@@ -1,3 +1,4 @@
+<div class="row">
 <div class="col-md-3">
     <div class="box box-solid">
         <div class="box-header with-border">
@@ -172,7 +173,4 @@
         </div>
         <!-- /.box-body -->
     </div>
-    <!-- /. box -->
-
-    <!-- /.box -->
 </div>
