@@ -6,32 +6,26 @@
         </div>
         <div class="box-body no-padding">
             <ul class="nav nav-pills nav-stacked">
-                <!-- ถอนอุปกรณ์ -->
-                <li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-minus-square"></i> ซื้อสินค้า </a></li>
+            <li><a href="index.php"><i class="fa fa-home"></i> สินค้าคงเหลือ </a></li>
+                <!-- ขายสินค้า -->
+                <li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-minus-square"></i> ขายสินค้า </a></li>
                 <div class="modal fade" id="myModal" role="dialog">
                     <div class="modal-dialog modal-lg">
-                        <form action="manage_product/price_product.php" method="post" target="_blank">
+                        <form action="manage_product/price_product.php" method="post">
                             <div class="modal-content">
+                                <div class="col-md-3"></div>
                                 <div class="modal-header">
-                                    <font size="3"><B><i class="fa fa-minus-square"></i> ซื้อสินค้า </B></font>
+                                    <font size="6"><p align = "center"> เลือกสินค้าที่ต้องการขาย </p></font>
                                 </div>
                                 <div class="col-md-2"></div>
                                 <div class="modal-body col-md-8 table-responsive mailbox-messages">
                                   <div class="table-responsive mailbox-messages">
-                                    <font size="2" color="red">*กรุณาเลือกรายการที่ต้องการถอน</font>
                                       <table class="table table-hover table-striped table-bordered">
                                         <tbody>
                                           <tr>
-                                            <th width="20%">
-                                             <div class="mailbox-controls">
-                                                <!-- Check all button -->
-                                                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                                                </button>
-                                                <span> เลือกทั้งหมด</span>
-                                              </div>
-                                            </th>
+                                                <th class="text-center" width="20%">เลือกสินค้า</th>
                                                 <th class="text-center" width="35%">ชื่อสินค้า</th>
-                                                <th class="text-center" width="15%">จำนวนคงเหลือ</th>
+                                                <th class="text-center" width="15%">คงเหลือ</th>
                                                 <th class="text-center" width="15%">หน่วยนับ</th>
                                                 <?php
                                                 foreach($query_product as $product):
@@ -46,8 +40,8 @@
                                             </tbody>
                                       </table>
                                   </div>
-                                  <button type="submit"  class="btn btn-success pull-left"><i class="fa fa-check-square-o"> ตกลง</i></button>
-                                    <button type="button" class="btn btn-danger pull-right" data-dismiss="modal"><i class="fa fa-close"> ปิด</i></button>
+                                  <button type="submit"  class="btn btn-success pull-left">ถัดไป ==>></button>
+                                    <button type="button" class="btn btn-danger pull-right" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
                                 </div>
                                 
                                 <div class="col-md-2"></div>
@@ -165,8 +159,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-success pull-left" onclick="if(confirm('ยืนยันการบันทึก')) return true; else return false;"><i class="fa fa-save"> บันทึก</i></button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> ปิด</i></button>
+                                    <button type="submit" class="btn btn-success pull-left" onclick="if(confirm('ยืนยันการบันทึก')) return true; else return false;"><i class="fa fa-toggle-right"> ถัดไป</i></button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
                                 </div>
                             </div>
                         </form>
@@ -174,7 +168,7 @@
                 </div>
                 <!--เพิ่มรายการอุปกรณ์ -->
                 <!--ประวัติเพิ่ม-ถอน อุปกรณ์ -->
-                <li><a target="_blank" href="manage_product/sale_history.php" ><i class="fa fa-exchange"></i> ประวัติการขายสินค้า </a></li>
+                <li><a target="_blank" href="manage_product/sale_history.php" ><i class="fa fa-exchange"></i> ยอดขายประจำวัน </a></li>
                 <!--ประวัติเพิ่ม-ถอน อุปกรณ์ -->
             </ul>
         </div>

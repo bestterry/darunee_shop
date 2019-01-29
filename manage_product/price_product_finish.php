@@ -105,7 +105,7 @@
 
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="print_listproduct.php" method="post" autocomplete="off">
+                  <form action="show_price.php" method="post" autocomplete="off">
                     <table class="table table-bordered table-hover">
                         <tbody>
                           <tr bgcolor="#99CCFF">
@@ -113,8 +113,8 @@
                             <th class="text-center" >ชื่อสินค้า</th>
                             <th class="text-center" width="15%" >จำนวนสินค้าที่ขาย</th>
                             <th class="text-center" width="10%" >หน่วยนับ</th>
-                            <th class="text-center" width="15%">ราคา/หน่วย</th>
-                            <th class="text-center" width="15%">รวมเป็นเงิน(บาท)</th>
+                            <th class="text-center" width="15%">ราคาต่อหน่วย</th>
+                            <th class="text-center" width="15%">รวมเงิน (บาท)</th>
                           </tr>
 
                           <?php //คำนวณสรายการสินค้า
@@ -130,6 +130,7 @@
                             $objr_num_product_instore = mysqli_fetch_array($objq_num_product_instore);
                             $total_num_product = $objr_num_product_instore['num_product']-$num_product;
                             $name_product = $objr_num_product_instore['name_product'];
+                            $unit = $objr_num_product_instore['unit'];
                             if($total_num_product < 0){
                               echo "สินค้ามีจำนวนไม่เพียงพอ";
                             }else{
@@ -146,9 +147,10 @@
                             <td class="text-center" ><?php echo $i+1 ?></td>
                             <td ><?php echo $name_product; ?></td>
                             <td class="text-center" ><?php echo $num_product; ?></td>
-                            <td><?php echo $objr_num_product_instore['unit'];?></td>
+                            <td class="text-center" ><?php echo $objr_num_product_instore['unit'];?></td>
                             <td class="text-center" ><?php echo $price_product; ?> </td>
                             <input class ="hidden" type="text" name="name_product[]" value="<?php echo $name_product; ?>">
+                            <input class ="hidden" type="text" name="unit[]" value="<?php echo $unit; ?>">
                             <input class ="hidden" type="text" name="num_product[]" value="<?php echo $num_product; ?>">
                             <input class ="hidden" type="text" name="price_product[]" value="<?php echo $price_product; ?>">
                             <td class="text-center" ><?php echo $total_price;?></td>
@@ -183,7 +185,7 @@
                       </div>
                       <div class="col-md-5">
                       
-                      <button type="submit" class="btn btn-block btn-success" ><i class="fa fa-print"> พิมพ์ใบเสร็จ  </i></button>
+                      <button type="submit" class="btn btn-block btn-success" ><i class="fa fa-calculator"> คำนวณเงิน  </i></button>
                       </div>
                       <div class="col-md-3">
                       </div>

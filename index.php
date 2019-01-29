@@ -45,50 +45,19 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<body class=" skin-blue ">
+<div>
 
   <header class="main-header">
-
-    <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
-    </a>
 
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <!-- <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
-      </a>
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-        </ul>
-      </div>
-
+      </a> -->
     </nav>
   </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>ทีมงานดารุณี</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -102,7 +71,7 @@
      <div class="col-md-9">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="4"><B> รายการสินค้า </font></B>
+                <font size="5"><p align="center"> จำนวนสินค้าคงเหลือ </font></p>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -111,15 +80,15 @@
                         <tbody>
                         <tr bgcolor="#99CCFF">
                             <th class="text-center" width="10%">ลำดับ</th>
-                            <th class="text-center" width="40%">ชื่อสินค้า</th>
-                            <th class="text-center" width="15%">จำนวนคงเหลือ</th>
+                            <th width="40%">ชื่อสินค้า</th>
+                            <th width="15%">จำนวนสินค้าคงเหลือ</th>
                         </tr>
                         <?php 
                            foreach($query_product as $product):
                         ?>
                         <tr>
                             <td class="text-center" width="10%"><?php echo $product['id_product']; ?></td>
-                            <td class="text-center" width="40%"><?php echo $product['name_product']; ?></td>
+                            <td width="40%"><?php echo $product['name_product']; ?></td>
                             <td width="15%"><?php echo $product['num_product']; ?> <?php echo $product['unit']; ?></td>
                         </tr>
                            <?php endforeach; ?>

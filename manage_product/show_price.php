@@ -66,7 +66,9 @@
       </a>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
+        
       </div>
+
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
@@ -76,7 +78,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>ทีมงานดารุณี</p>
@@ -93,71 +95,86 @@
 
     <!-- Main content -->
     <section class="content">
-      
+     
       <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="6"><p align = "center"> รายการขายสินค้า </font></p>
+                <font size="4"><B> รายการสินค้า </font></B>
             </div>
             <!-- /.box-header -->
+
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="price_product_finish.php" method="post" autocomplete="off">
+                  <form action="print_listproduct.php" method="post" autocomplete="off">
                     <table class="table table-bordered table-hover">
                         <tbody>
+                        
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="5%" >ลำดับ</th>
+                            <th class="text-center" width="5%">ลำดับ</th>
                             <th class="text-center" >ชื่อสินค้า</th>
-                            <th class="text-center" width="15%">จำนวนสินค้าที่ขาย</th>
-                            <th class="text-center" width="10%">หน่วยนับ</th>
+                            <th class="text-center" width="15%" >จำนวนสินค้าที่ขาย</th>
+                            <th class="text-center" width="10%" >หน่วยนับ</th>
                             <th class="text-center" width="15%">ราคาต่อหน่วย</th>
                             <th class="text-center" width="15%">รวมเงิน (บาท)</th>
                           </tr>
-                          <?php
-                            for($i=0;$i<count($_POST["menu"]);$i++)
-                            {
-                              if(trim($_POST["menu"][$i]) != "")
-                                {
-                                  $menu=$_POST['menu'][$i];
-                                  $list_product = "SELECT * FROM product WHERE id_product = $menu";
-                                  $objq_listproduct = mysqli_query($conn,$list_product);
-                                  $objr_listproduct = mysqli_fetch_array($objq_listproduct);
+                          <?php #endregion
+                              $total_all=0;
+                              $money_receive = $_POST['money_receive'];
+                              for ($i=0; $i < count($_POST['name_product']) ; $i++) {
+                                $total_price = $_POST['num_product'][$i]*$_POST['price_product'][$i];
                           ?>
                           <tr>
-                            <td class="text-center"><?php echo $i+1; ?></td>
-                            <td><?php echo $objr_listproduct['name_product']; ?></td>
-                            <td class="text-center" >
-                              <input class = "hidden" type="text" name="id_product[]" value="<?php echo $menu; ?>">
-                              <div class="form-group">
-                              <input type="text" name="num_product[]"  class="form-control text-center col-md-1" placeholder="<?php echo $objr_listproduct['unit'];?>">
-                            </td>
-                            <td class="text-center"><?php echo$objr_listproduct['unit'];?></td>
-                            <td class="text-center"  ><input type="text" name="price_product[]"  class="form-control text-center col-md-2" placeholder="ราคา/หน่วย">
-                            </td>
-                            <td></td>
+                            <td class="text-center" ><?php echo $i+1 ?></td>
+                            <td ><?php echo $_POST['name_product'][$i]; ?></td>
+                            <td class="text-center" ><?php echo $_POST['num_product'][$i]; ?></td>
+                            <td class="text-center"><?php echo $_POST['unit'][$i]; ?></td>
+                            <td class="text-center" ><?php echo $_POST['price_product'][$i]; ?> </td>
+                            <td class="text-center" ><?php echo $total_price;?></td>
+                            <input class ="hidden" type="text" name="name_product[]" value="<?php echo $_POST['name_product'][$i]; ?>">
+                            <input class ="hidden" type="text" name="unit[]" value="<?php echo $_POST['unit'][$i]; ?>">
+                            <input class ="hidden" type="text" name="num_product[]" value="<?php echo $_POST['num_product'][$i]; ?>">
+                            <input class ="hidden" type="text" name="price_product[]" value="<?php echo $_POST['price_product'][$i]; ?>">
                           </tr>
-                            <?php 
-                                  }
-                              }
-                             ?>
+                          <?php
+                              $total_all = $total_all+$total_price;
+                            } 
+                              $change = $money_receive-$total_all;
+                          ?> 
+                          <tr>
+                            <td style="visibility:collapse;"></td>
+                            <td style="visibility:collapse;"></td>
+                            <td style="visibility:collapse;"></td>
+                            <td style="visibility:collapse;"></td>
+                            <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
+                            <th class="text-center" bgcolor="#EAF4FF"><?php echo $total_all; ?></th>
+                          </tr>
+                          <tr>
+                            <td style="visibility:collapse;"></td>
+                            <td style="visibility:collapse;"></td>
+                            <td style="visibility:collapse;"></td>
+                            <td style="visibility:collapse;"></td>
+                            <th class="text-center">เงินทีรับ</th>
+                            <th class="text-center"><?php echo $money_receive; ?></th>
+                            <input class ="hidden" type="text" name="money_receive" value="<?php echo $money_receive; ?>">
+                          </tr>
+                          <tr>
+                            <td style="visibility:collapse;"></td>
+                            <td style="visibility:collapse;"></td>
+                            <td style="visibility:collapse;"></td>
+                            <td style="visibility:collapse;"></td>
+                            <th class="text-center">เงินทอน</th>
+                            <th class="text-center"><?php echo $change; ?></th>
+                          </tr>
                         </tbody>
                     </table>
-                    <div class="col-md-4">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-5">
-                      <a type="block" href="../index.php" class="btn btn-block btn-success"><<= เริ่มต้นใหม่ </i></a>
-                      </div>
-                      <div class="col-md-3">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                     </div>
                     <div class="col-md-4">
                       <div class="col-md-4">
                       </div>
                       <div class="col-md-5">
-                      <button type="submit" class="btn btn-block btn-success"><i class="fa fa-calculator"> คำนวณเงิน </i></button>
+                      
+                      <button type="submit" class="btn btn-block btn-success" ><i class="fa fa-print"> พิมพ์ใบเสร็จ  </i></button>
                       </div>
                       <div class="col-md-3">
                       </div>
@@ -167,6 +184,7 @@
                 <!-- /.mailbox-read-message -->
             </div>
             <!-- /.box-body -->
+
             <!-- /.box-footer -->
             <div class="box-footer">
 
@@ -175,6 +193,7 @@
         </div>
         <!-- /. box -->
     </div>
+
     </section>
     <!-- /.content -->
   </div>
