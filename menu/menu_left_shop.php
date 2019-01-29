@@ -103,25 +103,32 @@
                             <div class="modal-header">
                                 <font size="3"><B><i class="fa fa-cogs"></i> เเก้ไขรายการสินค้า </B></font>
                             </div>
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-6">
                             <div class="modal-body">
                                 <table class="table table-hover table-striped table-bordered">
                                     <tbody>
                                     <tr>
-                                        <th class="text-center" width="10%">ลำดับ</th>
+                                      
                                         <th class="text-center" width="40%">ชื่อสินค้า</th>
-                                        <th class="text-center" width="15%">จำนวน</th>
                                         <th class="text-center" width="10%">เเก้ไข</th>
+                                    </tr>
+                                    <?php 
+                                        foreach($query_product as $edit):
+                                    ?>
                                     <tr>
-                                        <td class="text-center" width="10%"></td>
-                                        <td class="text-center" width="15%"></td>
-                                        <td class="text-center" width="15%"></td>
-                                        <td class="text-center"><a target="_blank" href="" class="btn btn-warning"><span class="glyphicon glyphicon-cog"></span></a></td>
+                                        <td class="text-center" width="15%"><?php echo $edit['name_product'];?>(<font color="red"><?php echo $edit['unit']?></font>)</td>
+                                        <td class="text-center"><a href="manage_product/edit_product.php?id_product=<?php echo $edit['id_product'];?>" class="btn btn-warning"><span class="glyphicon glyphicon-cog"></span></a></td>
+                                        <?php endforeach;?>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
+                            </div>
+                            <div class="col-md-3">
+                            </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> ปิด</i></button>
                             </div>
                         </div>
                     </div>

@@ -66,9 +66,7 @@
       </a>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
-        
       </div>
-
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
@@ -78,7 +76,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>ทีมงานดารุณี</p>
@@ -95,95 +93,48 @@
 
     <!-- Main content -->
     <section class="content">
-     
+      
       <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="4"><B> รายการสินค้า </font></B>
+                <font size="4"><B> แก้ไขรายการสินค้า </font></B>
             </div>
             <!-- /.box-header -->
-
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="print_listproduct.php" method="post" autocomplete="off">
+                  <form action="edit_product_finish.php?" method="post" autocomplete="off">
                     <table class="table table-bordered table-hover">
                         <tbody>
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="5%">ลำดับ</th>
                             <th class="text-center" >ชื่อสินค้า</th>
-                            <th class="text-center" width="15%" >จำนวนสินค้าที่ขาย</th>
-                            <th class="text-center" width="10%" >หน่วยนับ</th>
-                            <th class="text-center" width="15%">ราคา/หน่วย</th>
-                            <th class="text-center" width="15%">รวมเป็นเงิน(บาท)</th>
+                            <th class="text-center" width="15%">จำนวนสินค้า</th>
+                            <th class="text-center" width="10%">หน่วยนับ</th>
                           </tr>
-
-                          <?php //คำนวณสรายการสินค้า
-                          $total_price_money = 0;
-                           for($i=0;$i<count($_POST['id_product']);$i++){
-                            $id_product = $_POST['id_product'][$i];
-                            $num_product = $_POST['num_product'][$i];
-                            $price_product = $_POST['price_product'][$i];
-                            $total_price = $num_product*$price_product;
-
-                            $num_product_instore="SELECT * FROM product WHERE id_product=$id_product";
-                            $objq_num_product_instore = mysqli_query($conn,$num_product_instore);
-                            $objr_num_product_instore = mysqli_fetch_array($objq_num_product_instore);
-                            $total_num_product = $objr_num_product_instore['num_product']-$num_product;
-                            $name_product = $objr_num_product_instore['name_product'];
-                            if($total_num_product < 0){
-                              echo "สินค้ามีจำนวนไม่เพียงพอ";
-                            }else{
-                              //Update NUM product in database
-                              $update_num_product = "UPDATE product SET num_product = $total_num_product WHERE id_product = $id_product";
-                              $objq_update = mysqli_query($conn,$update_num_product);
-                              //INsert history buy product
-                              $insert_history = "INSERT INTO sale_history (id_product, num_sale, price, status_sale)
-                                                  VALUES ( $id_product, $num_product, $total_price, 'sale')";
-                              mysqli_query($conn,$insert_history);
-                          ?>
-
+                        
                           <tr>
-                            <td class="text-center" ><?php echo $i+1 ?></td>
-                            <td ><?php echo $name_product; ?></td>
-                            <td class="text-center" ><?php echo $num_product; ?></td>
-                            <td><?php echo $objr_num_product_instore['unit'];?></td>
-                            <td class="text-center" ><?php echo $price_product; ?> </td>
-                            <input class ="hidden" type="text" name="name_product[]" value="<?php echo $name_product; ?>">
-                            <input class ="hidden" type="text" name="num_product[]" value="<?php echo $num_product; ?>">
-                            <input class ="hidden" type="text" name="price_product[]" value="<?php echo $price_product; ?>">
-                            <td class="text-center" ><?php echo $total_price;?></td>
-                          </tr>
                           <?php
-                            }
-                             $total_price_money = $total_price_money + $total_price;
-                           }
+                            $id_peoduct = $_GET['id_product']; 
+                            $sql_edit = "SELECT * FROM product WHERE id_product='$id_peoduct'";
+                            $objq_edit = mysqli_query($conn,$sql_edit);
+                            $objr_edit = mysqli_fetch_array($objq_edit);
                           ?>
-                          <tr>
-                            <td style="visibility:collapse;"></td>
-                            <td style="visibility:collapse;"></td>
-                            <td style="visibility:collapse;"></td>
-                            <td style="visibility:collapse;"></td>
-                            <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
-                            <th class="text-center" bgcolor="#EAF4FF"><?php echo $total_price_money; ?></th>
+                            <td class="text-center"><input type="text" name="name_product" class="form-control text-center col-md-1" value="<?php echo $objr_edit['name_product'];?>"></td>
+                            <td><input type="text" name="num_product" class="form-control text-center col-md-1" value="<?php echo $objr_edit['num_product'];?>"></td>
+                            <td class="text-center" >
+                            <input type="hidden" name="id_product" value="<?php echo $id_peoduct;?>">
+                            <input type="text" name="unit" class="form-control text-center col-md-1" value="<?php echo $objr_edit['unit'];?>">
+                            </td>
                           </tr>
+                           
                         </tbody>
                     </table>
                     <div class="col-md-8">
                     </div>
                     <div class="col-md-4">
-                      <table class="table table-bordered table-hover">
-                        <tbody>
-                        <tr>
-                        <th class="text-center">จำนวนเงินที่รับมา</th>
-                        <th class="text-center"> <input class="text-center" type="text" name="money_receive" placeholder="ระบุจำนวนเงิน"></th>
-                        </tr>
-                        </tbody>
-                      </table>
                       <div class="col-md-4">
                       </div>
                       <div class="col-md-5">
-                      
-                      <button type="submit" class="btn btn-block btn-success" ><i class="fa fa-print"> พิมพ์ใบเสร็จ  </i></button>
+                      <button type="submit" class="btn btn-block btn-success"><i class="fa fa-check-square"> บันทึก </i></button>
                       </div>
                       <div class="col-md-3">
                       </div>
@@ -193,7 +144,6 @@
                 <!-- /.mailbox-read-message -->
             </div>
             <!-- /.box-body -->
-
             <!-- /.box-footer -->
             <div class="box-footer">
 
@@ -202,7 +152,6 @@
         </div>
         <!-- /. box -->
     </div>
-
     </section>
     <!-- /.content -->
   </div>
