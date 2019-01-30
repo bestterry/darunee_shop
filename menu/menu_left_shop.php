@@ -61,24 +61,24 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <font size="3"><B><i class="fa fa-plus-square"></i> เพิ่มจำนวนสินค้า </B></font>
+                            <font size="6"><p align = "center"> เลือกรายการที่ต้องการเพิ่มจำนวน </p></font>
                             </div>
                             <div class="modal-body">
                                 <table class="table table-hover table-striped table-bordered">
                                     <tbody>
+                                        <th class="text-center" width="50%">ชื่อสินค้า</th>
+                                        <th class="text-center" width="20%">จำนวนที่มีอยู่</th>
+                                        <th class="text-center" width="20%">หน่วยนับ</th>
+                                        <th class="text-center" width="10%">เพิ่มจำนวน</th>
                                     <tr>
-                                        <th class="text-center" width="10%">ลำดับ</th>
-                                        <th class="text-center" width="20%">รหัสสินค้า</th>
-                                        <th class="text-center" width="45%">ชื่อสินค้า</th>
-                                        <th class="text-center" width="15%">จำนวนที่มีอยู่</th>
-                                        <th class="text-center" width="20%">เพิ่ม</th>
+                                        <?php foreach($query_product as $addproduct):?>
                                     <tr>
-                                        <td class="text-center" width="10%"></td>
-                                        <td class="text-center" width="20%"></td>
-                                        <td class="text-center" width="45%"></td>
-                                        <td class="text-center" width="15%"></td>
-                                        <td class="text-center" ><a target="_blank" href="" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span></a></td>
+                                        <td class="text-center" width="50%"><?php echo $addproduct['name_product']; ?></td>
+                                        <td class="text-center" width="20%"><?php echo $addproduct['num_product']; ?></td>
+                                        <td class="text-center" width="20%"><?php echo $addproduct['unit']; ?></td>
+                                        <td class="text-center" ><a href="manage_product/add_num_product.php?id_product=<?php echo $addproduct['id_product']; ?>" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span></a></td>
                                     </tr>
+                                                <?php endforeach;?>
                                     </tbody>
                                 </table>
                             </div>

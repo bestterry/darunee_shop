@@ -33,8 +33,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<!-- <body onload="window.print();"> -->
-<body>
+<body onload="window.print();">
   <div class="wrapper">
       <section class="invoice">
           <div class="row">
@@ -105,6 +104,7 @@
             <p class="text-center">ลงชื่อ ........................................................................................ ผู้รับเงิน</p>
         </div>
       </section>
+       <a type="button" href="../index.php" class="btn btn-block btn-default pull-right" style="width:100px;height:50">กลับหน้าหลัก</a>
   </div>
 </body>
 </html>
