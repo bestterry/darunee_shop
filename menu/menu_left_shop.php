@@ -78,7 +78,7 @@
                                         <td class="text-center" width="20%"><?php echo $addproduct['unit']; ?></td>
                                         <td class="text-center" ><a href="manage_product/add_num_product.php?id_product=<?php echo $addproduct['id_product']; ?>" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span></a></td>
                                     </tr>
-                                                <?php endforeach;?>
+                                        <?php endforeach;?>
                                     </tbody>
                                 </table>
                             </div>
@@ -114,7 +114,7 @@
                                     <tr>
                                         <td class="text-center" width="15%"><?php echo $edit['name_product'];?>(<font color="red"><?php echo $edit['unit']?></font>)</td>
                                         <td class="text-center"><a href="manage_product/edit_product.php?id_product=<?php echo $edit['id_product'];?>" class="btn btn-warning"><span class="glyphicon glyphicon-cog"></span></a></td>
-                                        <?php endforeach;?>
+                                    <?php endforeach;?>
                                     </tr>
                                     </tbody>
                                 </table>
