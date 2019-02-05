@@ -7,9 +7,9 @@
    $strHour= date("H",strtotime($strDate));
    $strMinute= date("i",strtotime($strDate));
    $strSeconds= date("s",strtotime($strDate));
-   $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+   $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
    $strMonthThai=$strMonthCut[$strMonth];
-   return "$strDay $strMonthThai $strYear";
+   return "$strDay $strMonthThai พ.ศ.$strYear";
  }
 
  $strDate = date('d-m-Y');
@@ -32,17 +32,36 @@
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style type='text/css'>
+      th {
+          height: 50px;
+          padding-left: 12px;
+          padding-right: 12px;  
+          text-align: left;
+          border-left: 1px solid #f4f4f4;
+          border-bottom: solid 2px #fff;
+          color: #333;
+        }
+    </style>
 </head>
 <body onload="window.print();">
+
   <div class="wrapper">
       <section class="invoice">
           <div class="row">
             <div class="col-xs-12">
-              <h5 class="text-center"> ใบเสร็จรับเงิน </h5>
-              <h3 class="page-header text-center"> ร้านทีมงานคุณดารุณี </h3>
+            <a type="button" class="btn btn-block btn-info pull-right" href="../index.php" style="width:100px;height:50"><<=กลับ</a>
+            <br>
+              <h5 class="text-center"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ใบเสร็จรับเงิน </h5>
+              <h3 class="page-header text-center"> ทีมงานคุณดารุณี </h3>
               <p class="text-center" size="5">เลขที่ 31/1 หมู่ 12 ตำบลสันสลี อำเภอเวียงป่าเป้า จังหวัดเชียงราย 57170  โทร 081-916-9852</p>
-              <p class="text-center">วันที่ &nbsp;&nbsp; <?php echo DateThai($strDate); ?></p>
-              <p>ผู้ซื้อ/ที่อยู่ ......................................................................................................................................................................................</p>
+              <br>
+              <br>
+              <p class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;วันที่ <?php echo DateThai($strDate); ?></p>
+              <br>
+              <p>ผู้ซื้อ/ที่อยู่................................................................................................................................................................</p>
+              <p>.................................................................................................................................................................................</p>
+              <br>
             </div>
           </div>
           <div class="row">
@@ -53,8 +72,9 @@
                     <th class="text-center" width="10%">ลำดับ</th>
                     <th class="text-center" width="40%">รายการสินค้า</th>
                     <th class="text-center" width="10%">จำนวน</th>
-                    <th class="text-center" width="20%">ราคาต่อหน่วย</th>
-                    <th class="text-center" width="20%">รวมเงิน (บาท)</th>
+                    <th class="text-center" width="10%">หน่วย</th>
+                    <th class="text-center" width="15%">ราคาต่อหน่วย</th>
+                    <th class="text-center" width="15%">รวมเงิน (บาท)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -68,6 +88,7 @@
                     <td class="text-center" ><?php echo $i+1; ?></td>
                     <td><?php echo $_POST['name_product'][$i]; ?></td>
                     <td class="text-center" ><?php echo $_POST['num_product'][$i]; ?> </td>
+                    <td class="text-center" ><?php echo $_POST['unit'][$i]; ?> </td>
                     <td class="text-center" ><?php echo $_POST['price_product'][$i]; ?></td>
                     <td class="text-center" ><?php echo $total_price; ?></td>
                   </tr>
@@ -81,10 +102,12 @@
                       <th style="visibility:collapse;" ></th>
                       <th style="visibility:collapse;" ></th>
                       <th style="visibility:collapse;" ></th>
+                      <th style="visibility:collapse;" ></th>
                       <th class="text-right" >เงินรวม</th>
                       <th class="text-center" ><?php echo $total_all; ?></th>
                   </tr>
                   <tr>
+                      <th style="visibility:collapse;" ></th>
                       <th style="visibility:collapse;" ></th>
                       <th style="visibility:collapse;" ></th>
                       <th style="visibility:collapse;" ></th>
@@ -95,16 +118,19 @@
                       <th style="visibility:collapse;" ></th>
                       <th style="visibility:collapse;" ></th>
                       <th style="visibility:collapse;" ></th>
+                      <th style="visibility:collapse;" ></th>
                       <th class="text-right" >เงินทอน</th>
                       <td class="text-center" ><?php echo $change; ?></td>
                   </tr>   
                 </tbody>
               </table>
+              <br>
+            <br>
             </div>
-            <p class="text-center">ลงชื่อ ........................................................................................ ผู้รับเงิน</p>
+            <p class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ ............................................................... ผู้รับเงิน</p>
+            <p class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( _____________________________________ )</p>
         </div>
       </section>
-       <a type="button" href="../index.php" class="btn btn-block btn-default pull-right" style="width:100px;height:50">กลับหน้าหลัก</a>
   </div>
 </body>
 </html>

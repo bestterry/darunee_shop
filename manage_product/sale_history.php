@@ -72,14 +72,15 @@
             <!-- /.box-header -->
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="price_product_finish.php" method="post" autocomplete="off">
+                  <form action="" method="post" autocomplete="off">
                     <table class="table table-hover table-striped table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="40%">ชื่อสินค้า</th>
-                            <th class="text-center" width="20%">จำนวนสินค้าที่ขาย</th>
-                            <th class="text-center" width="10%">หน่วยนับ</th>
-                            <th class="text-center" width="30%">รวมเป็นเงิน(บาท)</th>
+                            <th class="text-center" width="40%">รายการ</th>
+                            <th class="text-center" width="20%">จำนวน</th>
+                            <th class="text-center" width="10%">บ/หน่วย</th>
+                            <th class="text-center" width="10%">เงินขาย</th>
+                            <th class="text-center" width="20%">หมายเหตุ</th>
                           </tr>
                           <?php #endregion
                            $date = "SELECT * FROM sale_history
@@ -111,15 +112,29 @@
                           ?>
                           <tr>
                             <td><?php echo $objr_product['name_product']; ?></td>
-                            <td class="text-center"><?php echo $objr_product['num_sale'];  ?></td>
-                            <td class="text-center"><?php echo $objr_product['unit']; ?></td>
+                            <td class="text-center"><?php echo $objr_product['num_sale'];?>  (<?php echo $objr_product['unit']; ?>)</td>
+                            <td class="text-center"><?php echo $objr_product['price']/$objr_product['num_sale'];?></td>
                             <td class="text-center"><?php echo $objr_product['price']; ?></td>
+                            <td class="text-center"></td>
                           </tr>
                             <?php }
                          // } ?>
                         </tbody>
                     </table>
-                    
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                      <div class="col-md-4">
+                      </div>
+                      <div class="col-md-5">
+                      
+                      <button type="submit" class="btn btn-block btn-success" ><i class="fa fa-print"> พิมพ์ </i></button>
+                      </div>
+                      <div class="col-md-3">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
                   </form>
                 </div>
                 <!-- /.mailbox-read-message -->
