@@ -67,7 +67,7 @@
       <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="4"><B> ประวัติการขายสินค้า </font></B>
+                <font size="4"><B> ประวัติการขายสินค้า ประจำวันที่(<font size="4" color="red"><?php echo $strDate = date('d-m-Y');?></font>) </font></B>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -77,33 +77,46 @@
                         <tbody>
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" width="40%">ชื่อสินค้า</th>
-                            <th class="text-center" width="30%">จำนวนสินค้าที่ขาย</th>
-                            <th class="text-center" width="30%">เป็นเงินทั้งหมด</th>
+                            <th class="text-center" width="20%">จำนวนสินค้าที่ขาย</th>
+                            <th class="text-center" width="10%">หน่วยนับ</th>
+                            <th class="text-center" width="30%">รวมเป็นเงิน(บาท)</th>
                           </tr>
                           <?php #endregion
-                            $sql_history = "SELECT * FROM product";
-                            $objq_history = mysqli_query($conn,$sql_history);
-                            foreach($objq_history as $history ){
-                              $id_product = $history['id_product'];
-                              $total_sale = "SELECT SUM(sale_history.num_sale),SUM(sale_history.price) FROM sale_history 
-                                              INNER JOIN product ON sale_history.id_product=product.id_product
-                                              WHERE product.id_product = '$id_product'";
-                              $objq_sale = mysqli_query($conn,$total_sale);
-                              $objr_sale = mysqli_fetch_array($objq_sale);
-                              $num_product = $objr_sale['SUM(sale_history.num_sale)'];
-                              $total_money = $objr_sale['SUM(sale_history.price)'];
-                              $sql_NameProduct = "SELECT * FROM product WHERE id_product = '$id_product'";
-                              $objq_NameProduct = mysqli_query($conn,$sql_NameProduct);
-                              $objr_NameProduct = mysqli_fetch_array($objq_NameProduct);
-                              if(isset($num_product)){ 
+                           $date = "SELECT * FROM sale_history
+                                     WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
+                           $objq = mysqli_query($conn,$date);
+                           foreach($objq as $data){
+                              $id_sale = $data['id_sale_history'];
+                             $SQL_product = "SELECT * FROM product INNER JOIN sale_history 
+                             ON product.id_product = sale_history.id_product 
+                             WHERE sale_history.id_sale_history='$id_sale'";
+                             $objq_product = mysqli_query($conn,$SQL_product);
+                             $objr_product = mysqli_fetch_array($objq_product);
+    
+                            // $sql_history = "SELECT * FROM product";
+                            // $objq_history = mysqli_query($conn,$sql_history);
+                            // foreach($objq_history as $history ){
+                            //   $id_product = $history['id_product'];
+                            //   $total_sale = "SELECT SUM(sale_history.num_sale),SUM(sale_history.price) FROM sale_history 
+                            //                   INNER JOIN product ON sale_history.id_product=product.id_product
+                            //                   WHERE product.id_product = '$id_product'";
+                            //   $objq_sale = mysqli_query($conn,$total_sale);
+                            //   $objr_sale = mysqli_fetch_array($objq_sale);
+                            //   $num_product = $objr_sale['SUM(sale_history.num_sale)'];
+                            //   $total_money = $objr_sale['SUM(sale_history.price)'];
+                            //   $sql_NameProduct = "SELECT * FROM product WHERE id_product = '$id_product'";
+                            //   $objq_NameProduct = mysqli_query($conn,$sql_NameProduct);
+                            //   $objr_NameProduct = mysqli_fetch_array($objq_NameProduct);
+                            //   if(isset($num_product)){ 
                           ?>
                           <tr>
-                            <td><?php echo $objr_NameProduct['name_product']; ?></td>
-                            <td><?php echo $num_product;  ?></td>
-                            <td class="text-center" width="10%" ><?php echo $total_money; ?></td>
+                            <td><?php echo $objr_product['name_product']; ?></td>
+                            <td class="text-center"><?php echo $objr_product['num_sale'];  ?></td>
+                            <td class="text-center"><?php echo $objr_product['unit']; ?></td>
+                            <td class="text-center"><?php echo $objr_product['price']; ?></td>
                           </tr>
                             <?php }
-                          } ?>
+                         // } ?>
                         </tbody>
                     </table>
                     
