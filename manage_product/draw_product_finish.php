@@ -33,58 +33,69 @@
 <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="../plugins/iCheck/all.css">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class=" hold-transition skin-blue layout-top-nav ">
 <div class="wrapper">
+
   <header class="main-header">
-  <!-- Header Navbar: style can be found in header.less -->
+
+  
+    <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
     </nav>
   </header>
+
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
     </section>
+
     <!-- Main content -->
     <section class="content">
-      <div class="col-md-12">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <font size="4"><B> รายการสินค้า </font></B>
+    <div class="col-md-2">
+          </div>
+          <div class="col-md-8">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <font size="6">
+                  <p align = "center"> รายการเบิกสินค้า 
+                </font>
+                </p>
             </div>
             <!-- /.box-header -->
+
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="show_price.php" method="post" autocomplete="off">
+                  <form action="print_draw_product.php" method="post" autocomplete="off">
                     <table class="table table-bordered table-hover">
                         <tbody>
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" width="5%">ลำดับ</th>
                             <th class="text-center" >ชื่อสินค้า</th>
-                            <th class="text-center" width="15%" >จำนวนสินค้าที่ขาย</th>
+                            <th class="text-center" width="15%" >จำนวนสินค้าที่เบิก</th>
                             <th class="text-center" width="10%" >หน่วยนับ</th>
-                            <th class="text-center" width="15%">ราคาต่อหน่วย</th>
-                            <th class="text-center" width="15%">รวมเงิน (บาท)</th>
                           </tr>
+
                           <?php //คำนวณสรายการสินค้า
+                          $name = $_POST['name'];
                           $total_price_money = 0;
                            for($i=0;$i<count($_POST['id_product']);$i++){
                             $id_product = $_POST['id_product'][$i];
                             $num_product = $_POST['num_product'][$i];
-                            $price_product = $_POST['price_product'][$i];
-                            $total_price = $num_product*$price_product;
-
-                            $num_product_instore="SELECT * FROM product WHERE id_product=$id_product";
+                            $num_product_instore = "SELECT * FROM product WHERE id_product=$id_product";
                             $objq_num_product_instore = mysqli_query($conn,$num_product_instore);
                             $objr_num_product_instore = mysqli_fetch_array($objq_num_product_instore);
                             $total_num_product = $objr_num_product_instore['num_product']-$num_product;
@@ -97,73 +108,67 @@
                               $update_num_product = "UPDATE product SET num_product = $total_num_product WHERE id_product = $id_product";
                               $objq_update = mysqli_query($conn,$update_num_product);
                               //INsert history buy product
-                              $insert_history = "INSERT INTO sale_history (id_product, num_sale, price, name_draw, status_sale)
-                                                  VALUES ( $id_product, $num_product, $total_price, '-', 'sale')";
+                              $insert_history = "INSERT INTO sale_history (id_product, num_sale, price, name_draw,status_sale)
+                                                                    VALUES ( $id_product, $num_product, 0, '$name','draw')";
                               mysqli_query($conn,$insert_history);
                           ?>
+
                           <tr>
                             <td class="text-center" ><?php echo $i+1 ?></td>
                             <td ><?php echo $name_product; ?></td>
                             <td class="text-center" ><?php echo $num_product; ?></td>
                             <td class="text-center" ><?php echo $objr_num_product_instore['unit'];?></td>
-                            <td class="text-center" ><?php echo $price_product; ?> </td>
                             <input class ="hidden" type="text" name="name_product[]" value="<?php echo $name_product; ?>">
                             <input class ="hidden" type="text" name="unit[]" value="<?php echo $unit; ?>">
                             <input class ="hidden" type="text" name="num_product[]" value="<?php echo $num_product; ?>">
-                            <input class ="hidden" type="text" name="price_product[]" value="<?php echo $price_product; ?>">
-                            <td class="text-center" ><?php echo $total_price;?></td>
                           </tr>
                           <?php
                             }
-                             $total_price_money = $total_price_money + $total_price;
                            }
                           ?>
-                          <tr>
-                            <td style="visibility:collapse;"></td>
-                            <td style="visibility:collapse;"></td>
-                            <td style="visibility:collapse;"></td>
-                            <td style="visibility:collapse;"></td>
-                            <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
-                            <th class="text-center" bgcolor="#EAF4FF"><?php echo $total_price_money; ?></th>
-                          </tr>
                         </tbody>
                     </table>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                       <table class="table table-bordered table-hover">
                         <tbody>
-                        <tr>
-                        <th class="text-center">จำนวนเงินที่รับมา</th>
-                        <th class="text-center"> <input class="text-center" type="text" name="money_receive" placeholder="ระบุจำนวนเงิน"></th>
-                        </tr>
+                          <tr>
+                            <th class="text-center">ชื่อผู้เบิกสินค้า
+                            </th>
+                            <th bgcolor="#99CCFF" class="text-center"> 
+                              <?php echo $name; ?>
+                              <input class ="hidden" type="text" name="name" value="<?php echo $name; ?>">
+                            </th>
+                          </tr>
                         </tbody>
                       </table>
-                      <div class="col-md-4">
+                    </div> 
+                      <div class="col-md-5">
+                      </div>
+                      <div class="col-md-2">
+                      <button type="submit" class="btn btn-block btn-success" ><i class="fa fa-print"> พิมพ์ </i></button>
                       </div>
                       <div class="col-md-5">
-                      
-                      <button type="submit" class="btn btn-block btn-success" ><i class="fa fa-calculator"> คำนวณเงิน  </i></button>
-                      </div>
-                      <div class="col-md-3">
                       </div>
                     </div>
                   </form>
                 </div>
                 <!-- /.mailbox-read-message -->
-            </div>
-            <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
+
             </div>
             <!-- /.box-footer -->
         </div>
         <!-- /. box -->
     </div>
+
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
   <?php require("../menu/footer.html"); ?>
 </div>
    <!-- jQuery 3 -->

@@ -54,7 +54,55 @@
                         </form>
                     </div>
                 </div>
-                <!-- ถอนอุปกรณ์ -->
+                <!-- /ขายสินค้า -->
+                <!-- เบิกสินค้า -->
+                <li><a href="#" data-toggle="modal" data-target="#myModal10"><i class="fa fa-minus-square"></i> เบิกสินค้า </a></li>
+                <div class="modal fade" id="myModal10" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <form action="manage_product/draw_product.php" method="post">
+                            <div class="modal-content">
+                                <div class="col-md-3"></div>
+                                <div class="modal-header">
+                                    <font size="6"><p align = "center"> เลือกสินค้าที่ต้องการเบิก </p></font>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="modal-body col-md-8 table-responsive mailbox-messages">
+                                  <div class="table-responsive mailbox-messages">
+                                      <table class="table table-hover table-striped table-bordered">
+                                        <tbody>
+                                          <tr>
+                                                <th class="text-center" width="20%">เลือกสินค้า</th>
+                                                <th class="text-center" width="35%">ชื่อสินค้า</th>
+                                                <th class="text-center" width="15%">คงเหลือ</th>
+                                                <th class="text-center" width="15%">หน่วยนับ</th>
+                                                <?php
+                                                foreach($query_product as $product):
+                                              ?>
+                                            <tr>
+                                                <td class="text-center" width="15%"><input type="checkbox" name="menu[]" value="<?php echo $product['id_product']; ?>"></td>
+                                                <td  width="35%"><?php echo $product['name_product'];?></td>
+                                                <td class="text-center" width="15%"><?php echo $product['num_product'];?></td>
+                                                <td class="text-center" width="15%"><?php echo $product['unit'];?></td>
+                                                <?php endforeach; ?>
+                                            </tr>
+                                            </tbody>
+                                      </table>
+                                  </div>
+                                  <button type="submit"  class="btn btn-success pull-left">ถัดไป ==>></button>
+                                    <button type="button" class="btn btn-danger pull-right" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
+                                </div>
+                                
+                                <div class="col-md-2"></div>
+
+                                <div class="modal-footer">
+                                    
+                                </div>
+                             
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /เบิกสินค้า -->
                 <!--เพิ่มจำนวนอุปกรณ์ -->
                 <li><a href="#" data-toggle="modal" data-target="#myModal1"><i class="fa fa-plus-square"></i> เพิ่มจำนวนสินค้า</a></li>
                 <div class="modal fade" id="myModal1" role="dialog">

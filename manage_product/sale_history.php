@@ -52,7 +52,7 @@
 																	</tr>
 																	<?php #endregion
                            $date = "SELECT * FROM sale_history
-                                     WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
+                                     WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND status_sale='sale'";
                            $objq = mysqli_query($conn,$date);
                            foreach($objq as $data){
                               $id_sale = $data['id_sale_history'];
@@ -101,16 +101,17 @@
 																		<tr bgcolor="#99CCFF">
 																			<th class="text-center" width="40%">รายการ</th>
 																			<th class="text-center" width="20%">จำนวน</th>
-																			<th class="text-center" width="20%">จำนวนเงินทั้งหมด(บาท)</th>
+																			<th class="text-center" width="20%">จำนวนเงิน(บาท)</th>
 																		</tr>
-												  <?php #endregion
+													<?php #endregion
+														$sum_monny = 0;
                             $sql_history = "SELECT * FROM product";
                             $objq_history = mysqli_query($conn,$sql_history);
                             foreach($objq_history as $history ){
                               $id_product = $history['id_product'];
                               $total_sale = "SELECT SUM(sale_history.num_sale),SUM(sale_history.price) FROM sale_history 
                                               INNER JOIN product ON sale_history.id_product=product.id_product
-                                              WHERE product.id_product = '$id_product' AND DATE_FORMAT(sale_history.datetime,'%d-%m-%Y')='$strDate'";
+                                              WHERE product.id_product = '$id_product' AND DATE_FORMAT(sale_history.datetime,'%d-%m-%Y')='$strDate' AND sale_history.status_sale='sale'";
                               $objq_sale = mysqli_query($conn,$total_sale);
                               $objr_sale = mysqli_fetch_array($objq_sale);
                               $num_product = $objr_sale['SUM(sale_history.num_sale)'];
@@ -133,7 +134,13 @@
 																			</td>
 																		</tr>
 																		<?php }
+																$sum_monny = $sum_monny+$total_money;
                           } ?>
+													 <tr>
+                            <td style="visibility:collapse;"></td>
+                            <th class="text-center">รวมเป็นเงินทั้งหมด</th>
+                            <th class="text-center"><?php echo $sum_monny; ?></th>
+                          </tr>
 																	</tbody>
 																</table>
 																<div class="col-md-4"></div>
