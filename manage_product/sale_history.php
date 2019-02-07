@@ -147,9 +147,9 @@
 																<div class="col-md-4">
 																	<div class="col-md-4"></div>
 																	<div class="col-md-5">
-																		<button type="submit" class="btn btn-block btn-success" >
+																		<a type="button" href="../pdf_file/sale_history.php" class="btn btn-block btn-success" >
 																			<i class="fa fa-print"> พิมพ์ </i>
-																		</button>
+																		</a>
 																	</div>
 																	<div class="col-md-3"></div>
 																</div>

@@ -28,7 +28,7 @@ class PDF extends FPDF
         
         //Date
         $this->SetTextColor(255,0,0); 
-        $this->Text(83, 14,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
+        $this->Text(89, 19,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
         // Title
         $this->SetTextColor(0,0,0);
         $this->Cell(0,5, iconv( 'UTF-8','cp874' , 'ตารางบันทึกรายการขายหน้าร้าน ประจำวันที่ ') , 0 , 1,'L' );
@@ -53,12 +53,12 @@ class PDF extends FPDF
 // Instanciation of inherited class
 $pdf=new PDF('P','mm','A4');
             // ตั้งค่าขอบกระดาษทุกด้าน 20 มิลลิเมตร
+            $pdf->SetMargins(15, 15,15);
+
             $pdf->AddFont('angsana','','angsa.php');
 
             //สร้างหน้าเอกสาร
             $pdf->AddPage();
-            
-            $pdf->Addfont('angsa','','angsa.php');
             // กำหนดฟ้อนต์ที่จะใช้  อังสนา ตัวธรรมดา ขนาด 14
             $pdf->SetFont('angsana','',16);
             
@@ -92,7 +92,45 @@ $pdf=new PDF('P','mm','A4');
                     $pdf->Cell(40,8,iconv('UTF-8','cp874',''),1,0,'C');
                     $pdf->Ln(8);
                     }
+                    $pdf->AddPage();
+            // กำหนดฟ้อนต์ที่จะใช้  อังสนา ตัวธรรมดา ขนาด 14
+                    $pdf->SetFont('angsana','',18);
+                    $pdf->Ln(5);
+                    $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ยอดขายสินค้า ') , 0 , 1,'' );
+                    $pdf->Ln(3);
+                    $pdf->SetFont('angsana','',16);
+                    $pdf->Cell(70,8,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+                    $pdf->Cell(40,8,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
+                    $pdf->Cell(40,8,iconv('UTF-8','cp874','จำนวนเงิน(บาท)'),1,0,'C');
+                    $pdf->Ln(8);
+                        $sum_monny = 0;
+                        $sql_history = "SELECT * FROM product";
+                        $objq_history = mysqli_query($conn,$sql_history);
+                            foreach($objq_history as $history ){
+                              $id_product = $history['id_product'];
+                              $total_sale = "SELECT SUM(sale_history.num_sale),SUM(sale_history.price) FROM sale_history 
+                                              INNER JOIN product ON sale_history.id_product=product.id_product
+                                              WHERE product.id_product = '$id_product' AND DATE_FORMAT(sale_history.datetime,'%d-%m-%Y')='$strDate' AND sale_history.status_sale='sale'";
+                              $objq_sale = mysqli_query($conn,$total_sale);
+                              $objr_sale = mysqli_fetch_array($objq_sale);
+                              $num_product = $objr_sale['SUM(sale_history.num_sale)'];
+                              $total_money = $objr_sale['SUM(sale_history.price)'];
+                              $sql_NameProduct = "SELECT * FROM product WHERE id_product = '$id_product'";
+                              $objq_NameProduct = mysqli_query($conn,$sql_NameProduct);
+                              $objr_NameProduct = mysqli_fetch_array($objq_NameProduct);
+                              if(isset($num_product)){ 
+                    
+                    $pdf->Cell(70,8,iconv('UTF-8','cp874',$objr_NameProduct['name_product']),1,0,'');
+                    $pdf->Cell(40,8,iconv('UTF-8','cp874',$num_product.' '.'('.$objr_NameProduct['unit'].')'),1,0,'');
+                    $pdf->Cell(40,8,iconv('UTF-8','cp874',$total_money),1,0,'C');
+                    $pdf->Ln(8);
+                              }
+                              $sum_monny = $sum_monny+$total_money;
+                            }
+                    $pdf->Cell(70,8,iconv('UTF-8','cp874',''),0,0,'C');
+                    $pdf->Cell(40,8,iconv('UTF-8','cp874','รวมเป็นเงินทั้งหมด'),1,0,'C');
+                    $pdf->Cell(40,8,iconv('UTF-8','cp874',$sum_monny),1,0,'C');        
 
-                    //ยืนยันรับเงิน(ส่วนของการประปา)
+                    
     $pdf->Output();
 ?>
