@@ -8,6 +8,7 @@
     <title>โปรแกรมขายหน้าร้าน
     </title>
     <!-- Tell the browser to be responsive to screen width -->
+    <link rel="icon" type="image/png" href="../images/favicon.ico"/>
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -134,7 +135,7 @@ $objr_listproduct = mysqli_fetch_array($objq_listproduct);
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-6">
-                      <a type="block" href="../index.php" class="btn btn-block btn-success">
+                      <a type="block" href="../product.php" class="btn btn-block btn-success">
                         <<= เริ่มต้นใหม่
                       </a>
                   </div>

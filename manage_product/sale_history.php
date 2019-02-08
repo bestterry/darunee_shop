@@ -5,7 +5,8 @@
 		<?php require('../font/font_style.php');?>
 		<meta charset="utf-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-				<title>AdminLTE 2 | Registration Page</title>
+			<title>ทีมงานคุณดารุณี</title>
+    <link rel="icon" type="image/png" href="../images/favicon.ico"/>
 				<!-- Tell the browser to be responsive to screen width -->
 				<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 					<!-- Bootstrap 3.3.7 -->
@@ -143,19 +144,21 @@
                           </tr>
 																	</tbody>
 																</table>
+															
+															<div class="box-footer">
 																<div class="col-md-4"></div>
-																<div class="col-md-4">
-																	<div class="col-md-4"></div>
-																	<div class="col-md-5">
-																		<a type="button" href="../pdf_file/sale_history.php" class="btn btn-block btn-success" >
-																			<i class="fa fa-print"> พิมพ์ </i>
-																		</a>
+																	<div class="col-md-4">
+																		<div class="col-md-4"></div>
+																		<div class="col-md-5">
+																			<a type="button" href="../pdf_file/sale_history.php" class="btn btn-block btn-success" >
+																				<i class="fa fa-print"> พิมพ์ </i>
+																			</a>
+																		</div>
+																		<div class="col-md-3"></div>
 																	</div>
-																	<div class="col-md-3"></div>
+																	<div class="col-md-4"></div>
 																</div>
-																<div class="col-md-4"></div>
 															</div>
-															<div class="box-footer"></div>
 														</div>
 													</div>
 													<!-- /.register-box -->

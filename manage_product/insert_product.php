@@ -7,5 +7,5 @@
     $insert_product = "INSERT INTO product (name_product, num_product, unit, status)
     VALUES ('$name_product', '$num_product', '$unit_product', '$status')";
     mysqli_query($conn,$insert_product);
-    header("location:../index.php");
+    header("location:../product.php");
 // ?>

@@ -9,5 +9,5 @@
    SET name_product = '$name_product', num_product = '$num_product', unit = '$unit'
    WHERE id_product ='$id_product'";
    mysqli_query($conn,$update_product);
-   header('Location: ../index.php');
+   header('Location: ../product.php');
 ?>

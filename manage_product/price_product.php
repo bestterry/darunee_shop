@@ -6,8 +6,8 @@
 <?php require('../font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน</title>
-  <!-- Tell the browser to be responsive to screen width -->
+  <title>ทีมงานคุณดารุณี</title>
+    <link rel="icon" type="image/png" href="../images/favicon.ico"/>
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->
@@ -117,7 +117,7 @@
                       <div class="col-md-4">
                       </div>
                       <div class="col-md-5">
-                      <a type="block" href="../index.php" class="btn btn-block btn-success"><<= เริ่มต้นใหม่ </i></a>
+                      <a type="block" href="../product.php" class="btn btn-block btn-success"><<= เริ่มต้นใหม่ </i></a>
                       </div>
                       <div class="col-md-3">
                       </div>

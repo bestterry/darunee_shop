@@ -217,6 +217,8 @@
                 <!--เพิ่มรายการอุปกรณ์ -->
                 <!--ประวัติเพิ่ม-ถอน อุปกรณ์ -->
                 <li><a target="_blank" href="manage_product/sale_history.php" ><i class="fa fa-exchange"></i> ยอดขายประจำวัน </a></li>
+
+                <li><a href="login/logout.php" ><i class="fa fa-exchange"></i> ออกจากระบบ </a></li>
                 <!--ประวัติเพิ่ม-ถอน อุปกรณ์ -->
             </ul>
         </div>

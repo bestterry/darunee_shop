@@ -8,6 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>โปรแกรมขายหน้าร้าน</title>
   <!-- Tell the browser to be responsive to screen width -->
+  <link rel="icon" type="image/png" href="../images/favicon.ico"/>
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->

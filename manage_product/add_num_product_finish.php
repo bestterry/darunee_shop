@@ -9,7 +9,7 @@
   $sql = "UPDATE product SET num_product='$total' WHERE id_product ='$id_product'";
 
 if ($conn->query($sql) === TRUE) {
-  header('Location: ../index.php');;
+  header('Location: ../product.php');;
 } else {
     echo "Error updating record: " . $conn->error;
 }

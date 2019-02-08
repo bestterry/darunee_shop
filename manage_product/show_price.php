@@ -6,7 +6,8 @@
 <?php require('../font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน</title>
+  <title>ทีมงานคุณดารุณี</title>
+    <link rel="icon" type="image/png" href="../images/favicon.ico"/>
   <!-- Tell the browser to be responsive to screen width -->
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">

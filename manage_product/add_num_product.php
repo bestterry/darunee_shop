@@ -11,6 +11,7 @@
   <title>โปรแกรมขายหน้าร้าน</title>
   <!-- Tell the browser to be responsive to screen width -->
 <!-- Bootstrap 3.3.7 -->
+<link rel="icon" type="image/png" href="../images/favicon.ico"/>
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
@@ -104,7 +105,7 @@
                       <div class="col-md-4">
                       </div>
                       <div class="col-md-5">
-                      <a type="block" href="../index.php" class="btn btn-block btn-success"><<= กลับหน้าหลัก </i></a>
+                      <a type="block" href="../product.php" class="btn btn-block btn-success"><<= กลับหน้าหลัก </i></a>
                       </div>
                       <div class="col-md-3">
                       </div>
