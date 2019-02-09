@@ -75,7 +75,7 @@
 
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="print_listproduct.php" method="post" autocomplete="off">
+                  <form action="../pdf_file/bill.php" method="post" autocomplete="off"  target="_blank">
                     <table class="table table-bordered table-hover">
                         <tbody>
                         
@@ -138,6 +138,11 @@
                         </tbody>
                     </table>
                     <div class="col-md-8">
+                    <div class="col-md-2">
+                    <a type="block" href="../product.php" class="btn btn-block btn-success"><i class="fa fa-home"> กลับหน้าหลัก </i></a>
+                      </div>
+                      <div class="col-md-10">
+                      </div>
                     </div>
                     <div class="col-md-4">
                       <div class="col-md-4">

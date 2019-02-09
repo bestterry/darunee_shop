@@ -51,18 +51,19 @@
 																		<th class="text-center" width="20%">บ/หน่วย</th>
 																		<th class="text-center" width="20%">เงินขาย</th>
 																	</tr>
-																	<?php #endregion
+												<?php #endregion
                            $date = "SELECT * FROM sale_history
                                      WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND status_sale='sale'";
-                           $objq = mysqli_query($conn,$date);
-                           foreach($objq as $data){
-                              $id_sale = $data['id_sale_history'];
+													 $objq = mysqli_query($conn,$date);
+													 
+													 while($value = $objq ->fetch_assoc()){
+                             $id_sale = $value['id_sale_history'];
                              $SQL_product = "SELECT * FROM product INNER JOIN sale_history 
                              ON product.id_product = sale_history.id_product 
                              WHERE sale_history.id_sale_history='$id_sale'";
                              $objq_product = mysqli_query($conn,$SQL_product);
                              $objr_product = mysqli_fetch_array($objq_product);
-                          ?>
+                        ?>
 																	<tr>
 																		<td>
 																			<?php echo $objr_product['name_product']; ?>
@@ -78,7 +79,7 @@
 																			<?php echo $objr_product['price']; ?>
 																		</td>
 																	</tr>
-																	<?php
+														<?php
                               }
                             ?>
 																</tbody>
@@ -108,7 +109,7 @@
 														$sum_monny = 0;
                             $sql_history = "SELECT * FROM product";
                             $objq_history = mysqli_query($conn,$sql_history);
-                            foreach($objq_history as $history ){
+                            while($history = $objq_history ->fetch_assoc()){
                               $id_product = $history['id_product'];
                               $total_sale = "SELECT SUM(sale_history.num_sale),SUM(sale_history.price) FROM sale_history 
                                               INNER JOIN product ON sale_history.id_product=product.id_product

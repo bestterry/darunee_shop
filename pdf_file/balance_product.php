@@ -36,18 +36,6 @@ class PDF extends FPDF
         // Line break
         $this->Ln(2);
     }
-
-    // Page footer
-    function Footer()
-    {
-        // Position at 1.5 cm from bottom
-        $this->SetY(-15);
-        // set front
-        $this->AddFont('angsana','','angsa.php');
-        $this->SetFont('angsana','',16);
-        // Page number
-        $this->Cell(0,10,iconv( 'UTF-8','cp874' , 'หน้า ').$this->PageNo(),0,0,'C');
-    }
   }
 
 // Instanciation of inherited class
@@ -76,7 +64,7 @@ $pdf=new PDF('P','mm','A4');
                     $strDate = date('d-m-Y');
                     $date = "SELECT * FROM product";
                     $objq = mysqli_query($conn,$date);
-                    foreach($objq as $data){
+                    while($data = $objq ->fetch_assoc()){
                     $pdf->Cell(70,8,iconv('UTF-8','cp874',$data['name_product']),1,0,'L');
                     $pdf->Cell(27,8,iconv('UTF-8','cp874',$data['num_product']),1,0,'C');
                     $pdf->Cell(27,8,iconv('UTF-8','cp874',$data['unit']),1,0,'C');

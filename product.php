@@ -1,6 +1,6 @@
 <?php 
   require "session.php";
-  require "config_database/config.php"; 
+  require "config_database/config.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,6 +53,11 @@
           <?php 
 $list_product = "SELECT * FROM product";
 $query_product = mysqli_query($conn,$list_product);
+$query_product1 = mysqli_query($conn,$list_product);
+$query_product2 = mysqli_query($conn,$list_product);
+$query_product3 = mysqli_query($conn,$list_product);
+$query_product4 = mysqli_query($conn,$list_product);
+$query_product5 = mysqli_query($conn,$list_product);
 require 'menu/menu_left_shop.php';
 ?> 
           <div class="col-md-9">
@@ -77,8 +82,8 @@ require 'menu/menu_left_shop.php';
                       </th>
                     </tr>
                     <?php 
-foreach($query_product as $product):
-?>
+                      while($product = $query_product ->fetch_assoc()){
+                    ?>
                     <tr>
                       <td class="text-center" width="10%">
                         <?php echo $product['id_product']; ?>
@@ -91,7 +96,7 @@ foreach($query_product as $product):
                         <?php echo $product['unit']; ?>
                       </td>
                     </tr>
-                    <?php endforeach; ?>
+                      <?php } ?>
                   </tbody>
                 </table>
               </div>

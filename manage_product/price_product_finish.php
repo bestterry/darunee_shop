@@ -97,7 +97,7 @@
                               //Update NUM product in database
                               $update_num_product = "UPDATE product SET num_product = $total_num_product WHERE id_product = $id_product";
                               $objq_update = mysqli_query($conn,$update_num_product);
-                              //INsert history buy product
+                              // //INsert history buy product
                               $insert_history = "INSERT INTO sale_history (id_product, num_sale, price, name_draw, status_sale)
                                                   VALUES ( $id_product, $num_product, $total_price, '-', 'sale')";
                               mysqli_query($conn,$insert_history);
@@ -142,11 +142,11 @@
                       </table>
                       <div class="col-md-4">
                       </div>
-                      <div class="col-md-5">
+                      <div class="col-md-4">
                       
                       <button type="submit" class="btn btn-block btn-success" ><i class="fa fa-calculator"> คำนวณเงิน  </i></button>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-4">
                       </div>
                     </div>
                   </form>

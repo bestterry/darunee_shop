@@ -28,14 +28,14 @@
                                                 <th class="text-center" width="15%">คงเหลือ</th>
                                                 <th class="text-center" width="15%">หน่วยนับ</th>
                                                 <?php
-                                                foreach($query_product as $product):
+                                                while($product = $query_product1 ->fetch_assoc()){
                                               ?>
                                             <tr>
                                                 <td class="text-center" width="15%"><input type="checkbox" name="menu[]" value="<?php echo $product['id_product']; ?>"></td>
                                                 <td  width="35%"><?php echo $product['name_product'];?></td>
                                                 <td class="text-center" width="15%"><?php echo $product['num_product'];?></td>
                                                 <td class="text-center" width="15%"><?php echo $product['unit'];?></td>
-                                                <?php endforeach; ?>
+                                                <?php } ?>
                                             </tr>
                                             </tbody>
                                       </table>
@@ -56,7 +56,7 @@
                 </div>
                 <!-- /ขายสินค้า -->
                 <!-- เบิกสินค้า -->
-                <li><a href="#" data-toggle="modal" data-target="#myModal10"><i class="fa fa-minus-square"></i> เบิกสินค้า </a></li>
+                <li><a href="#" data-toggle="modal" data-target="#myModal10"><i class="fa fa-archive"></i> เบิกสินค้า </a></li>
                 <div class="modal fade" id="myModal10" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <form action="manage_product/draw_product.php" method="post">
@@ -76,14 +76,14 @@
                                                 <th class="text-center" width="15%">คงเหลือ</th>
                                                 <th class="text-center" width="15%">หน่วยนับ</th>
                                                 <?php
-                                                foreach($query_product as $product):
+                                                while($product = $query_product2 ->fetch_assoc()){
                                               ?>
                                             <tr>
                                                 <td class="text-center" width="15%"><input type="checkbox" name="menu[]" value="<?php echo $product['id_product']; ?>"></td>
                                                 <td  width="35%"><?php echo $product['name_product'];?></td>
                                                 <td class="text-center" width="15%"><?php echo $product['num_product'];?></td>
                                                 <td class="text-center" width="15%"><?php echo $product['unit'];?></td>
-                                                <?php endforeach; ?>
+                                                <?php } ?>
                                             </tr>
                                             </tbody>
                                       </table>
@@ -119,14 +119,14 @@
                                         <th class="text-center" width="20%">หน่วยนับ</th>
                                         <th class="text-center" width="10%">เพิ่มจำนวน</th>
                                     <tr>
-                                        <?php foreach($query_product as $addproduct):?>
+                                        <?php while($addproduct = $query_product3 ->fetch_assoc()){ ?>
                                     <tr>
                                         <td class="text-center" width="50%"><?php echo $addproduct['name_product']; ?></td>
                                         <td class="text-center" width="20%"><?php echo $addproduct['num_product']; ?></td>
                                         <td class="text-center" width="20%"><?php echo $addproduct['unit']; ?></td>
                                         <td class="text-center" ><a href="manage_product/add_num_product.php?id_product=<?php echo $addproduct['id_product']; ?>" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span></a></td>
                                     </tr>
-                                        <?php endforeach;?>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -157,12 +157,12 @@
                                         <th class="text-center" width="10%">เเก้ไข</th>
                                     </tr>
                                     <?php 
-                                        foreach($query_product as $edit):
+                                       while($edit = $query_product4 ->fetch_assoc()){
                                     ?>
                                     <tr>
                                         <td class="text-center" width="15%"><?php echo $edit['name_product'];?>(<font color="red"><?php echo $edit['unit']?></font>)</td>
                                         <td class="text-center"><a href="manage_product/edit_product.php?id_product=<?php echo $edit['id_product'];?>" class="btn btn-warning"><span class="glyphicon glyphicon-cog"></span></a></td>
-                                    <?php endforeach;?>
+                                       <?php } ?>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -218,7 +218,7 @@
                 <!--ประวัติเพิ่ม-ถอน อุปกรณ์ -->
                 <li><a target="_blank" href="manage_product/sale_history.php" ><i class="fa fa-exchange"></i> ยอดขายประจำวัน </a></li>
 
-                <li><a href="login/logout.php" ><i class="fa fa-exchange"></i> ออกจากระบบ </a></li>
+                <li><a href="login/logout.php" ><i class="fa fa-power-off"></i> ออกจากระบบ </a></li>
                 <!--ประวัติเพิ่ม-ถอน อุปกรณ์ -->
             </ul>
         </div>
