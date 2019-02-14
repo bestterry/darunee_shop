@@ -34,7 +34,6 @@ class PDF extends FPDF
         // Title
         $this->SetTextColor(0,0,0);
         $this->Cell(0,5, iconv( 'UTF-8','cp874' , 'รายการนำเข้าสินค้า ประจำวันที่ ') , 0 , 1,'L' );
-        
         // Line break
         $this->Ln(2);
     }
