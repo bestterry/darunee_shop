@@ -6,7 +6,7 @@
         </div>
         <div class="box-body no-padding">
             <ul class="nav nav-pills nav-stacked">
-            <li><a href="index.php"><i class="fa fa-home"></i> สินค้าคงเหลือ </a></li>
+            <li><a href="product.php"><i class="fa fa-home"></i> สินค้าคงเหลือ </a></li>
                 <!-- ขายสินค้า -->
                 <li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-minus-square"></i> ขายสินค้า </a></li>
                 <div class="modal fade" id="myModal" role="dialog">
@@ -55,6 +55,9 @@
                     </div>
                 </div>
                 <!-- /ขายสินค้า -->
+                <!-- /ประวัติขายสินค้า -->
+                <li><a target="_blank" href="manage_product/sale_history.php" ><i class="fa fa-exchange"></i> ยอดขายประจำวัน </a></li>
+                <!-- /ประวัติขายสินค้า -->
                 <!-- เบิกสินค้า -->
                 <li><a href="#" data-toggle="modal" data-target="#myModal10"><i class="fa fa-archive"></i> เบิกสินค้า </a></li>
                 <div class="modal fade" id="myModal10" role="dialog">
@@ -91,25 +94,24 @@
                                   <button type="submit"  class="btn btn-success pull-left">ถัดไป ==>></button>
                                     <button type="button" class="btn btn-danger pull-right" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
                                 </div>
-                                
                                 <div class="col-md-2"></div>
-
                                 <div class="modal-footer">
-                                    
                                 </div>
-                             
                             </div>
                         </form>
                     </div>
                 </div>
                 <!-- /เบิกสินค้า -->
-                <!--เพิ่มจำนวนอุปกรณ์ -->
-                <li><a href="#" data-toggle="modal" data-target="#myModal1"><i class="fa fa-plus-square"></i> เพิ่มจำนวนสินค้า</a></li>
+                <!-- ประวัติเบิกสินค้า -->
+                <li><a target="_blank" href="manage_product/draw_history.php" ><i class="fa fa-exchange"></i> ยอดเบิกสินค้าประจำวัน </a></li>
+                <!-- /ประวัติเบิกสินค้า -->
+                <!--เพิ่มจำนวนสินค้า -->
+                <li><a href="#" data-toggle="modal" data-target="#myModal1"><i class="fa fa-plus-square"></i> รับเข้าสินค้า</a></li>
                 <div class="modal fade" id="myModal1" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <font size="6"><p align = "center"> เลือกรายการที่ต้องการเพิ่มจำนวน </p></font>
+                            <font size="6"><p align = "center"> เลือกรายการ </p></font>
                             </div>
                             <div class="modal-body">
                                 <table class="table table-hover table-striped table-bordered">
@@ -137,6 +139,7 @@
                     </div>
                 </div>
                 <!--เพิ่มจำนวนอุปกรณ์ -->
+                <li><a target="_blank" href="manage_product/add_history.php" ><i class="fa fa-exchange"></i> ประวัติรับเข้าสินค้า </a></li>
                 <!-- เเก้ไขอุปกรณ์  -->
                 <li><a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-cogs"></i> เเก้ไขรายการสินค้า</a></li>
                 <div class="modal fade" id="myModal2" role="dialog">
@@ -214,10 +217,6 @@
                         </form>
                     </div>
                 </div>
-                <!--เพิ่มรายการอุปกรณ์ -->
-                <!--ประวัติเพิ่ม-ถอน อุปกรณ์ -->
-                <li><a target="_blank" href="manage_product/sale_history.php" ><i class="fa fa-exchange"></i> ยอดขายประจำวัน </a></li>
-
                 <li><a href="login/logout.php" ><i class="fa fa-power-off"></i> ออกจากระบบ </a></li>
                 <!--ประวัติเพิ่ม-ถอน อุปกรณ์ -->
             </ul>

@@ -50,6 +50,24 @@
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
+  <script language="javascript">
+  function fncSubmit()
+  {
+    if(document.form1.add_num.value == "")
+    {
+      alert('กรุณาระบุจำนวน');
+      document.form1.num.focus();
+      return false;
+    }	
+    if(document.form1.name.value == "")
+    {
+      alert('กรุณาระบุชื่อผู้รับเข้าสินค้า');
+      document.form1.name.focus();		
+      return false;
+    }	
+    document.form1.submit();
+  }
+  </script>
 <div class="wrapper">
   <header class="main-header">
     <!-- Header Navbar: style can be found in header.less -->
@@ -69,19 +87,19 @@
       <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="6"><p align = "center"> เพิ่มจำนวนสินค้า </font></p>
+                <font size="6"><p align = "center"> รับเข้าสินค้า </font></p>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="add_num_product_finish.php" method="post" autocomplete="off">
+                  <form action="add_num_product_finish.php" method="post" name="form1" onSubmit="JavaScript:return fncSubmit();" autocomplete="off">
                     <table class="table table-bordered table-hover">
                         <tbody>
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" >ชื่อสินค้า</th>
                             <th class="text-center" width="15%">จำนวนสินค้าที่มี</th>
                             <th class="text-center" width="10%">หน่วยนับ</th>
-                            <th class="text-center" width="15%">จำนวนสินค้าที่เพิ่ม</th>
+                            <th class="text-center" width="15%">จำนวนสินค้าที่รับเข้า</th>
                           </tr>
                         <?php 
                             $id_product = $_GET['id_product'];
@@ -101,6 +119,21 @@
                           </tr>
                         </tbody>
                     </table>
+                    <div class="col-md-8">
+                  </div>
+                  <div class="col-md-4">
+                    <table class="table table-bordered table-hover">
+                      <tbody>
+                        <tr>
+                          <th class="text-center">ชื่อผู้รับเข้าสินค้า
+                          </th>
+                          <th bgcolor="#99CCFF" class="text-center"> 
+                            <input class="text-center" type="text" name="name" placeholder="ลงชื่อ">
+                          </th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div> 
                     <div class="col-md-4">
                       <div class="col-md-4">
                       </div>

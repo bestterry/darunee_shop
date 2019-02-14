@@ -33,16 +33,10 @@ class PDF extends FPDF
         $this->Text(75, 19,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
         // Title
         $this->SetTextColor(0,0,0);
-        $this->Cell(0,5, iconv( 'UTF-8','cp874' , 'รายการขายหน้าร้าน ประจำวันที่ ') , 0 , 1,'L' );
-        if($this->PageNo()>1){
-            $this->Ln(2);
-            $this->Cell(60,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
-            $this->Cell(24,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
-            $this->Cell(20,10,iconv('UTF-8','cp874','บ/หน่วย'),1,0,'C');
-            $this->Cell(24,10,iconv('UTF-8','cp874','เงินขาย'),1,0,'C');
-            $this->Cell(40,10,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
-            $this->Ln(10);
-        }
+        $this->Cell(0,5, iconv( 'UTF-8','cp874' , 'รายการนำเข้าสินค้า ประจำวันที่ ') , 0 , 1,'L' );
+        
+        // Line break
+        $this->Ln(2);
     }
 
     // Page footer
@@ -72,12 +66,11 @@ $pdf=new PDF('P','mm','A4');
             $pdf->AddPage();
             $pdf->SetFont('angsana','',18);
             $pdf->Ln(5);
-            $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ยอดขายสินค้า ') , 0 , 1,'' );
+            $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ยอดนำเข้าสินค้า ') , 0 , 1,'' );
             $pdf->Ln(3);
             $pdf->SetFont('angsana','',16);
-            $pdf->Cell(70,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
-            $pdf->Cell(40,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
-            $pdf->Cell(40,10,iconv('UTF-8','cp874','จำนวนเงิน(บาท)'),1,0,'C');
+            $pdf->Cell(90,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+            $pdf->Cell(60,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
             $pdf->Ln(10);
                 
                 $sum_monny = 0;
@@ -85,28 +78,23 @@ $pdf=new PDF('P','mm','A4');
                 $objq_history = mysqli_query($conn,$sql_history);
                 while($history = $objq_history ->fetch_assoc()){
                       $id_product = $history['id_product'];
-                      $total_sale = "SELECT SUM(sale_history.num_sale),SUM(sale_history.price) FROM sale_history 
+                      $total_sale = "SELECT SUM(sale_history.num_sale) FROM sale_history 
                                       INNER JOIN product ON sale_history.id_product=product.id_product
-                                      WHERE product.id_product = '$id_product' AND DATE_FORMAT(sale_history.datetime,'%d-%m-%Y')='$strDate' AND sale_history.status_sale='sale'";
+                                      WHERE product.id_product = '$id_product' AND DATE_FORMAT(sale_history.datetime,'%d-%m-%Y')='$strDate' AND sale_history.status_sale='add'";
                       $objq_sale = mysqli_query($conn,$total_sale);
                       $objr_sale = mysqli_fetch_array($objq_sale);
                       $num_product = $objr_sale['SUM(sale_history.num_sale)'];
-                      $total_money = $objr_sale['SUM(sale_history.price)'];
                       $sql_NameProduct = "SELECT * FROM product WHERE id_product = '$id_product'";
                       $objq_NameProduct = mysqli_query($conn,$sql_NameProduct);
                       $objr_NameProduct = mysqli_fetch_array($objq_NameProduct);
                       if(isset($num_product)){ 
             
-            $pdf->Cell(70,8,iconv('UTF-8','cp874',$objr_NameProduct['name_product']),1,0,'');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',$num_product.' '.'('.$objr_NameProduct['unit'].')'),1,0,'');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',$total_money),1,0,'C');
+            $pdf->Cell(90,8,iconv('UTF-8','cp874',$objr_NameProduct['name_product']),1,0,'');
+            $pdf->Cell(60,8,iconv('UTF-8','cp874',$num_product.' '.'('.$objr_NameProduct['unit'].')'),1,0,'');
+            
             $pdf->Ln(8);
                       }
-                      $sum_monny = $sum_monny+$total_money;
-                    }
-            $pdf->Cell(70,8,iconv('UTF-8','cp874',''),0,0,'C');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874','รวมเป็นเงินทั้งหมด'),1,0,'C');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',$sum_monny),1,0,'C');  
+                    } 
 // --------------------------------------------------------------------------------------
             $pdf->AddPage();
             $pdf->SetFont('angsana','',16);
@@ -114,9 +102,13 @@ $pdf=new PDF('P','mm','A4');
             $pdf->Text(87, 19,iconv('UTF-8','cp874',''),1,0,'C');
             //สร้างตาราง
             $pdf->SetTextColor(0,0,0);
-            
+            $pdf->Ln(2);
+            $pdf->Cell(90,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+            $pdf->Cell(40,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
+            $pdf->Cell(40,10,iconv('UTF-8','cp874','ชื่อผู้ส่ง'),1,0,'C');
+            $pdf->Ln(10);
             $date = "SELECT * FROM sale_history
-                    WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND status_sale='sale'";
+                    WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND status_sale='add'";
             $objq = mysqli_query($conn,$date);
             while($data = $objq ->fetch_assoc()){
                 $id_sale = $data['id_sale_history'];
@@ -125,11 +117,9 @@ $pdf=new PDF('P','mm','A4');
                 WHERE sale_history.id_sale_history='$id_sale'";
                 $objq_product = mysqli_query($conn,$SQL_product);
                 $objr_product = mysqli_fetch_array($objq_product);
-            $pdf->Cell(60,8,iconv('UTF-8','cp874',$objr_product['name_product']),1,0,'L');
-            $pdf->Cell(24,8,iconv('UTF-8','cp874',$objr_product['num_sale'].' '.'('.$objr_product['unit'].')'),1,0,'L');
-            $pdf->Cell(20,8,iconv('UTF-8','cp874',$objr_product['price']/$objr_product['num_sale']),1,0,'C');
-            $pdf->Cell(24,8,iconv('UTF-8','cp874',$objr_product['price']),1,0,'C');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',''),1,0,'C');
+            $pdf->Cell(90,8,iconv('UTF-8','cp874',$objr_product['name_product']),1,0,'L');
+            $pdf->Cell(40,8,iconv('UTF-8','cp874',$objr_product['num_sale'].' '.'('.$objr_product['unit'].')'),1,0,'L');
+            $pdf->Cell(40,8,iconv('UTF-8','cp874',$objr_product['name_draw']),1,0,'C');
             $pdf->Ln(8);
             }                
     $pdf->Output();

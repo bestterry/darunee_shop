@@ -28,10 +28,10 @@ class PDF extends FPDF
         
         //Date
         $this->SetTextColor(255,0,0); 
-        $this->Text(84, 19,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
+        $this->Text(91, 19,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
         // Title
         $this->SetTextColor(0,0,0);
-        $this->Cell(0,5, iconv( 'UTF-8','cp874' , 'รายการสินค้าคงเหลือหน้าร้าน ประจำวันที่ ') , 0 , 1,'L' );
+        $this->Cell(0,5, iconv( 'UTF-8','cp874' , 'รายการสินค้าคงเหลือหน้าร้าน ประจำวันที่') , 0 , 1,'L' );
         
         // Line break
         $this->Ln(2);
@@ -41,7 +41,7 @@ class PDF extends FPDF
 // Instanciation of inherited class
 $pdf=new PDF('P','mm','A4');
             // ตั้งค่าขอบกระดาษทุกด้าน 20 มิลลิเมตร
-            $pdf->SetMargins(15, 15,15);
+            $pdf->SetMargins(25, 15,15);
 
             $pdf->AddFont('angsana','','angsa.php');
 
@@ -56,11 +56,11 @@ $pdf=new PDF('P','mm','A4');
                     //สร้างตาราง
                     $pdf->SetTextColor(0,0,0);
                     $pdf->Ln(2);
-                    $pdf->Cell(70,8,iconv('UTF-8','cp874','รายการ'),1,0,'C');
-                    $pdf->Cell(27,8,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
-                    $pdf->Cell(27,8,iconv('UTF-8','cp874','หน่วย'),1,0,'C');
-                    $pdf->Cell(40,8,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
-                    $pdf->Ln(8);
+                    $pdf->Cell(70,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+                    $pdf->Cell(27,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
+                    $pdf->Cell(27,10,iconv('UTF-8','cp874','หน่วย'),1,0,'C');
+                    $pdf->Cell(45,10,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
+                    $pdf->Ln(10);
                     $strDate = date('d-m-Y');
                     $date = "SELECT * FROM product";
                     $objq = mysqli_query($conn,$date);
@@ -68,7 +68,7 @@ $pdf=new PDF('P','mm','A4');
                     $pdf->Cell(70,8,iconv('UTF-8','cp874',$data['name_product']),1,0,'L');
                     $pdf->Cell(27,8,iconv('UTF-8','cp874',$data['num_product']),1,0,'C');
                     $pdf->Cell(27,8,iconv('UTF-8','cp874',$data['unit']),1,0,'C');
-                    $pdf->Cell(40,8,iconv('UTF-8','cp874',''),1,0,'C');
+                    $pdf->Cell(45,8,iconv('UTF-8','cp874',''),1,0,'C');
                     $pdf->Ln(8);
                     }                        
     $pdf->Output();

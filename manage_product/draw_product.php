@@ -130,40 +130,29 @@ $objr_listproduct = mysqli_fetch_array($objq_listproduct);
                         </tr>
                       </tbody>
                     </table>
-                  </div>         
-                  <div class="col-md-4">
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-6">
-                      <a type="block" href="../product.php" class="btn btn-block btn-success">
-                        <<= เริ่มต้นใหม่
-                      </a>
-                  </div>
-                  <div class="col-md-3">
-                  </div>
-                  </div>
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4">
-                  <div class="col-md-3">
-                  </div>
-                  <div class="col-md-6">
-                    <button type="submit" value="submit" class="btn btn-block btn-success">
-                    <i class="fa fa-save"> บันทึก </i>
-                    </button>
-                  </div>
-                  <div class="col-md-3">
-                  </div>
-                </div>
-                </form>
-                
+                  </div>  
             </div>
             <!-- /.mailbox-read-message -->
           </div>
           <!-- /.box-body -->
           <!-- /.box-footer -->
           <div class="box-footer">
-          </div>
+                <div class="col-md-2">
+                  <a href="../product.php" class="btn btn-block btn-success" >
+                  <i class="fa fa-arrow-left"> กลับ 
+                    </i>
+                  </a>
+                </div>
+                <div class="col-md-8">
+                </div>
+                <div class="col-md-2">
+                  <button type="submit" class="btn btn-block btn-success" >
+                    <i class="fa fa-floppy-o"> บันทึก 
+                    </i>
+                  </button>
+                </div>
+            </div>
+            </form>
           <!-- /.box-footer -->
           </div>
         <!-- /. box -->
