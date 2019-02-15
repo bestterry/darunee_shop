@@ -59,41 +59,41 @@
       <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="4"><B> แก้ไขรายการสินค้า </font></B>
+                <font size="4"><B> แก้ไขประวัติขายสินค้า </font></B>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="algorithm/edit_draw_history.php" method="post" autocomplete="off">
+                  <form action="algorithm/edit_sale_history.php" method="post" autocomplete="off">
                     <table class="table table-bordered table-hover">
                         <tbody>
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" >ชื่อสินค้า</th>
                             <th class="text-center" width="15%">จำนวนสินค้า</th>
                             <th class="text-center" width="10%">หน่วยนับ</th>
-                            <th class="text-center" width="15%">ชื่อผู้เบิก</th>
+                            <th class="text-center" width="15%">ราคา/หน่วย</th>
                           </tr>
                         
                           <tr>
                           <?php
-                            $id_peoduct = $_GET['id_draw']; 
+                            $id_product = $_GET['id_draw']; 
                             $SQL_product = "SELECT * FROM product INNER JOIN sale_history 
                             ON product.id_product = sale_history.id_product 
-                            WHERE sale_history.id_sale_history='$id_peoduct'";
+                            WHERE sale_history.id_sale_history='$id_product'";
                             $objq_product = mysqli_query($conn,$SQL_product);
                             $objr_product = mysqli_fetch_array($objq_product);
                           ?>
                             <td class="text-center"><input type="text" name="name_product" class="form-control text-center col-md-1" value="<?php echo $objr_product['name_product'];?>" readonly/></td>
                             <td>
                               <input type="text" name="after_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_sale'];?>">
-                              <input type="hidden" name="befor_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_sale'];?>">
                             </td>
                             <td class="text-center" >
-                            <input type="hidden" name="id_draw" value="<?php echo $id_peoduct;?>">
-                            <input type="text" class="form-control text-center col-md-1" value="<?php echo $objr_product['unit'];?>" readonly/>
+                            <input type="text" name="unit" class="form-control text-center col-md-1" value="<?php echo $objr_product['unit'];?>" readonly/>
                             </td>
                             <td class="text-center">
-                            <input type="text" class="form-control text-center col-md-1" value="<?php echo $objr_product['name_draw'];?>" readonly/>
+                            <input type="text" name="price" class="form-control text-center col-md-1" value="<?php echo $objr_product['price']/$objr_product['num_sale'];?>">
+                            <input type="hidden" name="id_draw" value="<?php echo $id_product;?>">
+                            <input type="hidden" name="befor_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_sale'];?>">
                             </td>
                           </tr>
                            
@@ -102,12 +102,13 @@
                     <div class="col-md-8">
                     </div>
                     <div class="col-md-4">
-                      <div class="col-md-4">
+                      <div class="col-md-5">
+                      <a href="algorithm/delete_sale_history.php?id_sale=<?php echo $id_product;?>" type="button" class="btn btn-block btn-danger"><i class="fa fa-check-square"> ลบ </i></a>
                       </div>
                       <div class="col-md-5">
                       <button type="submit" class="btn btn-block btn-success"><i class="fa fa-check-square"> บันทึก </i></button>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                       </div>
                     </div>
                   </form>

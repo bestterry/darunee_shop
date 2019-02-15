@@ -47,9 +47,10 @@
 																<tbody>
 																	<tr bgcolor="#99CCFF">
 																		<th class="text-center" width="40%">รายการ</th>
-																		<th class="text-center" width="20%">จำนวน</th>
-																		<th class="text-center" width="20%">บ/หน่วย</th>
+																		<th class="text-center" width="15%">จำนวน</th>
+																		<th class="text-center" width="15%">บ/หน่วย</th>
 																		<th class="text-center" width="20%">เงินขาย(บาท)</th>
+																		<th class="text-center" width="10%">แก้ไข</th>
 																	</tr>
 												<?php #endregion
                            $date = "SELECT * FROM sale_history
@@ -77,6 +78,9 @@
 																		</td>
 																		<td class="text-center">
 																			<?php echo $objr_product['price']; ?>
+																		</td>
+																		<td class="text-center">
+																			 <a href="edit_sale_history.php?id_draw=<?php echo $id_sale;?>"><span class="glyphicon glyphicon-cog"></span></a> 
 																		</td>
 																	</tr>
 														<?php
