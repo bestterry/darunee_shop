@@ -1,4 +1,7 @@
-<?php require "../config_database/config.php"; ?>
+<?php 
+  require "../config_database/config.php";
+  require "../session.php";  
+?>
 
 <!DOCTYPE html>
 <html>
@@ -6,9 +9,8 @@
 <?php require('../font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <link rel="icon" type="image/png" href="../images/favicon.ico"/>
+  <title>ทีมงานคุณดารุณี</title>
+    <link rel="icon" type="image/png" href="../images/favicon.ico"/>
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->
@@ -35,18 +37,26 @@
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-
 <body class=" hold-transition skin-blue layout-top-nav ">
 <div class="wrapper">
+
   <header class="main-header">
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
     </nav>
   </header>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -55,72 +65,43 @@
 
     <!-- Main content -->
     <section class="content">
-      
+  
       <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="4"><B> แก้ไขรายการสินค้า </font></B>
+                <font size="6"><p align = "center"> สต๊อกรถ </font></p>
+                <font size="4"><b align = "left"> เจ้าของรถ : <?php echo $username; ?></font></b>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="algorithm/edit_draw_history.php" method="post" autocomplete="off">
                     <table class="table table-bordered table-hover">
                         <tbody>
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" >ชื่อสินค้า</th>
-                            <th class="text-center" width="15%">จำนวนสินค้า</th>
-                            <th class="text-center" width="10%">หน่วยนับ</th>
-                            <th class="text-center" width="15%">ชื่อผู้เบิก</th>
+                            <th class="text-center" width="5%" >ลำดับ</th>
+                            <th class="text-center" >สินค้า</th>
+                            <th class="text-center" width="6%">หน่วย</th>
+                            <th class="text-center" width="9%">ยกมา(+)</th>
+                            <th class="text-center" width="9%">รับเข้า(+)</th>
+                            <th class="text-center" width="9%">เบิกออก(-)</th>
+                            <th class="text-center" width="9%">ขาย(-)</th>
+                            <th class="text-center" width="9%">อื่นๆ(-)</th>
+                            <th class="text-center" width="9%">คืนร้าน</th>
+                            <th class="text-center" width="9%">เหลือ</th>
+                            <th class="text-center" width="9%">นับจริง</th>
                           </tr>
-                        
-                          <tr>
-                          <?php
-                            $id_peoduct = $_GET['id_draw']; 
-                            $SQL_product = "SELECT * FROM product INNER JOIN sale_history 
-                            ON product.id_product = sale_history.id_product 
-                            WHERE sale_history.id_sale_history='$id_peoduct'";
-                            $objq_product = mysqli_query($conn,$SQL_product);
-                            $objr_product = mysqli_fetch_array($objq_product);
-                          ?>
-                            <td class="text-center"><input type="text" name="name_product" class="form-control text-center col-md-1" value="<?php echo $objr_product['name_product'];?>" readonly/></td>
-                            <td>
-                              <input type="text" name="after_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_sale'];?>">
-                              <input type="hidden" name="befor_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_sale'];?>">
-                            </td>
-                            <td class="text-center" >
-                            <input type="hidden" name="id_draw" value="<?php echo $id_peoduct;?>">
-                            <input type="text" class="form-control text-center col-md-1" value="<?php echo $objr_product['unit'];?>" readonly/>
-                            </td>
-                            <td class="text-center">
-                            <input type="text" name="name" class="form-control text-center col-md-1" value="<?php echo $objr_product['name_draw'];?>" >
-                            </td>
-                          </tr>
-                           
+              <?php require('algorithm/cal_store.php'); ?>                
                         </tbody>
                     </table>
-                    <div class="col-md-8">
-                    </div>
-                    <div class="col-md-4">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-5">
-                      <button type="submit" class="btn btn-block btn-success"><i class="fa fa-check-square"> บันทึก </i></button>
-                      </div>
-                      <div class="col-md-3">
-                      </div>
-                    </div>
-                  </form>
                 </div>
-                <!-- /.mailbox-read-message -->
             </div>
-            <!-- /.box-body -->
-            <!-- /.box-footer -->
             <div class="box-footer">
-
+             <a href="store.php" type="button" class="btn btn-success pull-left"> <<= กลับ </a>
+             <a href="../pdf_file/store.php" type="button" class="btn btn-success pull-right"><i class="fa fa-print"></i> พิมพ์ </a>
             </div>
             <!-- /.box-footer -->
         </div>
+        </form>
         <!-- /. box -->
     </div>
     </section>
@@ -129,7 +110,8 @@
   <!-- /.content-wrapper -->
 
   <?php require("../menu/footer.html"); ?>
-  </div>
+ </div>
+
    <!-- jQuery 3 -->
    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->

@@ -3,8 +3,9 @@ require "../../config_database/config.php";
   echo $id_draw = $_POST["id_draw"];
   $befor_num = $_POST['befor_num'];
   $after_num = $_POST['after_num'];
+  $pricepernum = $_POST['pricepernum'];
   $price = $_POST['price'];
-  $total_price = $after_num * $price;
+  $note = $_POST['note'];
 
   if($after_num > $befor_num){
     $total_num = $after_num-$befor_num;
@@ -20,7 +21,7 @@ require "../../config_database/config.php";
     $update_product = "UPDATE product SET num_product = '$total_num_product' WHERE id_product = '$id_product'";
     mysqli_query($conn,$update_product);
 
-    $update_draw = "UPDATE sale_history SET num_sale = '$after_num',price = '$total_price' WHERE id_sale_history = '$id_draw'";
+    $update_draw = "UPDATE sale_history SET num_sale = '$after_num',pricepernum = $pricepernum,price = '$price', note = '$note' WHERE id_sale_history = '$id_draw'";
     mysqli_query($conn,$update_draw);
   }
   else {
@@ -37,7 +38,7 @@ require "../../config_database/config.php";
     $update_product = "UPDATE product SET num_product = '$total_num_product' WHERE id_product = '$id_product'";
     mysqli_query($conn,$update_product);
 
-    $update_draw = "UPDATE sale_history SET num_sale = '$after_num',price = '$total_price' WHERE id_sale_history = '$id_draw'";
+    $update_draw = "UPDATE sale_history SET num_sale = '$after_num',pricepernum = $pricepernum ,price = '$price', note = '$note' WHERE id_sale_history = '$id_draw'";
     mysqli_query($conn,$update_draw);
   }
   header('location:../sale_history.php');

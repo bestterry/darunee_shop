@@ -134,35 +134,34 @@
                       </tbody>
                     </table>
                   </div> 
-                    <div class="col-md-4">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-5">
-                      <a type="block" href="../product.php" class="btn btn-block btn-success"><<= กลับหน้าหลัก </i></a>
-                      </div>
-                      <div class="col-md-3">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-4">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-5">
-                      <button type="submit" class="btn btn-block btn-success"><i class="fa fa-calculator"> บันทึก </i></button>
-                      </div>
-                      <div class="col-md-3">
-                      </div>
-                    </div>
-                  </form>
+               
                 </div>
-                <!-- /.mailbox-read-message -->
             </div>
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-
-            </div>
+              <div class="col-md-4">
+                  <div class="col-md-4">
+                  </div>
+                  <div class="col-md-5">
+                  <a type="block" href="../product.php" class="btn btn-success"><<= กลับหน้าหลัก </i></a>
+                  </div>
+                  <div class="col-md-3">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                  <div class="col-md-4">
+                  </div>
+                  <div class="col-md-5">
+                  <button type="submit" class="btn btn-success"><i class="fa fa-calculator"> บันทึก </i></button>
+                  </div>
+                  <div class="col-md-3">
+                  </div>
+                </div>
+              </div>
+              </form>
             <!-- /.box-footer -->
         </div>
         <!-- /. box -->

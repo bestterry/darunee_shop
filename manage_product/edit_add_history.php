@@ -59,19 +59,19 @@
       <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="4"><B> แก้ไขรายการสินค้า </font></B>
+                <font size="4"><B> แก้ไขประวัตินำเข้าสินค้า </font></B>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="algorithm/edit_draw_history.php" method="post" autocomplete="off">
+                  <form action="algorithm/edit_add_history.php" method="post" autocomplete="off">
                     <table class="table table-bordered table-hover">
                         <tbody>
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" >ชื่อสินค้า</th>
                             <th class="text-center" width="15%">จำนวนสินค้า</th>
                             <th class="text-center" width="10%">หน่วยนับ</th>
-                            <th class="text-center" width="15%">ชื่อผู้เบิก</th>
+                            <th class="text-center" width="15%">ชื่อผู้นำเข้า</th>
                           </tr>
                         
                           <tr>
@@ -93,7 +93,7 @@
                             <input type="text" class="form-control text-center col-md-1" value="<?php echo $objr_product['unit'];?>" readonly/>
                             </td>
                             <td class="text-center">
-                            <input type="text" name="name" class="form-control text-center col-md-1" value="<?php echo $objr_product['name_draw'];?>" >
+                            <input type="text" name="name" class="form-control text-center col-md-1" value="<?php echo $objr_product['name_draw'];?>">
                             </td>
                           </tr>
                            

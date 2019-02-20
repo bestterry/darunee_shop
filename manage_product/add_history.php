@@ -43,6 +43,7 @@
 																		<th class="text-center" width="40%">รายการ</th>
 																		<th class="text-center" width="30%">จำนวน</th>
 																		<th class="text-center" width="30%">ชื่อผู้ส่ง</th>
+																		<th class="text-center" width="10%">แก้ไข</th>
 																	</tr>
 												<?php #endregion
                            $date = "SELECT * FROM sale_history
@@ -67,6 +68,9 @@
 																		</td>
                                     <td class="text-center">
 																			<?php echo $objr_product['name_draw'];?>  
+																		</td>
+																		<td class="text-center">
+																			 <a href="edit_add_history.php?id_draw=<?php echo $id_sale;?>"><span class="glyphicon glyphicon-cog"></span></a> 
 																		</td>
 																	</tr>
 														<?php

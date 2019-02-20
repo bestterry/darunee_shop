@@ -31,11 +31,14 @@
                                                 while($product = $query_product1 ->fetch_assoc()){
                                               ?>
                                             <tr>
-                                                <td class="text-center" width="15%"><input type="checkbox" name="menu[]" value="<?php echo $product['id_product']; ?>"></td>
-                                                <td  width="35%"><?php echo $product['name_product'];?></td>
+                                                <td class="text-center" width="15%">
+                                                 <input type="checkbox" name="menu[]" value="<?php echo $product['id_product']; ?>">
+                                                </td>
+                                                <td width="35%"><?php echo $product['name_product'];?></td>
                                                 <td class="text-center" width="15%"><?php echo $product['num_product'];?></td>
                                                 <td class="text-center" width="15%"><?php echo $product['unit'];?></td>
                                                 <?php } ?>
+                                                 <input type="hidden" name="id_member" value="<?php echo $id_member; ?>">
                                             </tr>
                                             </tbody>
                                       </table>

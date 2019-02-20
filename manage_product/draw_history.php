@@ -130,18 +130,12 @@
 																	</tbody>
 																</table>
 															<div class="box-footer">
-																<div class="col-md-4"></div>
-																	<div class="col-md-4">
-																		<div class="col-md-4"></div>
-																		<div class="col-md-5">
-																			<a type="button" href="../pdf_file/draw_history.php" class="btn btn-block btn-success" >
+																		<div class="col-md-6 col-md-push-6">
+																			<a type="button" href="../pdf_file/draw_history.php" class="btn btn-success" >
 																				<i class="fa fa-print"> พิมพ์ </i>
 																			</a>
 																		</div>
-																		<div class="col-md-3"></div>
-																	</div>
-																	<div class="col-md-4"></div>
-																</div>
+																		
 															</div>
 														</div>
 													</div>

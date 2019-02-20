@@ -1,5 +1,6 @@
-<?php require "../config_database/config.php"; ?>
-
+<?php 
+ require "../config_database/config.php"; 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,12 +35,9 @@
 <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="../plugins/iCheck/all.css">
-
   <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-
 <body class=" hold-transition skin-blue layout-top-nav ">
 <div class="wrapper">
   <header class="main-header">
@@ -72,6 +70,8 @@
                             <th class="text-center" width="15%">จำนวนสินค้า</th>
                             <th class="text-center" width="10%">หน่วยนับ</th>
                             <th class="text-center" width="15%">ราคา/หน่วย</th>
+                            <th class="text-center" width="15%">เงินขาย</th>
+                            <th class="text-center" width="15%">หมายเหตุ</th>
                           </tr>
                         
                           <tr>
@@ -85,50 +85,45 @@
                           ?>
                             <td class="text-center"><input type="text" name="name_product" class="form-control text-center col-md-1" value="<?php echo $objr_product['name_product'];?>" readonly/></td>
                             <td>
-                              <input type="text" name="after_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_sale'];?>">
+                            <input type="text" name="after_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_sale'];?>">
                             </td>
                             <td class="text-center" >
                             <input type="text" name="unit" class="form-control text-center col-md-1" value="<?php echo $objr_product['unit'];?>" readonly/>
                             </td>
                             <td class="text-center">
-                            <input type="text" name="price" class="form-control text-center col-md-1" value="<?php echo $objr_product['price']/$objr_product['num_sale'];?>">
+                            <input type="text" name="pricepernum" class="form-control text-center col-md-1" value="<?php echo $objr_product['pricepernum'];?>">
                             <input type="hidden" name="id_draw" value="<?php echo $id_product;?>">
                             <input type="hidden" name="befor_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_sale'];?>">
                             </td>
+                            <td>
+                            <input type="text" name="price" class="form-control text-center col-md-1" value="<?php echo $objr_product['price']; ?>">
+                            </td>
+                            <td>
+                            <input type="text" name="note" class="form-control text-center col-md-1" value="<?php echo $objr_product['note']; ?>">
+                            </td>
                           </tr>
-                           
                         </tbody>
-                    </table>
-                    <div class="col-md-8">
-                    </div>
-                    <div class="col-md-4">
-                      <div class="col-md-5">
-                      <a href="algorithm/delete_sale_history.php?id_sale=<?php echo $id_product;?>" type="button" class="btn btn-block btn-danger"><i class="fa fa-check-square"> ลบ </i></a>
-                      </div>
-                      <div class="col-md-5">
-                      <button type="submit" class="btn btn-block btn-success"><i class="fa fa-check-square"> บันทึก </i></button>
-                      </div>
-                      <div class="col-md-2">
-                      </div>
-                    </div>
-                  </form>
+                        </table>
                 </div>
                 <!-- /.mailbox-read-message -->
             </div>
-            <!-- /.box-body -->
-            <!-- /.box-footer -->
             <div class="box-footer">
-
+              <div class="container">
+                <div class="pull-right">
+                    <a href="algorithm/delete_sale_history.php?id_sale=<?php echo $id_product;?>" type="button" class="btn btn-danger"><i class="fa fa-check-square"> ลบ </i></a>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check-square"> บันทึก </i></button>
+                </div>
+              </div> 
             </div>
             <!-- /.box-footer -->
         </div>
+        </form>
         <!-- /. box -->
     </div>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
   <?php require("../menu/footer.html"); ?>
   </div>
    <!-- jQuery 3 -->

@@ -46,11 +46,12 @@
 															<table class="table table-hover table-striped table-bordered">
 																<tbody>
 																	<tr bgcolor="#99CCFF">
-																		<th class="text-center" width="40%">รายการ</th>
+																		<th class="text-center" width="35%">รายการ</th>
 																		<th class="text-center" width="15%">จำนวน</th>
-																		<th class="text-center" width="15%">บ/หน่วย</th>
-																		<th class="text-center" width="20%">เงินขาย(บาท)</th>
-																		<th class="text-center" width="10%">แก้ไข</th>
+																		<th class="text-center" width="12%">บ/หน่วย</th>
+																		<th class="text-center" width="13%">เงินขาย(บาท)</th>
+																		<th class="text-center" width="20%">หมายเหตุ</th>
+																		<th class="text-center" width="5%">แก้ไข</th>
 																	</tr>
 												<?php #endregion
                            $date = "SELECT * FROM sale_history
@@ -74,10 +75,13 @@
 																			<?php echo $objr_product['unit']; ?>)
 																		</td>
 																		<td class="text-center">
-																			<?php echo $objr_product['price']/$objr_product['num_sale'];?>
+																			<?php echo $objr_product['pricepernum']; ?>
 																		</td>
 																		<td class="text-center">
 																			<?php echo $objr_product['price']; ?>
+																		</td>
+																		<td class="text-center">
+																			<?php echo $objr_product['note']; ?>
 																		</td>
 																		<td class="text-center">
 																			 <a href="edit_sale_history.php?id_draw=<?php echo $id_sale;?>"><span class="glyphicon glyphicon-cog"></span></a> 
@@ -155,7 +159,7 @@
 																	<div class="col-md-4">
 																		<div class="col-md-4"></div>
 																		<div class="col-md-5">
-																			<a type="button" href="../pdf_file/sale_history.php" class="btn btn-block btn-success" >
+																			<a type="button" href="../pdf_file/sale_history.php" class="btn btn-success" >
 																				<i class="fa fa-print"> พิมพ์ </i>
 																			</a>
 																		</div>

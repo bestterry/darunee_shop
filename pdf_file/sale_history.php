@@ -127,9 +127,9 @@ $pdf=new PDF('P','mm','A4');
                 $objr_product = mysqli_fetch_array($objq_product);
             $pdf->Cell(60,8,iconv('UTF-8','cp874',$objr_product['name_product']),1,0,'L');
             $pdf->Cell(24,8,iconv('UTF-8','cp874',$objr_product['num_sale'].' '.'('.$objr_product['unit'].')'),1,0,'L');
-            $pdf->Cell(20,8,iconv('UTF-8','cp874',$objr_product['price']/$objr_product['num_sale']),1,0,'C');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874',$objr_product['pricepernum']),1,0,'C');
             $pdf->Cell(24,8,iconv('UTF-8','cp874',$objr_product['price']),1,0,'C');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',''),1,0,'C');
+            $pdf->Cell(40,8,iconv('UTF-8','cp874',$objr_product['note']),1,0,'C');
             $pdf->Ln(8);
             }                
     $pdf->Output();
