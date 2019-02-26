@@ -1,4 +1,7 @@
-<?php require "../config_database/config.php"; ?>
+<?php 
+	require "../config_database/config.php"; 
+	require "../session.php";
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -54,15 +57,14 @@
 																		<th class="text-center" width="5%">แก้ไข</th>
 																	</tr>
 												<?php #endregion
-                           $date = "SELECT * FROM sale_history
-                                     WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND status_sale='sale'";
+                           $date = "SELECT * FROM price_history
+                                     WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_zone = '$id_zone'";
 													 $objq = mysqli_query($conn,$date);
-													 
 													 while($value = $objq ->fetch_assoc()){
-                             $id_sale = $value['id_sale_history'];
-                             $SQL_product = "SELECT * FROM product INNER JOIN sale_history 
-                             ON product.id_product = sale_history.id_product 
-                             WHERE sale_history.id_sale_history='$id_sale'";
+                             $id_sale = $value['id_price_history'];
+                             $SQL_product = "SELECT * FROM product INNER JOIN price_history 
+                             ON product.id_product = price_history.id_product 
+                             WHERE price_history .id_price_history='$id_sale'";
                              $objq_product = mysqli_query($conn,$SQL_product);
                              $objr_product = mysqli_fetch_array($objq_product);
                         ?>
@@ -71,14 +73,14 @@
 																			<?php echo $objr_product['name_product']; ?>
 																		</td>
 																		<td class="text-center">
-																			<?php echo $objr_product['num_sale'];?>  (
+																			<?php echo $objr_product['num'];?>  (
 																			<?php echo $objr_product['unit']; ?>)
 																		</td>
 																		<td class="text-center">
-																			<?php echo $objr_product['pricepernum']; ?>
+																			<?php echo $objr_product['price']; ?>
 																		</td>
 																		<td class="text-center">
-																			<?php echo $objr_product['price']; ?>
+																			<?php echo $objr_product['money']; ?>
 																		</td>
 																		<td class="text-center">
 																			<?php echo $objr_product['note']; ?>
@@ -119,18 +121,19 @@
                             $objq_history = mysqli_query($conn,$sql_history);
                             while($history = $objq_history ->fetch_assoc()){
                               $id_product = $history['id_product'];
-                              $total_sale = "SELECT SUM(sale_history.num_sale),SUM(sale_history.price) FROM sale_history 
-                                              INNER JOIN product ON sale_history.id_product=product.id_product
-                                              WHERE product.id_product = '$id_product' AND DATE_FORMAT(sale_history.datetime,'%d-%m-%Y')='$strDate' AND sale_history.status_sale='sale'";
+                              $total_sale = "SELECT SUM(price_history.num),SUM(price_history.money) FROM price_history 
+                                              INNER JOIN product ON price_history.id_product=product.id_product
+                                              WHERE product.id_product = '$id_product' AND DATE_FORMAT(price_history.datetime,'%d-%m-%Y')='$strDate' AND price_history.id_zone='$id_zone'";
                               $objq_sale = mysqli_query($conn,$total_sale);
                               $objr_sale = mysqli_fetch_array($objq_sale);
-                              $num_product = $objr_sale['SUM(sale_history.num_sale)'];
-                              $total_money = $objr_sale['SUM(sale_history.price)'];
+                              $num_product = $objr_sale['SUM(price_history.num)'];
+                              $total_money = $objr_sale['SUM(price_history.money)'];
                               $sql_NameProduct = "SELECT * FROM product WHERE id_product = '$id_product'";
                               $objq_NameProduct = mysqli_query($conn,$sql_NameProduct);
                               $objr_NameProduct = mysqli_fetch_array($objq_NameProduct);
                               if(isset($num_product)){ 
                           ?>
+													
 																		<tr>
 																			<td>
 																				<?php echo $objr_NameProduct['name_product']; ?>

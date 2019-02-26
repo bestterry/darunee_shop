@@ -1,6 +1,6 @@
 <?php 
-  require "session.php";
   require "config_database/config.php";
+  require "session.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,17 +41,54 @@
   </head>
   <body class=" hold-transition skin-blue layout-top-nav ">
     <div>
-      <header class="main-header">
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top">
-        </nav>
-      </header>
+    <header class="main-header">
+    <!-- Logo -->
+    <a href="../../index2.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>A</b>LT</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Admin</b>LTE</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="dist/img/user.png" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $username; ?></span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="dist/img/user.png" class="img-circle" alt="User Image">
+
+                <p>
+                        <?php echo $username; ?>
+                  <small>สาขา : <?php echo $name_zone; ?></small>
+                </p>
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
           <?php 
-$list_product = "SELECT * FROM product";
+$list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_zone = $id_zone";
 $query_product = mysqli_query($conn,$list_product);
 $query_product1 = mysqli_query($conn,$list_product);
 $query_product2 = mysqli_query($conn,$list_product);
@@ -92,7 +129,7 @@ require 'menu/menu_left_shop.php';
                         <?php echo $product['name_product']; ?>
                       </td>
                       <td width="15%">
-                        <?php echo $product['num_product']; ?> 
+                        <?php echo $product['num']; ?> 
                         <?php echo $product['unit']; ?>
                       </td>
                     </tr>
@@ -106,7 +143,7 @@ require 'menu/menu_left_shop.php';
                   <div class="col-md-4">
                     <div class="col-md-4"></div>
                     <div class="col-md-5">
-                      <a type="button" href="pdf_file/balance_product.php" class="btn btn-block btn-success" >
+                      <a type="button" href="pdf_file/balance_product.php" target="_blank" class="btn btn-success" >
                         <i class="fa fa-print"> พิมพ์ </i>
                       </a>
                     </div>

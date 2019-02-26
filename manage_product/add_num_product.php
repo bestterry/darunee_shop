@@ -83,58 +83,84 @@
 
     <!-- Main content -->
     <section class="content">
-      
-      <div class="col-md-12">
+    <div class="col-md-2"></div>
+      <div class="col-md-8">
         <div class="box box-primary">
             <div class="box-header with-border">
                 <font size="6"><p align = "center"> รับเข้าสินค้า </font></p>
             </div>
+
             <!-- /.box-header -->
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
                   <form action="add_num_product_finish.php" method="post" name="form1" onSubmit="JavaScript:return fncSubmit();" autocomplete="off">
                     <table class="table table-bordered table-hover">
                         <tbody>
-                          <tr bgcolor="#99CCFF">
-                            <th class="text-center" >ชื่อสินค้า</th>
-                            <th class="text-center" width="15%">จำนวนสินค้าที่มี</th>
-                            <th class="text-center" width="10%">หน่วยนับ</th>
-                            <th class="text-center" width="15%">จำนวนสินค้าที่รับเข้า</th>
-                          </tr>
-                        <?php 
-                            $id_product = $_GET['id_product'];
-                            $sql = "SELECT * FROM product WHERE id_product = '$id_product'";
-                            $query = mysqli_query($conn,$sql);
-                            $fetch = mysqli_fetch_array($query);
-                        ?>
-                          <tr>
-                            <td class="text-center"><?php echo $fetch['name_product'];?></td>
-                            <td class="text-center" ><?php echo $fetch['num_product'];?></td>
-                            <td class="text-center"><?php echo $fetch['unit'];?></td>
-                            <td class="text-center">
-                              <input type="text" name="add_num"  class="form-control text-center col-md-2" placeholder="จำนวน">
-                              <input type="hidden" name="id_product"  class="form-control text-center col-md-2" value="<?php echo $id_product;?>">
-                              <input type="hidden" name="num"  class="form-control text-center col-md-2" value="<?php echo $fetch['num_product'];?>">
-                            </td>
-                          </tr>
-                        </tbody>
+                      <tr bgcolor="#99CCFF">
+                        <th class="text-center" width="5%" >ลำดับ
+                        </th>
+                        <th class="text-center" width="30%">ชื่อสินค้า
+                        </th>
+                        <th class="text-center" width="15%">จำนวนสินค้าที่รับเข้า
+                        </th>
+                        <th class="text-center" width="15%">หน่วยนับ
+                        </th>
+                      </tr>
+                      <?php
+                          for($i=0;$i<count($_POST["menu"]);$i++)
+                          {
+                          if(trim($_POST["menu"][$i]) != "")
+                          {
+                          $menu=$_POST['menu'][$i];
+                          $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_numproduct = $menu";
+                          $objq_listproduct = mysqli_query($conn,$list_product);
+                          $objr_listproduct = mysqli_fetch_array($objq_listproduct);
+                      ?>
+                      <tr>
+                        <td class="text-center">
+                          <?php echo $i+1; ?>
+                        </td>
+                        <td>
+                          <?php echo $objr_listproduct['name_product']; ?>
+                        </td>
+                        <td class="text-center" >
+                          <input class = "hidden" type="text" name="id_product[]" value="<?php echo $menu; ?>">
+                          <div class="form-group">
+                            <input type="text" name="num_product[]" class="form-control text-center col-md-1" placeholder="<?php echo $objr_listproduct['unit'];?>">
+                        </td>
+                        <td class="text-center">
+                          <?php echo $objr_listproduct['unit'];?>
+                        </td>
+                      </tr>
+                      <?php 
+                        }
+                        }
+                      ?>
+                    </tbody>
                     </table>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <table class="table table-bordered table-hover">
                       <tbody>
                         <tr>
-                          <th class="text-center">ชื่อผู้รับเข้าสินค้า
+                          <th class="text-center">ชื่อผู้เบิกสินค้า
                           </th>
                           <th bgcolor="#99CCFF" class="text-center"> 
-                            <input class="text-center" type="text" name="name" placeholder="ลงชื่อ">
+                          <select name ="id_member" class="form-control select2" style="width: 100%;">
+                          <?php #endregion
+                           $sql_member = "SELECT * FROM member WHERE id_zone = 0";
+                           $objq_member = mysqli_query($conn,$sql_member);
+                           while($member = $objq_member -> fetch_assoc()){
+                          ?>
+                            <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?></option>
+                           <?php } ?>
+                          </select>
                           </th>
                         </tr>
                       </tbody>
                     </table>
                   </div> 
-               
                 </div>
             </div>
             <!-- /.box-body -->
@@ -155,7 +181,7 @@
                   <div class="col-md-4">
                   </div>
                   <div class="col-md-5">
-                  <button type="submit" class="btn btn-success"><i class="fa fa-calculator"> บันทึก </i></button>
+                  <button type="submit" class="btn btn-success"><i class="fa fa-save"> บันทึก </i></button>
                   </div>
                   <div class="col-md-3">
                   </div>
@@ -166,6 +192,7 @@
         </div>
         <!-- /. box -->
     </div>
+    <div class="col-md-2"></div>
     </section>
     <!-- /.content -->
   </div>

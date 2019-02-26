@@ -1,4 +1,7 @@
-<?php require "../config_database/config.php"; ?>
+<?php 
+	require "../config_database/config.php";
+	require "../session.php"; 
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -46,28 +49,21 @@
 																		<th class="text-center" width="10%">แก้ไข</th>
 																	</tr>
 												<?php #endregion
-                           $date = "SELECT * FROM sale_history
-                                     WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND status_sale='draw'";
+                           $date = "SELECT * FROM draw_history INNER JOIN product ON draw_history.id_product = product.id_product INNER JOIN member ON draw_history.id_member = member.id_member
+                                     WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND draw_history.id_zone = $id_zone";
 													 $objq = mysqli_query($conn,$date);
-													 
 													 while($value = $objq ->fetch_assoc()){
-                             $id_sale = $value['id_sale_history'];
-                             $SQL_product = "SELECT * FROM product INNER JOIN sale_history 
-                             ON product.id_product = sale_history.id_product 
-                             WHERE sale_history.id_sale_history='$id_sale'";
-                             $objq_product = mysqli_query($conn,$SQL_product);
-                             $objr_product = mysqli_fetch_array($objq_product);
                         ?>
 																	<tr>
 																		<td>
-																			<?php echo $objr_product['name_product']; ?>
+																			<?php echo $value['name_product']; ?>
 																		</td>
 																		<td class="text-center">
-																			<?php echo $objr_product['num_sale'];?>  (
-																			<?php echo $objr_product['unit']; ?>)
+																			<?php echo $value['num_draw'];?>  (
+																			<?php echo $value['unit']; ?>)
 																		</td>
                                     <td class="text-center">
-																			<?php echo $objr_product['name_draw'];?>  
+																			<?php echo $value['name'];?>  
 																		</td>
 																		<td class="text-center">
 																			 <a href="edit_draw_history.php?id_draw=<?php echo $id_sale;?>"><span class="glyphicon glyphicon-cog"></span></a> 
@@ -99,29 +95,25 @@
 																			<th class="text-center" width="20%">จำนวน</th>
 																		</tr>
 													<?php #endregion
-														$sum_monny = 0;
                             $sql_history = "SELECT * FROM product";
                             $objq_history = mysqli_query($conn,$sql_history);
                             while($history = $objq_history ->fetch_assoc()){
                               $id_product = $history['id_product'];
-                              $total_sale = "SELECT SUM(sale_history.num_sale) FROM sale_history 
-                                              INNER JOIN product ON sale_history.id_product=product.id_product
-                                              WHERE product.id_product = '$id_product' AND DATE_FORMAT(sale_history.datetime,'%d-%m-%Y')='$strDate' AND sale_history.status_sale='draw'";
+                              $total_sale = "SELECT SUM(draw_history.num_draw) FROM draw_history 
+                                              INNER JOIN product ON draw_history.id_product=product.id_product
+                                              WHERE draw_history.id_product = '$id_product' AND DATE_FORMAT(draw_history.datetime,'%d-%m-%Y')='$strDate' AND draw_history.id_zone=$id_zone";
                               $objq_sale = mysqli_query($conn,$total_sale);
                               $objr_sale = mysqli_fetch_array($objq_sale);
-                              $num_product = $objr_sale['SUM(sale_history.num_sale)'];
-                              $sql_NameProduct = "SELECT * FROM product WHERE id_product = '$id_product'";
-                              $objq_NameProduct = mysqli_query($conn,$sql_NameProduct);
-                              $objr_NameProduct = mysqli_fetch_array($objq_NameProduct);
+                              $num_product = $objr_sale['SUM(draw_history.num_draw)'];
                               if(isset($num_product)){ 
                           ?>
 																		<tr>
 																			<td>
-																				<?php echo $objr_NameProduct['name_product']; ?>
+																				<?php echo $history['name_product']; ?>
 																			</td>
 																			<td class="text-center">
 																				<?php echo$num_product; ?>  (
-																				<?php echo $objr_NameProduct['unit']; ?>)
+																				<?php echo $history['unit']; ?>)
 																			</td>
 																		</tr>
 																		<?php }

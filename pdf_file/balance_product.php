@@ -1,7 +1,7 @@
 <?php
 require('fpdf.php');
 require('../config_database/config.php'); 
-
+require('../session.php');
   function DateThai($strDate)
       {
       $strYear = date("Y",strtotime($strDate))+543;
@@ -62,11 +62,11 @@ $pdf=new PDF('P','mm','A4');
                     $pdf->Cell(45,10,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
                     $pdf->Ln(10);
                     $strDate = date('d-m-Y');
-                    $date = "SELECT * FROM product";
+                    $date = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_zone = $id_zone";
                     $objq = mysqli_query($conn,$date);
                     while($data = $objq ->fetch_assoc()){
                     $pdf->Cell(70,8,iconv('UTF-8','cp874',$data['name_product']),1,0,'L');
-                    $pdf->Cell(27,8,iconv('UTF-8','cp874',$data['num_product']),1,0,'C');
+                    $pdf->Cell(27,8,iconv('UTF-8','cp874',$data['num']),1,0,'C');
                     $pdf->Cell(27,8,iconv('UTF-8','cp874',$data['unit']),1,0,'C');
                     $pdf->Cell(45,8,iconv('UTF-8','cp874',''),1,0,'C');
                     $pdf->Ln(8);

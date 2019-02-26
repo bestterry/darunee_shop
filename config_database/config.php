@@ -2,7 +2,7 @@
 $host = "localhost";
 $userdb = "root";
 $passdb ="";
-$db = "darunee";
+$db = "darunee_shop";
 
 $conn= new mysqli($host,$userdb,$passdb,$db);
 mysqli_set_charset($conn, "utf8");

@@ -1,7 +1,6 @@
 <?php
 require('fpdf.php');
 require('../config_database/config.php'); 
-
   function DateThai($strDate)
       {
       $strYear = date("Y",strtotime($strDate))+543;
@@ -28,8 +27,14 @@ $pdf=new FPDF('P','mm','A4');
             // กำหนดฟ้อนต์ที่จะใช้  อังสนา ตัวธรรมดา ขนาด 14
             $pdf->SetFont('angsana','',16);
             $pdf->SetTextColor(0,0,0); 
+          if($_GET['status']=='add'){  
+            $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ใบคืนสินค้า') , 0 , 1,'C' );
+            $pdf->Ln(2);
+          }
+          if($_GET['status']=='draw'){  
             $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ใบเบิกสินค้า') , 0 , 1,'C' );
             $pdf->Ln(2);
+          }
             $pdf->SetFont('angsana','',20);
             $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'ทีมงานคุณดารุณี') , 0 , 1,'C' );
             $pdf->Ln(8);
@@ -38,9 +43,14 @@ $pdf=new FPDF('P','mm','A4');
             $pdf->Ln(8);
             $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,DateThai($strDate).'                         ') , 0 , 1,'R' );
             $pdf->Ln(8);
+          if($_GET['status']=='add'){  
+            $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'ชื่อผู้คืน : '.$_POST['name']) , 0 , 1,'L' );
+            $pdf->Ln(4);
+          }
+          if($_GET['status']=='draw'){  
             $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'ชื่อผู้เบิก : '.$_POST['name']) , 0 , 1,'L' );
             $pdf->Ln(4);
-
+          }
             $pdf->Cell(15,12,iconv('UTF-8','cp874','ลำดับ'),1,0,'C');
             $pdf->Cell(100,12,iconv('UTF-8','cp874','รายการสินค้า'),1,0,'C');
             $pdf->Cell(30,12,iconv('UTF-8','cp874','จำนวน'),1,0,'C');

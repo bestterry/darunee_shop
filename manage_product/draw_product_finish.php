@@ -1,4 +1,7 @@
-<?php require "../config_database/config.php"; ?>
+<?php 
+  require "../config_database/config.php"; 
+  require "../session.php";
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -64,14 +67,14 @@ folder instead of downloading all of them to reduce the load. -->
             <div class="box box-primary">
               <div class="box-header with-border">
                 <font size="6">
-                  <p align = "center"> รายการเบิกสินค้า 
+                  <p align = "center"> รายการรับเข้าสินค้า
                 </font>
                 </p>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="../pdf_file/draw.php" method="post" autocomplete="off">
+                <form action="../pdf_file/draw_add.php?status=draw" method="post" target="_blank" autocomplete="off">
                   <table class="table table-bordered table-hover">
                     <tbody>
                       <tr bgcolor="#99CCFF">
@@ -85,27 +88,32 @@ folder instead of downloading all of them to reduce the load. -->
                         </th>
                       </tr>
                       <?php //คำนวณสรายการสินค้า
-$name = $_POST['name'];
+$id_member = $_POST['id_member'];
+$sql_member = "SELECT * FROM member WHERE id_member = $id_member";
+$objq_member = mysqli_query($conn,$sql_member);
+$objr_member = mysqli_fetch_array($objq_member);
 $total_price_money = 0;
 for($i=0;$i<count($_POST['id_product']);$i++){
-               $id_product = $_POST['id_product'][$i];
+               $id_numproduct = $_POST['id_product'][$i];
                $num_product = $_POST['num_product'][$i];
-               $num_product_instore = "SELECT * FROM product WHERE id_product=$id_product";
+    
+               $num_product_instore = "SELECT * FROM num_product INNER JOIN product ON num_product.id_product = product.id_product WHERE num_product.id_numproduct='$id_numproduct' AND num_product.id_zone='$id_zone'";
                $objq_num_product_instore = mysqli_query($conn,$num_product_instore);
                $objr_num_product_instore = mysqli_fetch_array($objq_num_product_instore);
-               $total_num_product = $objr_num_product_instore['num_product']-$num_product;
+               $total_num_product = $objr_num_product_instore['num']-$num_product;
                $name_product = $objr_num_product_instore['name_product'];
+               $id_product = $objr_num_product_instore['id_product'];
                $unit = $objr_num_product_instore['unit'];
                if($total_num_product < 0){
-echo "สินค้ามีจำนวนไม่เพียงพอ";
+          echo "สินค้ามีจำนวนไม่เพียงพอ";
 
 }else{
       //Update NUM product in database
-      $update_num_product = "UPDATE product SET num_product = $total_num_product WHERE id_product = $id_product";
+      $update_num_product = "UPDATE num_product SET num = $total_num_product WHERE id_numproduct = $id_numproduct AND id_zone=$id_zone";
       $objq_update = mysqli_query($conn,$update_num_product);
       //INsert history buy product
-      $insert_history = "INSERT INTO sale_history (id_product, num_sale, price, name_draw,status_sale)
-      VALUES ( $id_product, $num_product, 0, '$name','draw')";
+      $insert_history = "INSERT INTO draw_history (num_draw, id_product, id_member, note, id_zone)
+      VALUES ( $num_product,$id_product,$id_member,'-',$id_zone)";
       mysqli_query($conn,$insert_history);
 ?>
                       <tr>
@@ -119,16 +127,16 @@ echo "สินค้ามีจำนวนไม่เพียงพอ";
                           <?php echo $num_product; ?>
                         </td>
                         <td class="text-center" >
-                          <?php echo $objr_num_product_instore['unit'];?>
+                          <?php echo $unit; ?>
                         </td>
                         <input class ="hidden" type="text" name="name_product[]" value="<?php echo $name_product; ?>">
-                        <input class ="hidden" type="text" name="unit[]" value="<?php echo $unit; ?>">
-                        <input class ="hidden" type="text" name="num_product[]" value="<?php echo $num_product; ?>">
+                        <input class ="hidden" type="text" name="unit[]" value="<?php echo $num_product; ?>">
+                        <input class ="hidden" type="text" name="num_product[]" value="<?php echo $unit; ?>">
                       </tr>
       <?php
           }
         }
-      ?>
+      // ?>
                     </tbody>
                   </table>
                   <div class="col-md-6">
@@ -140,8 +148,8 @@ echo "สินค้ามีจำนวนไม่เพียงพอ";
                           <th class="text-center">ชื่อผู้เบิกสินค้า
                           </th>
                           <th bgcolor="#99CCFF" class="text-center"> 
-                            <?php echo $name; ?>
-                            <input class ="hidden" type="text" name="name" value="<?php echo $name; ?>">
+                            <?php echo $objr_member['name']; ?>
+                            <input class ="hidden" type="text" name="name" value="<?php echo $objr_member['name']; ?>">
                           </th>
                         </tr>
                       </tbody>

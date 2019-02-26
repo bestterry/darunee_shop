@@ -1,7 +1,4 @@
-<?php 
-  require "../config_database/config.php"; 
-  //require "session.php"; 
-?>
+<?php require "../config_database/config.php"; ?>
 
 <!DOCTYPE html>
 <html>
@@ -37,13 +34,6 @@
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -52,13 +42,10 @@
 <div class="wrapper">
 
   <header class="main-header">
-
-  
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
     </nav>
   </header>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -67,7 +54,6 @@
 
     <!-- Main content -->
     <section class="content">
-  
       <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -88,13 +74,12 @@
                             <th class="text-center" width="15%">รวมเงิน (บาท)</th>
                           </tr>
                           <?php
-                          
                             for($i=0;$i<count($_POST["menu"]);$i++)
                             {
                               if(trim($_POST["menu"][$i]) != "")
                                 {
-                                  $id_numproduct = $_POST['menu'][$i];
-                                  $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_numproduct = $id_numproduct";
+                                  $menu=$_POST['menu'][$i];
+                                  $list_product = "SELECT * FROM product WHERE id_product = $menu";
                                   $objq_listproduct = mysqli_query($conn,$list_product);
                                   $objr_listproduct = mysqli_fetch_array($objq_listproduct);
                           ?>
@@ -102,11 +87,11 @@
                             <td class="text-center"><?php echo $i+1; ?></td>
                             <td><?php echo $objr_listproduct['name_product']; ?></td>
                             <td class="text-center" >
-                              <input class = "hidden" type="text" name="id_numproduct[]" value="<?php echo $id_numproduct; ?>">
+                              <input class = "hidden" type="text" name="id_product[]" value="<?php echo $menu; ?>">
                               <div class="form-group">
                               <input type="text" name="num_product[]"  class="form-control text-center col-md-1" placeholder="<?php echo $objr_listproduct['unit'];?>">
                             </td>
-                            <td class="text-center"><?php echo$objr_listproduct['unit'];?></td>
+                            <td class="text-center"><?php echo $objr_listproduct['unit'];?></td>
                             <td class="text-center"  ><input type="text" name="price_product[]"  class="form-control text-center col-md-2" placeholder="ราคา/หน่วย">
                             </td>
                             <td></td>
@@ -114,38 +99,35 @@
                             <?php 
                                   }
                               }
-                             ?>
+                            ?>
                         </tbody>
                     </table>
-                
+                    <div class="col-md-4">
+                      <div class="col-md-4">
+                      </div>
+                      <div class="col-md-5">
+                      <a type="block" href="store.php" class="btn  btn-success"><<= เริ่มต้นใหม่ </i></a>
+                      </div>
+                      <div class="col-md-3">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                      <div class="col-md-4">
+                      </div>
+                      <div class="col-md-5">
+                      <button type="submit" class="btn  btn-success"><i class="fa fa-calculator"> คำนวณเงิน </i></button>
+                      </div>
+                      <div class="col-md-3">
+                      </div>
+                    </div>
+                  </form>
                 </div>
                 <!-- /.mailbox-read-message -->
             </div>
-            <!-- /.box-body -->
-            <!-- /.box-footer -->
             <div class="box-footer">
-            <div class="col-md-4">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-5">
-                      <a type="block" href="../product.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i></a>
-                      </div>
-                      <div class="col-md-3">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-4">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-5">
-                      <button type="submit" class="btn btn-success"><i class="fa fa-calculator"> คำนวณเงิน </i></button>
-                      </div>
-                      <div class="col-md-3">
-                      </div>
-                    </div>
             </div>
-            </form>
             <!-- /.box-footer -->
         </div>
         <!-- /. box -->
@@ -154,10 +136,8 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
   <?php require("../menu/footer.html"); ?>
  </div>
-
    <!-- jQuery 3 -->
    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->

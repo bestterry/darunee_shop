@@ -1,4 +1,7 @@
-<?php require "../config_database/config.php"; ?>
+<?php 
+  require "../config_database/config.php"; 
+  require "../session.php";
+?>
 
 <!DOCTYPE html>
 <html>
@@ -79,27 +82,28 @@
                           </tr>
                           <?php //คำนวณสรายการสินค้า
                           $total_price_money = 0;
-                           for($i=0;$i<count($_POST['id_product']);$i++){
-                            $id_product = $_POST['id_product'][$i];
+                           for($i=0;$i<count($_POST['id_numproduct']);$i++){
+                            $id_numproduct = $_POST['id_numproduct'][$i];
                             $num_product = $_POST['num_product'][$i];
                             $price_product = $_POST['price_product'][$i];
                             $total_price = $num_product*$price_product;
 
-                            $num_product_instore="SELECT * FROM product WHERE id_product=$id_product";
+                            $num_product_instore="SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_numproduct = $id_numproduct";
                             $objq_num_product_instore = mysqli_query($conn,$num_product_instore);
                             $objr_num_product_instore = mysqli_fetch_array($objq_num_product_instore);
-                            $total_num_product = $objr_num_product_instore['num_product']-$num_product;
+                            $total_num_product = $objr_num_product_instore['num']-$num_product;
                             $name_product = $objr_num_product_instore['name_product'];
                             $unit = $objr_num_product_instore['unit'];
+                            $id_product = $objr_num_product_instore['id_product'];
                             if($total_num_product < 0){
                               echo "สินค้ามีจำนวนไม่เพียงพอ";
                             }else{
                               //Update NUM product in database
-                              $update_num_product = "UPDATE product SET num_product = $total_num_product WHERE id_product = $id_product";
+                              $update_num_product = "UPDATE num_product SET num = $total_num_product WHERE id_numproduct = $id_numproduct";
                               $objq_update = mysqli_query($conn,$update_num_product);
                               // //INsert history buy product
-                              $insert_history = "INSERT INTO sale_history (id_product, num_sale,pricepernum, price, name_draw, status_sale)
-                                                  VALUES ( $id_product, $num_product, $price_product,$total_price, '-', 'sale')";
+                              $insert_history = "INSERT INTO price_history (num, price, money, id_product, id_zone, note)
+                                                  VALUES ($num_product, $price_product, $total_price, $id_product, $id_zone, '-')";
                               mysqli_query($conn,$insert_history);
                           ?>
                           <tr>

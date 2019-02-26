@@ -85,15 +85,15 @@ folder instead of downloading all of them to reduce the load. -->
                         </th>
                       </tr>
                       <?php
-for($i=0;$i<count($_POST["menu"]);$i++)
-{
-if(trim($_POST["menu"][$i]) != "")
-{
-$menu=$_POST['menu'][$i];
-$list_product = "SELECT * FROM product WHERE id_product = $menu";
-$objq_listproduct = mysqli_query($conn,$list_product);
-$objr_listproduct = mysqli_fetch_array($objq_listproduct);
-?>
+                          for($i=0;$i<count($_POST["menu"]);$i++)
+                          {
+                          if(trim($_POST["menu"][$i]) != "")
+                          {
+                          $menu=$_POST['menu'][$i];
+                          $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_numproduct = $menu";
+                          $objq_listproduct = mysqli_query($conn,$list_product);
+                          $objr_listproduct = mysqli_fetch_array($objq_listproduct);
+                      ?>
                       <tr>
                         <td class="text-center">
                           <?php echo $i+1; ?>
@@ -111,9 +111,9 @@ $objr_listproduct = mysqli_fetch_array($objq_listproduct);
                         </td>
                       </tr>
                       <?php 
-}
-}
-?>
+                        }
+                        }
+                      ?>
                     </tbody>
                   </table>
                   <div class="col-md-6">
@@ -125,7 +125,15 @@ $objr_listproduct = mysqli_fetch_array($objq_listproduct);
                           <th class="text-center">ชื่อผู้เบิกสินค้า
                           </th>
                           <th bgcolor="#99CCFF" class="text-center"> 
-                            <input class="text-center" type="text" name="name" placeholder="ลงชื่อ">
+                          <select name ="id_member" class="form-control select2" style="width: 100%;">
+                          <?php #endregion
+                           $sql_member = "SELECT * FROM member WHERE id_zone = 0";
+                           $objq_member = mysqli_query($conn,$sql_member);
+                           while($member = $objq_member -> fetch_assoc()){
+                          ?>
+                            <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?></option>
+                           <?php } ?>
+                          </select>
                           </th>
                         </tr>
                       </tbody>
