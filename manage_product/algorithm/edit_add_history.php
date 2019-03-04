@@ -1,44 +1,36 @@
 <?php
 require "../../config_database/config.php";
-  $id_draw = $_POST["id_draw"];
-  $befor_num = $_POST['befor_num'];
-  $after_num = $_POST['after_num'];
-  $name = $_POST['name'];
+require "../../session.php";
 
+$id_add_history = $_POST["id_add_history"];
+$befor_num = $_POST['befor_num'];
+$after_num = $_POST['after_num'];
+
+$sql_add = " SELECT * FROM add_history WHERE id_add_history = $id_add_history"; 
+$objq_add = mysqli_query($conn,$sql_add);
+$objr_add = mysqli_fetch_array($objq_add);
+$id_product = $objr_add['id_product'];
+
+$sql_num = "SELECT * FROM num_product WHERE id_product = '$id_product' AND id_zone = '$id_zone'";
+$objq_num = mysqli_query($conn,$sql_num);
+$objr_num = mysqli_fetch_array($objq_num);
+echo $id_numproduct = $objr_num['id_numproduct'];
+$num_product = $objr_num['num'];
 
   if($after_num > $befor_num){
     $total_num = $after_num-$befor_num;
-    $sql_draw = " SELECT * FROM sale_history INNER JOIN product
-                  ON product.id_product = sale_history.id_product 
-                  WHERE sale_history.id_sale_history='$id_draw'";
-    $objq_draw = mysqli_query($conn,$sql_draw);
-    $objr_draw = mysqli_fetch_array($objq_draw);
-    $id_product = $objr_draw['id_product'];
-    $num_product = $objr_draw['num_product'];
-    $total_num_product = $num_product+$total_num;
-
-    $update_product = "UPDATE product SET num_product = '$total_num_product' WHERE id_product = '$id_product'";
-    mysqli_query($conn,$update_product);
-
-    $update_draw = "UPDATE sale_history SET num_sale = '$after_num',name_draw = '$name' WHERE id_sale_history = '$id_draw'";
-    mysqli_query($conn,$update_draw);
+    echo $total_num_product = $num_product+$total_num;
   }
   else {
     $total_num = $befor_num-$after_num;
-    $sql_draw = " SELECT * FROM sale_history INNER JOIN product
-                  ON product.id_product = sale_history.id_product 
-                  WHERE sale_history.id_sale_history='$id_draw'";
-    $objq_draw = mysqli_query($conn,$sql_draw);
-    $objr_draw = mysqli_fetch_array($objq_draw);
-    $id_product = $objr_draw['id_product'];
-    $num_product = $objr_draw['num_product'];
-    $total_num_product = $num_product-$total_num;
-
-    $update_product = "UPDATE product SET num_product = '$total_num_product' WHERE id_product = '$id_product'";
-    mysqli_query($conn,$update_product);
-
-    $update_draw = "UPDATE sale_history SET num_sale = '$after_num',name_draw = '$name' WHERE id_sale_history = '$id_draw'";
-    mysqli_query($conn,$update_draw);
+   echo $total_num_product = $num_product-$total_num;
   }
-  header('location:../add_history.php');
+
+$update_product = "UPDATE num_product SET num = '$total_num_product' WHERE id_numproduct = '$id_numproduct'";
+mysqli_query($conn,$update_product);
+
+$update_add = "UPDATE add_history SET num_add = '$after_num' WHERE id_add_history = '$id_add_history'";
+mysqli_query($conn,$update_add);
+
+header('location:../add_history.php');
 ?>

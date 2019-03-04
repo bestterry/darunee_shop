@@ -73,8 +73,8 @@
 																			<?php echo $objr_product['name_product']; ?>
 																		</td>
 																		<td class="text-center">
-																			<?php echo $objr_product['num'];?>  (
-																			<?php echo $objr_product['unit']; ?>)
+																			<?php echo $objr_product['num'];?>  
+																			<?php echo $objr_product['unit']; ?>
 																		</td>
 																		<td class="text-center">
 																			<?php echo $objr_product['price']; ?>
@@ -139,8 +139,8 @@
 																				<?php echo $objr_NameProduct['name_product']; ?>
 																			</td>
 																			<td class="text-center">
-																				<?php echo$num_product; ?>  (
-																				<?php echo $objr_NameProduct['unit']; ?>)
+																				<?php echo$num_product; ?> 
+																				<?php echo $objr_NameProduct['unit']; ?>
 																			</td>
 																			<td class="text-center">
 																				<?php echo $total_money; ?>

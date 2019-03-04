@@ -76,27 +76,27 @@
                         
                           <tr>
                           <?php
-                            $id_product = $_GET['id_draw']; 
-                            $SQL_product = "SELECT * FROM product INNER JOIN sale_history 
-                            ON product.id_product = sale_history.id_product 
-                            WHERE sale_history.id_sale_history='$id_product'";
+                            $id_price_product = $_GET['id_draw']; 
+                            $SQL_product = "SELECT * FROM product INNER JOIN price_history 
+                            ON product.id_product = price_history.id_product 
+                            WHERE price_history.id_price_history='$id_price_product'";
                             $objq_product = mysqli_query($conn,$SQL_product);
                             $objr_product = mysqli_fetch_array($objq_product);
                           ?>
                             <td class="text-center"><input type="text" name="name_product" class="form-control text-center col-md-1" value="<?php echo $objr_product['name_product'];?>" readonly/></td>
                             <td>
-                            <input type="text" name="after_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_sale'];?>">
+                            <input type="text" name="after_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num'];?>">
+                            <input type="hidden" name="befor_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num'];?>">
+                            <input type="hidden" name="id_price_product" value="<?php echo $id_price_product; ?>">
                             </td>
                             <td class="text-center" >
                             <input type="text" name="unit" class="form-control text-center col-md-1" value="<?php echo $objr_product['unit'];?>" readonly/>
                             </td>
                             <td class="text-center">
-                            <input type="text" name="pricepernum" class="form-control text-center col-md-1" value="<?php echo $objr_product['pricepernum'];?>">
-                            <input type="hidden" name="id_draw" value="<?php echo $id_product;?>">
-                            <input type="hidden" name="befor_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_sale'];?>">
+                            <input type="text" name="price" class="form-control text-center col-md-1" value="<?php echo $objr_product['price'];?>">
                             </td>
                             <td>
-                            <input type="text" name="price" class="form-control text-center col-md-1" value="<?php echo $objr_product['price']; ?>">
+                            <input type="text" name="money" class="form-control text-center col-md-1" value="<?php echo $objr_product['money']; ?>">
                             </td>
                             <td>
                             <input type="text" name="note" class="form-control text-center col-md-1" value="<?php echo $objr_product['note']; ?>">

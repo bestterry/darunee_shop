@@ -66,7 +66,7 @@
 																			<?php echo $value['name'];?>  
 																		</td>
 																		<td class="text-center">
-																			 <a href="edit_draw_history.php?id_draw=<?php echo $id_sale;?>"><span class="glyphicon glyphicon-cog"></span></a> 
+																			 <a href="edit_draw_history.php?id_draw_history=<?php echo $value['id_draw_history'];?>"><span class="glyphicon glyphicon-cog"></span></a> 
 																		</td>
 																	</tr>
 														<?php

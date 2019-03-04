@@ -59,7 +59,7 @@
       <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="4"><B> แก้ไขรายการสินค้า </font></B>
+                <font size="4"><B> แก้ไขประวัติเบิกสินค้า </font></B>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -73,30 +73,29 @@
                             <th class="text-center" width="10%">หน่วยนับ</th>
                             <th class="text-center" width="15%">ชื่อผู้เบิก</th>
                           </tr>
-                        
                           <tr>
                           <?php
-                            $id_peoduct = $_GET['id_draw']; 
-                            $SQL_product = "SELECT * FROM product INNER JOIN sale_history 
-                            ON product.id_product = sale_history.id_product 
-                            WHERE sale_history.id_sale_history='$id_peoduct'";
+                            $id_draw_history = $_GET['id_draw_history']; 
+                            $SQL_product = "SELECT * FROM product 
+                            INNER JOIN draw_history ON product.id_product = draw_history.id_product 
+                            INNER JOIN member ON draw_history.id_member = member.id_member
+                            WHERE draw_history.id_draw_history='$id_draw_history'";
                             $objq_product = mysqli_query($conn,$SQL_product);
                             $objr_product = mysqli_fetch_array($objq_product);
                           ?>
                             <td class="text-center"><input type="text" name="name_product" class="form-control text-center col-md-1" value="<?php echo $objr_product['name_product'];?>" readonly/></td>
                             <td>
-                              <input type="text" name="after_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_sale'];?>">
-                              <input type="hidden" name="befor_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_sale'];?>">
+                              <input type="text" name="after_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_draw'];?>">
+                              <input type="hidden" name="befor_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num_draw'];?>">
                             </td>
                             <td class="text-center" >
-                            <input type="hidden" name="id_draw" value="<?php echo $id_peoduct;?>">
+                            <input type="hidden" name="id_draw_history" value="<?php echo $id_draw_history;?>">
                             <input type="text" class="form-control text-center col-md-1" value="<?php echo $objr_product['unit'];?>" readonly/>
                             </td>
                             <td class="text-center">
-                            <input type="text" name="name" class="form-control text-center col-md-1" value="<?php echo $objr_product['name_draw'];?>" >
+                            <input type="text" class="form-control text-center col-md-1" value="<?php echo $objr_product['name'];?>" readonly/>
                             </td>
-                          </tr>
-                           
+                          </tr> 
                         </tbody>
                     </table>
                     <div class="col-md-8">

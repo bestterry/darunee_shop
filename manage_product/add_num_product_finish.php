@@ -100,7 +100,7 @@ for($i=0;$i<count($_POST['id_product']);$i++){
                $num_product_instore = "SELECT * FROM num_product INNER JOIN product ON num_product.id_product = product.id_product WHERE num_product.id_numproduct='$id_numproduct' AND num_product.id_zone='$id_zone'";
                $objq_num_product_instore = mysqli_query($conn,$num_product_instore);
                $objr_num_product_instore = mysqli_fetch_array($objq_num_product_instore);
-               $total_num_product = $objr_num_product_instore['num']-$num_product;
+               $total_num_product = $objr_num_product_instore['num']+$num_product;
                $name_product = $objr_num_product_instore['name_product'];
                $id_product = $objr_num_product_instore['id_product'];
                $unit = $objr_num_product_instore['unit'];
@@ -109,12 +109,12 @@ for($i=0;$i<count($_POST['id_product']);$i++){
 
 }else{
       //Update NUM product in database
-      // $update_num_product = "UPDATE num_product SET num = $total_num_product WHERE id_numproduct = $id_numproduct AND id_zone=$id_zone";
-      // $objq_update = mysqli_query($conn,$update_num_product);
+      $update_num_product = "UPDATE num_product SET num = $total_num_product WHERE id_numproduct = $id_numproduct AND id_zone=$id_zone";
+      $objq_update = mysqli_query($conn,$update_num_product);
       //INsert history buy product
-      // $insert_history = "INSERT INTO draw_history (num_draw, id_product, id_member, note, id_zone)
-      // VALUES ( $num_product,$id_product,$id_member,'-',$id_zone)";
-      // mysqli_query($conn,$insert_history);
+      $insert_history = "INSERT INTO add_history (num_add, id_product, id_member, note, id_zone)
+      VALUES ( $num_product,$id_product,$id_member,'-',$id_zone)";
+      mysqli_query($conn,$insert_history);
 ?>
                       <tr>
                         <td class="text-center" >

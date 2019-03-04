@@ -167,7 +167,7 @@
                                     ?>
                                     <tr>
                                         <td class="text-center" width="15%"><?php echo $edit['name_product'];?>(<font color="red"><?php echo $edit['unit']?></font>)</td>
-                                        <td class="text-center"><a href="manage_product/edit_product.php?id_product=<?php echo $edit['id_product'];?>" class="btn btn-warning"><span class="glyphicon glyphicon-cog"></span></a></td>
+                                        <td class="text-center"><a href="manage_product/edit_product.php?id_numproduct=<?php echo $edit['id_numproduct'];?>" class="btn btn-warning"><span class="glyphicon glyphicon-cog"></span></a></td>
                                        <?php } ?>
                                     </tr>
                                     </tbody>

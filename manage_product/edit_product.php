@@ -72,22 +72,22 @@
                             <th class="text-center" width="15%">จำนวนสินค้า</th>
                             <th class="text-center" width="10%">หน่วยนับ</th>
                           </tr>
-                        
                           <tr>
                           <?php
-                            $id_peoduct = $_GET['id_product']; 
-                            $sql_edit = "SELECT * FROM product WHERE id_product='$id_peoduct'";
+                            $id_numproduct = $_GET['id_numproduct']; 
+                            $sql_edit = "SELECT * FROM product INNER JOIN num_product 
+                                          ON product.id_product = num_product.id_product 
+                                          WHERE num_product.id_numproduct='$id_numproduct'";
                             $objq_edit = mysqli_query($conn,$sql_edit);
                             $objr_edit = mysqli_fetch_array($objq_edit);
                           ?>
                             <td class="text-center"><input type="text" name="name_product" class="form-control text-center col-md-1" value="<?php echo $objr_edit['name_product'];?>"></td>
-                            <td><input type="text" name="num_product" class="form-control text-center col-md-1" value="<?php echo $objr_edit['num_product'];?>"></td>
+                            <td><input type="text" name="num" class="form-control text-center col-md-1" value="<?php echo $objr_edit['num'];?>"></td>
                             <td class="text-center" >
-                            <input type="hidden" name="id_product" value="<?php echo $id_peoduct;?>">
+                            <input type="hidden" name="id_numproduct" value="<?php echo $id_numproduct;?>">
                             <input type="text" name="unit" class="form-control text-center col-md-1" value="<?php echo $objr_edit['unit'];?>">
                             </td>
                           </tr>
-                           
                         </tbody>
                     </table>
                     <div class="col-md-8">
