@@ -160,20 +160,8 @@ for($i=0;$i<count($_POST['id_product']);$i++){
               <!-- /.mailbox-read-message -->
               <!-- /.box-footer -->
               <div class="box-footer">
-                <div class="col-md-2">
-                  <a href="../product.php" class="btn btn-block btn-success" >
-                  <i class="fa fa-arrow-left"> กลับ 
-                    </i>
-                  </a>
-                </div>
-                <div class="col-md-8">
-                </div>
-                <div class="col-md-2">
-                  <button type="submit" class="btn btn-block btn-success" >
-                    <i class="fa fa-print"> พิมพ์ 
-                    </i>
-                  </button>
-                </div>
+                <a href="../product.php" class="btn btn-success pull-left"><i class="fa fa-arrow-left"> กลับ </i></a>
+                <button type="submit" class="btn btn-success pull-right"><i class="fa fa-print"> พิมพ์ </i></button>
               </div>
               </form>
             <!-- /.box-footer -->

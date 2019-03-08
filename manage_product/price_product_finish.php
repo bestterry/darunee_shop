@@ -144,23 +144,16 @@
                         </tr>
                         </tbody>
                       </table>
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-4">
-                      
-                      <button type="submit" class="btn btn-block btn-success" ><i class="fa fa-calculator"> คำนวณเงิน  </i></button>
-                      </div>
-                      <div class="col-md-4">
-                      </div>
                     </div>
-                  </form>
                 </div>
                 <!-- /.mailbox-read-message -->
             </div>
             <!-- /.box-body -->
             <!-- /.box-footer -->
-            <div class="box-footer">
+            <div align="center" class="box-footer">
+            <button type="submit" class="btn btn-success" ><i class="fa fa-calculator"> คำนวณเงิน  </i></button>
             </div>
+            </form>
             <!-- /.box-footer -->
         </div>
         <!-- /. box -->

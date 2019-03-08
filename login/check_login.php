@@ -13,6 +13,7 @@
     
 
     $_SESSION['id_member'] = $id_member;
+    $_SESSION['status'] = $status;
     session_write_close();
 
         if(!$objResult){
@@ -23,5 +24,8 @@
           }
           if ($status == 'sale') {
             header('location:../product.php');
+          }
+          if ($status == 'admin') {
+            header('location:../admin/admin.php');
           }     
 ?>

@@ -138,19 +138,10 @@ require 'menu/menu_left_shop.php';
                 </table>
               </div>
             </div>
-            <div class="box-footer">
-              <div class="col-md-4"></div>
-                  <div class="col-md-4">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-5">
-                      <a type="button" href="pdf_file/balance_product.php" target="_blank" class="btn btn-success" >
-                        <i class="fa fa-print"> พิมพ์ </i>
-                      </a>
-                    </div>
-                    <div class="col-md-3"></div>
-                  </div>
-                  <div class="col-md-4"></div>
-              </div>
+            <div align="center" class="box-footer">
+                <a type="button" href="pdf_file/balance_product.php" target="_blank" class="btn btn-success" >
+                  <i class="fa fa-print"> พิมพ์ </i>
+                </a>
             </div>
           </div>
           </div>

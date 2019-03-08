@@ -124,26 +124,8 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-            <div class="col-md-4">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-5">
-                      <a type="block" href="../product.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i></a>
-                      </div>
-                      <div class="col-md-3">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-4">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-5">
-                      <button type="submit" class="btn btn-success"><i class="fa fa-calculator"> คำนวณเงิน </i></button>
-                      </div>
-                      <div class="col-md-3">
-                      </div>
-                    </div>
+                <a type="block" href="../product.php" class="btn btn-success pull-left"><<= เริ่มต้นใหม่ </i></a>
+                <button type="submit" class="btn btn-success pull-right"><i class="fa fa-calculator"> คำนวณเงิน </i></button>  
             </div>
             </form>
             <!-- /.box-footer -->

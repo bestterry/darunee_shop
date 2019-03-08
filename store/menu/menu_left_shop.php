@@ -13,12 +13,10 @@
                     <div class="modal-dialog modal-lg">
                         <form action="sale_product.php" method="post">
                             <div class="modal-content">
-                                <div class="col-md-3"></div>
                                 <div class="modal-header">
                                     <font size="6"><p align = "center"> เลือกสินค้าที่ต้องการขาย </p></font>
                                 </div>
-                                <div class="col-md-2"></div>
-                                <div class="modal-body col-md-8 table-responsive mailbox-messages">
+                                <div class="modal-body table-responsive mailbox-messages">
                                   <div class="table-responsive mailbox-messages">
                                       <table class="table table-hover table-striped table-bordered">
                                         <tbody>
@@ -30,22 +28,20 @@
                                             <tr>
                                             <?php while($product = $query_product2 ->fetch_assoc()){ ?>
                                                 <td class="text-center" width="15%">
-                                                 <input type="checkbox" name="menu[]" value="<?php echo $product['id_product']; ?>">
+                                                 <input type="checkbox" name="id_numPD[]" value="<?php echo $product['id_numPD_car']; ?>">
                                                 </td>
                                                 <td width="35%"><?php echo $product['name_product']; ?></td>
-                                                <td class="text-center" width="15%"><?php echo $product['numPD']; ?></td>
+                                                <td class="text-center" width="15%"><?php echo $product['num']; ?></td>
                                                 <td class="text-center" width="15%"><?php echo $product['unit']; ?></td>
-                                                 <input type="hidden" name="id_member" value="">
                                             </tr>
                                             <?php }?> 
                                             </tbody>
                                       </table>
                                   </div>
-                                  <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
-                                  <button type="submit"  class="btn btn-success pull-right">ถัดไป ==>></button>
                                 </div>
-                                <div class="col-md-2"></div>
-                                <div class="modal-footer">    
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
+                                  <button type="submit"  class="btn btn-success pull-right">ถัดไป ==>></button>    
                                 </div>
                             </div>
                         </form>
@@ -53,7 +49,8 @@
                 </div>
                 <!-- /ขายสินค้า -->
                 <!-- ประวัติขายสินค้า -->
-                <li><a target="_blank" href="manage_product/sale_history.php" ><i class="fa fa-exchange"></i> ยอดขายประจำวัน </a></li>
+                <li><a href="sale_product_history.php" ><i class="fa fa-exchange"></i> ยอดขายประจำวัน </a></li>
+                <li><a href="store_car.php" ><i class="fa fa-truck"></i> สต๊อกรถ </a></li>
                 <!-- /ประวัติขายสินค้า -->
                 <!-- เบิกสินค้า -->
                 <!-- <li><a href="#" data-toggle="modal" data-target="#myModal10"><i class="fa fa-archive"></i> เบิกสินค้า </a></li>

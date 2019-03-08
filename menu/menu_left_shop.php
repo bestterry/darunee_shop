@@ -141,10 +141,10 @@
                         </form>
                     </div>
                 </div>
-                <!--เพิ่มจำนวนอุปกรณ์ -->
+                <!--ประวัติรับเข้าสินค้า -->
                 <li><a target="_blank" href="manage_product/add_history.php" ><i class="fa fa-exchange"></i> ประวัติรับเข้าสินค้า </a></li>
                 <!-- เเก้ไขอุปกรณ์  -->
-                <li><a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-cogs"></i> เเก้ไขรายการสินค้า</a></li>
+                <!-- <li><a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-cogs"></i> เเก้ไขรายการสินค้า</a></li>
                 <div class="modal fade" id="myModal2" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -180,36 +180,33 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- //เเก้ไขอุปกรณ์  -->
                 <!--เพิ่มรายการอุปกรณ์ -->
                 <li><a href="#" data-toggle="modal" data-target="#myModal3"><i class="fa fa-plus"></i>เพิ่มรายการสินค้าเข้าคลัง</a></li>
                 <div class="modal fade" id="myModal3" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <form action="manage_product/insert_product.php" method="post" autocomplete="off">
-                            <div class="modal-content">
+                            <div class="col-md-10 modal-content">
                                 <div class="modal-header">
                                     <font size="3"><B><i class="fa fa-plus"></i>เพิ่มรายการสินค้าเข้าคลัง</B></font>
                                 </div>
-                                <div class="modal-body">
+                                <div class=" modal-body">
                                     <div class="form-group">
-                                        <label for="txtname_tool">ชื่อสินค้า</label>
-                                        <input type="text" name="name_product" class="form-control" id="txtuserid" placeholder="กรุณาระบุชื่อสินค้า" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtnum">จำนวน</label>
-                                        <input type="text" name="num_product" class="form-control" id="txtname" placeholder="กรุณาระบุจำนวนสินค้า">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="unit">หน่วยนับ</label>
-                                        <input type="text" name="unit" class="form-control" id="unit" placeholder="กรุณาระบุหน่วยนับ">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>ประเภท</label>
-                                        <select name="status" class="form-control select2" style="width: 100%;">
-                                            <option value="health">เพื่อสุขภาพ</option>
-                                            <option value="farm">การเกษตร</option>
+                                    <label>ชื่อสินค้า</label>
+                                        <select name="id_product" class="form-control select2" style="width: 100%;">
+                                        <?php 
+                                            $SQL_product ="SELECT * FROM product";
+                                            $objq_product = mysqli_query($conn,$SQL_product);
+                                            while($list_product = $objq_product -> fetch_assoc()){
+                                        ?>
+                                            <option value="<?php echo $list_product['id_product'];?>"><?php echo $list_product['name_product'].'  ('.$list_product['unit'].')'; ?></option>
+                                            <?php }?>
                                         </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>จำนวน</label>
+                                        <input type="text" name="num" class="form-control" placeholder="กรุณาระบุจำนวนสินค้า">
                                     </div>
                                 </div>
                                 <div class="modal-footer">

@@ -107,14 +107,30 @@ for($i=0;$i<count($_POST['id_product']);$i++){
                if($total_num_product < 0){
           echo "สินค้ามีจำนวนไม่เพียงพอ";
 
-}else{
-      //Update NUM product in database
-      $update_num_product = "UPDATE num_product SET num = $total_num_product WHERE id_numproduct = $id_numproduct AND id_zone=$id_zone";
-      $objq_update = mysqli_query($conn,$update_num_product);
-      //INsert history buy product
-      $insert_history = "INSERT INTO draw_history (num_draw, id_product, id_member, note, id_zone)
-      VALUES ( $num_product,$id_product,$id_member,'-',$id_zone)";
-      mysqli_query($conn,$insert_history);
+                }else{
+                      //Update NUM product in database
+                      $update_num_product = "UPDATE num_product SET num = $total_num_product WHERE id_numproduct = $id_numproduct AND id_zone=$id_zone";
+                      $objq_update = mysqli_query($conn,$update_num_product);
+                      //INsert history buy product
+                      $insert_history = "INSERT INTO draw_history (num_draw, id_product, id_member, note, id_zone)
+                      VALUES ( $num_product,$id_product,$id_member,'-',$id_zone)";
+                      mysqli_query($conn,$insert_history);
+                      //Insert numPD_car
+                      $seach_product = "SELECT * FROM numpd_car WHERE id_product = $id_product AND id_member = $id_member";
+                      $objq_seach = mysqli_query($conn,$seach_product);
+                      $objr_seach = mysqli_fetch_array($objq_seach);
+                      $id_numpd_car = $objr_seach['id_numPD_car'];
+                      $num = $objr_seach['num'];
+                          if(isset($objr_seach)){
+                            $total_PD = $num + $num_product;
+                            $update_numpd_car = "UPDATE numpd_car SET num = $total_PD WHERE id_numpd_car = $id_numpd_car ";
+                            mysqli_query($conn,$update_numpd_car);
+                          }else{
+                            $insert_numPD_car = "INSERT INTO numpd_car (num, id_product, id_member)
+                            VALUES ( $num_product,$id_product,$id_member)";
+                            mysqli_query($conn,$insert_numPD_car);
+                          }
+
 ?>
                       <tr>
                         <td class="text-center" >
@@ -136,7 +152,7 @@ for($i=0;$i<count($_POST['id_product']);$i++){
       <?php
           }
         }
-      // ?>
+       ?>
                     </tbody>
                   </table>
                   <div class="col-md-6">
@@ -160,20 +176,8 @@ for($i=0;$i<count($_POST['id_product']);$i++){
               <!-- /.mailbox-read-message -->
               <!-- /.box-footer -->
               <div class="box-footer">
-                <div class="col-md-2">
-                  <a href="../product.php" class="btn btn-block btn-success" >
-                  <i class="fa fa-arrow-left"> กลับ 
-                    </i>
-                  </a>
-                </div>
-                <div class="col-md-8">
-                </div>
-                <div class="col-md-2">
-                  <button type="submit" class="btn btn-block btn-success" >
-                    <i class="fa fa-print"> พิมพ์ 
-                    </i>
-                  </button>
-                </div>
+                  <a href="../product.php" class="btn btn-success pull-left" ><i class="fa fa-arrow-left"> กลับ </i></a>
+                  <button type="submit" class="btn btn-success pull-right" ><i class="fa fa-print"> พิมพ์  </i></button>
               </div>
               </form>
             <!-- /.box-footer -->

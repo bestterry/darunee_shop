@@ -53,10 +53,46 @@
 
   <header class="main-header">
 
-  
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
-    </nav>
+            <!-- Sidebar toggle button-->
+         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+            <span class="hidden-xs"></span>
+         </a>
+    <ul class="dropdown-menu">
+        <!-- User image -->
+        <li class="user-header">
+            <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+            <p>
+              <small>พนักงาน</small>
+            </p>
+        </li>
+        <!-- Menu Body -->
+
+        <!-- Menu Footer-->
+        <li class="user-footer">
+            <div class="pull-left">
+                <a href="#" class="btn btn-default btn-flat">Profile</a>
+            </div>
+            <div class="pull-right">
+                <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
+            </div>
+        </li>
+    </ul>
+</li>
+                    <!-- /account -->
+                </ul>
+            </div>
+        </nav>
   </header>
 
   <!-- Content Wrapper. Contains page content -->
@@ -67,61 +103,69 @@
 
     <!-- Main content -->
     <section class="content">
-    <?php 
-      $list_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_member = $id_member";
-      $query_product = mysqli_query($conn,$list_product);
-      $query_product2 = mysqli_query($conn,$list_product);
-      require 'menu/menu_left_shop.php'; 
-    ?>
-    <div class="col-md-9">
-            <div class="box box-primary">
-              <div class="box-header with-border">
-                <font size="5">
-                  <p align="center"> จำนวนสินค้าคงเหลือ 
-                </font>
-                </p>
+  
+      <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <font size="6"><p align = "center"> สต๊อกรถ </font></p>
+                <font size="4"><b align = "left"> เจ้าของรถ : <?php echo $objr_name['name']; ?></font></b>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-                <table class="table table-hover table-striped table-bordered">
-                  <tbody>
-                    <tr bgcolor="#99CCFF">
-                      <th class="text-center" width="10%">ลำดับ
-                      </th>
-                      <th width="40%">ชื่อสินค้า
-                      </th>
-                      <th width="15%">จำนวนสินค้าคงเหลือ
-                      </th>
-                    </tr>
-                    <?php 
-                    $i=1;
-                      while($product = $query_product ->fetch_assoc()){
-                        
-                    ?>
-                    <tr>
-                      <td class="text-center" width="10%">
-                        <?php echo $i; ?>
-                      </td>
-                      <td width="40%">
-                        <?php echo $product['name_product']; ?>
-                      </td>
-                      <td width="15%">
-                        <?php echo $product['num']; ?> 
-                        <?php echo $product['unit']; ?>
-                      </td>
-                    </tr>
-                      <?php $i++; } ?>
-                  </tbody>
-                </table>
-              </div>
+                <div class="mailbox-read-message">
+                
+                <!-- ------------------------------------------------------------------------------------- -->
+                <br>
+                  <form action="store_2.php" method="post" autocomplete="off">
+                    <table class="table table-bordered table-hover">
+                        <tbody>
+                          <tr bgcolor="#99CCFF">
+                            <th class="text-center" width="5%" >ลำดับ</th>
+                            <th class="text-center" >สินค้า</th>
+                            <th class="text-center" width="6%">หน่วย</th>
+                            <th class="text-center" width="9%">ยกมา(+)</th>
+                            <th class="text-center" width="9%">รับเข้า(+)</th>
+                            <th class="text-center" width="9%">เบิกออก(-)</th>
+                            <th class="text-center" width="9%">ขาย(-)</th>
+                            <th class="text-center" width="9%">อื่นๆ(-)</th>
+                            <th class="text-center" width="9%">คืนร้าน</th>
+                            <th class="text-center" width="9%">เหลือ</th>
+                          </tr>
+      <?php 
+        
+      ?>
+                          <tr>
+                            <td class="text-center"><?php ?><input type="hidden" name="id_store_incar[]" class="form-control text-center col-md-2" value="<?php ?>"></td>
+                            <td class="text-center" ><input type="hidden" name="name_product[]"  class="form-control text-center col-md-2" value="<?php ?>"></td>
+                            <td class="text-center" ><input type="hidden" name="unit[]"  class="form-control text-center col-md-2" value="<?php ?>"></td>
+                            <td bgcolor="#ccffcc" class="text-center" ><input type="hidden" name="bring[]"  class="form-control text-center col-md-2" value="<?php ?>" ></td>
+                            <td bgcolor="#ccffcc" class="text-center" ><input type="hidden" name="input[]"  class="form-control text-center col-md-2" value="<?php ?>"></td>
+                            <td bgcolor="#ffc2b3" class="text-center" ><input type="hidden" name="draw[]"  class="form-control text-center col-md-2" value="<?php ?>"></td>
+                            <td bgcolor="#ffc2b3" class="text-center" ><input type="hidden" name="sale[]"  class="form-control text-center col-md-2" value="<?php ?>" ></td>
+                            <td bgcolor="#ffc2b3" class="text-center" ><input type="hidden" name="etc[]"  class="form-control text-center col-md-2" value="<?php ?>"></td>
+                            <td bgcolor="#ffc2b3" class="text-center" ><input type="hidden" name="return[]"  class="form-control text-center col-md-2" value="<?php ?>"></td>
+                            <td bgcolor="#b3ffff" class="text-center" ><?php ?></td>
+                          </tr>
+        <?php
+          
+        ?>                   
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.mailbox-read-message -->
             </div>
+            <!-- /.box-body -->
+            <!-- /.box-footer -->
             <div class="box-footer">
-              
+             <button type="submit" class="btn btn-success pull-right"><i class="fa fa-calculator"> </i>  คำนวณ</button>
+
+             <a href="algorithm/update_store.php?id_member=<?php  ?>" type="button" class="btn btn-info pull-left"><i class="fa fa-refresh"> </i>  ปรับปรุง</a>
             </div>
-          </div>
-          </div>
-      </div>
+            <!-- /.box-footer -->
+        </div>
+        </form>
+        <!-- /. box -->
+    </div>
     </section>
     <!-- /.content -->
   </div>

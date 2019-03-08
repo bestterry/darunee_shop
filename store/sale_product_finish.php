@@ -1,4 +1,15 @@
-<?php require "../config_database/config.php"; ?>
+<?php #endregion
+  // for($i=0;$i<count($_POST['id_numPD']);$i++){
+  //   echo $_POST['id_numPD'][$i].':';
+  //   echo $_POST['num_product'][$i].':';
+  //   echo $_POST['price_product'][$i].'<br>';
+  // }
+?>
+
+<?php 
+  require "../config_database/config.php";
+  require "../session.php";  
+?>
 
 <!DOCTYPE html>
 <html>
@@ -74,50 +85,56 @@
                             <th class="text-center" width="15%">รวมเงิน (บาท)</th>
                           </tr>
                           <?php
+                          $total_money = 0;
                             for($i=0;$i<count($_POST["id_numPD"]);$i++)
                             {
-                              if(trim($_POST["id_numPD"][$i]) != "")
-                                {
-                                  $id_numPD=$_POST['id_numPD'][$i];
-                                  $list_product = "SELECT * FROM numpd_car
-                                                  INNER JOIN product ON numpd_car.id_product = product.id_product
-                                                  WHERE numpd_car.id_numPD_car = $id_numPD";
-                                  $objq_listproduct = mysqli_query($conn,$list_product);
-                                  $objr_listproduct = mysqli_fetch_array($objq_listproduct);
+                              $id_numPD = $_POST['id_numPD'][$i];
+                              $num_product = $_POST['num_product'][$i];
+                              $price_product = $_POST['price_product'][$i];
+                              $money = $num_product * $price_product;
+                              $id_product = $_POST['id_product'][$i];
+                              
+                              //insert sale_car_history
+                              $insert_numPD = "INSERT INTO sale_car_history (num,price,money,id_product,id_member,note) 
+                                               VALUE ($num_product,$price_product, $money,$id_product,$id_member,'-')";
+                              mysqli_query($conn,$insert_numPD);
+
+                              //update numpd_car
+                              $seach_num = "SELECT * FROM numpd_car WHERE id_numPD_car = $id_numPD";
+                              $objq_seach = mysqli_query($conn,$seach_num);
+                              $objr_seach = mysqli_fetch_array($objq_seach);
+                              $befor_num = $objr_seach['num'];
+                              $total_num = $befor_num - $num_product;
+                              $update_numPD = "UPDATE numpd_car SET num = $total_num WHERE id_numPD_car = $id_numPD";
+                              mysqli_query($conn,$update_numPD);
                           ?>
                           <tr>
-                            <td class="text-center"><?php echo $i+1; ?></td>
-                            <td>
-                              <?php echo $objr_listproduct['name_product']; ?>
-                              <input class = "hidden" type="text" name="name_product[]" value="<?php echo $objr_listproduct['name_product']; ?>">
-                              <input class = "hidden" type="text" name="id_product[]" value="<?php echo $objr_listproduct['id_product']; ?>">
-                            </td>
-                            <td class="text-center" >
-                              <input class = "hidden" type="text" name="id_numPD[]" value="<?php echo $id_numPD; ?>">
-                              <input type="text" name="num_product[]"  class="form-control text-center col-md-1" placeholder="<?php echo $objr_listproduct['unit'];?>">
-                            </td>
-                            <td class="text-center">
-                              <?php echo $objr_listproduct['unit'];?>
-                              <input class = "hidden" type="text" name="unit[]" value="<?php echo $objr_listproduct['unit']; ?>">
-                            </td>
-                            <td class="text-center">
-                              <input type="text" name="price_product[]"  class="form-control text-center col-md-2" placeholder="ราคา/หน่วย">
-                            </td>
-                            <td></td>
+                            <td class="text-center"><?php echo $i+1;?></td>
+                            <td><?php echo $_POST['name_product'][$i];?></td>
+                            <td class="text-center" ><?php echo $_POST['num_product'][$i];?></td>
+                            <td class="text-center"><?php echo $_POST['unit'][$i];?></td>
+                            <td class="text-center"><?php echo $_POST['price_product'][$i];?></td>
+                            <td class="text-center"><?php echo $money;?></td>
                           </tr>
-                            <?php 
-                                  }
-                              }
-                            ?>
+                          <?php  
+                              $total_money = $total_money + $money; 
+                          }
+                          ?>
+                          <tr>
+                            <td style="visibility:collapse;"></td>
+                            <td style="visibility:collapse;"></td>
+                            <td style="visibility:collapse;"></td>
+                            <td style="visibility:collapse;"></td>
+                            <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
+                            <th class="text-center" bgcolor="#EAF4FF"><?php echo $total_money; ?></th>
+                          </tr>
                         </tbody>
                     </table>
-                  
                 </div>
                 <!-- /.mailbox-read-message -->
             </div>
             <div class="box-footer">
             <a type="block" href="store.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i></a>
-            <button type="submit" class="btn btn-success pull-right"><i class="fa fa-calculator"> คำนวณเงิน </i></button>
             </div>
             <!-- /.box-footer -->
             </form>

@@ -127,7 +127,7 @@ folder instead of downloading all of them to reduce the load. -->
                           <th bgcolor="#99CCFF" class="text-center"> 
                           <select name ="id_member" class="form-control select2" style="width: 100%;">
                           <?php #endregion
-                           $sql_member = "SELECT * FROM member WHERE id_zone = 0";
+                           $sql_member = "SELECT * FROM member WHERE status = 'employee'";
                            $objq_member = mysqli_query($conn,$sql_member);
                            while($member = $objq_member -> fetch_assoc()){
                           ?>
@@ -145,20 +145,17 @@ folder instead of downloading all of them to reduce the load. -->
           <!-- /.box-body -->
           <!-- /.box-footer -->
           <div class="box-footer">
-                <div class="col-md-2">
-                  <a href="../product.php" class="btn btn-block btn-success" >
+                
+                  <a href="../product.php" class="btn btn-success" >
                   <i class="fa fa-arrow-left"> กลับ 
                     </i>
                   </a>
-                </div>
-                <div class="col-md-8">
-                </div>
-                <div class="col-md-2">
-                  <button type="submit" class="btn btn-block btn-success" >
+               
+                  <button type="submit" class="btn btn-success pull-right" >
                     <i class="fa fa-floppy-o"> บันทึก 
                     </i>
                   </button>
-                </div>
+                
             </div>
             </form>
           <!-- /.box-footer -->

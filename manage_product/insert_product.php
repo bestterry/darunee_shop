@@ -1,11 +1,12 @@
 <?php  
   require('../config_database/config.php');
-  $name_product = $_POST['name_product'];
-  $num_product = $_POST['num_product'];
-  $unit_product = $_POST['unit'];
-  $status = $_POST['status'];
-    $insert_product = "INSERT INTO product (name_product, num_product, unit, status)
-    VALUES ('$name_product', '$num_product', '$unit_product', '$status')";
+  require('../session.php');
+  
+   $id_product = $_POST['id_product'];
+   $num = $_POST['num'];
+  
+    $insert_product = "INSERT INTO num_product (num, id_product, id_zone)
+    VALUES ('$num','$id_product','$id_zone')";
     mysqli_query($conn,$insert_product);
     header("location:../product.php");
-// ?>
+?>

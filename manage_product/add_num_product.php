@@ -166,28 +166,10 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-              <div class="col-md-4">
-                  <div class="col-md-4">
-                  </div>
-                  <div class="col-md-5">
-                  <a type="block" href="../product.php" class="btn btn-success"><<= กลับหน้าหลัก </i></a>
-                  </div>
-                  <div class="col-md-3">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4">
-                  <div class="col-md-4">
-                  </div>
-                  <div class="col-md-5">
-                  <button type="submit" class="btn btn-success"><i class="fa fa-save"> บันทึก </i></button>
-                  </div>
-                  <div class="col-md-3">
-                  </div>
-                </div>
-              </div>
-              </form>
+              <a type="block" href="../product.php" class="btn btn-success pull-left"><<= กลับหน้าหลัก </i></a>
+              <button type="submit" class="btn btn-success pull-right"><i class="fa fa-save"> บันทึก </i></button>
+            </div>
+          </form>
             <!-- /.box-footer -->
         </div>
         <!-- /. box -->

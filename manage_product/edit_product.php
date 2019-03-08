@@ -82,7 +82,7 @@
                             $objr_edit = mysqli_fetch_array($objq_edit);
                           ?>
                             <td class="text-center"><input type="text" name="name_product" class="form-control text-center col-md-1" value="<?php echo $objr_edit['name_product'];?>"></td>
-                            <td><input type="text" name="num" class="form-control text-center col-md-1" value="<?php echo $objr_edit['num'];?>"></td>
+                            <td><input type="text" class="form-control text-center col-md-1" value="<?php echo $objr_edit['num'];?>" readonly/></td>
                             <td class="text-center" >
                             <input type="hidden" name="id_numproduct" value="<?php echo $id_numproduct;?>">
                             <input type="text" name="unit" class="form-control text-center col-md-1" value="<?php echo $objr_edit['unit'];?>">
@@ -90,26 +90,12 @@
                           </tr>
                         </tbody>
                     </table>
-                    <div class="col-md-8">
-                    </div>
-                    <div class="col-md-4">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-5">
-                      <button type="submit" class="btn btn-block btn-success"><i class="fa fa-check-square"> บันทึก </i></button>
-                      </div>
-                      <div class="col-md-3">
-                      </div>
-                    </div>
-                  </form>
                 </div>
-                <!-- /.mailbox-read-message -->
             </div>
-            <!-- /.box-body -->
-            <!-- /.box-footer -->
-            <div class="box-footer">
-
+            <div class="box-footer" align="right">
+             <button type="submit" class="btn  btn-success"><i class="fa fa-check-square"> บันทึก </i></button>
             </div>
+            </form>
             <!-- /.box-footer -->
         </div>
         <!-- /. box -->
