@@ -51,6 +51,7 @@
                 <!-- ประวัติขายสินค้า -->
                 <li><a href="sale_product_history.php" ><i class="fa fa-exchange"></i> ยอดขายประจำวัน </a></li>
                 <li><a href="store_car.php" ><i class="fa fa-truck"></i> สต๊อกรถ </a></li>
+                <li><a href="../login/logout.php" ><i class="fa fa-close"></i> ออกจากระบบ </a></li>
                 <!-- /ประวัติขายสินค้า -->
                 <!-- เบิกสินค้า -->
                 <!-- <li><a href="#" data-toggle="modal" data-target="#myModal10"><i class="fa fa-archive"></i> เบิกสินค้า </a></li>

@@ -50,21 +50,16 @@
 </head>
 <body class=" hold-transition skin-blue layout-top-nav ">
 <div class="wrapper">
-
   <header class="main-header">
-
-  
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
     </nav>
   </header>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
     </section>
-
     <!-- Main content -->
     <section class="content">
     <?php 
@@ -126,10 +121,8 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
   <?php require("../menu/footer.html"); ?>
  </div>
-
    <!-- jQuery 3 -->
    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
@@ -157,7 +150,7 @@
         'info'        : true,
         'autoWidth'   : false
       }
-                              )
+                                 )
     }
      )
     $(function () {

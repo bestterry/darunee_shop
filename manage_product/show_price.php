@@ -8,7 +8,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>ทีมงานคุณดารุณี</title>
     <link rel="icon" type="image/png" href="../images/favicon.ico"/>
-  <!-- Tell the browser to be responsive to screen width -->
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->
@@ -76,9 +75,8 @@
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
                   <form action="../pdf_file/bill.php" method="post" autocomplete="off"  target="_blank">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered">
                         <tbody>
-                        
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" width="5%">ลำดับ</th>
                             <th class="text-center" >ชื่อสินค้า</th>
@@ -137,33 +135,15 @@
                           </tr>
                         </tbody>
                     </table>
-                    <div class="col-md-8">
-                    <div class="col-md-2">
-                    <a type="block" href="../product.php" class="btn btn-block btn-success"><i class="fa fa-home"> กลับหน้าหลัก </i></a>
-                      </div>
-                      <div class="col-md-10">
-                      </div>
                     </div>
-                    <div class="col-md-4">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-5">
-                      
-                      <button type="submit" class="btn btn-block btn-success" ><i class="fa fa-print"> พิมพ์ใบเสร็จ  </i></button>
-                      </div>
-                      <div class="col-md-3">
-                      </div>
-                    </div>
-                  </form>
                 </div>
                 <!-- /.mailbox-read-message -->
-            </div>
-            <!-- /.box-body -->
-
-            <!-- /.box-footer -->
+           
             <div class="box-footer">
-
+              <button type="submit" class="btn btn-success pull-right" ><i class="fa fa-print"> พิมพ์ใบเสร็จ  </i></button>
+              <a type="block" href="../product.php" class="btn btn-success"><i class="fa fa-home"> กลับหน้าหลัก </i></a>
             </div>
+            </form>
             <!-- /.box-footer -->
         </div>
         <!-- /. box -->
@@ -192,5 +172,64 @@
     <!-- AdminLTE for demo purposes -->
     <script src="../dist/js/demo.js"></script>
     <script src="../plugins/iCheck/icheck.min.js"></script>
+    <script>
+    $(function () {
+      $('#example1').DataTable()
+      $('#example2').DataTable({
+        'paging'      : true,
+        'lengthChange': false,
+        'searching'   : false,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : false
+      }
+                              )
+    }
+     )
+    $(function () {
+      //Enable iCheck plugin for checkboxes
+      //iCheck for checkbox and radio inputs
+      $('.mailbox-messages input[type="checkbox"]').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue'
+      }
+                                                          );
+      //Enable check and uncheck all functionality
+      $(".checkbox-toggle").click(function () {
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+          //Uncheck all checkboxes
+          $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+          $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        }
+        else {
+          //Check all checkboxes
+          $(".mailbox-messages input[type='checkbox']").iCheck("check");
+          $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+      }
+                                 );
+      //Handle starring for glyphicon and font awesome
+      $(".mailbox-star").click(function (e) {
+        e.preventDefault();
+        //detect type
+        var $this = $(this).find("a > i");
+        var glyph = $this.hasClass("glyphicon");
+        var fa = $this.hasClass("fa");
+        //Switch states
+        if (glyph) {
+          $this.toggleClass("glyphicon-star");
+          $this.toggleClass("glyphicon-star-empty");
+        }
+        if (fa) {
+          $this.toggleClass("fa-star");
+          $this.toggleClass("fa-star-o");
+        }
+      }
+      );
+    }
+     );
+  </script>
 </body>
 </html>

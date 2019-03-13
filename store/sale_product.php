@@ -111,6 +111,18 @@
                             ?>
                         </tbody>
                     </table>
+                    <div class="col-md-8">
+                    </div>
+                    <div class="col-md-4">
+                      <table class="table table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                        <th class="text-center">หมายเหตุ</th>
+                        <th class="text-center"> <input class="text-center" type="text" name="note"></th>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   
                 </div>
                 <!-- /.mailbox-read-message -->

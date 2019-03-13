@@ -168,11 +168,9 @@ $sum_monny = $sum_monny+$total_money;
                   </tr>
                 </tbody>
               </table>
+              
               <div align="center" class="box-footer">
-                <a type="button" href="../pdf_file/sale_history.php" class="btn btn-success">
-                  <i class="fa fa-print"> พิมพ์ 
-                  </i>
-                </a>
+                
               </div>
             </div>
           </div>

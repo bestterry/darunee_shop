@@ -67,118 +67,69 @@
 
     <!-- Main content -->
     <section class="content">
-    <?php 
-      $list_product = "SELECT * FROM product";
-      $query_product = mysqli_query($conn,$list_product);
-      $query_product2 = mysqli_query($conn,$list_product);
-    ?>
             <div class="box box-primary">
               <div class="box-header with-border">
-                <p align="center"><font size="5"> สต๊อกรวม </font></p>
-                <B><font size ="4">ประจำวันที่(<font color="red"><?php echo $strDate = date('d-m-Y');?></font>)</font></B>
-              </div>
+                <font size="5">
+                  <p align="center"> เพิ่มพนักงาน
+                </font>
+                </p>
+            </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <table class="table table-bordered">
-                  <tbody>
-                    <tr bgcolor="#99CCFF">
-                      <th class="text-center" width="5%">ที่</th>
-                      <th class="text-center" width="15%">ชื่อสินค้า</th>
-                      <th class="text-center" width="5%">หน่วย</th>
-                      <th class="text-center" width="8%">วปป.</th>
-                      <th class="text-center" width="8%">ลป.</th>
-                      <th class="text-center" width="8%">ดคต.</th>
-                      <th class="text-center" width="8%">จุน</th>
-                      <th class="text-center" width="8%">พาน</th>
-                      <th class="text-center" width="8%">มจน.</th>
-                      <th class="text-center" width="8%">ฮอด</th>
-                      <th class="text-center" width="8%">รวมรถ</th>
-                      <th class="text-center" width="8%">รวมทั้งหมด</th>
-                    </tr>
-                    <?php 
-                    $i=1;
-                      while($product = $query_product ->fetch_assoc()){
-                        
-                    ?>
-                    <tr>
-                      <td class="text-center" width="5%">
-                        <?php echo $i; ?>
-                      </td>
-                      <td class="text-center" width=15%">
-                        <?php echo $product['name_product']; ?>
-                      </td>
-                      <td class="text-center" width="5%">
-                        <?php echo $product['unit']; ?>
-                      </td>
-                      <!-- -------------------------------วปป------------------------------------ -->
-                      <?php 
-                      for ($i=1; $i < 8; $i++) { 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = $i";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if(!isset($objr_num['num'])){
-                      ?>
-                         <td width="8%"></td>
-                      <?php
-                        }else{
-                      ?> 
-                      <td class="text-center" width="8%"><?php echo $objr_num['num']; ?></td>
-                      <?php 
-                        } 
-                      }
-                      ?>
-                      <!-- -------------------------------//วปป------------------------------------ -->
+                <form action="algorithm/add_user.php" method="post" autocomplete="off">
+                  <section class="content">
+                      <div class="row">
+                          <!-- left column -->
+                          <div class="col-md-12">
+                              <!-- Horizontal Form -->
+                              <div class="box box-info">
+                                  <div class="box-header with-border">
+                                      <font color="red" size="3">*กรุณากรอกข้อมูลให้ครบทุกช่อง</font>
+                                  </div>
+                                  <div role="form">
+                                      <div class="box-body">
+                                          <div class="col-md-12">
+                                              <div class="form-group col-md-3">
+                                                  <label for="txtname">ชื่อ :</label>
+                                                  <input type="text" name="name" class="form-control" placeholder="ชื่อ">
+                                              </div>
+                                          </div>
 
+                                          <div class="col-md-12">
+                                              <div class="form-group col-md-4">
+                                                  <label for="txtlastname">username :</label>
+                                                  <input type="text" name="username" class="form-control" placeholder="username">
+                                              </div>
+                                              <div class="form-group col-md-3">
+                                                  <label for="txtlastname">password :</label>
+                                                  <input type="text" name="password" class="form-control" placeholder="password">
+                                              </div>
+                                          </div>
 
-                      <!-- -------------------------------รวมรถ------------------------------------ -->
-                      <?php 
-                        $SQL_num_car = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";
-                        $objq_num_car = mysqli_query($conn,$SQL_num_car);
-                        $objr_num_car = mysqli_fetch_array($objq_num_car);
-                        $total_numcar = $objr_num_car['SUM(num)'];
-                        if(!isset($total_numcar)){
-                      ?>
-                         <td width="8%"></td>
-                      <?php
-                        }else{
-                      ?> 
-                      <td class="text-center" width="8%"><?php echo $total_numcar; ?></td>
-                      <?php 
-                        } 
-                      ?>
-                      <!-- -------------------------------//รวมรถ------------------------------------ -->
-
-                      <!-- -------------------------------รวมทั้งหมด------------------------------------ -->
-                      <?php 
-                        $SQL_num = "SELECT SUM(num) FROM num_product WHERE id_product = $product[id_product]";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-
-                        $total_num = $objr_num['SUM(num)'];
-                        $total_numstore = $total_numcar+$total_num;
-                        
-                        if(!isset($total_numstore)){
-                      ?>
-                         <td width="8%"></td>
-                      <?php
-                        }else{
-                      ?> 
-                      <td class="text-center" width="8%"><?php echo $total_numstore; ?></td>
-                      <?php 
-                        } 
-                      ?>
-                      <!-- -------------------------------//รวมทั้งหมด------------------------------------ -->
-
-                    </tr>
-                      <?php $i++; } ?>
-                  </tbody>
-                </table>
+                                          <div class="col-md-12">
+                                              <div class="form-group col-md-2">
+                                                  <label for="inputPassword3">สถานะ :</label>
+                                                  <select class="form-control select2" style="width: 100%;" name="status">
+                                                      <option selected="selected">...กรุณาเลือกสถานะ...</option>
+                                                      <option name="admin" value="admin">ผู้ดูเเลระบบ</option>
+                                                      <option name="sale" value="sale">พนักงานหน้าร้าน</option>
+                                                      <option name="employee" value="employee">พนักงานส่งของ</option>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </section>
               </div>
             </div>
-            <div class="box-footer" align="center">
-            <a href="../pdf_file/admin_total_stock.php" class="btn btn-success"><i class="fa fa-print"> พิมพ์ </i></a>
+            <div class="box-footer">
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"> บันทึก </i></button>
             </div>
+            </form>
           </div>
           </div>
       </div>

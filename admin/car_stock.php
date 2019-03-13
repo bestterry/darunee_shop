@@ -74,7 +74,7 @@
     ?>
             <div class="box box-primary">
               <div class="box-header with-border">
-                <p align="center"><font size="5"> สต๊อกรวม </font></p>
+                <p align="center"><font size="5"> สต๊อกรถ </font></p>
                 <B><font size ="4">ประจำวันที่(<font color="red"><?php echo $strDate = date('d-m-Y');?></font>)</font></B>
               </div>
             <!-- /.box-header -->
@@ -86,14 +86,18 @@
                       <th class="text-center" width="5%">ที่</th>
                       <th class="text-center" width="15%">ชื่อสินค้า</th>
                       <th class="text-center" width="5%">หน่วย</th>
-                      <th class="text-center" width="8%">วปป.</th>
-                      <th class="text-center" width="8%">ลป.</th>
-                      <th class="text-center" width="8%">ดคต.</th>
-                      <th class="text-center" width="8%">จุน</th>
-                      <th class="text-center" width="8%">พาน</th>
-                      <th class="text-center" width="8%">มจน.</th>
-                      <th class="text-center" width="8%">ฮอด</th>
-                      <th class="text-center" width="8%">รวมรถ</th>
+                      <th class="text-center" width="5%">ยุทธ</th>
+                      <th class="text-center" width="5%">ลิน</th>
+                      <th class="text-center" width="5%">เอปุ้ย</th>
+                      <th class="text-center" width="5%">รงค์</th>
+                      <th class="text-center" width="5%">เอ๋ลังกา</th>
+                      <th class="text-center" width="5%">เกียรติ</th>
+                      <th class="text-center" width="5%">เดี่ยว</th>
+                      <th class="text-center" width="5%">อั๋น</th>
+                      <th class="text-center" width="5%">เบส</th>
+                      <th class="text-center" width="5%">revo5</th>
+                      <th class="text-center" width="5%">mizzu1</th>
+                      <th class="text-center" width="5%">revo</th>
                       <th class="text-center" width="8%">รวมทั้งหมด</th>
                     </tr>
                     <?php 
@@ -102,69 +106,50 @@
                         
                     ?>
                     <tr>
-                      <td class="text-center" width="5%">
+                      <td class="text-center" >
                         <?php echo $i; ?>
                       </td>
-                      <td class="text-center" width=15%">
+                      <td class="text-center" >
                         <?php echo $product['name_product']; ?>
                       </td>
-                      <td class="text-center" width="5%">
+                      <td class="text-center" >
                         <?php echo $product['unit']; ?>
                       </td>
-                      <!-- -------------------------------วปป------------------------------------ -->
-                      <?php 
-                      for ($i=1; $i < 8; $i++) { 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = $i";
+                      <!-- -------------------------------ลิน------------------------------------ -->
+                      <?php
+                      for ($i=4; $i < 16; $i++) { 
+                       
+                        $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $i";
                         $objq_num = mysqli_query($conn,$SQL_num);
                         $objr_num = mysqli_fetch_array($objq_num);
                         if(!isset($objr_num['num'])){
                       ?>
-                         <td width="8%"></td>
+                         <td ></td>
                       <?php
                         }else{
                       ?> 
-                      <td class="text-center" width="8%"><?php echo $objr_num['num']; ?></td>
+                      <td class="text-center" ><?php echo $objr_num['num']; ?></td>
                       <?php 
                         } 
                       }
                       ?>
-                      <!-- -------------------------------//วปป------------------------------------ -->
+                      <!-- -------------------------------//ลิน------------------------------------ -->
 
-
-                      <!-- -------------------------------รวมรถ------------------------------------ -->
-                      <?php 
-                        $SQL_num_car = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";
-                        $objq_num_car = mysqli_query($conn,$SQL_num_car);
-                        $objr_num_car = mysqli_fetch_array($objq_num_car);
-                        $total_numcar = $objr_num_car['SUM(num)'];
-                        if(!isset($total_numcar)){
-                      ?>
-                         <td width="8%"></td>
-                      <?php
-                        }else{
-                      ?> 
-                      <td class="text-center" width="8%"><?php echo $total_numcar; ?></td>
-                      <?php 
-                        } 
-                      ?>
-                      <!-- -------------------------------//รวมรถ------------------------------------ -->
 
                       <!-- -------------------------------รวมทั้งหมด------------------------------------ -->
                       <?php 
-                        $SQL_num = "SELECT SUM(num) FROM num_product WHERE id_product = $product[id_product]";
+                        $SQL_num = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";
                         $objq_num = mysqli_query($conn,$SQL_num);
                         $objr_num = mysqli_fetch_array($objq_num);
 
-                        $total_num = $objr_num['SUM(num)'];
-                        $total_numstore = $total_numcar+$total_num;
                         
-                        if(!isset($total_numstore)){
+                        if(!isset($objr_num['SUM(num)'])){
                       ?>
-                         <td width="8%"></td>
+                         <td ></td>
                       <?php
                         }else{
                       ?> 
-                      <td class="text-center" width="8%"><?php echo $total_numstore; ?></td>
+                      <td class="text-center" ><?php echo $objr_num['SUM(num)']; ?></td>
                       <?php 
                         } 
                       ?>
@@ -176,8 +161,8 @@
                 </table>
               </div>
             </div>
-            <div class="box-footer" align="center">
-            <a href="../pdf_file/admin_total_stock.php" class="btn btn-success"><i class="fa fa-print"> พิมพ์ </i></a>
+            <div class="box-footer">
+              
             </div>
           </div>
           </div>

@@ -86,6 +86,7 @@
                           </tr>
                           <?php
                           $total_money = 0;
+                          $note = $_POST['note'];
                             for($i=0;$i<count($_POST["id_numPD"]);$i++)
                             {
                               $id_numPD = $_POST['id_numPD'][$i];
@@ -96,7 +97,7 @@
                               
                               //insert sale_car_history
                               $insert_numPD = "INSERT INTO sale_car_history (num,price,money,id_product,id_member,note) 
-                                               VALUE ($num_product,$price_product, $money,$id_product,$id_member,'-')";
+                                               VALUE ($num_product,$price_product, $money,$id_product,$id_member,'$note')";
                               mysqli_query($conn,$insert_numPD);
 
                               //update numpd_car
@@ -130,6 +131,19 @@
                           </tr>
                         </tbody>
                     </table>
+
+                    <div class="col-md-8">
+                    </div>
+                    <div class="col-md-4">
+                      <table class="table table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                        <th class="text-center">หมายเหตุ</th>
+                        <th class="text-center"><?php echo $note; ?></th>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
                 </div>
                 <!-- /.mailbox-read-message -->
             </div>
