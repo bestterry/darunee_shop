@@ -76,9 +76,9 @@ $pdf=new PDF('L','mm','A4');
           $list_product = "SELECT * FROM product";
           $query_product = mysqli_query($conn,$list_product);
           $query_product2 = mysqli_query($conn,$list_product);
-          $i=1;
+          $a=1;
             while($product = $query_product ->fetch_assoc()){
-              $pdf->Cell(15,8,iconv('UTF-8','cp874',$i),1,0,'C');
+              $pdf->Cell(15,8,iconv('UTF-8','cp874',$a),1,0,'C');
               $pdf->Cell(60,8,iconv('UTF-8','cp874',$product['name_product']),1,0,'C');
               $pdf->Cell(20,8,iconv('UTF-8','cp874',$product['unit']),1,0,'C');
 
@@ -121,7 +121,7 @@ $pdf=new PDF('L','mm','A4');
             // $pdf->Cell(20,8,iconv('UTF-8','cp874','รวมรถ'),1,0,'C');
             // $pdf->Cell(25,8,iconv('UTF-8','cp874','รวมทั้งหมด'),1,0,'C');
             $pdf->Ln(8);   
-            $i++;
+            $a++;
           }   
 // --------------------------------------------------------------------------------------                     
     $pdf->Output();

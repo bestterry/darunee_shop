@@ -1,8 +1,10 @@
 <?php 
- require "../config_database/config.php"; 
- require "../session.php";
+    require "../config_database/config.php"; 
+    require "../session.php";
+    $sql_zone = "SELECT name_zone FROM zone  WHERE id_zone = '$_POST[id_zone]'";
+    $objq_zone = mysqli_query($conn,$sql_zone);
+    $objr_zone = mysqli_fetch_array($objq_zone);
  ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,14 +39,6 @@
 <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="../plugins/iCheck/all.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -75,47 +69,71 @@
     <nav class="navbar navbar-static-top">
     </nav>
   </header>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
     </section>
-
     <!-- Main content -->
     <section class="content">
-    <div class="col-md-2"></div>
-      <div class="col-md-8">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="6"><p align = "center"> รับเข้าสินค้า </font></p>
+                <font size="6"><p align = "center"> รับเข้าสินค้า : <?php echo $objr_zone['name_zone'];?></font></p>
             </div>
-
             <!-- /.box-header -->
-            <div class="box-body no-padding">
+            <div class="box-body no-padding ">
                 <div class="mailbox-read-message">
-                  <form action="add_num_product2.php" method="post">
+                  <form action="add_product2.php" method="post">
                     <table class="table table-bordered table-hover">
                         <tbody>
                       <tr bgcolor="#99CCFF">
-                        <th class="text-center" width="5%" >ลำดับ
+                      <?php 
+                        $id_member = $_POST['id_member'];
+                        if($id_member == 16 ){
+                      ?>
+                        <th class="text-center" width="5%" >เลือก
                         </th>
                         <th class="text-center" width="30%">ชื่อสินค้า
-                        </th>
-                        <th class="text-center" width="15%">จำนวนสินค้าที่มี
                         </th>
                         <th class="text-center" width="15%">หน่วยนับ
                         </th>
                       </tr>
                       <?php
-                      $i=1;
-                          $list_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_member = '$_POST[id_member]'";
-                          $objq_listproduct = mysqli_query($conn,$list_product);
-                          while($list = $objq_listproduct->fetch_assoc()){
+                        $list_product = "SELECT * FROM product";
+                        $objq_listproduct = mysqli_query($conn,$list_product);
+                            while($list = $objq_listproduct->fetch_assoc()){
+                        ?>
+                        <tr>
+                          <td class="text-center">
+                            <input type="checkbox" name="id_product[]" value="<?php echo $list['id_product']; ?>">
+                          </td>
+                          <td>
+                            <?php echo $list['name_product']; ?>
+                          </td>
+                          <td class="text-center">
+                            <?php echo $list['unit'];?>
+                          </td>
+                        </tr>
+                      <?php 
+                          } 
+                        }else{ ?>
+                      <th class="text-center" width="5%" >เลือก
+                        </th>
+                        <th class="text-center" width="30%">ชื่อสินค้า
+                        </th>
+                        <th class="text-center" width="15%">จำนวน
+                        </th>
+                        <th class="text-center" width="15%">หน่วยนับ
+                        </th>
+                      </tr>
+                      <?php  
+                      $list_product2 = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_member = '$id_member'";
+                      $objq_listproduct2 = mysqli_query($conn,$list_product2);
+                          while($list = $objq_listproduct2->fetch_assoc()){
                       ?>
                       <tr>
                         <td class="text-center">
-                          <input type="checkbox" name="id_num[]" value="<?php echo $list['id_numPD_car']; ?>">
+                          <input type="checkbox" name="id_numpd_car[]" value="<?php echo $list['id_numPD_car']; ?>">
                         </td>
                         <td>
                           <?php echo $list['name_product']; ?>
@@ -127,9 +145,10 @@
                           <?php echo $list['unit'];?>
                         </td>
                       </tr>
-                      <?php 
-                          $i++; }
-                      ?>
+                    <?php 
+                          }
+                           } 
+                    ?>
                     </tbody>
                     </table>
                     <div class="col-md-6">
@@ -147,6 +166,7 @@
                             $member = mysqli_fetch_array($objq_member);
                             echo $member['name']; 
                           ?>
+                           <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
                            <input type="hidden" name="name" value="<?php echo $member['name']; ?>">
                            <input type="hidden" name="id_member" value="<?php echo $member['id_member']; ?>">
                         </td>
@@ -160,7 +180,7 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-              <a type="block" href="../product.php" class="btn btn-success pull-left"><<= กลับหน้าหลัก </i></a>
+              <a type="block" href="admin.php" class="btn btn-success pull-left"><<= กลับหน้าหลัก </i></a>
               <button type="submit" class="btn btn-success pull-right">ต่อไป =>> </button>
             </div>
           </form>
@@ -170,9 +190,7 @@
     </div>
     </section>
     <!-- /.content -->
-  </div>
   <!-- /.content-wrapper -->
-
   <?php require("../menu/footer.html"); ?>
   </div>
    <!-- jQuery 3 -->

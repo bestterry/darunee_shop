@@ -7,10 +7,140 @@
         <div class="box-body no-padding">
             <ul class="nav nav-pills nav-stacked">
                 <!-- ประวัติขายสินค้า -->
-                <li><a href="sale_history.php" ><i class="fa fa-exchange"></i> ยอดขายประจำวัน</a></li>
+                <li><a href="sale_history.php" ><i class="fa fa-exchange"></i> ยอดขายประจำวัน </a></li>
+                 <!--โอนสินค้า -->
+                 <li><a href="#" data-toggle="modal" data-target="#myModal1"><i class="fa fa-archive"></i> โอนสินค้า </a></li>
+                <div class="modal fade" id="myModal1" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <form action="withdraw_product.php" method="post">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <font size="6"><p align = "center"> โอนสินค้า </p></font>
+                                </div>
+                                <div class="modal-body col-md-12 table-responsive mailbox-messages">
+                                  <div class="table-responsive mailbox-messages">
+
+                                    <table class="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                        <th class="text-center" width="30%">สต๊อกสินค้า
+                                        </th>
+                                        <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                                        <select name ="id_zone" class="form-control text-center select2" style="width: 100%;">
+                                            <?php #endregion
+                                            $sql_member = "SELECT * FROM zone ";
+                                            $objq_member = mysqli_query($conn,$sql_member);
+                                            while($member = $objq_member -> fetch_assoc()){
+                                            ?>
+                                                <option value="<?php echo $member['id_zone']; ?>"><?php echo $member['name_zone']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        </th>
+                                        </tr>
+                                    </tbody>
+                                    </table> 
+                                    <br> 
+
+                                  <table class="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                        <th class="text-center" width="30%">ชื่อผู้รับสินค้า
+                                        </th>
+                                        <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                                        <select name ="id_member" class="form-control text-center select2" style="width: 100%;">
+                                            <?php #endregion
+                                            $sql_member = "SELECT * FROM member WHERE status = 'employee'";
+                                            $objq_member = mysqli_query($conn,$sql_member);
+                                            while($member = $objq_member -> fetch_assoc()){
+                                            ?>
+                                                <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        </th>
+                                        </tr>
+                                    </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="submit"  class="btn btn-success pull-right">ถัดไป ==>></button>
+                                  <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--//รับเข้าสินค้า -->
+
+                 <!--โอนสินค้า -->
+                 <li><a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-archive"></i> รับเข้าสินค้า </a></li>
+                <div class="modal fade" id="myModal2" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <form action="add_product.php" method="post">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <font size="6"><p align = "center"> รับเข้าสินค้า </p></font>
+                                </div>
+                                <div class="modal-body col-md-12 table-responsive mailbox-messages">
+                                  <div class="table-responsive mailbox-messages">
+
+                                    <table class="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                        <th class="text-center" width="30%">สต๊อกสินค้า
+                                        </th>
+                                        <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                                        <select name ="id_zone" class="form-control text-center select2" style="width: 100%;">
+                                            <?php #endregion
+                                            $sql_member = "SELECT * FROM zone ";
+                                            $objq_member = mysqli_query($conn,$sql_member);
+                                            while($member = $objq_member -> fetch_assoc()){
+                                            ?>
+                                                <option value="<?php echo $member['id_zone']; ?>"><?php echo $member['name_zone']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        </th>
+                                        </tr>
+                                    </tbody>
+                                    </table> 
+                                    <br> 
+
+                                  <table class="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                        <th class="text-center" width="30%">ชื่อผู้ส่งสินค้า
+                                        </th>
+                                        <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                                        <select name ="id_member" class="form-control text-center select2" style="width: 100%;">
+                                            <?php #endregion
+                                            $sql_member = "SELECT * FROM member WHERE status = 'employee'";
+                                            $objq_member = mysqli_query($conn,$sql_member);
+                                            while($member = $objq_member -> fetch_assoc()){
+                                            ?>
+                                                <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        </th>
+                                        </tr>
+                                    </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="submit"  class="btn btn-success pull-right">ถัดไป ==>></button>
+                                  <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--//รับเข้าสินค้า -->
+
+                <!--ประวัติรับเข้าสินค้า -->
                 <li><a href="total_stock.php" ><i class="fa fa-home"></i> สต๊อกรวม </a></li>
                 <li><a href="car_stock.php" ><i class="fa fa-truck"></i> สต๊อกรถ </a></li>
                 <li><a href="add_user.php" ><i class="fa fa-user"></i> เพิ่มพนักงาน </a></li>
+                <li><a href="withdraw_history.php"><i class="fa fa-archive"></i> ประวัติการโอนสินค้า </a></li>
                 <li><a href="../login/logout.php" ><i class="fa fa-close"></i> ออกจากระบบ </a></li>
                 <!-- /ประวัติขายสินค้า -->
                 <!-- เบิกสินค้า -->
@@ -29,18 +159,17 @@
                                       <table class="table table-hover table-striped table-bordered">
                                         <tbody>
                                           <tr>
-                                                <th class="text-center" width="20%">เลือกสินค้า</th>
-                                                <th class="text-center" width="35%">ชื่อสินค้า</th>
-                                                <th class="text-center" width="15%">คงเหลือ</th>
-                                                <th class="text-center" width="15%">หน่วยนับ</th>
-                                                
-                                            <tr>
-                                                <td class="text-center" width="15%"><input type="checkbox" name="menu[]" value=""></td>
-                                                <td  width="35%"></td>
-                                                <td class="text-center" width="15%"></td>
-                                                <td class="text-center" width="15%"></td> 
-                                            </tr>
-                                            </tbody>
+                                            <th class="text-center" width="20%">เลือกสินค้า</th>
+                                            <th class="text-center" width="35%">ชื่อสินค้า</th>
+                                            <th class="text-center" width="15%">คงเหลือ</th>
+                                            <th class="text-center" width="15%">หน่วยนับ</th>
+                                          <tr>
+                                            <td class="text-center" width="15%"><input type="checkbox" name="menu[]" value=""></td>
+                                            <td  width="35%"></td>
+                                            <td class="text-center" width="15%"></td>
+                                            <td class="text-center" width="15%"></td> 
+                                          </tr>
+                                        </tbody>
                                       </table>
                                   </div>
                                   <button type="submit"  class="btn btn-success pull-left">ถัดไป ==>></button>

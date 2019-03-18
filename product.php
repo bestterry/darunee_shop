@@ -119,11 +119,12 @@ require 'menu/menu_left_shop.php';
                       </th>
                     </tr>
                     <?php 
+                    $i= 1;
                       while($product = $query_product ->fetch_assoc()){
                     ?>
                     <tr>
                       <td class="text-center" width="10%">
-                        <?php echo $product['id_product']; ?>
+                        <?php $i; ?>
                       </td>
                       <td width="40%">
                         <?php echo $product['name_product']; ?>
@@ -133,7 +134,7 @@ require 'menu/menu_left_shop.php';
                         <?php echo $product['unit']; ?>
                       </td>
                     </tr>
-                      <?php } ?>
+                      <?php $i++; } ?>
                   </tbody>
                 </table>
               </div>

@@ -1,6 +1,9 @@
 <?php 
- require "../config_database/config.php"; 
- require "../session.php";
+    require "../config_database/config.php"; 
+    require "../session.php";
+    $sql_zone = "SELECT name_zone FROM zone  WHERE id_zone = '$_POST[id_zone]'";
+    $objq_zone = mysqli_query($conn,$sql_zone);
+    $objr_zone = mysqli_fetch_array($objq_zone);
  ?>
 
 <!DOCTYPE html>
@@ -88,17 +91,17 @@
       <div class="col-md-8">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="6"><p align = "center"> รับเข้าสินค้า </font></p>
+                <font size="6"><p align = "center"> โอนสินค้าจาก : <?php echo $objr_zone['name_zone'];?></font></p>
             </div>
 
             <!-- /.box-header -->
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="add_num_product2.php" method="post">
+                  <form action="withdraw_product2.php" method="post">
                     <table class="table table-bordered table-hover">
                         <tbody>
                       <tr bgcolor="#99CCFF">
-                        <th class="text-center" width="5%" >ลำดับ
+                        <th class="text-center" width="5%" >เลือก
                         </th>
                         <th class="text-center" width="30%">ชื่อสินค้า
                         </th>
@@ -109,13 +112,13 @@
                       </tr>
                       <?php
                       $i=1;
-                          $list_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_member = '$_POST[id_member]'";
-                          $objq_listproduct = mysqli_query($conn,$list_product);
+                      $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_zone = '$_POST[id_zone]'";
+                      $objq_listproduct = mysqli_query($conn,$list_product);
                           while($list = $objq_listproduct->fetch_assoc()){
                       ?>
                       <tr>
                         <td class="text-center">
-                          <input type="checkbox" name="id_num[]" value="<?php echo $list['id_numPD_car']; ?>">
+                          <input type="checkbox" name="id_num_product[]" value="<?php echo $list['id_numproduct']; ?>">
                         </td>
                         <td>
                           <?php echo $list['name_product']; ?>
@@ -138,7 +141,7 @@
                     <table class="table table-bordered table-hover">
                       <tbody>
                         <tr>
-                          <th class="text-center">ชื่อผู้ส่งสินค้า
+                          <th class="text-center">ชื่อผู้รับสินค้า
                           </th>
                           <th bgcolor="#99CCFF" class="text-center"> 
                           <?php #endregion
@@ -147,6 +150,7 @@
                             $member = mysqli_fetch_array($objq_member);
                             echo $member['name']; 
                           ?>
+                           <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
                            <input type="hidden" name="name" value="<?php echo $member['name']; ?>">
                            <input type="hidden" name="id_member" value="<?php echo $member['id_member']; ?>">
                         </td>
@@ -160,7 +164,7 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-              <a type="block" href="../product.php" class="btn btn-success pull-left"><<= กลับหน้าหลัก </i></a>
+              <a type="block" href="admin.php" class="btn btn-success pull-left"><<= กลับหน้าหลัก </i></a>
               <button type="submit" class="btn btn-success pull-right">ต่อไป =>> </button>
             </div>
           </form>

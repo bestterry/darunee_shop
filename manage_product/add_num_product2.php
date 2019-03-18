@@ -37,17 +37,8 @@
 <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="../plugins/iCheck/all.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
   <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -94,62 +85,75 @@
             <!-- /.box-header -->
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="add_num_product2.php" method="post">
+                  <form action="algorithm/add_product.php" method="post" autocomplete="off">
                     <table class="table table-bordered table-hover">
                         <tbody>
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="5%" >ลำดับ
                         </th>
-                        <th class="text-center" width="30%">ชื่อสินค้า
+                        <th class="text-center" width="35%">ชื่อสินค้า
                         </th>
-                        <th class="text-center" width="15%">จำนวนสินค้าที่มี
+                        <th class="text-center" width="20%">จำนวนสินค้าที่มี
                         </th>
-                        <th class="text-center" width="15%">หน่วยนับ
+                        <th class="text-center" width="20%">หน่วยนับ
                         </th>
+                        <th class="text-center" width="20%">จำนวนสินค้ารับเข้า
+                        </th
                       </tr>
                       <?php
-                      $i=1;
-                          $list_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_member = '$_POST[id_member]'";
+                     for ($i=0; $i < count($_POST['id_num']); $i++) { 
+                       
+                          $id_num = $_POST['id_num'][$i];
+                          $list_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_numPD_car = $id_num";
                           $objq_listproduct = mysqli_query($conn,$list_product);
-                          while($list = $objq_listproduct->fetch_assoc()){
+                          $list = mysqli_fetch_array($objq_listproduct);
                       ?>
                       <tr>
                         <td class="text-center">
-                          <input type="checkbox" name="id_num[]" value="<?php echo $list['id_numPD_car']; ?>">
+                          <?php echo $i+1; ?>
+                          <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
                         </td>
                         <td>
                           <?php echo $list['name_product']; ?>
                         </td>
                         <td class="text-center" >
                            <?php echo $list['num'];?>
+                           <input type="hidden" name="num_befor[]" value="<?php echo $list['num']; ?>">
                         </td>
                         <td class="text-center">
                           <?php echo $list['unit'];?>
                         </td>
+                        <td class="text-center"><input class="text-center" type="text" name="num_after[]" ></td>
                       </tr>
                       <?php 
-                          $i++; }
+                           }
                       ?>
                     </tbody>
                     </table>
                     <div class="col-md-6">
-                  </div>
-                  <div class="col-md-6">
+                    <table class="table table-bordered table-hover">
+                      <tbody>
+                        <tr>
+                          <th class="text-center">หมายเหตุ
+                          </th>
+                          <th bgcolor="#99CCFF" class="text-center"> 
+                             <input class="text-center" type="text" name="note" value="-">
+                          </th>
+                        </tr>
+                      </tbody>
+                    </table>
+                    </div>
+                    <div class="col-md-6">
                     <table class="table table-bordered table-hover">
                       <tbody>
                         <tr>
                           <th class="text-center">ชื่อผู้ส่งสินค้า
                           </th>
                           <th bgcolor="#99CCFF" class="text-center"> 
-                          <?php #endregion
-                            $sql_member = "SELECT * FROM member WHERE id_member = '$_POST[id_member]'";
-                            $objq_member = mysqli_query($conn,$sql_member);
-                            $member = mysqli_fetch_array($objq_member);
-                            echo $member['name']; 
-                          ?>
-                           <input type="hidden" name="name" value="<?php echo $member['name']; ?>">
-                           <input type="hidden" name="id_member" value="<?php echo $member['id_member']; ?>">
-                        </td>
+                            <?php #endregion
+                              echo $_POST['name'];
+                            ?>
+                             <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
                           </th>
                         </tr>
                       </tbody>
@@ -160,8 +164,8 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-              <a type="block" href="../product.php" class="btn btn-success pull-left"><<= กลับหน้าหลัก </i></a>
-              <button type="submit" class="btn btn-success pull-right">ต่อไป =>> </button>
+              <a type="block" href="../product.php" class="btn btn-success pull-left"><<= กลับหน้าหลัก></a>
+              <button type="submit" class="btn btn-success pull-right"><i class="fa fa-save">  บันทึก</i></button>
             </div>
           </form>
             <!-- /.box-footer -->
