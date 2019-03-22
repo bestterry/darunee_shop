@@ -29,6 +29,8 @@ require "../session.php";
   <body class="hold-transition register-page">
     <div class="container">
       <div class="box box-primary">
+
+      <!-- --------------------------------ประวัติการขายสินค้า-------------------------------- -->
         <div class="box-header with-border">
           <font size="4">
             <B> ประวัติการขายสินค้า ประจำวันที่(
@@ -59,7 +61,7 @@ require "../session.php";
                 </tr>
                 <?php #endregion
 $date = "SELECT * FROM sale_car_history
-WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_member = '$id_member'";
+WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_member = '$id_member' AND status='sale'";
 $objq = mysqli_query($conn,$date);
 while($value = $objq ->fetch_assoc()){
 $id_sale = $value['id_sale_history'];
@@ -99,7 +101,9 @@ $objr_product = mysqli_fetch_array($objq_product);
               </tbody>
             </table>
           </div>
-          <!-- /.mailbox-read-message -->
+          <!-- --------------------------------//ประวัติการขายสินค้า-------------------------------- -->
+
+          <!-- --------------------------------ยอดขายสินค้า-------------------------------- -->
           <div class="box-header with-border">
             <font size="4">
               <B> ยอดขายสินค้า ประจำวันที่(
@@ -130,7 +134,7 @@ while($history = $objq_history ->fetch_assoc()){
 $id_product = $history['id_product'];
 $total_sale = "SELECT SUM(sale_car_history.num),SUM(sale_car_history.money) FROM sale_car_history 
 INNER JOIN product ON sale_car_history.id_product=product.id_product
-WHERE product.id_product = '$id_product' AND DATE_FORMAT(sale_car_history.datetime,'%d-%m-%Y')='$strDate' AND sale_car_history.id_member = '$id_member'";
+WHERE product.id_product = '$id_product' AND DATE_FORMAT(sale_car_history.datetime,'%d-%m-%Y')='$strDate' AND sale_car_history.id_member = '$id_member' AND sale_car_history.status= 'sale'";
 $objq_sale = mysqli_query($conn,$total_sale);
 $objr_sale = mysqli_fetch_array($objq_sale);
 $num_product = $objr_sale['SUM(sale_car_history.num)'];
@@ -145,7 +149,7 @@ if(isset($num_product)){
                       <?php echo $objr_NameProduct['name_product']; ?>
                     </td>
                     <td class="text-center">
-                      <?php echo$num_product; ?> 
+                      <?php echo $num_product; ?> 
                       <?php echo $objr_NameProduct['unit']; ?>
                     </td>
                     <td class="text-center">
@@ -168,6 +172,65 @@ $sum_monny = $sum_monny+$total_money;
                   </tr>
                 </tbody>
               </table>
+              <!-- --------------------------------//ยอดขายสินค้า-------------------------------- -->
+
+              <!-- --------------------------------ยอดแถมสินค้า-------------------------------- -->
+          <div class="box-header with-border">
+            <font size="4">
+              <B> ยอดแถมสินค้า ประจำวันที่(
+                <font size="4" color="red">
+                  <?php echo $strDate = date('d-m-Y');?>
+                </font>) 
+                </font>
+              </B>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body no-padding">
+            <div class="mailbox-read-message">
+              <table class="table table-hover table-striped table-bordered">
+                <tbody>
+                  <tr bgcolor="#99CCFF">
+                    <th class="text-center" width="40%">รายการ
+                    </th>
+                    <th class="text-center" width="20%">จำนวน
+                    </th>
+                  </tr>
+                  <?php #endregion
+$sum_monny = 0;
+$sql_history = "SELECT * FROM product";
+$objq_history = mysqli_query($conn,$sql_history);
+while($history = $objq_history ->fetch_assoc()){
+$id_product = $history['id_product'];
+$total_sale = "SELECT SUM(sale_car_history.num),SUM(sale_car_history.money) FROM sale_car_history 
+INNER JOIN product ON sale_car_history.id_product=product.id_product
+WHERE product.id_product = '$id_product' AND DATE_FORMAT(sale_car_history.datetime,'%d-%m-%Y')='$strDate' AND sale_car_history.id_member = '$id_member' AND sale_car_history.status= 'free'";
+$objq_sale = mysqli_query($conn,$total_sale);
+$objr_sale = mysqli_fetch_array($objq_sale);
+$num_product = $objr_sale['SUM(sale_car_history.num)'];
+$total_money = $objr_sale['SUM(sale_car_history.money)'];
+$sql_NameProduct = "SELECT * FROM product WHERE id_product = '$id_product'";
+$objq_NameProduct = mysqli_query($conn,$sql_NameProduct);
+$objr_NameProduct = mysqli_fetch_array($objq_NameProduct);
+if(isset($num_product)){ 
+?>
+                  <tr>
+                    <td>
+                      <?php echo $objr_NameProduct['name_product']; ?>
+                    </td>
+                    <td class="text-center">
+                      <?php echo $num_product; ?> 
+                      <?php echo $objr_NameProduct['unit']; ?>
+                    </td>
+                  </tr>
+                  <?php 
+}
+} 
+?>
+                </tbody>
+              </table>
+              <!-- --------------------------------//ยอดแถมสินค้า-------------------------------- -->
+
+              
               
               <div align="center" class="box-footer">
                 

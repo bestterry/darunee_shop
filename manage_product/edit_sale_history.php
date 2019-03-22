@@ -76,7 +76,7 @@
                         
                           <tr>
                           <?php
-                            $id_price_product = $_GET['id_draw']; 
+                            $id_price_product = $_GET['id_price_history']; 
                             $SQL_product = "SELECT * FROM product INNER JOIN price_history 
                             ON product.id_product = price_history.id_product 
                             WHERE price_history.id_price_history='$id_price_product'";

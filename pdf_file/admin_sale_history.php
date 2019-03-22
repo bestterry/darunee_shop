@@ -33,18 +33,8 @@ class PDF extends FPDF
         $this->Text(70, 19,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
         // Title
         $this->SetTextColor(0,0,0);
-        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'รายการขายทั้งหมด ประจำวันที่ ') , 0 , 1,'L' );
-        if($this->PageNo()>1){
-            $this->Ln(2);
-            $this->Cell(60,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
-            $this->Cell(20,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
-            $this->Cell(20,10,iconv('UTF-8','cp874','บ/หน่วย'),1,0,'C');
-            $this->Cell(25,10,iconv('UTF-8','cp874','เงินขาย'),1,0,'C');
-            $this->Cell(50,10,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
-            $this->Ln(10);
-        }
+        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'รายการขายทั้งหมด ประจำวันที่ ') , 0 , 1,'L' ); 
     }
-
     // Page footer
     function Footer()
     {
@@ -109,7 +99,7 @@ $pdf=new PDF('P','mm','A4');
             if(!isset($objr_check['num'])){
 
             }else{
-
+              $pdf->AddPage();
               $pdf->SetFont('angsana','',18);
               $pdf->Ln(5);
               $pdf->Cell(0,5, iconv( 'UTF-8','cp874',$objr_member['name']) , 0 , 1,'' );

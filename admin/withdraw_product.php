@@ -87,8 +87,6 @@
 
     <!-- Main content -->
     <section class="content">
-    <div class="col-md-2"></div>
-      <div class="col-md-8">
         <div class="box box-primary">
             <div class="box-header with-border">
                 <font size="6"><p align = "center"> โอนสินค้าจาก : <?php echo $objr_zone['name_zone'];?></font></p>
@@ -161,8 +159,6 @@
                   </div> 
                 </div>
             </div>
-            <!-- /.box-body -->
-            <!-- /.box-footer -->
             <div class="box-footer">
               <a type="block" href="admin.php" class="btn btn-success pull-left"><<= กลับหน้าหลัก </i></a>
               <button type="submit" class="btn btn-success pull-right">ต่อไป =>> </button>
@@ -170,8 +166,6 @@
           </form>
             <!-- /.box-footer -->
         </div>
-        <!-- /. box -->
-    </div>
     </section>
     <!-- /.content -->
   </div>

@@ -1,15 +1,4 @@
-<?php #endregion
-  // for($i=0;$i<count($_POST['id_numPD']);$i++){
-  //   echo $_POST['id_numPD'][$i].':';
-  //   echo $_POST['num_product'][$i].':';
-  //   echo $_POST['price_product'][$i].'<br>';
-  // }
-?>
-
-<?php 
-  require "../config_database/config.php";
-  require "../session.php";  
-?>
+<?php require "../config_database/config.php"; ?>
 
 <!DOCTYPE html>
 <html>
@@ -68,97 +57,87 @@
       <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="6"><p align = "center"> รายการขายสินค้า </font></p>
+                <font size="6"><p align = "center"> รายการสินค้าที่ต้องการโอน </font></p>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="sale_product_finish.php" method="post" autocomplete="off">
+                  <form action="algorithm/transfer_product.php" method="post" autocomplete="off">
                     <table class="table table-bordered table-hover">
                         <tbody>
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" width="5%" >ลำดับ</th>
                             <th class="text-center" >ชื่อสินค้า</th>
-                            <th class="text-center" width="15%">จำนวนสินค้าที่ขาย</th>
+                            <th class="text-center" width="15%">จำนวนสินค้าที่มี</th>
                             <th class="text-center" width="10%">หน่วยนับ</th>
-                            <th class="text-center" width="15%">ราคาต่อหน่วย</th>
-                            <th class="text-center" width="15%">รวมเงิน (บาท)</th>
+                            <th class="text-center" width="15%">จำนวนสินค้าที่ต้องการโอน</th>
                           </tr>
                           <?php
-                          $total_money = 0;
-                          $note = $_POST['note'];
                             for($i=0;$i<count($_POST["id_numPD"]);$i++)
                             {
-                              $id_numPD = $_POST['id_numPD'][$i];
-                              $num_product = $_POST['num_product'][$i];
-                              $price_product = $_POST['price_product'][$i];
-                              $money = $num_product * $price_product;
-                              $id_product = $_POST['id_product'][$i];
-                              if($price_product == 0){
-                                $status = 'free';
-                              }else{
-                                $status = 'sale';
-                              }
-                              //insert sale_car_history
-                              $insert_numPD = "INSERT INTO sale_car_history (num,price,money,id_product,status,id_member,note) 
-                                               VALUE ($num_product,$price_product, $money,$id_product,'$status',$id_member,'$note')";
-                              mysqli_query($conn,$insert_numPD);
-
-                              //update numpd_car
-                              $seach_num = "SELECT * FROM numpd_car WHERE id_numPD_car = $id_numPD";
-                              $objq_seach = mysqli_query($conn,$seach_num);
-                              $objr_seach = mysqli_fetch_array($objq_seach);
-                              $befor_num = $objr_seach['num'];
-                              $total_num = $befor_num - $num_product;
-                              if($total_num == 0){
-                                $delete_numPD = "DELETE FROM numpd_car WHERE id_numPD_car = $id_numPD";
-                                mysqli_query($conn,$delete_numPD);
-                              }else{
-                                $update_numPD = "UPDATE numpd_car SET num = $total_num WHERE id_numPD_car = $id_numPD";
-                                mysqli_query($conn,$update_numPD);
-                              }
-                              
+                              if(trim($_POST["id_numPD"][$i]) != "")
+                                {
+                                  $id_numPD=$_POST['id_numPD'][$i];
+                                  $list_product = "SELECT * FROM numpd_car
+                                                  INNER JOIN product ON numpd_car.id_product = product.id_product
+                                                  WHERE numpd_car.id_numPD_car = $id_numPD";
+                                  $objq_listproduct = mysqli_query($conn,$list_product);
+                                  $objr_listproduct = mysqli_fetch_array($objq_listproduct);
                           ?>
                           <tr>
-                            <td class="text-center"><?php echo $i+1;?></td>
-                            <td><?php echo $_POST['name_product'][$i];?></td>
-                            <td class="text-center" ><?php echo $_POST['num_product'][$i];?></td>
-                            <td class="text-center"><?php echo $_POST['unit'][$i];?></td>
-                            <td class="text-center"><?php echo $_POST['price_product'][$i];?></td>
-                            <td class="text-center"><?php echo $money;?></td>
+                            <td class="text-center"><?php echo $i+1; ?></td>
+                            <td>
+                              <?php echo $objr_listproduct['name_product']; ?>
+                              <input class = "hidden" type="text" name="id_product[]" value="<?php echo $objr_listproduct['id_product']; ?>">
+                              <input class = "hidden" type="text" name="id_numPD_car[]" value="<?php echo $objr_listproduct['id_numPD_car']; ?>">
+                            </td>
+                            <td class="text-center" >
+                              <?php echo $objr_listproduct['num'];?>
+                              <input class = "hidden" type="text" name="num_befor[]" value="<?php echo $objr_listproduct['num']; ?>">
+                            </td>
+                            <td class="text-center">
+                              <?php echo $objr_listproduct['unit'];?>
+                            </td>
+                            <td class="text-center">
+                              <input type="text" name="num_after[]"  class="form-control text-center col-md-2" placeholder="ระบุจำนวน">
+                            </td>
                           </tr>
-                          <?php  
-                              $total_money = $total_money + $money; 
-                          }
-                          ?>
-                          <tr>
-                            <td style="visibility:collapse;"></td>
-                            <td style="visibility:collapse;"></td>
-                            <td style="visibility:collapse;"></td>
-                            <td style="visibility:collapse;"></td>
-                            <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
-                            <th class="text-center" bgcolor="#EAF4FF"><?php echo $total_money; ?></th>
-                          </tr>
+                            <?php 
+                                  }
+                              }
+                            ?>
                         </tbody>
                     </table>
-
                     <div class="col-md-8">
                     </div>
                     <div class="col-md-4">
                       <table class="table table-bordered table-hover">
                         <tbody>
-                        <tr>
-                        <th class="text-center">หมายเหตุ</th>
-                        <th class="text-center"><?php echo $note; ?></th>
-                        </tr>
+                          <tr>
+                            <th class="text-center">ชื่อผู้รับสินค้า
+                            </th>
+                            <th bgcolor="#99CCFF" class="text-center" width="40%"> 
+                              <select name ="id_member" class="form-control text-center select2" style="width: 100%;">
+                                  <?php #endregion
+                                  $sql_member = "SELECT * FROM member WHERE status = 'employee'";
+                                  $objq_member = mysqli_query($conn,$sql_member);
+                                  while($member = $objq_member -> fetch_assoc()){
+                                  ?>
+                                      <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?></option>
+                                  <?php } ?>
+                              </select>
+                            </th>
+                           </tr>
                         </tbody>
-                      </table>
-                    </div>
+                        </table>
+                      </div> 
+                  
                 </div>
                 <!-- /.mailbox-read-message -->
             </div>
             <div class="box-footer">
             <a type="block" href="store.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i></a>
+            <button type="submit" class="btn btn-success pull-right"><i class="fa fa-calculator"> บันทึก </i></button>
             </div>
             <!-- /.box-footer -->
             </form>

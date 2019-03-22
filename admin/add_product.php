@@ -152,29 +152,28 @@
                     </tbody>
                     </table>
                     <div class="col-md-6">
-                  </div>
-                  <div class="col-md-6">
-                    <table class="table table-bordered table-hover">
-                      <tbody>
-                        <tr>
-                          <th class="text-center">ชื่อผู้ส่งสินค้า
-                          </th>
-                          <th bgcolor="#99CCFF" class="text-center"> 
-                          <?php #endregion
-                            $sql_member = "SELECT * FROM member WHERE id_member = '$_POST[id_member]'";
-                            $objq_member = mysqli_query($conn,$sql_member);
-                            $member = mysqli_fetch_array($objq_member);
-                            echo $member['name']; 
-                          ?>
-                           <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
-                           <input type="hidden" name="name" value="<?php echo $member['name']; ?>">
-                           <input type="hidden" name="id_member" value="<?php echo $member['id_member']; ?>">
-                        </td>
-                          </th>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div> 
+                    </div>
+                    <div class="col-md-6">
+                      <table class="table table-bordered table-hover">
+                        <tbody>
+                          <tr>
+                            <th class="text-center">ชื่อผู้ส่งสินค้า
+                            </th>
+                            <th bgcolor="#99CCFF" class="text-center"> 
+                              <?php #endregion
+                                $sql_member = "SELECT * FROM member WHERE id_member = '$_POST[id_member]'";
+                                $objq_member = mysqli_query($conn,$sql_member);
+                                $member = mysqli_fetch_array($objq_member);
+                                echo $member['name']; 
+                              ?>
+                              <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
+                              <input type="hidden" name="name" value="<?php echo $member['name']; ?>">
+                              <input type="hidden" name="id_member" value="<?php echo $member['id_member']; ?>">
+                            </th>
+                           </tr>
+                        </tbody>
+                        </table>
+                      </div> 
                 </div>
             </div>
             <!-- /.box-body -->

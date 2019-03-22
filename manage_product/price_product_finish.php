@@ -102,9 +102,15 @@
                               $update_num_product = "UPDATE num_product SET num = $total_num_product WHERE id_numproduct = $id_numproduct";
                               $objq_update = mysqli_query($conn,$update_num_product);
                               // //INsert history buy product
-                              $insert_history = "INSERT INTO price_history (num, price, money, id_product, id_zone, note)
-                                                  VALUES ($num_product, $price_product, $total_price, $id_product, $id_zone, '-')";
-                              mysqli_query($conn,$insert_history);
+                              if($price_product == 0){
+                                $status = "free";
+                              }else{
+                                $status = "sale";
+                              }
+                              $insert_history = "INSERT INTO price_history (num, price, money, id_product, status, id_zone, note)
+                                                  VALUES ($num_product, $price_product, $total_price, $id_product, '$status', $id_zone, '-')";
+                                mysqli_query($conn,$insert_history);
+                              
                           ?>
                           <tr>
                             <td class="text-center" ><?php echo $i+1 ?></td>

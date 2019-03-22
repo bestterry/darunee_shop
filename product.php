@@ -124,7 +124,7 @@ require 'menu/menu_left_shop.php';
                     ?>
                     <tr>
                       <td class="text-center" width="10%">
-                        <?php $i; ?>
+                        <?php echo $i; ?>
                       </td>
                       <td width="40%">
                         <?php echo $product['name_product']; ?>
