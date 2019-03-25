@@ -19,7 +19,6 @@
                                 </div>
                                 <div class="modal-body col-md-12 table-responsive mailbox-messages">
                                   <div class="table-responsive mailbox-messages">
-
                                     <table class="table table-bordered table-hover">
                                     <tbody>
                                         <tr>
