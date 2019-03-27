@@ -106,7 +106,8 @@
                       <div class="col-md-4">
                       </div>
                       <div class="col-md-5">
-                      <button type="submit" class="btn btn-block btn-success"><i class="fa fa-check-square"> บันทึก </i></button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check-square"> บันทึก </i></button>
+                        <a href="algorithm/delete_add_history.php?id=<?php echo $id_add;?>" class="btn btn-danger"><i class="fa fa-minus-square"> ลบ </i></a>
                       </div>
                       <div class="col-md-3">
                       </div>

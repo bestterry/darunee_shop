@@ -7,7 +7,7 @@
         <div class="box-body no-padding">
             <ul class="nav nav-pills nav-stacked" ata-widget="tree">
                 <!-- ประวัติขายสินค้า -->
-                <li><a href="sale_history.php" ><i class="fa fa-exchange"></i> ยอดขายประจำวัน </a></li>
+                <li><a href="sale_history.php" ><i class="fa fa-exchange"></i> ยอดขายสินค้า </a></li>
                  <!--โอนสินค้า -->
                  <li><a href="#" data-toggle="modal" data-target="#myModal1"><i class="fa fa-archive"></i> โอนสินค้า </a></li>
                 <div class="modal fade" id="myModal1" role="dialog">
@@ -183,6 +183,7 @@
                 <!-- /เพิ่มสินค้าเข้าสต๊อก -->
                 <li><a href="withdraw_history.php"><i class="fa fa-archive"></i> ประวัติการโอนสินค้า </a></li>
                 <li><a href="add_history.php"><i class="fa fa-archive"></i> ประวัติการรับเข้าสินค้า </a></li>
+                <li><a href="add_data.php" ><i class="fa fa-user"></i> เพิ่มข้อมูล </a></li>
                 <li><a href="../login/logout.php" ><i class="fa fa-close"></i> ออกจากระบบ </a></li>
                 
                 <!-- /ประวัติขายสินค้า -->

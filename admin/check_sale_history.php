@@ -78,7 +78,7 @@
                     <tr bgcolor="#99CCFF">
                       <th width="40%">ชื่อสินค้า </th>
                       <th width="15%" class="text-center">จำนวนสินค้า</th>
-                      <th width="15%" class="text-center">จำนวนเงิน</th>
+                      <th width="15%" class="text-center">จำนวนเงิน(บาท)</th>
                     </tr>
               <?php #endregion
                   $total_money = 0;
@@ -133,7 +133,7 @@
               </div>
             </div>
             <div class="box-footer" align="center">
-              <a href="" class="btn btn-success"><i class="fa fa-print"></i> พิมพ์ </a>
+              <a href="../pdf_file/check_sale_history.php?aday=<?php echo $aday;?>&&bday=<?php echo $bday;?>" class="btn btn-success"><i class="fa fa-print"></i> พิมพ์ </a>
             </div>
           </div>
           </div>

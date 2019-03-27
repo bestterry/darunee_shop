@@ -110,8 +110,8 @@
             <div class="box-footer">
               <div class="container">
                 <div class="pull-right">
-                    <a href="algorithm/delete_sale_history.php?id_sale=<?php echo $id_product;?>" type="button" class="btn btn-danger"><i class="fa fa-check-square"> ลบ </i></a>
                     <button type="submit" class="btn btn-success"><i class="fa fa-check-square"> บันทึก </i></button>
+                    <a href="algorithm/delete_sale_history.php?id=<?php echo $id_price_product;?>" type="button" class="btn btn-danger"><i class="fa fa-check-square"> ลบ </i></a>
                 </div>
               </div> 
             </div>
