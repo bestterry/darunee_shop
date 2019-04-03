@@ -77,12 +77,12 @@ $pdf=new PDF('P','mm','A4');
                 $objq_history = mysqli_query($conn,$sql_history);
                 while($history = $objq_history ->fetch_assoc()){
                       $id_product = $history['id_product'];
-                      $total_sale = "SELECT SUM(sale_history.num_sale) FROM sale_history 
-                                      INNER JOIN product ON sale_history.id_product=product.id_product
-                                      WHERE product.id_product = '$id_product' AND DATE_FORMAT(sale_history.datetime,'%d-%m-%Y')='$strDate' AND sale_history.status_sale='add'";
-                      $objq_sale = mysqli_query($conn,$total_sale);
-                      $objr_sale = mysqli_fetch_array($objq_sale);
-                      $num_product = $objr_sale['SUM(sale_history.num_sale)'];
+                      $total_add = "SELECT SUM(add_history.num_add) FROM add_history 
+                                      INNER JOIN product ON add_history.id_product=product.id_product
+                                      WHERE product.id_product = '$id_product' AND DATE_FORMAT(add_history.datetime,'%d-%m-%Y')='$strDate'";
+                      $objq_add = mysqli_query($conn,$total_add);
+                      $objr_add = mysqli_fetch_array($objq_add);
+                      $num_product = $objr_add['SUM(add_history.num_add)'];
                       $sql_NameProduct = "SELECT * FROM product WHERE id_product = '$id_product'";
                       $objq_NameProduct = mysqli_query($conn,$sql_NameProduct);
                       $objr_NameProduct = mysqli_fetch_array($objq_NameProduct);
@@ -102,23 +102,26 @@ $pdf=new PDF('P','mm','A4');
             //สร้างตาราง
             $pdf->SetTextColor(0,0,0);
             $pdf->Ln(2);
-            $pdf->Cell(90,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
-            $pdf->Cell(40,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
-            $pdf->Cell(40,10,iconv('UTF-8','cp874','ชื่อผู้ส่ง'),1,0,'C');
+            $pdf->Cell(70,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+            $pdf->Cell(30,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
+            $pdf->Cell(30,10,iconv('UTF-8','cp874','ชื่อผู้ส่ง'),1,0,'C');
+            $pdf->Cell(40,10,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
             $pdf->Ln(10);
-            $date = "SELECT * FROM sale_history
-                    WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND status_sale='add'";
+            $date = "SELECT * FROM add_history
+                    WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
             $objq = mysqli_query($conn,$date);
             while($data = $objq ->fetch_assoc()){
-                $id_sale = $data['id_sale_history'];
-                $SQL_product = "SELECT * FROM product INNER JOIN sale_history 
-                ON product.id_product = sale_history.id_product 
-                WHERE sale_history.id_sale_history='$id_sale'";
+                $id_add = $data['id_add_history'];
+                $SQL_product = "SELECT * FROM add_history 
+                INNER JOIN product ON product.id_product = add_history.id_product 
+                INNER JOIN member ON add_history.id_member = member.id_member 
+                WHERE add_history.id_add_history='$id_add'";
                 $objq_product = mysqli_query($conn,$SQL_product);
                 $objr_product = mysqli_fetch_array($objq_product);
-            $pdf->Cell(90,8,iconv('UTF-8','cp874',$objr_product['name_product']),1,0,'L');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',$objr_product['num_sale'].' '.'('.$objr_product['unit'].')'),1,0,'L');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',$objr_product['name_draw']),1,0,'C');
+            $pdf->Cell(70,8,iconv('UTF-8','cp874',$objr_product['name_product']),1,0,'L');
+            $pdf->Cell(30,8,iconv('UTF-8','cp874',$objr_product['num_add'].' '.'('.$objr_product['unit'].')'),1,0,'L');
+            $pdf->Cell(30,8,iconv('UTF-8','cp874',$objr_product['name']),1,0,'C');
+            $pdf->Cell(40,8,iconv('UTF-8','cp874',$objr_product['note']),1,0,'C');
             $pdf->Ln(8);
             }                
     $pdf->Output();

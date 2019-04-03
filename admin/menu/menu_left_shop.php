@@ -138,9 +138,8 @@
                 <!--ประวัติรับเข้าสินค้า -->
                 <li><a href="total_stock.php" ><i class="fa fa-home"></i> สต๊อกรวม </a></li>
                 <li><a href="car_stock.php" ><i class="fa fa-truck"></i> สต๊อกรถ </a></li>
-                <li><a href="add_user.php" ><i class="fa fa-user"></i> เพิ่มพนักงาน </a></li>
                 <!-- เพิ่มสินค้าเข้าสต๊อก -->
-                <li><a href="#" data-toggle="modal" data-target="#myModal10"><i class="fa fa-archive"></i>เพิ่มสินค้าเข้าสต๊อก</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#myModal10"><i class="fa fa-plus-circle"></i>เพิ่มสินค้าเข้าสต๊อก</a></li>
                 <div class="modal fade" id="myModal10" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <form action="add_num_product.php" method="post">
@@ -181,8 +180,8 @@
                     </div>
                 </div>
                 <!-- /เพิ่มสินค้าเข้าสต๊อก -->
-                <li><a href="withdraw_history.php"><i class="fa fa-archive"></i> ประวัติการโอนสินค้า </a></li>
-                <li><a href="add_history.php"><i class="fa fa-archive"></i> ประวัติการรับเข้าสินค้า </a></li>
+                <li><a href="withdraw_history.php"><i class="fa fa-cloud-upload"></i> ประวัติการโอนสินค้า </a></li>
+                <li><a href="add_history.php"><i class="fa fa-cloud-download"></i> ประวัติการรับเข้าสินค้า </a></li>
                 <li><a href="add_data.php" ><i class="fa fa-user"></i> เพิ่มข้อมูล </a></li>
                 <li><a href="../login/logout.php" ><i class="fa fa-close"></i> ออกจากระบบ </a></li>
                 

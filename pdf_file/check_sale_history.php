@@ -28,13 +28,15 @@ class PDF extends FPDF
 $pdf=new PDF('P','mm','A4');
             // ตั้งค่าขอบกระดาษทุกด้าน 20 มิลลิเมตร
             $pdf->AliasNbPages();
-            $pdf->SetMargins(15,15,15);
+            $pdf->SetMargins(25,10,15);
             $pdf->AddFont('angsana','','angsa.php');
             //สร้างหน้าเอกสาร
             $pdf->AddPage();
             $pdf->SetFont('angsana','',18);
             $pdf->Ln(5);
             $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ยอดขายสินค้าวันที่ '.DateThai($aday).' ถึง '.DateThai($bday)) , 0 , 1,'' );
+            $pdf->Ln(3);
+            $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ยอดขายรวม') , 0 , 1,'' );
             $pdf->Ln(3);
             $pdf->SetFont('angsana','',16);
             $pdf->Cell(70,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
@@ -77,5 +79,63 @@ $pdf=new PDF('P','mm','A4');
             $pdf->Cell(40,8,iconv('UTF-8','cp874','รวมเป็นเงิน'),1,0,'C');
             $pdf->Cell(40,8,iconv('UTF-8','cp874',$total_all_money),1,0,'C');  
 // --------------------------------------------------------------------------------------
+            //สร้างหน้าเอกสาร
+            $pdf->AddPage();
+            $pdf->SetFont('angsana','',18);
+            $pdf->Ln(5);
+            $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ยอดขายสินค้าวันที่ '.DateThai($aday).' ถึง '.DateThai($bday)) , 0 , 1,'' );
+            $pdf->Ln(3);
+            $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , '(1) ร้านเวียงป่าเป้า') , 0 , 1,'' );
+            $pdf->Ln(3);
+            $pdf->SetFont('angsana','',16);
+            $pdf->Cell(60,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+            $pdf->Cell(35,10,iconv('UTF-8','cp874','จำนวนสินค้า'),1,0,'C');
+            $pdf->Cell(35,10,iconv('UTF-8','cp874','จำนวนเงิน(บาท)'),1,0,'C');
+            $pdf->Cell(35,10,iconv('UTF-8','cp874','วันที่'),1,0,'C');
+            $pdf->Ln(10);
+            
+            $date = "SELECT * FROM sale_car_history
+                              INNER JOIN product ON product.id_product = sale_car_history.id_product 
+                              INNER JOIN member ON member.id_member = sale_car_history.id_member
+                              WHERE (sale_car_history.datetime between '$aday 00:00:00' and '$bday 23:59:59')";
+                              $objq = mysqli_query($conn,$date);
+                              while($value = $objq ->fetch_assoc()){ 
+            $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['name_product']),1,0,'');
+            $pdf->Cell(35,8,iconv('UTF-8','cp874',$value['num'].' '.' '.$value['unit']),1,0,'');
+            $pdf->Cell(35,8,iconv('UTF-8','cp874',$value['money']),1,0,'C');
+            $pdf->Cell(35,8,iconv('UTF-8','cp874',DateThai($value['datetime'])),1,0,'C');
+            $pdf->Ln(8);
+                      }  
+// --------------------------------------------------------------------------------------
+            //สร้างหน้าเอกสาร
+            $pdf->AddPage();
+            $pdf->SetFont('angsana','',18);
+            $pdf->Ln(5);
+            $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ยอดขายสินค้าวันที่ '.DateThai($aday).' ถึง '.DateThai($bday)) , 0 , 1,'' );
+            $pdf->Ln(3);
+            $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , '(2) รถส่งสินค้า') , 0 , 1,'' );
+            $pdf->Ln(3);
+            $pdf->SetFont('angsana','',16);
+            $pdf->Cell(60,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+            $pdf->Cell(30,10,iconv('UTF-8','cp874','จำนวนสินค้า'),1,0,'C');
+            $pdf->Cell(30,10,iconv('UTF-8','cp874','จำนวนเงิน(บาท)'),1,0,'C');
+            $pdf->Cell(30,10,iconv('UTF-8','cp874','ชื่อผู้ส่งสินค้า'),1,0,'C');
+            $pdf->Cell(30,10,iconv('UTF-8','cp874','วันที่'),1,0,'C');
+            $pdf->Ln(10);
+
+            $date = "SELECT * FROM sale_car_history
+                  INNER JOIN product ON product.id_product = sale_car_history.id_product 
+                  INNER JOIN member ON member.id_member = sale_car_history.id_member
+                  WHERE (sale_car_history.datetime between '$aday 00:00:00' and '$bday 23:59:59')";
+                  $objq = mysqli_query($conn,$date);
+                  while($value = $objq ->fetch_assoc()){ 
+            $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['name_product']),1,0,'');
+            $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['num'].' '.' '.$value['unit']),1,0,'');
+            $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['money']),1,0,'C');
+            $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['name']),1,0,'C');
+            $pdf->Cell(30,8,iconv('UTF-8','cp874',DateThai($value['datetime'])),1,0,'C');
+            $pdf->Ln(8);
+                      }  
+            // --------------------------------------------------------------------------------------
     $pdf->Output();
 ?>

@@ -2,6 +2,7 @@
 require('fpdf.php');
 require('../config_database/config.php'); 
 require('../session.php');
+$day = $_GET['day'];
   function DateThai($strDate)
       {
       $strYear = date("Y",strtotime($strDate))+543;
@@ -23,14 +24,14 @@ class PDF extends FPDF
     function Header()
     {
         // Date
-        $strDate = date('d-m-Y');
+        $day1 = $_GET['day'];
         // Arial bold 15
         $this->AddFont('angsana','','angsa.php');
         $this->SetFont('angsana','',16);
         
         //Date
         $this->SetTextColor(255,0,0); 
-        $this->Text(70, 19,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
+        $this->Text(70, 19,iconv('UTF-8','cp874',DateThai($day1)),1,0,'C');
         // Title
         $this->SetTextColor(0,0,0);
         $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'รายการขายทั้งหมด ประจำวันที่ ') , 0 , 1,'L' ); 
@@ -53,6 +54,7 @@ $pdf=new PDF('P','mm','A4');
             $pdf->AliasNbPages();
             $pdf->SetMargins(20, 15,15);
             $pdf->AddFont('angsana','','angsa.php');
+            //สร้างหน้าเอกสาร
 
             // ยอดขายรวม.
             $pdf->AddPage();
@@ -71,13 +73,13 @@ $pdf=new PDF('P','mm','A4');
             $objq = mysqli_query($conn,$date);
             while($value = $objq ->fetch_assoc()){ 
               $id_product = $value['id_product'];
-              $sql_num = "SELECT SUM(num),SUM(money) FROM price_history WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = $id_product AND status = 'sale'";
+              $sql_num = "SELECT SUM(num),SUM(money) FROM price_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day' AND id_product = $id_product AND status = 'sale'";
               $objq_num = mysqli_query($conn,$sql_num);
               $objr_num = mysqli_fetch_array($objq_num);
               $num = $objr_num['SUM(num)'];
               $num_money = $objr_num['SUM(money)'];
 
-              $sql_num_car = "SELECT SUM(num),SUM(money) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = $id_product AND status = 'sale'";
+              $sql_num_car = "SELECT SUM(num),SUM(money) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day' AND id_product = $id_product AND status = 'sale'";
               $objq_num_car = mysqli_query($conn,$sql_num_car);
               $objr_num_car = mysqli_fetch_array($objq_num_car);
               $num_car = $objr_num_car['SUM(num)'];
@@ -102,7 +104,7 @@ $pdf=new PDF('P','mm','A4');
             $pdf->Ln(10);
              // ยอดขายรวม.
 
-            //ร้านเวียงป่าเป้า
+            // หน้าร้าน วปป.
             $pdf->AddPage();
             $pdf->SetFont('angsana','',18);
             $pdf->Ln(5);
@@ -115,11 +117,10 @@ $pdf=new PDF('P','mm','A4');
             $pdf->Cell(25,10,iconv('UTF-8','cp874','เงินขาย(บาท)'),1,0,'C');
             $pdf->Cell(50,10,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
             $pdf->Ln(10);
-                
             $total_money = 0;
               $date = "SELECT * FROM product INNER JOIN price_history 
                         ON product.id_product = price_history.id_product 
-                        WHERE DATE_FORMAT(price_history.datetime,'%d-%m-%Y')='$strDate'";
+                        WHERE DATE_FORMAT(price_history.datetime,'%Y-%m-%d')='$day'";
               $objq = mysqli_query($conn,$date);
               while($value = $objq ->fetch_assoc()){ 
             $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['name_product']),1,0,'');
@@ -134,10 +135,9 @@ $pdf=new PDF('P','mm','A4');
             $pdf->Cell(40,8,iconv('UTF-8','cp874','รวมเป็นเงินทั้งหมด'),1,0,'C');
             $pdf->Cell(25,8,iconv('UTF-8','cp874',$total_money),1,0,'C');
             $pdf->Ln(10);
-            //ร้านเวียงป่าเป้า//
+             // หน้าร้าน วปป.
 
-
-            //รวมรถ
+             // รถ.
           for ($i=4; $i < 15; $i++){
             $sql_member = "SELECT * FROM member WHERE id_member = $i";
             $objq_member = mysqli_query($conn,$sql_member);
@@ -145,7 +145,7 @@ $pdf=new PDF('P','mm','A4');
 
             $check = "SELECT * FROM product INNER JOIN sale_car_history
                             ON product.id_product = sale_car_history.id_product 
-                            WHERE sale_car_history.id_member = $i AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
+                            WHERE sale_car_history.id_member = $i AND DATE_FORMAT(sale_car_history.datetime,'%Y-%m-%d')='$day'";
             $objq_check = mysqli_query($conn,$check);
             $objr_check = mysqli_fetch_array($objq_check);
             if(!isset($objr_check['num'])){
@@ -166,7 +166,7 @@ $pdf=new PDF('P','mm','A4');
               $total_money = 0;
               $SQL_product = "SELECT * FROM product INNER JOIN sale_car_history
                               ON product.id_product = sale_car_history.id_product 
-                              WHERE sale_car_history.id_member = $i AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
+                              WHERE sale_car_history.id_member = $i AND DATE_FORMAT(sale_car_history.datetime,'%Y-%m-%d')='$day'";
               $objq_product = mysqli_query($conn,$SQL_product);
                   while($product = $objq_product -> fetch_assoc()){
               $pdf->Cell(60,8,iconv('UTF-8','cp874',$product['name_product']),1,0,'');
@@ -182,8 +182,8 @@ $pdf=new PDF('P','mm','A4');
             $pdf->Cell(25,8,iconv('UTF-8','cp874',$total_money),1,0,'C');
             $pdf->Ln(10);
               }
-          }  
-          //รวมรถ//     
+          } 
+          // รถ.      
 // --------------------------------------------------------------------------------------                     
     $pdf->Output();
 ?>
