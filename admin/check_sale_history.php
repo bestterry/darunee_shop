@@ -59,8 +59,7 @@
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
     <header class="main-header">
-      <nav class="navbar navbar-static-top">
-      </nav>
+    <?php require('menu/header_logout.php');?>
     </header>
     <div class="content-wrapper">
       <section class="content-header">

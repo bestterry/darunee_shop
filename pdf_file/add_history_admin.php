@@ -31,7 +31,7 @@ class PDF extends FPDF
         
         //Date
         $this->SetTextColor(255,0,0); 
-        $this->Text(83, 19,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
+        $this->Text(80, 19,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
         // Title
         $this->SetTextColor(0,0,0);
         $this->Cell(0,5, iconv( 'UTF-8','cp874' , 'รายการรับเข้าสินค้า ประจำวันที่ ') , 0 , 1,'L' );

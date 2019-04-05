@@ -72,10 +72,10 @@
         <div class="box box-primary">
           <div class="box-header with-border">
             <p align="center">
-              <font size="5"> <B>ประวัติรับเข้าสินค้า</B> </font>
+              <font size="5"> สต๊อกรวม </font>
             </p>
             <B>
-              <font size="4">ประวัติรับเข้าสินค้า ประจำวันที่(<font color="red"><?php echo $strDate = date('d-m-Y');?>
+              <font size="4">ประวัติการโอนสินค้า ประจำวันที่(<font color="red"><?php echo $strDate = date('d-m-Y');?>
                 </font>)</font>
             </B>
           </div>
@@ -132,7 +132,7 @@
             <!-- /.mailbox-read-message -->
             <div class="box-header with-border">
               <font size="4">
-                <B> ยอดรับเข้าสินค้า ประจำวันที่(
+                <B> ยอดการรับเข้าสินค้า ประจำวันที่(
                   <font size="4" color="red">
                     <?php echo $strDate = date('d-m-Y');?>
                   </font>)
@@ -178,7 +178,7 @@
               </div>
             </div>
             <div class="box-footer" align="center">
-              <a href="../pdf_file/add_history_admin.php" class="btn btn-success"><i class="fa fa-print"> พิมพ์
+              <a href="../pdf_file/draw_history_admin.php" class="btn btn-success"><i class="fa fa-print"> พิมพ์
                 </i></a>
             </div>
           </div>

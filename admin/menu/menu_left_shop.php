@@ -183,7 +183,6 @@
                 <li><a href="withdraw_history.php"><i class="fa fa-cloud-upload"></i> ประวัติการโอนสินค้า </a></li>
                 <li><a href="add_history.php"><i class="fa fa-cloud-download"></i> ประวัติการรับเข้าสินค้า </a></li>
                 <li><a href="add_data.php" ><i class="fa fa-user"></i> เพิ่มข้อมูล </a></li>
-                <li><a href="../login/logout.php" ><i class="fa fa-close"></i> ออกจากระบบ </a></li>
                 
                 <!-- /ประวัติขายสินค้า -->
                 <!-- เบิกสินค้า -->

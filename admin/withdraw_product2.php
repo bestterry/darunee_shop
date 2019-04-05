@@ -64,9 +64,7 @@
       </script>
       <div class="wrapper">
         <header class="main-header">
-          <!-- Header Navbar: style can be found in header.less -->
-          <nav class="navbar navbar-static-top">
-          </nav>
+        <?php require('menu/header_logout.php');?>
         </header>
 
         <!-- Content Wrapper. Contains page content -->
@@ -83,8 +81,8 @@
                 <div class="box-header with-border">
                   <font size="6">
                     <p align="center">โอนสินค้าจาก : <?php echo $objr_zone['name_zone'];?>
+                    </p>
                   </font>
-                  </p>
                 </div>
 
                 <!-- /.box-header -->
@@ -102,7 +100,7 @@
                             </th>
                             <th class="text-center" width="20%">หน่วยนับ
                             </th>
-                            <th class="text-center" width="20%">จำนวนสินค้ารับเข้า
+                            <th class="text-center" width="20%">จำนวนสินค้า
                             </th </tr> <?php
                      for ($i=0; $i < count($_POST['id_num_product']); $i++) { 
                        
