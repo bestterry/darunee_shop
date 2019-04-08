@@ -66,11 +66,11 @@
 
       <!-- Main content -->
       <section class="content">
-
-        <div class="col-md-12">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
           <div class="box box-primary">
-            <div class="box-header with-border">
-              <font size="4"><B> รายการสินค้า </font></B>
+            <div class="box-header with-border text-center">
+              <font size="5"><B> รายการขายสินค้า </font></B>
             </div>
             <!-- /.box-header -->
 
@@ -83,7 +83,6 @@
                         <th class="text-center" width="5%">ลำดับ</th>
                         <th class="text-center">ชื่อสินค้า</th>
                         <th class="text-center" width="15%">จำนวนสินค้าที่ขาย</th>
-                        <th class="text-center" width="10%">หน่วยนับ</th>
                         <th class="text-center" width="15%">ราคาต่อหน่วย</th>
                         <th class="text-center" width="15%">รวมเงิน (บาท)</th>
                       </tr>
@@ -95,9 +94,8 @@
                           ?>
                       <tr>
                         <td class="text-center"><?php echo $i+1 ?></td>
-                        <td><?php echo $_POST['name_product'][$i]; ?></td>
+                        <td><?php echo $_POST['name_product'][$i].' ('.$_POST['unit'][$i].')'; ?></td>
                         <td class="text-center"><?php echo $_POST['num_product'][$i]; ?></td>
-                        <td class="text-center"><?php echo $_POST['unit'][$i]; ?></td>
                         <td class="text-center"><?php echo $_POST['price_product'][$i]; ?> </td>
                         <td class="text-center"><?php echo $total_price;?></td>
                         <input class="hidden" type="text" name="name_product[]"
@@ -117,12 +115,10 @@
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        <td style="visibility:collapse;"></td>
                         <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
                         <th class="text-center" bgcolor="#EAF4FF"><?php echo $total_all; ?></th>
                       </tr>
                       <tr>
-                        <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
@@ -131,7 +127,6 @@
                         <input class="hidden" type="text" name="money_receive" value="<?php echo $money_receive; ?>">
                       </tr>
                       <tr>
-                        <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>

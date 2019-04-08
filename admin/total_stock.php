@@ -106,7 +106,7 @@
                     <td class="text-center" width="5%">
                       <?php echo $i; ?>
                     </td>
-                    <td class="text-center" width=15%">
+                    <td class="text-center" width="15%">
                       <?php echo $product['name_product']; ?>
                     </td>
                     <td class="text-center" width="5%">

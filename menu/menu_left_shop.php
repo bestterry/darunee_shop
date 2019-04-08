@@ -24,8 +24,9 @@
                                           <tr>
                                                 <th class="text-center" width="20%">เลือกสินค้า</th>
                                                 <th class="text-center" width="35%">ชื่อสินค้า</th>
-                                                <th class="text-center" width="15%">คงเหลือ</th>
                                                 <th class="text-center" width="15%">หน่วยนับ</th>
+                                                <th class="text-center" width="15%">คงเหลือ</th>
+                                                
                                                 <?php
                                                  while($product = $query_product1 ->fetch_assoc()){
                                                 ?>
@@ -34,8 +35,9 @@
                                                  <input type="checkbox" name="menu[]" value="<?php echo $product['id_numproduct']; ?>">
                                                 </td>
                                                 <td width="35%"><?php echo $product['name_product'];?></td>
-                                                <td class="text-center" width="15%"><?php echo $product['num'];?></td>
                                                 <td class="text-center" width="15%"><?php echo $product['unit'];?></td>
+                                                <td class="text-center" width="15%"><?php echo $product['num'];?></td>
+                                                
                                                 <?php } ?>
                                                  <input type="hidden" name="id_member" value="<?php echo $id_member; ?>">
                                             </tr>

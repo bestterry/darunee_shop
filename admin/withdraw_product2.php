@@ -98,11 +98,11 @@
                             </th>
                             <th class="text-center" width="20%">จำนวนสินค้าที่มี
                             </th>
-                            <th class="text-center" width="20%">หน่วยนับ
-                            </th>
                             <th class="text-center" width="20%">จำนวนสินค้า
-                            </th </tr> <?php
-                     for ($i=0; $i < count($_POST['id_num_product']); $i++) { 
+                            </th> 
+                          </tr> 
+                      <?php
+                        for ($i=0; $i < count($_POST['id_num_product']); $i++) { 
                        
                           $id_num_product = $_POST['id_num_product'][$i];
                           $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_numproduct = $id_num_product";
@@ -115,14 +115,11 @@
                               <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
                             </td>
                             <td>
-                              <?php echo $list['name_product']; ?>
+                              <?php echo $list['name_product'].' ('.$list['unit'].')'; ?>
                             </td>
                             <td class="text-center">
                               <?php echo $list['num'];?>
                               <input type="hidden" name="num_befor[]" value="<?php echo $list['num']; ?>">
-                            </td>
-                            <td class="text-center">
-                              <?php echo $list['unit'];?>
                             </td>
                             <td class="text-center"><input class="text-center" type="text" name="num_after[]"></td>
                           </tr>

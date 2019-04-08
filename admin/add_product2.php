@@ -64,7 +64,7 @@
   </script>
   <div class="wrapper">
     <header class="main-header">
-    <?php require('menu/header_logout.php');?>
+      <?php require('menu/header_logout.php');?>
     </header>
 
     <!-- Content Wrapper. Contains page content -->
@@ -139,8 +139,6 @@
                         </th>
                         <th class="text-center" width="20%">จำนวนสินค้าที่มี
                         </th>
-                        <th class="text-center" width="20%">หน่วยนับ
-                        </th>
                         <th class="text-center" width="20%">จำนวนสินค้ารับเข้า
                         </th </tr> <?php
                      for ($i=0; $i < count($_POST['id_numpd_car']); $i++) { 
@@ -156,14 +154,11 @@
                           <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
                         </td>
                         <td>
-                          <?php echo $list['name_product']; ?>
+                          <?php echo $list['name_product'].' ('.$list['unit'].')'; ?>
                         </td>
                         <td class="text-center">
                           <?php echo $list['num'];?>
                           <input type="hidden" name="num_befor[]" value="<?php echo $list['num']; ?>">
-                        </td>
-                        <td class="text-center">
-                          <?php echo $list['unit'];?>
                         </td>
                         <td class="text-center"><input class="text-center" type="text" name="num_after[]"></td>
                       </tr>

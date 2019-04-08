@@ -119,7 +119,7 @@ require 'menu/menu_left_shop.php';
                       </th>
                       <th width="40%">ชื่อสินค้า
                       </th>
-                      <th width="15%">จำนวนสินค้าคงเหลือ
+                      <th class="text-center" width="15%">จำนวนสินค้าคงเหลือ
                       </th>
                     </tr>
                     <?php 
@@ -131,11 +131,11 @@ require 'menu/menu_left_shop.php';
                         <?php echo $i; ?>
                       </td>
                       <td width="40%">
-                        <?php echo $product['name_product']; ?>
+                        <?php echo $product['name_product'].' ('.$product['unit'].')'; ?>
+
                       </td>
-                      <td width="15%">
+                      <td width="15%" class="text-center">
                         <?php echo $product['num']; ?>
-                        <?php echo $product['unit']; ?>
                       </td>
                     </tr>
                     <?php $i++; } ?>

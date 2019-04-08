@@ -91,8 +91,21 @@
                     </tr>
                     <?php 
                     $i=1;
-                      while($product = $query_product ->fetch_assoc()){
-                        
+                    $total_num = 0;
+                    $SQL_numproduct = "SELECT * FROM product";
+                    $objq_numproduct = mysqli_query($conn,$SQL_numproduct);
+                      while($product = $objq_numproduct ->fetch_assoc()){
+                        $SQL_num_store = "SELECT SUM(num) FROM num_product WHERE id_product = $product[id_product]";
+                        $objq_num_store = mysqli_query($conn,$SQL_num_store);
+                        $objr_num_store = mysqli_fetch_array($objq_num_store);
+                        $num_product = $objr_num_store['SUM(num)'];
+
+                        $SQL_num_car = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";
+                        $objq_num_car = mysqli_query($conn,$SQL_num_car);
+                        $objr_num_car = mysqli_fetch_array($objq_num_car);
+                        $num_car = $objr_num_car['SUM(num)'];
+                        $total_num = $num_product + $num_car;
+
                     ?>
                     <tr>
                       <td class="text-center" width="10%">
@@ -100,10 +113,10 @@
                       </td>
                       <td width="40%">
                         <?php echo $product['name_product']; ?>
+                        <?php echo '('.$product['unit'].')'; ?>
                       </td>
                       <td width="15%">
-                        <?php echo $product['num']; ?>
-                        <?php echo $product['unit']; ?>
+                        <?php echo $total_num; ?>
                       </td>
                     </tr>
                     <?php $i++; } ?>

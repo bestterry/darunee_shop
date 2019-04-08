@@ -1,5 +1,6 @@
 <?php 
-  require "../config_database/config.php"; 
+  require "../config_database/config.php";
+  require "../session.php"; 
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +47,7 @@
   <div class="wrapper">
 
     <header class="main-header">
-    <?php require('menu/header_logout.php');?>
+      <?php require('menu/header_logout.php');?>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -56,7 +57,8 @@
 
       <!-- Main content -->
       <section class="content">
-        <div class="col-md-12">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
           <div class="box box-primary">
             <div class="box-header with-border">
               <font size="6">
@@ -73,8 +75,7 @@
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="5%">ลำดับ</th>
                         <th class="text-center">ชื่อสินค้า</th>
-                        <th class="text-center" width="10%">หน่วยนับ</th>
-                        <th class="text-center" width="15%">จำนวนสินค้าที่ต้องการเพิ่ม</th>
+                        <th class="text-center" width="25%">จำนวนสินค้าที่ต้องการเพิ่ม</th>
                       </tr>
                       <?php
                             for($i=0;$i<count($_POST["id_product"]);$i++)
@@ -89,12 +90,9 @@
                       <tr>
                         <td class="text-center"><?php echo $i+1; ?></td>
                         <td>
-                          <?php echo $objr_listproduct['name_product']; ?>
+                          <?php echo $objr_listproduct['name_product'].' ('.$objr_listproduct['unit'].')'; ?>
                           <input class="hidden" type="text" name="id_product[]"
                             value="<?php echo $objr_listproduct['id_product']; ?>">
-                        </td>
-                        <td class="text-center">
-                          <?php echo $objr_listproduct['unit'];?>
                         </td>
                         <td class="text-center">
                           <input type="text" name="num[]" class="form-control text-center col-md-2"
@@ -145,11 +143,12 @@
           </div>
           <!-- /. box -->
         </div>
-      </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-    <?php require("../menu/footer.html"); ?>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <?php require("../menu/footer.html"); ?>
   </div>
   <!-- jQuery 3 -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>

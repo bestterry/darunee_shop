@@ -63,10 +63,11 @@
       </section>
       <!-- Main content -->
       <section class="content">
-        <div class="col-md-12">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
           <div class="box box-primary">
-            <div class="box-header with-border">
-              <font size="4"><B> รายการสินค้า </font></B>
+            <div class="box-header text-center with-border">
+              <font size="5"><B> รายการขายสินค้า </font></B>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -78,7 +79,6 @@
                         <th class="text-center" width="5%">ลำดับ</th>
                         <th class="text-center">ชื่อสินค้า</th>
                         <th class="text-center" width="15%">จำนวนสินค้าที่ขาย</th>
-                        <th class="text-center" width="10%">หน่วยนับ</th>
                         <th class="text-center" width="15%">ราคาต่อหน่วย</th>
                         <th class="text-center" width="15%">รวมเงิน (บาท)</th>
                       </tr>
@@ -116,9 +116,8 @@
                           ?>
                       <tr>
                         <td class="text-center"><?php echo $i+1 ?></td>
-                        <td><?php echo $name_product; ?></td>
+                        <td><?php echo $name_product.' ('.$objr_num_product_instore['unit'].')'; ?></td>
                         <td class="text-center"><?php echo $num_product; ?></td>
-                        <td class="text-center"><?php echo $objr_num_product_instore['unit'];?></td>
                         <td class="text-center"><?php echo $price_product; ?> </td>
                         <input class="hidden" type="text" name="name_product[]" value="<?php echo $name_product; ?>">
                         <input class="hidden" type="text" name="unit[]" value="<?php echo $unit; ?>">
@@ -132,7 +131,6 @@
                            }
                           ?>
                       <tr>
-                        <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
