@@ -1,13 +1,13 @@
-<?php 
-  require "../config_database/config.php";
-  require "../session.php"; 
+<?php
+require "../config_database/config.php";
+require "../session.php";
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-  <?php require('../font/font_style.php');?>
+  <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>ทีมงานคุณดารุณี</title>
@@ -39,15 +39,14 @@
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
   <!-- Google Font -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
 
     <header class="main-header">
-    <?php require('menu/header_logout.php');?>
+      <?php require('menu/header_logout.php'); ?>
     </header>
 
     <!-- Content Wrapper. Contains page content -->
@@ -58,20 +57,18 @@
 
       <!-- Main content -->
       <section class="content">
-        <?php 
-      $list_product = "SELECT * FROM product";
-      $query_product = mysqli_query($conn,$list_product);
-      $query_product2 = mysqli_query($conn,$list_product);
-    ?>
+        <?php
+        $list_product = "SELECT * FROM product";
+        $query_product = mysqli_query($conn, $list_product);
+        $query_product2 = mysqli_query($conn, $list_product);
+        ?>
         <div class="box box-primary">
-          <div class="box-header with-border">
-            <p align="center">
-              <font size="5"> สต๊อกรถ </font>
-            </p>
-            <B>
-              <font size="4">ประจำวันที่(<font color="red"><?php echo $strDate = date('d-m-Y');?></font>)</font>
-            </B>
+          <div class="box-header text-center with-border">
+            <B><font size="5"> สต๊อกรถ </font></B>
+            <br>
+            <B><font size="4">ประจำวันที่(<font color="red"><?php echo $strDate = date('d-m-Y'); ?></font>)</font></B>
           </div>
+          
           <!-- /.box-header -->
           <div class="box-body no-padding">
             <div class="mailbox-read-message">
@@ -84,72 +81,73 @@
                     <th class="text-center" width="5%">ยุทธ</th>
                     <th class="text-center" width="5%">ลิน</th>
                     <th class="text-center" width="5%">เอปุ้ย</th>
-                    <th class="text-center" width="5%">รงค์</th>
+                    <th class="text-center" width="5%">เจ๋ง</th>
                     <th class="text-center" width="5%">เอ๋ลังกา</th>
                     <th class="text-center" width="5%">เกียรติ</th>
                     <th class="text-center" width="5%">เดี่ยว</th>
                     <th class="text-center" width="5%">อั๋น</th>
                     <th class="text-center" width="5%">เบส</th>
-                    <th class="text-center" width="5%">revo5</th>
-                    <th class="text-center" width="5%">mizzu1</th>
-                    <th class="text-center" width="5%">revo</th>
+                    <th class="text-center" width="5%">หนึ่ง</th>
+                    <th class="text-center" width="5%">กร</th>
+                    <th class="text-center" width="5%">เอี่ยว</th>
                     <th class="text-center" width="8%">รวมทั้งหมด</th>
                   </tr>
-                  <?php 
-                    $a=1;
-                      while($product = $query_product ->fetch_assoc()){
-                        
+                  <?php
+                  $a = 1;
+                  while ($product = $query_product->fetch_assoc()) {
+
                     ?>
-                  <tr>
-                    <td class="text-center">
-                      <?php echo $a; ?>
-                    </td>
-                    <td class="text-center">
-                      <?php echo $product['name_product']; ?>
-                    </td>
-                    <td class="text-center">
-                      <?php echo $product['unit']; ?>
-                    </td>
-                    <!-- -------------------------------รถ------------------------------------ -->
-                    <?php
-                      for ($i=4; $i < 16; $i++) { 
-                       
+                    <tr>
+                      <td class="text-center">
+                        <?php echo $a; ?>
+                      </td>
+                      <td class="text-center">
+                        <?php echo $product['name_product']; ?>
+                      </td>
+                      <td class="text-center">
+                        <?php echo $product['unit']; ?>
+                      </td>
+                      <!-- -------------------------------รถ------------------------------------ -->
+                      <?php
+                      for ($i = 4; $i < 16; $i++) {
+
                         $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $i";
-                        $objq_num = mysqli_query($conn,$SQL_num);
+                        $objq_num = mysqli_query($conn, $SQL_num);
                         $objr_num = mysqli_fetch_array($objq_num);
-                        if(!isset($objr_num['num'])){
-                      ?>
-                    <td></td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center"><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
+                        if (!isset($objr_num['num'])) {
+                          ?>
+                          <td></td>
+                        <?php
+                      } else {
+                        ?>
+                          <td class="text-center"><?php echo $objr_num['num']; ?></td>
+                        <?php
                       }
-                      ?>
-                    <!-- -------------------------------//รถ------------------------------------ -->
+                    }
+                    ?>
+                      <!-- -------------------------------//รถ------------------------------------ -->
 
-                    <!-- -------------------------------รวมทั้งหมด------------------------------------ -->
-                    <?php 
-                        $SQL_num = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
+                      <!-- -------------------------------รวมทั้งหมด------------------------------------ -->
+                      <?php
+                      $SQL_num = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";
+                      $objq_num = mysqli_query($conn, $SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
 
-                        
-                        if(!isset($objr_num['SUM(num)'])){
+
+                      if (!isset($objr_num['SUM(num)'])) {
+                        ?>
+                        <td></td>
+                      <?php
+                    } else {
                       ?>
-                    <td></td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center"><?php echo $objr_num['SUM(num)']; ?></td>
-                    <?php 
-                        } 
-                      ?>
-                    <!-- -------------------------------//รวมทั้งหมด------------------------------------ -->
-                  </tr>
-                  <?php $a++; } ?>
+                        <td class="text-center"><?php echo $objr_num['SUM(num)']; ?></td>
+                      <?php
+                    }
+                    ?>
+                      <!-- -------------------------------//รวมทั้งหมด------------------------------------ -->
+                    </tr>
+                    <?php $a++;
+                  } ?>
                 </tbody>
               </table>
             </div>
@@ -184,56 +182,56 @@
   <script src="../dist/js/demo.js"></script>
   <script src="../plugins/iCheck/icheck.min.js"></script>
   <script>
-  $(function() {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging': true,
-      'lengthChange': false,
-      'searching': false,
-      'ordering': true,
-      'info': true,
-      'autoWidth': false
+    $(function() {
+      $('#example1').DataTable()
+      $('#example2').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+      })
     })
-  })
-  $(function() {
-    //Enable iCheck plugin for checkboxes
-    //iCheck for checkbox and radio inputs
-    $('.mailbox-messages input[type="checkbox"]').iCheck({
-      checkboxClass: 'icheckbox_flat-blue',
-      radioClass: 'iradio_flat-blue'
+    $(function() {
+      //Enable iCheck plugin for checkboxes
+      //iCheck for checkbox and radio inputs
+      $('.mailbox-messages input[type="checkbox"]').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue'
+      });
+      //Enable check and uncheck all functionality
+      $(".checkbox-toggle").click(function() {
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+          //Uncheck all checkboxes
+          $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+          $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        } else {
+          //Check all checkboxes
+          $(".mailbox-messages input[type='checkbox']").iCheck("check");
+          $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+      });
+      //Handle starring for glyphicon and font awesome
+      $(".mailbox-star").click(function(e) {
+        e.preventDefault();
+        //detect type
+        var $this = $(this).find("a > i");
+        var glyph = $this.hasClass("glyphicon");
+        var fa = $this.hasClass("fa");
+        //Switch states
+        if (glyph) {
+          $this.toggleClass("glyphicon-star");
+          $this.toggleClass("glyphicon-star-empty");
+        }
+        if (fa) {
+          $this.toggleClass("fa-star");
+          $this.toggleClass("fa-star-o");
+        }
+      });
     });
-    //Enable check and uncheck all functionality
-    $(".checkbox-toggle").click(function() {
-      var clicks = $(this).data('clicks');
-      if (clicks) {
-        //Uncheck all checkboxes
-        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-      } else {
-        //Check all checkboxes
-        $(".mailbox-messages input[type='checkbox']").iCheck("check");
-        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-      }
-      $(this).data("clicks", !clicks);
-    });
-    //Handle starring for glyphicon and font awesome
-    $(".mailbox-star").click(function(e) {
-      e.preventDefault();
-      //detect type
-      var $this = $(this).find("a > i");
-      var glyph = $this.hasClass("glyphicon");
-      var fa = $this.hasClass("fa");
-      //Switch states
-      if (glyph) {
-        $this.toggleClass("glyphicon-star");
-        $this.toggleClass("glyphicon-star-empty");
-      }
-      if (fa) {
-        $this.toggleClass("fa-star");
-        $this.toggleClass("fa-star-o");
-      }
-    });
-  });
   </script>
 </body>
 

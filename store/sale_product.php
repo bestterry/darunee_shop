@@ -69,7 +69,6 @@
                             <th class="text-center" width="5%" >ลำดับ</th>
                             <th class="text-center" >ชื่อสินค้า</th>
                             <th class="text-center" width="15%">จำนวนสินค้าที่ขาย</th>
-                            <th class="text-center" width="10%">หน่วยนับ</th>
                             <th class="text-center" width="15%">ราคาต่อหน่วย</th>
                             <th class="text-center" width="15%">รวมเงิน (บาท)</th>
                           </tr>
@@ -88,17 +87,14 @@
                           <tr>
                             <td class="text-center"><?php echo $i+1; ?></td>
                             <td>
-                              <?php echo $objr_listproduct['name_product']; ?>
+                              <?php echo $objr_listproduct['name_product'].' ('.$objr_listproduct['unit'].')'; ?>
                               <input class = "hidden" type="text" name="name_product[]" value="<?php echo $objr_listproduct['name_product']; ?>">
                               <input class = "hidden" type="text" name="id_product[]" value="<?php echo $objr_listproduct['id_product']; ?>">
+                              <input class = "hidden" type="text" name="unit[]" value="<?php echo $objr_listproduct['unit']; ?>">
                             </td>
                             <td class="text-center" >
                               <input class = "hidden" type="text" name="id_numPD[]" value="<?php echo $id_numPD; ?>">
                               <input type="text" name="num_product[]"  class="form-control text-center col-md-1" placeholder="<?php echo $objr_listproduct['unit'];?>">
-                            </td>
-                            <td class="text-center">
-                              <?php echo $objr_listproduct['unit'];?>
-                              <input class = "hidden" type="text" name="unit[]" value="<?php echo $objr_listproduct['unit']; ?>">
                             </td>
                             <td class="text-center">
                               <input type="text" name="price_product[]"  class="form-control text-center col-md-2" placeholder="ราคา/หน่วย">

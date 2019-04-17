@@ -57,35 +57,37 @@
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
-  <div class="wrapper">
+  <div class="wrapper" >
     <header class="main-header">
-    <?php require('menu/header_logout.php');?>
+      <?php require('menu/header_logout.php');?>
     </header>
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="height: 2000px;">
       <section class="content-header">
       </section>
       <section class="content">
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <font size="5">
-              ประวัติการขายสินค้าวันที่ <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red">
-                <?php echo DateThai($bday);?></font>
-            </font>
-
-          </div>
-          <div class="box-body no-padding">
-            <div class="mailbox-read-message">
-              <font size="5" color='red'>
-                ยอดขายรวม
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="box box-primary">
+            <div class="box-header text-center with-border">
+              <font size="5">
+                <B> ประวัติการขายสินค้าวันที่ <font color="red"><?php echo DateThai($aday);?></font> ถึง <font
+                    color="red"><?php echo DateThai($bday);?></font></B>
               </font>
-              <table class="table table-hover table-striped table-bordered">
-                <tbody>
-                  <tr bgcolor="#99CCFF">
-                    <th width="40%">ชื่อสินค้า </th>
-                    <th width="15%" class="text-center">จำนวนสินค้า</th>
-                    <th width="15%" class="text-center">จำนวนเงิน(บาท)</th>
-                  </tr>
-                  <?php #endregion
+
+            </div>
+            <div class="box-body no-padding">
+              <div class="mailbox-read-message">
+                <font size="5" color='red'>
+                  ยอดขายรวม
+                </font>
+                <table class="table table-hover table-striped table-bordered">
+                  <tbody>
+                    <tr bgcolor="#99CCFF">
+                      <th width="40%">ชื่อสินค้า </th>
+                      <th width="15%" class="text-center">จำนวนสินค้า</th>
+                      <th width="15%" class="text-center">จำนวนเงิน(บาท)</th>
+                    </tr>
+                    <?php #endregion
                   $total_money = 0;
                   $total_all_money = 0;
                   $date = "SELECT * FROM product ";
@@ -111,81 +113,80 @@
 
                     }else{
               ?>
-                  <tr>
-                    <td>
-                      <?php echo $value['name_product']; ?>
-                    </td>
-                    <td class="text-center">
-                      <?php echo $total_num;?>
-                      <?php echo $value['unit']; ?>
-                    </td>
-                    <td class="text-center">
-                      <?php echo $total_money; ?>
-                    </td>
-                  </tr>
-                  <?php
+                    <tr>
+                      <td>
+                        <?php echo $value['name_product'].' ('.$value['unit'].')'; ?>
+                      </td>
+                      <td class="text-center">
+                        <?php echo $total_num;?>
+                      </td>
+                      <td class="text-center">
+                        <?php echo $total_money; ?>
+                      </td>
+                    </tr>
+                    <?php
                   $total_all_money = $total_all_money + $total_money;
                     }
                   }
                   ?>
-                  <tr>
-                    <th></th>
-                    <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
-                    <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_all_money; ?></th>
-                  </tr>
-                </tbody>
-              </table>
+                    <tr>
+                      <th></th>
+                      <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
+                      <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_all_money; ?></th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
 
 
-          <div class="box-body no-padding">
-            <div class="mailbox-read-message">
-              <font size="5" color='red'>ข้อมูลการขาย</font>
-              <br>
-              <font size="4">(1) ร้านเวียงป่าเป้า</font>
-              <table class="table table-hover table-striped table-bordered">
-                <tbody>
-                  <tr bgcolor="#99CCFF">
-                    <th width="40%">ชื่อสินค้า </th>
-                    <th width="15%" class="text-center">จำนวนสินค้า</th>
-                    <th width="15%" class="text-center">จำนวนเงิน(บาท)</th>
-                    <th width="15%" class="text-center">วันที่</th>
-                  </tr>
-                  <?php #endregion
+            <div class="box-body no-padding">
+              <div class="mailbox-read-message">
+                <font size="5" color='red'>ข้อมูลการขาย</font>
+                <br>
+                <font size="4">(1) ร้านเวียงป่าเป้า</font>
+                <table class="table table-hover table-striped table-bordered">
+                  <tbody>
+                    <tr bgcolor="#99CCFF">
+                      <th width="40%">ชื่อสินค้า </th>
+                      <th width="15%" class="text-center">จำนวนสินค้า</th>
+                      <th width="15%" class="text-center">จำนวนเงิน(บาท)</th>
+                      <th width="15%" class="text-center">วันที่</th>
+                    </tr>
+                    <?php #endregion
                   $date = "SELECT * FROM product 
                   INNER JOIN price_history ON product.id_product = price_history.id_product 
                   WHERE (price_history.datetime between '$aday 00:00:00' and '$bday 23:59:59')";
                   $objq = mysqli_query($conn,$date);
                   while($value = $objq ->fetch_assoc()){ 
               ?>
-                  <tr>
-                    <td> <?php echo $value['name_product']; ?> </td>
-                    <td class="text-center"><?php echo $value['num'];?> <?php echo $value['unit']; ?></td>
-                    <td class="text-center"><?php echo $value['money']; ?></td>
-                    <td class="text-center"><?php echo DateThai($value['datetime']); ?></td>
-                  </tr>
-                  <?php
+                    <tr>
+                      <td> <?php echo $value['name_product'].' ('.$value['unit'].')'; ?> </td>
+                      <td class="text-center"><?php echo $value['num'];?></td>
+                      <td class="text-center"><?php echo $value['money']; ?></td>
+                      <td class="text-center"><?php echo DateThai($value['datetime']); ?></td>
+                    </tr>
+                    <?php
                     }
                   
                   ?>
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          <div class="box-body no-padding">
-            <div class="mailbox-read-message">
-              <font size="4">(2) รถส่งสินค้า</font>
-              <table class="table table-hover table-striped table-bordered">
-                <tbody>
-                  <tr bgcolor="#99CCFF">
-                    <th width="40%">ชื่อสินค้า </th>
-                    <th width="15%" class="text-center">จำนวนสินค้า</th>
-                    <th width="15%" class="text-center">จำนวนเงิน(บาท)</th>
-                    <th width="15%" class="text-center">ชื่อผู้ส่งสินค้า</th>
-                    <th width="15%" class="text-center">วันที่</th>
-                  </tr>
-                  <?php #endregion
+            <div class="box-body no-padding">
+              <div class="mailbox-read-message">
+                <font size="4">(2) รถส่งสินค้า</font>
+                <table class="table table-hover table-striped table-bordered">
+                  <tbody>
+                    <tr bgcolor="#99CCFF">
+                      <th width="40%">ชื่อสินค้า </th>
+                      <th width="15%" class="text-center">จำนวนสินค้า</th>
+                      <th width="15%" class="text-center">จำนวนเงิน(บาท)</th>
+                      <th width="15%" class="text-center">ชื่อผู้ส่งสินค้า</th>
+                      <th width="15%" class="text-center">วันที่</th>
+                    </tr>
+                    <?php #endregion
                   $date = "SELECT * FROM sale_car_history
                   INNER JOIN product ON product.id_product = sale_car_history.id_product 
                   INNER JOIN member ON member.id_member = sale_car_history.id_member
@@ -193,24 +194,25 @@
                   $objq = mysqli_query($conn,$date);
                   while($value = $objq ->fetch_assoc()){ 
               ?>
-                  <tr>
-                    <td> <?php echo $value['name_product']; ?> </td>
-                    <td class="text-center"><?php echo $value['num'];?> <?php echo $value['unit']; ?></td>
-                    <td class="text-center"><?php echo $value['money']; ?></td>
-                    <td class="text-center"><?php echo $value['name']; ?></td>
-                    <td class="text-center"><?php echo DateThai($value['datetime']); ?></td>
-                  </tr>
-                  <?php
+                    <tr>
+                      <td> <?php echo $value['name_product'].' ('.$value['unit'].')'; ?> </td>
+                      <td class="text-center"><?php echo $value['num'];?></td>
+                      <td class="text-center"><?php echo $value['money']; ?></td>
+                      <td class="text-center"><?php echo $value['name']; ?></td>
+                      <td class="text-center"><?php echo DateThai($value['datetime']); ?></td>
+                    </tr>
+                    <?php
                     }
                   
                   ?>
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          <div class="box-footer" align="center">
-            <a href="../pdf_file/check_sale_history.php?aday=<?php echo $aday;?>&&bday=<?php echo $bday;?>"
-              class="btn btn-success"><i class="fa fa-print"></i> พิมพ์ </a>
+            <div class="box-footer" align="center">
+              <a href="../pdf_file/check_sale_history.php?aday=<?php echo $aday;?>&&bday=<?php echo $bday;?>"
+                class="btn btn-success"><i class="fa fa-print"></i> พิมพ์ </a>
+            </div>
           </div>
         </div>
     </div>

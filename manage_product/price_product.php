@@ -1,5 +1,6 @@
 <?php 
   require "../config_database/config.php"; 
+  require "../session.php";
   //require "session.php"; 
 ?>
 
@@ -54,10 +55,36 @@
   <div class="wrapper">
 
     <header class="main-header">
-
-
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
+      <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->  
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="../dist/img/user.png" class="user-image" alt="User Image">
+                <span class="hidden-xs"><?php echo $username; ?></span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
+
+                  <p>
+                    <?php echo $username; ?>
+                    <small>สาขา : <?php echo $name_zone; ?></small>
+                  </p>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-right">
+                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
 
@@ -122,6 +149,19 @@
                              ?>
                     </tbody>
                   </table>
+                  <div class="col-md-8">
+                    
+                  </div>
+                  <div class="col-md-4">
+                    <table class="table table-bordered table-hover">
+                      <tbody>
+                        <tr>
+                          <th class="text-center">หมายเหตุ</th>
+                          <th class="text-center"> <input class="text-center" type="text" name=" note"value=""></th>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </div>
 
               </div>
               <!-- /.mailbox-read-message -->

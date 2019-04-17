@@ -3,6 +3,7 @@
  require "../../session.php";
  $id_zone = $_POST['id_zone'];
  $id_member = $_POST['id_member'];
+ $note = $_POST['note'];
 
  for ($i=0; $i < count($_POST['id_numproduct']); $i++) { 
    $id_numproduct = $_POST['id_numproduct'][$i];
@@ -11,7 +12,7 @@
    $num_after = $_POST['num_after'][$i];
       //-----------------------------insert draw_history----------------------------------
       $insert_draw = "INSERT INTO draw_history (num_draw, id_product, id_member, id_zone, note)
-                      VALUE ($num_after, $id_product, $id_member, $id_zone, '')";
+                      VALUE ($num_after, $id_product, $id_member, $id_zone, '$note')";
       mysqli_query($conn,$insert_draw);
       //-----------------------------/insert draw_history----------------------------------
 

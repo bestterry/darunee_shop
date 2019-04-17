@@ -78,10 +78,10 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
               <div class="box box-primary">
-                <div class="box-header with-border">
-                  <font size="6">
-                    <p align="center">โอนสินค้าจาก : <?php echo $objr_zone['name_zone'];?>
-                    </p>
+                <div class="box-header text-center with-border">
+                  <font size="5">
+                    <B align="center">เบิกสินค้าจาก : <?php echo $objr_zone['name_zone'];?>
+                    </B>
                   </font>
                 </div>
 
@@ -129,13 +129,23 @@
                         </tbody>
                       </table>
                       <div class="col-md-6">
-
+                      <table class="table table-bordered table-hover">
+                          <tbody>
+                            <tr>
+                              <th class="text-center">หมายเหตุ
+                              </th>
+                              <th  bgcolor="#99CCFF" class="text-center">
+                                <input class="text-center" type="text" name="note" value="<?php echo '-'; ?>">
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                       <div class="col-md-6">
                         <table class="table table-bordered table-hover">
                           <tbody>
                             <tr>
-                              <th class="text-center">ชื่อผู้ส่งสินค้า
+                              <th class="text-center">ชื่อผู้เบิกสินค้า
                               </th>
                               <th bgcolor="#99CCFF" class="text-center">
                                 <?php #endregion

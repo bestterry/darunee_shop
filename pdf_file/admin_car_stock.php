@@ -41,15 +41,15 @@ class PDF extends FPDF
         $this->Cell(14,10,iconv('UTF-8','cp874','ยุทธ'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','ลิน'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','เอปุ้ย'),1,0,'C');
-        $this->Cell(14,10,iconv('UTF-8','cp874','รงค์'),1,0,'C');
+        $this->Cell(14,10,iconv('UTF-8','cp874','เจ๋ง'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','เอ๋ลังกา'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','เกียรติ'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','เดี่ยว'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','อั๋น'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','เบส'),1,0,'C');
-        $this->Cell(14,10,iconv('UTF-8','cp874','revo5'),1,0,'C');
-        $this->Cell(14,10,iconv('UTF-8','cp874','mizzu1'),1,0,'C');
-        $this->Cell(14,10,iconv('UTF-8','cp874','revo'),1,0,'C');
+        $this->Cell(14,10,iconv('UTF-8','cp874','หนึ่ง'),1,0,'C');
+        $this->Cell(14,10,iconv('UTF-8','cp874','กร'),1,0,'C');
+        $this->Cell(14,10,iconv('UTF-8','cp874','เอี่ยว'),1,0,'C');
        $this->Cell(25,10,iconv('UTF-8','cp874','รวมทั้งหมด'),1,0,'C');
             $this->Ln(10);
         

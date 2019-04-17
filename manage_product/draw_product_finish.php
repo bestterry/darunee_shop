@@ -51,9 +51,37 @@ folder instead of downloading all of them to reduce the load. -->
 
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
-    <header class="main-header">
+  <header class="main-header">
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
+      <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->  
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="../dist/img/user.png" class="user-image" alt="User Image">
+                <span class="hidden-xs"><?php echo $username; ?></span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
+
+                  <p>
+                    <?php echo $username; ?>
+                    <small>สาขา : <?php echo $name_zone; ?></small>
+                  </p>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-right">
+                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
@@ -67,11 +95,10 @@ folder instead of downloading all of them to reduce the load. -->
         </div>
         <div class="col-md-8">
           <div class="box box-primary">
-            <div class="box-header with-border">
-              <font size="6">
-                <p align="center"> รายการรับเข้าสินค้า
+            <div class="box-header text-center with-border">
+              <font size="5">
+                <B align="center"> รายการเบิกสินค้า</B>
               </font>
-              </p>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -86,14 +113,14 @@ folder instead of downloading all of them to reduce the load. -->
                         </th>
                         <th class="text-center" width="15%">จำนวนสินค้าที่เบิก
                         </th>
-                        <th class="text-center" width="10%">หน่วยนับ
-                        </th>
                       </tr>
-                      <?php //คำนวณสรายการสินค้า
+            <?php //คำนวณสรายการสินค้า
+              $note = $_POST['note'];
               $id_member = $_POST['id_member'];
               $sql_member = "SELECT * FROM member WHERE id_member = $id_member";
               $objq_member = mysqli_query($conn,$sql_member);
               $objr_member = mysqli_fetch_array($objq_member);
+              
               $total_price_money = 0;
               for($i=0;$i<count($_POST['id_product']);$i++){
                $id_numproduct = $_POST['id_product'][$i];
@@ -111,18 +138,21 @@ folder instead of downloading all of them to reduce the load. -->
 
                 }else{
                       //Update NUM product in database
-                      $update_num_product = "UPDATE num_product SET num = $total_num_product WHERE id_numproduct = $id_numproduct AND id_zone=$id_zone";
+                      $update_num_product = "UPDATE num_product SET num = $total_num_product WHERE id_numproduct = $id_numproduct AND id_zone = $id_zone";
                       $objq_update = mysqli_query($conn,$update_num_product);
                       //INsert history buy product
                       $insert_history = "INSERT INTO draw_history (num_draw, id_product, id_member, note, id_zone)
-                      VALUES ( $num_product,$id_product,$id_member,'-',$id_zone)";
+                      VALUES ( $num_product,$id_product,$id_member,'$note',$id_zone)";
                       mysqli_query($conn,$insert_history);
                       //Insert numPD_car
-                      $seach_product = "SELECT * FROM numpd_car WHERE id_product = $id_product AND id_member = $id_member";
-                      $objq_seach = mysqli_query($conn,$seach_product);
-                      $objr_seach = mysqli_fetch_array($objq_seach);
-                      $id_numpd_car = $objr_seach['id_numPD_car'];
-                      $num = $objr_seach['num'];
+                      if ($objr_member['username']=='etc' ) {
+                         // exit if and goto loop again
+                      }else{
+                        $seach_product = "SELECT * FROM numpd_car WHERE id_product = $id_product AND id_member = $id_member";
+                        $objq_seach = mysqli_query($conn,$seach_product);
+                        $objr_seach = mysqli_fetch_array($objq_seach);
+                        $id_numpd_car = $objr_seach['id_numPD_car'];
+                        $num = $objr_seach['num'];
                           if(isset($objr_seach)){
                             $total_PD = $num + $num_product;
                             $update_numpd_car = "UPDATE numpd_car SET num = $total_PD WHERE id_numpd_car = $id_numpd_car ";
@@ -132,24 +162,21 @@ folder instead of downloading all of them to reduce the load. -->
                             VALUES ( $num_product,$id_product,$id_member)";
                             mysqli_query($conn,$insert_numPD_car);
                           }
-
+                      }
 ?>
                       <tr>
                         <td class="text-center">
-                          <?php echo $i+1 ?>
+                          <?php echo $i+1; ?>
                         </td>
                         <td>
-                          <?php echo $name_product; ?>
+                          <?php echo $name_product.' ('.$unit.')'; ?>
                         </td>
                         <td class="text-center">
                           <?php echo $num_product; ?>
                         </td>
-                        <td class="text-center">
-                          <?php echo $unit; ?>
-                        </td>
                         <input class="hidden" type="text" name="name_product[]" value="<?php echo $name_product; ?>">
-                        <input class="hidden" type="text" name="unit[]" value="<?php echo $num_product; ?>">
-                        <input class="hidden" type="text" name="num_product[]" value="<?php echo $unit; ?>">
+                        <input class="hidden" type="text" name="num_product[]" value="<?php echo $num_product; ?>">
+                        <input class="hidden" type="text" name="unit[]" value="<?php echo $unit; ?>">
                       </tr>
                       <?php
           }
@@ -158,6 +185,19 @@ folder instead of downloading all of them to reduce the load. -->
                     </tbody>
                   </table>
                   <div class="col-md-6">
+                    <table class="table table-bordered table-hover">
+                      <tbody>
+                        <tr>
+                          <th class="text-center" width="30%">
+                            หมายเหตุ
+                          </th>
+                          <th bgcolor="#ccebff" class="text-center" width="70%">
+                            <?php echo $note; ?>
+                            <input class="hidden" type="text" name="note" value="<?php echo $note; ?>">
+                          </th>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                   <div class="col-md-6">
                     <table class="table table-bordered table-hover">
@@ -165,7 +205,7 @@ folder instead of downloading all of them to reduce the load. -->
                         <tr>
                           <th class="text-center">ชื่อผู้เบิกสินค้า
                           </th>
-                          <th bgcolor="#99CCFF" class="text-center">
+                          <th bgcolor="#ccebff" class="text-center">
                             <?php echo $objr_member['name']; ?>
                             <input class="hidden" type="text" name="name" value="<?php echo $objr_member['name']; ?>">
                           </th>

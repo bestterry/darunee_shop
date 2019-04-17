@@ -64,35 +64,37 @@
 
       <!-- Main content -->
       <section class="content">
-        <?php 
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <?php 
       $list_product = "SELECT * FROM product";
       $query_product = mysqli_query($conn,$list_product);
       $query_product2 = mysqli_query($conn,$list_product);
     ?>
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <p align="center">
-              <font size="5"> <B>ประวัติรับเข้าสินค้า</B> </font>
-            </p>
-            <B>
-              <font size="4">ประวัติรับเข้าสินค้า ประจำวันที่(<font color="red"><?php echo $strDate = date('d-m-Y');?>
-                </font>)</font>
-            </B>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body no-padding">
-            <div class="mailbox-read-message">
-              <table class="table table-hover table-striped table-bordered">
-                <tbody>
-                  <tr bgcolor="#99CCFF">
-                    <th class="text-center" width="5%">ลำดับ</th>
-                    <th class="text-center" width="30%">รายการ</th>
-                    <th class="text-center" width="15%">จำนวน</th>
-                    <th class="text-center" width="15%">ชื่อส่งสินค้า</th>
-                    <th class="text-center" width="15%">โอนเข้า</th>
-                    <th class="text-center" width="20%">หมายเหตุ</th>
-                  </tr>
-                  <?php #endregion
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <p align="center">
+                <font size="5"> <B>ประวัติรับเข้าสินค้า</B> </font>
+              </p>
+              <B>
+                <font size="4">ประวัติรับเข้าสินค้า ประจำวันที่(<font color="red"><?php echo $strDate = date('d-m-Y');?>
+                  </font>)</font>
+              </B>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="mailbox-read-message">
+                <table class="table table-hover table-striped table-bordered">
+                  <tbody>
+                    <tr bgcolor="#99CCFF">
+                      <th class="text-center" width="5%">ลำดับ</th>
+                      <th class="text-center" width="30%">รายการ</th>
+                      <th class="text-center" width="15%">จำนวน</th>
+                      <th class="text-center" width="15%">ชื่อส่งสินค้า</th>
+                      <th class="text-center" width="15%">โอนเข้า</th>
+                      <th class="text-center" width="20%">หมายเหตุ</th>
+                    </tr>
+                    <?php #endregion
                         $i=1;
                            $date = "SELECT * FROM add_history 
                                     INNER JOIN product ON add_history.id_product = product.id_product 
@@ -102,53 +104,52 @@
 													 $objq = mysqli_query($conn,$date);
 													 while($value = $objq ->fetch_assoc()){
                         ?>
-                  <tr>
-                    <td class="text-center">
-                      <?php echo $i; ?>
-                    </td>
-                    <td>
-                      <?php echo $value['name_product']; ?>
-                    </td>
-                    <td class="text-center">
-                      <?php echo $value['num_add'];?> (
-                      <?php echo $value['unit']; ?>)
-                    </td>
-                    <td class="text-center">
-                      <?php echo $value['name'];?>
-                    </td>
-                    <td class="text-center">
-                      <?php echo $value['name_zone'];?>
-                    </td>
-                    <td class="text-center">
-                      <?php echo $value['note'];?>
-                    </td>
-                  </tr>
-                  <?php
+                    <tr>
+                      <td class="text-center">
+                        <?php echo $i; ?>
+                      </td>
+                      <td>
+                        <?php echo $value['name_product'].' ('.$value['unit'].')'; ?>
+                      </td>
+                      <td class="text-center">
+                        <?php echo $value['num_add'];?>
+                      </td>
+                      <td class="text-center">
+                        <?php echo $value['name'];?>
+                      </td>
+                      <td class="text-center">
+                        <?php echo $value['name_zone'];?>
+                      </td>
+                      <td class="text-center">
+                        <?php echo $value['note'];?>
+                      </td>
+                    </tr>
+                    <?php
                               $i++; }
                             ?>
-                </tbody>
-              </table>
-            </div>
-            <!-- /.mailbox-read-message -->
-            <div class="box-header with-border">
-              <font size="4">
-                <B> ยอดรับเข้าสินค้า ประจำวันที่(
-                  <font size="4" color="red">
-                    <?php echo $strDate = date('d-m-Y');?>
-                  </font>)
-              </font>
-              </B>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-                <table class="table table-hover table-striped table-bordered">
-                  <tbody>
-                    <tr bgcolor="#99CCFF">
-                      <th class="text-center" width="40%">รายการ</th>
-                      <th class="text-center" width="20%">จำนวน</th>
-                    </tr>
-                    <?php #endregion
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.mailbox-read-message -->
+              <div class="box-header with-border">
+                <font size="4">
+                  <B> ยอดรับเข้าสินค้า ประจำวันที่(
+                    <font size="4" color="red">
+                      <?php echo $strDate = date('d-m-Y');?>
+                    </font>)
+                </font>
+                </B>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body no-padding">
+                <div class="mailbox-read-message">
+                  <table class="table table-hover table-striped table-bordered">
+                    <tbody>
+                      <tr bgcolor="#99CCFF">
+                        <th class="text-center" width="40%">รายการ</th>
+                        <th class="text-center" width="20%">จำนวน</th>
+                      </tr>
+                      <?php #endregion
                             $sql_history = "SELECT * FROM product";
                             $objq_history = mysqli_query($conn,$sql_history);
                             while($history = $objq_history ->fetch_assoc()){
@@ -161,25 +162,25 @@
                               $num_product = $objr_sale['SUM(add_history.num_add)'];
                               if(isset($num_product)){ 
                           ?>
-                    <tr>
-                      <td>
-                        <?php echo $history['name_product']; ?>
-                      </td>
-                      <td class="text-center">
-                        <?php echo$num_product; ?> (
-                        <?php echo $history['unit']; ?>)
-                      </td>
-                    </tr>
-                    <?php }
+                      <tr>
+                        <td>
+                          <?php echo $history['name_product'].' ('.$history['unit'].')'; ?>
+                        </td>
+                        <td class="text-center">
+                          <?php echo$num_product; ?>
+                        </td>
+                      </tr>
+                      <?php }
 																
                           } ?>
-                  </tbody>
-                </table>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
-            <div class="box-footer" align="center">
-              <a href="../pdf_file/add_history_admin.php" class="btn btn-success"><i class="fa fa-print"> พิมพ์
-                </i></a>
+              <div class="box-footer" align="center">
+                <a href="../pdf_file/add_history_admin.php" class="btn btn-success"><i class="fa fa-print"> พิมพ์
+                  </i></a>
+              </div>
             </div>
           </div>
         </div>

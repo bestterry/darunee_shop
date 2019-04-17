@@ -78,11 +78,10 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
           <div class="box box-primary">
-            <div class="box-header with-border">
-              <font size="6">
-                <p align="center">โอนสินค้าจาก : <?php echo $objr_zone['name_zone'];?>
+            <div class="box-header text-center with-border">
+              <font size="5">
+                <B align="center">โอนสินค้าจาก : <?php echo $objr_zone['name_zone'];?></B>
               </font>
-              </p>
             </div>
 
             <!-- /.box-header -->

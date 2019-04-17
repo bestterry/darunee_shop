@@ -52,11 +52,7 @@
 <div class="wrapper">
 
   <header class="main-header">
-
-  
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-    </nav>
+    <nav class="navbar navbar-static-top"> </nav>
   </header>
 
   <!-- Content Wrapper. Contains page content -->
@@ -76,11 +72,10 @@
     ?>
     <div class="col-md-9">
             <div class="box box-primary">
-              <div class="box-header with-border">
+              <div class="box-header text-center with-border">
                 <font size="5">
-                  <p align="center"> จำนวนสินค้าคงเหลือ 
+                  <B> จำนวนสินค้าคงเหลือ </B>
                 </font>
-                </p>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -105,11 +100,10 @@
                         <?php echo $i; ?>
                       </td>
                       <td width="40%">
-                        <?php echo $product['name_product']; ?>
+                        <?php echo $product['name_product'].' ('.$product['unit'].')'; ?>
                       </td>
                       <td width="15%">
                         <?php echo $product['num']; ?> 
-                        <?php echo $product['unit']; ?>
                       </td>
                     </tr>
                       <?php $i++; } ?>

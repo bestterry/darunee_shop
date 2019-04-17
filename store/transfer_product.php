@@ -69,7 +69,6 @@
                             <th class="text-center" width="5%" >ลำดับ</th>
                             <th class="text-center" >ชื่อสินค้า</th>
                             <th class="text-center" width="15%">จำนวนสินค้าที่มี</th>
-                            <th class="text-center" width="10%">หน่วยนับ</th>
                             <th class="text-center" width="15%">จำนวนสินค้าที่ต้องการโอน</th>
                           </tr>
                           <?php
@@ -87,16 +86,13 @@
                           <tr>
                             <td class="text-center"><?php echo $i+1; ?></td>
                             <td>
-                              <?php echo $objr_listproduct['name_product']; ?>
+                              <?php echo $objr_listproduct['name_product'].' ('.$objr_listproduct['unit'].')'; ?>
                               <input class = "hidden" type="text" name="id_product[]" value="<?php echo $objr_listproduct['id_product']; ?>">
                               <input class = "hidden" type="text" name="id_numPD_car[]" value="<?php echo $objr_listproduct['id_numPD_car']; ?>">
                             </td>
                             <td class="text-center" >
                               <?php echo $objr_listproduct['num'];?>
                               <input class = "hidden" type="text" name="num_befor[]" value="<?php echo $objr_listproduct['num']; ?>">
-                            </td>
-                            <td class="text-center">
-                              <?php echo $objr_listproduct['unit'];?>
                             </td>
                             <td class="text-center">
                               <input type="text" name="num_after[]"  class="form-control text-center col-md-2" placeholder="ระบุจำนวน">

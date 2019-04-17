@@ -66,7 +66,6 @@ $pdf=new PDF('P','mm','A4');
             //สร้างหน้าเอกสาร
             $pdf->AddPage();
             $pdf->SetFont('angsana','',18);
-            $pdf->Ln(5);
             $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ยอดรวมเบิกสินค้า ') , 0 , 1,'' );
             $pdf->Ln(3);
             $pdf->SetFont('angsana','',16);
@@ -100,17 +99,19 @@ $pdf=new PDF('P','mm','A4');
             //สร้างตาราง
             $pdf->SetTextColor(0,0,0);
             $pdf->Ln(2);
-            $pdf->Cell(90,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
-            $pdf->Cell(40,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
-            $pdf->Cell(40,10,iconv('UTF-8','cp874','ชื่อผู้เบิก'),1,0,'C');
+            $pdf->Cell(80,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+            $pdf->Cell(25,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
+            $pdf->Cell(25,10,iconv('UTF-8','cp874','ชื่อผู้เบิก'),1,0,'C');
+            $pdf->Cell(40,10,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
             $pdf->Ln(10);
             $date = "SELECT * FROM draw_history INNER JOIN product ON draw_history.id_product = product.id_product INNER JOIN member ON draw_history.id_member = member.id_member
             WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND draw_history.id_zone = $id_zone";
             $objq = mysqli_query($conn,$date);
             while($value = $objq ->fetch_assoc()){
-            $pdf->Cell(90,8,iconv('UTF-8','cp874',$value['name_product']),1,0,'L');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',$value['num_draw'].' '.$value['unit']),1,0,'L');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',$value['name']),1,0,'C');
+            $pdf->Cell(80,8,iconv('UTF-8','cp874',$value['name_product']),1,0,'L');
+            $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['num_draw'].' '.$value['unit']),1,0,'L');
+            $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['name']),1,0,'C');
+            $pdf->Cell(40,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
             $pdf->Ln(8);
             }                
     $pdf->Output();

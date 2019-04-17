@@ -91,8 +91,8 @@ $pdf=new PDF('P','mm','A4');
               if($total_num==0) {
 
               }else{
-            $pdf->Cell(90,8,iconv('UTF-8','cp874',$value['name_product']),1,0,'');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',$total_num.' '.$value['unit']),1,0,'');
+            $pdf->Cell(90,8,iconv('UTF-8','cp874',$value['name_product'].' ('.$value['unit'].')'),1,0,'');
+            $pdf->Cell(40,8,iconv('UTF-8','cp874',$total_num),1,0,'C');
             $pdf->Cell(40,8,iconv('UTF-8','cp874',$total_money),1,0,'C');
             $pdf->Ln(8);
             $total_all_money = $total_all_money + $total_money;
@@ -123,8 +123,8 @@ $pdf=new PDF('P','mm','A4');
                         WHERE DATE_FORMAT(price_history.datetime,'%Y-%m-%d')='$day'";
               $objq = mysqli_query($conn,$date);
               while($value = $objq ->fetch_assoc()){ 
-            $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['name_product']),1,0,'');
-            $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['num'].' '.$value['unit']),1,0,'');
+            $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['name_product'].' ('.$value['unit'].')'),1,0,'');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['num']),1,0,'C');
             $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['price']),1,0,'C');
             $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['money']),1,0,'C');
             $pdf->Cell(50,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
@@ -169,8 +169,8 @@ $pdf=new PDF('P','mm','A4');
                               WHERE sale_car_history.id_member = $i AND DATE_FORMAT(sale_car_history.datetime,'%Y-%m-%d')='$day'";
               $objq_product = mysqli_query($conn,$SQL_product);
                   while($product = $objq_product -> fetch_assoc()){
-              $pdf->Cell(60,8,iconv('UTF-8','cp874',$product['name_product']),1,0,'');
-              $pdf->Cell(20,8,iconv('UTF-8','cp874',$product['num'].' '.$product['unit']),1,0,'');
+              $pdf->Cell(60,8,iconv('UTF-8','cp874',$product['name_product'].' ('.$product['unit'].')'),1,0,'');
+              $pdf->Cell(20,8,iconv('UTF-8','cp874',$product['num']),1,0,'C');
               $pdf->Cell(20,8,iconv('UTF-8','cp874',$product['price']),1,0,'C');
               $pdf->Cell(25,8,iconv('UTF-8','cp874',$product['money']),1,0,'C');
               $pdf->Cell(50,8,iconv('UTF-8','cp874',$product['note']),1,0,'C');

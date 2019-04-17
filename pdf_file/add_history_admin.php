@@ -86,8 +86,8 @@ $pdf=new PDF('P','mm','A4');
               $num_product = $objr_sale['SUM(add_history.num_add)'];
               if(isset($num_product)){ 
             
-            $pdf->Cell(90,8,iconv('UTF-8','cp874',$history['name_product']),1,0,'');
-            $pdf->Cell(60,8,iconv('UTF-8','cp874',$num_product.' '.$history['unit']),1,0,'');
+            $pdf->Cell(90,8,iconv('UTF-8','cp874',$history['name_product'].' ('.$history['unit'].')'),1,0,'');
+            $pdf->Cell(60,8,iconv('UTF-8','cp874',$num_product),1,0,'C');
             
             $pdf->Ln(8);
                       }
@@ -115,8 +115,8 @@ $pdf=new PDF('P','mm','A4');
             $objq = mysqli_query($conn,$date);
             while($value = $objq ->fetch_assoc()){
             $pdf->Cell(10,8,iconv('UTF-8','cp874',$i),1,0,'C');  
-            $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['name_product']),1,0,'L');
-            $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['num_add'].' '.$value['unit']),1,0,'L');
+            $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['name_product'].' ('.$value['unit'].')'),1,0,'L');
+            $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['num_add']),1,0,'C');
             $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['name']),1,0,'C');
             $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['name_zone']),1,0,'C');
             $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');

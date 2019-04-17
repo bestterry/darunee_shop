@@ -70,10 +70,9 @@
       $query_product2 = mysqli_query($conn,$list_product);
     ?>
         <div class="box box-primary">
-          <div class="box-header with-border">
-            <p align="center">
-              <font size="5"> สต๊อกรวม </font>
-            </p>
+          <div class="box-header text-center with-border">
+            <B align="center"> <font size="5"> สต๊อกรวม </font></B>
+            <br>
             <B>
               <font size="4">ประจำวันที่(<font color="red"><?php echo $strDate = date('d-m-Y');?></font>)</font>
             </B>
@@ -99,12 +98,13 @@
                   </tr>
                   <?php 
                     $i=1;
+                    $a = 1;
                       while($product = $query_product ->fetch_assoc()){
                         
                     ?>
                   <tr>
                     <td class="text-center" width="5%">
-                      <?php echo $i; ?>
+                      <?php echo $a; ?>
                     </td>
                     <td class="text-center" width="15%">
                       <?php echo $product['name_product']; ?>
@@ -172,7 +172,7 @@
                     <!-- -------------------------------//รวมทั้งหมด------------------------------------ -->
 
                   </tr>
-                  <?php $i++; } ?>
+                  <?php $i++; $a++; } ?>
                 </tbody>
               </table>
             </div>

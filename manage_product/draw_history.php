@@ -47,8 +47,9 @@
             <tbody>
               <tr bgcolor="#99CCFF">
                 <th class="text-center" width="40%">รายการ</th>
-                <th class="text-center" width="25%">จำนวน</th>
-                <th class="text-center" width="25%">ชื่อผู้เบิก</th>
+                <th class="text-center" width="12%">จำนวน</th>
+                <th class="text-center" width="12%">ชื่อผู้เบิก</th>
+                <th class="text-center" width="25%">หมายเหตุ</th>
                 <th class="text-center" width="10%">แก้ไข</th>
               </tr>
               <?php #endregion
@@ -67,6 +68,9 @@
                 </td>
                 <td class="text-center">
                   <?php echo $value['name'];?>
+                </td>
+                <td class="text-center">
+                  <?php echo $value['note'];?>
                 </td>
                 <td class="text-center">
                   <a href="edit_draw_history.php?id_draw_history=<?php echo $value['id_draw_history'];?>"><span

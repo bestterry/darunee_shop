@@ -67,23 +67,23 @@
                   <div class="row">
                     <div class="container">
                       <?php 
-                                      $list_product = "SELECT * FROM product";
-                                      $query_product = mysqli_query($conn,$list_product);
-                                      $query_product2 = mysqli_query($conn,$list_product);
-                                      $day = $_POST['day'];
-                                      function DateThai($strDate)
-                                        {
-                                          $strYear = date("Y",strtotime($strDate))+543;
-                                          $strMonth= date("n",strtotime($strDate));
-                                          $strDay= date("j",strtotime($strDate));
-                                          $strHour= date("H",strtotime($strDate));
-                                          $strMinute= date("i",strtotime($strDate));
-                                          $strSeconds= date("s",strtotime($strDate));
-                                          $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-                                          $strMonthThai=$strMonthCut[$strMonth];
-                                          return "$strDay $strMonthThai $strYear";
-                                        }
-                                    ?>
+                          $list_product = "SELECT * FROM product";
+                          $query_product = mysqli_query($conn,$list_product);
+                          $query_product2 = mysqli_query($conn,$list_product);
+                          $day = $_POST['day'];
+                          function DateThai($strDate)
+                            {
+                              $strYear = date("Y",strtotime($strDate))+543;
+                              $strMonth= date("n",strtotime($strDate));
+                              $strDay= date("j",strtotime($strDate));
+                              $strHour= date("H",strtotime($strDate));
+                              $strMinute= date("i",strtotime($strDate));
+                              $strSeconds= date("s",strtotime($strDate));
+                              $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+                              $strMonthThai=$strMonthCut[$strMonth];
+                              return "$strDay $strMonthThai $strYear";
+                            }
+                        ?>
                       <!-- ------------------------------ยอดขายรวม---------------------------- -->
                       <div class="box-header with-border">
                         <font size="4">
@@ -107,38 +107,37 @@
                             <th class="text-center" width="25%">เงินขาย(บาท)</th>
                           </tr>
                           <?php #endregion
-                                      $total_money = 0;
-                                      $total_all_money = 0;
-                                      $date = "SELECT * FROM product ";
-                                      $objq = mysqli_query($conn,$date);
-                                      while($value = $objq ->fetch_assoc()){ 
-                                        $id_product = $value['id_product'];
-                                        $sql_num = "SELECT SUM(num),SUM(money) FROM price_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day' AND id_product = $id_product AND status = 'sale'";
-                                        $objq_num = mysqli_query($conn,$sql_num);
-                                        $objr_num = mysqli_fetch_array($objq_num);
-                                        $num = $objr_num['SUM(num)'];
-                                        $num_money = $objr_num['SUM(money)'];
+                              $total_money = 0;
+                              $total_all_money = 0;
+                              $date = "SELECT * FROM product ";
+                              $objq = mysqli_query($conn,$date);
+                              while($value = $objq ->fetch_assoc()){ 
+                                $id_product = $value['id_product'];
+                                $sql_num = "SELECT SUM(num),SUM(money) FROM price_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day' AND id_product = $id_product AND status = 'sale'";
+                                $objq_num = mysqli_query($conn,$sql_num);
+                                $objr_num = mysqli_fetch_array($objq_num);
+                                $num = $objr_num['SUM(num)'];
+                                $num_money = $objr_num['SUM(money)'];
 
-                                        $sql_num_car = "SELECT SUM(num),SUM(money) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day' AND id_product = $id_product AND status = 'sale'";
-                                        $objq_num_car = mysqli_query($conn,$sql_num_car);
-                                        $objr_num_car = mysqli_fetch_array($objq_num_car);
-                                        $num_car = $objr_num_car['SUM(num)'];
-                                        $num_money_car = $objr_num_car['SUM(money)'];
+                                $sql_num_car = "SELECT SUM(num),SUM(money) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day' AND id_product = $id_product AND status = 'sale'";
+                                $objq_num_car = mysqli_query($conn,$sql_num_car);
+                                $objr_num_car = mysqli_fetch_array($objq_num_car);
+                                $num_car = $objr_num_car['SUM(num)'];
+                                $num_money_car = $objr_num_car['SUM(money)'];
 
-                                        $total_num = $num + $num_car;
-                                        $total_money = $num_money + $num_money_car;
+                                $total_num = $num + $num_car;
+                                $total_money = $num_money + $num_money_car;
 
-                                        if($total_num==0) {
+                                if($total_num==0) {
 
-                                        }else{
-                                  ?>
+                                }else{
+                          ?>
                           <tr>
                             <td>
-                              <?php echo $value['name_product']; ?>
+                              <?php echo $value['name_product'].' ('.$value['unit'].')'; ?>
                             </td>
                             <td class="text-center">
                               <?php echo $total_num;?>
-                              <?php echo $value['unit']; ?>
                             </td>
                             <td class="text-center">
                               <?php echo $total_money; ?>
@@ -183,11 +182,10 @@
                                   ?>
                           <tr>
                             <td>
-                              <?php echo $value['name_product']; ?>
+                              <?php echo $value['name_product'].' ('.$value['unit'].')'; ?>
                             </td>
                             <td class="text-center">
                               <?php echo $value['num'];?>
-                              <?php echo $value['unit']; ?>
                             </td>
                             <td class="text-center">
                               <?php echo $value['price']; ?>
@@ -252,11 +250,10 @@
                                   ?>
                           <tr>
                             <td>
-                              <?php echo $product['name_product']; ?>
+                              <?php echo $product['name_product'].' ('.$product['unit'].')'; ?>
                             </td>
                             <td class="text-center">
                               <?php echo $product['num'];?>
-                              <?php echo $product['unit']; ?>
                             </td>
                             <td class="text-center">
                               <?php echo $product['price']; ?>

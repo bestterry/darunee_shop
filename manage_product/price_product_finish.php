@@ -51,9 +51,37 @@
 
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
-    <header class="main-header">
+  <header class="main-header">
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
+      <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->  
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="../dist/img/user.png" class="user-image" alt="User Image">
+                <span class="hidden-xs"><?php echo $username; ?></span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
+
+                  <p>
+                    <?php echo $username; ?>
+                    <small>สาขา : <?php echo $name_zone; ?></small>
+                  </p>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-right">
+                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
@@ -83,6 +111,7 @@
                         <th class="text-center" width="15%">รวมเงิน (บาท)</th>
                       </tr>
                       <?php //คำนวณสรายการสินค้า
+                      $note = $_POST['note'];
                           $total_price_money = 0;
                            for($i=0;$i<count($_POST['id_numproduct']);$i++){
                             $id_numproduct = $_POST['id_numproduct'][$i];
@@ -110,12 +139,12 @@
                                 $status = "sale";
                               }
                               $insert_history = "INSERT INTO price_history (num, price, money, id_product, status, id_zone, note)
-                                                  VALUES ($num_product, $price_product, $total_price, $id_product, '$status', $id_zone, '-')";
+                                                  VALUES ($num_product, $price_product, $total_price, $id_product, '$status', $id_zone, '$note')";
                                 mysqli_query($conn,$insert_history);
                               
                           ?>
                       <tr>
-                        <td class="text-center"><?php echo $i+1 ?></td>
+                        <td class="text-center"><?php echo $i+1; ?></td>
                         <td><?php echo $name_product.' ('.$objr_num_product_instore['unit'].')'; ?></td>
                         <td class="text-center"><?php echo $num_product; ?></td>
                         <td class="text-center"><?php echo $price_product; ?> </td>
@@ -140,6 +169,7 @@
                     </tbody>
                   </table>
                   <div class="col-md-8">
+                    
                   </div>
                   <div class="col-md-4">
                     <table class="table table-bordered table-hover">

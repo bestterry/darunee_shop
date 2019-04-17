@@ -68,8 +68,8 @@ $pdf=new PDF('P','mm','A4');
 
               }else{ 
             
-            $pdf->Cell(70,8,iconv('UTF-8','cp874',$value['name_product']),1,0,'');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',$total_num.' '.' '.$value['unit']),1,0,'');
+            $pdf->Cell(70,8,iconv('UTF-8','cp874',$value['name_product'].' ('.$value['unit'].')'),1,0,'');
+            $pdf->Cell(40,8,iconv('UTF-8','cp874',$total_num),1,0,'C');
             $pdf->Cell(40,8,iconv('UTF-8','cp874',$total_money),1,0,'C');
             $pdf->Ln(8);
                       }
@@ -100,8 +100,8 @@ $pdf=new PDF('P','mm','A4');
                               WHERE (sale_car_history.datetime between '$aday 00:00:00' and '$bday 23:59:59')";
                               $objq = mysqli_query($conn,$date);
                               while($value = $objq ->fetch_assoc()){ 
-            $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['name_product']),1,0,'');
-            $pdf->Cell(35,8,iconv('UTF-8','cp874',$value['num'].' '.' '.$value['unit']),1,0,'');
+            $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['name_product'].' ('.$value['unit'].')'),1,0,'');
+            $pdf->Cell(35,8,iconv('UTF-8','cp874',$value['num']),1,0,'C');
             $pdf->Cell(35,8,iconv('UTF-8','cp874',$value['money']),1,0,'C');
             $pdf->Cell(35,8,iconv('UTF-8','cp874',DateThai($value['datetime'])),1,0,'C');
             $pdf->Ln(8);
@@ -129,8 +129,8 @@ $pdf=new PDF('P','mm','A4');
                   WHERE (sale_car_history.datetime between '$aday 00:00:00' and '$bday 23:59:59')";
                   $objq = mysqli_query($conn,$date);
                   while($value = $objq ->fetch_assoc()){ 
-            $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['name_product']),1,0,'');
-            $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['num'].' '.' '.$value['unit']),1,0,'');
+            $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['name_product'].' ('.$value['unit'].')'),1,0,'');
+            $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['num']),1,0,'C');
             $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['money']),1,0,'C');
             $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['name']),1,0,'C');
             $pdf->Cell(30,8,iconv('UTF-8','cp874',DateThai($value['datetime'])),1,0,'C');

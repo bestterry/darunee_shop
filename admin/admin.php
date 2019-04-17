@@ -70,11 +70,10 @@
     ?>
         <div class="col-md-9">
           <div class="box box-primary">
-            <div class="box-header with-border">
+            <div class="box-header text-center with-border">
               <font size="5">
-                <p align="center"> จำนวนสินค้าคงเหลือ
+                <B align="center"> จำนวนสินค้าคงเหลือ  </B>
               </font>
-              </p>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -86,7 +85,7 @@
                       </th>
                       <th width="40%">ชื่อสินค้า
                       </th>
-                      <th width="15%">จำนวนสินค้าคงเหลือ
+                      <th class="text-center" width="15%">จำนวนสินค้าคงเหลือ
                       </th>
                     </tr>
                     <?php 
@@ -108,18 +107,20 @@
 
                     ?>
                     <tr>
+                      <?php if($total_num == 0){
+
+                      }else{ ?>
                       <td class="text-center" width="10%">
                         <?php echo $i; ?>
                       </td>
                       <td width="40%">
-                        <?php echo $product['name_product']; ?>
-                        <?php echo '('.$product['unit'].')'; ?>
+                        <?php echo $product['name_product'].'  ('.$product['unit'].')'; ?>
                       </td>
-                      <td width="15%">
+                      <td class="text-center" width="15%">
                         <?php echo $total_num; ?>
                       </td>
                     </tr>
-                    <?php $i++; } ?>
+                    <?php $i++; } } ?>
                   </tbody>
                 </table>
               </div>

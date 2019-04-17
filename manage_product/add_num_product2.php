@@ -60,9 +60,37 @@
   }
   </script>
   <div class="wrapper">
-    <header class="main-header">
+  <header class="main-header">
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
+      <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->  
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="../dist/img/user.png" class="user-image" alt="User Image">
+                <span class="hidden-xs"><?php echo $username; ?></span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
+
+                  <p>
+                    <?php echo $username; ?>
+                    <small>สาขา : <?php echo $name_zone; ?></small>
+                  </p>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-right">
+                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
 
@@ -77,11 +105,10 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
           <div class="box box-primary">
-            <div class="box-header with-border">
-              <font size="6">
-                <p align="center"> รับเข้าสินค้า
+            <div class="box-header text-center with-border">
+              <font size="5">
+                <B> รับเข้าสินค้า</B>
               </font>
-              </p>
             </div>
 
             <!-- /.box-header -->

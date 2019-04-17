@@ -1,6 +1,6 @@
 <?php 
-  require "../config_database/config.php"; 
-  require "../session.php";
+  require "../config_database/config.php";
+  require "../session.php"; 
 ?>
 
 <!DOCTYPE html>
@@ -10,8 +10,7 @@
   <?php require('../font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน</title>
-  <!-- Tell the browser to be responsive to screen width -->
+  <title>ทีมงานคุณดารุณี</title>
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -46,38 +45,9 @@
 
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
-  <header class="main-header">
-      <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->  
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo $username; ?></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
 
-                  <p>
-                    <?php echo $username; ?>
-                    <small>สาขา : <?php echo $name_zone; ?></small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <header class="main-header">
+    <nav class="navbar navbar-static-top">
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -87,57 +57,79 @@
 
       <!-- Main content -->
       <section class="content">
-
-        <div class="col-md-12">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
-              <font size="5"><B> แก้ไขรายการสินค้า </font></B>
+              <font size="5">
+                <B align="center"> แก้ไขสินค้า </B>
+              </font>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="algorithm/edit_product.php" method="post" autocomplete="off">
+                <form action="algorithm/edit_sale_history.php" method="post" autocomplete="off">
                   <table class="table table-bordered table-hover">
                     <tbody>
                       <tr bgcolor="#99CCFF">
-                        <th class="text-center">ชื่อสินค้า</th>
-                        <th class="text-center" width="15%">จำนวนสินค้า</th>
-                        <th class="text-center" width="10%">หน่วยนับ</th>
+                        <th class="text-center" width="35%">รายการ
+                        </th>
+                        <th class="text-center" width="15%">จำนวน
+                        </th>
+                        <th class="text-center" width="12%">บ/หน่วย
+                        </th>
+                        <th class="text-center" width="13%">เงินขาย(บาท)
+                        </th>
+                        <th class="text-center" width="20%">หมายเหตุ
+                        </th>
                       </tr>
-                      <tr>
-                        <?php
-                            $id_numproduct = $_GET['id_numproduct']; 
-                            $sql_edit = "SELECT * FROM product INNER JOIN num_product 
-                                          ON product.id_product = num_product.id_product 
-                                          WHERE num_product.id_numproduct='$id_numproduct'";
-                            $objq_edit = mysqli_query($conn,$sql_edit);
-                            $objr_edit = mysqli_fetch_array($objq_edit);
+                      <?php
+                              $id_sale = $_GET['id_sale'];
+                                  $list_product = "SELECT * FROM product INNER JOIN sale_car_history ON product.id_product = sale_car_history.id_product 
+                                                   WHERE sale_car_history.id_sale_history = $id_sale";
+                                  $objq_listproduct = mysqli_query($conn,$list_product);
+                                  $objr_listproduct = mysqli_fetch_array($objq_listproduct);
                           ?>
-                        <td class="text-center"> <?php echo $objr_edit['name_product'];?> </td>
-                        <td>
-                          <input type="text" name="num" class="form-control text-center col-md-1" value="<?php echo $objr_edit['num'];?>" >
-                          <input type="hidden" name="id_numproduct" class="form-control text-center col-md-1" value="<?php echo $objr_edit['id_numproduct'];?>" >
+                      <tr>
+                        <td class="text-center">
+                           <input type="text" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['name_product'].' ('.$objr_listproduct['unit'].')'; ?>" readonly />
+                           <input type="hidden" name="id_sale" class="form-control text-center col-md-1" value="<?php echo $id_sale; ?>">
+                           <input type="hidden" name="id_product" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['id_product']; ?>">
                         </td>
-                        <td class="text-center"> <?php echo $objr_edit['unit'];?> </td>
+                        <td>
+                          <input  type="hidden" name="num_befor" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['num']; ?>">
+                          <input  type="text" name="num_after" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['num']; ?>">
+                        </td>
+                        <td class="text-center"> 
+                          <input type="text" name="price" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['price']; ?>">
+                        </td>
+                        <td>
+                          <input  type="text" name="money" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['money']; ?>">
+                        </td>
+                        <td class="text-center"> 
+                          <input type="text" name="note" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['note']; ?>">
+                        </td>
                       </tr>
                     </tbody>
                   </table>
               </div>
+              <!-- /.mailbox-read-message -->
             </div>
-            <div class="box-footer" align="right">
-              <button type="submit" class="btn  btn-success"><i class="fa fa-check-square"> บันทึก </i></button>
+            <div class="box-footer">
+              <a type="block" href="sale_product_history.php" class="btn btn-success"><<= กลับ </i> </a> 
+              <button type="submit" class="btn btn-success pull-right"><i class="fa fa-save"> บันทึก </i></button>
             </div>
-            </form>
             <!-- /.box-footer -->
+            </form>
           </div>
           <!-- /. box -->
         </div>
-      </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-
-    <?php require("../menu/footer.html"); ?>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <?php require("../menu/footer.html"); ?>
   </div>
   <!-- jQuery 3 -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>

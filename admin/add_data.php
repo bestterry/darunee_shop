@@ -46,7 +46,7 @@
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
     <header class="main-header">
-    <?php require('menu/header_logout.php');?>
+      <?php require('menu/header_logout.php');?>
     </header>
 
     <!-- Content Wrapper. Contains page content -->
@@ -64,6 +64,7 @@
               <ul class="nav nav-tabs">
                 <li><a href="#adduser" data-toggle="tab">เพิ่มพนักงาน</a></li>
                 <li><a href="#addproduct" data-toggle="tab">เพิ่มสินค้า</a></li>
+                <li><a href="#settingproduct" data-toggle="tab">แก้ไขสินค้า</a></li>
               </ul>
               <div class="tab-content">
                 <!-- เพิ่มพนักงาน -->
@@ -172,6 +173,66 @@
                   </div>
                 </div>
                 <!-- /เพิ่มสินค้า -->
+
+                <!-- แก้ไขสินค้า -->
+                <div class="tab-pane" id="settingproduct">
+                  <div class="box box-default">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="container">
+                          <form action="algorithm/add_product2.php" method="post" autocomplete="off">
+                            <div class="box-header with-border">
+                              <font size="4">
+                                <B>
+                                  แก้ไขสินค้า
+                                </B>
+                              </font>
+                            </div>
+                            <table class="table table-bordered">
+                              <tbody>
+                                <tr bgcolor="#99CCFF">
+                                  <th class="text-center">ชื่อสินค้า</th>
+                                  <th class="text-center" width="15%">หน่วย</th>
+                                  <th class="text-center" width="15%">ราคา (บาท)</th>
+                                  <th class="text-center" width="12%">แก้ไข</th>
+                                  <th class="text-center" width="12%">ลบ</th>
+                                </tr>
+                                <?php #endregion
+                                                  $total_money = 0;
+                                                  $date = "SELECT * FROM product";  
+                                                  $objq = mysqli_query($conn,$date);
+                                                  while($value = $objq ->fetch_assoc()){ 
+                                              ?>
+                                <tr>
+                                  <td>
+                                    <?php echo $value['name_product']; ?>
+                                  </td>
+                                  <td class="text-center">
+                                    <?php echo $value['unit']; ?>
+                                  </td>
+                                  <td class="text-center">
+                                    <?php echo $value['price']; ?>
+                                  </td>
+                                  <td class="text-center">
+                                    <a href="edit_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="btn btn-success"><i class="fa fa-cog"></i></a>
+                                  </td>
+                                  <td class="text-center">
+                                    <a href="algorithm/delete_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="btn btn-danger"><i class="fa fa-minus-square"></i></a>
+                                  </td>
+                                </tr>
+                                <?php
+                                  }
+                                ?>
+                              </tbody>
+                            </table>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /เเก้ไขสินค้า -->
 
               </div>
               <!-- /.tab-content -->
