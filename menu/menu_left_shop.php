@@ -149,16 +149,13 @@
             </div>
           </div>
           <!-- /ประวัติขายสินค้า -->
-          <li><a target="_blank" href="manage_product/sale_history.php"><i class="fa fa-exchange"></i> ยอดขายประจำวัน
-            </a></li>
+          <li><a href="manage_product/sale_history.php"><i class="fa fa-exchange"></i> ยอดขายประจำวัน</a></li>
           <!-- /ประวัติขายสินค้า -->
           <!-- ประวัติเบิกสินค้า -->
-          <li><a target="_blank" href="manage_product/draw_history.php"><i class="fa fa-exchange"></i>
-              ยอดเบิกสินค้าประจำวัน </a></li>
+          <li><a href="manage_product/draw_history.php"><i class="fa fa-exchange"></i> ยอดเบิกสินค้าประจำวัน </a></li>
           <!-- /ประวัติเบิกสินค้า -->
           <!--ประวัติรับเข้าสินค้า -->
-          <li><a target="_blank" href="manage_product/add_history.php"><i class="fa fa-exchange"></i>
-              ประวัติรับเข้าสินค้า </a></li>
+          <li><a href="manage_product/add_history.php"><i class="fa fa-exchange"></i> ประวัติรับเข้าสินค้า </a></li>
           <!-- เเก้ไขอุปกรณ์  -->
           <!--เพิ่มรายการอุปกรณ์ -->
           <li><a href="#" data-toggle="modal" data-target="#myModal3"><i class="fa fa-cog"></i>แก้ไขจำนวนสินค้า</a></li>
@@ -204,7 +201,7 @@
               </form>
             </div>
           </div>
-          <li><a href="login/logout.php"><i class="fa fa-power-off"></i> ออกจากระบบ </a></li>
+          <li><a href="login/logout.php"><i class="fa fa-power-off">  </i> ออกจากระบบ </a></li>
           <!--ประวัติเพิ่ม-ถอน อุปกรณ์ -->
         </ul>
       </div>
