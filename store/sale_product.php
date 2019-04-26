@@ -1,4 +1,7 @@
-<?php require "../config_database/config.php"; ?>
+<?php 
+  require "../config_database/config.php"; 
+  require "../session.php";
+?>
 
 <!DOCTYPE html>
 <html>
@@ -42,9 +45,7 @@
 <div class="wrapper">
 
   <header class="main-header">
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-    </nav>
+  <?php require('menu/header_logout.php');?>
   </header>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -119,13 +120,12 @@
                         </tbody>
                       </table>
                     </div>
-                  
                 </div>
                 <!-- /.mailbox-read-message -->
             </div>
             <div class="box-footer">
             <a type="block" href="store.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i></a>
-            <button type="submit" class="btn btn-success pull-right"><i class="fa fa-calculator"> คำนวณเงิน </i></button>
+            <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-calculator"> บันทึก </i></button>
             </div>
             <!-- /.box-footer -->
             </form>

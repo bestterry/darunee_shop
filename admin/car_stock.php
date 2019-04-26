@@ -90,6 +90,8 @@ require "../session.php";
                     <th class="text-center" width="5%">หนึ่ง</th>
                     <th class="text-center" width="5%">กร</th>
                     <th class="text-center" width="5%">เอี่ยว</th>
+                    <th class="text-center" width="5%">รีโว่ สนง.</th>
+                    <th class="text-center" width="5%">รีโว่5</th>
                     <th class="text-center" width="8%">รวมทั้งหมด</th>
                   </tr>
                   <?php
@@ -109,7 +111,7 @@ require "../session.php";
                       </td>
                       <!-- -------------------------------รถ------------------------------------ -->
                       <?php
-                      for ($i = 4; $i < 16; $i++) {
+                      for ($i = 4; $i < 18; $i++) {
 
                         $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $i";
                         $objq_num = mysqli_query($conn, $SQL_num);

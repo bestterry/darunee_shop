@@ -193,7 +193,7 @@
             <!-- /.box-footer -->
             <div class="box-footer">
               <a type="block" href="admin.php" class="btn btn-success pull-left">
-                <<= กลับหน้าหลัก</a> <button type="submit" class="btn btn-success pull-right"><i class="fa fa-save">
+                <<= กลับหน้าหลัก</a> <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save">
                     บันทึก</i></button>
             </div>
             </form>

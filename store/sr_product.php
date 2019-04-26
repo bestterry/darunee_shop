@@ -1,13 +1,13 @@
-<?php 
-  require "../config_database/config.php";
-  require "../session.php"; 
+<?php
+require "../config_database/config.php";
+require "../session.php";
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-  <?php require('../font/font_style.php');?>
+  <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>ทีมงานคุณดารุณี</title>
@@ -39,15 +39,14 @@
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
   <!-- Google Font -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
 
     <header class="main-header">
-      <?php require('menu/header_logout.php');?>
+      <?php require('menu/header_logout.php'); ?>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -57,59 +56,77 @@
 
       <!-- Main content -->
       <section class="content">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="box box-primary">
-            <div class="box-header text-center with-border">
+            <div class="box-header with-border text-center">
               <font size="5">
-                <B align="center"> แก้ไขสินค้า </B>
+                <B> รายการสินค้าที่ต้องการแยก</B>
               </font>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="algorithm/edit_product.php" method="post" autocomplete="off">
-                  <table class="table table-bordered table-hover">
+                <form action="algorithm/sr_product.php" method="post" autocomplete="off">
+                  <table class="table table-bordered ">
                     <tbody>
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="50%">ชื่อสินค้า</th>
-                        <th class="text-center">หน่วย</th>
+                        <th class="text-center" width="25%">จำนวนสินค้าที่มี</th>
+                        <th class="text-center" width="25%">จำนวนสินค้าที่ต้องการแยก</th>
                       </tr>
                       <?php
-                              $id_product = $_GET['id_product'];
-                                  $list_product = "SELECT * FROM product WHERE id_product = $id_product";
-                                  $objq_listproduct = mysqli_query($conn,$list_product);
-                                  $objr_listproduct = mysqli_fetch_array($objq_listproduct);
-                          ?>
-                      <tr>
-                        <td class="text-center">
-                           <input type="text" name="name_product" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['name_product']; ?>">
-                           <input type="hidden" name="id_product" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['id_product']; ?>">
-                        </td>
-                        <td>
-                          <input  type="text" name="unit" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['unit']; ?>">
-                        </td>
-                      </tr>
+                              $id_product2 = 0;
+                              $id_numPD = $_POST['id_numPD'];
+                              $list_product = "SELECT * FROM numpd_car
+                                                  INNER JOIN product ON numpd_car.id_product = product.id_product
+                                                  WHERE numpd_car.id_numPD_car = $id_numPD";
+                              $objq_listproduct = mysqli_query($conn, $list_product);
+                              $objr_listproduct = mysqli_fetch_array($objq_listproduct);
+                              $id_product = $objr_listproduct['id_product'];
+                              if ($id_product==1) {
+                                $id_product2 = 2;
+                              }elseif ($id_product==3) {
+                                $id_product2 = 4;
+                              }elseif ($id_product==5) {
+                                $id_product2 = 6;
+                              }elseif ($id_product==9) {
+                                $id_product2 = 10;
+                              }
+                              ?>
+                          <tr>
+                            <td>
+                              <?php echo $objr_listproduct['name_product'] . ' (' . $objr_listproduct['unit'] . ')'; ?>
+                              <input class="hidden" type="text" name="id_product" value="<?php echo $objr_listproduct['id_product']; ?>">
+                              <input class="hidden" type="text" name="id_numPD_car" value="<?php echo $objr_listproduct['id_numPD_car']; ?>">
+                              <input class="hidden" type="text" name="id_product2" value="<?php echo $id_product2; ?>">
+                            </td>
+                            <td class="text-center">
+                              <?php echo $objr_listproduct['num']; ?>
+                              <input class="hidden" type="text" name="num_befor" value="<?php echo $objr_listproduct['num']; ?>">
+                            </td>
+                            <td class="text-center">
+                              <input type="text" name="num_after" class="form-control text-center col-md-2" placeholder="ระบุจำนวน">
+                            </td>
+                          </tr>
                     </tbody>
                   </table>
               </div>
               <!-- /.mailbox-read-message -->
             </div>
             <div class="box-footer">
-              <a type="block" href="add_data.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i> </a> 
-              <button type="submit" class="btn btn-success pull-right"><i class="fa fa-save"> บันทึก </i></button>
+              <a type="block" href="store.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i> </a> 
+              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-calculator"> บันทึก </i></button>
             </div>
             <!-- /.box-footer -->
             </form>
           </div>
           <!-- /. box -->
         </div>
+      </section>
+      <!-- /.content -->
     </div>
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <?php require("../menu/footer.html"); ?>
+    <!-- /.content-wrapper -->
+    <?php require("../menu/footer.html"); ?>
   </div>
   <!-- jQuery 3 -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>

@@ -65,6 +65,7 @@ require "../session.php";
               <ul class="nav nav-tabs">
                 <li><a href="#timeline" data-toggle="tab">ยอดเบิกรายวัน</a></li>
                 <li><a href="#checkday" data-toggle="tab">ตรวจสอบยอดเบิกรายวัน</a></li>
+                <li><a href="#change" data-toggle="tab">ตรวจสอบการโอนสินค้าระหว่างรถ</a></li>
               </ul>
               <div class="tab-content">
                 <!-- /.tab-pane -->
@@ -231,21 +232,78 @@ require "../session.php";
                 <!-- /.tab-pane -->
 
                 <!-- tab-pane -->
-                <div class="tab-pane" id="settings">
+                <div class="tab-pane" id="change">
                   <div class="box box-default">
                     <div class="box-header with-border">
-
+                    <div class="box-header with-border">
+                      <p align="center">
+                        <font size="5"><B>การโอนสินค้าระหว่างรถ</B> </font>
+                      </p>
+                      <B>
+                        <font size="4">การโอนสินค้าระหว่างรถ ประจำวันที่(<font color="red"> <?php echo $strDate = date('d-m-Y'); ?>
+                          </font>)</font>
+                      </B>
+                    </div>
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr bgcolor="#99CCFF">
+                          <th class="text-center" width="5%">ลำดับ</th>
+                          <th class="text-center" width="35%">รายการ</th>
+                          <th class="text-center" width="12%">จำนวน</th>
+                          <th class="text-center" width="12%">ชื่อผู้ส่ง</th>
+                          <th class="text-center" width="12%">ชื่อผู้รับ</th>
+                          <th class="text-center" width="20%">หมายเหตุ</th>
+                        </tr>
+                        <?php #endregion
+                        $i = 1;
+                        $date = "SELECT * FROM change_bwt_car
+                            INNER JOIN product ON change_bwt_car.id_product = product.id_product 
+                            WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
+                        $objq = mysqli_query($conn, $date);
+                        while ($value = $objq->fetch_assoc()) {
+                          $name1 = "SELECT name FROM member WHERE id_member = $value[id_member_send]";
+                          $objq_name1 = mysqli_query($conn,$name1);
+                          $objr_name1 = mysqli_fetch_array($objq_name1);
+                          $name2 = "SELECT name FROM member WHERE id_member = $value[id_member_receive]";
+                          $objq_name2 = mysqli_query($conn,$name2);
+                          $objr_name2 = mysqli_fetch_array($objq_name2);
+                          ?>
+                          <tr>
+                            <td class="text-center">
+                              <?php echo $i; ?>
+                            </td>
+                            <td>
+                              <?php echo $value['name_product'] . ' (' . $value['unit'] . ')'; ?>
+                            </td>
+                            <td class="text-center">
+                              <?php echo $value['num']; ?>
+                            </td>
+                            <td class="text-center">
+                              <?php echo $objr_name1['name']; ?>
+                            </td>
+                            <td class="text-center">
+                              <?php echo $objr_name2['name']; ?>
+                            </td>
+                            <td class="text-center">
+                              <?php echo $value['note']; ?>
+                            </td>
+                          </tr>
+                          <?php
+                          $i++;
+                        }
+                        ?>
+                      </tbody>
+                    </table>
                     </div>
                   </div>
                 </div>
                 <!-- /.tab-pane -->
+                
               </div>
               <!-- /.tab-content -->
             </div>
             <!-- /.nav-tabs-custom -->
           </div>
-
-
         </div>
       </section>
       <!-- /.content -->

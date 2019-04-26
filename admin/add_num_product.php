@@ -135,7 +135,7 @@
             </div>
             <div class="box-footer">
               <a type="block" href="admin.php" class="btn btn-success">
-                <<= เริ่มต้นใหม่ </i> </a> <button type="submit" class="btn btn-success pull-right"><i
+                <<= เริ่มต้นใหม่ </i> </a> <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i
                     class="fa fa-calculator"> บันทึก </i></button>
             </div>
             <!-- /.box-footer -->

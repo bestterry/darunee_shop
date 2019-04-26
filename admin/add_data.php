@@ -65,6 +65,7 @@
                 <li><a href="#adduser" data-toggle="tab">เพิ่มพนักงาน</a></li>
                 <li><a href="#addproduct" data-toggle="tab">เพิ่มสินค้า</a></li>
                 <li><a href="#settingproduct" data-toggle="tab">แก้ไขสินค้า</a></li>
+                <li><a href="#settingproductcar" data-toggle="tab">แก้ไขสินค้าในรถ</a></li>
               </ul>
               <div class="tab-content">
                 <!-- เพิ่มพนักงาน -->
@@ -123,7 +124,6 @@
                       </div>
                     </form>
                   </div>
-
                 </div>
                 <!-- /เพิ่มพนักงาน -->
 
@@ -194,7 +194,6 @@
                                 <tr bgcolor="#99CCFF">
                                   <th class="text-center">ชื่อสินค้า</th>
                                   <th class="text-center" width="15%">หน่วย</th>
-                                  <th class="text-center" width="15%">ราคา (บาท)</th>
                                   <th class="text-center" width="12%">แก้ไข</th>
                                   <th class="text-center" width="12%">ลบ</th>
                                 </tr>
@@ -212,9 +211,6 @@
                                     <?php echo $value['unit']; ?>
                                   </td>
                                   <td class="text-center">
-                                    <?php echo $value['price']; ?>
-                                  </td>
-                                  <td class="text-center">
                                     <a href="edit_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="btn btn-success"><i class="fa fa-cog"></i></a>
                                   </td>
                                   <td class="text-center">
@@ -226,6 +222,49 @@
                                 ?>
                               </tbody>
                             </table>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /เเก้ไขสินค้า -->
+
+                <!-- แก้ไขสินค้าในรถ -->
+                <div class="tab-pane" id="settingproductcar">
+                  <div class="box box-default">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="container">
+                          <form action="edit_productcar.php" method="post" autocomplete="off">
+                            <div class="box-header with-border">
+                              <font size="4">
+                                <B>
+                                แก้ไขสินค้าในรถ
+                                </B>
+                              </font>
+                            </div>
+                              <table  class="table table-bordered">
+                                <tbody>
+                                  <th width="20%">กรุณาเลือกบุคคล</th>
+                                  <th>
+                                  <select class="form-control select2" style="width: 100%;" name="id_membercar">
+                                    <option selected="selected">-</option>
+                                  <?php
+                                    $sql_member = "SELECT * FROM member WHERE status='employee'";
+                                    $objq_member = mysqli_query($conn,$sql_member);
+                                    while($value = $objq_member->fetch_assoc()){
+                                  ?>
+                                    <option name="id_member" value="<?php echo $value['id_member'];?>"><?php echo $value['name'];?></option>
+                                  <?php }?>  
+                                  </select>
+                                  </th>
+                                </tbody>
+                              </table>
+                              <div class="box-footer" align="center">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-true"></i> ตกลง </button>
+                              </div>
                           </form>
                         </div>
                       </div>

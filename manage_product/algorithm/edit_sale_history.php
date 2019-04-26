@@ -20,11 +20,11 @@ require "../../session.php";
 
   if($after_num > $befor_num){
     $total_num = $after_num-$befor_num;
-    echo $total_num_product = $num_product-$total_num;
+    $total_num_product = $num_product-$total_num;
   }
   else {
     $total_num = $befor_num-$after_num;
-    echo $total_num_product = $num_product+$total_num;
+    $total_num_product = $num_product+$total_num;
     }
     
     ///update จำนวนคงเหลือของสินค้า

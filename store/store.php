@@ -52,7 +52,7 @@
 <div class="wrapper">
 
   <header class="main-header">
-    <nav class="navbar navbar-static-top"> </nav>
+  <?php require('menu/header_logout.php');?>
   </header>
 
   <!-- Content Wrapper. Contains page content -->
@@ -162,7 +162,14 @@
         checkboxClass: 'icheckbox_flat-blue',
         radioClass: 'iradio_flat-blue'
       }
+      
                                                           );
+      //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+
       //Enable check and uncheck all functionality
       $(".checkbox-toggle").click(function () {
         var clicks = $(this).data('clicks');
@@ -197,6 +204,7 @@
         }
       }
                               );
+                              
     }
      );
   </script>

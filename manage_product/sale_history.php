@@ -60,8 +60,7 @@
                 <th class="text-center" width="5%">แก้ไข</th>
               </tr>
               <?php #endregion
-																$date = "SELECT * FROM price_history INNER JOIN product ON product.id_product = price_history.id_product 
-																					WHERE DATE_FORMAT(price_history.datetime,'%d-%m-%Y')='$strDate' AND price_history.id_zone = '$id_zone' AND price_history.status = 'sale'";
+																$date = "SELECT * FROM price_history INNER JOIN product ON product.id_product = price_history.id_product	WHERE DATE_FORMAT(price_history.datetime,'%d-%m-%Y')='$strDate' AND price_history.id_zone = '$id_zone' AND price_history.status = 'sale'";
 																$objq = mysqli_query($conn,$date);
 																while($value = $objq ->fetch_assoc()){
 															?>

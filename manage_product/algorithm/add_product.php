@@ -4,7 +4,6 @@
  $id_member = $_POST['id_member'];
  $note = $_POST['note'];
  $status = $_POST['status'];
- print_r($_POST);
   if($status == 'etc'){
     //----------------------------------mansge num_product = etc ------------------------------------
     for($i=0;$i < count($_POST['id_product']); $i++){
@@ -19,11 +18,11 @@
         $insert_num = "INSERT INTO num_product (num, id_product, id_zone)
         VALUE ($num_after, $id_product, $id_zone)";  
         mysqli_query($conn,$insert_num);
-        echo "1";
+        
        }else{
         $update_num_product = "UPDATE num_product SET num = $total_num WHERE id_product = $id_product AND id_zone = $id_zone";
         mysqli_query($conn,$update_num_product);
-        echo "2";
+       
        }
         
         //-------------------------INSERT add_history---------------------------------------
@@ -52,7 +51,7 @@
                       VALUE ($num_after, $id_product, $id_zone)";  
           mysqli_query($conn,$insert_num_product);
         }else{
-          echo $num = $num_after + $objr_product['num'];
+          $num = $num_after + $objr_product['num'];
           $update_num_product = "UPDATE num_product SET num = $num WHERE id_product = $id_product AND id_zone = $id_zone";
           mysqli_query($conn,$update_num_product);
         }

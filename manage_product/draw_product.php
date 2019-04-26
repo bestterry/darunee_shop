@@ -192,7 +192,7 @@ folder instead of downloading all of them to reduce the load. -->
                 </i>
               </a>
 
-              <button type="submit" class="btn btn-success pull-right">
+              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";>
                 <i class="fa fa-floppy-o"> บันทึก
                 </i>
               </button>

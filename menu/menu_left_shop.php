@@ -148,6 +148,92 @@
               </form>
             </div>
           </div>
+
+           <!-- แยกสินค้า -->
+           <li><a href="#" data-toggle="modal" data-target="#myModal3"><i class="fa fa-inbox"></i> แยกสินค้า </a></li>
+          <div class="modal fade" id="myModal3" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <form action="manage_product/sr_product.php" method="post">
+                <div class="modal-content text-center">
+                  <div class="modal-header">
+                    <font size="5"><B align="center"> เลือกสินค้าที่ต้องการแยก </B></font>
+                  </div>
+                  <div class="modal-body table-responsive mailbox-messages">
+                    <div class="table-responsive mailbox-messages">
+                      <table class="table table-hover table-striped table-bordered">
+                        <tbody>
+                          <tr>
+                            <th class="text-center" width="20%">เลือกสินค้า</th>
+                            <th class="text-center" width="35%">ชื่อสินค้า</th>
+                            <th class="text-center" width="15%">คงเหลือ</th>
+                          <tr>
+                            <?php 
+                                                $sr_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_zone= $id_zone";
+                                                $sql_sr_product = mysqli_query($conn,$sr_product);
+                                                while($product = $sql_sr_product ->fetch_assoc()){
+                                                    $id_product = $product['id_product'];
+                                                    if($id_product==1){ 
+                                            ?>
+                            <td class="text-center" width="15%">
+                              <input type="radio" class="minimal" name="id_numproduct" value="<?php echo $product['id_numproduct']; ?>">
+                            </td>
+                            <td width="35%"><?php echo $product['name_product'].' ('.$product['unit'].')'; ?></td>
+                            <td class="text-center" width="15%"><?php echo $product['num']; ?></td>
+                          </tr>
+                          <?php
+                                                    }else if($id_product==3) { 
+                                            ?>
+                          <tr>
+                            <td class="text-center" width="15%">
+                              <input type="radio" class="minimal" name="id_numproduct"
+                                value="<?php echo $product['id_numproduct']; ?>">
+                            </td>
+                            <td width="35%"><?php echo $product['name_product'].' ('.$product['unit'].')'; ?></td>
+                            <td class="text-center" width="15%"><?php echo $product['num']; ?></td>
+                          </tr>
+                          <?php
+                                                    }else if($id_product==5) { 
+                                            ?>
+                          <tr>
+                            <td class="text-center" width="15%">
+                              <input type="radio" class="minimal" name="id_numproduct"
+                                value="<?php echo $product['id_numproduct']; ?>">
+                            </td>
+                            <td width="35%"><?php echo $product['name_product'].' ('.$product['unit'].')'; ?></td>
+                            <td class="text-center" width="15%"><?php echo $product['num']; ?></td>
+                          </tr>
+                          <?php
+                                                    }else if($id_product==9) { 
+                                            ?>
+                          <tr>
+                            <td class="text-center" width="15%">
+                              <input type="radio" class="minimal" name="id_numproduct"
+                                value="<?php echo $product['id_numproduct']; ?>">
+                            </td>
+                            <td width="35%"><?php echo $product['name_product'].' ('.$product['unit'].')'; ?></td>
+                            <td class="text-center" width="15%"><?php echo $product['num']; ?></td>
+                          </tr>
+                          <?php            
+                                                    }else{
+
+                                                    }
+                                                }
+                                            ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close">
+                        ปิดหน้าต่างนี้</i></button>
+                    <button type="submit" class="btn btn-success pull-right">ถัดไป ==>></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- /แยกสินค้า -->
+
           <!-- /ประวัติขายสินค้า -->
           <li><a href="manage_product/sale_history.php"><i class="fa fa-exchange"></i> ยอดขายประจำวัน</a></li>
           <!-- /ประวัติขายสินค้า -->
@@ -201,7 +287,7 @@
               </form>
             </div>
           </div>
-          <li><a href="login/logout.php"><i class="fa fa-power-off">  </i> ออกจากระบบ </a></li>
+          
           <!--ประวัติเพิ่ม-ถอน อุปกรณ์ -->
         </ul>
       </div>

@@ -218,9 +218,8 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-              <a type="block" href="../product.php" class="btn btn-success pull-left">
-                <<= กลับหน้าหลัก </a> <button type="submit" class="btn btn-success pull-right"><i class="fa fa-save">
-                    บันทึก</i></button>
+              <a type="block" href="../product.php" class="btn btn-success pull-left"><<= กลับหน้าหลัก </a> 
+              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save">  บันทึก</i></button>
             </div>
             </form>
             <!-- /.box-footer -->

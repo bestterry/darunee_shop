@@ -47,7 +47,7 @@
   <div class="wrapper">
 
     <header class="main-header">
-    <nav class="navbar navbar-static-top">
+    <?php require('menu/header_logout.php');?>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

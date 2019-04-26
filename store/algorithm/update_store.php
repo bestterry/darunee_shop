@@ -15,8 +15,7 @@
     }
     else
     {
-        $update_store = " UPDATE store_incar
-                          SET bring = $surplus, input = 0, draw = 0, sale = 0, etc=0, ret=0, surplus=0, count = 0 
+        $update_store = " UPDATE store_incar SET bring = $surplus, input = 0, draw = 0, sale = 0, etc=0, ret=0, surplus=0, count = 0 
                           WHERE id_store_incar =  $id_store_incar";
         mysqli_query($conn,$update_store);
     }   

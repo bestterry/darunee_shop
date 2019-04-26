@@ -1,12 +1,15 @@
 <?php 
    require "../../config_database/config.php";
-    echo $id_numproduct = $_POST['id_numproduct'].'<br>';
-    echo $num = $_POST['num'];
+     $id_numproduct = $_POST['id_numproduct'];
+     $num = $_POST['num'];
         
-
-        $update_product = "UPDATE num_product
-        SET num = '$num'
-        WHERE id_numproduct ='$id_numproduct'";
-        mysqli_query($conn,$update_product);
+        $update_product = "UPDATE num_product SET num = '$num' WHERE id_numproduct ='$id_numproduct'";
+        if ($conn->query($update_product) === TRUE) {
+            echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . $conn->error;
+        }
+        
+        $conn->close();
         header('Location: ../../product.php');
 ?>

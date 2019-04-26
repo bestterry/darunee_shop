@@ -48,7 +48,7 @@
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
     <header class="main-header">
-      <nav class="navbar navbar-static-top"> </nav>
+    <?php require('menu/header_logout.php');?>
     </header>
 
     <!-- Content Wrapper. Contains page content -->
@@ -82,7 +82,119 @@
                                 $query_product2 = mysqli_query($conn,$list_product);
                                 $strDate = date('d-m-Y');
                               ?>
+                            <!-- --------------------------------ประวัติรับเข้าสินค้า-------------------------------- -->
+                            <?php
+                              $date = "SELECT * FROM draw_history 
+                              INNER JOIN member ON draw_history.id_member = member.id_member 
+                              INNER JOIN product ON draw_history.id_product = product.id_product
+                              INNER JOIN zone ON draw_history.id_zone = zone.id_zone
+                              WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND draw_history.id_member = '$id_member' ";
+                              $objq = mysqli_query($conn,$date);
+                              if(mysqli_num_rows($objq)==0) {} else{
+                             ?>
+                            <div class="box-header with-border">
+                              <font size="4">
+                                <B> รับเข้าสินค้า ประจำวันที่(
+                                  <font size="4" color="red">
+                                    <?php echo $strDate = date('d-m-Y');?>
+                                  </font>)
+                              </font>
+                              </B>
+                            </div>
+                            <!-- /.box-header -->
+                            <table class="table table-bordered">
+                              <tbody>
+                                <tr bgcolor="#99CCFF">
+                                  <th class="text-center" width="35%">รายการ
+                                  </th>
+                                  <th class="text-center" width="15%">จำนวน
+                                  </th>
+                                  <th class="text-center" width="12%">เบิกจาก
+                                  </th>
+                                </tr>
+                                <?php #endregion
+                                    while($value = $objq ->fetch_assoc()){
+                                  ?>
+                                <tr>
+                                  <td>
+                                    <?php echo $value['name_product'].'  ('.$value['unit'].')'; ?>
+                                  </td>
+                                  <td class="text-center">
+                                    <?php echo $value['num_draw'];?>
+                                  </td>
+                                  <td class="text-center">
+                                    <?php echo $value['name_zone']; ?>
+                                  </td>
+                                  
+                                </tr>
+                                <?php
+                                    }
+                                ?>
+                              </tbody>
+                            </table>
+                            <?php }?>
+                            <!-- --------------------------------//ประวัติรับเข้าสินค้า-------------------------------- -->
+                            <!-- --------------------------------ประวัติรับโอนสินค้า-------------------------------- -->
+                            <?php
+                              $change_bwt_car = "SELECT * FROM change_bwt_car 
+                              INNER JOIN member ON change_bwt_car.id_member_receive = member.id_member 
+                              INNER JOIN product ON change_bwt_car.id_product = product.id_product
+                              WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND change_bwt_car.id_member_send = '$id_member' ";
+                              $objq_change = mysqli_query($conn,$change_bwt_car);
+                              if(mysqli_num_rows($objq_change)==0) {} else{
+                            ?>
+                            <div class="box-header with-border">
+                              <font size="4">
+                                <B> โอนสินค้า ประจำวันที่(
+                                  <font size="4" color="red">
+                                    <?php echo $strDate = date('d-m-Y');?>
+                                  </font>)
+                              </font>
+                              </B>
+                            </div>
+                            <!-- /.box-header -->
+                            <table class="table table-bordered">
+                              <tbody>
+                                <tr bgcolor="#99CCFF">
+                                  <th class="text-center" width="35%">รายการ
+                                  </th>
+                                  <th class="text-center" width="15%">จำนวน
+                                  </th>
+                                  <th class="text-center" width="12%">โอนให้
+                                  </th>
+                                </tr>
+                                <?php #endregion
+                                    while($value = $objq_change ->fetch_assoc()){
+                                  ?>
+                                <tr>
+                                  <td>
+                                    <?php echo $value['name_product'].' ('.$value['unit'].')'; ?>
+                                  </td>
+                                  <td class="text-center">
+                                    <?php echo $value['num'];?>
+                                  </td>
+                                  <td class="text-center">
+                                    <?php echo $value['name']; ?>
+                                  </td>
+                                  
+                                </tr>
+                                <?php
+                                    }
+                                ?>
+                              </tbody>
+                            </table>
+                            <?php }?>
+                            <!-- --------------------------------//ประวัติโอนสินค้า-------------------------------- -->
+
                             <!-- --------------------------------ประวัติการขายสินค้า-------------------------------- -->
+                            <?php 
+                              $date = "SELECT * FROM sale_car_history
+                              WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_member = '$id_member' AND status='sale'";
+                              $objq = mysqli_query($conn,$date);
+                              if(mysqli_num_rows($objq)==0){
+
+                              }else{
+                            ?>
                             <div class="box-header with-border">
                               <font size="4">
                                 <B> ประวัติการขายสินค้า ประจำวันที่(
@@ -110,9 +222,6 @@
                                   </th>
                                 </tr>
                                 <?php #endregion
-                                    $date = "SELECT * FROM sale_car_history
-                                    WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_member = '$id_member' AND status='sale'";
-                                    $objq = mysqli_query($conn,$date);
                                     while($value = $objq ->fetch_assoc()){
                                       $id_sale = $value['id_sale_history'];
                                       $SQL_product = "SELECT * FROM product INNER JOIN sale_car_history 
@@ -149,6 +258,7 @@
                                 ?>
                               </tbody>
                             </table>
+                                  <?php }?>
                             <!-- --------------------------------//ประวัติการขายสินค้า-------------------------------- -->
                             <!-- --------------------------------ยอดขายสินค้า-------------------------------- -->
                             <div class="box-header with-border">

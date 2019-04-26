@@ -45,7 +45,7 @@ require "../session.php";
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
     <header class="main-header">
-
+    <?php require('menu/header_logout.php');?>
     </header>
 
     <!-- Content Wrapper. Contains page content -->

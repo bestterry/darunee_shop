@@ -1,7 +1,6 @@
 <?php 
  require "../../config_database/config.php";
  require "../../session.php";
-  print_r($_POST);
    $id_product = $_POST["id_product"];
    $num_befor = $_POST['num_befor'];
    $num_after = $_POST['num_after'];

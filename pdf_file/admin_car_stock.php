@@ -35,11 +35,11 @@ class PDF extends FPDF
         $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'สต๊อก    รถทั้งหมด') , 0 , 1,'L' );
         $this->Ln(3);
         $this->SetFont('angsana','',14);
-        $this->Cell(15,10,iconv('UTF-8','cp874','ที่'),1,0,'C');
-        $this->Cell(60,10,iconv('UTF-8','cp874','ชื่อสินค้า'),1,0,'C');
+        $this->Cell(10,10,iconv('UTF-8','cp874','ที่'),1,0,'C');
+        $this->Cell(50,10,iconv('UTF-8','cp874','ชื่อสินค้า'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','หน่วย'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','ยุทธ'),1,0,'C');
-        $this->Cell(14,10,iconv('UTF-8','cp874','ลิน'),1,0,'C');
+        $this->Cell(14,10,iconv('UTF-8','cp874','นลิน'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','เอปุ้ย'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','เจ๋ง'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','เอ๋ลังกา'),1,0,'C');
@@ -50,7 +50,9 @@ class PDF extends FPDF
         $this->Cell(14,10,iconv('UTF-8','cp874','หนึ่ง'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','กร'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','เอี่ยว'),1,0,'C');
-       $this->Cell(25,10,iconv('UTF-8','cp874','รวมทั้งหมด'),1,0,'C');
+        $this->Cell(14,10,iconv('UTF-8','cp874','รีโว่ สนง.'),1,0,'C');
+        $this->Cell(14,10,iconv('UTF-8','cp874','รีโว่5'),1,0,'C');
+       $this->Cell(18,10,iconv('UTF-8','cp874','รวมทั้งหมด'),1,0,'C');
             $this->Ln(10);
         
     }
@@ -71,7 +73,7 @@ class PDF extends FPDF
 $pdf=new PDF('L','mm','A4');
             // ตั้งค่าขอบกระดาษทุกด้าน 20 มิลลิเมตร
             $pdf->AliasNbPages();
-            $pdf->SetMargins(10,10,10);
+            $pdf->SetMargins(5,10,10);
             $pdf->AddFont('angsana','','angsa.php');
             //สร้างหน้าเอกสาร
             $pdf->AddPage();
@@ -83,12 +85,12 @@ $pdf=new PDF('L','mm','A4');
           $query_product2 = mysqli_query($conn,$list_product);
           $a=1;
             while($product = $query_product ->fetch_assoc()){
-              $pdf->Cell(15,8,iconv('UTF-8','cp874',$a),1,0,'C');
-              $pdf->Cell(60,8,iconv('UTF-8','cp874',$product['name_product']),1,0,'C');
+              $pdf->Cell(10,8,iconv('UTF-8','cp874',$a),1,0,'C');
+              $pdf->Cell(50,8,iconv('UTF-8','cp874',$product['name_product']),1,0,'C');
               $pdf->Cell(14,8,iconv('UTF-8','cp874',$product['unit']),1,0,'C');
 
               // -----------------------พื้นที่----------------------------------
-              for ($i=4; $i < 16; $i++) { 
+              for ($i=4; $i < 18; $i++) { 
                        
                 $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $i";
                 $objq_num = mysqli_query($conn,$SQL_num);
@@ -107,9 +109,9 @@ $pdf=new PDF('L','mm','A4');
               $objr_num_car = mysqli_fetch_array($objq_num_car);
               $total_numcar = $objr_num_car['SUM(num)'];
               if(!isset($total_numcar)){
-                $pdf->Cell(25,8,iconv('UTF-8','cp874',''),1,0,'C');
+                $pdf->Cell(18,8,iconv('UTF-8','cp874',''),1,0,'C');
               }else{
-                $pdf->Cell(25,8,iconv('UTF-8','cp874',$objr_num_car['SUM(num)']),1,0,'C');
+                $pdf->Cell(18,8,iconv('UTF-8','cp874',$objr_num_car['SUM(num)']),1,0,'C');
               }
               //-------------------------//รวมรถ----------------------------------
            

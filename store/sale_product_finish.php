@@ -1,11 +1,3 @@
-<?php #endregion
-  // for($i=0;$i<count($_POST['id_numPD']);$i++){
-  //   echo $_POST['id_numPD'][$i].':';
-  //   echo $_POST['num_product'][$i].':';
-  //   echo $_POST['price_product'][$i].'<br>';
-  // }
-?>
-
 <?php 
   require "../config_database/config.php";
   require "../session.php";  
@@ -53,9 +45,7 @@
 <div class="wrapper">
 
   <header class="main-header">
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-    </nav>
+  <?php require('menu/header_logout.php');?>
   </header>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
