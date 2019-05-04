@@ -121,6 +121,8 @@ require "../session.php";
                                 $id_product2 = 6;
                               }elseif ($id_product==9) {
                                 $id_product2 = 10;
+                              }elseif ($id_product==32) {
+                                $id_product2 = 33;
                               }
                               ?>
                           <tr>
@@ -144,7 +146,7 @@ require "../session.php";
               <!-- /.mailbox-read-message -->
             </div>
             <div class="box-footer">
-              <a type="block" href="store.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i> </a> 
+              <a type="block" href="../product.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i> </a> 
               <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-calculator"> บันทึก </i></button>
             </div>
             <!-- /.box-footer -->

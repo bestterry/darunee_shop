@@ -23,6 +23,8 @@ $num_after = $_POST['num_after'];
     $total_pd = $num_after * 120;
   }elseif ($id_product==9) {
     $total_pd = $num_after * 24;
+  }elseif ($id_product==32) {
+    $total_pd = $num_after * 24;
   }
 
     $check_num = "SELECT num FROM num_product WHERE id_product = $id_product2 AND id_zone = $id_zone";

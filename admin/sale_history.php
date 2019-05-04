@@ -2,6 +2,7 @@
 
   require "../config_database/config.php";
   require "../session.php"; 
+  require "menu/date.php";
 
 ?>
 
@@ -48,7 +49,10 @@
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
     <header class="main-header">
-    <?php require('menu/header_logout.php');?>
+    <?php 
+      require('menu/header_logout.php');
+      
+      ?>
     </header>
 
     <!-- Content Wrapper. Contains page content -->
@@ -67,6 +71,9 @@
                 <li><a href="#timeline" data-toggle="tab">ยอดขายรายวัน</a></li>
                 <li><a href="#checkday" data-toggle="tab">ตรวจสอบยอดขายรายวัน</a></li>
                 <li><a href="#settings" data-toggle="tab">ตรวจสอบยอดขาย</a></li>
+                <div align="right">
+                  <a href="admin.php" class="btn btn-success"><i class="fa fa-home"> กลับสู่เมนูหลัก </i></a>
+                </div>
               </ul>
               <div class="tab-content">
                 <!-- /.tab-pane -->
@@ -86,10 +93,13 @@
                             <!-- ------------------------------ยอดขายรวม---------------------------- -->
                             <div class="box-header with-border">
                               <font size="4">
-                                <B>ยอดขายสินค้า ประจำวันที่(
+                                <B>ยอดขาย 
                                   <font size="4" color="red">
-                                    <?php echo $strDate = date('d-m-Y');?>
-                                  </font>)
+                                    <?php 
+                                        $strDate = date('d-m-Y');
+                                        echo DateThai($strDate);
+                                    ?>
+                                  </font>
                               </font>
                               </B>
                             </div>
@@ -101,9 +111,9 @@
                             <table class="table table-bordered">
                               <tbody>
                                 <tr bgcolor="#99CCFF">
-                                  <th class="text-center" width="50%">รายการ</th>
+                                  <th class="text-center" width="50%">สินค้า_หน่วย</th>
                                   <th class="text-center" width="25%">จำนวน</th>
-                                  <th class="text-center" width="25%">เงินขาย(บาท)</th>
+                                  <th class="text-center" width="25%">เงินขาย(บ)</th>
                                 </tr>
                                 <?php #endregion
                                                   $total_money = 0;
@@ -133,11 +143,10 @@
                                               ?>
                                 <tr>
                                   <td>
-                                    <?php echo $value['name_product']; ?>
+                                    <?php echo $value['name_product'].'_'.$value['unit']; ?>
                                   </td>
                                   <td class="text-center">
                                     <?php echo $total_num;?>
-                                    <?php echo $value['unit']; ?>
                                   </td>
                                   <td class="text-center">
                                     <?php echo $total_money; ?>
@@ -149,8 +158,8 @@
                                                   }
                                                   ?>
                                 <tr>
-                                  <th></th>
-                                  <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
+                                  <th bgcolor="#EAF4FF"></th>
+                                  <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                                   <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_all_money; ?></th>
                                 </tr>
                               </tbody>
@@ -160,33 +169,32 @@
                             <!-- ------------------------------ร้านเวียงป่าเป้า---------------------------- -->
                             <B>
                               <font size="4">
-                                ร้านเวียงป่าเป้า
+                                เวียงป่าเป้า
                               </font>
                             </B>
                             <table class="table table-bordered">
                               <tbody>
                                 <tr bgcolor="#99CCFF">
-                                  <th class="text-center" width="35%">รายการ</th>
-                                  <th class="text-center" width="15%">จำนวน</th>
+                                  <th class="text-center" width="25%">สินค้า_หน่วย</th>
+                                  <th class="text-center" width="13%">จำนวน</th>
                                   <th class="text-center" width="12%">บ/หน่วย</th>
-                                  <th class="text-center" width="13%">เงินขาย(บาท)</th>
-                                  <th class="text-center" width="20%">หมายเหตุ</th>
+                                  <th class="text-center" width="13%">เงินขาย(บ)</th>
+                                  <th class="text-center" width="40%">รายละเอียด</th>
                                 </tr>
                                 <?php
                                                   $total_money = 0;
                                                   $date = "SELECT * FROM product INNER JOIN price_history 
                                                             ON product.id_product = price_history.id_product 
-                                                            WHERE DATE_FORMAT(price_history.datetime,'%d-%m-%Y')='$strDate' AND price_history.status = 'sale'";
+                                                            WHERE DATE_FORMAT(price_history.datetime,'%d-%m-%Y')='$strDate'";
                                                   $objq = mysqli_query($conn,$date);
                                                   while($value = $objq ->fetch_assoc()){ 
                                               ?>
                                 <tr>
                                   <td>
-                                    <?php echo $value['name_product']; ?>
+                                    <?php echo $value['name_product'].'_'.$value['unit']; ?>
                                   </td>
                                   <td class="text-center">
                                     <?php echo $value['num'];?>
-                                    <?php echo $value['unit']; ?>
                                   </td>
                                   <td class="text-center">
                                     <?php echo $value['price']; ?>
@@ -203,11 +211,11 @@
                                                     }
                                                   ?>
                                 <tr>
-                                  <td style="visibility:collapse;"></td>
-                                  <td style="visibility:collapse;"></td>
-                                  <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
+                                  <th bgcolor="#EAF4FF" class="text-center"></th>
+                                  <th bgcolor="#EAF4FF" class="text-center"></th>
+                                  <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                                   <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_money;?></th>
-                                  <td style="visibility:collapse;"></td>
+                                  <td bgcolor="#EAF4FF"></td>
                                 </tr>
                               </tbody>
                             </table>
@@ -215,7 +223,7 @@
 
                             <!-- ------------------------------//รถรวม---------------------------- -->
 
-                            <?php for ($i=4; $i < 15; $i++) { 
+                            <?php for ($i=4; $i < 18; $i++) { 
                                                       $sql_member = "SELECT * FROM member WHERE id_member = $i";
                                                       $objq_member = mysqli_query($conn,$sql_member);
                                                       $objr_member = mysqli_fetch_array($objq_member);
@@ -237,27 +245,26 @@
                             <table class="table table-bordered">
                               <tbody>
                                 <tr bgcolor="#99CCFF">
-                                  <th class="text-center" width="35%">รายการ</th>
-                                  <th class="text-center" width="15%">จำนวน</th>
+                                  <th class="text-center" width="25%">สินค้า_หน่วย</th>
+                                  <th class="text-center" width="13%">จำนวน</th>
                                   <th class="text-center" width="12%">บ/หน่วย</th>
-                                  <th class="text-center" width="13%">เงินขาย(บาท)</th>
-                                  <th class="text-center" width="20%">หมายเหตุ</th>
+                                  <th class="text-center" width="13%">เงินขาย(บ)</th>
+                                  <th class="text-center" width="40%">รายละเอียด</th>
                                 </tr>
                                 <?php #endregion
                                               $total_money = 0;
                                                     $SQL_product = "SELECT * FROM product INNER JOIN sale_car_history
                                                                     ON product.id_product = sale_car_history.id_product 
-                                                                    WHERE sale_car_history.id_member = $i AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND sale_car_history.status = 'sale'";
+                                                                    WHERE sale_car_history.id_member = $i AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' ";
                                                     $objq_product = mysqli_query($conn,$SQL_product);
                                                     while($product = $objq_product -> fetch_assoc()){
                                               ?>
                                 <tr>
                                   <td>
-                                    <?php echo $product['name_product']; ?>
+                                    <?php echo $product['name_product'].'_'.$product['unit']; ?>
                                   </td>
                                   <td class="text-center">
                                     <?php echo $product['num'];?>
-                                    <?php echo $product['unit']; ?>
                                   </td>
                                   <td class="text-center">
                                     <?php echo $product['price']; ?>
@@ -274,11 +281,11 @@
                                                   } 
                                               ?>
                                 <tr>
-                                  <td style="visibility:collapse;"></td>
-                                  <td style="visibility:collapse;"></td>
-                                  <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
+                                  <td bgcolor="#EAF4FF"></td>
+                                  <td bgcolor="#EAF4FF"></td>
+                                  <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                                   <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_money;?></th>
-                                  <td style="visibility:collapse;"></td>
+                                  <td bgcolor="#EAF4FF"></td>
                                 </tr>
                               </tbody>
                             </table>
@@ -291,10 +298,12 @@
                             <!-- --------------------------------ยอดแถมสินค้า-------------------------------- -->
                             <div class="box-header with-border">
                               <font size="4">
-                                <B> ยอดแถมสินค้า ประจำวันที่(
+                                <B> ยอดแถม 
                                   <font size="4" color="red">
-                                    <?php echo $strDate = date('d-m-Y');?>
-                                  </font>)
+                                    <?php 
+                                      echo DateThai($strDate);
+                                    ?>
+                                  </font>
                               </font>
                               </B>
                             </div>
@@ -302,7 +311,7 @@
                             <table class="table table-bordered">
                               <tbody>
                                 <tr bgcolor="#99CCFF">
-                                  <th class="text-center" width="40%">รายการ
+                                  <th class="text-center" width="0%">สินค้า_หน่วย
                                   </th>
                                   <th class="text-center" width="20%">จำนวน
                                   </th>
@@ -327,11 +336,10 @@
                                                       ?>
                                 <tr>
                                   <td>
-                                    <?php echo $objr_NameProduct['name_product']; ?>
+                                    <?php echo $objr_NameProduct['name_product'].'_'.$objr_NameProduct['unit']; ?>
                                   </td>
                                   <td class="text-center">
                                     <?php echo $num_product; ?>
-                                    <?php echo $objr_NameProduct['unit']; ?>
                                   </td>
                                 </tr>
                                 <?php 
@@ -345,8 +353,7 @@
                         </div>
                       </div>
                       <div class="box-footer" align="center">
-                        <a href="../pdf_file/admin_sale_history.php" class="btn btn-success"><i class="fa fa-print">
-                            พิมพ์ </i></a>
+                        <a href="../pdf_file/admin_sale_history.php" class="btn btn-success"><i class="fa fa-print">พิมพ์ </i></a>
                       </div>
                     </div>
                   </div>

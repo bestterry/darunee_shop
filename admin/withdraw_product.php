@@ -102,7 +102,7 @@
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="5%">เลือก
                         </th>
-                        <th class="text-center" width="30%">ชื่อสินค้า
+                        <th class="text-center" width="30%">สินค้า_หน่วย
                         </th>
                         <th class="text-center" width="15%">จำนวนสินค้าที่มี
                         </th>
@@ -118,7 +118,7 @@
                           <input type="checkbox" name="id_num_product[]" value="<?php echo $list['id_numproduct']; ?>">
                         </td>
                         <td>
-                          <?php echo $list['name_product'].' ('.$list['unit'].')'; ?>
+                          <?php echo $list['name_product'].'_'.$list['unit']; ?>
                         </td>
                         <td class="text-center">
                           <?php echo $list['num'];?>
@@ -135,7 +135,7 @@
                     <table class="table table-bordered table-hover">
                       <tbody>
                         <tr>
-                          <th class="text-center">ชื่อผู้เบิกสินค้า
+                          <th bgcolor="#99CCFF" class="text-center">ผู้เบิก
                           </th>
                           <th bgcolor="#99CCFF" class="text-center">
                             <?php #endregion

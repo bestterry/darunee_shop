@@ -145,7 +145,7 @@
                             ?>
                             <div class="box-header with-border">
                               <font size="4">
-                                <B> โอนสินค้า ประจำวันที่(
+                                <B> โอนสินค้าระหว่างรถ ประจำวันที่(
                                   <font size="4" color="red">
                                     <?php echo $strDate = date('d-m-Y');?>
                                   </font>)
@@ -185,11 +185,62 @@
                             </table>
                             <?php }?>
                             <!-- --------------------------------//ประวัติโอนสินค้า-------------------------------- -->
+                            <!-- --------------------------------ประวัติรับเข้าสินค้าระหว่างรถ-------------------------------- -->
+                            <?php
+                              $change_bwt_car = "SELECT * FROM change_bwt_car 
+                              INNER JOIN member ON change_bwt_car.id_member_send = member.id_member 
+                              INNER JOIN product ON change_bwt_car.id_product = product.id_product
+                              WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND change_bwt_car.id_member_receive = '$id_member' ";
+                              $objq_change = mysqli_query($conn,$change_bwt_car);
+                              if(mysqli_num_rows($objq_change)==0) {} else{
+                            ?>
+                            <div class="box-header with-border">
+                              <font size="4">
+                                <B> รับเข้าสินค้าระหว่างรถ ประจำวันที่(
+                                  <font size="4" color="red">
+                                    <?php echo $strDate = date('d-m-Y');?>
+                                  </font>)
+                              </font>
+                              </B>
+                            </div>
+                            <!-- /.box-header -->
+                            <table class="table table-bordered">
+                              <tbody>
+                                <tr bgcolor="#99CCFF">
+                                  <th class="text-center" width="35%">รายการ
+                                  </th>
+                                  <th class="text-center" width="15%">จำนวน
+                                  </th>
+                                  <th class="text-center" width="12%">รับจาก
+                                  </th>
+                                </tr>
+                                <?php #endregion
+                                    while($value = $objq_change ->fetch_assoc()){
+                                  ?>
+                                <tr>
+                                  <td>
+                                    <?php echo $value['name_product'].' ('.$value['unit'].')'; ?>
+                                  </td>
+                                  <td class="text-center">
+                                    <?php echo $value['num'];?>
+                                  </td>
+                                  <td class="text-center">
+                                    <?php echo $value['name']; ?>
+                                  </td>
+                                  
+                                </tr>
+                                <?php
+                                    }
+                                ?>
+                              </tbody>
+                            </table>
+                            <?php }?>
+                            <!-- --------------------------------//ประวัติรับเข้าสินค้าระหว่างรถ-------------------------------- -->
 
                             <!-- --------------------------------ประวัติการขายสินค้า-------------------------------- -->
                             <?php 
                               $date = "SELECT * FROM sale_car_history
-                              WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_member = '$id_member' AND status='sale'";
+                              WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_member = '$id_member'";
                               $objq = mysqli_query($conn,$date);
                               if(mysqli_num_rows($objq)==0){
 
@@ -208,17 +259,19 @@
                             <table class="table table-bordered">
                               <tbody>
                                 <tr bgcolor="#99CCFF">
-                                  <th class="text-center" width="35%">รายการ
+                                  <th class="text-center" width="30%">รายการ
                                   </th>
                                   <th class="text-center" width="15%">จำนวน
                                   </th>
                                   <th class="text-center" width="12%">บ/หน่วย
                                   </th>
-                                  <th class="text-center" width="13%">เงินขาย(บาท)
+                                  <th class="text-center" width="12%">เงินขาย(บาท)
                                   </th>
                                   <th class="text-center" width="20%">หมายเหตุ
                                   </th>
                                   <th class="text-center" width="5%">แก้ไข
+                                  </th>
+                                  <th class="text-center" width="5%">ลบ
                                   </th>
                                 </tr>
                                 <?php #endregion
@@ -249,6 +302,12 @@
                                   <td class="text-center">
                                     <a href="edit_sale_history.php?id_sale=<?php echo $id_sale;?>">
                                       <span class="glyphicon glyphicon-cog">
+                                      </span>
+                                    </a>
+                                  </td>
+                                  <td class="text-center">
+                                    <a onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')" href="algorithm/delete_sale.php?id_sale=<?php echo $id_sale;?>"=<?php echo $id_sale;?>">
+                                      <span class="glyphicon glyphicon-remove-circle">
                                       </span>
                                     </a>
                                   </td>
@@ -384,9 +443,8 @@
                           </div>
                         </div>
                       </div>
-                      <div class="box-footer" align="center">
-                        <a href="../pdf_file/admin_sale_history.php" class="btn btn-success"><i class="fa fa-print">
-                            พิมพ์ </i></a>
+                      <div class="box-footer">
+                      <a type="block" href="store.php" class="btn btn-success"><<= กลับหน้าหลัก </i></a>
                       </div>
                     </div>
                   </div>

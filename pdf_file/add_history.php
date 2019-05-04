@@ -1,6 +1,7 @@
 <?php
 require('fpdf.php');
 require('../config_database/config.php'); 
+require('../session.php'); 
 
   function DateThai($strDate)
       {
@@ -79,7 +80,7 @@ $pdf=new PDF('P','mm','A4');
                       $id_product = $history['id_product'];
                       $total_add = "SELECT SUM(add_history.num_add) FROM add_history 
                                       INNER JOIN product ON add_history.id_product=product.id_product
-                                      WHERE product.id_product = '$id_product' AND DATE_FORMAT(add_history.datetime,'%d-%m-%Y')='$strDate'";
+                                      WHERE product.id_product = '$id_product' AND DATE_FORMAT(add_history.datetime,'%d-%m-%Y')='$strDate' AND add_history.id_zone=$id_zone";
                       $objq_add = mysqli_query($conn,$total_add);
                       $objr_add = mysqli_fetch_array($objq_add);
                       $num_product = $objr_add['SUM(add_history.num_add)'];
@@ -108,7 +109,7 @@ $pdf=new PDF('P','mm','A4');
             $pdf->Cell(40,10,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
             $pdf->Ln(10);
             $date = "SELECT * FROM add_history
-                    WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
+                    WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_zone=$id_zone";
             $objq = mysqli_query($conn,$date);
             while($data = $objq ->fetch_assoc()){
                 $id_add = $data['id_add_history'];

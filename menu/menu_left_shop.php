@@ -213,12 +213,24 @@
                             <td width="35%"><?php echo $product['name_product'].' ('.$product['unit'].')'; ?></td>
                             <td class="text-center" width="15%"><?php echo $product['num']; ?></td>
                           </tr>
+                          <?php
+                                                    }else if($id_product==32) { 
+                                            ?>
+                          <tr>
+                            <td class="text-center" width="15%">
+                              <input type="radio" class="minimal" name="id_numproduct"
+                                value="<?php echo $product['id_numproduct']; ?>">
+                            </td>
+                            <td width="35%"><?php echo $product['name_product'].' ('.$product['unit'].')'; ?></td>
+                            <td class="text-center" width="15%"><?php echo $product['num']; ?></td>
+                          </tr>
                           <?php            
                                                     }else{
 
                                                     }
                                                 }
                                             ?>
+
                         </tbody>
                       </table>
                     </div>
@@ -244,8 +256,8 @@
           <li><a href="manage_product/add_history.php"><i class="fa fa-exchange"></i> ประวัติรับเข้าสินค้า </a></li>
           <!-- เเก้ไขอุปกรณ์  -->
           <!--เพิ่มรายการอุปกรณ์ -->
-          <li><a href="#" data-toggle="modal" data-target="#myModal3"><i class="fa fa-cog"></i>แก้ไขจำนวนสินค้า</a></li>
-          <div class="modal fade" id="myModal3" role="dialog">
+          <li><a href="#" data-toggle="modal" data-target="#myModal4"><i class="fa fa-cog"></i>แก้ไขจำนวนสินค้า</a></li>
+          <div class="modal fade" id="myModal4" role="dialog">
             <div class="modal-dialog modal-lg">
               <form action="manage_product/insert_product.php" method="post" autocomplete="off">
                 <div class="col-md-10 modal-content">

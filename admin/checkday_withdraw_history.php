@@ -1,6 +1,6 @@
 <?php
-require "../config_database/config.php";
-require "../session.php";
+  require "../config_database/config.php";
+  require "../session.php";
 ?>
 
 <!DOCTYPE html>
@@ -90,8 +90,12 @@ require "../session.php";
                           <font size="5"><B>ประวัติการเบิกสินค้า</B> </font>
                         </p>
                         <B>
-                          <font size="4">ประวัติการเบิกสินค้า ประจำวันที่(<font color="red"><?php echo $strDate = date('d-m-Y'); ?>
-                            </font>)</font>
+                          <font size="4">ประวัติการเบิกสินค้า วันที่<font color="red">
+                            <?php 
+                              $strDate = date('d-m-Y'); 
+                              echo DateThai($strDate);
+                            ?>
+                            </font>
                         </B>
                       </div>
                       <table class="table table-bordered">
@@ -146,10 +150,10 @@ require "../session.php";
                       <!-- ------------------------------ยอดขายรวม---------------------------- -->
                       <div class="box-header with-border">
                         <font size="4">
-                          <B> ยอดเบิกสินค้า ประจำวันที่(
+                          <B> ยอดเบิกสินค้า วันที่
                             <font size="4" color="red">
-                              <?php echo $strDate = date('d-m-Y'); ?>
-                            </font>)
+                              <?php echo DateThai($strDate); ?>
+                            </font>
                         </font>
                         </B>
                       </div>
@@ -166,7 +170,7 @@ require "../session.php";
                             $id_product = $history['id_product'];
                             $total_sale = "SELECT SUM(draw_history.num_draw) FROM draw_history 
                                               INNER JOIN product ON draw_history.id_product=product.id_product
-                                              WHERE draw_history.id_product = '$id_product' AND DATE_FORMAT(draw_history.datetime,'%d-%m-%Y')='$strDate'";
+                                              WHERE draw_history.id_product = '$id_product' AND DATE_FORMAT(draw_history.datetime,'%Y-%m-%d')='$day'";
                             $objq_sale = mysqli_query($conn, $total_sale);
                             $objr_sale = mysqli_fetch_array($objq_sale);
                             $num_product = $objr_sale['SUM(draw_history.num_draw)'];

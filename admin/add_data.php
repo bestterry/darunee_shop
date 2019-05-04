@@ -66,6 +66,7 @@
                 <li><a href="#addproduct" data-toggle="tab">เพิ่มสินค้า</a></li>
                 <li><a href="#settingproduct" data-toggle="tab">แก้ไขสินค้า</a></li>
                 <li><a href="#settingproductcar" data-toggle="tab">แก้ไขสินค้าในรถ</a></li>
+                <li><a href="#addproductcar" data-toggle="tab">เพิ่มสินค้าเข้ารถรถ</a></li>
               </ul>
               <div class="tab-content">
                 <!-- เพิ่มพนักงาน -->
@@ -272,6 +273,49 @@
                   </div>
                 </div>
                 <!-- /เเก้ไขสินค้า -->
+
+                <!-- เพิ่มสินค้ารถ -->
+                <div class="tab-pane" id="addproductcar">
+                  <div class="box box-default">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="container">
+                          <form action="add_numproductcar.php" method="post" autocomplete="off">
+                            <div class="box-header with-border">
+                              <font size="4">
+                                <B>
+                                เพิ่มสินค้ารถ
+                                </B>
+                              </font>
+                            </div>
+                              <table  class="table table-bordered">
+                                <tbody>
+                                  <th width="20%">กรุณาเลือกบุคคล</th>
+                                  <th>
+                                  <select class="form-control select2" style="width: 100%;" name="id_member">
+                                    <option selected="selected">-</option>
+                                  <?php
+                                    $sql_member = "SELECT * FROM member WHERE status='employee'";
+                                    $objq_member = mysqli_query($conn,$sql_member);
+                                    while($value = $objq_member->fetch_assoc()){
+                                  ?>
+                                    <option name="id_member" value="<?php echo $value['id_member'];?>"><?php echo $value['name'];?></option>
+                                  <?php }?>  
+                                  </select>
+                                  </th>
+                                </tbody>
+                              </table>
+                              <div class="box-footer" align="center">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-true"></i> ตกลง </button>
+                              </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /เพิ่มสินค้ารถ -->
 
               </div>
               <!-- /.tab-content -->

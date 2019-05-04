@@ -156,6 +156,17 @@
                             <td width="35%"><?php echo $product['name_product'].' ('.$product['unit'].')'; ?></td>
                             <td class="text-center" width="15%"><?php echo $product['num']; ?></td>
                           </tr>
+                          <?php
+                                                    }else if($id_product==32) { 
+                                            ?>
+                          <tr>
+                            <td class="text-center" width="15%">
+                              <input type="radio" class="minimal" name="id_numPD"
+                                value="<?php echo $product['id_numPD_car']; ?>">
+                            </td>
+                            <td width="35%"><?php echo $product['name_product'].' ('.$product['unit'].')'; ?></td>
+                            <td class="text-center" width="15%"><?php echo $product['num']; ?></td>
+                          </tr>
                           <?php            
                                                     }else{
 

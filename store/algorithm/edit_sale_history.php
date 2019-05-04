@@ -7,6 +7,7 @@
    $price = $_POST['price'];
    $money = $_POST['money'];
    $note = $_POST['note'];
+   $id_sale = $_POST['id_sale'];
    $total_num = 0;
    
    $sql_numpd_car = "SELECT * FROM numpd_car WHERE id_product = $id_product AND id_member = $id_member";
@@ -16,7 +17,7 @@
    $total_num = $num_pd + ($num_befor - $num_after);
     
   $sql_update_h = "UPDATE sale_car_history SET num=$num_after, price=$price, money=$money, note='$note' 
-                    WHERE id_product = $id_product AND id_member = $id_member";
+                    WHERE id_sale_history = $id_sale";
                     mysqli_query($conn,$sql_update_h);
   $sql_update_c = "UPDATE numpd_car SET num = $total_num
                     WHERE id_product = $id_product AND id_member = $id_member";

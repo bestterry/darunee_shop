@@ -2,7 +2,7 @@
 <div class="col-md-3">
     <div class="box box-solid">
         <div class="box-header with-border">
-            <font size="3"><B>เมนูจัดการสินค้า</B></font>
+            <font size="3"><B>เมนูหลัก</B></font>
         </div>
         <div class="box-body no-padding">
             <ul class="nav nav-pills nav-stacked" ata-widget="tree">
@@ -22,17 +22,22 @@
                                     <table class="table table-bordered table-hover">
                                     <tbody>
                                         <tr>
-                                        <th class="text-center" width="30%">สต๊อกสินค้า
-                                        </th>
+                                        <th class="text-center" width="30%"><font size="5">สต๊อก</font></th>
                                         <th bgcolor="#99CCFF" class="text-center" width="70%"> 
                                         <select name ="id_zone" class="form-control text-center select2" style="width: 100%;">
                                             <?php #endregion
                                             $sql_member = "SELECT * FROM zone ";
                                             $objq_member = mysqli_query($conn,$sql_member);
                                             while($member = $objq_member -> fetch_assoc()){
+                                                if ($member['id_zone']==8) {
+                                                    
+                                                }else{
                                             ?>
                                                 <option value="<?php echo $member['id_zone']; ?>"><?php echo $member['name_zone']; ?></option>
-                                            <?php } ?>
+                                            <?php
+                                                }   
+                                            } 
+                                            ?>
                                         </select>
                                         </th>
                                         </tr>
@@ -43,23 +48,26 @@
                                   <table class="table table-bordered table-hover">
                                     <tbody>
                                         <tr>
-                                        <th class="text-center" width="30%">ชื่อผู้เบิกสินค้า
-                                        </th>
+                                        <th class="text-center" width="30%"><font size="5">ผู้เบิก</font></th>
                                         <th bgcolor="#99CCFF" class="text-center" width="70%"> 
                                         <select name ="id_member" class="form-control text-center select2" style="width: 100%;">
                                             <?php #endregion
                                             $sql_member = "SELECT * FROM member WHERE status = 'employee'";
                                             $objq_member = mysqli_query($conn,$sql_member);
                                             while($member = $objq_member -> fetch_assoc()){
+                                                
                                             ?>
                                                 <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?></option>
-                                            <?php } ?>
+                                            <?php
+                                             } 
+                                            ?>
                                         </select>
                                         </th>
                                         </tr>
                                     </tbody>
                                     </table>
-                                  </div>
+                                    
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="submit"  class="btn btn-success pull-right">ถัดไป ==>></button>
@@ -86,17 +94,22 @@
                                     <table class="table table-bordered table-hover">
                                     <tbody>
                                         <tr>
-                                        <th class="text-center" width="30%">สต๊อกสินค้า
-                                        </th>
+                                        <th class="text-center" width="30%"><font size="5">สต๊อก</font></th>
                                         <th bgcolor="#99CCFF" class="text-center" width="70%"> 
                                         <select name ="id_zone" class="form-control text-center select2" style="width: 100%;">
                                             <?php #endregion
                                             $sql_member = "SELECT * FROM zone ";
                                             $objq_member = mysqli_query($conn,$sql_member);
                                             while($member = $objq_member -> fetch_assoc()){
+                                                if ($member['id_zone']==8) {
+                                                    
+                                                }else{
                                             ?>
                                                 <option value="<?php echo $member['id_zone']; ?>"><?php echo $member['name_zone']; ?></option>
-                                            <?php } ?>
+                                            <?php 
+                                                }
+                                              } 
+                                            ?>
                                         </select>
                                         </th>
                                         </tr>
@@ -107,8 +120,7 @@
                                   <table class="table table-bordered table-hover">
                                     <tbody>
                                         <tr>
-                                        <th class="text-center" width="30%">ชื่อผู้ส่งสินค้า
-                                        </th>
+                                        <th class="text-center" width="30%"><font size="5">ผู้ส่ง</font></th>
                                         <th bgcolor="#99CCFF" class="text-center" width="70%"> 
                                         <select name ="id_member" class="form-control text-center select2" style="width: 100%;">
                                             <?php #endregion

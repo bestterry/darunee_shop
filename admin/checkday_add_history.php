@@ -90,8 +90,8 @@ require "../session.php";
                           <font size="5"> <B>ประวัติรับเข้าสินค้า</B> </font>
                         </p>
                         <B>
-                          <font size="4">ประวัติรับเข้าสินค้า ประจำวันที่(<font color="red"> <?php echo DateThai($day); ?>
-                            </font>)</font>
+                          <font size="4">ประวัติรับเข้าสินค้า วันที่ <font color="red"> <?php echo DateThai($day); ?>
+                            </font>
                         </B>
                       </div>
                       <table class="table table-bordered">
@@ -146,10 +146,10 @@ require "../session.php";
                       <!-- ------------------------------ยอดขายรวม---------------------------- -->
                       <div class="box-header with-border">
                         <font size="4">
-                          <B> ยอดรับเข้าสินค้า ประจำวันที่(
+                          <B> ยอดรับเข้าสินค้า วันที่
                             <font size="4" color="red">
                               <?php echo DateThai($day); ?>
-                            </font>)
+                            </font>
                         </font>
                         </B>
                       </div>

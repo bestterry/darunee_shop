@@ -87,10 +87,10 @@
                       <!-- ------------------------------ยอดขายรวม---------------------------- -->
                       <div class="box-header with-border">
                         <font size="4">
-                          <B>ยอดขายสินค้า ประจำวันที่(
+                          <B>ยอดขายสินค้า_วันที่_
                             <font size="4" color="red">
                               <?php echo DateThai($day);?>
-                            </font>)
+                            </font>
                         </font>
                         </B>
                       </div>
@@ -102,9 +102,9 @@
                       <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="50%">รายการ</th>
+                            <th class="text-center" width="50%">สินค้า_หน่วย</th>
                             <th class="text-center" width="25%">จำนวน</th>
-                            <th class="text-center" width="25%">เงินขาย(บาท)</th>
+                            <th class="text-center" width="25%">เงินขาย(บ)</th>
                           </tr>
                           <?php #endregion
                               $total_money = 0;
@@ -134,7 +134,7 @@
                           ?>
                           <tr>
                             <td>
-                              <?php echo $value['name_product'].' ('.$value['unit'].')'; ?>
+                              <?php echo $value['name_product'].'_'.$value['unit']; ?>
                             </td>
                             <td class="text-center">
                               <?php echo $total_num;?>
@@ -150,7 +150,7 @@
                                       ?>
                           <tr>
                             <th></th>
-                            <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
+                            <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                             <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_all_money; ?></th>
                           </tr>
                         </tbody>
@@ -160,17 +160,17 @@
                       <!-- ------------------------------ร้านเวียงป่าเป้า---------------------------- -->
                       <B>
                         <font size="4">
-                          ร้านเวียงป่าเป้า
+                          เวียงป่าเป้า
                         </font>
                       </B>
                       <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="35%">รายการ</th>
-                            <th class="text-center" width="15%">จำนวน</th>
+                            <th class="text-center" width="20%">สินค้า_หน่วย</th>
+                            <th class="text-center" width="13%">จำนวน</th>
                             <th class="text-center" width="12%">บ/หน่วย</th>
-                            <th class="text-center" width="13%">เงินขาย(บาท)</th>
-                            <th class="text-center" width="20%">หมายเหตุ</th>
+                            <th class="text-center" width="13%">เงินขาย(บ)</th>
+                            <th class="text-center" width="40%">รายละเอียด</th>
                           </tr>
                           <?php #endregion
                                       $total_money = 0;
@@ -182,7 +182,7 @@
                                   ?>
                           <tr>
                             <td>
-                              <?php echo $value['name_product'].' ('.$value['unit'].')'; ?>
+                              <?php echo $value['name_product'].'_'.$value['unit']; ?>
                             </td>
                             <td class="text-center">
                               <?php echo $value['num'];?>
@@ -204,7 +204,7 @@
                           <tr>
                             <td style="visibility:collapse;"></td>
                             <td style="visibility:collapse;"></td>
-                            <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
+                            <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                             <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_money;?></th>
                             <td style="visibility:collapse;"></td>
                           </tr>
@@ -234,11 +234,11 @@
                       <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="35%">รายการ</th>
-                            <th class="text-center" width="15%">จำนวน</th>
+                            <th class="text-center" width="20%">สินค้า_หน่วย</th>
+                            <th class="text-center" width="13%">จำนวน</th>
                             <th class="text-center" width="12%">บ/หน่วย</th>
-                            <th class="text-center" width="13%">เงินขาย(บาท)</th>
-                            <th class="text-center" width="20%">หมายเหตุ</th>
+                            <th class="text-center" width="13%">เงินขาย(บ)</th>
+                            <th class="text-center" width="40%">รายละเอียด</th>
                           </tr>
                           <?php #endregion
                                   $total_money = 0;
@@ -250,7 +250,7 @@
                                   ?>
                           <tr>
                             <td>
-                              <?php echo $product['name_product'].' ('.$product['unit'].')'; ?>
+                              <?php echo $product['name_product'].'_'.$product['unit']; ?>
                             </td>
                             <td class="text-center">
                               <?php echo $product['num'];?>
@@ -272,7 +272,7 @@
                           <tr>
                             <td style="visibility:collapse;"></td>
                             <td style="visibility:collapse;"></td>
-                            <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
+                            <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                             <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_money;?></th>
                             <td style="visibility:collapse;"></td>
                           </tr>
@@ -287,10 +287,10 @@
                       <!-- --------------------------------ยอดแถมสินค้า-------------------------------- -->
                       <div class="box-header with-border">
                         <font size="4">
-                          <B> ยอดแถมสินค้า ประจำวันที่(
+                          <B> ยอดแถม_วันที่_
                             <font size="4" color="red">
                               <?php echo DateThai($day);?>
-                            </font>)
+                            </font>
                         </font>
                         </B>
                       </div>
@@ -298,7 +298,7 @@
                       <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="40%">รายการ
+                            <th class="text-center" width="40%">สินค้า_หน่วย
                             </th>
                             <th class="text-center" width="20%">จำนวน
                             </th>
@@ -323,7 +323,7 @@
                                           ?>
                           <tr>
                             <td>
-                              <?php echo $objr_NameProduct['name_product']; ?>
+                              <?php echo $objr_NameProduct['name_product'].'_'.$objr_NameProduct['unit']; ?>
                             </td>
                             <td class="text-center">
                               <?php echo $num_product; ?>

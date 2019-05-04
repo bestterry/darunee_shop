@@ -1,9 +1,6 @@
-    <?php 
+<?php 
     require "../config_database/config.php"; 
     require "../session.php";
-    $sql_zone = "SELECT name_zone FROM zone  WHERE id_zone = '$_POST[id_zone]'";
-    $objq_zone = mysqli_query($conn,$sql_zone);
-    $objr_zone = mysqli_fetch_array($objq_zone);
  ?>
 
     <!DOCTYPE html>
@@ -80,7 +77,7 @@
               <div class="box box-primary">
                 <div class="box-header text-center with-border">
                   <font size="5">
-                    <B align="center">เบิกสินค้าจาก : <?php echo $objr_zone['name_zone'];?>
+                    <B align="center">เบิกสินค้าจาก : 
                     </B>
                   </font>
                 </div>
@@ -96,32 +93,22 @@
                             </th>
                             <th class="text-center" width="35%">สินค้า_หน่วย
                             </th>
-                            <th class="text-center" width="20%">จำนวนสินค้าที่มี
-                            </th>
                             <th class="text-center" width="20%">จำนวนสินค้า
                             </th> 
                           </tr> 
                       <?php
-                        for ($i=0; $i < count($_POST['id_num_product']); $i++) { 
+                        for ($i=0; $i < count($_POST['id_product']); $i++) { 
                        
-                          $id_num_product = $_POST['id_num_product'][$i];
-                          $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_numproduct = $id_num_product";
+                          $id_product = $_POST['id_product'][$i];
+                          $list_product = "SELECT * FROM product WHERE id_product = $id_product";
                           $objq_listproduct = mysqli_query($conn,$list_product);
                           $list = mysqli_fetch_array($objq_listproduct);
                       ?> <tr>
-                            <td class="text-center">
-                              <?php echo $i+1; ?>
-                              <input type="hidden" name="id_numproduct[]" value="<?php echo $list['id_numproduct']; ?>">
+                            <td class="text-center"><?php echo $i+1; ?>
                               <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
                             </td>
-                            <td>
-                              <?php echo $list['name_product'].'_'.$list['unit']; ?>
-                            </td>
-                            <td class="text-center">
-                              <?php echo $list['num'];?>
-                              <input type="hidden" name="num_befor[]" value="<?php echo $list['num']; ?>">
-                            </td>
-                            <td class="text-center"><input class="text-center" type="text" name="num_after[]"></td>
+                            <td><?php echo $list['name_product'].'_'.$list['unit']; ?> </td>
+                            <td class="text-center"><input class="text-center" type="text" name="num[]"></td>
                           </tr>
                           <?php 
                            }

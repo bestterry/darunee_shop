@@ -1,6 +1,7 @@
 <?php
 require "../config_database/config.php";
 require "../session.php";
+require "menu/date.php";
 ?>
 
 <!DOCTYPE html>
@@ -63,10 +64,16 @@ require "../session.php";
         $query_product2 = mysqli_query($conn, $list_product);
         ?>
         <div class="box box-primary">
-          <div class="box-header text-center with-border">
-            <B><font size="5"> สต๊อกรถ </font></B>
-            <br>
-            <B><font size="4">ประจำวันที่(<font color="red"><?php echo $strDate = date('d-m-Y'); ?></font>)</font></B>
+        <div class="box-header text-center with-border">
+            <B align="center"> 
+              <font size="5"> Stockรถ </font>
+              <font size="5" color="red">  
+                <?php 
+                    $strDate = date('d-m-Y');
+                    echo DateThai($strDate);
+                ?>
+              </font>
+            </B>
           </div>
           
           <!-- /.box-header -->
@@ -76,13 +83,13 @@ require "../session.php";
                 <tbody>
                   <tr bgcolor="#99CCFF">
                     <th class="text-center" width="5%">ที่</th>
-                    <th class="text-center" width="15%">ชื่อสินค้า</th>
+                    <th class="text-center" width="15%">สินค้า</th>
                     <th class="text-center" width="5%">หน่วย</th>
                     <th class="text-center" width="5%">ยุทธ</th>
                     <th class="text-center" width="5%">ลิน</th>
-                    <th class="text-center" width="5%">เอปุ้ย</th>
-                    <th class="text-center" width="5%">เจ๋ง</th>
-                    <th class="text-center" width="5%">เอ๋ลังกา</th>
+                    <th class="text-center" width="5%">เอ</th>
+                    <th class="text-center" width="5%">รงค์</th>
+                    <th class="text-center" width="5%">เอ๋</th>
                     <th class="text-center" width="5%">เกียรติ</th>
                     <th class="text-center" width="5%">เดี่ยว</th>
                     <th class="text-center" width="5%">อั๋น</th>
@@ -90,9 +97,9 @@ require "../session.php";
                     <th class="text-center" width="5%">หนึ่ง</th>
                     <th class="text-center" width="5%">กร</th>
                     <th class="text-center" width="5%">เอี่ยว</th>
-                    <th class="text-center" width="5%">รีโว่ สนง.</th>
-                    <th class="text-center" width="5%">รีโว่5</th>
-                    <th class="text-center" width="8%">รวมทั้งหมด</th>
+                    <th class="text-center" width="5%">รว1</th>
+                    <th class="text-center" width="5%">รว5</th>
+                    <th class="text-center" width="8%">ทั้งหมด</th>
                   </tr>
                   <?php
                   $a = 1;

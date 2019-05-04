@@ -94,7 +94,7 @@
                       ?>
                         <th class="text-center" width="5%">เลือก
                         </th>
-                        <th class="text-center" width="30%">ชื่อสินค้า
+                        <th class="text-center" width="30%">สินค้า
                         </th>
                       </tr>
                       <?php
@@ -115,7 +115,7 @@
                         }else{ ?>
                       <th class="text-center" width="5%">เลือก
                       </th>
-                      <th class="text-center" width="30%">ชื่อสินค้า
+                      <th class="text-center" width="30%">สินค้า_หน่วย
                       </th>
                       <th class="text-center" width="15%">จำนวนที่มี
                       </th>
@@ -130,7 +130,7 @@
                           <input type="checkbox" name="id_numpd_car[]" value="<?php echo $list['id_numPD_car']; ?>">
                         </td>
                         <td>
-                          <?php echo $list['name_product'].' ('.$list['unit'].')'; ?>
+                          <?php echo $list['name_product'].'_'.$list['unit']; ?>
                         </td>
                         <td class="text-center">
                           <?php echo $list['num'];?>
@@ -148,7 +148,7 @@
                     <table class="table table-bordered table-hover">
                       <tbody>
                         <tr>
-                          <th class="text-center">ชื่อผู้ส่งสินค้า
+                          <th bgcolor="#99CCFF" class="text-center">ผู้ส่งสินค้า
                           </th>
                           <th bgcolor="#99CCFF" class="text-center">
                             <?php #endregion

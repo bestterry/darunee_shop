@@ -5,6 +5,7 @@ require "../../session.php";
  $id_member_send = $id_member;
  $id_member_receive = $_POST['id_member'];
 
+
   for ($i=0; $i < count($_POST['id_product']); $i++) { 
     $id_product = $_POST['id_product'][$i];
     $id_numPD_car = $_POST['id_numPD_car'][$i];
@@ -14,7 +15,7 @@ require "../../session.php";
 
     //---------------------insert change_bwt_car --------------------------------------     
     $insert_change = "INSERT INTO change_bwt_car (num, id_product, id_member_send, id_member_receive, note)
-                      VALUES ($num_befor, $id_product, $id_member_send, $id_member_receive, '-')";
+                      VALUES ($num_after, $id_product, $id_member_send, $id_member_receive, '-')";
                       mysqli_query($conn,$insert_change);
     //---------------------//insert change_bwt_car --------------------------------------  
 

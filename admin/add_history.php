@@ -2,6 +2,7 @@
 
 require "../config_database/config.php";
 require "../session.php";
+require "menu/date.php";
 
 ?>
 
@@ -79,7 +80,7 @@ require "../session.php";
                             $list_product = "SELECT * FROM product";
                             $query_product = mysqli_query($conn, $list_product);
                             $query_product2 = mysqli_query($conn, $list_product);
-                            $strDate = date('d-m-Y');
+                            
                             ?>
                             <!-- ------------------------------ยอดขายรวม---------------------------- -->
                             <div class="box-header with-border">
@@ -87,8 +88,12 @@ require "../session.php";
                                 <font size="5"> <B>ประวัติรับเข้าสินค้า</B> </font>
                               </p>
                               <B>
-                                <font size="4">ประวัติรับเข้าสินค้า ประจำวันที่(<font color="red"><?php echo $strDate = date('d-m-Y'); ?>
-                                  </font>)</font>
+                                <font size="4">ประวัติรับเข้าสินค้า วันที่<font color="red">
+                                  <?php 
+                                        $strDate = date('d-m-Y');
+                                        echo DateThai($strDate); 
+                                  ?>
+                                  </font></font>
                               </B>
                             </div>
                             <table class="table table-bordered">
@@ -143,10 +148,10 @@ require "../session.php";
                             <!-- ------------------------------ยอดขายรวม---------------------------- -->
                             <div class="box-header with-border">
                               <font size="4">
-                                <B> ยอดรับเข้าสินค้า ประจำวันที่(
+                                <B> ยอดรับเข้าสินค้า วันที่
                                   <font size="4" color="red">
-                                    <?php echo $strDate = date('d-m-Y'); ?>
-                                  </font>)
+                                    <?php echo DateThai($strDate); ; ?>
+                                  </font>
                               </font>
                               </B>
                             </div>

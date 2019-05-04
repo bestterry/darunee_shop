@@ -100,7 +100,7 @@ require "../session.php";
                           </tr>
                           <?php #endregion
                           $date = "SELECT * FROM sale_car_history
-                                    WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day' AND id_member = '$id_member' AND status='sale'";
+                                    WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day' AND id_member = '$id_member'";
                           $objq = mysqli_query($conn, $date);
                           while ($value = $objq->fetch_assoc()) {
                             $id_sale = $value['id_sale_history'];

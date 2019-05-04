@@ -91,7 +91,10 @@ require "../session.php";
                                 $id_product2 = 6;
                               }elseif ($id_product==9) {
                                 $id_product2 = 10;
+                              }elseif ($id_product==32) {
+                                $id_product2 = 33;
                               }
+                              
                               ?>
                           <tr>
                             <td>
