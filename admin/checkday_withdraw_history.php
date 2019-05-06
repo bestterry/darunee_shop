@@ -65,6 +65,9 @@
                 <div class="box-body">
                   <div class="row">
                     <div class="container">
+                    <div align="right">
+                      <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+                    </div>
                       <?php
                       $list_product = "SELECT * FROM product";
                       $query_product = mysqli_query($conn, $list_product);
@@ -87,24 +90,25 @@
                       <!-- ------------------------------ยอดขายรวม---------------------------- -->
                       <div class="box-header with-border">
                         <p align="center">
-                          <font size="5"><B>ประวัติการเบิกสินค้า</B> </font>
-                        </p>
-                        <B>
-                          <font size="4">ประวัติการเบิกสินค้า วันที่<font color="red">
+                          <font size="5">
+                            <B>ประวัติการเบิกสินค้า 
+                              <font color="red">
                             <?php 
                               $strDate = date('d-m-Y'); 
-                              echo DateThai($strDate);
+                              echo DateThai($day);
                             ?>
-                            </font>
-                        </B>
+                            </B>
+                              </font> 
+                          </font>
+                        </p>
                       </div>
                       <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" width="5%">ลำดับ</th>
-                            <th class="text-center" width="35%">รายการ</th>
+                            <th class="text-center" width="35%">สินค้า_หน่วย</th>
                             <th class="text-center" width="12%">จำนวน</th>
-                            <th class="text-center" width="12%">ชื่อผู้เบิก</th>
+                            <th class="text-center" width="12%">ผู้เบิก</th>
                             <th class="text-center" width="12%">เบิกจาก</th>
                             <th class="text-center" width="20%">หมายเหตุ</th>
                           </tr>
@@ -123,7 +127,7 @@
                                 <?php echo $i; ?>
                               </td>
                               <td>
-                                <?php echo $value['name_product'] . ' (' . $value['unit'] . ')'; ?>
+                                <?php echo $value['name_product'] . '_' . $value['unit']; ?>
                               </td>
                               <td class="text-center">
                                 <?php echo $value['num_draw']; ?>
@@ -150,17 +154,13 @@
                       <!-- ------------------------------ยอดขายรวม---------------------------- -->
                       <div class="box-header with-border">
                         <font size="4">
-                          <B> ยอดเบิกสินค้า วันที่
-                            <font size="4" color="red">
-                              <?php echo DateThai($strDate); ?>
-                            </font>
+                          <B>ยอดเบิกสินค้า</B>
                         </font>
-                        </B>
                       </div>
                       <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="40%">รายการ</th>
+                            <th class="text-center" width="40%">สินค้า_หน่วย</th>
                             <th class="text-center" width="20%">จำนวน</th>
                           </tr>
                           <?php #endregion
@@ -178,7 +178,7 @@
                               ?>
                               <tr>
                                 <td>
-                                  <?php echo $history['name_product'] . ' (' . $history['unit'] . ')'; ?>
+                                  <?php echo $history['name_product'] . '_' . $history['unit']; ?>
                                 </td>
                                 <td class="text-center">
                                   <?php echo $num_product; ?>

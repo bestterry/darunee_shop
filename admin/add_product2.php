@@ -80,9 +80,17 @@
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center">โอนสินค้าจาก : <?php echo $objr_zone['name_zone'];?></B>
+                <B align="center">รับเข้าสินค้า : <?php echo $objr_zone['name_zone'];?></B>
               </font>
             </div>
+            <div class="text-right with-border">
+              <font size="4">
+                <B > ผู้ส่งสินค้า : 
+                        <?php 
+                            echo $_POST['name']; 
+                        ?>   
+                </B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </font>
 
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -152,7 +160,7 @@
                           <input type="hidden" name="id_numpd_car[]" value="<?php echo $list['id_numPD_car']; ?>">
                           <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
                         </td>
-                        <td>
+                        <td class="text-left">
                           <?php echo $list['name_product'].'_'.$list['unit']; ?>
                         </td>
                         <td class="text-center">
@@ -171,21 +179,8 @@
 
                   </div>
                   <div class="col-md-6">
-                    <table class="table table-bordered table-hover">
-                      <tbody>
-                        <tr>
-                          <th bgcolor="#99CCFF" class="text-center">ผู้ส่งสินค้า
-                          </th>
-                          <th bgcolor="#99CCFF" class="text-center">
-                            <?php #endregion
-                              echo $_POST['name'];
-                            ?>
-                            <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
-                            <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
-                          </th>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
+                    <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
                   </div>
               </div>
             </div>

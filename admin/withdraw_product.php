@@ -89,10 +89,21 @@
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center"> เบิกสินค้าจาก : <?php echo $objr_zone['name_zone'];?> </B>
+                <B align="center"> เบิกสินค้าจาก : <?php echo $objr_zone['name_zone'];?>   </B>
               </font>
             </div>
-
+            <div class="text-right with-border">
+              <font size="4">
+                <B > ผู้เบิก : 
+                        <?php 
+                            $sql_member = "SELECT * FROM member WHERE id_member = '$_POST[id_member]'";
+                            $objq_member = mysqli_query($conn,$sql_member);
+                            $member = mysqli_fetch_array($objq_member);
+                            echo $member['name']; 
+                        ?>   
+                </B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </font>
+            </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
@@ -129,30 +140,9 @@
                       ?>
                     </tbody>
                   </table>
-                  <div class="col-md-6">
-                  </div>
-                  <div class="col-md-6">
-                    <table class="table table-bordered table-hover">
-                      <tbody>
-                        <tr>
-                          <th bgcolor="#99CCFF" class="text-center">ผู้เบิก
-                          </th>
-                          <th bgcolor="#99CCFF" class="text-center">
-                            <?php #endregion
-                            $sql_member = "SELECT * FROM member WHERE id_member = '$_POST[id_member]'";
-                            $objq_member = mysqli_query($conn,$sql_member);
-                            $member = mysqli_fetch_array($objq_member);
-                            echo $member['name']; 
-                          ?>
                             <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
                             <input type="hidden" name="name" value="<?php echo $member['name']; ?>">
                             <input type="hidden" name="id_member" value="<?php echo $member['id_member']; ?>">
-                            </td>
-                          </th>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
               </div>
             </div>
             <div class="box-footer">

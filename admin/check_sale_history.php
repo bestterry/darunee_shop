@@ -69,53 +69,51 @@
         <div class="col-md-8">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
+              <div align="right">
+                <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+              </div>
               <font size="5">
-                <B> ประวัติการขายสินค้าวันที่ <font color="red"><?php echo DateThai($aday);?></font> ถึง <font
-                    color="red"><?php echo DateThai($bday);?></font></B>
+                <B> ประวัติการขาย <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
               </font>
-
             </div>
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <font size="5" color='red'>
-                  ยอดขายรวม
-                </font>
-                <table class="table table-hover table-striped table-bordered">
+                <table class="table table-striped ">
                   <tbody>
-                    <tr bgcolor="#99CCFF">
-                      <th width="40%">ชื่อสินค้า </th>
-                      <th width="15%" class="text-center">จำนวนสินค้า</th>
-                      <th width="15%" class="text-center">จำนวนเงิน(บาท)</th>
+                    <tr>
+                      <th bgcolor="#99CCFF" width="40%" class="text-center">สินค้า_หน่วย </th>
+                      <th bgcolor="#99CCFF" width="15%" class="text-center">จำนวน</th>
+                      <th bgcolor="#99CCFF" width="15%" class="text-center">เงินขาย(บ)</th>
                     </tr>
                     <?php #endregion
-                  $total_money = 0;
-                  $total_all_money = 0;
-                  $date = "SELECT * FROM product ";
-                  $objq = mysqli_query($conn,$date);
-                  while($value = $objq ->fetch_assoc()){ 
-                    $id_product = $value['id_product'];
-                    $sql_num = "SELECT SUM(num),SUM(money) FROM price_history WHERE (datetime between '$aday 00:00:00' and '$bday 23:59:59') AND id_product = $id_product";
-                    $objq_num = mysqli_query($conn,$sql_num);
-                    $objr_num = mysqli_fetch_array($objq_num);
-                    $num = $objr_num['SUM(num)'];
-                    $num_money = $objr_num['SUM(money)'];
+                        $total_money = 0;
+                        $total_all_money = 0;
+                        $date = "SELECT * FROM product ";
+                        $objq = mysqli_query($conn,$date);
+                        while($value = $objq ->fetch_assoc()){ 
+                          $id_product = $value['id_product'];
+                          $sql_num = "SELECT SUM(num),SUM(money) FROM price_history WHERE (datetime between '$aday 00:00:00' and '$bday 23:59:59') AND id_product = $id_product";
+                          $objq_num = mysqli_query($conn,$sql_num);
+                          $objr_num = mysqli_fetch_array($objq_num);
+                          $num = $objr_num['SUM(num)'];
+                          $num_money = $objr_num['SUM(money)'];
 
-                    $sql_num_car = "SELECT SUM(num),SUM(money) FROM sale_car_history WHERE (datetime between '$aday 00:00:00' and '$bday 23:59:59') AND id_product = $id_product";
-                    $objq_num_car = mysqli_query($conn,$sql_num_car);
-                    $objr_num_car = mysqli_fetch_array($objq_num_car);
-                    $num_car = $objr_num_car['SUM(num)'];
-                    $num_money_car = $objr_num_car['SUM(money)'];
+                          $sql_num_car = "SELECT SUM(num),SUM(money) FROM sale_car_history WHERE (datetime between '$aday 00:00:00' and '$bday 23:59:59') AND id_product = $id_product";
+                          $objq_num_car = mysqli_query($conn,$sql_num_car);
+                          $objr_num_car = mysqli_fetch_array($objq_num_car);
+                          $num_car = $objr_num_car['SUM(num)'];
+                          $num_money_car = $objr_num_car['SUM(money)'];
 
-                    $total_num = $num + $num_car;
-                    $total_money = $num_money + $num_money_car;
+                          $total_num = $num + $num_car;
+                          $total_money = $num_money + $num_money_car;
 
-                    if($total_num==0) {
+                          if($total_num==0) {
 
                     }else{
               ?>
                     <tr>
                       <td>
-                        <?php echo $value['name_product'].' ('.$value['unit'].')'; ?>
+                        <?php echo $value['name_product'].'_'.$value['unit']; ?>
                       </td>
                       <td class="text-center">
                         <?php echo $total_num;?>
@@ -130,90 +128,14 @@
                   }
                   ?>
                     <tr>
-                      <th></th>
-                      <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
+                      <th bgcolor="#EAF4FF"></th>
+                      <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                       <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_all_money; ?></th>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
-
-
-            <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-                <font size="5" color='red'>ข้อมูลการขาย</font>
-                <br>
-                <font size="4">(1) ร้านเวียงป่าเป้า</font>
-                <table class="table table-hover table-striped table-bordered">
-                  <tbody>
-                    <tr bgcolor="#99CCFF">
-                      <th width="40%">ชื่อสินค้า </th>
-                      <th width="15%" class="text-center">จำนวนสินค้า</th>
-                      <th width="15%" class="text-center">จำนวนเงิน(บาท)</th>
-                      <th width="15%" class="text-center">วันที่</th>
-                    </tr>
-                    <?php #endregion
-                  $date = "SELECT * FROM product 
-                  INNER JOIN price_history ON product.id_product = price_history.id_product 
-                  WHERE (price_history.datetime between '$aday 00:00:00' and '$bday 23:59:59')";
-                  $objq = mysqli_query($conn,$date);
-                  while($value = $objq ->fetch_assoc()){ 
-              ?>
-                    <tr>
-                      <td> <?php echo $value['name_product'].' ('.$value['unit'].')'; ?> </td>
-                      <td class="text-center"><?php echo $value['num'];?></td>
-                      <td class="text-center"><?php echo $value['money']; ?></td>
-                      <td class="text-center"><?php echo DateThai($value['datetime']); ?></td>
-                    </tr>
-                    <?php
-                    }
-                  
-                  ?>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-                <font size="4">(2) รถส่งสินค้า</font>
-                <table class="table table-hover table-striped table-bordered">
-                  <tbody>
-                    <tr bgcolor="#99CCFF">
-                      <th width="40%">ชื่อสินค้า </th>
-                      <th width="15%" class="text-center">จำนวนสินค้า</th>
-                      <th width="15%" class="text-center">จำนวนเงิน(บาท)</th>
-                      <th width="15%" class="text-center">ชื่อผู้ส่งสินค้า</th>
-                      <th width="15%" class="text-center">วันที่</th>
-                    </tr>
-                    <?php #endregion
-                  $date = "SELECT * FROM sale_car_history
-                  INNER JOIN product ON product.id_product = sale_car_history.id_product 
-                  INNER JOIN member ON member.id_member = sale_car_history.id_member
-                  WHERE (sale_car_history.datetime between '$aday 00:00:00' and '$bday 23:59:59')";
-                  $objq = mysqli_query($conn,$date);
-                  while($value = $objq ->fetch_assoc()){ 
-              ?>
-                    <tr>
-                      <td> <?php echo $value['name_product'].' ('.$value['unit'].')'; ?> </td>
-                      <td class="text-center"><?php echo $value['num'];?></td>
-                      <td class="text-center"><?php echo $value['money']; ?></td>
-                      <td class="text-center"><?php echo $value['name']; ?></td>
-                      <td class="text-center"><?php echo DateThai($value['datetime']); ?></td>
-                    </tr>
-                    <?php
-                    }
-                  
-                  ?>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="box-footer" align="center">
-              <a href="../pdf_file/check_sale_history.php?aday=<?php echo $aday;?>&&bday=<?php echo $bday;?>"
-                class="btn btn-success"><i class="fa fa-print"></i> พิมพ์ </a>
-            </div>
-          </div>
         </div>
     </div>
     </section>

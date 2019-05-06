@@ -66,7 +66,7 @@ require "menu/date.php";
         <div class="box box-primary">
         <div class="box-header text-center with-border">
             <B align="center"> 
-              <font size="5"> Stockรถ </font>
+              <font size="5"> จำนวนสินค้าคงเหลือบนรถ </font>
               <font size="5" color="red">  
                 <?php 
                     $strDate = date('d-m-Y');
@@ -161,8 +161,9 @@ require "menu/date.php";
               </table>
             </div>
           </div>
-          <div class="box-footer" align="center">
-            <a href="../pdf_file/admin_car_stock.php" class="btn btn-success"><i class="fa fa-print"> พิมพ์ </i></a>
+          <div class="box-footer">
+            <a href="admin.php" class="btn btn-success pull-left"> <<== กลับสู่หน้าหลัก </a>
+            <a href="../pdf_file/admin_car_stock.php" class="btn btn-success pull-right"><i class="fa fa-print"> พิมพ์ </i></a>
           </div>
         </div>
     </div>

@@ -85,26 +85,27 @@ require "menu/date.php";
                             <!-- ------------------------------ยอดขายรวม---------------------------- -->
                             <div class="box-header with-border">
                               <p align="center">
-                                <font size="5"> <B>ประวัติรับเข้าสินค้า</B> </font>
-                              </p>
-                              <B>
-                                <font size="4">ประวัติรับเข้าสินค้า วันที่<font color="red">
+                                <font size="5">
+                                  <B>ประวัติรับเข้าสินค้า 
+                                    <font color="red">
                                   <?php 
                                         $strDate = date('d-m-Y');
                                         echo DateThai($strDate); 
                                   ?>
-                                  </font></font>
-                              </B>
+                                    </font>
+                                 </B> 
+                                </font>
+                              </p>
                             </div>
                             <table class="table table-bordered">
                               <tbody>
                                 <tr bgcolor="#99CCFF">
                                   <th class="text-center" width="5%">ลำดับ</th>
-                                  <th class="text-center" width="30%">รายการ</th>
-                                  <th class="text-center" width="15%">จำนวน</th>
-                                  <th class="text-center" width="15%">ชื่อส่งสินค้า</th>
-                                  <th class="text-center" width="15%">โอนเข้า</th>
-                                  <th class="text-center" width="20%">หมายเหตุ</th>
+                                  <th class="text-center" width="30%">สินค้า_หน่วย</th>
+                                  <th class="text-center" width="10%">จำนวน</th>
+                                  <th class="text-center" width="13%">ผู้ส่ง</th>
+                                  <th class="text-center" width="13%">รับเข้า</th>
+                                  <th class="text-center" width="30%">หมายเหตุ</th>
                                 </tr>
                                 <?php #endregion
                                 $i = 1;
@@ -121,7 +122,7 @@ require "menu/date.php";
                                       <?php echo $i; ?>
                                     </td>
                                     <td>
-                                      <?php echo $value['name_product'] . ' (' . $value['unit'] . ')'; ?>
+                                      <?php echo $value['name_product'] . '_' . $value['unit']; ?>
                                     </td>
                                     <td class="text-center">
                                       <?php echo $value['num_add']; ?>
@@ -147,18 +148,12 @@ require "menu/date.php";
 
                             <!-- ------------------------------ยอดขายรวม---------------------------- -->
                             <div class="box-header with-border">
-                              <font size="4">
-                                <B> ยอดรับเข้าสินค้า วันที่
-                                  <font size="4" color="red">
-                                    <?php echo DateThai($strDate); ; ?>
-                                  </font>
-                              </font>
-                              </B>
+                              <font size="4"><B>ยอดรับเข้าสินค้า</B></font> 
                             </div>
                             <table class="table table-bordered">
                               <tbody>
                                 <tr bgcolor="#99CCFF">
-                                  <th class="text-center" width="40%">รายการ</th>
+                                  <th class="text-center" width="40%">สินค้า_หน่วย</th>
                                   <th class="text-center" width="20%">จำนวน</th>
                                 </tr>
                                 <?php #endregion
@@ -176,7 +171,7 @@ require "menu/date.php";
                                     ?>
                                     <tr>
                                       <td>
-                                        <?php echo $history['name_product'] . ' (' . $history['unit'] . ')'; ?>
+                                        <?php echo $history['name_product'] . '_' . $history['unit']; ?>
                                       </td>
                                       <td class="text-center">
                                         <?php echo $num_product; ?>

@@ -85,10 +85,13 @@
                             }
                         ?>
                       <!-- ------------------------------ยอดขายรวม---------------------------- -->
-                      <div class="box-header with-border">
-                        <font size="4">
-                          <B>ยอดขายสินค้า_วันที่_
-                            <font size="4" color="red">
+                      <div class="box-header text-center with-border">
+                      <div align="right">
+                        <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+                      </div>
+                        <font size="5">
+                          <B>ยอดขาย 
+                            <font size="5" color="red">
                               <?php echo DateThai($day);?>
                             </font>
                         </font>
@@ -149,7 +152,7 @@
                                       }
                                       ?>
                           <tr>
-                            <th></th>
+                            <th bgcolor="#EAF4FF"></th>
                             <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                             <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_all_money; ?></th>
                           </tr>
@@ -202,11 +205,11 @@
                                         }
                                       ?>
                           <tr>
-                            <td style="visibility:collapse;"></td>
-                            <td style="visibility:collapse;"></td>
+                            <td bgcolor="#EAF4FF"></td>
+                            <td bgcolor="#EAF4FF"></td>
                             <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                             <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_money;?></th>
-                            <td style="visibility:collapse;"></td>
+                            <td bgcolor="#EAF4FF"></td>
                           </tr>
                         </tbody>
                       </table>
@@ -270,11 +273,11 @@
                                       } 
                                   ?>
                           <tr>
-                            <td style="visibility:collapse;"></td>
-                            <td style="visibility:collapse;"></td>
+                            <td bgcolor="#EAF4FF"></td>
+                            <td bgcolor="#EAF4FF"></td>
                             <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                             <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_money;?></th>
-                            <td style="visibility:collapse;"></td>
+                            <td bgcolor="#EAF4FF"></td>
                           </tr>
                         </tbody>
                       </table>
@@ -287,10 +290,7 @@
                       <!-- --------------------------------ยอดแถมสินค้า-------------------------------- -->
                       <div class="box-header with-border">
                         <font size="4">
-                          <B> ยอดแถม_วันที่_
-                            <font size="4" color="red">
-                              <?php echo DateThai($day);?>
-                            </font>
+                          <B> ยอดแถม
                         </font>
                         </B>
                       </div>

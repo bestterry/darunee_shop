@@ -68,11 +68,11 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li><a href="#timeline" data-toggle="tab">ยอดขายรายวัน</a></li>
-                <li><a href="#checkday" data-toggle="tab">ตรวจสอบยอดขายรายวัน</a></li>
-                <li><a href="#settings" data-toggle="tab">ตรวจสอบยอดขาย</a></li>
+                <li><a href="#timeline" data-toggle="tab">ยอดขายวันนี้</a></li>
+                <li><a href="#checkday" data-toggle="tab">ยอดขายย้อนหลัง</a></li>
+                <li><a href="#settings" data-toggle="tab">ยอดขายตามช่วงเวลา</a></li>
                 <div align="right">
-                  <a href="admin.php" class="btn btn-success"><i class="fa fa-home"> กลับสู่เมนูหลัก </i></a>
+                  <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
                 </div>
               </ul>
               <div class="tab-content">
@@ -91,10 +91,10 @@
                                 $strDate = date('d-m-Y');
                               ?>
                             <!-- ------------------------------ยอดขายรวม---------------------------- -->
-                            <div class="box-header with-border">
-                              <font size="4">
+                            <div class="box-header text-center with-border">
+                              <font size="5">
                                 <B>ยอดขาย 
-                                  <font size="4" color="red">
+                                  <font size="5" color="red">
                                     <?php 
                                         $strDate = date('d-m-Y');
                                         echo DateThai($strDate);
@@ -298,14 +298,9 @@
                             <!-- --------------------------------ยอดแถมสินค้า-------------------------------- -->
                             <div class="box-header with-border">
                               <font size="4">
-                                <B> ยอดแถม 
-                                  <font size="4" color="red">
-                                    <?php 
-                                      echo DateThai($strDate);
-                                    ?>
-                                  </font>
+                                <B> ยอดแถม </B>
                               </font>
-                              </B>
+                              
                             </div>
                             <!-- /.box-header -->
                             <table class="table table-bordered">
@@ -316,7 +311,7 @@
                                   <th class="text-center" width="20%">จำนวน
                                   </th>
                                 </tr>
-                                <?php #endregion
+                                <?php 
                                                       $sum_monny = 0;
                                                       $sql_history = "SELECT * FROM product";
                                                       $objq_history = mysqli_query($conn,$sql_history);
@@ -375,7 +370,7 @@
                             <div class="col-md-5">
                               <div class="box-body">
                                 <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
-                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบข้อมูลสถิติการขายย้อนหลัง</p>
+                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบข้อมูลการขายย้อนหลัง</p>
                               </div>
                             </div>
                             <div class="col-md-5">
@@ -409,8 +404,8 @@
                           <form action="check_sale_history.php" method="post">
                             <div class="col-md-5">
                               <div class="box-body">
-                                <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
-                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบข้อมูลสถิติการขายย้อนหลัง</p>
+                                <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้ </strong>
+                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบข้อมูลการขายย้อนหลัง</p>
                               </div>
                             </div>
                             <div class="col-md-5">
@@ -419,7 +414,7 @@
                                 <input type="date" name="aday">
                               </div>
                               <div class="form-group">
-                                <label>ถึง &nbsp;&nbsp;&nbsp;: </label>
+                                <label>ถึง &nbsp;&nbsp;&nbsp;&nbsp;:</label>
                                 <input type="date" name="bday">
                               </div>
                               <div class="box-footer">

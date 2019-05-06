@@ -73,7 +73,7 @@
         <div class="box box-primary">
           <div class="box-header text-center with-border">
             <B align="center"> 
-              <font size="5"> Stockสินค้ารวม </font>
+              <font size="5"> จำนวนสินค้าคงเหลือ </font>
               <font size="5" color="red">  
                 <?php 
                     $strDate = date('d-m-Y');
@@ -85,11 +85,11 @@
           <!-- /.box-header -->
           <div class="box-body no-padding">
             <div class="mailbox-read-message">
-              <table class="table table-bordered">
+              <table class="table table-striped">
                 <tbody>
-                  <tr bgcolor="#99CCFF">
+                  <tr class="info">
                     <th class="text-center" width="5%">ที่</th>
-                    <th class="text-center" width="15%">ชื่อสินค้า</th>
+                    <th class="text-center" width="15%">สินค้า</th>
                     <th class="text-center" width="5%">หน่วย</th>
                     <th class="text-center" width="5%">จุน</th>
                     <th class="text-center" width="5%">พาน</th>
@@ -301,8 +301,9 @@
               </table>
             </div>
           </div>
-          <div class="box-footer" align="center">
-            <a href="../pdf_file/admin_total_stock.php" class="btn btn-success"><i class="fa fa-print"> พิมพ์ </i></a>
+          <div class="box-footer">
+            <a href="admin.php" class="btn btn-success pull-left"> <<== กลับสู่หน้าหลัก </a>
+            <a href="../pdf_file/admin_total_stock.php" class="btn btn-success pull-right"><i class="fa fa-print"> พิมพ์ </i></a>
           </div>
         </div>
     </div>

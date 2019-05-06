@@ -84,6 +84,15 @@
                     </B>
                   </font>
                 </div>
+                <div class="text-right with-border">
+              <font size="4">
+                <B > ผู้เบิก : 
+                        <?php 
+                            echo $_POST['name']; 
+                        ?>   
+                </B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </font>
+            </div>
 
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
@@ -98,7 +107,7 @@
                             </th>
                             <th class="text-center" width="20%">จำนวนสินค้าที่มี
                             </th>
-                            <th class="text-center" width="20%">จำนวนสินค้า
+                            <th class="text-center" width="20%">จำนวนสินค้าขอเบิก
                             </th> 
                           </tr> 
                       <?php
@@ -132,29 +141,14 @@
                       <table class="table table-bordered table-hover">
                           <tbody>
                             <tr>
-                              <th bgcolor="#99CCFF" class="text-center">หมายเหตุ
-                              </th>
-                              <th bgcolor="#99CCFF" class="text-center"><input size="50" class="text-center" type="text" name="note" value="<?php echo '-'; ?>"></th>
+                              <th class="text-center">หมายเหตุ : <input size="50" class="text-center" type="text" name="note" value="<?php echo '-'; ?>"></th>
                             </tr>
                           </tbody>
                         </table>
                       </div>
                       <div class="col-md-6">
-                        <table class="table table-bordered table-hover">
-                          <tbody>
-                            <tr>
-                              <th bgcolor="#99CCFF" class="text-center">ผู้เบิก
-                              </th>
-                              <th bgcolor="#99CCFF" class="text-center">
-                                <?php #endregion
-                              echo $_POST['name'];
-                            ?>
                                 <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
                                 <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
-                              </th>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                   </div>
                 </div>

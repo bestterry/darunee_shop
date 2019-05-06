@@ -37,17 +37,17 @@ class PDF extends FPDF
             $this->Cell(15,10,iconv('UTF-8','cp874','ที่'),1,0,'C');
             $this->Cell(60,10,iconv('UTF-8','cp874','ชื่อสินค้า'),1,0,'C');
             $this->Cell(20,10,iconv('UTF-8','cp874','หน่วย'),1,0,'C');
-            $this->Cell(20,10,iconv('UTF-8','cp874','วปป.'),1,0,'C');
-            $this->Cell(20,10,iconv('UTF-8','cp874','ดคต.'),1,0,'C');
-            $this->Cell(20,10,iconv('UTF-8','cp874','จุน'),1,0,'C');
-            $this->Cell(20,10,iconv('UTF-8','cp874','พาน'),1,0,'C');
-            $this->Cell(20,10,iconv('UTF-8','cp874','มจน'),1,0,'C');
-            $this->Cell(20,10,iconv('UTF-8','cp874','ลำปาง'),1,0,'C');
-            $this->Cell(20,10,iconv('UTF-8','cp874','ฮอด'),1,0,'C');
-            $this->Cell(20,10,iconv('UTF-8','cp874','รวมรถ'),1,0,'C');
-            $this->Cell(25,10,iconv('UTF-8','cp874','รวมทั้งหมด'),1,0,'C');
+            $this->Cell(17,10,iconv('UTF-8','cp874','จุน'),1,0,'C');
+            $this->Cell(17,10,iconv('UTF-8','cp874','พาน'),1,0,'C');
+            $this->Cell(17,10,iconv('UTF-8','cp874','ดคต.'),1,0,'C');
+            $this->Cell(17,10,iconv('UTF-8','cp874','วปป.'),1,0,'C');
+            $this->Cell(17,10,iconv('UTF-8','cp874','ลำปาง'),1,0,'C');
+            $this->Cell(17,10,iconv('UTF-8','cp874','ฮอด'),1,0,'C');
+            $this->Cell(17,10,iconv('UTF-8','cp874','แม่จัน'),1,0,'C');
+            $this->Cell(17,10,iconv('UTF-8','cp874','ฝาง'),1,0,'C');
+            $this->Cell(20,10,iconv('UTF-8','cp874','รถ'),1,0,'C');
+            $this->Cell(25,10,iconv('UTF-8','cp874','ทั้งหมด'),1,0,'C');
             $this->Ln(10);
-        
     }
 
     // Page footer
@@ -82,18 +82,93 @@ $pdf=new PDF('L','mm','A4');
               $pdf->Cell(60,8,iconv('UTF-8','cp874',$product['name_product']),1,0,'C');
               $pdf->Cell(20,8,iconv('UTF-8','cp874',$product['unit']),1,0,'C');
 
-              // -----------------------พื้นที่----------------------------------
-              for ($i=1; $i < 8; $i++) { 
-              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = $i";
+              // -----------------------จุน----------------------------------
+              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 3";
               $objq_num = mysqli_query($conn,$SQL_num);
               $objr_num = mysqli_fetch_array($objq_num);
               if(!isset($objr_num['num'])){
-                $pdf->Cell(20,8,iconv('UTF-8','cp874',''),1,0,'C');
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',''),1,0,'C');
               }else{
-                $pdf->Cell(20,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
               }
-            }
-              // -----------------------//พื้นที่----------------------------------
+              // -----------------------//จุน----------------------------------
+
+              // -----------------------พาน----------------------------------
+              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 4";
+              $objq_num = mysqli_query($conn,$SQL_num);
+              $objr_num = mysqli_fetch_array($objq_num);
+              if(!isset($objr_num['num'])){
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',''),1,0,'C');
+              }else{
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
+              }
+              // -----------------------//พาน----------------------------------
+
+              // -----------------------ดคต----------------------------------
+              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 2";
+              $objq_num = mysqli_query($conn,$SQL_num);
+              $objr_num = mysqli_fetch_array($objq_num);
+              if(!isset($objr_num['num'])){
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',''),1,0,'C');
+              }else{
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
+              }
+              // -----------------------//ดคต----------------------------------
+
+              // -----------------------วปป----------------------------------
+              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 1";
+              $objq_num = mysqli_query($conn,$SQL_num);
+              $objr_num = mysqli_fetch_array($objq_num);
+              if(!isset($objr_num['num'])){
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',''),1,0,'C');
+              }else{
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
+              }
+              // -----------------------//วปป----------------------------------
+
+              // -----------------------ลำปาง----------------------------------
+              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 6";
+              $objq_num = mysqli_query($conn,$SQL_num);
+              $objr_num = mysqli_fetch_array($objq_num);
+              if(!isset($objr_num['num'])){
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',''),1,0,'C');
+              }else{
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
+              }
+              // -----------------------//ลำปาง----------------------------------
+
+              // -----------------------ฮอด----------------------------------
+              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 7";
+              $objq_num = mysqli_query($conn,$SQL_num);
+              $objr_num = mysqli_fetch_array($objq_num);
+              if(!isset($objr_num['num'])){
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',''),1,0,'C');
+              }else{
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
+              }
+              // -----------------------//ฮอด----------------------------------
+
+              // -----------------------แม่จัน----------------------------------
+              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 5";
+              $objq_num = mysqli_query($conn,$SQL_num);
+              $objr_num = mysqli_fetch_array($objq_num);
+              if(!isset($objr_num['num'])){
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',''),1,0,'C');
+              }else{
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
+              }
+              // -----------------------//แม่จัน----------------------------------
+
+              // -----------------------ฝาง----------------------------------
+              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 9";
+              $objq_num = mysqli_query($conn,$SQL_num);
+              $objr_num = mysqli_fetch_array($objq_num);
+              if(!isset($objr_num['num'])){
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',''),1,0,'C');
+              }else{
+                $pdf->Cell(17,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
+              }
+              // -----------------------//ฝาง----------------------------------
 
               //-------------------------รวมรถ----------------------------------
               $SQL_num_car = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";
