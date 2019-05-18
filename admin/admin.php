@@ -102,11 +102,11 @@
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-              <table class="table table-bordered">
+              <table class="table table table-striped table-bordered ">
                 <tbody>
-                  <tr bgcolor="#99CCFF">
+                  <tr class="info" >
                     <th class="text-center" width="15%">ชื่อทีมงาน</th>
-                    <th class="text-center" width="5%">รวมเงิน(บ)</th>
+                    <th class="text-center" width="5%">เงินขาย(บ)</th>
                     <th class="text-center" width="5%">Soft HOMDY(ลัง)</th>
                     <th class="text-center" width="5%">Soft HOMDY(ขวด)</th>
                   </tr>
@@ -186,7 +186,7 @@
                     $total_numsoft2 = $total_numsoft2 + $num_soft2;
                   }
                   ?>
-                    <th class="info text-right">รวมเงินทั้งหมด</th>
+                    <th class="info text-right">รวม</th>
                     <th class="info text-center"><?php echo $total_money+$sum_wp;?></th>
                     <th class="info text-center"><?php echo $total_numsoft1+$sum_wp_soft1; ?></th>
                     <th class="info text-center"><?php echo $total_numsoft2+$sum_wp_soft2;?></th>

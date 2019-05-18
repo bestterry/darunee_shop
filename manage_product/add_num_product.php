@@ -69,38 +69,8 @@
   </script>
   <div class="wrapper">
   <header class="main-header">
-      <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->  
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo $username; ?></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
-
-                  <p>
-                    <?php echo $username; ?>
-                    <small>สาขา : <?php echo $name_zone; ?></small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    <?php require"menu/main_header.php";?>
+  </header>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -117,6 +87,19 @@
             </font>
           </div>
 
+          <div class="text-right with-border">
+              <font size="4">
+                <B > ผู้ส่ง : 
+                        <?php
+                           $sql_member = "SELECT * FROM member WHERE id_member = '$_POST[id_member]'";
+                           $objq_member = mysqli_query($conn,$sql_member);
+                           $member = mysqli_fetch_array($objq_member);
+                           echo $member['name']; 
+                        ?>   
+                </B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </font>
+            </div>
+
           <!-- /.box-header -->
           <div class="box-body no-padding">
             <div class="mailbox-read-message">
@@ -129,7 +112,7 @@
                   <tbody>
                     <tr bgcolor="#99CCFF">
                       <th class="text-center" width="5%">ลำดับ</th>
-                      <th class="text-center" width="30%">ชื่อสินค้า</th>
+                      <th class="text-center" width="30%">สินค้า_หน่วย</th>
                     </tr>
                     <?php
                       $i=1;
@@ -140,7 +123,7 @@
                     <tr>
                       <td class="text-center"><input type="checkbox" name="id_product[]"
                           value="<?php echo $list['id_product'];?>"></td>
-                      <td><?php echo $list['name_product'].'  ('.$list['unit'].')'; ?></td>
+                      <td><?php echo $list['name_product'].'_'.$list['unit']; ?></td>
                     </tr>
                     <?php 
                           $i++; }
@@ -156,8 +139,8 @@
                   <tbody>
                     <tr bgcolor="#99CCFF">
                       <th class="text-center" width="5%">ลำดับ</th>
-                      <th class="text-center" width="30%">ชื่อสินค้า</th>
-                      <th class="text-center" width="15%">จำนวนสินค้าที่มี</th>
+                      <th class="text-center" width="30%">สินค้า_หน่วย</th>
+                      <th class="text-center" width="15%">จำนวน</th>
                     </tr>
                     <?php
                       $i=1;
@@ -168,7 +151,7 @@
                     <tr>
                       <td class="text-center"><input type="checkbox" name="id_num[]"
                           value="<?php echo $list['id_numPD_car']; ?>"></td>
-                      <td><?php echo $list['name_product'].'  ('.$list['unit'].')'; ?></td>
+                      <td><?php echo $list['name_product'].'_'.$list['unit']; ?></td>
                       <td class="text-center"><?php echo $list['num'];?></td>
                     </tr>
                     <?php 
@@ -180,29 +163,9 @@
                 <?php 
                       }
                     ?>
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
-                  <table class="table table-bordered table-hover">
-                    <tbody>
-                      <tr>
-                        <th class="text-center">ชื่อผู้ส่งสินค้า
-                        </th>
-                        <th bgcolor="#99CCFF" class="text-center">
-                          <?php #endregion
-                            $sql_member = "SELECT * FROM member WHERE id_member = '$_POST[id_member]'";
-                            $objq_member = mysqli_query($conn,$sql_member);
-                            $member = mysqli_fetch_array($objq_member);
-                            echo $member['name']; 
-                          ?>
-                          <input type="hidden" name="name" value="<?php echo $member['name']; ?>">
-                          <input type="hidden" name="id_member" value="<?php echo $member['id_member']; ?>">
-                          </td>
-                        </th>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                        <input type="hidden" name="name" value="<?php echo $member['name']; ?>">
+                        <input type="hidden" name="id_member" value="<?php echo $member['id_member']; ?>">
+               
             </div>
           </div>
           <!-- /.box-body -->

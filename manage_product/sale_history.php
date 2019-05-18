@@ -9,7 +9,7 @@
   <?php require('../font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ทีมงานคุณดารุณี</title>
+  <title>โปรแกรมขายหน้าร้าน</title>
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -39,25 +39,26 @@
     <div class="box box-primary">
       <!-- -----------------------ประวัติการขายสินค้า-------------------------- -->
       <div class="box-header with-border">
-        <font size="4">
-          <B> ประวัติการขายสินค้า ประจำวันที่(
-            <font size="4" color="red">
-              <?php echo $strDate = date('d-m-Y');?>
-            </font>)
+      <div align="right"><a type="block" href="../product.php" class="btn btn-success "> <<= กลับสู่หน้าหลัก </i> </a> </div>
+        <font size="5">
+          <B> รายการขาย 
+            <font color="red">
+              <?php require"../menu/date.php";?>
+            </font>
         </font>
         </B>
       </div>
       <div class="box-body no-padding">
         <div class="mailbox-read-message">
-          <table class="table table-hover table-striped table-bordered">
+          <table class="table table-striped table-bordered">
             <tbody>
-              <tr bgcolor="#99CCFF">
-                <th class="text-center" width="35%">รายการ</th>
+              <tr class="info">
+                <th class="text-center" width="35%">สินค้า_หน่วย</th>
                 <th class="text-center" width="15%">จำนวน</th>
                 <th class="text-center" width="12%">บ/หน่วย</th>
-                <th class="text-center" width="13%">เงินขาย(บาท)</th>
-                <th class="text-center" width="20%">หมายเหตุ</th>
-                <th class="text-center" width="5%">แก้ไข</th>
+                <th class="text-center" width="13%">เงิน(บ)</th>
+                <th class="text-center" width="25%">หมายเหตุ</th>
+                <th class="text-center" width="10%">แก้ไข</th>
               </tr>
               <?php #endregion
 																$date = "SELECT * FROM price_history INNER JOIN product ON product.id_product = price_history.id_product	
@@ -67,11 +68,10 @@
 															?>
               <tr>
                 <td>
-                  <?php echo $value['name_product']; ?>
+                  <?php echo $value['name_product'].'_'.$value['unit']; ?>
                 </td>
-                <td>
+                <td class="text-center">
                   <?php echo $value['num']; ?>
-                  <?php echo $value['unit']; ?>
                 </td>
                 <td class="text-center">
                   <?php echo $value['price']; ?>
@@ -83,8 +83,7 @@
                   <?php echo $value['note']; ?>
                 </td>
                 <td class="text-center">
-                  <a href="edit_sale_history.php?id_price_history=<?php echo $value['id_price_history'];?>"><span
-                      class="glyphicon glyphicon-cog"></span></a>
+                  <a href="edit_sale_history.php?id_price_history=<?php echo $value['id_price_history'];?>"><i class="fa fa-cog"></i></a>
                 </td>
               </tr>
               <?php
@@ -97,23 +96,20 @@
 
         <!-- -----------------------ยอดขายสินค้า-------------------------- -->
         <div class="box-header with-border">
-          <font size="4">
-            <B> ยอดขายสินค้า ประจำวันที่(
-              <font size="4" color="red">
-                <?php echo $strDate = date('d-m-Y');?>
-              </font>)
+          <font size="5">
+            <B> ยอดขาย
           </font>
           </B>
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
           <div class="mailbox-read-message">
-            <table class="table table-hover table-striped table-bordered">
+            <table class="table table-striped table-bordered">
               <tbody>
-                <tr bgcolor="#99CCFF">
-                  <th class="text-center" width="40%">รายการ</th>
+                <tr class="info">
+                  <th class="text-center" width="40%">สินค้า_หน่วย</th>
                   <th class="text-center" width="20%">จำนวน</th>
-                  <th class="text-center" width="20%">จำนวนเงิน(บาท)</th>
+                  <th class="text-center" width="20%">เงิน(บ)</th>
                 </tr>
                 <?php #endregion
 														$sum_monny = 0;
@@ -135,11 +131,10 @@
 
                 <tr>
                   <td>
-                    <?php echo $name_product; ?>
+                    <?php echo $name_product.'_'.$unit; ?>
                   </td>
-                  <td>
+                  <td class="text-center">
                     <?php echo $num_product; ?>
-                    <?php echo $unit; ?>
                   </td>
                   <td class="text-center">
                     <?php echo $total_money; ?>
@@ -150,7 +145,7 @@
                           } ?>
                 <tr>
                   <td style="visibility:collapse;"></td>
-                  <th class="text-center">รวมเป็นเงินทั้งหมด</th>
+                  <th class="text-center">รวมเงิน(บ)</th>
                   <th class="text-center"><?php echo $sum_monny; ?></th>
                 </tr>
               </tbody>
@@ -159,21 +154,15 @@
 
             <!-- -----------------------ยอดแถมสินค้า-------------------------- -->
             <div class="box-header with-border">
-              <font size="4">
-                <B> ยอดแถมสินค้า ประจำวันที่(
-                  <font size="4" color="red">
-                    <?php echo $strDate = date('d-m-Y');?>
-                  </font>)
-              </font>
-              </B>
+                <B><font size="5"> ยอดแถม</font></B>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <table class="table table-hover table-striped table-bordered">
+                <table class="table table-striped table-bordered">
                   <tbody>
-                    <tr bgcolor="#99CCFF">
-                      <th class="text-center" width="40%">รายการ</th>
+                    <tr class="info">
+                      <th class="text-center" width="40%">สินค้า_หน่วย</th>
                       <th class="text-center" width="20%">จำนวน</th>
                     </tr>
                     <?php #endregion
@@ -195,11 +184,10 @@
                           ?>
                     <tr>
                       <td>
-                        <?php echo $name_product; ?>
+                        <?php echo $name_product.'_'.$unit; ?>
                       </td>
                       <td class="text-center">
                         <?php echo $num_product; ?>
-                        <?php echo $unit; ?>
                       </td>
                     </tr>
                     <?php }

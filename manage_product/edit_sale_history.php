@@ -44,38 +44,8 @@
 
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
-  <header class="main-header">
-      <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->  
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo $username; ?></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
-
-                  <p>
-                    <?php echo $username; ?>
-                    <small>สาขา : <?php echo $name_zone; ?></small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <header class="main-header">
+      <?php require "menu/main_header.php"; ?>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -105,7 +75,6 @@
                         <th class="text-center" width="15%">เงินขาย</th>
                         <th class="text-center" width="15%">หมายเหตุ</th>
                       </tr>
-
                       <tr>
                         <?php
                             $id_price_product = $_GET['id_price_history']; 
@@ -119,19 +88,16 @@
                             class="form-control text-center col-md-1"
                             value="<?php echo $objr_product['name_product'];?>" readonly /></td>
                         <td>
-                          <input type="text" name="after_num" class="form-control text-center col-md-1"
-                            value="<?php echo $objr_product['num'];?>">
-                          <input type="hidden" name="befor_num" class="form-control text-center col-md-1"
-                            value="<?php echo $objr_product['num'];?>">
-                          <input type="hidden" name="id_price_product" value="<?php echo $id_price_product; ?>">
+                          <input type="text" name="after_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num'];?>" readonly />
+                          <input type="hidden" name="befor_num" class="form-control text-center col-md-1" value="<?php echo $objr_product['num'];?>">
+                          <input type="hidden" name="id_price_product" value="<?php echo $id_price_product; ?>" readonly />
                         </td>
                         <td class="text-center">
-                          <input type="text" name="unit" class="form-control text-center col-md-1"
-                            value="<?php echo $objr_product['unit'];?>" readonly />
+                          <input type="text" name="unit" class="form-control text-center col-md-1"  value="<?php echo $objr_product['unit'];?>" readonly />
                         </td>
                         <td class="text-center">
                           <input type="text" name="price" class="form-control text-center col-md-1"
-                            value="<?php echo $objr_product['price'];?>">
+                            value="<?php echo $objr_product['price'];?>" readonly />
                         </td>
                         <td>
                           <input type="text" name="money" class="form-control text-center col-md-1"

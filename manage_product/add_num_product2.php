@@ -60,38 +60,8 @@
   }
   </script>
   <div class="wrapper">
-  <header class="main-header">
-      <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->  
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo $username; ?></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
-
-                  <p>
-                    <?php echo $username; ?>
-                    <small>สาขา : <?php echo $name_zone; ?></small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <header class="main-header">
+    <?php require"menu/main_header.php";?>
     </header>
 
     <!-- Content Wrapper. Contains page content -->
@@ -108,6 +78,16 @@
             <div class="box-header text-center with-border">
               <font size="5">
                 <B> รับเข้าสินค้า</B>
+              </font>
+            </div>
+
+            <div class="text-right with-border">
+              <font size="4">
+                <B > ผู้ส่ง : 
+                        <?php
+                          echo $_POST['name'];
+                        ?>   
+                </B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </font>
             </div>
 
@@ -153,9 +133,9 @@
                     <tbody>
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="5%">ลำดับ</th>
-                        <th class="text-center" width="35%">ชื่อสินค้า </th>
-                        <th class="text-center" width="20%">จำนวนสินค้าที่มี</th>
-                        <th class="text-center" width="20%">จำนวนสินค้ารับเข้า</th>
+                        <th class="text-center" width="35%">สินค้า_หน่วย </th>
+                        <th class="text-center" width="20%">จำนวนที่มี</th>
+                        <th class="text-center" width="20%">จำนวนรับเข้า</th>
                       </tr>
                       <?php
                      for ($i=0; $i < count($_POST['id_num']); $i++) { 
@@ -169,7 +149,7 @@
                         <td class="text-center"><?php echo $i+1; ?>
                           <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
                         </td>
-                        <td><?php echo $list['name_product'].'  ('.$list['unit'].')'; ?> </td>
+                        <td><?php echo $list['name_product'].'_'.$list['unit']; ?> </td>
                         <td class="text-center"><?php echo $list['num'];?>
                           <input type="hidden" name="num_befor[]" value="<?php echo $list['num']; ?>">
                         </td>
@@ -184,31 +164,16 @@
                     }
                     ?>
                   <div class="col-md-6">
-                    <table class="table table-bordered table-hover">
-                      <tbody>
-                        <tr>
-                          <th class="text-center">หมายเหตุ
-                          </th>
-                          <th bgcolor="#99CCFF" class="text-center">
-                            <input class="text-center" type="text" name="note" value="-">
-                          </th>
-                        </tr>
-                      </tbody>
-                    </table>
+                    
                   </div>
                   <div class="col-md-6">
-                    <table class="table table-bordered table-hover">
+                  <table class="table table-bordered table-hover">
                       <tbody>
-                        <tr>
-                          <th class="text-center">ชื่อผู้ส่งสินค้า
-                          </th>
-                          <th bgcolor="#99CCFF" class="text-center">
-                            <?php #endregion
-                              echo $_POST['name'];
-                            ?>
+                        <tr bgcolor="#99CCFF">
+                          <th class="text-center">หมายเหตุ :</th>
+                          <th class="text-center"><input class="text-center" type="text" name="note" value="-" size="30"> </th>
                             <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
                             <input type="hidden" name="status" value="<?php echo $status; ?>">
-                          </th>
                         </tr>
                       </tbody>
                     </table>

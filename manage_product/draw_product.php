@@ -9,8 +9,7 @@
   <?php require('../font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน
-  </title>
+  <title>โปรแกรมขายหน้าร้าน</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
@@ -51,38 +50,8 @@ folder instead of downloading all of them to reduce the load. -->
 
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
-  <header class="main-header">
-      <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->  
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo $username; ?></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
-
-                  <p>
-                    <?php echo $username; ?>
-                    <small>สาขา : <?php echo $name_zone; ?></small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <header class="main-header">
+    <?php require "menu/main_header.php"; ?>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -104,14 +73,14 @@ folder instead of downloading all of them to reduce the load. -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
                 <form action="draw_product_finish.php" method="post" autocomplete="off" name="form1">
-                  <table class="table table-bordered table-hover">
+                  <table class="table table-bordered ">
                     <tbody>
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="5%">ลำดับ
                         </th>
-                        <th class="text-center" width="30%">ชื่อสินค้า
+                        <th class="text-center" width="30%">สินค้า_หน่วย
                         </th>
-                        <th class="text-center" width="15%">จำนวนสินค้าที่ต้องเบิก
+                        <th class="text-center" width="15%">จำนวน
                         </th>
                       </tr>
                       <?php
@@ -129,13 +98,11 @@ folder instead of downloading all of them to reduce the load. -->
                           <?php echo $i+1; ?>
                         </td>
                         <td>
-                          <?php echo $objr_listproduct['name_product'].' ('.$objr_listproduct['unit'].')'; ?>
+                          <?php echo $objr_listproduct['name_product'].'_'.$objr_listproduct['unit']; ?>
                         </td>
-                        <td class="text-center">
-                          <input class="hidden" type="text" name="id_product[]" value="<?php echo $menu; ?>">
-                          <div class="form-group">
-                            <input type="text" name="num_product[]" class="form-control text-center col-md-1"
-                              placeholder="<?php echo $objr_listproduct['unit'];?>">
+                        <td>
+                            <input class="hidden" type="text" name="id_product[]" value="<?php echo $menu; ?>">
+                            <input class="text-center" type="text" name="num_product[]" placeholder="<?php echo $objr_listproduct['unit'];?>">
                         </td>
                       </tr>
                       <?php 
@@ -144,33 +111,27 @@ folder instead of downloading all of them to reduce the load. -->
                       ?>
                     </tbody>
                   </table>
-                  <div class="col-md-6">
-                  <table class="table table-bordered table-hover">
+                  <div class="col-md-8">
+                  <table class="table table-bordered">
                       <tbody>
-                        <tr>
-                          <th class="text-center">
-                            หมายเหตุ
-                          </th>
-                          <th bgcolor="#99CCFF" class="text-center">
-                           <input class="text-center" type="text" name="note" value="<?php echo ''; ?>">
-                          </th>
-                        </tr>
+                      <tr bgcolor="#99CCFF">
+                        <th class="text-center">หมายเหตุ : <input size="50" class="text-center" type="text" name="note" value="<?php echo '-'; ?>"></th>
+                      </tr>
                       </tbody>
                     </table>
                   </div>
-                  <div class="col-md-6">
-                    <table class="table table-bordered table-hover">
+                  <div class="col-md-4">
+                    <table class="table table-bordered">
                       <tbody>
-                        <tr>
-                          <th class="text-center">ชื่อผู้เบิกสินค้า
-                          </th>
-                          <th bgcolor="#99CCFF" class="text-center">
+                        <tr bgcolor="#99CCFF">
+                          <th class="text-right"> ผู้เบิก : </th>
+                          <th class="text-center">
                             <select name="id_member" class="form-control select2" style="width: 100%;">
-                              <?php #endregion
-                           $sql_member = "SELECT * FROM member WHERE status = 'employee'";
-                           $objq_member = mysqli_query($conn,$sql_member);
-                           while($member = $objq_member -> fetch_assoc()){
-                          ?>
+                              <?php 
+                                $sql_member = "SELECT * FROM member WHERE status = 'employee'";
+                                $objq_member = mysqli_query($conn,$sql_member);
+                                while($member = $objq_member -> fetch_assoc()){
+                              ?>
                               <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?>
                               </option>
                               <?php } ?>
@@ -186,15 +147,8 @@ folder instead of downloading all of them to reduce the load. -->
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-
-              <a href="../product.php" class="btn btn-success">
-                <i class="fa fa-arrow-left"> กลับ
-                </i>
-              </a>
-
-              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";>
-                <i class="fa fa-floppy-o"> บันทึก
-                </i>
+              <a type="block" href="../product.php" class="btn btn-success pull-left"> <<= กลับสู่หน้าหลัก</a> 
+              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";> <i class="fa fa-floppy-o"> บันทึก</i>
               </button>
 
             </div>

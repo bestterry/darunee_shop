@@ -11,7 +11,7 @@
   <?php require('../font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ทีมงานคุณดารุณี</title>
+  <title>โปรแกรมขายหน้าร้าน</title>
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -55,37 +55,7 @@
   <div class="wrapper">
 
     <header class="main-header">
-      <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->  
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo $username; ?></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
-
-                  <p>
-                    <?php echo $username; ?>
-                    <small>สาขา : <?php echo $name_zone; ?></small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <?php require"menu/main_header.php";?>
     </header>
 
     <!-- Content Wrapper. Contains page content -->
@@ -108,14 +78,14 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
                 <form action="price_product_finish.php" method="post" autocomplete="off">
-                  <table class="table table-bordered table-hover">
+                  <table class="table table-bordered">
                     <tbody>
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="5%">ลำดับ</th>
-                        <th class="text-center">ชื่อสินค้า</th>
-                        <th class="text-center" width="15%">จำนวนสินค้าที่ขาย</th>
-                        <th class="text-center" width="15%">ราคาต่อหน่วย</th>
-                        <th class="text-center" width="15%">รวมเงิน (บาท)</th>
+                        <th class="text-center">สินค้า_หน่วย</th>
+                        <th class="text-center" width="15%">จำนวน</th>
+                        <th class="text-center" width="15%">บ/หน่วย</th>
+                        <th class="text-center" width="15%">รวมเงิน(บ)</th>
                       </tr>
                       <?php
                           
@@ -130,17 +100,12 @@
                           ?>
                       <tr>
                         <td class="text-center"><?php echo $i+1; ?></td>
-                        <td><?php echo $objr_listproduct['name_product'].' ('.$objr_listproduct['unit'].')'; ?></td>
-                        <td class="text-center">
-                          <input class="hidden" type="text" name="id_numproduct[]"
-                            value="<?php echo $id_numproduct; ?>">
-                          <div class="form-group">
-                            <input type="text" name="num_product[]" class="form-control text-center col-md-1"
-                              placeholder="<?php echo $objr_listproduct['unit'];?>">
+                        <td><?php echo $objr_listproduct['name_product'].'_'.$objr_listproduct['unit']; ?></td>
+                        <td>
+                            <input class="hidden" type="text" name="id_numproduct[]" value="<?php echo $id_numproduct; ?>">
+                            <input class="text-center" type="text" name="num_product[]" placeholder="<?php echo $objr_listproduct['unit'];?>">
                         </td>
-                        <td class="text-center"><input type="text" name="price_product[]"
-                            class="form-control text-center col-md-2" placeholder="ราคา/หน่วย">
-                        </td>
+                        <td class="text-center"><input class="text-center" type="text" name="price_product[]"  placeholder="ราคา/หน่วย"> </td>
                         <td></td>
                       </tr>
                       <?php 
@@ -149,15 +114,15 @@
                              ?>
                     </tbody>
                   </table>
-                  <div class="col-md-8">
+                  <div class="col-md-2">
                     
                   </div>
-                  <div class="col-md-4">
-                    <table class="table table-bordered table-hover">
+                  <div class="col-md-10">
+                    <table class="table table-bordered">
                       <tbody>
-                        <tr>
+                        <tr bgcolor="#99CCFF">
                           <th class="text-center">หมายเหตุ</th>
-                          <th class="text-center"> <input class="text-center" type="text" name=" note"value=""></th>
+                          <th class="text-center"> <input class="text-center" type="text" size="50" name=" note" value="-"></th>
                         </tr>
                       </tbody>
                     </table> 
@@ -169,9 +134,8 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-              <a type="block" href="../product.php" class="btn btn-success pull-left">
-                <<= เริ่มต้นใหม่ </i> </a> <button type="submit" class="btn btn-success pull-right"><i
-                    class="fa fa-calculator"> คำนวณเงิน </i></button>
+              <a type="block" href="../product.php" class="btn btn-success pull-left"> <<= กลับสู่หน้าหลัก </i> </a> 
+              <button type="submit" class="btn btn-success pull-right"><i class="fa fa-calculator"> คำนวณเงิน </i></button>
             </div>
             </form>
             <!-- /.box-footer -->

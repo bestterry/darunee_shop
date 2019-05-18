@@ -65,6 +65,9 @@ require "../session.php";
                 <div class="box-body">
                   <div class="row">
                     <div class="container">
+                    <div align="right">
+                      <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+                    </div>
                       <?php
                       $list_product = "SELECT * FROM product";
                       $query_product = mysqli_query($conn, $list_product);
@@ -87,22 +90,18 @@ require "../session.php";
                       <!-- ------------------------------ยอดขายรวม---------------------------- -->
                       <div class="box-header with-border">
                         <p align="center">
-                          <font size="5"> <B>ประวัติรับเข้าสินค้า</B> </font>
+                          <font size="5"> <B>รับเข้าสินค้า <font color="red"> <?php echo DateThai($day); ?></font></B></font>
                         </p>
-                        <B>
-                          <font size="4">ประวัติรับเข้าสินค้า วันที่ <font color="red"> <?php echo DateThai($day); ?>
-                            </font>
-                        </B>
                       </div>
-                      <table class="table table-bordered">
+                      <table class="table table-striped ">
                         <tbody>
-                          <tr bgcolor="#99CCFF">
+                          <tr class="info" >
                             <th class="text-center" width="5%">ลำดับ</th>
-                            <th class="text-center" width="30%">รายการ</th>
-                            <th class="text-center" width="15%">จำนวน</th>
-                            <th class="text-center" width="15%">ชื่อส่งสินค้า</th>
-                            <th class="text-center" width="15%">โอนเข้า</th>
-                            <th class="text-center" width="20%">หมายเหตุ</th>
+                            <th class="text-center" width="25%">สินค้า_หน่วย</th>
+                            <th class="text-center" width="10%">จำนวน</th>
+                            <th class="text-center" width="10%">ผู้ส่ง</th>
+                            <th class="text-center" width="10%">รับเข้า</th>
+                            <th class="text-center" width="40%">หมายเหตุ</th>
                           </tr>
                           <?php #endregion
                           $i = 1;
@@ -119,7 +118,7 @@ require "../session.php";
                                 <?php echo $i; ?>
                               </td>
                               <td>
-                                <?php echo $value['name_product'] . ' (' . $value['unit'] . ')'; ?>
+                                <?php echo $value['name_product'] . '_' . $value['unit']; ?>
                               </td>
                               <td class="text-center">
                                 <?php echo $value['num_add']; ?>
@@ -145,18 +144,12 @@ require "../session.php";
 
                       <!-- ------------------------------ยอดขายรวม---------------------------- -->
                       <div class="box-header with-border">
-                        <font size="4">
-                          <B> ยอดรับเข้าสินค้า วันที่
-                            <font size="4" color="red">
-                              <?php echo DateThai($day); ?>
-                            </font>
-                        </font>
-                        </B>
+                        <font size="4"><B> ยอดรับเข้าสินค้า </B></font>
                       </div>
-                      <table class="table table-bordered">
+                      <table class="table table-striped ">
                         <tbody>
-                          <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="40%">รายการ</th>
+                          <tr class="info" >
+                            <th class="text-center" width="40%">สินค้า_หน่วย</th>
                             <th class="text-center" width="20%">จำนวน</th>
                           </tr>
                           <?php #endregion
@@ -174,7 +167,7 @@ require "../session.php";
                               ?>
                               <tr>
                                 <td>
-                                  <?php echo $history['name_product'] . ' (' . $history['unit'] . ')'; ?>
+                                  <?php echo $history['name_product'] . '_' . $history['unit']; ?>
                                 </td>
                                 <td class="text-center">
                                   <?php echo $num_product; ?>

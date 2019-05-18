@@ -85,7 +85,7 @@
           <!-- /.box-header -->
           <div class="box-body no-padding">
             <div class="mailbox-read-message">
-              <table class="table table-striped table-bordered">
+              <table class="table table-striped">
                 <tbody>
                   <tr class="info">
                     <th class="text-center" width="5%">ที่</th>
@@ -98,7 +98,7 @@
                     <th class="text-center" width="5%">ลำปาง</th>
                     <th class="text-center" width="5%">ฮอด</th>
                     <th class="text-center" width="5%">แม่จัน</th>
-                    <th class="text-center" width="5%">ทีมจร</th>
+                    <th class="text-center" width="5%">ฝาง</th>
                     <th class="text-center" width="5%">รถ</th>
                     <th class="text-center" width="5%">ทั้งหมด</th>
                   </tr>
@@ -302,7 +302,7 @@
             </div>
           </div>
           <div class="box-footer">
-            <a href="admin.php" class="btn btn-success pull-left"> <<== กลับสู่เมนูหลัก </a>
+            <a href="store.php" class="btn btn-success pull-left"> <<== กลับสู่หน้าหลัก </a>
             <a href="../pdf_file/admin_total_stock.php" class="btn btn-success pull-right"><i class="fa fa-print"> พิมพ์ </i></a>
           </div>
         </div>

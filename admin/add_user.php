@@ -124,7 +124,8 @@
             </div>
           </div>
           <div class="box-footer">
-            <button type="submit" class="btn btn-success"><i class="fa fa-save"> บันทึก </i></button>
+            <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
+            <button type="submit" class="btn btn-success pull-right"><i class="fa fa-save"> บันทึก </i></button>
           </div>
           </form>
         </div>

@@ -85,10 +85,10 @@
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
                   <div class="mailbox-read-message">
-                    <form action="algorithm/withdraw_product.php" method="post" autocomplete="off">
-                      <table class="table table-bordered table-hover">
-                        <tbody>
-                          <tr bgcolor="#99CCFF">
+                    <form action="algorithm/add_numproductcar.php" method="post" autocomplete="off">
+                      <table class="table table-striped ">
+                          <tbody>
+                            <tr class="info" >
                             <th class="text-center" width="5%">ลำดับ
                             </th>
                             <th class="text-center" width="35%">สินค้า_หน่วย
@@ -115,28 +115,19 @@
                       ?>
                         </tbody>
                       </table>
-                      <div class="col-md-12">
-                      <table class="table table-bordered table-hover">
-                          <tbody>
-                            <tr>
-                              <th bgcolor="#99CCFF" class="text-center">หมายเหตุ
-                              </th>
-                              <th bgcolor="#99CCFF" class="text-center"><input size="50" class="text-center" type="text" name="note" value="<?php echo '-'; ?>"></th>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
                       <div class="col-md-6">
                         <table class="table table-bordered table-hover">
                           <tbody>
                             <tr>
-                              <th bgcolor="#99CCFF" class="text-center">ผู้เบิก
+                              <th bgcolor="#99CCFF" class="text-center">โอนให้
                               </th>
                               <th bgcolor="#99CCFF" class="text-center">
                                 <?php #endregion
-                              echo $_POST['name'];
+                                  $name = "SELECT * FROM member WHERE id_member = $_POST[id_member]";
+                                  $objq_name = mysqli_query($conn,$name);
+                                  $objr_name = mysqli_fetch_array($objq_name);
+                              echo $objr_name['name'];
                             ?>
-                                <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
                                 <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
                               </th>
                             </tr>
@@ -148,7 +139,7 @@
                 <!-- /.box-body -->
                 <!-- /.box-footer -->
                 <div class="box-footer">
-                  <a type="block" href="admin.php" class="btn btn-success pull-left"><<= กลับหน้าหลัก</a> 
+                  <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
                   <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save">
                         บันทึก</i></button>
                 </div>

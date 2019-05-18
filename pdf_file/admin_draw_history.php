@@ -69,7 +69,7 @@ $pdf=new PDF('P','mm','A4');
             $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ยอดรวมเบิกสินค้า ') , 0 , 1,'' );
             $pdf->Ln(3);
             $pdf->SetFont('angsana','',16);
-            $pdf->Cell(90,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+            $pdf->Cell(90,10,iconv('UTF-8','cp874','สินค้า_หน่วย'),1,0,'C');
             $pdf->Cell(60,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
             $pdf->Ln(10);
             $i=1;    
@@ -85,7 +85,7 @@ $pdf=new PDF('P','mm','A4');
               $num_product = $objr_sale['SUM(draw_history.num_draw)'];
               if(isset($num_product)){ 
             
-            $pdf->Cell(90,8,iconv('UTF-8','cp874',$history['name_product'].' ('.$history['unit'].')'),1,0,'');
+            $pdf->Cell(90,8,iconv('UTF-8','cp874',$history['name_product'].'_'.$history['unit']),1,0,'');
             $pdf->Cell(60,8,iconv('UTF-8','cp874',$num_product),1,0,'C');
             
             $pdf->Ln(8);
@@ -100,11 +100,11 @@ $pdf=new PDF('P','mm','A4');
             $pdf->SetTextColor(0,0,0);
             $pdf->Ln(2);
             $pdf->Cell(10,10,iconv('UTF-8','cp874','ลำดับ'),1,0,'C');
-            $pdf->Cell(60,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+            $pdf->Cell(50,10,iconv('UTF-8','cp874','สินค้า_หน่วย'),1,0,'C');
             $pdf->Cell(20,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
-            $pdf->Cell(20,10,iconv('UTF-8','cp874','ชื่อผู้เบิก'),1,0,'C');
+            $pdf->Cell(20,10,iconv('UTF-8','cp874','ผู้เบิก'),1,0,'C');
             $pdf->Cell(20,10,iconv('UTF-8','cp874','เบิกจาก'),1,0,'C');
-            $pdf->Cell(40,10,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
+            $pdf->Cell(50,10,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
             $pdf->Ln(10);
             $date = "SELECT * FROM draw_history 
                      INNER JOIN product ON draw_history.id_product = product.id_product 
@@ -114,11 +114,11 @@ $pdf=new PDF('P','mm','A4');
             $objq = mysqli_query($conn,$date);
             while($value = $objq ->fetch_assoc()){
             $pdf->Cell(10,8,iconv('UTF-8','cp874',$i),1,0,'C');  
-            $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['name_product'].' ('.$value['unit'].')'),1,0,'L');
+            $pdf->Cell(50,8,iconv('UTF-8','cp874',$value['name_product'].'_'.$value['unit']),1,0,'L');
             $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['num_draw']),1,0,'C');
             $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['name']),1,0,'C');
             $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['name_zone']),1,0,'C');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
+            $pdf->Cell(50,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
             $pdf->Ln(8);
             $i++; }                
     $pdf->Output();

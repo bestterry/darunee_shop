@@ -27,11 +27,11 @@ class PDF extends FPDF
         $strDate = date('d-m-Y');
         // Arial bold 15
         $this->AddFont('angsana','','angsa.php');
-        $this->SetFont('angsana','',18);
+        $this->SetFont('angsana','',16);
         
         //Date
         $this->SetTextColor(255,0,0); 
-        $this->Text(78, 19,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
+        $this->Text(72, 19,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
         // Title
         $this->SetTextColor(0,0,0);
         $this->Cell(0,5, iconv( 'UTF-8','cp874' , 'รายการเบิกสินค้า ประจำวันที่ ') , 0 , 1,'L' );

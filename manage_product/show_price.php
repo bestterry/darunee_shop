@@ -10,7 +10,7 @@
   <?php require('../font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ทีมงานคุณดารุณี</title>
+  <title>โปรแกรมขายหน้าร้าน</title>
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -52,38 +52,8 @@
 
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
-  <header class="main-header">
-      <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->  
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo $username; ?></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
-
-                  <p>
-                    <?php echo $username; ?>
-                    <small>สาขา : <?php echo $name_zone; ?></small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <header class="main-header">
+      <?php require "menu/main_header.php"; ?>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -108,10 +78,10 @@
                     <tbody>
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="5%">ลำดับ</th>
-                        <th class="text-center">ชื่อสินค้า</th>
-                        <th class="text-center" width="15%">จำนวนสินค้าที่ขาย</th>
-                        <th class="text-center" width="15%">ราคาต่อหน่วย</th>
-                        <th class="text-center" width="15%">รวมเงิน (บาท)</th>
+                        <th class="text-center">สินค้า_หน่วย</th>
+                        <th class="text-center" width="15%">จำนวน</th>
+                        <th class="text-center" width="15%">บ/หน่วย</th>
+                        <th class="text-center" width="15%">รวมเงิน(บ)</th>
                       </tr>
                       <?php #endregion
                               $total_all=0;
@@ -121,7 +91,7 @@
                           ?>
                       <tr>
                         <td class="text-center"><?php echo $i+1 ?></td>
-                        <td><?php echo $_POST['name_product'][$i].' ('.$_POST['unit'][$i].')'; ?></td>
+                        <td><?php echo $_POST['name_product'][$i].'_'.$_POST['unit'][$i]; ?></td>
                         <td class="text-center"><?php echo $_POST['num_product'][$i]; ?></td>
                         <td class="text-center"><?php echo $_POST['price_product'][$i]; ?> </td>
                         <td class="text-center"><?php echo $total_price;?></td>
@@ -167,9 +137,8 @@
             <!-- /.mailbox-read-message -->
 
             <div class="box-footer">
-              <button type="submit" class="btn btn-success pull-right"><i class="fa fa-print"> พิมพ์ใบเสร็จ
-                </i></button>
-              <a type="block" href="../product.php" class="btn btn-success"><i class="fa fa-home"> กลับหน้าหลัก </i></a>
+              <button type="submit" class="btn btn-success pull-right"><i class="fa fa-print"> พิมพ์ใบเสร็จ </i></button>
+              <a type="block" href="../product.php" class="btn btn-success pull-left"> <<= กลับสู่หน้าหลัก</a> 
             </div>
             </form>
             <!-- /.box-footer -->

@@ -2,7 +2,6 @@
   require "../config_database/config.php";
   require "../session.php"; 
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -62,7 +61,7 @@
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center"> แก้ไขสินค้า </B>
+                <B align="center"> แก้ไขข้อมูลสินค้า </B>
               </font>
             </div>
             <!-- /.box-header -->
@@ -74,6 +73,7 @@
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="50%">ชื่อสินค้า</th>
                         <th class="text-center">หน่วย</th>
+                        <th class="text-center">ราคาซื้อมา(บ)</th>
                       </tr>
                       <?php
                               $id_product = $_GET['id_product'];
@@ -88,6 +88,9 @@
                         </td>
                         <td>
                           <input  type="text" name="unit" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['unit']; ?>">
+                        </td>
+                        <td>
+                          <input  type="text" name="price_num" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['price_num']; ?>">
                         </td>
                       </tr>
                     </tbody>

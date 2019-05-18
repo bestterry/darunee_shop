@@ -64,8 +64,11 @@ require "menu/date.php";
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li><a href="#timeline" data-toggle="tab">ยอดเบิกรายวัน</a></li>
-                <li><a href="#checkday" data-toggle="tab">ตรวจสอบยอดเบิกรายวัน</a></li>
+                <li><a href="#timeline" data-toggle="tab">ยอดรับเข้าวันนี้</a></li>
+                <li><a href="#checkday" data-toggle="tab">ยอดรับเข้าย้อนหลัง</a></li>
+                <div align="right">
+                  <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+                </div>
               </ul>
               <div class="tab-content">
                 <!-- /.tab-pane -->
@@ -86,7 +89,7 @@ require "menu/date.php";
                             <div class="box-header with-border">
                               <p align="center">
                                 <font size="5">
-                                  <B>ประวัติรับเข้าสินค้า 
+                                  <B>รับเข้าสินค้า 
                                     <font color="red">
                                   <?php 
                                         $strDate = date('d-m-Y');
@@ -97,9 +100,9 @@ require "menu/date.php";
                                 </font>
                               </p>
                             </div>
-                            <table class="table table-bordered">
-                              <tbody>
-                                <tr bgcolor="#99CCFF">
+                            <table class="table table-striped ">
+                            <tbody>
+                              <tr class="info" >
                                   <th class="text-center" width="5%">ลำดับ</th>
                                   <th class="text-center" width="30%">สินค้า_หน่วย</th>
                                   <th class="text-center" width="10%">จำนวน</th>
@@ -150,9 +153,9 @@ require "menu/date.php";
                             <div class="box-header with-border">
                               <font size="4"><B>ยอดรับเข้าสินค้า</B></font> 
                             </div>
-                            <table class="table table-bordered">
+                            <table class="table table-striped ">
                               <tbody>
-                                <tr bgcolor="#99CCFF">
+                                <tr class="info" >
                                   <th class="text-center" width="40%">สินค้า_หน่วย</th>
                                   <th class="text-center" width="20%">จำนวน</th>
                                 </tr>
@@ -210,7 +213,7 @@ require "menu/date.php";
                             <div class="col-md-5">
                               <div class="box-body">
                                 <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
-                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบข้อมูลการเบิกย้อนหลัง</p>
+                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบข้อมูลรับเข้าสินค้าย้อนหลัง</p>
                               </div>
                             </div>
                             <div class="col-md-5">

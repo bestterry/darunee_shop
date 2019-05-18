@@ -96,13 +96,13 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
                 <form action="algorithm/add_product.php" method="post" autocomplete="off">
-                  <table class="table table-bordered table-hover">
-                    <tbody>
+                  <table class="table table-striped ">
+                          <tbody>
                       <?php 
                           $id_member = $_POST['id_member'];
                           if($id_member == 16){
                         ?>
-                      <tr bgcolor="#99CCFF">
+                      <tr class="info">
                         <th class="text-center" width="5%">ลำดับ
                         </th>
                         <th class="text-center" width="35%">ชื่อสินค้า
@@ -187,8 +187,8 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-              <a type="block" href="admin.php" class="btn btn-success pull-left">
-                <<= กลับหน้าหลัก</a> <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save">
+              <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
+              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save">
                     บันทึก</i></button>
             </div>
             </form>

@@ -20,7 +20,7 @@
           <!-- Menu Footer-->
           <li class="user-footer">
             <div class="pull-right">
-              <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
+              <a href="../login/logout.php" class="btn btn-danger btn-flat">ออกจากระบบ</a>
             </div>
           </li>
         </ul>

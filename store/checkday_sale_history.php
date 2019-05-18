@@ -1,6 +1,7 @@
 <?php
 require "../config_database/config.php";
 require "../session.php";
+require "menu/date.php";
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +41,30 @@ require "../session.php";
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <style>
+          #customers {
+            
+            width: 100%;
+          }
+
+          #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+          }
+
+          #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+          #customers tr:hover {background-color: #ddd;}
+
+          #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #99CCFF;
+          
+          }
+    </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -73,30 +98,29 @@ require "../session.php";
                       ?>
                       <!-- --------------------------------ประวัติการขายสินค้า-------------------------------- -->
                       <div class="box-header with-border">
-                        <font size="4">
-                          <B> ประวัติการขายสินค้า ประจำวันที่(
-                            <font size="4" color="red">
-                              <?php echo $day; ?>
-                            </font>)
-                        </font>
-                        </B>
-                      </div>
+                      <a type="block" href="store.php" class="btn btn-success pull-right"><<= กลับหน้าหลัก </i></a>
+                              <font size="4">
+                                <B> ข้อมูลการขาย 
+                                  <font size="4" color="red">
+                                    <?php echo DateThai($day);?>
+                                  </font>
+                              </font>
+                              </B>
+                            </div>
                       <!-- /.box-header -->
                       <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="35%">รายการ
-                            </th>
-                            <th class="text-center" width="15%">จำนวน
-                            </th>
-                            <th class="text-center" width="12%">บ/หน่วย
-                            </th>
-                            <th class="text-center" width="13%">เงินขาย(บาท)
-                            </th>
-                            <th class="text-center" width="20%">หมายเหตุ
-                            </th>
-                            <th class="text-center" width="5%">แก้ไข
-                            </th>
+                          <th class="text-center" width="25%">สินค้า_หน่วย
+                          </th>
+                          <th class="text-center" width="10%">จำนวน
+                          </th>
+                          <th class="text-center" width="10%">บ/หน่วย
+                          </th>
+                          <th class="text-center" width="10%">เงิน(บ)
+                          </th>
+                          <th class="text-center" width="35%">ชื่อร้านค้า/ลูกค้า
+                          </th>
                           </tr>
                           <?php #endregion
                           $date = "SELECT * FROM sale_car_history
@@ -112,7 +136,7 @@ require "../session.php";
                             ?>
                             <tr>
                               <td>
-                                <?php echo $objr_product['name_product'] . ' (' . $objr_product['unit'] . ')'; ?>
+                                <?php echo $objr_product['name_product'] . '_' . $objr_product['unit']; ?>
                               </td>
                               <td class="text-center">
                                 <?php echo $objr_product['num']; ?>
@@ -126,12 +150,6 @@ require "../session.php";
                               <td class="text-center">
                                 <?php echo $objr_product['note']; ?>
                               </td>
-                              <td class="text-center">
-                                <a href="edit_sale_history.php?id_sale=<?php echo $id_sale; ?>">
-                                  <span class="glyphicon glyphicon-cog">
-                                  </span>
-                                </a>
-                              </td>
                             </tr>
                           <?php
                         }
@@ -141,25 +159,25 @@ require "../session.php";
                       <!-- --------------------------------//ประวัติการขายสินค้า-------------------------------- -->
                       <!-- --------------------------------ยอดขายสินค้า-------------------------------- -->
                       <div class="box-header with-border">
-                        <font size="4">
-                          <B> ยอดขายสินค้า ประจำวันที่(
-                            <font size="4" color="red">
-                              <?php echo $day; ?>
-                            </font>)
-                        </font>
-                        </B>
-                      </div>
+                              <font size="4">
+                                <B> ยอดขาย 
+                                  <font size="4" color="red">
+                                    <?php echo DateThai($day);?>
+                                  </font>
+                              </font>
+                              </B>
+                            </div>
                       <!-- /.box-header -->
 
                       <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="40%">รายการ
-                            </th>
-                            <th class="text-center" width="20%">จำนวน
-                            </th>
-                            <th class="text-center" width="20%">จำนวนเงิน(บาท)
-                            </th>
+                          <th class="text-center" width="40%">สินค้า_หน่วย
+                          </th>
+                          <th class="text-center" width="20%">จำนวน
+                          </th>
+                          <th class="text-center" width="20%">เงิน(บ)
+                          </th>
                           </tr>
                           <?php #endregion
                           $sum_monny = 0;
@@ -181,7 +199,7 @@ require "../session.php";
                               ?>
                               <tr>
                                 <td>
-                                  <?php echo $objr_NameProduct['name_product'] . ' (' . $objr_NameProduct['unit'] . ')'; ?>
+                                  <?php echo $objr_NameProduct['name_product'] . '_' . $objr_NameProduct['unit']; ?>
                                 </td>
                                 <td class="text-center">
                                   <?php echo $num_product; ?>
@@ -210,19 +228,19 @@ require "../session.php";
 
                       <!-- --------------------------------ยอดแถมสินค้า-------------------------------- -->
                       <div class="box-header with-border">
-                        <font size="4">
-                          <B> ยอดแถมสินค้า ประจำวันที่(
-                            <font size="4" color="red">
-                              <?php echo $day; ?>
-                            </font>)
-                        </font>
-                        </B>
-                      </div>
+                              <font size="4">
+                                <B> ยอดแถม
+                                  <font size="4" color="red">
+                                    <?php echo DateThai($day);?>
+                                  </font>
+                              </font>
+                              </B>
+                            </div>
                       <!-- /.box-header -->
                       <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="40%">รายการ
+                            <th class="text-center" width="40%">สินค้า_หน่วย
                             </th>
                             <th class="text-center" width="20%">จำนวน
                             </th>
@@ -247,7 +265,7 @@ require "../session.php";
                               ?>
                               <tr>
                                 <td>
-                                  <?php echo $objr_NameProduct['name_product'] . ' (' . $objr_NameProduct['unit'] . ')'; ?>
+                                  <?php echo $objr_NameProduct['name_product'] . '_' . $objr_NameProduct['unit']; ?>
                                 </td>
                                 <td class="text-center">
                                   <?php echo $num_product; ?>

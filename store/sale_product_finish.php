@@ -64,14 +64,14 @@
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
                   <form action="sale_product_finish.php" method="post" autocomplete="off">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" width="5%" >ลำดับ</th>
-                            <th class="text-center" >ชื่อสินค้า</th>
-                            <th class="text-center" width="15%">จำนวนสินค้าที่ขาย</th>
-                            <th class="text-center" width="15%">ราคาต่อหน่วย</th>
-                            <th class="text-center" width="15%">รวมเงิน (บาท)</th>
+                            <th class="text-center" >สินค้า_หน่วย</th>
+                            <th class="text-center" width="15%">จำนวน</th>
+                            <th class="text-center" width="15%">บ/หน่วย</th>
+                            <th class="text-center" width="15%">เงินขาย(บ)</th>
                           </tr>
                           <?php
                           $total_money = 0;
@@ -82,6 +82,7 @@
                               $num_product = $_POST['num_product'][$i];
                               $price_product = $_POST['price_product'][$i];
                               $money = $num_product * $price_product;
+                              $money2 = round($money);
                               $id_product = $_POST['id_product'][$i];
                               if($price_product == 0){
                                 $status = 'free';
@@ -90,7 +91,7 @@
                               }
                               //insert sale_car_history
                               $insert_numPD = "INSERT INTO sale_car_history (num,price,money,id_product,status,id_member,note) 
-                                               VALUE ($num_product,$price_product, $money,$id_product,'$status',$id_member,'$note')";
+                                               VALUE ($num_product,$price_product, $money2,$id_product,'$status',$id_member,'$note')";
                               mysqli_query($conn,$insert_numPD);
 
                               //update numpd_car
@@ -110,13 +111,13 @@
                           ?>
                           <tr>
                             <td class="text-center"><?php echo $i+1;?></td>
-                            <td><?php echo $_POST['name_product'][$i].' ('.$_POST['unit'][$i].')';?></td>
+                            <td><?php echo $_POST['name_product'][$i].'_'.$_POST['unit'][$i];?></td>
                             <td class="text-center" ><?php echo $_POST['num_product'][$i];?></td>
                             <td class="text-center"><?php echo $_POST['price_product'][$i];?></td>
-                            <td class="text-center"><?php echo $money;?></td>
+                            <td class="text-center"><?php echo $money2;?></td>
                           </tr>
                           <?php  
-                              $total_money = $total_money + $money; 
+                              $total_money = $total_money + $money2; 
                           }
                           ?>
                           <tr>
@@ -129,14 +130,12 @@
                         </tbody>
                     </table>
 
-                    <div class="col-md-8">
-                    </div>
-                    <div class="col-md-4">
-                      <table class="table table-bordered table-hover">
+                    <div class="col-md-12">
+                      <table class="table table-bordered ">
                         <tbody>
-                        <tr>
-                        <th class="text-center">หมายเหตุ</th>
-                        <th class="text-center"><?php echo $note; ?></th>
+                        <tr  bgcolor="#99CCFF">
+                        <th width="15%" class="text-center">หมายเหตุ : </th>
+                        <th width="85%" class="text-center"><?php echo $note; ?></th>
                         </tr>
                         </tbody>
                       </table>
@@ -145,7 +144,7 @@
                 <!-- /.mailbox-read-message -->
             </div>
             <div class="box-footer">
-            <a type="block" href="store.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i></a>
+            <a type="block" href="store.php" class="btn btn-success"><<= กลับหน้าหลัก </i></a>
             </div>
             <!-- /.box-footer -->
             </form>

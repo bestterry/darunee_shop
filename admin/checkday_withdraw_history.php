@@ -91,7 +91,7 @@
                       <div class="box-header with-border">
                         <p align="center">
                           <font size="5">
-                            <B>ประวัติการเบิกสินค้า 
+                            <B>เบิกสินค้า 
                               <font color="red">
                             <?php 
                               $strDate = date('d-m-Y'); 
@@ -102,15 +102,15 @@
                           </font>
                         </p>
                       </div>
-                      <table class="table table-bordered">
+                      <table class="table table-striped ">
                         <tbody>
-                          <tr bgcolor="#99CCFF">
+                          <tr class="info" >
                             <th class="text-center" width="5%">ลำดับ</th>
-                            <th class="text-center" width="35%">สินค้า_หน่วย</th>
-                            <th class="text-center" width="12%">จำนวน</th>
-                            <th class="text-center" width="12%">ผู้เบิก</th>
-                            <th class="text-center" width="12%">เบิกจาก</th>
-                            <th class="text-center" width="20%">หมายเหตุ</th>
+                            <th class="text-center" width="25%">สินค้า_หน่วย</th>
+                            <th class="text-center" width="8%">จำนวน</th>
+                            <th class="text-center" width="10%">ผู้เบิก</th>
+                            <th class="text-center" width="10%">เบิกจาก</th>
+                            <th class="text-center" width="36%">หมายเหตุ</th>
                           </tr>
                           <?php #endregion
                           $i = 1;
@@ -157,9 +157,9 @@
                           <B>ยอดเบิกสินค้า</B>
                         </font>
                       </div>
-                      <table class="table table-bordered">
+                      <table class="table table-striped ">
                         <tbody>
-                          <tr bgcolor="#99CCFF">
+                          <tr class="info" >
                             <th class="text-center" width="40%">สินค้า_หน่วย</th>
                             <th class="text-center" width="20%">จำนวน</th>
                           </tr>

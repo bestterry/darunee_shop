@@ -1,7 +1,21 @@
 <?php 
-    require "../config_database/config.php"; 
-    require "../session.php";
- ?>
+  require "../config_database/config.php";
+  require "../session.php"; 
+  $aday = $_POST['aday'];
+  $bday = $_POST['bday'];
+  function DateThai($strDate)
+	{
+		$strYear = date("Y",strtotime($strDate))+543;
+		$strMonth= date("n",strtotime($strDate));
+		$strDay= date("j",strtotime($strDate));
+		$strHour= date("H",strtotime($strDate));
+		$strMinute= date("i",strtotime($strDate));
+		$strSeconds= date("s",strtotime($strDate));
+		$strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+		$strMonthThai=$strMonthCut[$strMonth];
+		return "$strDay $strMonthThai $strYear";
+	}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -10,10 +24,9 @@
   <?php require('../font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <!-- Bootstrap 3.3.7 -->
+  <title>ทีมงานคุณดารุณี</title>
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
+  <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
@@ -39,105 +52,68 @@
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-  <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
-  <script language="javascript">
-  function fncSubmit() {
-    if (document.form1.add_num.value == "") {
-      alert('กรุณาระบุจำนวน');
-      document.form1.num.focus();
-      return false;
-    }
-    if (document.form1.name.value == "") {
-      alert('กรุณาระบุชื่อผู้รับเข้าสินค้า');
-      document.form1.name.focus();
-      return false;
-    }
-    document.form1.submit();
-  }
-  </script>
-  <div class="wrapper">
+  <div class="wrapper" >
     <header class="main-header">
       <?php require('menu/header_logout.php');?>
     </header>
-
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="height: 1000px;">
-      <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
-
-      <!-- Main content -->
       <section class="content">
-
         <div class="col-md-2"></div>
         <div class="col-md-8">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
+              <div align="right">
+                <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+              </div>
               <font size="5">
-                <B align="center"> เพิ่มสินค้าเข้ารถ </B>
+                <B> เงินสะสม <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
               </font>
             </div>
-
-            <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="add_numproductcar2.php" method="post">
-                <table class="table table-striped ">
+                <table class="table table-striped table-bordered">
                   <tbody>
                     <tr class="info" >
-                        <th class="text-center" width="5%">เลือก
-                        </th>
-                        <th class="text-center" width="30%">สินค้า_หน่วย
-                        </th>
-                      </tr>
-                      <?php
-                      $i=1;
-                      $list_product = "SELECT * FROM product ";
-                      $objq_listproduct = mysqli_query($conn,$list_product);
-                          while($list = $objq_listproduct->fetch_assoc()){
-                      ?>
-                      <tr>
-                        <td class="text-center">
-                          <input type="checkbox" name="id_product[]" value="<?php echo $list['id_product']; ?>">
-                        </td>
-                        <td>
-                          <?php echo $list['name_product'].'_'.$list['unit']; ?>
-                        </td>
-                      </tr>
-                      <?php 
-                          $i++; }
-                      ?>
-                    </tbody>
-                  </table>
+                    <th class="text-center" width="15%">วันที่</th>
+                      <th class="text-center" width="25%">เงินได้</th>
+                      <th class="text-center" width="13%">เงินได้สะสม</th>
+                      <th class="text-center" width="15%">เงินได้เฉลี่ย</th>
+                    </tr>
+                    <?php
+                        $total_money = 0;
+                        $i = 1;
+                        $sql_day_car = "SELECT SUM(money),datetime FROM sale_car_history WHERE (datetime between '$aday 00:00:00' and '$bday 23:59:59') GROUP BY DAY(datetime),MONTH(datetime),YEAR(datetime) ORDER BY datetime";
+                        $objq_day_car = mysqli_query($conn,$sql_day_car);
+                        while ($value = $objq_day_car-> fetch_assoc() ) {
+                          $money_car = $value['SUM(money)'];
+                          $date = $value['datetime'];
+                          $total_money = $total_money + $money_car;
+                        //  time
+                        //  $d=strtotime($date);
+                        //   echo date("Y-m-d", $d);
+                    ?>
+                    <tr>
+                    <td class="text-center"><?php echo DateThai($date);?></td>
+                      <td class="text-center"><?php echo $money_car;?></td>
+                      <td class="text-center"><?php echo $total_money;?></td>
+                      <td class="text-center"><?php echo round($total_money/$i);?></td>
+                    </tr>
+                      <?php $i++;}?>
+                  </tbody>
+                </table>
               </div>
             </div>
-            <div class="box-footer">
-              <input class="hidden "type="text" name="id_member" value="<?php echo $_POST['id_member']; ?>">
-              <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
-              <button type="submit" class="btn btn-success pull-right">ต่อไป =>> </button>
-            </div>
-            </form>
-            <!-- /.box-footer -->
-          </div>
         </div>
     </div>
-  </div>
-  <!-- /. box -->
-  </div>
-  </section>
-  <!-- /.content -->
+    </section>
+    <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
   <?php require("../menu/footer.html"); ?>
@@ -173,7 +149,7 @@
   $(function() {
     //Enable iCheck plugin for checkboxes
     //iCheck for checkbox and radio inputs
-    $('.mailbox-read-message input[type="checkbox"]').iCheck({
+    $('.mailbox-messages input[type="checkbox"]').iCheck({
       checkboxClass: 'icheckbox_flat-blue',
       radioClass: 'iradio_flat-blue'
     });
@@ -182,11 +158,11 @@
       var clicks = $(this).data('clicks');
       if (clicks) {
         //Uncheck all checkboxes
-        $(".mailbox-read-message input[type='checkbox']").iCheck("uncheck");
+        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
         $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
       } else {
         //Check all checkboxes
-        $(".mailbox-read-message input[type='checkbox']").iCheck("check");
+        $(".mailbox-messages input[type='checkbox']").iCheck("check");
         $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
       }
       $(this).data("clicks", !clicks);
@@ -211,5 +187,4 @@
   });
   </script>
 </body>
-
 </html>

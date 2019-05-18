@@ -7,15 +7,15 @@
         <div class="box-body no-padding">
             <ul class="nav nav-pills nav-stacked" ata-widget="tree">
                 <!-- ประวัติขายสินค้า -->
-                <li><a href="sale_history.php" ><i class="fa fa-exchange"></i> ยอดขายสินค้า </a></li>
+                <li><a href="sale_history.php" ><i class="fa fa-exchange"></i> ยอดขาย </a></li>
                  <!--โอนสินค้า -->
-                 <li><a href="#" data-toggle="modal" data-target="#myModal1"><i class="fa fa-archive"></i> เบิกสินค้า </a></li>
+                 <li><a href="#" data-toggle="modal" data-target="#myModal1"><i class="fa fa-archive"></i> เบิกออก </a></li>
                 <div class="modal fade" id="myModal1" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <form action="withdraw_product.php" method="post">
                             <div class="modal-content">
                                 <div class="modal-header text-center">
-                                    <font size="5"><B align = "center"> เบิกสินค้า </B></font>
+                                    <font size="5"><B align = "center"> เบิกออก </B></font>
                                 </div>
                                 <div class="modal-body col-md-12 table-responsive mailbox-messages">
                                   <div class="table-responsive mailbox-messages">
@@ -80,13 +80,13 @@
                 <!--//รับเข้าสินค้า -->
 
                  <!--โอนสินค้า -->
-                 <li><a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-archive"></i> รับเข้าสินค้า </a></li>
+                 <li><a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-archive"></i> รับเข้า </a></li>
                 <div class="modal fade" id="myModal2" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <form action="add_product.php" method="post">
                             <div class="modal-content">
                                 <div class="modal-header text-center">
-                                    <font size="5"><B> รับเข้าสินค้า </B></font>
+                                    <font size="5"><B> รับเข้า </B></font>
                                 </div>
                                 <div class="modal-body col-md-12 table-responsive mailbox-messages">
                                   <div class="table-responsive mailbox-messages">
@@ -150,9 +150,47 @@
                 <!--ประวัติรับเข้าสินค้า -->
                 <li><a href="total_stock.php" ><i class="fa fa-home"></i> สต๊อกรวม </a></li>
                 <li><a href="car_stock.php" ><i class="fa fa-truck"></i> สต๊อกรถ </a></li>
-                
-                <li><a href="withdraw_history.php"><i class="fa fa-cloud-upload"></i> ประวัติการเบิกสินค้า </a></li>
-                <li><a href="add_history.php"><i class="fa fa-cloud-download"></i> ประวัติการรับเข้าสินค้า </a></li>
+                <li><a href="withdraw_history.php"><i class="fa fa-cloud-upload"></i> ข้อมูลการเบิก </a></li>
+                <li><a href="add_history.php"><i class="fa fa-cloud-download"></i> ข้อมูลการรับเข้า </a></li>
+                <li><a href="profit.php"><i class="fa fa-money"></i> กำไรขาย </a></li>
+                <!--โอนสินค้า -->
+                <li><a href="#" data-toggle="modal" data-target="#cu"><i class="fa fa-archive"></i> เงินสะสม </a></li>
+                <div class="modal fade" id="cu" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <form action="cu_sale.php" method="post">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <font size="5"><B> เงินสะสม </B></font>
+                                </div>
+                                <div class="modal-body col-md-12 table-responsive mailbox-messages">
+                                  <div class="table-responsive mailbox-messages">
+                                    <div class="col-md-6">
+                                        <div class="box-body">
+                                            <strong><i class="fa fa-file-text-o margin-r-6"></i> การใช้ </strong>
+                                            <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบข้อมูลเงินสะสม</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>ตั้งเเต่ : </label>
+                                            <input type="date" name="aday">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ถึง &nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                                            <input type="date" name="bday">
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="submit"  class="btn btn-success pull-right">ถัดไป ==>></button>
+                                  <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--//รับเข้าสินค้า -->
                 <li><a href="add_data.php" ><i class="fa fa-cog"></i> จัดการข้อมูลสินค้า-พนักงาน </a></li>
             </ul>
         </div>

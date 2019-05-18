@@ -31,10 +31,10 @@ class PDF extends FPDF
         
         //Date
         $this->SetTextColor(255,0,0); 
-        $this->Text(75, 19,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
+        $this->Text(65, 19,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
         // Title
         $this->SetTextColor(0,0,0);
-        $this->Cell(0,5, iconv( 'UTF-8','cp874' , 'รายการนำเข้าสินค้า ประจำวันที่ ') , 0 , 1,'L' );
+        $this->Cell(0,5, iconv( 'UTF-8','cp874' , 'ประวัติรับเข้าสินค้า วันที่ ') , 0 , 1,'L' );
         // Line break
         $this->Ln(2);
     }
@@ -66,10 +66,10 @@ $pdf=new PDF('P','mm','A4');
             $pdf->AddPage();
             $pdf->SetFont('angsana','',18);
             $pdf->Ln(5);
-            $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ยอดนำเข้าสินค้า ') , 0 , 1,'' );
+            $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ยอดรับเข้าสินค้า ') , 0 , 1,'' );
             $pdf->Ln(3);
             $pdf->SetFont('angsana','',16);
-            $pdf->Cell(90,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+            $pdf->Cell(90,10,iconv('UTF-8','cp874','สินค้า_หน่วย'),1,0,'C');
             $pdf->Cell(60,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
             $pdf->Ln(10);
                 
@@ -90,7 +90,7 @@ $pdf=new PDF('P','mm','A4');
                       if(isset($num_product)){ 
             
             $pdf->Cell(90,8,iconv('UTF-8','cp874',$objr_NameProduct['name_product']),1,0,'');
-            $pdf->Cell(60,8,iconv('UTF-8','cp874',$num_product.' '.'('.$objr_NameProduct['unit'].')'),1,0,'');
+            $pdf->Cell(60,8,iconv('UTF-8','cp874',$num_product.' '.'_'.$objr_NameProduct['unit']),1,0,'');
             
             $pdf->Ln(8);
                       }
@@ -103,9 +103,9 @@ $pdf=new PDF('P','mm','A4');
             //สร้างตาราง
             $pdf->SetTextColor(0,0,0);
             $pdf->Ln(2);
-            $pdf->Cell(70,10,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+            $pdf->Cell(70,10,iconv('UTF-8','cp874','สินค้า_หน่วย'),1,0,'C');
             $pdf->Cell(30,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
-            $pdf->Cell(30,10,iconv('UTF-8','cp874','ชื่อผู้ส่ง'),1,0,'C');
+            $pdf->Cell(30,10,iconv('UTF-8','cp874','ผู้ส่ง'),1,0,'C');
             $pdf->Cell(40,10,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
             $pdf->Ln(10);
             $date = "SELECT * FROM add_history
@@ -120,7 +120,7 @@ $pdf=new PDF('P','mm','A4');
                 $objq_product = mysqli_query($conn,$SQL_product);
                 $objr_product = mysqli_fetch_array($objq_product);
             $pdf->Cell(70,8,iconv('UTF-8','cp874',$objr_product['name_product']),1,0,'L');
-            $pdf->Cell(30,8,iconv('UTF-8','cp874',$objr_product['num_add'].' '.'('.$objr_product['unit'].')'),1,0,'L');
+            $pdf->Cell(30,8,iconv('UTF-8','cp874',$objr_product['num_add'].' '.'_'.$objr_product['unit']),1,0,'L');
             $pdf->Cell(30,8,iconv('UTF-8','cp874',$objr_product['name']),1,0,'C');
             $pdf->Cell(40,8,iconv('UTF-8','cp874',$objr_product['note']),1,0,'C');
             $pdf->Ln(8);

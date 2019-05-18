@@ -9,8 +9,7 @@
   <?php require('font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน
-  </title>
+  <title>โปรแกรมขายหน้าร้าน</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" type="image/png" href="images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
@@ -45,38 +44,7 @@
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div>
     <header class="main-header">
-      
-      <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top">
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->  
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo $username; ?></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="dist/img/user.png" class="img-circle" alt="User Image">
-
-                  <p>
-                    <?php echo $username; ?>
-                    <small>สาขา : <?php echo $name_zone; ?></small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <?php require"menu/main_header.php";?>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -96,7 +64,7 @@ require 'menu/menu_left_shop.php';
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center">จำนวนสินค้าคงเหลือ</B>
+                <B align="center">สินค้าคงเหลือในร้าน <font color="red"> <?php require "menu/date.php";?> </font></B>
               </font>
             </div>
             <!-- /.box-header -->
@@ -107,9 +75,9 @@ require 'menu/menu_left_shop.php';
                     <tr bgcolor="#99CCFF">
                       <th class="text-center" width="10%">ลำดับ
                       </th>
-                      <th width="40%">ชื่อสินค้า
+                      <th  class="text-center" width="40%">สินค้า_หน่วย
                       </th>
-                      <th class="text-center" width="15%">จำนวนสินค้าคงเหลือ
+                      <th class="text-center" width="15%">จำนวน
                       </th>
                     </tr>
                     <?php 
@@ -121,7 +89,7 @@ require 'menu/menu_left_shop.php';
                         <?php echo $i; ?>
                       </td>
                       <td width="40%">
-                        <?php echo $product['name_product'].' ('.$product['unit'].')'; ?>
+                        <?php echo $product['name_product'].'_'.$product['unit']; ?>
 
                       </td>
                       <td width="15%" class="text-center">

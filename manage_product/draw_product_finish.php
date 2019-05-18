@@ -9,8 +9,7 @@
   <?php require('../font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน
-  </title>
+  <title>โปรแกรมขายหน้าร้าน</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
@@ -104,14 +103,14 @@ folder instead of downloading all of them to reduce the load. -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
                 <form action="../pdf_file/draw_add.php?status=draw" method="post" target="_blank" autocomplete="off">
-                  <table class="table table-bordered table-hover">
+                  <table class="table table-bordered">
                     <tbody>
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="5%">ลำดับ
                         </th>
-                        <th class="text-center">ชื่อสินค้า
+                        <th class="text-center">สินค้า_หน่วย
                         </th>
-                        <th class="text-center" width="15%">จำนวนสินค้าที่เบิก
+                        <th class="text-center" width="15%">จำนวนสินค้าขอเบิก 
                         </th>
                       </tr>
             <?php //คำนวณสรายการสินค้า
@@ -169,7 +168,7 @@ folder instead of downloading all of them to reduce the load. -->
                           <?php echo $i+1; ?>
                         </td>
                         <td>
-                          <?php echo $name_product.' ('.$unit.')'; ?>
+                          <?php echo $name_product.'_'.$unit; ?>
                         </td>
                         <td class="text-center">
                           <?php echo $num_product; ?>
@@ -218,7 +217,7 @@ folder instead of downloading all of them to reduce the load. -->
             <!-- /.mailbox-read-message -->
             <!-- /.box-footer -->
             <div class="box-footer">
-              <a href="../product.php" class="btn btn-success pull-left"><i class="fa fa-arrow-left"> กลับ </i></a>
+            <a type="block" href="../product.php" class="btn btn-success pull-left"> <<= กลับสู่หน้าหลัก</a> 
               <button type="submit" class="btn btn-success pull-right"><i class="fa fa-print"> พิมพ์ </i></button>
             </div>
             </form>

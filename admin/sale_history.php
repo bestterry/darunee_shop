@@ -108,9 +108,9 @@
                                 ยอดขายรวม
                               </font>
                             </B>
-                            <table class="table table-bordered">
+                            <table class="table table-striped table-bordered">
                               <tbody>
-                                <tr bgcolor="#99CCFF">
+                                <tr class="info" >
                                   <th class="text-center" width="50%">สินค้า_หน่วย</th>
                                   <th class="text-center" width="25%">จำนวน</th>
                                   <th class="text-center" width="25%">เงินขาย(บ)</th>
@@ -172,9 +172,9 @@
                                 เวียงป่าเป้า
                               </font>
                             </B>
-                            <table class="table table-bordered">
+                            <table class="table table-striped table-bordered">
                               <tbody>
-                                <tr bgcolor="#99CCFF">
+                                <tr class="info" >
                                   <th class="text-center" width="25%">สินค้า_หน่วย</th>
                                   <th class="text-center" width="13%">จำนวน</th>
                                   <th class="text-center" width="12%">บ/หน่วย</th>
@@ -242,9 +242,9 @@
                                 <?php echo $objr_member['name']; ?>
                               </font>
                             </B>
-                            <table class="table table-bordered">
+                            <table class="table table-striped table-bordered">
                               <tbody>
-                                <tr bgcolor="#99CCFF">
+                                <tr class="info" >
                                   <th class="text-center" width="25%">สินค้า_หน่วย</th>
                                   <th class="text-center" width="13%">จำนวน</th>
                                   <th class="text-center" width="12%">บ/หน่วย</th>
@@ -303,9 +303,9 @@
                               
                             </div>
                             <!-- /.box-header -->
-                            <table class="table table-bordered">
+                            <table class="table table-striped table-bordered">
                               <tbody>
-                                <tr bgcolor="#99CCFF">
+                                <tr class="info" >
                                   <th class="text-center" width="0%">สินค้า_หน่วย
                                   </th>
                                   <th class="text-center" width="20%">จำนวน

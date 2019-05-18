@@ -64,9 +64,9 @@
               <ul class="nav nav-tabs">
                 <li><a href="#adduser" data-toggle="tab">เพิ่มพนักงาน</a></li>
                 <li><a href="#addproduct" data-toggle="tab">เพิ่มสินค้า</a></li>
-                <li><a href="#settingproduct" data-toggle="tab">แก้ไขสินค้า</a></li>
-                <li><a href="#settingproductcar" data-toggle="tab">แก้ไขสินค้าในรถ</a></li>
-                <li><a href="#addproductcar" data-toggle="tab">เพิ่มสินค้าเข้ารถรถ</a></li>
+                <li><a href="#settingproduct" data-toggle="tab">แก้ไขข้อมูลสินค้า</a></li>
+                <li><a href="#settingproductcar" data-toggle="tab">แก้ไขจำนวนสินค้าในรถ</a></li>
+                <li><a href="#addproductcar" data-toggle="tab">เพิ่มสินค้าเข้ารถ</a></li>
               </ul>
               <div class="tab-content">
                 <!-- เพิ่มพนักงาน -->
@@ -161,7 +161,7 @@
                             <div class="col-md-12">
                               <div class="form-group col-md-2">
                                 <label for="inputPassword3">ราคาซื้อมา :</label>
-                                <input type="text" name="price" class="form-control" placeholder="ราคา">
+                                <input type="text" name="price_num" class="form-control" placeholder="ราคา">
                               </div>
                             </div>
                             <div class="box-footer" align="center">
@@ -186,13 +186,13 @@
                             <div class="box-header with-border">
                               <font size="4">
                                 <B>
-                                  แก้ไขสินค้า
+                                  แก้ไขข้อมูลสินค้า
                                 </B>
                               </font>
                             </div>
-                            <table class="table table-bordered">
+                            <table class="table table-striped ">
                               <tbody>
-                                <tr bgcolor="#99CCFF">
+                                <tr class="info" >
                                   <th class="text-center">ชื่อสินค้า</th>
                                   <th class="text-center" width="15%">หน่วย</th>
                                   <th class="text-center" width="12%">แก้ไข</th>
@@ -242,7 +242,7 @@
                             <div class="box-header with-border">
                               <font size="4">
                                 <B>
-                                แก้ไขสินค้าในรถ
+                                แก้ไขจำนวนสินค้าในรถ
                                 </B>
                               </font>
                             </div>
@@ -250,16 +250,16 @@
                                 <tbody>
                                   <th width="20%">กรุณาเลือกบุคคล</th>
                                   <th>
-                                  <select class="form-control select2" style="width: 100%;" name="id_membercar">
-                                    <option selected="selected">-</option>
-                                  <?php
-                                    $sql_member = "SELECT * FROM member WHERE status='employee'";
-                                    $objq_member = mysqli_query($conn,$sql_member);
-                                    while($value = $objq_member->fetch_assoc()){
-                                  ?>
-                                    <option name="id_member" value="<?php echo $value['id_member'];?>"><?php echo $value['name'];?></option>
-                                  <?php }?>  
-                                  </select>
+                                    <select class="form-control select2" style="width: 50%;" name="id_membercar">
+                                      <option selected="selected">-</option>
+                                    <?php
+                                      $sql_member = "SELECT * FROM member WHERE status='employee'";
+                                      $objq_member = mysqli_query($conn,$sql_member);
+                                      while($value = $objq_member->fetch_assoc()){
+                                    ?>
+                                      <option name="id_member" value="<?php echo $value['id_member'];?>"><?php echo $value['name'];?></option>
+                                    <?php }?>  
+                                    </select>
                                   </th>
                                 </tbody>
                               </table>
@@ -285,7 +285,7 @@
                             <div class="box-header with-border">
                               <font size="4">
                                 <B>
-                                เพิ่มสินค้ารถ
+                                  เพิ่มสินค้าเข้ารถ
                                 </B>
                               </font>
                             </div>
@@ -293,7 +293,7 @@
                                 <tbody>
                                   <th width="20%">กรุณาเลือกบุคคล</th>
                                   <th>
-                                  <select class="form-control select2" style="width: 100%;" name="id_member">
+                                  <select class="form-control select2" style="width: 50%;" name="id_member">
                                     <option selected="selected">-</option>
                                   <?php
                                     $sql_member = "SELECT * FROM member WHERE status='employee'";

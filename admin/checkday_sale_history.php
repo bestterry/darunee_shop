@@ -102,9 +102,9 @@
                           ยอดขายรวม
                         </font>
                       </B>
-                      <table class="table table-bordered">
+                      <table class="table table-striped ">
                         <tbody>
-                          <tr bgcolor="#99CCFF">
+                          <tr class="info" >
                             <th class="text-center" width="50%">สินค้า_หน่วย</th>
                             <th class="text-center" width="25%">จำนวน</th>
                             <th class="text-center" width="25%">เงินขาย(บ)</th>
@@ -166,9 +166,9 @@
                           เวียงป่าเป้า
                         </font>
                       </B>
-                      <table class="table table-bordered">
+                      <table class="table table-striped ">
                         <tbody>
-                          <tr bgcolor="#99CCFF">
+                          <tr class="info" >
                             <th class="text-center" width="20%">สินค้า_หน่วย</th>
                             <th class="text-center" width="13%">จำนวน</th>
                             <th class="text-center" width="12%">บ/หน่วย</th>
@@ -216,13 +216,13 @@
                       <!-- ------------------------------//ร้านเวียงป่าเป้า---------------------------- -->
 
                       <!-- ------------------------------//รถรวม---------------------------- -->
-                      <?php for ($i=4; $i < 15; $i++) { 
+                      <?php for ($i=4; $i < 18; $i++) { 
                                           $sql_member = "SELECT * FROM member WHERE id_member = $i";
                                           $objq_member = mysqli_query($conn,$sql_member);
                                           $objr_member = mysqli_fetch_array($objq_member);
 
                                           $check = " SELECT * FROM product INNER JOIN sale_car_history
-                                                    ON product.id_product = sale_car_history.id_product WHERE sale_car_history.id_member = $i AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day' AND sale_car_history.status = 'sale' ";
+                                                     ON product.id_product = sale_car_history.id_product WHERE sale_car_history.id_member = $i AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day' AND sale_car_history.status = 'sale' ";
                                           $objq_check = mysqli_query($conn,$check);
                                           $objr_check = mysqli_fetch_array($objq_check);
                                           if(!isset($objr_check['num'])){
@@ -234,9 +234,9 @@
                           <?php echo $objr_member['name']; ?>
                         </font>
                       </B>
-                      <table class="table table-bordered">
+                      <table class="table table-striped ">
                         <tbody>
-                          <tr bgcolor="#99CCFF">
+                          <tr class="info" >
                             <th class="text-center" width="20%">สินค้า_หน่วย</th>
                             <th class="text-center" width="13%">จำนวน</th>
                             <th class="text-center" width="12%">บ/หน่วย</th>
@@ -295,9 +295,9 @@
                         </B>
                       </div>
                       <!-- /.box-header -->
-                      <table class="table table-bordered">
+                      <table class="table table-striped ">
                         <tbody>
-                          <tr bgcolor="#99CCFF">
+                          <tr class="info" >
                             <th class="text-center" width="40%">สินค้า_หน่วย
                             </th>
                             <th class="text-center" width="20%">จำนวน

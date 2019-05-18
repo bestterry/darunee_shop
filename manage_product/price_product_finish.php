@@ -51,38 +51,8 @@
 
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
-  <header class="main-header">
-      <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->  
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo $username; ?></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
-
-                  <p>
-                    <?php echo $username; ?>
-                    <small>สาขา : <?php echo $name_zone; ?></small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <header class="main-header">
+     <?php require "menu/main_header.php"; ?>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -105,10 +75,10 @@
                     <tbody>
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="5%">ลำดับ</th>
-                        <th class="text-center">ชื่อสินค้า</th>
-                        <th class="text-center" width="15%">จำนวนสินค้าที่ขาย</th>
-                        <th class="text-center" width="15%">ราคาต่อหน่วย</th>
-                        <th class="text-center" width="15%">รวมเงิน (บาท)</th>
+                        <th class="text-center">สินค้า_หน่วย</th>
+                        <th class="text-center" width="15%">จำนวน</th>
+                        <th class="text-center" width="15%">บ/หน่วย</th>
+                        <th class="text-center" width="15%">รวมเงิน(บ)</th>
                       </tr>
                       <?php //คำนวณสรายการสินค้า
                       $note = $_POST['note'];
@@ -145,7 +115,7 @@
                           ?>
                       <tr>
                         <td class="text-center"><?php echo $i+1; ?></td>
-                        <td><?php echo $name_product.' ('.$objr_num_product_instore['unit'].')'; ?></td>
+                        <td><?php echo $name_product.'_'.$objr_num_product_instore['unit']; ?></td>
                         <td class="text-center"><?php echo $num_product; ?></td>
                         <td class="text-center"><?php echo $price_product; ?> </td>
                         <input class="hidden" type="text" name="name_product[]" value="<?php echo $name_product; ?>">
@@ -168,13 +138,20 @@
                       </tr>
                     </tbody>
                   </table>
-                  <div class="col-md-8">
-                    
-                  </div>
-                  <div class="col-md-4">
-                    <table class="table table-bordered table-hover">
+                  <div class="col-md-6">
+                   <table class="table table-bordered ">
                       <tbody>
-                        <tr>
+                        <tr bgcolor="#99CCFF">
+                          <th class="text-center" width="25%">หมายเหตุ</th>
+                          <th class="text-center" width="75%"> <?php echo $note; ?></th>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </div>
+                  <div class="col-md-6">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr bgcolor="#99CCFF">
                           <th class="text-center">จำนวนเงินที่รับมา</th>
                           <th class="text-center"> <input class="text-center" type="text" name="money_receive"
                               placeholder="ระบุจำนวนเงิน"></th>
@@ -188,7 +165,8 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div align="center" class="box-footer">
-              <button type="submit" class="btn btn-success"><i class="fa fa-calculator"> คำนวณเงิน </i></button>
+              <a type="block" href="../product.php" class="btn btn-success pull-left"> <<= กลับสู่หน้าหลัก</a> 
+              <button type="submit" class="btn btn-success pull-right"><i class="fa fa-calculator"> คำนวณเงิน </i></button>
             </div>
             </form>
             <!-- /.box-footer -->

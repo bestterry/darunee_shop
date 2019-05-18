@@ -10,7 +10,7 @@ require "../session.php";
   <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ทีมงานคุณดารุณี</title>
+  <title>โปรแกรมขายหน้าร้าน</title>
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -46,37 +46,7 @@ require "../session.php";
   <div class="wrapper">
 
     <header class="main-header">
-          <!-- Header Navbar: style can be found in header.less -->
-          <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->  
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo $username; ?></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="../dist/img/user.png" class="img-circle" alt="User Image">
-
-                  <p>
-                    <?php echo $username; ?>
-                    <small>สาขา : <?php echo $name_zone; ?></small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="../login/logout.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <?php require "menu/main_header.php"; ?>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -90,7 +60,7 @@ require "../session.php";
           <div class="box box-primary">
             <div class="box-header with-border text-center">
               <font size="5">
-                <B> รายการสินค้าที่ต้องการแยก</B>
+                <B> สินค้าที่ต้องการแกะกล่อง </B>
               </font>
             </div>
             <!-- /.box-header -->
@@ -100,9 +70,9 @@ require "../session.php";
                   <table class="table table-bordered ">
                     <tbody>
                       <tr bgcolor="#99CCFF">
-                        <th class="text-center" width="50%">ชื่อสินค้า</th>
-                        <th class="text-center" width="25%">จำนวนสินค้าที่มี</th>
-                        <th class="text-center" width="25%">จำนวนสินค้าที่ต้องการแยก</th>
+                        <th class="text-center" width="50%">สินค้า_หน่วย</th>
+                        <th class="text-center" width="25%">จำนวนที่มี</th>
+                        <th class="text-center" width="25%">จำนวนแกะกล่อง</th>
                       </tr>
                       <?php
                               $id_product2 = 0;
@@ -127,7 +97,7 @@ require "../session.php";
                               ?>
                           <tr>
                             <td>
-                              <?php echo $objr_listproduct['name_product'] . ' (' . $objr_listproduct['unit'] . ')'; ?>
+                              <?php echo $objr_listproduct['name_product'] . '_' . $objr_listproduct['unit']; ?>
                               <input class="hidden" type="text" name="id_product" value="<?php echo $objr_listproduct['id_product']; ?>">
                               <input class="hidden" type="text" name="id_numproduct" value="<?php echo $objr_listproduct['id_numproduct']; ?>">
                               <input class="hidden" type="text" name="id_product2" value="<?php echo $id_product2; ?>">
@@ -146,7 +116,7 @@ require "../session.php";
               <!-- /.mailbox-read-message -->
             </div>
             <div class="box-footer">
-              <a type="block" href="../product.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i> </a> 
+              <a type="block" href="../product.php" class="btn btn-success"><<= กลับสู่หน้าหลัก </i> </a> 
               <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-calculator"> บันทึก </i></button>
             </div>
             <!-- /.box-footer -->

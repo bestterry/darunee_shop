@@ -70,9 +70,9 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
                 <form action="algorithm/add_num_product.php" method="post" autocomplete="off">
-                  <table class="table table-bordered table-hover">
-                    <tbody>
-                      <tr bgcolor="#99CCFF">
+                <table class="table table-striped ">
+                  <tbody>
+                    <tr class="info" >
                         <th class="text-center" width="5%">ลำดับ</th>
                         <th class="text-center">ชื่อสินค้า</th>
                         <th class="text-center" width="25%">จำนวนสินค้าที่ต้องการเพิ่ม</th>
@@ -108,7 +108,7 @@
                   <div class="col-md-8">
                   </div>
                   <div class="col-md-4">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered">
                       <tbody>
                         <tr>
                           <th class="text-center">เพิ่มไปยังสต๊อก
@@ -134,9 +134,8 @@
               <!-- /.mailbox-read-message -->
             </div>
             <div class="box-footer">
-              <a type="block" href="admin.php" class="btn btn-success">
-                <<= เริ่มต้นใหม่ </i> </a> <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i
-                    class="fa fa-calculator"> บันทึก </i></button>
+              <a type="block" href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก </i></a> 
+              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-calculator"> บันทึก </i></button>
             </div>
             <!-- /.box-footer -->
             </form>

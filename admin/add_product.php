@@ -96,9 +96,9 @@
             <div class="box-body no-padding ">
               <div class="mailbox-read-message">
                 <form action="add_product2.php" method="post">
-                  <table class="table table-bordered table-hover">
-                    <tbody>
-                      <tr bgcolor="#99CCFF">
+                  <table class="table table-striped ">
+                          <tbody>
+                            <tr class="info" >
                         <?php 
                         $id_member = $_POST['id_member'];
                         if($id_member == 16 ){
@@ -165,8 +165,8 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-              <a type="block" href="admin.php" class="btn btn-success pull-left">
-                <<= กลับหน้าหลัก </i> </a> <button type="submit" class="btn btn-success pull-right">ต่อไป =>> </button>
+              <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
+              <button type="submit" class="btn btn-success pull-right">ต่อไป =>> </button>
             </div>
             </form>
             <!-- /.box-footer -->

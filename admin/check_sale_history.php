@@ -61,7 +61,7 @@
     <header class="main-header">
       <?php require('menu/header_logout.php');?>
     </header>
-    <div class="content-wrapper" style="height: 2000px;">
+    <div class="content-wrapper" style="height: 1000px;">
       <section class="content-header">
       </section>
       <section class="content">
@@ -73,14 +73,14 @@
                 <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
               </div>
               <font size="5">
-                <B> ประวัติการขาย <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
+                <B> ยอดขาย <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
               </font>
             </div>
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <table class="table table-striped ">
-                  <tbody>
-                    <tr>
+              <table class="table table-striped ">
+                <tbody>
+                  <tr class="info" >
                       <th bgcolor="#99CCFF" width="40%" class="text-center">สินค้า_หน่วย </th>
                       <th bgcolor="#99CCFF" width="15%" class="text-center">จำนวน</th>
                       <th bgcolor="#99CCFF" width="15%" class="text-center">เงินขาย(บ)</th>

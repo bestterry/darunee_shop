@@ -58,19 +58,19 @@
       <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="6"><p align = "center"> รายการสินค้าที่ต้องการโอน </font></p>
+                <font size="5"><p align = "center"> <B>รายการสินค้าที่ต้องการโอน<B> </font></p>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
                   <form action="algorithm/transfer_product.php" method="post" autocomplete="off">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" width="5%" >ลำดับ</th>
-                            <th class="text-center" >ชื่อสินค้า</th>
-                            <th class="text-center" width="15%">จำนวนสินค้าที่มี</th>
-                            <th class="text-center" width="15%">จำนวนสินค้าที่ต้องการโอน</th>
+                            <th class="text-center" >สินค้า_หน่วย</th>
+                            <th class="text-center" width="15%">จำนวนที่มี</th>
+                            <th class="text-center" width="20%">จำนวนโอน</th>
                           </tr>
                           <?php
                             for($i=0;$i<count($_POST["id_numPD"]);$i++)
@@ -87,7 +87,7 @@
                           <tr>
                             <td class="text-center"><?php echo $i+1; ?></td>
                             <td>
-                              <?php echo $objr_listproduct['name_product'].' ('.$objr_listproduct['unit'].')'; ?>
+                              <?php echo $objr_listproduct['name_product'].'_'.$objr_listproduct['unit']; ?>
                               <input class = "hidden" type="text" name="id_product[]" value="<?php echo $objr_listproduct['id_product']; ?>">
                               <input class = "hidden" type="text" name="id_numPD_car[]" value="<?php echo $objr_listproduct['id_numPD_car']; ?>">
                             </td>
@@ -108,12 +108,12 @@
                     <div class="col-md-8">
                     </div>
                     <div class="col-md-4">
-                      <table class="table table-bordered table-hover">
+                      <table class="table table-bordered">
                         <tbody>
-                          <tr>
-                            <th class="text-center">ชื่อผู้รับสินค้า
+                          <tr bgcolor="#99CCFF">
+                            <th class="text-right">ผู้รับโอน :
                             </th>
-                            <th bgcolor="#99CCFF" class="text-center" width="40%"> 
+                            <th class="text-center" width="40%"> 
                               <select name ="id_member" class="form-control text-center select2" style="width: 100%;">
                                   <?php #endregion
                                   $sql_member = "SELECT * FROM member WHERE status = 'employee'";
@@ -133,7 +133,7 @@
                 <!-- /.mailbox-read-message -->
             </div>
             <div class="box-footer">
-            <a type="block" href="store.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i></a>
+            <a type="block" href="store.php" class="btn btn-success"><<= กลับสู่หน้าหลัก </i></a>
             <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-calculator"> บันทึก </i></button>
             </div>
             <!-- /.box-footer -->

@@ -69,7 +69,7 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
                 <form action="algorithm/edit_sale_history.php" method="post" autocomplete="off">
-                  <table class="table table-bordered table-hover">
+                  <table class="table table-bordered">
                     <tbody>
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="35%">รายการ

@@ -108,9 +108,9 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
                 <form action="withdraw_product2.php" method="post">
-                  <table class="table table-bordered table-hover">
+                  <table class="table table-striped ">
                     <tbody>
-                      <tr bgcolor="#99CCFF">
+                      <tr class="info" >
                         <th class="text-center" width="5%">เลือก
                         </th>
                         <th class="text-center" width="30%">สินค้า_หน่วย
@@ -146,8 +146,8 @@
               </div>
             </div>
             <div class="box-footer">
-              <a type="block" href="admin.php" class="btn btn-success pull-left">
-                <<= กลับหน้าหลัก </i> </a> <button type="submit" class="btn btn-success pull-right">ต่อไป =>> </button>
+              <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก </a> 
+              <button type="submit" class="btn btn-success pull-right">ต่อไป =>> </button>
             </div>
             </form>
             <!-- /.box-footer -->

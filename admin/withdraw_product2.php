@@ -98,7 +98,7 @@
                 <div class="box-body no-padding">
                   <div class="mailbox-read-message">
                     <form action="algorithm/withdraw_product.php" method="post" autocomplete="off">
-                      <table class="table table-bordered table-hover">
+                      <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" width="5%">ลำดับ
@@ -132,8 +132,8 @@
                             </td>
                             <td class="text-center"><input class="text-center" type="text" name="num_after[]"></td>
                           </tr>
-                          <?php 
-                           }
+                      <?php 
+                        }
                       ?>
                         </tbody>
                       </table>
@@ -147,17 +147,16 @@
                         </table>
                       </div>
                       <div class="col-md-6">
-                                <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
-                                <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
+                        <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
+                        <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
                       </div>
                   </div>
                 </div>
                 <!-- /.box-body -->
                 <!-- /.box-footer -->
                 <div class="box-footer">
-                  <a type="block" href="admin.php" class="btn btn-success pull-left"><<= กลับหน้าหลัก</a> 
-                  <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save">
-                        บันทึก</i></button>
+                  <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
+                  <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save">บันทึก</i></button>
                 </div>
                 </form>
                 <!-- /.box-footer -->
@@ -168,7 +167,6 @@
           <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-
         <?php require("../menu/footer.html"); ?>
       </div>
       <!-- jQuery 3 -->

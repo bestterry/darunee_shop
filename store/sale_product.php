@@ -58,20 +58,20 @@
       <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <font size="6"><p align = "center"> รายการขายสินค้า </font></p>
+                <font size="5"><p align = "center"> <B>รายการขายสินค้า<B> </font></p>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
                   <form action="sale_product_finish.php" method="post" autocomplete="off">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" width="5%" >ลำดับ</th>
-                            <th class="text-center" >ชื่อสินค้า</th>
-                            <th class="text-center" width="15%">จำนวนสินค้าที่ขาย</th>
-                            <th class="text-center" width="15%">ราคาต่อหน่วย</th>
-                            <th class="text-center" width="15%">รวมเงิน (บาท)</th>
+                            <th class="text-center" >สินค้า_หน่วย</th>
+                            <th class="text-center" width="15%">จำนวน</th>
+                            <th class="text-center" width="15%">บ/หน่วย</th>
+                            <th class="text-center" width="15%">เงินขาย(บ)</th>
                           </tr>
                           <?php
                             for($i=0;$i<count($_POST["id_numPD"]);$i++)
@@ -88,17 +88,17 @@
                           <tr>
                             <td class="text-center"><?php echo $i+1; ?></td>
                             <td>
-                              <?php echo $objr_listproduct['name_product'].' ('.$objr_listproduct['unit'].')'; ?>
+                              <?php echo $objr_listproduct['name_product'].'_'.$objr_listproduct['unit']; ?>
                               <input class = "hidden" type="text" name="name_product[]" value="<?php echo $objr_listproduct['name_product']; ?>">
                               <input class = "hidden" type="text" name="id_product[]" value="<?php echo $objr_listproduct['id_product']; ?>">
                               <input class = "hidden" type="text" name="unit[]" value="<?php echo $objr_listproduct['unit']; ?>">
                             </td>
                             <td class="text-center" >
                               <input class = "hidden" type="text" name="id_numPD[]" value="<?php echo $id_numPD; ?>">
-                              <input type="text" name="num_product[]"  class="form-control text-center col-md-1" placeholder="<?php echo $objr_listproduct['unit'];?>">
+                              <input class="text-center" type="text" name="num_product[]"   placeholder="<?php echo $objr_listproduct['unit'];?>">
                             </td>
                             <td class="text-center">
-                              <input type="text" name="price_product[]"  class="form-control text-center col-md-2" placeholder="ราคา/หน่วย">
+                              <input class="text-center" type="text" name="price_product[]" placeholder="ราคา/หน่วย">
                             </td>
                             <td></td>
                           </tr>
@@ -108,14 +108,12 @@
                             ?>
                         </tbody>
                     </table>
-                    <div class="col-md-8">
-                    </div>
-                    <div class="col-md-4">
-                      <table class="table table-bordered table-hover">
+                    <div class="col-md-12">
+                      <table class="table table-bordered">
                         <tbody>
-                        <tr>
-                        <th class="text-center">หมายเหตุ</th>
-                        <th class="text-center"> <input class="text-center" type="text" name="note"></th>
+                        <tr bgcolor="#99CCFF">
+                        <th class="text-center">หมายเหตุ : </th>
+                        <th class="text-center"> <input class="text-center" type="text" name="note" size="50"></th>
                         </tr>
                         </tbody>
                       </table>
@@ -124,7 +122,7 @@
                 <!-- /.mailbox-read-message -->
             </div>
             <div class="box-footer">
-            <a type="block" href="store.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i></a>
+            <a type="block" href="store.php" class="btn btn-success"><<= กลับหน้าหลัก </i></a>
             <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-calculator"> บันทึก </i></button>
             </div>
             <!-- /.box-footer -->

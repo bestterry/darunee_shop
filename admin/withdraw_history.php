@@ -62,9 +62,9 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li><a href="#timeline" data-toggle="tab">ยอดเบิกรายวัน</a></li>
-                <li><a href="#checkday" data-toggle="tab">ตรวจสอบยอดเบิกรายวัน</a></li>
-                <li><a href="#change" data-toggle="tab">ตรวจสอบการโอนสินค้าระหว่างรถ</a></li>
+                <li><a href="#timeline" data-toggle="tab">ยอดเบิกสินค้าวันนี้</a></li>
+                <li><a href="#change" data-toggle="tab">โอนสินค้าระหว่างรถ</a></li>
+                <li><a href="#checkday" data-toggle="tab">ยอดเบิกย้อนหลัง</a></li>
                 <div align="right">
                   <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
                 </div>
@@ -87,7 +87,7 @@
                             <!-- ------------------------------ยอดขายรวม---------------------------- -->
                             <div class="box-header with-border">
                               <p align="center">
-                                <font size="5"><B>ประวัติการเบิกสินค้า
+                                <font size="5"><B>ยอดเบิกสินค้า
                                   <font color="red">
                                   <?php 
                                     $strDate = date('d-m-Y');
@@ -98,15 +98,15 @@
                                  </font>
                               </p>
                             </div>
-                            <table class="table table-bordered">
+                            <table class="table table-striped">
                               <tbody>
-                                <tr bgcolor="#99CCFF">
+                                <tr class="info">
                                   <th class="text-center" width="5%">ลำดับ</th>
-                                  <th class="text-center" width="35%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="12%">จำนวน</th>
-                                  <th class="text-center" width="12%">ชื่อผู้เบิก</th>
-                                  <th class="text-center" width="12%">เบิกจาก</th>
-                                  <th class="text-center" width="20%">หมายเหตุ</th>
+                                  <th class="text-center" width="25%">สินค้า_หน่วย</th>
+                                  <th class="text-center" width="8%">จำนวน</th>
+                                  <th class="text-center" width="10%">ผู้เบิก</th>
+                                  <th class="text-center" width="10%">เบิกจาก</th>
+                                  <th class="text-center" width="36%">หมายเหตุ</th>
                                 </tr>
                                 <?php #endregion
                                 $i = 1;
@@ -153,10 +153,10 @@
                                 <B>ยอดเบิกสินค้า</B>
                               </font>
                             </div>
-                            <table class="table table-bordered">
+                            <table class="table table-striped">
                               <tbody>
-                                <tr bgcolor="#99CCFF">
-                                  <th class="text-center" width="40%">รายการ</th>
+                                <tr class="info">
+                                  <th class="text-center" width="40%">สินค้า_หน่วย</th>
                                   <th class="text-center" width="20%">จำนวน</th>
                                 </tr>
                                 <?php #endregion
@@ -213,7 +213,7 @@
                             <div class="col-md-5">
                               <div class="box-body">
                                 <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
-                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบข้อมูลสถิติการขายย้อนหลัง</p>
+                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบข้อมูลการเบิกย้อนหลัง</p>
                               </div>
                             </div>
                             <div class="col-md-5">
@@ -239,12 +239,12 @@
                     <div class="box-header with-border">
                     <div class="box-header with-border">
                       <p align="center">
-                        <font size="5"><B>การโอนสินค้าระหว่างรถ<font color="red"> <?php echo DateThai($strDate); ?></font></B> </font>
+                        <font size="5"><B>โอนสินค้าระหว่างรถ<font color="red"> <?php echo DateThai($strDate); ?></font></B> </font>
                       </p>
                     </div>
-                    <table class="table table-bordered">
+                    <table class="table table-striped">
                       <tbody>
-                        <tr bgcolor="#99CCFF">
+                        <tr class="info">
                           <th class="text-center" width="5%">ลำดับ</th>
                           <th class="text-center" width="30%">สินค้า_หน่วย</th>
                           <th class="text-center" width="12%">จำนวน</th>

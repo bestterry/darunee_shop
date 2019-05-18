@@ -96,8 +96,7 @@ $pdf=new PDF('P','mm','A4');
             $total_all_money = $total_all_money + $total_money;
               }
             }     
-            $pdf->Cell(90,8,iconv('UTF-8','cp874',''),0,0,'C');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874','รวมเงิน'),1,0,'C');
+            $pdf->Cell(130,8,iconv('UTF-8','cp874','รวมเงิน'),1,0,'R');
             $pdf->Cell(40,8,iconv('UTF-8','cp874',$total_all_money),1,0,'C');
             $pdf->Ln(10);
              // ยอดขายรวม.
@@ -130,8 +129,7 @@ $pdf=new PDF('P','mm','A4');
             $pdf->Ln(8);
             $total_money = $total_money + $value['money'];
             }       
-            $pdf->Cell(50,8,iconv('UTF-8','cp874',''),0,0,'C');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874','รวมเงิน'),1,0,'C');
+            $pdf->Cell(90,8,iconv('UTF-8','cp874','รวมเงิน'),1,0,'R');
             $pdf->Cell(25,8,iconv('UTF-8','cp874',$total_money),1,0,'C');
             $pdf->Ln(10);
             //ร้านเวียงป่าเป้า//
@@ -177,8 +175,7 @@ $pdf=new PDF('P','mm','A4');
               $pdf->Ln(8);
               $total_money = $total_money + $product['money'];
                 }
-            $pdf->Cell(50,8,iconv('UTF-8','cp874',''),0,0,'C');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874','รวมเงิน'),1,0,'C');
+            $pdf->Cell(90,8,iconv('UTF-8','cp874','รวมเงิน'),1,0,'R');
             $pdf->Cell(25,8,iconv('UTF-8','cp874',$total_money),1,0,'C');
             $pdf->Ln(10);
               }
