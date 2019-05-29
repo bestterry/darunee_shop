@@ -77,9 +77,9 @@ require "../session.php";
                       <?php
                               $id_product2 = 0;
                               $id_numPD = $_POST['id_numPD'];
-                              $list_product = "SELECT * FROM numpd_car
-                                                  INNER JOIN product ON numpd_car.id_product = product.id_product
-                                                  WHERE numpd_car.id_numPD_car = $id_numPD";
+                              $list_product = " SELECT * FROM numpd_car
+                                                INNER JOIN product ON numpd_car.id_product = product.id_product
+                                                WHERE numpd_car.id_numPD_car = $id_numPD";
                               $objq_listproduct = mysqli_query($conn, $list_product);
                               $objr_listproduct = mysqli_fetch_array($objq_listproduct);
                               $id_product = $objr_listproduct['id_product'];

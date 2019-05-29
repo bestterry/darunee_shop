@@ -3,7 +3,7 @@
   if($_SESSION['id_member'] == "")
   
   {
-      header("location:../index.html");
+      header("location:index.html");
       exit();
   }
 

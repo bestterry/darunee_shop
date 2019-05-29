@@ -192,6 +192,75 @@
           </div>
           <!-- /แยกสินค้า -->
 
+          <!-- สถานที่ทำงาน -->
+          <li><a href="#" data-toggle="modal" data-target="#working"><i class="fa fa-users"></i> ข้อมูลทำงาน </a></li>
+          <div class="modal fade" id="working" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <form action="working.php" method="post">
+                <div class="modal-content text-center">
+                  <div class="modal-header">
+                    <font size="5"><B align="center"> ข้อมูลทำงาน </B></font>
+                  </div>
+                  <br>
+                  <div class="col-md-12">
+                    <div class="col-md-6">  
+                        <table class="table table-bordered ">
+                          <tbody>
+                              <tr>
+                              <th class="text-center" width="30%"><font size="3">เดือน :</font></th>
+                              <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                              <select name ="month" style="width: 100%;">
+                              <option selected="selected" value="01">มกราคม</option>
+                                    <option value="02">กุมภาพันธ์</option>
+                                    <option value="03">มีนาคม</option>
+                                    <option value="04">เมษายน</option>
+                                    <option value="05">พฤษภาคม</option>
+                                    <option value="06">มิถุนายน</option>
+                                    <option value="07">กฤกฏาคม</option>
+                                    <option value="08">สิงหาคม</option>
+                                    <option value="09">กันยายน</option>
+                                    <option value="10">ตุลาคม</option>
+                                    <option value="11">พฤศจิกายน</option>
+                                    <option value="12">ธันวาคม</option>
+                              </select>
+                              </th>
+                              </tr>
+                          </tbody>
+                        </table> 
+                      </div>
+                        <!-- /.form-group -->
+
+                        <div class="col-md-6">  
+                          <table class="table table-bordered ">
+                            <tbody>
+                                <tr>
+                                <th class="text-center" width="30%"><font size="3">ปี :</font></th>
+                                <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                                <select name ="year" style="width: 100%;">
+                                      <option selected="selected" value="2019">2562</option>
+                                      <option value="2020">2563</option>
+                                      <option value="2021">2564</option>
+                                      <option value="2022">2565</option>
+                                      <option value="2023">2566</option>
+                                </select>
+                                </th>
+                                </tr>
+                            </tbody>
+                          </table> 
+                        </div>
+                        <!-- /.form-group -->
+                    </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close">
+                        ปิดหน้าต่างนี้</i></button>
+                    <button type="submit" class="btn btn-success pull-right">ถัดไป ==>></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- /สถานที่ทำงาน -->
+
           <!-- /สต๊อกรถ -->
           <li><a href="car_stock.php"><i class="fa fa-truck"></i> สต๊อกรถ </a></li>
           <!-- /สต๊อกรถ -->

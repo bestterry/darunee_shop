@@ -153,7 +153,8 @@
                 <li><a href="withdraw_history.php"><i class="fa fa-cloud-upload"></i> ข้อมูลการเบิก </a></li>
                 <li><a href="add_history.php"><i class="fa fa-cloud-download"></i> ข้อมูลการรับเข้า </a></li>
                 <li><a href="profit.php"><i class="fa fa-money"></i> กำไรขาย </a></li>
-                <!--โอนสินค้า -->
+                
+                <!--เงินสะสม -->
                 <li><a href="#" data-toggle="modal" data-target="#cu"><i class="fa fa-archive"></i> เงินสะสม </a></li>
                 <div class="modal fade" id="cu" role="dialog">
                     <div class="modal-dialog modal-lg">
@@ -190,7 +191,11 @@
                         </form>
                     </div>
                 </div>
-                <!--//รับเข้าสินค้า -->
+                <!--//เงินสะสม -->
+
+                <!-- สถานที่ทำงาน -->
+                <li><a href="working.php"><i class="fa fa-users"></i> ตารางปฏิบัติงาน </a></li>
+                <!-- /สถานที่ทำงาน -->
                 <li><a href="add_data.php" ><i class="fa fa-cog"></i> จัดการข้อมูลสินค้า-พนักงาน </a></li>
             </ul>
         </div>

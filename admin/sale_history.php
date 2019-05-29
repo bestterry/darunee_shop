@@ -166,25 +166,28 @@
                             </table>
                             <!-- ------------------------------//ยอดขายรวม---------------------------- -->
 
-                            <!-- ------------------------------ร้านเวียงป่าเป้า---------------------------- -->
+                            
+                            <!-- ------------------------------หน้าร้าน---------------------------- -->
                             <B>
                               <font size="4">
-                                เวียงป่าเป้า
+                                หน้าร้าน
                               </font>
                             </B>
                             <table class="table table-striped table-bordered">
                               <tbody>
                                 <tr class="info" >
                                   <th class="text-center" width="25%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="13%">จำนวน</th>
+                                  <th class="text-center" width="8%">จำนวน</th>
                                   <th class="text-center" width="12%">บ/หน่วย</th>
                                   <th class="text-center" width="13%">เงินขาย(บ)</th>
-                                  <th class="text-center" width="40%">รายละเอียด</th>
+                                  <th class="text-center" width="13%">ร้าน</th>
+                                  <th class="text-center" width="50%">รายละเอียด</th>
                                 </tr>
                                 <?php
                                                   $total_money = 0;
-                                                  $date = "SELECT * FROM product INNER JOIN price_history 
-                                                            ON product.id_product = price_history.id_product 
+                                                  $date = " SELECT * FROM price_history 
+                                                            INNER JOIN product ON product.id_product = price_history.id_product
+                                                            INNER JOIN zone ON price_history.id_zone = zone.id_zone 
                                                             WHERE DATE_FORMAT(price_history.datetime,'%d-%m-%Y')='$strDate'";
                                                   $objq = mysqli_query($conn,$date);
                                                   while($value = $objq ->fetch_assoc()){ 
@@ -203,6 +206,9 @@
                                     <?php echo $value['money']; ?>
                                   </td>
                                   <td class="text-center">
+                                    <?php echo $value['name_zone']; ?>
+                                  </td>
+                                  <td class="text-center">
                                     <?php echo $value['note']; ?>
                                   </td>
                                 </tr>
@@ -213,13 +219,14 @@
                                 <tr>
                                   <th bgcolor="#EAF4FF" class="text-center"></th>
                                   <th bgcolor="#EAF4FF" class="text-center"></th>
+                                  <th bgcolor="#EAF4FF" class="text-center"></th>
                                   <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                                   <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_money;?></th>
                                   <td bgcolor="#EAF4FF"></td>
                                 </tr>
                               </tbody>
                             </table>
-                            <!-- ------------------------------//ร้านเวียงป่าเป้า---------------------------- -->
+                            <!-- ------------------------------//หน้าร้าน---------------------------- -->
 
                             <!-- ------------------------------//รถรวม---------------------------- -->
 

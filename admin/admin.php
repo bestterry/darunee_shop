@@ -111,27 +111,27 @@
                     <th class="text-center" width="5%">Soft HOMDY(ขวด)</th>
                   </tr>
                   <?php 
-                    $sql_wp = "SELECT SUM(money) FROM price_history WHERE id_zone = 1 AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
+                    $sql_wp = "SELECT SUM(money) FROM price_history WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
                     $objq_wp = mysqli_query($conn,$sql_wp);
                     $objr_wp = mysqli_fetch_array($objq_wp);
                     $sum_wp = $objr_wp['SUM(money)'];
 
                     //soft ลัง ร้านเวียง
-                    $sql_wp_soft1 = "SELECT SUM(num) FROM price_history WHERE id_zone = 1 AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = 1";
+                    $sql_wp_soft1 = "SELECT SUM(num) FROM price_history WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = 1";
                     $objq_wp_soft1 = mysqli_query($conn,$sql_wp_soft1);
                     $objr_wp_soft1 = mysqli_fetch_array($objq_wp_soft1);
                     $sum_wp_soft1 = $objr_wp_soft1['SUM(num)'];
                     //soft ลัง ร้านเวียง
 
                     //soft ขวด ร้านเวียง
-                    $sql_wp_soft2 = "SELECT SUM(num) FROM price_history WHERE id_zone = 1 AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = 2";
+                    $sql_wp_soft2 = "SELECT SUM(num) FROM price_history WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = 2";
                     $objq_wp_soft2 = mysqli_query($conn,$sql_wp_soft2);
                     $objr_wp_soft2 = mysqli_fetch_array($objq_wp_soft2);
                     $sum_wp_soft2 = $objr_wp_soft2['SUM(num)'];
                     //soft ขวด ร้านเวียง
                   ?>
                   <tr>
-                    <td class="text-center" width="15%">เวียงป่าเป้า</td>
+                    <td class="text-center" width="15%">หน้าร้าน</td>
                     <td class="text-center" width="5%"><?php echo $sum_wp;?></td>
                     <td class="text-center" width="5%"><?php echo $sum_wp_soft1;?></td>
                     <td class="text-center" width="5%"><?php echo $sum_wp_soft2;?></td>
