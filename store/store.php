@@ -201,7 +201,7 @@
                     //soft ขวด ร้านเวียง
                   ?>
                   <tr>
-                    <td class="text-center" width="15%">เวียงป่าเป้า</td>
+                    <td class="text-center" width="15%">หน้าร้าน</td>
                     <td class="text-center" width="5%"><?php echo $sum_wp;?></td>
                     <td class="text-center" width="5%"><?php echo $sum_wp_soft1;?></td>
                     <td class="text-center" width="5%"><?php echo $sum_wp_soft2;?></td>

@@ -78,7 +78,7 @@
                     $year = $_POST['year'];
                     $month = $_POST['month'];
                         $sql_day_car = " SELECT * FROM area INNER JOIN working ON area.id_working=working.id_working
-                        WHERE area.id_member = $id_member AND (area.datetime between '$year-$month-01 00:00:00' and '$year-$month-31 23:59:59') GROUP BY DAY(datetime),MONTH(datetime),YEAR(datetime) ORDER BY datetime";
+                        WHERE area.id_member = $id_member AND (area.datetime between '$year-$month-01 00:00:00' and '$year-$month-31 23:59:59')";
                         $objq_day_car = mysqli_query($conn,$sql_day_car);
                         while ($value = $objq_day_car-> fetch_assoc() ) {
                         $datetime = $value['datetime'];

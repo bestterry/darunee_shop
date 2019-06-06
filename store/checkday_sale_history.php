@@ -100,7 +100,7 @@ require "menu/date.php";
                       <div class="box-header with-border">
                       <a type="block" href="store.php" class="btn btn-success pull-right"><<= กลับหน้าหลัก </i></a>
                               <font size="4">
-                                <B> ข้อมูลการขาย 
+                                <B> ยอดขายรวม 
                                   <font size="4" color="red">
                                     <?php echo DateThai($day);?>
                                   </font>

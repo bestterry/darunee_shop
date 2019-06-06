@@ -96,7 +96,7 @@
                     <th class="text-center" width="5%">ดคต.</th>
                     <th class="text-center" width="5%">วปป.</th>
                     <th class="text-center" width="5%">ลำปาง</th>
-                    <th class="text-center" width="5%">ฮอด</th>
+                    <th class="text-center" width="5%">ขายส่ง</th>
                     <th class="text-center" width="5%">แม่จัน</th>
                     <th class="text-center" width="5%">ทีมจร</th>
                     <th class="text-center" width="5%">รถ</th>

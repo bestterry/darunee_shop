@@ -219,10 +219,10 @@
                                 <tr>
                                   <th bgcolor="#EAF4FF" class="text-center"></th>
                                   <th bgcolor="#EAF4FF" class="text-center"></th>
-                                  <th bgcolor="#EAF4FF" class="text-center"></th>
                                   <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                                   <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_money;?></th>
-                                  <td bgcolor="#EAF4FF"></td>
+                                  <th bgcolor="#EAF4FF" class="text-center"></th>
+                                  <th bgcolor="#EAF4FF"></th>
                                 </tr>
                               </tbody>
                             </table>
@@ -230,7 +230,7 @@
 
                             <!-- ------------------------------//รถรวม---------------------------- -->
 
-                            <?php for ($i=4; $i < 18; $i++) { 
+                            <?php for ($i=4; $i <= 19; $i++) { 
                                                       $sql_member = "SELECT * FROM member WHERE id_member = $i";
                                                       $objq_member = mysqli_query($conn,$sql_member);
                                                       $objr_member = mysqli_fetch_array($objq_member);
@@ -355,7 +355,7 @@
                         </div>
                       </div>
                       <div class="box-footer" align="center">
-                        <a href="../pdf_file/admin_sale_history.php" class="btn btn-success"><i class="fa fa-print">พิมพ์ </i></a>
+                        <a href="../pdf_file/admin_sale_history.php" class="btn btn-success"><i class="fa fa-print"> พิมพ์ </i></a>
                       </div>
                     </div>
                   </div>

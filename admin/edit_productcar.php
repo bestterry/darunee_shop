@@ -101,7 +101,7 @@
                                     <a href="edit_productcar2.php?id_numPD_car=<?php echo $value['id_numPD_car']; ?>" type="button" class="btn btn-success"><i class="fa fa-cog"></i></a>
                                   </td>
                                   <td class="text-center">
-                                    <a href="algorithm/delete_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="btn btn-danger"><i class="fa fa-minus-square"></i></a>
+                                    <a href="algorithm/delete_PDcar.php?id_numpd_car=<?php echo $value['id_numPD_car']; ?>" type="button" class="btn btn-danger"><i class="fa fa-minus-square"></i></a>
                                   </td>
                                 </tr>
                                 <?php

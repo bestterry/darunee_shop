@@ -70,7 +70,6 @@
               <ul class="nav nav-tabs">
                 <li><a href="#profit_today" data-toggle="tab">ตารางปฏิบัติงานวันนี้</a></li>
                 <li><a href="#profit_back" data-toggle="tab">ตารางปฏิบัติงานย้อนหลัง</a></li>
-                <li><a href="#profit_duration" data-toggle="tab">กำไรตามช่วงเวลา</a></li>
                 <div align="right">
                   <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
                 </div>

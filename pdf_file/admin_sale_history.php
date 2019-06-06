@@ -101,42 +101,45 @@ $pdf=new PDF('P','mm','A4');
             $pdf->Ln(10);
              // ยอดขายรวม.
 
-            //ร้านเวียงป่าเป้า
+            //หน้าร้าน
             $pdf->AddPage();
             $pdf->SetFont('angsana','',18);
             $pdf->Ln(5);
             $pdf->Cell(0,5, iconv( 'UTF-8','cp874' , 'ร้านเวียงป่าเป้า ') , 0 , 1,'' );
             $pdf->Ln(3);
             $pdf->SetFont('angsana','',16);
-            $pdf->Cell(50,10,iconv('UTF-8','cp874','สินค้า_หน่วย'),1,0,'C');
+            $pdf->Cell(45,10,iconv('UTF-8','cp874','สินค้า_หน่วย'),1,0,'C');
             $pdf->Cell(20,10,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
             $pdf->Cell(20,10,iconv('UTF-8','cp874','บ/หน่วย'),1,0,'C');
-            $pdf->Cell(25,10,iconv('UTF-8','cp874','เงินขาย(บ)'),1,0,'C');
-            $pdf->Cell(70,10,iconv('UTF-8','cp874','รายละเอียด'),1,0,'C');
+            $pdf->Cell(20,10,iconv('UTF-8','cp874','เงินขาย(บ)'),1,0,'C');
+            $pdf->Cell(20,10,iconv('UTF-8','cp874','ร้าน'),1,0,'C');
+            $pdf->Cell(55,10,iconv('UTF-8','cp874','รายละเอียด'),1,0,'C');
             $pdf->Ln(10);
                 
             $total_money = 0;
-              $date = "SELECT * FROM product INNER JOIN price_history 
-                        ON product.id_product = price_history.id_product 
+              $date = "SELECT * FROM price_history 
+                        INNER JOIN product ON product.id_product = price_history.id_product 
+                        INNER JOIN zone ON price_history.id_zone = zone.id_zone 
                         WHERE DATE_FORMAT(price_history.datetime,'%d-%m-%Y')='$strDate'";
               $objq = mysqli_query($conn,$date);
               while($value = $objq ->fetch_assoc()){ 
-            $pdf->Cell(50,8,iconv('UTF-8','cp874',$value['name_product'].'_'.$value['unit']),1,0,'');
+            $pdf->Cell(45,8,iconv('UTF-8','cp874',$value['name_product'].'_'.$value['unit']),1,0,'');
             $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['num']),1,0,'C');
             $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['price']),1,0,'C');
-            $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['money']),1,0,'C');
-            $pdf->Cell(70,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['money']),1,0,'C');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['name_zone']),1,0,'C');
+            $pdf->Cell(55,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
             $pdf->Ln(8);
             $total_money = $total_money + $value['money'];
             }       
-            $pdf->Cell(90,8,iconv('UTF-8','cp874','รวมเงิน'),1,0,'R');
-            $pdf->Cell(25,8,iconv('UTF-8','cp874',$total_money),1,0,'C');
+            $pdf->Cell(85,8,iconv('UTF-8','cp874','รวมเงิน'),1,0,'R');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874',$total_money),1,0,'C');
             $pdf->Ln(10);
             //ร้านเวียงป่าเป้า//
 
 
             //รวมรถ
-          for ($i=4; $i <= 17; $i++){
+          for ($i=4; $i <= 19; $i++){
             $sql_member = "SELECT * FROM member WHERE id_member = $i";
             $objq_member = mysqli_query($conn,$sql_member);
             $objr_member = mysqli_fetch_array($objq_member);

@@ -106,7 +106,7 @@
               <form action="add_num_product2.php" method="post">
                 <?php
                     $id_member = $_POST['id_member']; 
-                    if($id_member == 18){
+                    if($id_member == 19){
                   ?>
                 <table class="table table-bordered table-hover">
                   <tbody>

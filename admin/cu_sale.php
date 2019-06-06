@@ -61,7 +61,7 @@
     <header class="main-header">
       <?php require('menu/header_logout.php');?>
     </header>
-    <div class="content-wrapper" style="height: 1000px;">
+    <div class="content-wrapper" style="height: 1400px;">
       <section class="content-header">
       </section>
       <section class="content">
@@ -89,18 +89,20 @@
                     <?php
                         $total_money = 0;
                         $i = 1;
-                        $sql_day_car = "SELECT SUM(money),datetime FROM sale_car_history WHERE (datetime between '$aday 00:00:00' and '$bday 23:59:59') GROUP BY DAY(datetime),MONTH(datetime),YEAR(datetime) ORDER BY datetime";
+                        $sql_day_car = "SELECT SUM(money) as sum_money,DAY(datetime),MONTH(datetime),YEAR(datetime) FROM sale_car_history WHERE (datetime between '$aday 00:00:00' and '$bday 23:59:59') GROUP BY DAY(datetime),MONTH(datetime),YEAR(datetime)";
                         $objq_day_car = mysqli_query($conn,$sql_day_car);
-                        while ($value = $objq_day_car-> fetch_assoc() ) {
-                          $money_car = $value['SUM(money)'];
-                          $date = $value['datetime'];
+                        while ($value = $objq_day_car -> fetch_assoc() ) {
+                          
+                          //$date = DateThai($value['datetime']);
+                          $money_car = $value['sum_money'];
                           $total_money = $total_money + $money_car;
+                          $date = $value['DAY(datetime)'].'-'.$value['MONTH(datetime)'].'-'.$value['YEAR(datetime)'];
                         //  time
                         //  $d=strtotime($date);
                         //   echo date("Y-m-d", $d);
                     ?>
                     <tr>
-                    <td class="text-center"><?php echo DateThai($date);?></td>
+                    <td class="text-center"><?php echo DateThai($date); ?></td>
                       <td class="text-center"><?php echo $money_car;?></td>
                       <td class="text-center"><?php echo $total_money;?></td>
                       <td class="text-center"><?php echo round($total_money/$i);?></td>

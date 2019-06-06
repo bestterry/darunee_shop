@@ -119,7 +119,7 @@
                              ?>
                             <div class="box-header with-border">
                               <font size="4">
-                                <B> รับเข้าสินค้า 
+                                <B> ยอดขายรวม 
                                   <font size="4" color="red">
                                     <?php echo DateThai($strDate);?>
                                   </font>
