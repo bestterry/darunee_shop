@@ -89,7 +89,7 @@ folder instead of downloading all of them to reduce the load. -->
               <div class="mailbox-read-message">
                 <form action="finish.php" method="post" autocomplete="off">
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label>ชื่อลูกค้า</label>
                         <input type="text" name="name_customer" class="form-control" placeholder="ชื่อ">
@@ -117,32 +117,46 @@ folder instead of downloading all of them to reduce the load. -->
                       <!-- /.form-group -->
                       <div class="form-group">
                         <label>หมู่บ้าน</label>
-                        <input class="form-control" placeholder="หมู่บ้าน">
+                        <input class="form-control" name="village" placeholder="หมู่บ้าน">
                         </select>
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label>เบอร์โทรศัพท์</label>
-                        <input class="form-control" placeholder="เบอร์โทรศัพท์">
+                        <input class="form-control" name="tel" placeholder="เบอร์โทรศัพท์">
                       </div>
                     </div>
-                    <div class="col-md-6">
-
-                    <div class="table-responsive">
-                      <table class="table table-bordered" id="dynamic_field">
-                        <tr>
-                          <th bgcolor="#0099ff" class="text-center" width="60%">สินค้า</th>
-                          <th bgcolor="#0099ff" class="text-center" width="20%">จำนวน</th>
-                          <th bgcolor="#0099ff" class="text-center" width="20%">จัดการ</th>
-                        </tr>
-                        <tr>
-                          <td><input type="text" name="name_product[]" placeholder="สินค้า" class="form-control name_list"/></td>
-                          <td><input type="text" name="num[]" placeholder="จำนวน" class="form-control name_list" /></td>
-                          <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success">เพิ่มสินค้า</button></td>
-                        </tr>
-                      </table>
-                    </div>
+                    <div class="col-md-7">
+                      <div class="table-responsive">
+                        <table class="table table-bordered" id="dynamic_field">
+                          <tr>
+                            <th bgcolor="#0099ff" class="text-center" width="55%">สินค้า</th>
+                            <th bgcolor="#0099ff" class="text-center" width="15%">จำนวน</th>
+                            <th bgcolor="#0099ff" class="text-center" width="15%">เงินขาย(บ)</th>
+                            <th bgcolor="#0099ff" class="text-center" width="15%">จัดการ</th>
+                          </tr>
+                          <tr>
+                            <td>
+                              <select name="id_product[]" class="form-control select2" style="width: 100%;">
+                                <option value="">-- เลือกสินค้า --</option>
+                              <?php 
+                                  $product = "SELECT * FROM product";
+                                  $objq_product = mysqli_query($mysqli,$product);
+                                  while($value = $objq_product->fetch_array()){
+                                ?>
+                                  <option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option>
+                                <?php 
+                                  }
+                                ?>
+                              </select>
+                            </td>
+                            <td><input type="text" name="num[]" placeholder="จำนวน" class="form-control" /></td>
+                            <td><input type="text" name="price[]" placeholder="ราคา" class="form-control" /></td>
+                            <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success">เพิ่มสินค้า</button></td>
+                          </tr>
+                        </table>
+                      </div>
                     </div>
                     <!-- /.row -->
                   </div>
@@ -239,7 +253,7 @@ $(document).ready(function(){
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name_product[]" placeholder="สินค้า" class="form-control name_list"/></td><td><input type="text" name="num[]" placeholder="จำนวน" class="form-control name_list" /></td><td  class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td><input type="text" name="num[]" placeholder="จำนวน" class="form-control " /><td><input type="text" name="price[]" placeholder="ราคา" class="form-control" /></td></td><td  class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
 	});
 	
 	$(document).on('click', '.btn_remove', function(){

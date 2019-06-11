@@ -22,8 +22,7 @@
   <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-     folder instead of downloading all of them to reduce the load. -->
+  <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="../bower_components/morris.js/morris.css">
@@ -67,6 +66,9 @@
                 <li><a href="#settingproduct" data-toggle="tab">แก้ไขข้อมูลสินค้า</a></li>
                 <li><a href="#settingproductcar" data-toggle="tab">แก้ไขจำนวนสินค้าในรถ</a></li>
                 <li><a href="#addproductcar" data-toggle="tab">เพิ่มสินค้าเข้ารถ</a></li>
+                <div align="right">
+                  <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+                </div>
               </ul>
               <div class="tab-content">
                 <!-- เพิ่มพนักงาน -->

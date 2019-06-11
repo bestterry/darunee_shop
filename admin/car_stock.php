@@ -93,12 +93,12 @@ require "menu/date.php";
                     <th class="text-center" width="5%">เดี่ว</th>
                     <th class="text-center" width="5%">อั๋น</th>
                     <th class="text-center" width="5%">เบส</th>
-                    <th class="text-center" width="5%">ขาว</th>
-                    <th class="text-center" width="5%">กร</th>
+                    <th class="text-center" width="5%">หนึ่ง</th>
+                    <th class="text-center" width="5%">บอย</th>
                     <th class="text-center" width="5%">เอี่ว</th>
-                    <th class="text-center" width="5%">รว1</th>
-                    <th class="text-center" width="5%">รว5</th>
-                    <th class="text-center" width="5%">ดำ</th>
+                    <th class="text-center" width="5%">-</th>
+                    <th class="text-center" width="5%">-</th>
+                    <th class="text-center" width="5%">-</th>
                     <th class="text-center" width="8%">รวม</th>
                   </tr>
                   <?php

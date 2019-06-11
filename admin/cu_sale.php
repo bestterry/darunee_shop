@@ -73,7 +73,7 @@
                 <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
               </div>
               <font size="5">
-                <B> เงินสะสม <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
+                <B> เงินขาย <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
               </font>
             </div>
             <div class="box-body no-padding">
@@ -82,9 +82,9 @@
                   <tbody>
                     <tr class="info" >
                     <th class="text-center" width="15%">วันที่</th>
-                      <th class="text-center" width="25%">เงินได้</th>
-                      <th class="text-center" width="13%">เงินได้สะสม</th>
-                      <th class="text-center" width="15%">เงินได้เฉลี่ย</th>
+                      <th class="text-center" width="25%">เงินขาย</th>
+                      <th class="text-center" width="13%">เงินขายสะสม</th>
+                      <th class="text-center" width="15%">เงินขายเฉลี่ย</th>
                     </tr>
                     <?php
                         $total_money = 0;
@@ -93,17 +93,23 @@
                         $objq_day_car = mysqli_query($conn,$sql_day_car);
                         while ($value = $objq_day_car -> fetch_assoc() ) {
                           
-                          //$date = DateThai($value['datetime']);
-                          $money_car = $value['sum_money'];
-                          $total_money = $total_money + $money_car;
                           $date = $value['DAY(datetime)'].'-'.$value['MONTH(datetime)'].'-'.$value['YEAR(datetime)'];
-                        //  time
-                        //  $d=strtotime($date);
-                        //   echo date("Y-m-d", $d);
+
+                          $time = strtotime($date);
+                          $newformat = date('Y-m-d',$time);
+
+                          $price_history = "SELECT SUM(money) FROM price_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat'";
+                          $objq_price_history = mysqli_query($conn,$price_history);
+                          $objr_price_history = mysqli_fetch_array($objq_price_history);
+
+                          $money_car = $value['sum_money'];
+                          $money_store = $objr_price_history['SUM(money)'];
+                          $all_money = $money_car + $money_store;
+                          $total_money = $total_money + $all_money;
                     ?>
                     <tr>
                     <td class="text-center"><?php echo DateThai($date); ?></td>
-                      <td class="text-center"><?php echo $money_car;?></td>
+                      <td class="text-center"><?php echo $all_money;?></td>
                       <td class="text-center"><?php echo $total_money;?></td>
                       <td class="text-center"><?php echo round($total_money/$i);?></td>
                     </tr>

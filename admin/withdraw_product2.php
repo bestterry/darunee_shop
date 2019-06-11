@@ -105,9 +105,9 @@
                             </th>
                             <th class="text-center" width="35%">สินค้า_หน่วย
                             </th>
-                            <th class="text-center" width="20%">จำนวนสินค้าที่มี
+                            <th class="text-center" width="20%">จำนวนที่มี
                             </th>
-                            <th class="text-center" width="20%">จำนวนสินค้าขอเบิก
+                            <th class="text-center" width="20%">จำนวนขอเบิก
                             </th> 
                           </tr> 
                       <?php

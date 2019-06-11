@@ -39,8 +39,7 @@
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
   <!-- Google Font -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">

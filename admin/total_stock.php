@@ -73,7 +73,7 @@
         <div class="box box-primary">
           <div class="box-header text-center with-border">
             <B align="center"> 
-              <font size="5"> จำนวนสินค้าคงเหลือ </font>
+              <font size="5"> สต๊อกร้าน </font>
               <font size="5" color="red">  
                 <?php 
                     $strDate = date('d-m-Y');

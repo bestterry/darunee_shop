@@ -115,7 +115,7 @@
                         </th>
                         <th class="text-center" width="30%">สินค้า_หน่วย
                         </th>
-                        <th class="text-center" width="15%">จำนวนสินค้าที่มี
+                        <th class="text-center" width="15%">จำนวนที่มี
                         </th>
                       </tr>
                       <?php

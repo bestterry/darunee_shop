@@ -80,26 +80,26 @@ require "menu/date.php";
           <div class="box-body no-padding">
             <div class="mailbox-read-message">
               <table class="table table-striped table-bordered">
-                <tbody>
+              <tbody>
                   <tr class="info">
-                    <th class="text-center" width="5%">ที่</th>
-                    <th class="text-center" width="15%">สินค้า</th>
-                    <th class="text-center" width="5%">หน่วย</th>
+                    <th class="text-center" width="3%">ที่</th>
+                    <th class="text-center" width="18%">สินค้า_หน่วย</th>
                     <th class="text-center" width="5%">ยุทธ</th>
                     <th class="text-center" width="5%">ลิน</th>
                     <th class="text-center" width="5%">เอ</th>
                     <th class="text-center" width="5%">รงค์</th>
                     <th class="text-center" width="5%">เอ๋</th>
-                    <th class="text-center" width="5%">เกียรติ</th>
-                    <th class="text-center" width="5%">เดี่ยว</th>
+                    <th class="text-center" width="5%">เกีติ</th>
+                    <th class="text-center" width="5%">เดี่ว</th>
                     <th class="text-center" width="5%">อั๋น</th>
                     <th class="text-center" width="5%">เบส</th>
                     <th class="text-center" width="5%">หนึ่ง</th>
-                    <th class="text-center" width="5%">กร</th>
-                    <th class="text-center" width="5%">เอี่ยว</th>
-                    <th class="text-center" width="5%">รว1</th>
-                    <th class="text-center" width="5%">รว5</th>
-                    <th class="text-center" width="8%">ทั้งหมด</th>
+                    <th class="text-center" width="5%">บอย</th>
+                    <th class="text-center" width="5%">เอี่ว</th>
+                    <th class="text-center" width="5%">-</th>
+                    <th class="text-center" width="5%">-</th>
+                    <th class="text-center" width="5%">-</th>
+                    <th class="text-center" width="8%">รวม</th>
                   </tr>
                   <?php
                   $a = 1;
@@ -111,14 +111,11 @@ require "menu/date.php";
                         <?php echo $a; ?>
                       </td>
                       <td class="text-center">
-                        <?php echo $product['name_product']; ?>
-                      </td>
-                      <td class="text-center">
-                        <?php echo $product['unit']; ?>
+                        <?php echo $product['name_product'].'_'.$product['unit']; ?>
                       </td>
                       <!-- -------------------------------รถ------------------------------------ -->
                       <?php
-                      for ($i = 4; $i < 18; $i++) {
+                      for ($i = 4; $i <= 18; $i++) {
 
                         $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $i";
                         $objq_num = mysqli_query($conn, $SQL_num);

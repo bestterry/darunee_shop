@@ -88,11 +88,12 @@
                         <table class="table table-striped table-bordered">
                               <tbody>
                                 <tr class="info" >
-                                  <th class="text-center" width="25%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="13%">จำนวน</th>
-                                  <th class="text-center" width="15%">เงินขาย(บ)</th>
-                                  <th class="text-center" width="15%">เงินซื้อ(บ)</th>
-                                  <th class="text-center" width="15%">กำไรขาย(บ)</th>
+                                  <th class="text-center" width="30%">สินค้า_หน่วย</th>
+                                  <th class="text-center" width="14%">จำนวน</th>
+                                  <th class="text-center" width="14%">บ/หน่วย</th>
+                                  <th class="text-center" width="14%">ทุนซื้อ(บ)</th>
+                                  <th class="text-center" width="14%">เงินขาย(บ)</th>
+                                  <th class="text-center" width="14%">กำไรขาย(บ)</th>
                                 </tr>
                                 <?php
                                 $a = 0;
@@ -124,8 +125,9 @@
                                 <tr>
                                   <td><?php echo $value['name_product'].'_'.$value['unit'];?></td>
                                   <td class="text-center"><?php echo $total_num; ?></td>
-                                  <td class="text-center"><?php echo $total_salemoney; ?></td>
-                                  <td class="text-center"><?php echo $price_product; ?></td>
+                                  <td class="text-center"><?php echo $price_num; ?></td>
+                                  <td class="text-center"><?php echo round($price_product); ?></td>
+                                  <td class="text-center"><?php echo round($total_salemoney); ?></td>
                                   <td class="text-center"><?php echo round($profit_sale); ?></td>
                                 </tr>
                                 <?php 
@@ -136,6 +138,7 @@
                                 ?>
                                 <tr>
                                   <th bgcolor="#EAF4FF"></th>
+                                  <th bgcolor="#EAF4FF" ></th>
                                   <th bgcolor="#EAF4FF" class="text-right">รวมเงิน</th>
                                   <th bgcolor="#EAF4FF" class="text-center"><?php echo round($a); ?></th>
                                   <th bgcolor="#EAF4FF" class="text-center"><?php echo round($b); ?></th>
