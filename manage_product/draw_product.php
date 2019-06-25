@@ -131,10 +131,16 @@ folder instead of downloading all of them to reduce the load. -->
                                 $sql_member = "SELECT * FROM member WHERE status = 'employee'";
                                 $objq_member = mysqli_query($conn,$sql_member);
                                 while($member = $objq_member -> fetch_assoc()){
+                                  $id_member = $member['id_member'];
+                                  if ($id_member == 19) {
+                                    
+                                  }else {
                               ?>
-                              <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?>
+                              <option value="<?php echo $id_member; ?>"><?php echo $member['name']; ?>
                               </option>
-                              <?php } ?>
+                              <?php }
+                                      } 
+                              ?>
                             </select>
                           </th>
                         </tr>

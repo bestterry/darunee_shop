@@ -55,7 +55,6 @@ folder instead of downloading all of them to reduce the load. -->
                 <!-- User image -->
                 <li class="user-header">
                   <img src="dist/img/user.png" class="img-circle" alt="User Image">
-
                   <p>
                     <small>สาขา : </small>
                   </p>
@@ -94,6 +93,12 @@ folder instead of downloading all of them to reduce the load. -->
                         <label>ชื่อลูกค้า</label>
                         <input type="text" name="name_customer" class="form-control" placeholder="ชื่อ">
                       </div>
+                      <!-- /.form-group -->
+                      <div class="form-group">
+                        <label>บ้าน  หมู่ที่</label>
+                        <input class="form-control" name="village" placeholder="หมู่บ้าน">
+                        </select>
+                      </div>
                       <div class="form-group">
                         <label>จังหวัด</label>
                         <select name="province_name" data-where="2" class="ajax_address form-control select2" style="width: 100%;">
@@ -114,12 +119,7 @@ folder instead of downloading all of them to reduce the load. -->
                           <option value="">-- เลือกตำบล --</option>
                         </select>
                       </div>
-                      <!-- /.form-group -->
-                      <div class="form-group">
-                        <label>หมู่บ้าน</label>
-                        <input class="form-control" name="village" placeholder="หมู่บ้าน">
-                        </select>
-                      </div>
+                      
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
@@ -162,6 +162,7 @@ folder instead of downloading all of them to reduce the load. -->
                   </div>
               </div>
               <div align="center" class="box-footer">
+                <a type="button" href="order.php" class="btn btn-danger pull-left"> <<== กลับสู่หน้าหลัก</a>
                 <button type="submit" class="btn btn-success"><i class="fa fa-save">  บันทึก </i></button>
               </div>
             </div>
@@ -241,7 +242,7 @@ folder instead of downloading all of them to reduce the load. -->
                 }, function(data) {
                   targetObj.html(data); // แสดงค่าผลลัพธ์
                 });
-              }, 1500);
+              }, 0);
             }
           });
 

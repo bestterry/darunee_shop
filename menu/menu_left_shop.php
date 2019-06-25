@@ -129,10 +129,17 @@
                                 $sql_member = "SELECT * FROM member WHERE status = 'employee'";
                                 $objq_member = mysqli_query($conn, $sql_member);
                                 while ($member = $objq_member->fetch_assoc()) {
+                                  $id_member = $member['id_member'];
+                                  if ($id_member == 19) {
+                                    
+                                  }else {
                                   ?>
-                                  <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?>
+                                  <option value="<?php echo $id_member; ?>"><?php echo $member['name']; ?>
                                   </option>
-                                <?php } ?>
+                                <?php 
+                                      } 
+                                  }
+                                ?>
                               </select>
                             </th>
                           </tr>
@@ -232,7 +239,6 @@
                                                     }
                                                 }
                                             ?>
-
                         </tbody>
                       </table>
                     </div>
@@ -253,7 +259,13 @@
           <!-- /ประวัติเบิกสินค้า -->
           <!--ประวัติรับเข้าสินค้า -->
           <li><a href="manage_product/add_history.php"><i class="fa fa-cloud-download"></i> รายการรับ </a></li>
-          <!-- เเก้ไขอุปกรณ์  -->
+          <!-- ประวัติรับเข้าสินค้า  -->
+          <!-- สต๊อกรถ -->
+          <li><a href="pdf_file/list_order.php" ><i class="fa fa-truck"></i> ออร์เดอร์ค้างส่ง </a></li>
+          <!-- /สต๊อกรถ -->
+          <!-- รายการรวมสต๊อกค้างส่ง -->
+          <li><a href="manage_product/total_order.php" ><i class="fa fa-shopping-cart"></i> จำนวนออร์เดอร์ค้างส่ง </a></li>
+          <!-- /รายการรวมสต๊อกค้างส่ง -->
         </ul>
       </div>
       <!-- /.box-body -->

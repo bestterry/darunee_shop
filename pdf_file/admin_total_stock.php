@@ -42,9 +42,9 @@ class PDF extends FPDF
             $this->Cell(17,10,iconv('UTF-8','cp874','ดคต.'),1,0,'C');
             $this->Cell(17,10,iconv('UTF-8','cp874','วปป.'),1,0,'C');
             $this->Cell(17,10,iconv('UTF-8','cp874','ลำปาง'),1,0,'C');
-            $this->Cell(17,10,iconv('UTF-8','cp874','ฮอด'),1,0,'C');
+            $this->Cell(17,10,iconv('UTF-8','cp874','ขายส่ง'),1,0,'C');
             $this->Cell(17,10,iconv('UTF-8','cp874','แม่จัน'),1,0,'C');
-            $this->Cell(17,10,iconv('UTF-8','cp874','ฝาง'),1,0,'C');
+            $this->Cell(17,10,iconv('UTF-8','cp874','ทีมจร'),1,0,'C');
             $this->Cell(20,10,iconv('UTF-8','cp874','รถ'),1,0,'C');
             $this->Cell(25,10,iconv('UTF-8','cp874','ทั้งหมด'),1,0,'C');
             $this->Ln(10);

@@ -1,15 +1,16 @@
 <?php 
   include("db_connect.php");
-  $name_customer = $_POST['name_customer'];
-  $id_province = $_POST['province_name'];
-  $id_amphur = $_POST['amphur_name'];
-  $id_district = $_POST['district_name'];
-  $village = $_POST['village'];
-  $tel = $_POST['tel'];
-  $mysqli = connect();
-  $insert_addorder = "INSERT INTO addorder (name_customer, tel, village, district_code, amphur_id, province_id, status)
-                      VALUES ('$name_customer', '$tel', '$village', $id_district, $id_amphur, $id_province, 'pending')";
-  mysqli_query($mysqli,$insert_addorder);
+    $mysqli = connect();
+    $id_addorder = $_GET['id_addorder'];
+    $sql_addorder = "SELECT * FROM addorder 
+                    INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
+                    INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
+                    INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
+                    WHERE addorder.id_addorder = $id_addorder";
+    $objq_addorder = mysqli_query($mysqli,$sql_addorder);
+    $objr_addorder = mysqli_fetch_array($objq_addorder);
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,6 +47,28 @@ folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
+  <style>
+          #customers {
+            
+            width: 100%;
+          }
+
+          #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+          }
+
+          #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+
+          #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #99CCFF;
+          
+          }
+        </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -103,32 +126,20 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#0099ff" width="25%">ชื่อ :</th>
-                            <th width="85%"><?php echo $name_customer; ?></th>
+                            <th bgcolor="#99CCFF" width="25%">ชื่อ :</th>
+                            <th width="85%"><?php echo $objr_addorder['name_customer']; ?></th>
                           </tr>
                           <tr>
-                            <th bgcolor="#0099ff" width="25%">ที่อยู่ :</th>
+                            <th bgcolor="#99CCFF" width="25%">ที่อยู่ :</th>
                             <th width="85%">
                               <?php 
-                                $sql_district = "SELECT * FROM tbl_districts WHERE district_code = $id_district";
-                                $objq_district = mysqli_query($mysqli,$sql_district);
-                                $objr_district = mysqli_fetch_array($objq_district);
-                                
-                                $sql_amphur = "SELECT * FROM tbl_amphures WHERE amphur_id = $id_amphur";
-                                $objq_amphur = mysqli_query($mysqli,$sql_amphur);
-                                $objr_amphur = mysqli_fetch_array($objq_amphur);
-
-                                $sql_province = "SELECT * FROM tbl_provinces WHERE province_id = $id_province";
-                                $objq_province = mysqli_query($mysqli,$sql_province);
-                                $objr_province = mysqli_fetch_array($objq_province);
-
-                                echo "$village".' '.'ต.'.$objr_district['district_name'].' '.'อ.'.$objr_amphur['amphur_name'].' '.'จ.'.$objr_province['province_name'];
+                                echo $objr_addorder['village'].' '.'ต.'.$objr_addorder['district_name'].' '.'อ.'.$objr_addorder['amphur_name'].' '.'จ.'.$objr_addorder['province_name'];
                               ?>
                             </th>
                           </tr>
                           <tr>
-                            <th bgcolor="#0099ff" width="25%">เบอร์โทร :</th>
-                            <th width="85%"><?php echo $tel; ?></th>
+                            <th bgcolor="#99CCFF" width="25%">เบอร์โทร :</th>
+                            <th width="85%"><?php echo $objr_addorder['tel']; ?></th>
                           </tr>
                         </table>
                       </div>
@@ -139,45 +150,31 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#0099ff" class="text-center" width="70%">สินค้า</th>
-                            <th bgcolor="#0099ff" class="text-center" width="15%">จำนวน</th>
-                            <th bgcolor="#0099ff" class="text-center" width="15%">เงินขาย(บ)</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="70%">สินค้า</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="15%">จำนวน</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="15%">เงินขาย(บ)</th>
                           </tr>
                           <?php 
-                            $num_product = COUNT($_POST['id_product']);
-                            $total_price = 0;
-                            for ($i=0; $i < $num_product; $i++) { 
-
-                                $id_product = $_POST['id_product'][$i];
-                                $num = $_POST['num'][$i]; 
-                                $price = $_POST['price'][$i]; 
-
-                                $seach_idaddorder = "SELECT MAX(id_addorder) AS id_addorder FROM addorder";
-                                $objq_addorder = mysqli_query($mysqli,$seach_idaddorder);
-                                $objr_addorder = mysqli_fetch_array($objq_addorder);
-                                $id_addorder = $objr_addorder['id_addorder'];
-
-                                $insert_listorder = "INSERT INTO listorder (id_product, num, money, id_addorder)
-                                                    VALUES ($id_product, $num, $price, $id_addorder)";
-                                mysqli_query($mysqli,$insert_listorder);
-
-                                $sql_product = "SELECT * FROM product WHERE id_product = $id_product";
-                                $objq_product = mysqli_query($mysqli,$sql_product);
-                                $objr_product = mysqli_fetch_array($objq_product);
+                                $total_money = 0;
+                                $seach_listorder = "SELECT * FROM listorder 
+                                                    INNER JOIN product ON listorder.id_product = product.id_product
+                                                    WHERE listorder.id_addorder = $id_addorder";
+                                $objq_listorder = mysqli_query($mysqli,$seach_listorder);
+                                while($value = $objq_listorder->fetch_assoc()){
                           ?>
                           <tr>
-                            <td  class="text-center"><?php echo $objr_product['name_product'].'_'.$objr_product['unit']; ?></td>
-                            <td class="text-center"><?php echo $num; ?></td>
-                            <td class="text-center"><?php echo $price; ?></td>
+                            <td><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
+                            <td class="text-center"><?php echo $value['num']; ?></td>
+                            <td class="text-center"><?php echo $value['money']; ?></td>
                           </tr>
                           <?php
-                              $total_price = $total_price + $price;
-                            }
+                            $total_money = $total_money + $value['money'];
+                           } 
                           ?>
                           <tr>
-                            <th bgcolor="#0099ff" class="text-center"></th>
-                            <th bgcolor="#0099ff" class="text-right">รวมเงิน</th>
-                            <th bgcolor="#0099ff" class="text-center"><?php echo $total_price; ?></th>
+                            <th bgcolor="#99CCFF" class="text-center"></th>
+                            <th bgcolor="#99CCFF" class="text-right">รวมเงิน</th>
+                            <th bgcolor="#99CCFF" class="text-center"><?php echo $total_money; ?></th>
                           </tr>
                         </table>
                       </div>
@@ -185,15 +182,9 @@ folder instead of downloading all of them to reduce the load. -->
 
                   </div>
               </div>
-              <div class="box-footer">
-                <a type="button" href="order.php" class="btn btn-danger"> <<== กลับสู่หน้าหลัก</a> 
-                <a type="button" href="add_order.php" class="btn btn-success">เพิ่มใบสั่งสินค้า</a> 
-                </div> 
-              </div> 
-            </form> 
-          </div> 
-          </div> 
-        </section> <!-- jQuery 3 -->
+              <div align="left" class="box-footer">
+                <a type="button" href="list_order.php" class="btn btn-success">
+                  <<== กลับ</a> </div> </div> </form> </div> </div> </section> <!-- jQuery 3 -->
                     <script src="../bower_components/jquery/dist/jquery.min.js">
                     </script>
                     <!-- Bootstrap 3.3.7 -->

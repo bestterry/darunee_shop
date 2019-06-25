@@ -114,21 +114,6 @@
                       <th class="text-center" width="5%">ลำดับ</th>
                       <th class="text-center" width="30%">สินค้า_หน่วย</th>
                     </tr>
-                    <?php
-                      $i=1;
-                          $product = "SELECT * FROM product";
-                          $objq_product = mysqli_query($conn,$product);
-                          while($list = $objq_product->fetch_assoc()){
-                      ?>
-                    <tr>
-                      <td class="text-center"><input type="checkbox" name="id_product[]"
-                          value="<?php echo $list['id_product'];?>"></td>
-                      <td><?php echo $list['name_product'].'_'.$list['unit']; ?></td>
-                    </tr>
-                    <?php 
-                          $i++; }
-                      ?>
-                    <input type="hidden" name="status" value="<?php echo "etc";?>">
                   </tbody>
                 </table>
                 <?php 

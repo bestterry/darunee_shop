@@ -2,13 +2,14 @@
 require '../../config_database/config.php';
   $id_member = $_POST['id_member'];
   $id_zone = $_POST['id_zone'];
-  
+  $note = $_POST['note'];
+
     for ($i=0; $i < count($_POST['id_product']); $i++) { 
       $id_product = $_POST['id_product'][$i];
       $num_after = $_POST['num_after'][$i];
 
       $sql_addhistory = "INSERT INTO add_history (num_add, id_product,id_member, note, id_zone)
-                          VALUES ($num_after, $id_product,$id_member,'-', $id_zone)";
+                          VALUES ($num_after, $id_product,$id_member,'$note', $id_zone)";
         mysqli_query($conn,$sql_addhistory); 
       
       $sql_numproduct = "SELECT * FROM num_product WHERE id_product = $id_product AND id_zone = $id_zone";
@@ -25,7 +26,7 @@ require '../../config_database/config.php';
         $sql_updatenum = "UPDATE num_product SET num = $total_numproduct WHERE id_numproduct = $id_numproduct";
         mysqli_query($conn,$sql_updatenum);
       }
-        if($id_member == 16){
+        if($id_member == 19){
           continue;
         }else {
           $id_numpd_car = $_POST['id_numpd_car'][$i];

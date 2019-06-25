@@ -100,7 +100,7 @@
                           <tbody>
                       <?php 
                           $id_member = $_POST['id_member'];
-                          if($id_member == 16){
+                          if($id_member == 19){
                         ?>
                       <tr class="info">
                         <th class="text-center" width="5%">ลำดับ
@@ -175,10 +175,17 @@
                       ?>
                     </tbody>
                   </table>
-                  <div class="col-md-6">
-
-                  </div>
-                  <div class="col-md-6">
+                  <div class="col-md-12">
+                  <table class="table table-bordered">
+                      <tbody>
+                        <tr bgcolor="#99CCFF">
+                          <th class="text-center">หมายเหตุ :</th>
+                          <th class="text-center"><input class="text-center" type="text" name="note" value="-" size="50"> </th>
+                            <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
+                            
+                        </tr>
+                      </tbody>
+                    </table>
                     <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
                     <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
                   </div>

@@ -143,8 +143,8 @@
                                   <th bgcolor="#EAF4FF"></th>
                                   <th bgcolor="#EAF4FF"></th>
                                   <th bgcolor="#EAF4FF" class="text-right">รวมเงิน</th>
-                                  <th bgcolor="#EAF4FF" class="text-center"><?php echo round($a); ?></th>
                                   <th bgcolor="#EAF4FF" class="text-center"><?php echo round($b); ?></th>
+                                  <th bgcolor="#EAF4FF" class="text-center"><?php echo round($a); ?></th>
                                   <th bgcolor="#EAF4FF" class="text-center"><?php echo round($total_money); ?></th>
                                 </tr>
                               </tbody>

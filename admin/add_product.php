@@ -63,10 +63,11 @@
   </script>
   <div class="wrapper">
     <header class="main-header">
+
       <?php require('menu/header_logout.php');?>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="height: 1000px;">
       <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
@@ -75,6 +76,7 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
           <div class="box box-primary">
+
             <div class="box-header text-center with-border">
               <font size="5">
                 <B align="center"> รับเข้าสินค้า : <?php echo $objr_zone['name_zone'];?> </B>
@@ -101,7 +103,7 @@
                             <tr class="info" >
                         <?php 
                         $id_member = $_POST['id_member'];
-                        if($id_member == 16 ){
+                        if($id_member == 19 ){
                       ?>
                         <th class="text-center" width="5%">เลือก
                         </th>
