@@ -1,6 +1,5 @@
 <?php
-  include("db_connect.php");
-  $mysqli = connect();
+  require "../config_database/config.php";
   function DateThai($strDate)
   {
     $strYear = date("Y",strtotime($strDate))+543;
@@ -11,7 +10,7 @@
     $strSeconds= date("s",strtotime($strDate));
     $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
     $strMonthThai=$strMonthCut[$strMonth];
-    return "$strDay $strMonthThai $strYear";
+    return "$strDay";
   }
 ?>
 <!DOCTYPE html>
@@ -21,7 +20,7 @@
   <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>รวม ORDER ค้างส่ง</title>
+  <title>ส่ง ORDER</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
@@ -61,11 +60,14 @@ folder instead of downloading all of them to reduce the load. -->
           }
 
           #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+
           #customers th {
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: center;
             background-color: #99CCFF;
+          
           }
   </style>
 </head>
@@ -83,112 +85,54 @@ folder instead of downloading all of them to reduce the load. -->
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="height: 3300px;">
+    <div class="content-wrapper">
       <!-- Main content -->
       <section class="content">
       <div class="col-md-12">
-        <form action="pending_product.php" method="post">
+        <form action="algorithm/sent_order.php" method="post">
           <div class="box box-primary">
+          <div class="box-header with-border">
+            <a type="button" href="store.php" class="btn btn-danger "><<== กลับสู่เมนูหลัก</a>
+            <a type="button" href="../pdf_file/list_order2.php" class="btn btn-success "><i class="fa fa-print">  พิมพ์</i></a>
+            <br>
+            <div class="col-md-12 text-center"><font size="4"><B>รายการ ORDER ค้างส่ง</B></font></div>
+          </div>
             <!-- /.box-header -->
-            <div class="box-header with-border">
-              <a type="button" href="order.php" class="btn btn-danger"><<== กลับสู่เมนูหลัก</a>
-              <a type="button" href="../pdf_file/total_order.php" class="btn btn-success"><i class="fa fa-print">  พิมพ์</i></a>
-            </div>
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-              <?php 
-                $sql_province = "SELECT * FROM tbl_provinces";
-                $objq_province = mysqli_query($mysqli,$sql_province);
-                while($value_pv = $objq_province->fetch_assoc()){
-                  $id_province = $value_pv['province_id'];
-              ?>
-              <div class="text-center">
-              <B>
-                <font size="4">
-                  <?php echo 'ค้างส่ง : '.$value_pv['province_name'];?>
-                </font>
-              </B>
-                </div>
               <table id="customers">
                 <tbody>
-                    <tr>
-                      <th class="text-center" width="15%"></th>
-                    <?php 
-                      $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = $id_province";
-                      $objq_amphur = mysqli_query($mysqli,$sql_amphur);
-                      while($value_am = $objq_amphur->fetch_assoc()){
-                    ?><?php 
-                        if($value_am['province_id']==38){ ?> 
-                          <th class="text-center" width="10%"><?php echo $value_am['amphur_name'];?></th>
-                        <?php 
-                        }elseif($value_am['province_id']==40){ ?> 
-                          <th class="text-center" width="6%"><?php echo $value_am['amphur_name'];?></th>
-                          <?php 
-                        }elseif($value_am['province_id']==44){ ?> 
-                          <th class="text-center" width="9%"><?php echo $value_am['amphur_name'];?></th>
-                        <?php }else{ ?>
-                          <th class="text-center" width="9%"><?php echo $value_am['amphur_name'];?></th>
-                        <?php }?>
-                      <?php }?>
-                      <th class="text-center">รวม</th>
-                    </tr>
-                    <tr>
-                    
-                    <?php
-                      
-                        $sql_product = "SELECT * FROM product";
-                        $objq_product = mysqli_query($mysqli,$sql_product);
-                        while($value_pd = $objq_product->fetch_assoc())
-                        {
-                          ?>
-                          <td><?php echo $value_pd['name_product'].'_'.$value_pd['unit'];?></td>
-                          <?php
-                          $total_pd = 0;
-                          $id_product = $value_pd['id_product'];
-                          $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = $id_province";
-                          $objq_amphur = mysqli_query($mysqli,$sql_amphur);
-                          while($value_am = $objq_amphur->fetch_assoc())
-                          {
-                            
-                            $amphur_id = $value_am['amphur_id'];
-                            $sql_numpd = "SELECT SUM(num) FROM listorder 
-                                          INNER JOIN addorder ON listorder.id_addorder = addorder.id_addorder
-                                          INNER JOIN product ON listorder.id_product = product.id_product
-                                          WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'";
-                            $objq_numpd = mysqli_query($mysqli,$sql_numpd);
-                            $objr_numpd = mysqli_fetch_array($objq_numpd);
-                            $numpd = $objr_numpd['SUM(num)'];
-                        ?>
-                            <td class="text-center">
-                              <?php 
-                               if (!isset($numpd)) {
-                                 echo "-";
-                               }else{
-                                 echo $numpd;
-                               }
-                               
-                              ?>
-                            </td>
-                        <?php 
-                        $total_pd = $total_pd + $numpd;
-                          }
-                    ?>
-                        <td class="text-center"><?php echo "$total_pd";?></td>
-                        </tr>
-                      <?php 
-                        }
-                      ?>
-                      
+                  <tr>
+                    <th class="text-center" width="8%">ส่งแล้ว</th>
+                    <th class="text-center" width="7%">เลขที่</th>
+                    <th class="text-center" width="68%">ORDER ค้างส่ง</th>
+                    <th class="text-center" width="7%">วันที่สั่ง</th>
+                    <th class="text-center" width="5%">ใบสั่ง</th>
+                  </tr>
+                 <?php 
+                  $sql_addorder = "SELECT * FROM addorder 
+                                   INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
+                                   INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
+                                   INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
+                                   WHERE addorder.status = 'pending' ORDER BY addorder.id_addorder DESC";
+                  $objq_addorder = mysqli_query($conn,$sql_addorder);
+                  while($value = $objq_addorder->fetch_assoc()){
+                 ?>
+                  <tr>
+                    <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=1" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่งแล้ว</a></td>
+                    <td class="text-center"><?php echo $value['id_addorder']; ?></td>
+                    <td ><?php echo $value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
+                    <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
+                    <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
+                   </tr>
+                 <?php 
+                  }
+                 ?>
                 </tbody>
               </table>
-              <br>
-              <br>
-              <?php
-                }
-              ?>
               </div>
             </div>
-            <div class="box-footer">
+            <div class="box-footer" align="center">
               
             </div>
           </div>

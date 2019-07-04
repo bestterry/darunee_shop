@@ -268,6 +268,14 @@
           <!-- /สต๊อกรถ -->
           <li><a href="total_stock.php"><i class="fa fa-dropbox"></i> สต๊อกรวม </a></li>
           <!-- /สต๊อกรถ -->
+          
+          <!-- รายการรวมสต๊อกค้างส่ง -->
+          <li><a href="sent_order.php" ><i class="fa fa-shopping-cart"></i> ส่งออร์เดอร์ </a></li>
+          <!-- /รายการรวมสต๊อกค้างส่ง -->
+
+          <!-- รายการรวมสต๊อกค้างส่ง -->
+          <li><a href="../pdf_file/list_order.php" ><i class="fa fa-shopping-cart"></i> ออร์เดอร์ค้างส่ง </a></li>
+          <!-- /รายการรวมสต๊อกค้างส่ง -->
 
         </ul>
       </div>

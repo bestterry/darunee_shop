@@ -1,14 +1,17 @@
 <?php 
   include("db_connect.php");
+  
   $name_customer = $_POST['name_customer'];
   $id_province = $_POST['province_name'];
   $id_amphur = $_POST['amphur_name'];
   $id_district = $_POST['district_name'];
   $village = $_POST['village'];
   $tel = $_POST['tel'];
+  $note = $_POST['note'];
   $mysqli = connect();
-  $insert_addorder = "INSERT INTO addorder (name_customer, tel, village, district_code, amphur_id, province_id, status)
-                      VALUES ('$name_customer', '$tel', '$village', $id_district, $id_amphur, $id_province, 'pending')";
+  
+  $insert_addorder = "INSERT INTO addorder (name_customer, tel, village, district_code, amphur_id, province_id, note, status)
+                      VALUES ('$name_customer', '$tel', '$village', $id_district, $id_amphur, $id_province, '$note', 'pending')";
   mysqli_query($mysqli,$insert_addorder);
 ?>
 <!DOCTYPE html>
@@ -18,7 +21,7 @@
   <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน</title>
+  <title>เพิ่ม ORDER ใหม่</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
@@ -130,6 +133,10 @@ folder instead of downloading all of them to reduce the load. -->
                             <th bgcolor="#0099ff" width="25%">เบอร์โทร :</th>
                             <th width="85%"><?php echo $tel; ?></th>
                           </tr>
+                          <tr>
+                            <th bgcolor="#0099ff" width="25%">หมายเหตุ :</th>
+                            <th width="85%"><?php echo $note; ?></th>
+                          </tr>
                         </table>
                       </div>
                     </div>
@@ -141,24 +148,21 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <th bgcolor="#0099ff" class="text-center" width="70%">สินค้า</th>
                             <th bgcolor="#0099ff" class="text-center" width="15%">จำนวน</th>
-                            <th bgcolor="#0099ff" class="text-center" width="15%">เงินขาย(บ)</th>
                           </tr>
                           <?php 
                             $num_product = COUNT($_POST['id_product']);
-                            $total_price = 0;
                             for ($i=0; $i < $num_product; $i++) { 
 
                                 $id_product = $_POST['id_product'][$i];
-                                $num = $_POST['num'][$i]; 
-                                $price = $_POST['price'][$i]; 
+                                $num = $_POST['num'][$i];
 
                                 $seach_idaddorder = "SELECT MAX(id_addorder) AS id_addorder FROM addorder";
                                 $objq_addorder = mysqli_query($mysqli,$seach_idaddorder);
                                 $objr_addorder = mysqli_fetch_array($objq_addorder);
                                 $id_addorder = $objr_addorder['id_addorder'];
 
-                                $insert_listorder = "INSERT INTO listorder (id_product, num, money, id_addorder)
-                                                    VALUES ($id_product, $num, $price, $id_addorder)";
+                                $insert_listorder = "INSERT INTO listorder (id_product, num, id_addorder)
+                                                    VALUES ($id_product, $num, $id_addorder)";
                                 mysqli_query($mysqli,$insert_listorder);
 
                                 $sql_product = "SELECT * FROM product WHERE id_product = $id_product";
@@ -168,17 +172,10 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <td  class="text-center"><?php echo $objr_product['name_product'].'_'.$objr_product['unit']; ?></td>
                             <td class="text-center"><?php echo $num; ?></td>
-                            <td class="text-center"><?php echo $price; ?></td>
                           </tr>
                           <?php
-                              $total_price = $total_price + $price;
                             }
                           ?>
-                          <tr>
-                            <th bgcolor="#0099ff" class="text-center"></th>
-                            <th bgcolor="#0099ff" class="text-right">รวมเงิน</th>
-                            <th bgcolor="#0099ff" class="text-center"><?php echo $total_price; ?></th>
-                          </tr>
                         </table>
                       </div>
                     </div>

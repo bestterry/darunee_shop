@@ -39,7 +39,6 @@ class PDF extends FPDF
     // Page footer
     function Footer()
     {
-          
             $this->SetY(-20);
             $this->AddFont('angsana','','angsa.php');
             $this->SetFont('angsana','',14);
@@ -56,25 +55,25 @@ $pdf=new PDF('P','mm','A4');
             $pdf->AddFont('angsana','','angsa.php');
             $pdf->SetFont('angsana','',20);
             //วนลูปหาอำเภอที่มีใน addorder
-            $sql_provinces = "SELECT tbl_provinces.province_id FROM tbl_provinces 
-                             INNER JOIN addorder ON tbl_provinces.province_id = addorder.province_id
+            $sql_provinces = "SELECT tbl_amphures.amphur_id FROM tbl_amphures
+                             INNER JOIN addorder ON tbl_amphures.amphur_id = addorder.amphur_id
                              WHERE addorder.status = 'pending'
-                             GROUP BY tbl_provinces.province_id";
+                             GROUP BY tbl_amphures.amphur_id";
             $objq_province = mysqli_query($conn,$sql_provinces);
-            while($value_pv = $objq_province -> fetch_assoc())
+            while($value_ap = $objq_province -> fetch_assoc())
             { 
                 $pdf->AddPage();
-                $id_province = $value_pv['province_id'];
+                $id_amphur = $value_ap['amphur_id'];
                 $sql_addorder = "SELECT * FROM addorder 
                                 INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code 
                                 INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
                                 INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
-                                WHERE addorder.status = 'pending' AND addorder.province_id = $id_province";
+                                WHERE addorder.status = 'pending' AND addorder.amphur_id = $id_amphur";
                 $objq_addorder = mysqli_query($conn,$sql_addorder);
                 while($value = $objq_addorder->fetch_assoc ())
                 { 
                   $id_addorder = $value['id_addorder'];
-                  $pdf->Text(150, 9,iconv('UTF-8','cp874','จ.'.$value['province_name']),1,0,'C');
+                  $pdf->Text(140, 9,iconv('UTF-8','cp874','อ.'.$value['amphur_name'].'จ.'.$value['province_name']),1,0,'C');
                   $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'_______________________________________________________________________________________________') , 0 , 1,'L' );
                   $pdf->Ln(4); 
                   

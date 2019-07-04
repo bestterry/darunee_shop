@@ -21,7 +21,7 @@
   <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน</title>
+  <title>รายการ ORDER</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
@@ -86,21 +86,26 @@ folder instead of downloading all of them to reduce the load. -->
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" width="2000px">
       <!-- Main content -->
       <section class="content">
       <div class="col-md-12">
-        <form action="pending_product.php" method="post">
           <div class="box box-primary">
             <!-- /.box-header -->
+          <div class="box-header with-border">
+            <a type="button" href="order.php" class="btn btn-danger "><<== กลับสู่เมนูหลัก</a>
+            <a type="button" href="../pdf_file/list_order.php" class="btn btn-success "><i class="fa fa-print">  พิมพ์</i></a>
+            <br>
+            <div class="col-md-12 text-center"><font size="4"><B>รายการ ORDER ค้างส่ง</B></font></div>
+          </div>
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
               <table id="customers">
                 <tbody>
                   <tr>
-                    <th class="text-center" width="8%">ค้างส่ง</th>
+                    <th class="text-center" width="8%">ส่งแล้ว</th>
                     <th class="text-center" width="7%">เลขที่</th>
-                    <th class="text-center" width="70%">ลูกค้าค้างส่ง</th>
+                    <th class="text-center" width="70%">ที่อยู่ลูกค้า</th>
                     <th class="text-center" width="5%">ใบสั่ง</th>
                     <th class="text-center" width="5%">แก้ไข</th>
                     <th class="text-center" width="5%">ลบ</th>
@@ -115,9 +120,9 @@ folder instead of downloading all of them to reduce the load. -->
                   while($value = $objq_addorder->fetch_assoc()){
                  ?>
                   <tr>
-                    <td class="text-center"><input type="checkbox" name="id_addorder[]" value="<?php echo $value['id_addorder']; ?>"></td>
+                  <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่งแล้ว</a></td>
                     <td class="text-center"><?php echo $value['id_addorder']; ?></td>
-                    <td ><?php echo $value['name_customer'].'   '.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
+                    <td ><?php echo $value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
                     <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
                     <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้ไข</a></td>
                     <td class="text-center" ><a href="delete_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";>ลบ</a></td>
@@ -129,11 +134,7 @@ folder instead of downloading all of them to reduce the load. -->
               </table>
               </div>
             </div>
-            <div class="box-footer" align="center">
-              <a type="button" href="order.php" class="btn btn-danger pull-left"><<== กลับสู่หน้าหลัก</a>
-                <a type="button" href="../pdf_file/list_order.php" class="btn btn-success " ><i class="fa fa-print">  พิมพ์</i></a>
-              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('ออร์เดอร์ที่ไม่ถูกเลือกไว้จะถูกลบไป ท่านแน่ใจหรือไม่?')";>บันทึกค้างส่ง</button>
-            </div>
+            <div class="box-footer" align="center"> </div>
           </div>
           </form>
         </div>

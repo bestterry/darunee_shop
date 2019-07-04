@@ -9,7 +9,7 @@ $mysqli = connect();
   <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน</title>
+  <title>เพิ่ม ORDER ใหม่</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
@@ -37,6 +37,26 @@ folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
+
+  <script language="javascript">
+    function fncSubmit()
+    {
+      if(document.form1.name_customer.value == "")
+      {
+        alert('กรุณาระบุชื่อลูกค้า');
+        document.form1.name_customer.focus();
+        return false;
+      }	
+      if(document.form1.tel.value == "")
+      {
+        alert('กรุณาระบุเบอร์โทรศัพท์');
+        document.form1.tel.focus();		
+        return false;
+      }	
+      
+      document.form1.submit();
+    }
+  </script>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -86,59 +106,79 @@ folder instead of downloading all of them to reduce the load. -->
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="finish.php" method="post" autocomplete="off">
+                <form action="finish.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                       <div class="form-group">
-                        <label>ชื่อลูกค้า</label>
-                        <input type="text" name="name_customer" class="form-control" placeholder="ชื่อ">
+                        <label class="col-sm-2 control-label">ชื่อลูกค้า :</label>
+
+                        <div class="col-sm-10">
+                          <input type="text" name="name_customer" class="form-control" placeholder="ชื่อลูกค้า">
+                        </div>
                       </div>
                       <!-- /.form-group -->
                       <div class="form-group">
-                        <label>บ้าน  หมู่ที่</label>
-                        <input class="form-control" name="village" placeholder="หมู่บ้าน">
-                        </select>
+                        <label class="col-sm-2 control-label">หมู่บ้าน :</label>
+
+                        <div class="col-sm-10">
+                          <input type="text" name="village" class="form-control" placeholder="หมู่บ้าน">
+                        </div>
                       </div>
+
                       <div class="form-group">
-                        <label>จังหวัด</label>
-                        <select name="province_name" data-where="2" class="ajax_address form-control select2" style="width: 100%;">
-                          <option value="">-- เลือกจังหวัด --</option>
-                        </select>
+                          <label class="col-sm-2 control-label">เบอร์โทร :</label>
+                          <div class="col-sm-10">
+                            <input class="form-control" name="tel" placeholder="เบอร์โทรศัพท์">
+                          </div>
+                        </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">จังหวัด :</label>
+                        <div class="col-sm-10">
+                          <select name="province_name" data-where="2" class="form-control ajax_address select2" >
+                            <option value="">-- เลือกจังหวัด --</option>
+                          </select>
+                        </div>
                       </div>
                       <!-- /.form-group -->
                       <div class="form-group">
-                        <label>อำเภอ</label>
-                        <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="width: 100%;">
-                          <option value="">-- เลือกอำเภอ/เขต --</option>
-                        </select>
+                        <label  class="col-sm-2 control-label">อำเภอ :</label>
+                        <div class="col-sm-10">
+                          <select name="amphur_name" data-where="3" class="ajax_address form-control select2" >
+                            <option value="">-- เลือกอำเภอ/เขต --</option>
+                          </select>
+                        </div>
                       </div>
                       <!-- /.form-group -->
                       <div class="form-group">
-                        <label>ตำบล</label>
-                        <select name="district_name" data-where="4" class="ajax_address form-control select2" style="width: 100%;">
-                          <option value="">-- เลือกตำบล --</option>
-                        </select>
+                        <label class="col-sm-2 control-label">ตำบล :</label>
+                        <div class="col-sm-10">
+                          <select name="district_name" data-where="4" class="ajax_address form-control select2" style="width: 100%;">
+                            <option value="">-- เลือกตำบล --</option>
+                          </select>
+                        </div>
                       </div>
-                      
-                    </div>
-                    <div class="col-md-2">
+
                       <div class="form-group">
-                        <label>เบอร์โทรศัพท์</label>
-                        <input class="form-control" name="tel" placeholder="เบอร์โทรศัพท์">
+                        <label class="col-sm-2 control-label">หมายเหตุ :</label>
+
+                        <div class="col-sm-10">
+                          <input type="text" name="note" class="form-control" value="-" maxlength="25">
+                        </div>
                       </div>
+
                     </div>
                     <div class="col-md-7">
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#0099ff" class="text-center" width="55%">สินค้า</th>
-                            <th bgcolor="#0099ff" class="text-center" width="15%">จำนวน</th>
-                            <th bgcolor="#0099ff" class="text-center" width="15%">เงินขาย(บ)</th>
-                            <th bgcolor="#0099ff" class="text-center" width="15%">จัดการ</th>
+                            <th bgcolor="#4dd2ff" class="text-center" width="55%">สินค้า</th>
+                            <th bgcolor="#4dd2ff" class="text-center" width="15%">จำนวน</th>
+                            <th bgcolor="#4dd2ff" class="text-center" width="15%">จัดการ</th>
                           </tr>
                           <tr>
-                            <td>
-                              <select name="id_product[]" class="form-control select2" style="width: 100%;">
+                            <td class="text-center">
+                              <select name="id_product[]" class="form-control text-center select2" style="width: 100%;">
                                 <option value="">-- เลือกสินค้า --</option>
                               <?php 
                                   $product = "SELECT * FROM product";
@@ -151,8 +191,7 @@ folder instead of downloading all of them to reduce the load. -->
                                 ?>
                               </select>
                             </td>
-                            <td><input type="text" name="num[]" placeholder="จำนวน" class="form-control" /></td>
-                            <td><input type="text" name="price[]" placeholder="ราคา" class="form-control" /></td>
+                            <td><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td>
                             <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success">เพิ่มสินค้า</button></td>
                           </tr>
                         </table>
@@ -254,7 +293,7 @@ $(document).ready(function(){
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td><input type="text" name="num[]" placeholder="จำนวน" class="form-control " /><td><input type="text" name="price[]" placeholder="ราคา" class="form-control" /></td></td><td  class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td class="text-center"><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td><td  class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
 	});
 	
 	$(document).on('click', '.btn_remove', function(){

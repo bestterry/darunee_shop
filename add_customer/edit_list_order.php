@@ -19,7 +19,7 @@ $mysqli = connect();
   <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน</title>
+  <title>แก้ไข ORDER</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
@@ -55,29 +55,6 @@ folder instead of downloading all of them to reduce the load. -->
       <nav class="navbar navbar-static-top">
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="dist/img/user.png" class="img-circle" alt="User Image">
-
-                  <p>
-                    <small>สาขา : </small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="login/logout.php" class="btn btn-danger btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
           </ul>
         </div>
       </nav>
@@ -86,72 +63,102 @@ folder instead of downloading all of them to reduce the load. -->
     <div class="content-wrapper">
       <!-- Main content -->
       <section class="content">
-
-        <div class="col-md-12">
+      <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center"> แก้ไขออร์เดอร์ <font color="red"> </font></B>
+                <B align="center"> เพิ่มใบสั่งสินค้า <font color="red"> </font></B>
               </font>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="finish.php" method="post" autocomplete="off">
+                <form action="edit_list_order_finish.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                   <div class="row">
-                   
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                       <div class="form-group">
-                        <label>ชื่อลูกค้า</label>
-                        <input type="text" name="name_customer" class="form-control" placeholder="ชื่อ" value="<?php echo $objr_addorder['name_customer'];?>">
-                      </div>
-                      <!-- /.form-group -->
-                      <div class="form-group">
-                        <label>หมู่บ้าน</label>
-                        <input class="form-control" name="village" placeholder="หมู่บ้าน" value="<?php echo $objr_addorder['village'];?>">
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label>จังหวัด</label>
-                        <select name="province_name" data-where="2" class="ajax_address form-control select2" style="width: 100%;" disabled>
-                          <option value=""><?php echo $objr_addorder['province_name'];?></option>
-                        </select>
-                      </div>
-                      <!-- /.form-group -->
-                      <div class="form-group">
-                        <label>อำเภอ</label>
-                        <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="width: 100%;" disabled>
-                          <option value="">-- เลือกอำเภอ/เขต --</option>
-                        </select>
-                      </div>
-                      <!-- /.form-group -->
-                      <div class="form-group">
-                        <label>ตำบล</label>
-                        <select name="district_name" data-where="4" class="ajax_address form-control select2" style="width: 100%;" disabled>
-                          <option value="">-- เลือกตำบล --</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="form-group">
-                        <label>เบอร์โทรศัพท์</label>
-                        <input class="form-control" name="tel" placeholder="เบอร์โทรศัพท์" value="<?php echo $objr_addorder['tel'];?>">
-                      </div>
-                    </div>
+                        <label class="col-sm-2 control-label">ชื่อลูกค้า :</label>
 
+                        <div class="col-sm-10">
+                          <input type="text" name="name_customer" class="form-control" value="<?php echo $objr_addorder['name_customer'];?>">
+                          <input type="hidden" name="id_addorder" value="<?php echo $id_addorder; ?>">
+                        </div>
+                      </div>
+                      <!-- /.form-group -->
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">หมู่บ้าน :</label>
+
+                        <div class="col-sm-10">
+                          <input type="text" name="village" class="form-control" value="<?php echo $objr_addorder['village'];?>">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">เบอร์โทร :</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" name="tel" value="<?php echo $objr_addorder['tel'];?>">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">หมายเหตุ :</label>
+
+                        <div class="col-sm-10">
+                          <input type="text" name="note" class="form-control"  maxlength="25" value="<?php echo $objr_addorder['note'];?>">
+                         </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">จังหวัด :</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" value="<?php echo $objr_addorder['province_name'];?>" disabled/>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">อำเภอ :</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" value="<?php echo $objr_addorder['amphur_name'];?>" disabled/>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">ตำบล :</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" value="<?php echo $objr_addorder['district_name'];?>" disabled>
+                        </div>
+                      </div>
+
+                    </div>
                     <div class="col-md-7">
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#0099ff" class="text-center" width="55%">สินค้า</th>
-                            <th bgcolor="#0099ff" class="text-center" width="15%">จำนวน</th>
-                            <th bgcolor="#0099ff" class="text-center" width="15%">เงินขาย(บ)</th>
-                            <th bgcolor="#0099ff" class="text-center" width="15%">จัดการ</th>
+                            <th bgcolor="#4dd2ff" class="text-center" width="55%">สินค้า</th>
+                            <th bgcolor="#4dd2ff" class="text-center" width="15%">จำนวน</th>
+                            <th bgcolor="#4dd2ff" class="text-center" width="15%">จัดการ</th>
                           </tr>
                           <tr>
-                            <td>
-                              <select name="id_product[]" class="form-control select2" style="width: 100%;">
-                                <option value="">-- เลือกสินค้า --</option>
+                            <?php 
+                              $sql_num = "SELECT * FROM listorder INNER JOIN product ON listorder.id_product = product.id_product
+                              WHERE listorder.id_addorder = $id_addorder GROUP BY listorder.id_listorder ASC";
+                              $objq_num = mysqli_query($mysqli,$sql_num);
+                              while ($value = $objq_num->fetch_assoc()) {
+                            ?>
+                            <td class="text-center">
+                              <input type="text" class="form-control text-center" value="<?php echo $value['name_product'].'_'.$value['unit']; ?>" disabled/>
+                              <input type="hidden" name="id_listorder[]" value="<?php echo $value['id_listorder']; ?>">
+                            </td>
+                            <td><input type="text" name="num[]" class="form-control text-center" value="<?php echo $value['num']; ?>"></td>
+                            <td class="text-center"><a href="delete_list_order2.php?id_listorder=<?php echo $value['id_listorder']; ?>&&id_addorder=<?php echo $id_addorder; ?>" type="button" class="btn btn-danger">ลบ</a></td>
+                          </tr>
+                            <?php
+                            }
+                            ?>
+                          <tr>
+                            <td class="text-center">
+                              <select name="id_product2[]" class="form-control text-center select2" style="width: 100%;">
+                                <option value="list">-- เลือกสินค้า --</option>
                               <?php 
                                   $product = "SELECT * FROM product";
                                   $objq_product = mysqli_query($mysqli,$product);
@@ -163,8 +170,9 @@ folder instead of downloading all of them to reduce the load. -->
                                 ?>
                               </select>
                             </td>
-                            <td><input type="text" name="num[]" placeholder="จำนวน" class="form-control" /></td>
-                            <td><input type="text" name="price[]" placeholder="ราคา" class="form-control" /></td>
+                            <td>
+                              <input type="text" name="num2[]" placeholder="จำนวน" class="form-control text-center" />
+                            </td>
                             <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success">เพิ่มสินค้า</button></td>
                           </tr>
                         </table>
@@ -174,8 +182,8 @@ folder instead of downloading all of them to reduce the load. -->
                   </div>
               </div>
               <div align="center" class="box-footer">
-                <a type="button" href="list_order.php" class="btn btn-danger pull-left"> <<== กลับ</a>
-                <!-- <button type="submit" class="btn btn-success"><i class="fa fa-save">  บันทึก </i></button> -->
+                <a type="button" href="order.php" class="btn btn-danger pull-left"> <<== กลับสู่หน้าหลัก</a>
+                <button type="submit" class="btn btn-success"><i class="fa fa-save" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";>  บันทึก </i></button>
               </div>
             </div>
             </form>
@@ -266,7 +274,7 @@ $(document).ready(function(){
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td><input type="text" name="num[]" placeholder="จำนวน" class="form-control " /><td><input type="text" name="price[]" placeholder="ราคา" class="form-control" /></td></td><td  class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product2[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td class="text-center"><input type="text" name="num2[]" placeholder="จำนวน" class="form-control " /><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
 	});
 	
 	$(document).on('click', '.btn_remove', function(){

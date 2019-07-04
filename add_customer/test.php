@@ -1,6 +1,5 @@
 <?php
-  include("db_connect.php");
-  $mysqli = connect();
+  require "../config_database/config.php";
   function DateThai($strDate)
   {
     $strYear = date("Y",strtotime($strDate))+543;
@@ -21,7 +20,7 @@
   <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>รวม ORDER ค้างส่ง</title>
+  <title>รายการ ORDER</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
@@ -61,11 +60,14 @@ folder instead of downloading all of them to reduce the load. -->
           }
 
           #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+
           #customers th {
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: center;
             background-color: #99CCFF;
+          
           }
   </style>
 </head>
@@ -83,114 +85,74 @@ folder instead of downloading all of them to reduce the load. -->
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="height: 3300px;">
+    <div class="content-wrapper" width="2000px">
       <!-- Main content -->
       <section class="content">
       <div class="col-md-12">
-        <form action="pending_product.php" method="post">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <div class="box-header with-border">
-              <a type="button" href="order.php" class="btn btn-danger"><<== กลับสู่เมนูหลัก</a>
-              <a type="button" href="../pdf_file/total_order.php" class="btn btn-success"><i class="fa fa-print">  พิมพ์</i></a>
-            </div>
+          <div class="box-header with-border">
+            <a type="button" href="order.php" class="btn btn-danger "><<== กลับสู่เมนูหลัก</a>
+            <a type="button" href="../pdf_file/list_order.php" class="btn btn-success "><i class="fa fa-print">  พิมพ์</i></a>
+            <br>
+            <div class="col-md-12 text-center"><font size="4"><B>รายการ ORDER ค้างส่ง</B></font></div>
+          </div>
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-              <?php 
-                $sql_province = "SELECT * FROM tbl_provinces";
-                $objq_province = mysqli_query($mysqli,$sql_province);
-                while($value_pv = $objq_province->fetch_assoc()){
-                  $id_province = $value_pv['province_id'];
-              ?>
-              <div class="text-center">
-              <B>
-                <font size="4">
-                  <?php echo 'ค้างส่ง : '.$value_pv['province_name'];?>
-                </font>
-              </B>
-                </div>
               <table id="customers">
                 <tbody>
-                    <tr>
-                      <th class="text-center" width="15%"></th>
+                  <tr>
+                    <th class="text-center" width="15%">ส่งแล้ว</th>
+                    <th class="text-center" width="15%">เชียงใหม่</th>
+                    <th class="text-center" width="15%">ลำปาง</th>
+                    <th class="text-center" width="15%">พะเยา</th>
+                    <th class="text-center" width="15%">เชียงราย</th>
+                    <th class="text-center" width="15%">รวม</th>
+                  </tr>
+                 <?php 
+                    $sql_pd = "SELECT * FROM product";
+                    $objq_pd = mysqli_query($conn,$sql_pd);
+                    while ($value_pd = $objq_pd->fetch_assoc()) {
+                     $id_product = $value_pd['id_product'];
+                  ?>
+                  <tr>
+                    <td class="text-center"><?php echo $value_pd['name_product']; ?></td>
                     <?php 
-                      $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = $id_province";
-                      $objq_amphur = mysqli_query($mysqli,$sql_amphur);
-                      while($value_am = $objq_amphur->fetch_assoc()){
-                    ?><?php 
-                        if($value_am['province_id']==38){ ?> 
-                          <th class="text-center" width="10%"><?php echo $value_am['amphur_name'];?></th>
-                        <?php 
-                        }elseif($value_am['province_id']==40){ ?> 
-                          <th class="text-center" width="6%"><?php echo $value_am['amphur_name'];?></th>
-                          <?php 
-                        }elseif($value_am['province_id']==44){ ?> 
-                          <th class="text-center" width="9%"><?php echo $value_am['amphur_name'];?></th>
-                        <?php }else{ ?>
-                          <th class="text-center" width="9%"><?php echo $value_am['amphur_name'];?></th>
-                        <?php }?>
-                      <?php }?>
-                      <th class="text-center">รวม</th>
-                    </tr>
-                    <tr>
-                    
-                    <?php
-                      
-                        $sql_product = "SELECT * FROM product";
-                        $objq_product = mysqli_query($mysqli,$sql_product);
-                        while($value_pd = $objq_product->fetch_assoc())
-                        {
-                          ?>
-                          <td><?php echo $value_pd['name_product'].'_'.$value_pd['unit'];?></td>
-                          <?php
-                          $total_pd = 0;
-                          $id_product = $value_pd['id_product'];
-                          $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = $id_province";
-                          $objq_amphur = mysqli_query($mysqli,$sql_amphur);
-                          while($value_am = $objq_amphur->fetch_assoc())
-                          {
-                            
-                            $amphur_id = $value_am['amphur_id'];
-                            $sql_numpd = "SELECT SUM(num) FROM listorder 
-                                          INNER JOIN addorder ON listorder.id_addorder = addorder.id_addorder
-                                          INNER JOIN product ON listorder.id_product = product.id_product
-                                          WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'";
-                            $objq_numpd = mysqli_query($mysqli,$sql_numpd);
-                            $objr_numpd = mysqli_fetch_array($objq_numpd);
-                            $numpd = $objr_numpd['SUM(num)'];
-                        ?>
-                            <td class="text-center">
-                              <?php 
-                               if (!isset($numpd)) {
-                                 echo "-";
-                               }else{
-                                 echo $numpd;
-                               }
-                               
-                              ?>
-                            </td>
-                        <?php 
-                        $total_pd = $total_pd + $numpd;
-                          }
+                      $total_num = 0;
+                      $sql_pv = "SELECT * FROM tbl_provinces";
+                      $objq_pv = mysqli_query($conn,$sql_pv);
+                      while($value_pv = $objq_pv -> fetch_assoc()){
+                        $id_province = $value_pv['province_id'];
+                        $sql_num = "SELECT SUM(num) FROM listorder INNER JOIN addorder ON listorder.id_addorder = addorder.id_addorder 
+                                    WHERE listorder.id_product = $id_product AND addorder.province_id = $id_province";
+                        $objq_num = mysqli_query($conn,$sql_num);
+                        $objr_num = mysqli_fetch_array($objq_num);
+                        $num = $objr_num['SUM(num)'];
                     ?>
-                        <td class="text-center"><?php echo "$total_pd";?></td>
-                        </tr>
+                    <td class="text-center">
                       <?php 
-                        }
+                        if (!isset($num)) {
+                          echo "-";
+                        }else{
+                          echo $num;
+                        } 
                       ?>
-                      
+                    </td>
+                      <?php 
+                      $total_num = $total_num + $num;
+                      }
+                      ?>
+                    <td class="text-center" ><?php echo $total_num; ?></td>
+                  </tr>
+                  <?php 
+                    }
+                  ?>
+                 
                 </tbody>
               </table>
-              <br>
-              <br>
-              <?php
-                }
-              ?>
               </div>
             </div>
-            <div class="box-footer">
-              
-            </div>
+            <div class="box-footer" align="center"> </div>
           </div>
           </form>
         </div>

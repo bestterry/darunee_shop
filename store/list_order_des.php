@@ -1,6 +1,5 @@
 <?php 
-  include("db_connect.php");
-
+  include("../config_database/config.php");
   function DateThai($strDate)
   {
     $strYear = date("Y",strtotime($strDate))+543;
@@ -14,14 +13,13 @@
     return "$strDay $strMonthThai $strYear";
   }
 
-    $mysqli = connect();
     $id_addorder = $_GET['id_addorder'];
     $sql_addorder = "SELECT * FROM addorder 
                     INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
                     INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
                     INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
                     WHERE addorder.id_addorder = $id_addorder";
-    $objq_addorder = mysqli_query($mysqli,$sql_addorder);
+    $objq_addorder = mysqli_query($conn,$sql_addorder);
     $objr_addorder = mysqli_fetch_array($objq_addorder);
 
 
@@ -33,7 +31,7 @@
   <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>รายการ ORDER </title>
+  <title>โปรแกรมขายหน้าร้าน</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
@@ -163,14 +161,6 @@ folder instead of downloading all of them to reduce the load. -->
                               ?>
                             </th>
                           </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">หมายเหตุ :</th>
-                            <th width="85%">
-                              <?php 
-                                echo $objr_addorder['note'];
-                              ?>
-                            </th>
-                          </tr>
                         </table>
                       </div>
                     </div>
@@ -188,7 +178,7 @@ folder instead of downloading all of them to reduce the load. -->
                                 $seach_listorder = "SELECT * FROM listorder 
                                                     INNER JOIN product ON listorder.id_product = product.id_product
                                                     WHERE listorder.id_addorder = $id_addorder";
-                                $objq_listorder = mysqli_query($mysqli,$seach_listorder);
+                                $objq_listorder = mysqli_query($conn,$seach_listorder);
                                 while($value = $objq_listorder->fetch_assoc()){
                           ?>
                           <tr>
@@ -205,7 +195,7 @@ folder instead of downloading all of them to reduce the load. -->
                   </div>
               </div>
               <div align="left" class="box-footer">
-                <a type="button" href="list_order.php" class="btn btn-success">
+                <a type="button" href="sent_order.php" class="btn btn-success">
                   <<== กลับ</a> </div> </div> </form> </div> </div> </section> <!-- jQuery 3 -->
                     <script src="../bower_components/jquery/dist/jquery.min.js">
                     </script>

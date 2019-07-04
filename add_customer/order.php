@@ -8,7 +8,7 @@
   <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>โปรแกรมขายหน้าร้าน</title>
+  <title>เพิ่ม ORDER</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
@@ -86,15 +86,19 @@ folder instead of downloading all of them to reduce the load. -->
                     <ul class="nav nav-pills nav-stacked" ata-widget="tree">
 
                         <!-- เพิ่มรายการสั่งสินค้า -->
-                        <li><a href="add_order.php" ><i class="fa fa-home"></i> เพิ่มออร์เดอร์ </a></li>
+                        <li><a href="add_order.php" ><i class="fa fa-home"></i> เพิ่ม ORDER ใหม่ </a></li>
                         <!-- /เพิ่มรายการสั่งสินค้า -->
 
+                        <!-- รายการรวมสต๊อกค้างส่ง -->
+                        <li><a href="sent_order.php" ><i class="fa fa-shopping-cart"></i> ORDER ค้างส่ง(หน่วยรถ) </a></li>
+                        <!-- /รายการรวมสต๊อกค้างส่ง -->
+
                         <!-- สต๊อกรถ -->
-                        <li><a href="list_order.php" ><i class="fa fa-truck"></i> ออร์เดอร์ค้างส่ง </a></li>
+                        <li><a href="list_order.php" ><i class="fa fa-truck"></i> ORDER ค้างส่ง(ADMIN) </a></li>
                         <!-- /สต๊อกรถ -->
 
                         <!-- รายการรวมสต๊อกค้างส่ง -->
-                        <li><a href="total_order.php" ><i class="fa fa-shopping-cart"></i> จำนวนออร์เดอร์ค้างส่ง </a></li>
+                        <li><a href="total_order.php" ><i class="fa fa-shopping-cart"></i> จำนวนค้างส่ง </a></li>
                         <!-- /รายการรวมสต๊อกค้างส่ง -->
                         
                     </ul>
