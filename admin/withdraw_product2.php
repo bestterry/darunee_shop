@@ -8,7 +8,7 @@
 
     <!DOCTYPE html>
     <html>
-
+      
     <head>
       <?php require('../font/font_style.php');?>
       <meta charset="utf-8">
@@ -156,7 +156,7 @@
                 <!-- /.box-footer -->
                 <div class="box-footer">
                   <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
-                  <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save">บันทึก</i></button>
+                  <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"> บันทึก</i></button>
                 </div>
                 </form>
                 <!-- /.box-footer -->

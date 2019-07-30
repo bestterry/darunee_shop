@@ -1,9 +1,9 @@
 <?php
-  include("db_connect.php");
-  $mysqli = connect();
+  require "../config_database/config.php";
+
   function DateThai($strDate)
   {
-    $strYear = date("Y",strtotime($strDate))+543;
+    $strYear = date("Y",strtotime($strDate))+543-2500;
     $strMonth= date("n",strtotime($strDate));
     $strDay= date("j",strtotime($strDate));
     $strHour= date("H",strtotime($strDate));
@@ -11,7 +11,7 @@
     $strSeconds= date("s",strtotime($strDate));
     $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
     $strMonthThai=$strMonthCut[$strMonth];
-    return "$strDay";
+    return "$strDay $strMonthThai $strYear";
   }
 ?>
 <!DOCTYPE html>
@@ -94,40 +94,56 @@ folder instead of downloading all of them to reduce the load. -->
             <!-- /.box-header -->
           <div class="box-header with-border">
             <a type="button" href="order.php" class="btn btn-danger "><= เมนูหลัก</a>
-            <a type="button" href="../pdf_file/list_order.php" class="btn btn-success ">พิมพ์จังหวัด</a>
-            <a type="button" href="../pdf_file/list_order2.php" class="btn btn-success ">พิมพ์อำเภอ</a>
-            <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-success ">ORDER วันนี้</a>
           </div>
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
               <table id="customers">
                 <tbody>
                   <tr>
-                    <th class="text-center" width="5%">ส่ง</th>
-                    <th class="text-center" width="5%">สั่ง</th>
+                    <th class="text-center" width="5%">ข้อมูล</th>
                     <th class="text-center" width="5%">แก้</th>
-                    <th class="text-center" width="5%">ลบ</th>
-                    <th class="text-center" width="5%">ที่</th>
-                    <th class="text-center" width="70%">ORDER ค้างส่ง</th>
-                    <th class="text-center" width="5%">วัน</th>
+                    <th class="text-center" width="10%">ใบสั่งที่</th>
+                    <th class="text-center" width="30%">สินค้า_หน่วย</th>
+                    <th class="text-center" width="10%">จำนวน</th>
+                    <th class="text-center" width="10%">ราคา</th>
+                    <th class="text-center" width="10%">เงินซื้อ</th>
+                    <th class="text-center" width="10%">วันที่สั่ง</th>
+                    <th class="text-center" width="10%">สถานะ</th>
                   </tr>
                  <?php 
-                  $sql_addorder = "SELECT * FROM addorder 
-                                   INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
-                                   INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
-                                   INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
-                                   WHERE addorder.status = 'pending' ORDER BY addorder.id_addorder DESC";
-                  $objq_addorder = mysqli_query($mysqli,$sql_addorder);
+                 
+                  $order_list = "SELECT * FROM order_list
+                                   INNER JOIN product ON order_list.id_product = product.id_product
+                                   ORDER BY order_list.id_order_list DESC";
+                  $objq_addorder = mysqli_query($conn,$order_list);
                   while($value = $objq_addorder->fetch_assoc()){
+                    $num_product = $value['num_product'];
+                    $price = $value['price'];
+                    $total_money = $num_product * $price;
+                    $status = $value['status'];
                  ?>
                   <tr>
-                    <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>
-                    <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
-                    <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
-                    <td class="text-center" ><a href="delete_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";>ลบ</a></td>
-                    <td class="text-center"><?php echo $value['id_addorder']; ?></td>
-                    <td ><?php echo $value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
-                    <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
+                    <td class="text-center"><a href="data_order.php?id_order_list=<?php echo $value['id_order_list']; ?>"><i class="fa fa-search-plus"></i></a></td>
+                    <td class="text-center" ><a href="edit_order.php?id_order_list=<?php echo $value['id_order_list']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
+                    <td class="text-center"><?php echo $value['list_order'];?></td>
+                    <td class="text-center" ><?php echo $value['name_product'];?></td>
+                    <td class="text-center" ><?php echo $num_product; ?></td>
+                    <td class="text-center" ><?php echo $price; ?></td>
+                    <td class="text-center" ><?php echo $total_money; ?></td>
+                    <td class="text-center" ><?php echo DateThai($value['date_order']);?></td>
+                     <td class="text-center">
+                     <?php  
+                        if($status=="done"){
+                      ?>
+                        <span class="label label-danger">ไม่ได้จ่าย</span>
+                      <?php
+                        }else {
+                      ?>
+                        <span class="label label-success">จ่ายแล้ว</span>
+                      <?php  
+                        }
+                     ?>
+                    </td>
                   </tr>
                  <?php 
                   }

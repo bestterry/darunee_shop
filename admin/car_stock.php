@@ -96,9 +96,9 @@ require "menu/date.php";
                     <th class="text-center" width="5%">หนึ่ง</th>
                     <th class="text-center" width="5%">บอย</th>
                     <th class="text-center" width="5%">เอี่ว</th>
-                    <th class="text-center" width="5%">หนุ่ย</th>
-                    <th class="text-center" width="5%">-</th>
-                    <th class="text-center" width="5%">-</th>
+                    <th class="text-center" width="5%">เค</th>
+                    <th class="text-center" width="5%">เอ็กซ์</th>
+                    <th class="text-center" width="5%">รอน</th>
                     <th class="text-center" width="8%">รวม</th>
                   </tr>
                   <?php
@@ -115,6 +115,7 @@ require "menu/date.php";
                       </td>
                       <!-- -------------------------------รถ------------------------------------ -->
                       <?php
+                      $total_num = 0;
                       for ($i = 4; $i <= 18; $i++) {
 
                         $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $i";
@@ -129,27 +130,15 @@ require "menu/date.php";
                           <td class="text-center"><?php echo $objr_num['num']; ?></td>
                         <?php
                       }
+                      $total_num = $total_num + $objr_num['num'];
                     }
                     ?>
                       <!-- -------------------------------//รถ------------------------------------ -->
 
                       <!-- -------------------------------รวมทั้งหมด------------------------------------ -->
-                      <?php
-                      $SQL_num = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";
-                      $objq_num = mysqli_query($conn, $SQL_num);
-                      $objr_num = mysqli_fetch_array($objq_num);
-
-
-                      if (!isset($objr_num['SUM(num)'])) {
-                        ?>
-                        <td></td>
-                      <?php
-                    } else {
-                      ?>
-                        <td class="text-center"><?php echo $objr_num['SUM(num)']; ?></td>
-                      <?php
-                    }
-                    ?>
+                        
+                        <td class="text-center"><?php echo $total_num; ?></td>
+                      
                       <!-- -------------------------------//รวมทั้งหมด------------------------------------ -->
                     </tr>
                     <?php $a++;

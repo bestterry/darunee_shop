@@ -98,7 +98,7 @@
                               <input class="text-center" type="text" name="num_product[]"   placeholder="<?php echo $objr_listproduct['unit'];?>">
                             </td>
                             <td class="text-center">
-                              <input class="text-center" type="text" name="price_product[]" placeholder="ราคา/หน่วย">
+                              <input class="text-center" type="text" name="price_product[]" value="0">
                             </td>
                             <td></td>
                           </tr>

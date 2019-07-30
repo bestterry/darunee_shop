@@ -107,6 +107,7 @@ folder instead of downloading all of them to reduce the load. -->
                           <option value="">-- เลือกอำเภอ/เขต --</option>
                         </select>
                       </div>
+                      
                       <!-- /.form-group -->
                       <div class="form-group">
                         <label>ตำบล</label>
@@ -128,7 +129,6 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
                     </div>
                     <div class="col-md-6">
-
                       <div class="form-group">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
@@ -147,8 +147,8 @@ folder instead of downloading all of them to reduce the load. -->
                           </tr>
                         </table>
                       </div>
-                      
                     </div>
+
                     <!-- /.row -->
                   </div>
               </div>

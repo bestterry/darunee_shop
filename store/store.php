@@ -1,6 +1,7 @@
 <?php 
-  require "../config_database/config.php";
-  require "../session.php"; 
+  require "db_connect.php";
+  $mysqli = connect();
+  require "session.php"; 
   require "menu/date.php";
   $strDate = date('d-m-Y');
 ?>
@@ -89,73 +90,12 @@
     <section class="content">
     <?php 
       $list_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_member = $id_member";
-      $query_product = mysqli_query($conn,$list_product);
-      $query_product1 = mysqli_query($conn,$list_product);
-      $query_product2 = mysqli_query($conn,$list_product);
+      $query_product = mysqli_query($mysqli,$list_product);
+      $query_product1 = mysqli_query($mysqli,$list_product);
+      $query_product2 = mysqli_query($mysqli,$list_product);
       require 'menu/menu_left_shop.php'; 
     ?>
-    <div class="col-md-6">
-      
-      </div>
 
-      <?php 
-        $checkST_area = "SELECT * FROM area WHERE id_member = $id_member AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' ";
-        $objq_checkarea = mysqli_query($conn,$checkST_area);
-        $objr_checkarea = mysqli_fetch_array($objq_checkarea);
-        $id_area = $objr_checkarea['id_area'];
-        if (!isset($id_area)) {
-      ?>
-
-      <!-- บันทึกการทำงาน -->
-      <div class="col-md-6">
-        <form action="algorithm/working.php" method="POST" autocomplete="off">
-        <div class="box box-primary">
-          <div class="box-header text-center with-border">
-
-          </div>
-          <div class="box-body no-padding">
-            <div class="mailbox-read-message">
-            <table id="customers">
-                <tbody>
-                  <tr>
-                    <th class="text-center" width="50%">พื้นที่ทำงาน(อำเภอ)</th>
-                    <th class="text-center" width="50%">งานที่ทำ</th>
-                  </tr>
-                  <tr>
-                    <td> <input class="text-center" type="text" name="name_area" size="40"> </td>
-                    <td>
-                      <select name ="id_working" class="form-control text-center select2" style="width: 100%;">
-                          <option>--</option>
-                          <?php #endregion
-                          $sql_working = "SELECT * FROM working";
-                          $objq_working = mysqli_query($conn,$sql_working);
-                          while($working = $objq_working -> fetch_assoc()){
-                          ?>
-                            <option value="<?php echo $working['id_working']; ?>"><?php echo $working['name_working']; ?></option>
-                          <?php } ?>
-                      </select>
-                    </td>
-                 </tbody>
-            </table>
-            </div>
-          </div>
-          <div class="box-footer text-center">
-            <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"> บันทึก </i></button>
-          </div>
-        </div>  
-        </form>
-      </div>
-      <!-- //บันทึกการทำงาน -->
-      <?php 
-        }else{
-          
-        }
-      ?>
-
-
-
-
-      <div class="col-md-3"></div>
       <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
@@ -182,20 +122,20 @@
                   </tr>
                   <?php 
                     $sql_wp = "SELECT SUM(money) FROM price_history WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
-                    $objq_wp = mysqli_query($conn,$sql_wp);
+                    $objq_wp = mysqli_query($mysqli,$sql_wp);
                     $objr_wp = mysqli_fetch_array($objq_wp);
                     $sum_wp = $objr_wp['SUM(money)'];
 
                     //soft ลัง ร้านเวียง
                     $sql_wp_soft1 = "SELECT SUM(num) FROM price_history WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = 1";
-                    $objq_wp_soft1 = mysqli_query($conn,$sql_wp_soft1);
+                    $objq_wp_soft1 = mysqli_query($mysqli,$sql_wp_soft1);
                     $objr_wp_soft1 = mysqli_fetch_array($objq_wp_soft1);
                     $sum_wp_soft1 = $objr_wp_soft1['SUM(num)'];
                     //soft ลัง ร้านเวียง
 
                     //soft ขวด ร้านเวียง
                     $sql_wp_soft2 = "SELECT SUM(num) FROM price_history WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = 2";
-                    $objq_wp_soft2 = mysqli_query($conn,$sql_wp_soft2);
+                    $objq_wp_soft2 = mysqli_query($mysqli,$sql_wp_soft2);
                     $objr_wp_soft2 = mysqli_fetch_array($objq_wp_soft2);
                     $sum_wp_soft2 = $objr_wp_soft2['SUM(num)'];
                     //soft ขวด ร้านเวียง
@@ -211,25 +151,25 @@
                   $total_numsoft1 = 0;
                   $total_numsoft2 = 0;
                     $sql_idmember = "SELECT * FROM member";
-                    $objq_member = mysqli_query($conn,$sql_idmember);
+                    $objq_member = mysqli_query($mysqli,$sql_idmember);
                     while($value = $objq_member->fetch_assoc()){
                       $id_member = $value['id_member'];
                       $sql_sum = "SELECT SUM(money),name FROM sale_car_history INNER JOIN member ON sale_car_history.id_member = member.id_member 
                                   WHERE sale_car_history.id_member = $id_member AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
-                      $objq_sum = mysqli_query($conn,$sql_sum);
+                      $objq_sum = mysqli_query($mysqli,$sql_sum);
                       $objr_sum = mysqli_fetch_array($objq_sum);
 
                       //soft homdy ลัง
                       $sql_sum_soft1 = "SELECT SUM(num) FROM sale_car_history 
                                         WHERE id_member = $id_member AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = 1";
-                      $objq_sum_soft1 = mysqli_query($conn,$sql_sum_soft1);
+                      $objq_sum_soft1 = mysqli_query($mysqli,$sql_sum_soft1);
                       $objr_sum_soft1 = mysqli_fetch_array($objq_sum_soft1);
                       //soft homdy ลัง
 
                       //soft homdy ขวด
                       $sql_sum_soft2 = "SELECT SUM(num) FROM sale_car_history 
                                         WHERE id_member = $id_member AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = 2";
-                      $objq_sum_soft2 = mysqli_query($conn,$sql_sum_soft2);
+                      $objq_sum_soft2 = mysqli_query($mysqli,$sql_sum_soft2);
                       $objr_sum_soft2 = mysqli_fetch_array($objq_sum_soft2);
                       //soft homdy ขวด
 
@@ -360,6 +300,59 @@
                               
     }
      );
+  </script>
+  
+  <script type="text/javascript">
+    $(function() {
+
+      // เมื่อโหลดขึ้นมาครั้งแรก ให้ ajax ไปดึงข้อมูลจังหวัดทั้งหมดมาแสดงใน
+      // ใน select ที่ชื่อ province_name 
+      // หรือเราไม่ใช้ส่วนนี้ก็ได้ โดยไปใช้การ query ด้วย php แสดงจังหวัดทั้งหมดก็ได้
+      $.post("getAddress.php", {
+        IDTbl: 1
+      }, function(data) {
+        $("select[name=province_name]").html(data);
+      });
+      // สร้างตัวแปร สำหรับเก็บค่าข้อความให้เลือกรายการ เช่น เลือกจังหวัด
+      // เราจะเก็บค่านี้ไว้ใช้กรณีมีการรีเซ็ต หรือเปลี่ยนแปลงรายการใหม่
+      var chooseText = [];
+      $(".ajax_address").each(function(i, k) {
+        var initObj = $(".ajax_address").eq(i).find("option:eq(0)")[0];
+        chooseText[i] = initObj;
+      });
+
+      // ส่วนของการตรวจสอบ และดึงข้อมูล ajax สังเกตว่าเราใช้ css คลาสชื่อ ajax_address
+      // ดังนั้น css คลาสชื่อนี้จำเป็นต้องกำหนด หรือเราจะเปลี่ยนเป็นชื่ออื่นก็ได้ แต่จำไว้ว่า
+      // ต้องเปลี่ยนในส่วนนี้ด้วย
+      $(".ajax_address").on("change", function() {
+        var indexObj = $(".ajax_address").index(this); // เก็บค่า index ไว้ใช้งานสำหรับอ้างอิง
+        // วนลูปรีเซ็ตค่า select ของแต่ละรายการ โดยเอาค่าจาก array ด้านบนที่เราได้เก็บไว้
+        $(".ajax_address").each(function(i, k) {
+          if (i > indexObj) { // รีเซ็ตค่าของรายการที่ไม่ได้เลือก
+            $(".ajax_address").eq(i).html(chooseText[i]);
+          }
+        });
+
+        var obj = $(this);
+        var IDCheck = obj.val(); // ข้อมูลที่เราจะใช้เช็คกรณี where เช่น id ของจังหวัด
+        var IDWhere = obj.data("where"); // ค่าจาก data-where ค่าน่าจะเป็นตัวฟิลด์เงื่อนไขที่เราจะใช้
+        var targetObj = $("select[data-where='" + (IDWhere + 1) + "']"); // ตัวที่เราจะเปลี่ยนแปลงข้อมูล
+        if (targetObj.length > 0) { // ถ้ามี obj เป้าหมาย
+          targetObj.html("<option>.. กำลังโหลดข้อมูล.. </option>"); // แสดงสถานะกำลังโหลด  
+          setTimeout(function() { // หน่วงเวลานิดหน่อยให้เห็นการทำงาน ตัดเออกได้
+            // ส่งค่าไปทำการดึงข้อมูล option ตามเงื่อนไข
+            $.post("getAddress.php", {
+              IDTbl: IDWhere,
+              IDCheck: IDCheck,
+              IDWhere: IDWhere - 1
+            }, function(data) {
+              targetObj.html(data); // แสดงค่าผลลัพธ์
+            });
+          }, 0);
+        }
+      });
+
+    });
   </script>
 </body>
 </html>

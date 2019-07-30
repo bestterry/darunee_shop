@@ -66,8 +66,8 @@ folder instead of downloading all of them to reduce the load. -->
       <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
-              <font size="5">
-                <B align="center"> เพิ่มใบสั่งสินค้า <font color="red"> </font></B>
+              <font size="4">
+                <B align="center">เเก้ไข ORDER <font color="red"> </font></B>
               </font>
             </div>
             <!-- /.box-header -->
@@ -77,7 +77,7 @@ folder instead of downloading all of them to reduce the load. -->
                   <div class="row">
                     <div class="col-md-5">
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">ชื่อลูกค้า :</label>
+                        <label class="col-sm-2 control-label">ลูกค้า :</label>
 
                         <div class="col-sm-10">
                           <input type="text" name="name_customer" class="form-control" value="<?php echo $objr_addorder['name_customer'];?>">
@@ -86,7 +86,7 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
                       <!-- /.form-group -->
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">หมู่บ้าน :</label>
+                        <label class="col-sm-2 control-label">บ้าน :</label>
 
                         <div class="col-sm-10">
                           <input type="text" name="village" class="form-control" value="<?php echo $objr_addorder['village'];?>">
@@ -94,7 +94,7 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">เบอร์โทร :</label>
+                        <label class="col-sm-2 control-label">โทร :</label>
                         <div class="col-sm-10">
                           <input class="form-control" name="tel" value="<?php echo $objr_addorder['tel'];?>">
                         </div>
@@ -134,7 +134,7 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#4dd2ff" class="text-center" width="55%">สินค้า</th>
+                            <th bgcolor="#4dd2ff" class="text-center" width="55%">สินค้า_หน่วย</th>
                             <th bgcolor="#4dd2ff" class="text-center" width="15%">จำนวน</th>
                             <th bgcolor="#4dd2ff" class="text-center" width="15%">จัดการ</th>
                           </tr>
@@ -182,8 +182,8 @@ folder instead of downloading all of them to reduce the load. -->
                   </div>
               </div>
               <div align="center" class="box-footer">
-                <a type="button" href="order.php" class="btn btn-danger pull-left"> <<== กลับสู่หน้าหลัก</a>
-                <button type="submit" class="btn btn-success"><i class="fa fa-save" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";>  บันทึก </i></button>
+                <a type="button" href="list_order.php" class="btn btn-danger pull-left"> <<== กลับ</a>
+                <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";>  บันทึก ORDER </button>
               </div>
             </div>
             </form>

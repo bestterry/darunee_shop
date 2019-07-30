@@ -8,11 +8,11 @@
             <ul class="nav nav-pills nav-stacked" ata-widget="tree">
 
                 <!-- สต๊อกรวม -->
-                <li><a href="total_stock.php" ><i class="fa fa-home"></i> สต๊อกร้าน </a></li>
+                <li><a href="../pdf_file/admin_total_stock.php" ><i class="fa fa-home"></i> สต๊อกร้าน </a></li>
                 <!-- /สต๊อกรวม -->
 
                 <!-- สต๊อกรถ -->
-                <li><a href="car_stock.php" ><i class="fa fa-truck"></i> สต๊อกรถ </a></li>
+                <li><a href="../pdf_file/admin_car_stock.php" ><i class="fa fa-truck"></i> สต๊อกรถ </a></li>
                 <!-- /สต๊อกรถ -->
 
                 <!-- ยอดขาย -->
@@ -213,9 +213,17 @@
                 <li><a href="withdraw_history.php"><i class="fa fa-cloud-upload"></i> ข้อมูลการเบิก </a></li>
                 <!--/ข้อมูลการเบิก -->
 
-                 <!--จัดการข้อมูลสินค้า-พนักงาน -->
+                <!--จัดการข้อมูลสินค้า-พนักงาน -->
                 <li><a href="add_data.php" ><i class="fa fa-cog"></i> จัดการข้อมูล </a></li>
                 <!--/จัดการข้อมูลสินค้า-พนักงาน -->
+
+                <!--ORDER ค้างส่ง -->
+                <li><a href="../add_customer/order.php" ><i class="fa fa-columns"></i> ORDER ค้างส่ง </a></li>
+                <!--/ORDER ค้างส่ง -->
+
+                <!--สั่งสินค้า -->
+                <li><a href="../order/order.php" ><i class="fa fa-file-text-o"></i> สั่งสินค้า </a></li>
+                <!--/สั่งสินค้า -->
 
                 <!-- สถานที่ทำงาน -->
                 <!-- <li><a href="working.php"><i class="fa fa-users"></i> ตารางปฏิบัติงาน </a></li> -->

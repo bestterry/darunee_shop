@@ -97,8 +97,8 @@ require "menu/date.php";
                     <th class="text-center" width="5%">บอย</th>
                     <th class="text-center" width="5%">เอี่ว</th>
                     <th class="text-center" width="5%">หนุ่ย</th>
-                    <th class="text-center" width="5%">-</th>
-                    <th class="text-center" width="5%">-</th>
+                    <th class="text-center" width="5%">เอ็กซ์</th>
+                    <th class="text-center" width="5%">รอน</th>
                     <th class="text-center" width="8%">รวม</th>
                   </tr>
                   <?php

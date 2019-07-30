@@ -1,6 +1,7 @@
 <?php 
   require "../config_database/config.php";
-  require "../session.php"; 
+  require "../session.php";
+  require "menu/date.php"; 
 ?>
 
 <!DOCTYPE html>
@@ -71,18 +72,6 @@
                           $query_product = mysqli_query($conn,$list_product);
                           $query_product2 = mysqli_query($conn,$list_product);
                           $day = $_POST['day'];
-                          function DateThai($strDate)
-                            {
-                              $strYear = date("Y",strtotime($strDate))+543;
-                              $strMonth= date("n",strtotime($strDate));
-                              $strDay= date("j",strtotime($strDate));
-                              $strHour= date("H",strtotime($strDate));
-                              $strMinute= date("i",strtotime($strDate));
-                              $strSeconds= date("s",strtotime($strDate));
-                              $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-                              $strMonthThai=$strMonthCut[$strMonth];
-                              return "$strDay $strMonthThai $strYear";
-                            }
                         ?>
                       <!-- ------------------------------ยอดขายรวม---------------------------- -->
                       <div class="box-header text-center with-border">
@@ -148,9 +137,9 @@
                           </tr>
                           <?php
                                       $total_all_money = $total_all_money + $total_money;
-                                        }
-                                      }
-                                      ?>
+                                    }
+                                  }
+                          ?>
                           <tr>
                             <th bgcolor="#EAF4FF"></th>
                             <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
@@ -161,7 +150,7 @@
                       <!-- ------------------------------//ยอดขายรวม---------------------------- -->
 
                     <!-- ------------------------------หน้าร้าน---------------------------- -->
-                    <B>
+                          <B>
                             <font size="4">
                               หน้าร้าน
                             </font>
@@ -222,7 +211,7 @@
                           <!-- ------------------------------//หน้าร้าน---------------------------- -->
 
                       <!-- ------------------------------//รถรวม---------------------------- -->
-                      <?php for ($i=4; $i < 18; $i++) { 
+                      <?php for ($i=4; $i <= 18; $i++) { 
                                           $sql_member = "SELECT * FROM member WHERE id_member = $i";
                                           $objq_member = mysqli_query($conn,$sql_member);
                                           $objr_member = mysqli_fetch_array($objq_member);
@@ -247,7 +236,8 @@
                             <th class="text-center" width="13%">จำนวน</th>
                             <th class="text-center" width="12%">บ/หน่วย</th>
                             <th class="text-center" width="13%">เงินขาย(บ)</th>
-                            <th class="text-center" width="40%">รายละเอียด</th>
+                            <th class="text-center" width="32%">รายละเอียด</th>
+                            <th class="text-center" width="32%">เวลา</th>
                           </tr>
                           <?php #endregion
                                   $total_money = 0;
@@ -273,6 +263,9 @@
                             <td class="text-center">
                               <?php echo $product['note']; ?>
                             </td>
+                            <td class="text-center">
+                              <?php echo DateThai2($product['datetime']); ?>
+                            </td>
                           </tr>
                           <?php 
                                         $total_money = $total_money + $product['money'];
@@ -283,6 +276,7 @@
                             <td bgcolor="#EAF4FF"></td>
                             <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
                             <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_money;?></th>
+                            <td bgcolor="#EAF4FF"></td>
                             <td bgcolor="#EAF4FF"></td>
                           </tr>
                         </tbody>

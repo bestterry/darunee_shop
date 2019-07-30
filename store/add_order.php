@@ -57,7 +57,6 @@ folder instead of downloading all of them to reduce the load. -->
       document.form1.submit();
     }
   </script>
-  
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -146,7 +145,7 @@ folder instead of downloading all of them to reduce the load. -->
                         <label  class="col-sm-2 control-label">อำเภอ :</label>
                         <div class="col-sm-10">
                           <select name="amphur_name" data-where="3" class="ajax_address form-control select2" >
-                            <option value="">-- เลือกอำเภอ --</option>
+                            <option value="">-- เลือกอำเภอ/เขต --</option>
                           </select>
                         </div>
                       </div>
@@ -167,8 +166,8 @@ folder instead of downloading all of them to reduce the load. -->
                           <input type="text" name="note" class="form-control" value="-" maxlength="25">
                         </div>
                       </div>
-                    </div>
 
+                    </div>
                     <div class="col-md-7">
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
@@ -199,12 +198,11 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
                     </div>
                     <!-- /.row -->
-                    
                   </div>
               </div>
               <div align="center" class="box-footer">
-                <a type="button" href="order.php" class="btn btn-danger pull-left"> <= เมนูหลัก</a>
-                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก ORDER</button>
+                <a type="button" href="sent_order.php" class="btn btn-danger pull-left"> <= เมนูหลัก</a>
+                <button type="submit" class="btn btn-success"><i class="fa fa-save">  บันทึก ORDER </i></button>
               </div>
             </div>
             </form>

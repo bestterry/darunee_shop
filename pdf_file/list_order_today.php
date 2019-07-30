@@ -14,31 +14,30 @@ require('../config_database/config.php');
       return "$strDay $strMonthThai $strYear";
       }
 
-      $strDate = date('d-m-Y');
-
 class PDF extends FPDF
   {
   // Page header
     function Header()
     {
         // Date
-        $strDate = date('d-m-Y');
+        $strDate = date('Y-m-d');
         // Arial bold 15
         $this->AddFont('angsana','','angsa.php');
         $this->SetFont('angsana','',20);
         
         //Date
         $this->SetTextColor(255,0,0); 
-        $this->Text(80, 9,iconv('UTF-8','cp874',''),1,0,'C');
+        $this->Text(80, 9,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
         
         // Title
         $this->SetTextColor(0,0,0);
-        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'') , 0 , 1,'L' ); 
+        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'ORDER') , 0 , 1,'L' ); 
         $this->Ln(2);
     }
     // Page footer
     function Footer()
     {
+          
             $this->SetY(-20);
             $this->AddFont('angsana','','angsa.php');
             $this->SetFont('angsana','',14);
@@ -55,33 +54,20 @@ $pdf=new PDF('P','mm','A4');
             $pdf->AddFont('angsana','','angsa.php');
             $pdf->SetFont('angsana','',20);
             //วนลูปหาอำเภอที่มีใน addorder
-            $sql_provinces = "SELECT tbl_amphures.amphur_id FROM tbl_amphures
-                             INNER JOIN addorder ON tbl_amphures.amphur_id = addorder.amphur_id
-                             WHERE addorder.status = 'pending'
-                             GROUP BY tbl_amphures.amphur_id";
-            $objq_province = mysqli_query($conn,$sql_provinces);
-            while($value_ap = $objq_province -> fetch_assoc())
-            { 
-                $pdf->AddPage();
-                $id_amphur = $value_ap['amphur_id'];
+            $pdf->AddPage();
+            $strDate = date('Y-m-d');
                 $sql_addorder = "SELECT * FROM addorder 
-                                INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code 
-                                INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
-                                INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
-                                WHERE addorder.status = 'pending' AND addorder.amphur_id = $id_amphur";
+                                  INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code 
+                                  INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
+                                  INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
+                                  WHERE addorder.status = 'pending' AND DATE_FORMAT(addorder.datetime,'%Y-%m-%d') = '$strDate' 
+                                  ORDER BY id_addorder DESC";
                 $objq_addorder = mysqli_query($conn,$sql_addorder);
+               
                 while($value = $objq_addorder->fetch_assoc ())
                 { 
+                  
                   $id_addorder = $value['id_addorder'];
-                  $pdf->SetFont('angsana','',24);
-                  $pdf->SetTextColor(255,0,0); 
-                  $pdf->Text(15, 9,iconv('UTF-8','cp874','อ.'.$value['amphur_name']),1,0,'C');
-                  $pdf->SetTextColor(0,0,0); 
-                  $pdf->SetFont('angsana','',20);
-                  $pdf->Text(140, 9,iconv('UTF-8','cp874','จ.'.$value['province_name']),1,0,'C');
-                  $pdf->SetTextColor(255,0,0); 
-                  $pdf->Text(165, 9,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
-                  $pdf->SetTextColor(0,0,0); 
                   $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'_______________________________________________________________________________________________') , 0 , 1,'L' );
                   $pdf->Ln(4); 
                   
@@ -105,7 +91,7 @@ $pdf=new PDF('P','mm','A4');
 # '.$value['note'].'
 '   .'  '  ) );
                 }  
-            }        
+              
 // --------------------------------------------------------------------------------------                     
     $pdf->Output();
 ?>

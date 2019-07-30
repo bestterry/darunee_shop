@@ -2,7 +2,7 @@
   <div class="col-md-3">
     <div class="box box-solid">
       <div class="box-header with-border">
-        <font size="3"><B>เมนูจัดหน่วยรถ</B></font>
+        <font size="3"><B>เมนูหน่วยรถ</B></font>
       </div>
       <div class="box-body no-padding">
         <ul class="nav nav-pills nav-stacked">
@@ -49,7 +49,7 @@
           <!-- /ขายสินค้า -->
 
           <!-- /สินค้าคงเหลือ -->
-          <li><a href="total_store.php"><i class="fa fa-home"></i> สินค้าคงเหลือบนรถ </a></li>
+          <li><a href="total_store.php"><i class="fa fa-home"></i> สต๊อกหน่วยรถ </a></li>
           <!-- /สินค้าคงเหลือ -->
 
           <!-- ประวัติขายสินค้า -->
@@ -115,7 +115,7 @@
                           <tr>
                             <?php 
                                                 $sr_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_member = $id_member";
-                                                $sql_sr_product = mysqli_query($conn,$sr_product);
+                                                $sql_sr_product = mysqli_query($mysqli,$sr_product);
                                                 while($product = $sql_sr_product ->fetch_assoc()){
                                                     $id_product = $product['id_product'];
                                                     if($id_product==1){ 
@@ -251,8 +251,7 @@
                         <!-- /.form-group -->
                     </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close">
-                        ปิดหน้าต่างนี้</i></button>
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close">ปิดหน้าต่างนี้</i></button>
                     <button type="submit" class="btn btn-success pull-right">ถัดไป ==>></button>
                   </div>
                 </div>
@@ -270,13 +269,58 @@
           <!-- /สต๊อกรถ -->
           
           <!-- รายการรวมสต๊อกค้างส่ง -->
-          <li><a href="sent_order.php" ><i class="fa fa-shopping-cart"></i> ส่งออร์เดอร์ </a></li>
+          <li><a href="sent_order.php" ><i class="fa fa-shopping-cart"></i> ORDER หน่วยรถ </a></li>
           <!-- /รายการรวมสต๊อกค้างส่ง -->
 
-          <!-- รายการรวมสต๊อกค้างส่ง -->
-          <li><a href="../pdf_file/list_order.php" ><i class="fa fa-shopping-cart"></i> ออร์เดอร์ค้างส่ง </a></li>
-          <!-- /รายการรวมสต๊อกค้างส่ง -->
+         <!-- ค้นหา ORDER -->
+         <li><a href="#" data-toggle="modal" data-target="#seachorder"><i class="fa fa-archive"></i> ค้นหา ORDER </a></li>
+          <div class="modal fade" id="seachorder" role="dialog">
+              <div class="modal-dialog modal-lg">
+                  <form action="../pdf_file/list_order3.php" method="post">
+                      <div class="modal-content">
+                          <div class="modal-header text-center">
+                              <font size="5"><B> ค้นหา ORDER </B></font>
+                          </div>
+                          <div class="modal-body col-md-12 table-responsive mailbox-messages">
+                            <div class="table-responsive mailbox-messages">
 
+                              <table class="table table-bordered">
+                              <tbody>
+                                  <tr>
+                                  <th class="text-center" width="30%"><font size="5">จังหวัด</font></th>
+                                  <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                                  <select name="province_name" data-where="2" class="form-control ajax_address select2" style="width: 100%;">
+                                      <option value="">-- เลือกจังหวัด --</option>
+                                  </select>
+                                  </th>
+                                  </tr>
+                              </tbody>
+                              </table> 
+                              <br> 
+
+                            <table class="table table-bordered">
+                              <tbody>
+                                  <tr>
+                                  <th class="text-center" width="30%"><font size="5">อำเภอ</font></th>
+                                  <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                                  <select name="amphur_name" data-where="3" class="form-control ajax_address select2" style="width: 100%;">
+                                      <option value="">-- เลือกอำเภอ --</option>
+                                  </select>
+                                  </th>
+                                  </tr>
+                              </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit"  class="btn btn-success pull-right">ถัดไป ==>></button>
+                            <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <!-- ค้นหา ORDER -->
         </ul>
       </div>
       <!-- /.box-body -->

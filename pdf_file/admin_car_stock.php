@@ -36,11 +36,10 @@ class PDF extends FPDF
         $this->Ln(3);
         $this->SetFont('angsana','',14);
         $this->Cell(10,10,iconv('UTF-8','cp874','ที่'),1,0,'C');
-        $this->Cell(50,10,iconv('UTF-8','cp874','ชื่อสินค้า'),1,0,'C');
-        $this->Cell(14,10,iconv('UTF-8','cp874','หน่วย'),1,0,'C');
+        $this->Cell(50,10,iconv('UTF-8','cp874','สินค้า_หน่วย'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','ยุทธ'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','นลิน'),1,0,'C');
-        $this->Cell(14,10,iconv('UTF-8','cp874','เอปุ้ย'),1,0,'C');
+        $this->Cell(14,10,iconv('UTF-8','cp874','เอ'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','รงค์'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','เอ๋'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','เกียรติ'),1,0,'C');
@@ -50,9 +49,10 @@ class PDF extends FPDF
         $this->Cell(14,10,iconv('UTF-8','cp874','หนึ่ง'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','บอย'),1,0,'C');
         $this->Cell(14,10,iconv('UTF-8','cp874','เอี่ยว'),1,0,'C');
-        $this->Cell(14,10,iconv('UTF-8','cp874','หนุ่ย'),1,0,'C');
-        $this->Cell(14,10,iconv('UTF-8','cp874','-'),1,0,'C');
-       $this->Cell(18,10,iconv('UTF-8','cp874','รวมทั้งหมด'),1,0,'C');
+        $this->Cell(14,10,iconv('UTF-8','cp874','เค'),1,0,'C');
+        $this->Cell(14,10,iconv('UTF-8','cp874','เอ็กซ์'),1,0,'C');
+        $this->Cell(14,10,iconv('UTF-8','cp874','รอน'),1,0,'C');
+       $this->Cell(18,10,iconv('UTF-8','cp874','รวม'),1,0,'C');
             $this->Ln(10);
         
     }
@@ -86,11 +86,10 @@ $pdf=new PDF('L','mm','A4');
           $a=1;
             while($product = $query_product ->fetch_assoc()){
               $pdf->Cell(10,8,iconv('UTF-8','cp874',$a),1,0,'C');
-              $pdf->Cell(50,8,iconv('UTF-8','cp874',$product['name_product']),1,0,'C');
-              $pdf->Cell(14,8,iconv('UTF-8','cp874',$product['unit']),1,0,'C');
+              $pdf->Cell(50,8,iconv('UTF-8','cp874',$product['name_product'].'_'.$product['unit']),1,0,'C');
 
               // -----------------------พื้นที่----------------------------------
-              for ($i=4; $i < 18; $i++) { 
+              for ($i=4; $i <= 18; $i++) { 
                        
                 $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $i";
                 $objq_num = mysqli_query($conn,$SQL_num);

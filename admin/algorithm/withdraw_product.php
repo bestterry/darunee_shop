@@ -23,24 +23,29 @@
       //-----------------------------//update num_product------------------------------------
 
       //-----------------------------manage numpd_car----------------------------------------
-      $sql_checkcar = "SELECT * FROM numpd_car WHERE id_product = $id_product AND id_member = $id_member";
-      $objq_checkcar = mysqli_query($conn,$sql_checkcar);
-      $objr_checkcar = mysqli_fetch_array($objq_checkcar);
-      $id_numPD_car = $objr_checkcar['id_numPD_car'];
-      if(!isset($id_numPD_car)){
-         $insert_numpd = "INSERT INTO numpd_car (num, id_product, id_member)
-                          VALUE ($num_after, $id_product, $id_member)";
-        mysqli_query($conn,$insert_numpd);
-      }else{
-        $sql_seach_numcar = "SELECT * FROM numpd_car WHERE id_numPD_car = $id_numPD_car";
-        $objq_seach_numcar = mysqli_query($conn,$sql_seach_numcar);
-        $objr_seach_numcar = mysqli_fetch_array($objq_seach_numcar);
-        $num_productcar = $objr_seach_numcar['num'];
-        $total_num_product = $num_productcar + $num_after; 
+    if($id_member == 19){
+      continue;
+    }else{
+        $sql_checkcar = "SELECT * FROM numpd_car WHERE id_product = $id_product AND id_member = $id_member";
+        $objq_checkcar = mysqli_query($conn,$sql_checkcar);
+        $objr_checkcar = mysqli_fetch_array($objq_checkcar);
+        $id_numPD_car = $objr_checkcar['id_numPD_car'];
+        if(!isset($id_numPD_car)){
+          $insert_numpd = "INSERT INTO numpd_car (num, id_product, id_member)
+                            VALUE ($num_after, $id_product, $id_member)";
+          mysqli_query($conn,$insert_numpd);
         
-        $update_numpd = "UPDATE numpd_car SET num = $total_num_product WHERE id_numPD_car = $id_numPD_car";
-        mysqli_query($conn,$update_numpd);
-      }
+        }else{
+          $sql_seach_numcar = "SELECT * FROM numpd_car WHERE id_numPD_car = $id_numPD_car";
+          $objq_seach_numcar = mysqli_query($conn,$sql_seach_numcar);
+          $objr_seach_numcar = mysqli_fetch_array($objq_seach_numcar);
+          $num_productcar = $objr_seach_numcar['num'];
+          $total_num_product = $num_productcar + $num_after; 
+          
+          $update_numpd = "UPDATE numpd_car SET num = $total_num_product WHERE id_numPD_car = $id_numPD_car";
+          mysqli_query($conn,$update_numpd);
+        }
+    }
       //-----------------------------//manage numpd_car----------------------------------------
  }
   header('location:../admin.php');

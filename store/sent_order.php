@@ -85,29 +85,33 @@ folder instead of downloading all of them to reduce the load. -->
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" width="2000px">
       <!-- Main content -->
       <section class="content">
       <div class="col-md-12">
-        <form action="algorithm/sent_order.php" method="post">
           <div class="box box-primary">
-          <div class="box-header with-border">
-            <a type="button" href="store.php" class="btn btn-danger "><<== กลับสู่เมนูหลัก</a>
-            <a type="button" href="../pdf_file/list_order2.php" class="btn btn-success "><i class="fa fa-print">  พิมพ์</i></a>
-            <br>
-            <div class="col-md-12 text-center"><font size="4"><B>รายการ ORDER ค้างส่ง</B></font></div>
-          </div>
             <!-- /.box-header -->
+          <div class="box-header with-border">
+            <a type="button" href="store.php" class="btn btn-danger "><= เมนูหลัก</a>
+            <a type="button" href="../pdf_file/list_order.php" class="btn btn-success ">พิมพ์จังหวัด</a>
+            <a type="button" href="../pdf_file/list_order2.php" class="btn btn-success ">พิมพ์อำเภอ</a>
+            <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-success ">ORDER วันนี้</a>
+            <a type="button" href="add_order.php" class="btn btn-warning ">เพิ่ม ORDER</a>
+
+            <br>
+            <div class="col-md-12 text-center"><font size="4"><B>ORDER ค้างส่ง</B></font></div>
+          </div>
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
               <table id="customers">
                 <tbody>
                   <tr>
-                    <th class="text-center" width="8%">ส่งแล้ว</th>
-                    <th class="text-center" width="7%">เลขที่</th>
-                    <th class="text-center" width="68%">ORDER ค้างส่ง</th>
-                    <th class="text-center" width="7%">วันที่สั่ง</th>
-                    <th class="text-center" width="5%">ใบสั่ง</th>
+                    <th class="text-center" width="5%">ส่ง</th>
+                    <th class="text-center" width="5%">สั่ง</th>
+                    <th class="text-center" width="5%">แก้</th>
+                    <th class="text-center" width="5%">ที่</th>
+                    <th class="text-center" width="75%">ที่อยู่ลูกค้า</th>
+                    <th class="text-center" width="5%">วัน</th>
                   </tr>
                  <?php 
                   $sql_addorder = "SELECT * FROM addorder 
@@ -119,12 +123,13 @@ folder instead of downloading all of them to reduce the load. -->
                   while($value = $objq_addorder->fetch_assoc()){
                  ?>
                   <tr>
-                    <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=1" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่งแล้ว</a></td>
+                    <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>
+                    <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
+                    <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
                     <td class="text-center"><?php echo $value['id_addorder']; ?></td>
                     <td ><?php echo $value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
                     <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
-                    <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
-                   </tr>
+                  </tr>
                  <?php 
                   }
                  ?>
@@ -132,9 +137,7 @@ folder instead of downloading all of them to reduce the load. -->
               </table>
               </div>
             </div>
-            <div class="box-footer" align="center">
-              
-            </div>
+            <div class="box-footer" align="center"> </div>
           </div>
           </form>
         </div>

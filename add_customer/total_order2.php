@@ -124,13 +124,12 @@ folder instead of downloading all of them to reduce the load. -->
                     <td class="text-center"><?php echo $value_pd['name_product'].'_'.$value_pd['unit']; ?></td>
                     <?php 
                       $total_num = 0;
-                      for ($i=1; $i < 6; $i++) { 
-                        
-                      
-                        $sql_num = "SELECT SUM(num) FROM addorder 
-                                    INNER JOIN listorder ON listorder.id_addorder = addorder.id_addorder 
-                                    INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
-                                    WHERE listorder.id_product = $id_product AND addorder.status = 'pending' AND tbl_amphures.id_area = $i";
+                      $sql_pv = "SELECT * FROM tbl_provinces";
+                      $objq_pv = mysqli_query($mysqli,$sql_pv);
+                      while($value_pv = $objq_pv -> fetch_assoc()){
+                        $id_province = $value_pv['province_id'];
+                        $sql_num = "SELECT SUM(num) FROM listorder INNER JOIN addorder ON listorder.id_addorder = addorder.id_addorder 
+                                    WHERE listorder.id_product = $id_product AND addorder.province_id = $id_province AND addorder.status = 'pending'";
                         $objq_num = mysqli_query($mysqli,$sql_num);
                         $objr_num = mysqli_fetch_array($objq_num);
                         $num = $objr_num['SUM(num)'];
@@ -146,7 +145,7 @@ folder instead of downloading all of them to reduce the load. -->
                     </td>
                       <?php 
                       $total_num = $total_num + $num;
-                      } 
+                      }
                       ?>
                     <td class="text-center" ><?php echo $total_num; ?></td>
                   </tr>

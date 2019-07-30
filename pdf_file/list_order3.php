@@ -55,15 +55,9 @@ $pdf=new PDF('P','mm','A4');
             $pdf->AddFont('angsana','','angsa.php');
             $pdf->SetFont('angsana','',20);
             //วนลูปหาอำเภอที่มีใน addorder
-            $sql_provinces = "SELECT tbl_amphures.amphur_id FROM tbl_amphures
-                             INNER JOIN addorder ON tbl_amphures.amphur_id = addorder.amphur_id
-                             WHERE addorder.status = 'pending'
-                             GROUP BY tbl_amphures.amphur_id";
-            $objq_province = mysqli_query($conn,$sql_provinces);
-            while($value_ap = $objq_province -> fetch_assoc())
-            { 
+             
                 $pdf->AddPage();
-                $id_amphur = $value_ap['amphur_id'];
+                $id_amphur = $_POST['amphur_name'];
                 $sql_addorder = "SELECT * FROM addorder 
                                 INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code 
                                 INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
@@ -105,7 +99,7 @@ $pdf=new PDF('P','mm','A4');
 # '.$value['note'].'
 '   .'  '  ) );
                 }  
-            }        
+                   
 // --------------------------------------------------------------------------------------                     
     $pdf->Output();
 ?>
