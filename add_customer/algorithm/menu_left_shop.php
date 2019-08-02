@@ -66,7 +66,7 @@
                 <!-- ค้นหา ORDER -->
 
                 <!-- รายการรวมสต๊อกค้างส่ง -->
-                <li><a href="../pdf_file/total_order.php" ><i class="fa fa-shopping-cart"></i> จำนวนค้างส่ง </a></li>
+                <li><a href="total_order.php" ><i class="fa fa-shopping-cart"></i> จำนวนค้างส่ง </a></li>
                 <!-- /รายการรวมสต๊อกค้างส่ง -->
 
                 

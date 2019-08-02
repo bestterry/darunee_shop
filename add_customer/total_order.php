@@ -83,7 +83,7 @@ folder instead of downloading all of them to reduce the load. -->
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="height: 3300px;">
+    <div class="content-wrapper" style="height: 4800px;">
       <!-- Main content -->
       <section class="content">
       <div class="col-md-12">
@@ -92,7 +92,7 @@ folder instead of downloading all of them to reduce the load. -->
             <!-- /.box-header -->
             <div class="box-header with-border">
               <a type="button" href="order.php" class="btn btn-danger"><= เมนูหลัก</a>
-              <a type="button" href="../pdf_file/total_order.php" class="btn btn-success"><i class="fa fa-print">  พิมพ์</i></a>
+              <a type="button" href="../pdf_file/total_order.php" class="btn btn-success"> PDF </a>
             </div>
             <div class="box-body no-padding">
               <div class="mailbox-read-message">

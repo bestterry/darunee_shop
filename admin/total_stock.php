@@ -303,7 +303,7 @@
           </div>
           <div class="box-footer">
             <a href="admin.php" class="btn btn-success pull-left"> <<== กลับสู่เมนูหลัก </a>
-            <a href="../pdf_file/admin_total_stock.php" class="btn btn-success pull-right"><i class="fa fa-print"> พิมพ์ </i></a>
+            <a href="../pdf_file/admin_total_stock.php" class="btn btn-success pull-right"> PDF </a>
           </div>
         </div>
     </div>

@@ -102,8 +102,9 @@ folder instead of downloading all of them to reduce the load. -->
                   <tr>
                     <th class="text-center" width="5%">ข้อมูล</th>
                     <th class="text-center" width="5%">แก้</th>
+                    <th class="text-center" width="5%">ลำดับ</th>
                     <th class="text-center" width="10%">ใบสั่งที่</th>
-                    <th class="text-center" width="30%">สินค้า_หน่วย</th>
+                    <th class="text-center" width="25%">สินค้า</th>
                     <th class="text-center" width="10%">จำนวน</th>
                     <th class="text-center" width="10%">ราคา</th>
                     <th class="text-center" width="10%">เงินซื้อ</th>
@@ -125,8 +126,9 @@ folder instead of downloading all of them to reduce the load. -->
                   <tr>
                     <td class="text-center"><a href="data_order.php?id_order_list=<?php echo $value['id_order_list']; ?>"><i class="fa fa-search-plus"></i></a></td>
                     <td class="text-center" ><a href="edit_order.php?id_order_list=<?php echo $value['id_order_list']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
+                    <td class="text-center"><?php echo $value['id_order_list'];?></td>
                     <td class="text-center"><?php echo $value['list_order'];?></td>
-                    <td class="text-center" ><?php echo $value['name_product'];?></td>
+                    <td class="text-center" ><?php echo $value['full_name'];?></td>
                     <td class="text-center" ><?php echo $num_product; ?></td>
                     <td class="text-center" ><?php echo $price; ?></td>
                     <td class="text-center" ><?php echo $total_money; ?></td>

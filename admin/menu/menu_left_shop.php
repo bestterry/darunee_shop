@@ -8,11 +8,11 @@
             <ul class="nav nav-pills nav-stacked" ata-widget="tree">
 
                 <!-- สต๊อกรวม -->
-                <li><a href="../pdf_file/admin_total_stock.php" ><i class="fa fa-home"></i> สต๊อกร้าน </a></li>
+                <li><a href="total_stock.php" ><i class="fa fa-home"></i> สต๊อกร้าน </a></li>
                 <!-- /สต๊อกรวม -->
 
                 <!-- สต๊อกรถ -->
-                <li><a href="../pdf_file/admin_car_stock.php" ><i class="fa fa-truck"></i> สต๊อกรถ </a></li>
+                <li><a href="car_stock.php" ><i class="fa fa-truck"></i> สต๊อกรถ </a></li>
                 <!-- /สต๊อกรถ -->
 
                 <!-- ยอดขาย -->
@@ -224,6 +224,10 @@
                 <!--สั่งสินค้า -->
                 <li><a href="../order/order.php" ><i class="fa fa-file-text-o"></i> สั่งสินค้า </a></li>
                 <!--/สั่งสินค้า -->
+
+                <!-- เงินขายรายวัน -->
+                <li><a href="receive_money.php" ><i class="fa fa-money"></i> เงินขายรายวัน </a></li>
+                <!-- /เงินขายรายวัน -->
 
                 <!-- สถานที่ทำงาน -->
                 <!-- <li><a href="working.php"><i class="fa fa-users"></i> ตารางปฏิบัติงาน </a></li> -->

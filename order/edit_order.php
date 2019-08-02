@@ -207,7 +207,7 @@ folder instead of downloading all of them to reduce the load. -->
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="height: 1000px;">
       <!-- Main content -->
       <section class="content">
 

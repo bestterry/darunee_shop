@@ -45,7 +45,6 @@ class PDF extends FPDF
         $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'________________________________________________________________________________________________') , 0 , 1,'L' ); 
         $this->Ln(8);
       }
-    
   }
 
 // Instanciation of inherited class
@@ -65,7 +64,7 @@ $pdf=new PDF('P','mm','A4');
               $pdf->SetFont('angsana','',18);
               $pdf->Text(195, 10,iconv('UTF-8','cp874',$objr_order['id_order_list']),1,0,'C');
               $pdf->Text(130, 58,iconv('UTF-8','cp874',DateThai($objr_order['date_order'])),1,0,'C');
-              $pdf->Text(50, 67,iconv('UTF-8','cp874',$objr_order['list_order']),1,0,'C');
+              $pdf->Text(130, 48,iconv('UTF-8','cp874',$objr_order['list_order']),1,0,'C');
               $pdf->Text(70, 98,iconv('UTF-8','cp874',$objr_order['num_product'].'    '.$objr_order['unit']),1,0,'C');
               $pdf->Text(55, 119,iconv('UTF-8','cp874',$objr_order['name_store'].'    '.'อ.'.$objr_amphur['amphur_name'].'     จ.'.$objr_amphur['province_name']),1,0,'C');
               $pdf->Text(85, 127,iconv('UTF-8','cp874',$objr_order['name_to']),1,0,'C');
@@ -76,11 +75,11 @@ $pdf=new PDF('P','mm','A4');
               $pdf->Text(140, 155,iconv('UTF-8','cp874',$objr_order['licent_plate']),1,0,'C');
               $pdf->Text(79, 163,iconv('UTF-8','cp874',DateThai($objr_order['date_getorder'])),1,0,'C');
               $pdf->Text(60, 175,iconv('UTF-8','cp874',$objr_order['name_author']),1,0,'C');
-              $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'') , 0 , 1,'C' );
+              $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'                                                                         ใบสั่งที่ .............................................................') , 0 , 1,'C' );
               $pdf->Ln(5);
               $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'                                                                         วันที่ .................................................................') , 0 , 1,'C' );
               $pdf->Ln(5);
-              $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'ใบสั่งที่ .........................................................') , 0 , 1,'L' );
+              $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'') , 0 , 1,'L' );
               $pdf->Ln(5);
               $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'สินค้า : ') , 0 , 1,'L' ); 
               $pdf->Ln(5);

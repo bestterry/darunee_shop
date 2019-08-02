@@ -321,6 +321,10 @@
               </div>
           </div>
           <!-- ค้นหา ORDER -->
+
+          <!-- เงินขายรายวัน -->
+          <li><a href="receive_money.php" ><i class="fa fa-money"></i> เงินขายรายวัน </a></li>
+          <!-- /เงินขายรายวัน -->
         </ul>
       </div>
       <!-- /.box-body -->
