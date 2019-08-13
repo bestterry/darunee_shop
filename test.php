@@ -59,120 +59,60 @@
       </section>
       <!-- Main content -->
       <section class="content">
-       
-      <div class="col-md-12">
+        <!-- add data -->
+
+        <div class="col-md-12">
           <div class="box box-primary">
-            <div class="box-header text-center with-border">
-              <font size="5">
-                <B align="center"> ใบสั่งสินค้า <font color="red"> </font></B>
-              </font>
-            </div>
             <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-                <form action="finish.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
-                  <div class="row">
-                    <div class="col-md-5">
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">ลูกค้า :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="name_customer" class="form-control" placeholder="ชื่อลูกค้า">
-                        </div>
-                      </div>
-                      <!-- /.form-group -->
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">บ้าน :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="village" class="form-control" placeholder="หมู่บ้าน">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                          <label class="col-sm-2 control-label">โทร :</label>
-                          <div class="col-sm-10">
-                            <input class="form-control" name="tel" placeholder="เบอร์โทรศัพท์">
-                          </div>
-                        </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">จังหวัด :</label>
-                        <div class="col-sm-10">
-                          <select name="province_name" data-where="2" class="form-control ajax_address select2" >
-                            <option value="">-- เลือกจังหวัด --</option>
-                          </select>
-                        </div>
-                      </div>
-                      <!-- /.form-group -->
-                      <div class="form-group">
-                        <label  class="col-sm-2 control-label">อำเภอ :</label>
-                        <div class="col-sm-10">
-                          <select name="amphur_name" data-where="3" class="ajax_address form-control select2" >
-                            <option value="">-- เลือกอำเภอ --</option>
-                          </select>
-                        </div>
-                      </div>
-                      <!-- /.form-group -->
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">ตำบล :</label>
-                        <div class="col-sm-10">
-                          <select name="district_name" data-where="4" class="ajax_address form-control select2" style="width: 100%;">
-                            <option value="">-- เลือกตำบล --</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">หมายเหตุ :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="note" class="form-control" value="-" maxlength="200">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-7">
-                      <div class="table-responsive">
-                        <table class="table table-bordered" id="dynamic_field">
-                          <tr>
-                            <th bgcolor="#4dd2ff" class="text-center" width="55%">สินค้า_หน่วย</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="15%">จำนวน</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="15%">จัดการ</th>
-                          </tr>
-                          <tr>
-                            <td class="text-center">
-                              <select name="id_product[]" class="form-control text-center select2" style="width: 100%;">
-                                <option class="text-center" value="">-- เลือกสินค้า --</option>
-                              <?php 
-                                  $product = "SELECT * FROM product";
-                                  $objq_product = mysqli_query($mysqli,$product);
-                                  while($value = $objq_product->fetch_array()){
-                                ?>
-                                  <option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option>
-                                <?php 
-                                  }
-                                ?>
-                              </select>
-                            </td>
-                            <td><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td>
-                            <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success">เพิ่มสินค้า</button></td>
-                          </tr>
-                        </table>
-                      </div>
-                    </div>
-                    <!-- /.row -->
-                    
-                  </div>
-              </div>
-              <div align="center" class="box-footer">
-                <a type="button" href="order.php" class="btn btn-danger pull-left"> <= เมนูหลัก</a>
-                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก ORDER</button>
-              </div>
+            <div class="box-header with-border">
+              <a type="button" href="order.php" class="btn btn-danger "><= เมนูหลัก</a>
+              <a type="button" href="../pdf_file/list_order.php" class="btn btn-success ">พิมพ์จังหวัด</a>
+              <a type="button" href="../pdf_file/list_order2.php" class="btn btn-success ">พิมพ์อำเภอ</a>
+              <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-success ">ORDER วันนี้</a>
             </div>
-            </form>
+              <div class="box-body no-padding">
+                <div class="mailbox-read-message">
+                <table id="customers">
+                  <tbody>
+                    <tr>
+                      <th class="text-center" width="5%">ส่ง</th>
+                      <th class="text-center" width="5%">สั่ง</th>
+                      <th class="text-center" width="5%">แก้</th>
+                      <th class="text-center" width="5%">ลบ</th>
+                      <th class="text-center" width="5%">ที่</th>
+                      <th class="text-center" width="70%">ORDER ค้างส่ง</th>
+                      <th class="text-center" width="5%">วัน</th>
+                    </tr>
+                  <?php 
+                    $sql_addorder = "SELECT * FROM addorder 
+                                    INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
+                                    INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
+                                    INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
+                                    WHERE addorder.status = 'pending' ORDER BY addorder.id_addorder DESC";
+                    $objq_addorder = mysqli_query($mysqli,$sql_addorder);
+                    while($value = $objq_addorder->fetch_assoc()){
+                  ?>
+                    <tr>
+                      <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>
+                      <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
+                      <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
+                      <td class="text-center" ><a href="delete_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";>ลบ</a></td>
+                      <td class="text-center"><?php echo $value['id_addorder']; ?></td>
+                      <td ><?php echo $value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
+                      <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
+                    </tr>
+                  <?php 
+                    }
+                  ?>
+                  </tbody>
+                </table>
+                </div>
+              </div>
+              <div class="box-footer" align="center"> </div>
+            </div>
           </div>
-        </div>
+
+        <!-- //add data -->
       </section>
     <!-- /.content -->
     </div>

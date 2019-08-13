@@ -64,10 +64,9 @@
         ?>
         <div class="col-md-6">
         </div>
-    </div>
-    </section>
+      </section>
     <!-- /.content -->
-  </div>
+    </div>
   <!-- /.content-wrapper -->
   <?php require("../menu/footer.html"); ?>
   </div>

@@ -119,7 +119,7 @@
                              ?>
                             <div class="box-header with-border">
                               <font size="4">
-                                <B> ยอดขายรวม 
+                                <B> เบิกสินค้าจาก 
                                   <font size="4" color="red">
                                     <?php echo DateThai($strDate);?>
                                   </font>
@@ -324,8 +324,7 @@
                                   </td>
                                   <td class="text-center">
                                     <a onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')" href="algorithm/delete_sale.php?id_sale=<?php echo $id_sale;?>"=<?php echo $id_sale;?>">
-                                      <span class="glyphicon glyphicon-remove-circle">
-                                      </span>
+                                      <span class="glyphicon glyphicon-remove-circle"> </span>
                                     </a>
                                   </td>
                                 </tr>

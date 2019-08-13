@@ -89,24 +89,21 @@
         <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center"> รับเงินรายวัน 
-                <font size="5" color="red">
-                  
-                 </font>
+                <B align="center"> รับเงินรายวัน </B>
               </font>
-              </B>
             </div>
           <div class="mailbox-read-message">
           <table id="customers">
             <tbody>
               <tr>
-                <th class="text-center" width="16%">ชื่อ</th>
-                <th class="text-center" width="16%">ปฏิบัติงาน</th>
-                <th class="text-center" width="16%">เงินขาย(บ)</th>
-                <th class="text-center" width="16%">ประเภทรับเงิน</th>
-                <th class="text-center" width="16%">วันที่รับเงิน</th>
+                <th class="text-center" width="15%">ชื่อ</th>
+                <th class="text-center" width="15%">ปฏิบัติงาน</th>
+                <th class="text-center" width="15%">เงินขาย(บ)</th>
+                <th class="text-center" width="15%">ประเภทรับเงิน</th>
+                <th class="text-center" width="15%">วันที่รับเงิน</th>
                 <th class="text-center" width="10%">สนง.</th>
                 <th class="text-center" width="10%">หัวหน้า</th>
+                <th class="text-center" width="5%">จัดการ</th>
               </tr>
               <?php
                 while($value = $objq_receive -> fetch_assoc()){
@@ -147,8 +144,30 @@
                       } 
                   ?>
                 </td>
+                <td class="text-center" > <a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="fa fa-cog"></a></td>
               </tr>
                 <?php }?>
+            </tbody>
+          </table>
+
+          <br>
+          <br>
+
+          <table id="customers">
+            <tbody>
+              <tr>
+                <th class="text-center" width="20%">สด</th>
+                <th class="text-center" width="20%">เช็ค</th>
+                <th class="text-center" width="20%">สกต.</th>
+                <th class="text-center" width="20%">เชื่อ</th>
+                <th class="text-center" width="20%">ฝากขาย</th>
+              </tr>
+              <tr>
+                <?php 
+                  $rc_category = "SELECT * FROM rc_category"
+                ?>
+                <td class="text-center"> </td>
+              </tr>
             </tbody>
           </table>
           </div>

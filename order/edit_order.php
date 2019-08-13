@@ -24,8 +24,8 @@
     $objr_order = mysqli_fetch_array($objq_order);
 
     $amphur_id = $objr_order['amphur_id'];
-    $sql_amphur = "SELECT * FROM tbl_amphures INNER JOIN tbl_provinces ON tbl_amphures.province_id = tbl_provinces.province_id
-                  WHERE tbl_amphures.amphur_id = $amphur_id";
+    $sql_amphur = "SELECT * FROM tbl2_amphures INNER JOIN tbl2_provinces ON tbl2_amphures.province_id = tbl2_provinces.province_id
+                  WHERE tbl2_amphures.amphur_id = $amphur_id";
     $objq_amphur = mysqli_query($conn,$sql_amphur);
     $objr_amphur = mysqli_fetch_array($objq_amphur);
 ?>
@@ -84,95 +84,7 @@ folder instead of downloading all of them to reduce the load. -->
     }
   </style>
 
-  <script language="javascript">
-    function fncSubmit()
-    {
-      if(document.form1.list_order.value == "")
-      {
-        alert('กรุณาระบุใบสั่งที่');
-        document.form1.list_order.focus();
-        return false;
-      }	
-      if(document.form1.date_receive.value == "")
-      {
-        alert('กรุณาระบุรถมาถึง');
-        document.form1.date_receive.focus();		
-        return false;
-      }	
-      if(document.form1.num_product.value == "")
-      {
-        alert('กรุณาระบุจำนวนสินค้า');
-        document.form1.num_product.focus();		
-        return false;
-      }	
-      if(document.form1.price.value == "")
-      {
-        alert('กรุณาระบุราคา/น.');
-        document.form1.price.focus();		
-        return false;
-      }	
-      if(document.form1.portage.value == "")
-      {
-        alert('กรุณาระบุค่าขนส่ง');
-        document.form1.portage.focus();		
-        return false;
-      }	
-      if(document.form1.name_sent.value == "")
-      {
-        alert('กรุณาระบุชื่อ พขร.');
-        document.form1.name_sent.focus();		
-        return false;
-      }	
-      if(document.form1.tel_sent.value == "")
-      {
-        alert('กรุณาระบุเบอร์ พขร.');
-        document.form1.tel_sent.focus();		
-        return false;
-      }
-      if(document.form1.catagory_car.value == "")
-      {
-        alert('กรุณาเลือกประเภทรถ');
-        document.form1.catagory_car.focus();		
-        return false;
-      }
-      if(document.form1.licent_plate.value == "")
-      {
-        alert('กรุณาระบุทะเบียนรถ');
-        document.form1.licent_plate.focus();		
-        return false;
-      }
-      if(document.form1.name_author.value == "")
-      {
-        alert('กรุณาระบุผู้เขียนใบสั่ง');
-        document.form1.name_author.focus();		
-        return false;
-      }
-      if(document.form1.status.value == "")
-      {
-        alert('กรุณาเลือกสถานะ');
-        document.form1.status.focus();		
-        return false;
-      }
-      if(document.form1.name_to.value == "")
-      {
-        alert('กรุณาระบุชื่อผู้รับ');
-        document.form1.name_to.focus();		
-        return false;
-      }
-      if(document.form1.tel_to.value == "")
-      {
-        alert('กรุณาระบุเบอร์ผู้รับ');
-        document.form1.tel_to.focus();		
-        return false;
-      }
-
-      
-      document.form1.submit();
-    }
-  </script>
-  
 </head>
-
 <body class=" hold-transition skin-blue layout-top-nav">
   <div>
     <header class="main-header">
@@ -189,7 +101,6 @@ folder instead of downloading all of them to reduce the load. -->
                 <!-- User image -->
                 <li class="user-header">
                   <img src="dist/img/user.png" class="img-circle" alt="User Image">
-
                   <p>
                     <small>สาขา : </small>
                   </p>
@@ -207,125 +118,124 @@ folder instead of downloading all of them to reduce the load. -->
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="height: 1000px;">
+    <div class="content-wrapper" style="height: 820px;">
       <!-- Main content -->
       <section class="content">
-
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
+              <div class="text-center">
+                <font size="5">
+                  <B align="center"> แก้ไข - เพิ่มเติมข้อมูลใบสั่ง <font color="red"> </font></B>
+                </font>
+              </div> 
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="edit_order_finish.php" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
+              <form action="edit_order_finish.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                   <div class="row">
-                    <!-- ข้อมูลลูกค้า -->
-                    <div class="col-md-5">
-                      <div class="table-responsive">
+                     <!-- ข้อมูลสินค้า -->
+                     <div class="col-md-12">
+                      <div>
+                        
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">ใบสั่งที่ :</th>
-                            <th width="85%">
+                            <th width="25%" class="text-right"><font size="4" valign="middle">ID &nbsp;&nbsp;:</font></th>
+                            <td width="25%" ><input type="text" name="id_order_list" class="form-control" value="<?php echo $id_order_list; ?>" disabled></td>
+                            <th width="25%"></th>
+                            <td width="25%"></td>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right"><font size="4" valign="middle">ใบสั่งที่ &nbsp;&nbsp;:</font></th>
+                            <td width="25%" > 
                               <input type="text" name="list_order" class="form-control" value="<?php echo $objr_order['list_order']; ?>">
                               <input type="hidden" name="id_order_list" class="form-control" value="<?php echo $id_order_list; ?>">
-                            </th>
+                            </td>
+                            <th width="25%" class="text-right" ><font size="4">ประเภทรถ &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="catagory_car" class="form-control" value="<?php echo $objr_order['catagory_car']; ?>"></td>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">วันที่สั่ง :</th>
-                            <th width="85%"><input type="text"  class="form-control" value="<?php echo DateThai($objr_order['date_order']); ?>" disabled></th>
+                            <th width="25%" class="text-right" ><font size="4">วันที่สั่ง &nbsp;&nbsp;:</font></th>
+                            <td width="25%" ><input type="date" name="date_order" class="form-control" value="<?php echo $objr_order['date_order']; ?>"/></td>
+                            <th width="25%" class="text-right"><font size="4">ทะเบียนรถ &nbsp;&nbsp;:</font></th>
+                            <td width="25%" ><input type="text" name="licent_plate" class="form-control" value="<?php echo $objr_order['licent_plate']; ?>"></td>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">รถเข้า รง. :</th>
-                            <th width="85%"><input type="text"  class="form-control" value="<?php echo DateThai($objr_order['date_getorder']); ?>" disabled></th>
+                            <th width="25%" class="text-right" ><font size="4"> สินค้า &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" class="form-control" value="<?php echo $objr_order['full_name']; ?>" disabled></th>
+                            <th width="25%" class="text-right"><font size="4">พนักงานขับรถ &nbsp;&nbsp;:</font></th>
+                            <td width="25%"> <input type="text" name="name_sent" class="form-control" value="<?php echo $objr_order['name_sent']; ?>"></td>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">รถมาถึง :</th>
-                            <th width="85%"><input type="date" name="date_receive" class="form-control" value="<?php echo $objr_order['date_receive']; ?>"></th>
+                            <th width="25%" class="text-right" ><font size="4">จำนวนสินค้า &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="num_product" class="form-control" value="<?php echo $objr_order['num_product']; ?>"></td>
+                            <th width="25%" class="text-right" ><font size="4">เบอร์โทร พขร. &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="tel_sent" class="form-control" value="<?php echo $objr_order['tel_sent']; ?>"></td>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">สินค้า :</th>
-                            <th width="85%"><input type="text" class="form-control" value="<?php echo $objr_order['name_product']; ?>" disabled></th>
+                            <th width="25%" class="text-right" ><font size="4">ใบกำกับภาษี &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="vat" class="form-control" value="<?php echo $objr_order['vat']; ?>"></td></td>
+                            <th width="25%" class="text-right"><font size="4">วันที่รถเข้าโรงงาน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="date" name="date_getorder"  class="form-control" value="<?php echo $objr_order['date_getorder']; ?>"></td>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">จำนวน_หน่วย :</th>
-                            <th width="85%"><input type="text" name="num_product" class="form-control" value="<?php echo $objr_order['num_product']; ?>"></th>
+                            <th width="25%" class="text-right" ><font size="4">ผู้ออกใบสั่ง &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="name_author" class="form-control" value="<?php echo $objr_order['name_author']; ?>"></td>
+                            <th width="25%" class="text-right"><font size="4">วันที่รถมาถึง &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="date" name="date_receive" class="form-control" value="<?php echo $objr_order['date_receive']; ?>"></td>
                           </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ราคา/น. :</th>
-                            <th width="85%"><input type="text" name="price" class="form-control" value="<?php echo $objr_order['price']; ?>"></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">เงินซื้อ(บ.) :</th>
-                            <th width="85%"><input type="text" name="money" class="form-control" value="<?php echo $objr_order['money']; ?>" ></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ภาษี :</th>
-                            <th width="85%"><input type="text" name="vat" class="form-control" value="<?php echo $objr_order['vat']; ?>" ></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ค่าขนส่ง :</th>
-                            <th width="85%"><input type="text" name="portage" class="form-control" value="<?php echo $objr_order['portage']; ?>"></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ค่าลงของ :</th>
-                            <th width="85%"><input type="text" name="pay_portage" class="form-control" value="<?php echo $objr_order['pay_portage']; ?>"></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ชื่อ พขร. :</th>
-                            <th width="85%"><input type="text" name="name_sent" class="form-control" value="<?php echo $objr_order['name_sent']; ?>"></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">เบอร์ พขร. :</th>
-                            <th width="85%"><input type="text" name="tel_sent" class="form-control" value="<?php echo $objr_order['tel_sent']; ?>"></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ทะเบียนรถ :</th>
-                            <th width="85%"><input type="text" name="licent_plate" class="form-control" value="<?php echo $objr_order['licent_plate']; ?>"></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ผู้เขียนใบสั่ง :</th>
-                            <th width="85%"><input type="text" name="name_author" class="form-control" value="<?php echo $objr_order['name_author']; ?>"></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#ff8080" width="25%">สถานะ :</th>
-                            <th width="85%">
-                              <select name="status" class="form-control text-center select2" style="width: 100%;">
-                                <option class="text-center" value="">-- เลือกสถานะ --</option>
-                                <option value="success"> ส่งแล้ว </option>
-                                <option value="done"> ยังไม่ได้ส่ง </option>
-                              </select>
-                            </th>
-                          </tr>
-                        </table>
-                      </div>
-                    </div>
+                          </table>
 
-                    <!-- ข้อมูลสินค้้า -->
-                    <div class="col-md-7">
-                      <div class="table-responsive">
-                        <table class="table table-bordered" id="dynamic_field">
-                        <tr>
-                            <th bgcolor="#99CCFF" class="text-center" width="60%">จุดลงของ</th>
-                            <th bgcolor="#99CCFF" class="text-center" width="20%">ผู้รับ</th>
-                            <th bgcolor="#99CCFF" class="text-center" width="20%">เบอร์ผู้รับ</th>
+                           <table class="table table-bordered" id="dynamic_field">
+                          <tr>
+                            <th width="25%" class="text-right"><font size="4">ชื่อร้าน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="name_store" value="<?php echo $objr_order['name_store']; ?>" class="form-control " /></td>
+                            <th width="25%" class="text-right" ><font size="4">ราคาสินค้า/หน่วย &nbsp;&nbsp;:</font></th>
+                            <td width="20%" ><input type="text" name="price" class="form-control" value="<?php echo $objr_order['price'];?>" ></td>
+                            <th width="5%"><font size="4">บาท</font></th>
+                            </td>
                           </tr>
                           <tr>
-                            <td class="text-center"><?php echo $objr_order['name_store'].'    '.'อ.'.$objr_amphur['amphur_name'].'     จ.'.$objr_amphur['province_name']; ?></td>
-                            <td class="text-center"><input type="text" name="name_to" class="form-control text-center" value="<?php echo $objr_order['name_to']; ?>"></td>
-                            <td class="text-center"><input type="text" name="tel_to" class="form-control text-center" value="<?php echo $objr_order['tel_to']; ?>"></td>
+                            <th width="25%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><?php echo 'จ.'.$objr_amphur['province_name']; ?></td>
+                            <th width="25%" class="text-right" ><font size="4">ราคาสินค้า &nbsp;&nbsp;:</font></th>
+                            <td width="20%" ><input type="text" name="money" class="form-control" value="<?php echo $objr_order['money'];?>"></td>
+                            <th width="5%"><font size="4">บาท</font></th>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><?php echo 'อ.'.$objr_amphur['amphur_name']; ?></td>
+                            <th width="25%" class="text-right" ><font size="4">ค่ารถขนส่ง &nbsp;&nbsp;:</font></th>
+                            <td width="20%" ><input type="text" name="portage" class="form-control" value="<?php echo $objr_order['portage'];?>" ></td>
+                            <th width="5%"><font size="4">บาท</font></th>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right" ><font size="4">ผู้ประสานงาน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="name_to" class="form-control" value="<?php echo $objr_order['name_to'];?>"/></td>
+                            <th width="25%" class="text-right" ><font size="4">ค่าคนงานลงของ &nbsp;&nbsp;:</font></th>
+                            <td width="20%" ><input type="text" name="pay_portage" class="form-control" value="<?php echo $objr_order['pay_portage'];?>" "></td>
+                            <th width="5%"><font size="4">บาท</font></th>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right"><font size="4">เบอร์โทรประสานงาน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="tel_to" value="<?php echo $objr_order['tel_to'];?>"  class="form-control "></td>
+                            <th width="25%" class="text-right" ><font size="4">ใบจ่ายที่ &nbsp;&nbsp;:</font></th>
+                            <td width="20%"><input type="text" name="slip_number" class="form-control " value="<?php echo $objr_order['slip_number'];?>" "></td>
+                            <th width="5%"><font size="4"></font></th>
                           </tr>
                         </table>
+
                       </div>
-                    </div>
                     </div>
                   </div>
-                    <div class="box-footer with-border">
-                      <a type="button" href="list_order.php" class="btn btn-danger"> <= กลับ</a>
-                      <button type="submit" class="btn btn-success" name="add" id="add"><i class="fa fa-save"></i> บันทึก ORDER</button>
-                    </div> 
-                  </div> 
-                </form> 
+              </div>
+              <div align="center" class="box-footer">
+                <a type="button" href="data_order.php?id_order_list=<?php echo $id_order_list;?>" class="btn btn-danger pull-left"> << กลับ </a>
+                <button type="submit" class="btn btn-success" name="add" id="add"><i class="fa fa-save"></i> บันทึกข้อมูล </button>
+              </div>
+            </div>
+            </form>
             </div> 
           </div> 
        </section> 
@@ -354,7 +264,6 @@ folder instead of downloading all of them to reduce the load. -->
     </script>
     <script src="../plugins/iCheck/icheck.min.js">
     </script>
-
 </body>
 
 </html>

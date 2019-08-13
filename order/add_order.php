@@ -4,7 +4,7 @@
 ?>
 <!DOCTYPE html>
 <html>
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <head>
   <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
@@ -41,6 +41,12 @@ folder instead of downloading all of them to reduce the load. -->
   <script language="javascript">
     function fncSubmit()
     {
+      if(document.form1.id_order_list.value == "")
+      {
+        alert('กรุณาระบุ ID');
+        document.form1.id_order_list.focus();
+        return false;
+      }	
       if(document.form1.list_order.value == "")
       {
         alert('กรุณาระบุใบสั่งที่');
@@ -175,192 +181,161 @@ folder instead of downloading all of them to reduce the load. -->
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="height: 820px;">
       <!-- Main content -->
+      <form action="add_order_finish.php" name="frmMain" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
+      <script language="JavaScript">
+        function fncSum()
+        {
+          document.frmMain.money.value = parseFloat(document.frmMain.num_product.value) * parseFloat(document.frmMain.price.value);
+        }
+      </script>
       <section class="content">
-
         <div class="col-md-12">
           <div class="box box-primary">
-            <div class="box-header text-center with-border">
+            <div class="box-header with-border">
+            <div class="text-center">
               <font size="5">
-                <B align="center"> ใบสั่งสินค้า <font color="red"> </font></B>
+                <B align="center"> ข้อมูลสั่งสินค้า </B>
               </font>
-            </div>
+            </div> 
+            <div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="add_order_finish.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                   <div class="row">
-                    <div class="col-md-5">
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">ใบสั่งที่ :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="list_order" class="form-control" placeholder="ใบสั่งที่">
-                        </div>
-                      </div>
-                      <!-- /.form-group -->
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">วันที่สั่ง :</label>
-
-                        <div class="col-sm-10">
-                          <input type="date" name="date_order" class="form-control" placeholder="วันที่สั่ง">
-                        </div>
-                      </div>
-
-                      
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">รถเข้า รง. วันที่ :</label>
-
-                        <div class="col-sm-10">
-                          <input type="date" name="date_getorder" class="form-control" value="-" >
-                        </div>
-                      </div>
-
-
-                      <div class="form-group">
-                          <label class="col-sm-2 control-label">สินค้า :</label>
-                          <div class="col-sm-10">
-                          <select name="id_product" class="form-control text-center select2" style="width: 100%;">
-                            <option class="text-center" value="">-- เลือกสินค้า --</option>
-                            <?php 
-                              $product = "SELECT * FROM product";
-                              $objq_product = mysqli_query($mysqli,$product);
-                              while($value = $objq_product->fetch_array()){
-                            ?>
-                            <option value="<?php echo $value['id_product'];?>"><?php echo $value['full_name'].'_'.$value['unit'];?></option>
-                            <?php 
-                              }
-                            ?>
-                          </select>
-                          </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">จำนวน :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="num_product" class="form-control" placeholder="จำนวน" >
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">ราคา/น. :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="price" class="form-control" placeholder="ราคา/น." >
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">รวมเงิน :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="money" class="form-control" placeholder="รวมเงิน" >
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                          <label class="col-sm-2 control-label">ภาษี :</label>
-                          <div class="col-sm-10">
-                          <select name="vat" class="form-control text-center select2" style="width: 100%;">
-                            <option class="text-center" value="">-- เลือกภาษี --</option>
-                            
-                            <option value="มี">มี</option>
-                            <option value="ไม่มี">ไม่มี</option>
-                            
-                          </select>
-                          </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">ชื่อ พขร. :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="name_sent" class="form-control" placeholder="ชื่อ พขร." >
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">เบอร์ พขร. :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="tel_sent" class="form-control" placeholder="เบอร์ พขร.">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                          <label class="col-sm-2 control-label">ประเภทรถ :</label>
-                          <div class="col-sm-10">
-                          <select name="catagory_car" class="form-control text-center select2" style="width: 100%;">
-                            <option class="text-center" value="">-- เลือกประเภทรถ --</option>
-                            
-                            <option value="พ่วง">พ่วง</option>
-                            <option value="หกล้อ">หกล้อ</option>
-                            <option value="สิบล้อ">สิบล้อ</option>
-                            
-                          </select>
-                          </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">ทะเบียนรถ :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="licent_plate" class="form-control" placeholder="ทะเบียนรถ">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">ผู้เขียนใบสั่ง :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="name_author" class="form-control" placeholder="ผู้เขียนใบสั่ง">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-7">
-                      <div class="table-responsive">
+                     <!-- ข้อมูลสินค้า -->
+                     <div class="col-md-12">
+                      <div>
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#4dd2ff" class="text-center" width="20%">จังหวัด</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="20%">อำเภอ</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="20%">ชื่อร้าน</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="15%">ผู้รับ</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="15%">เบอร์ผู้รับ</th>
+                            <th width="25%" class="text-right" ><font size="4">ID &nbsp;&nbsp;:</font></th>
+                            <td width="25%" ><input type="text" name="id_order_list" class="form-control" placeholder="ID"  style="background-color: #e6f7ff;" ></td>
+                            <th width="25%"></th>
+                            <td width="25%"></td>
                           </tr>
                           <tr>
-                            <td class="text-center">
-                              <select name="province_name" data-where="2" class="form-control ajax_address select2" >
-                                <option value="">-- เลือกจังหวัด --</option>
-                            </select>
+                            <th width="25%" class="text-right"><font size="4" valign="middle">ใบสั่งที่ &nbsp;&nbsp;:</font></th>
+                            <td width="25%" > <input type="text" name="list_order" class="form-control" placeholder="ใบสั่งที่" style="background-color: #e6f7ff;"></td>
+                            <th width="25%" class="text-right" ><font size="4">ประเภทรถ &nbsp;&nbsp;:</font></th>
+                            <td width="25%">
+                              <select name="catagory_car" class="form-control text-center select2" style="background-color: #e6f7ff;">
+                                <option class="text-center" value="">-- เลือกประเภทรถ --</option>
+                                <option value="พ่วง">พ่วง</option>
+                                <option value="หกล้อ">หกล้อ</option>
+                                <option value="สิบล้อ">สิบล้อ</option>
+                                <option value="สิบล้อ">ขนส่ง</option>
+                              </select>
                             </td>
-                            <td>
-                              <select name="amphur_name" data-where="3" class="ajax_address form-control select2" >
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right" ><font size="4">วันที่สั่ง &nbsp;&nbsp;:</font></th>
+                            <td width="25%" ><input type="date" name="date_order" class="form-control" placeholder="วันที่สั่ง" value="" style="background-color: #e6f7ff;"></td>
+                            <th width="25%" class="text-right"><font size="4">ทะเบียนรถ &nbsp;&nbsp;:</font></th>
+                            <td width="25%" ><input type="text" name="licent_plate" class="form-control" placeholder="ทะเบียนรถ" style="background-color: #e6f7ff;"></td>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right" ><font size="4"> สินค้า &nbsp;&nbsp;:</font></th>
+                            <td width="25%" >
+                              <select name="id_product" class="form-control text-center select2" style="background-color: #e6f7ff;">
+                                <option class="text-center" value="">-- เลือกสินค้า --</option>
+                                <?php 
+                                  $product = "SELECT * FROM product";
+                                  $objq_product = mysqli_query($mysqli,$product);
+                                  while($value = $objq_product->fetch_array()){
+                                ?>
+                                <option value="<?php echo $value['id_product'];?>"><?php echo $value['full_name'].'_'.$value['unit'];?></option>
+                                <?php 
+                                  }
+                                ?>
+                              </select>
+                            </td>
+                            <th width="25%" class="text-right"><font size="4">พนักงานขับรถ &nbsp;&nbsp;:</font></th>
+                            <td width="25%"> <input type="text" name="name_sent" class="form-control" placeholder="ชื่อ พขร." style="background-color: #e6f7ff;"></td>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right" ><font size="4">จำนวนสินค้า &nbsp;&nbsp;:</font></th>
+                            <td width="25%" ><input type="text" name="num_product" class="form-control" style="background-color: #e6f7ff;" value="" OnChange="fncSum();"></td>
+                            <th width="25%" class="text-right" ><font size="4">เบอร์โทร พขร. &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="tel_sent" class="form-control" placeholder="เบอร์ พขร." style="background-color: #e6f7ff;"></td>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right" ><font size="4">ใบกำกับภาษี &nbsp;&nbsp;:</font></th>
+                            <td width="25%">
+                              <select name="vat" class="form-control text-center select2" style="width: 100%;">
+                                <option class="text-center" value="">-- เลือกภาษี --</option>
+                                <option value="มี">มี</option>
+                                <option value="ไม่มี">ไม่มี</option>
+                              </select>
+                            </td>
+                            <th width="25%" class="text-right"><font size="4">วันที่รถเข้าโรงงาน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="date" name="date_getorder" class="form-control" value="-" style="background-color: #e6f7ff;"></td>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right" ><font size="4">ผู้ออกใบสั่ง &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="name_author" class="form-control" placeholder="ผู้ออกใบสั่ง" style="background-color: #e6f7ff;"></td>
+                            <th width="25%" class="text-right"><font size="4">วันที่รถมาถึง &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="date" name="date_receive" class="form-control" value="-" ></td>
+                          </tr>
+                          </table>
+                           <table class="table table-bordered" id="dynamic_field">
+                          <tr>
+                            <th width="25%" class="text-right"><font size="4">ชื่อร้าน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="name_store" placeholder="ชื่อร้าน" class="form-control " style="background-color: #e6f7ff;"></td>
+                            <th width="25%" class="text-right" ><font size="4">ราคาสินค้า/หน่วย &nbsp;&nbsp;:</font></th>
+                            <td width="20%" ><input type="text" name="price" class="form-control" placeholder="ราคาสินค้า/หน่วย" value="" OnChange="fncSum();"></td>
+                            <th width="5%"><font size="4">บาท</font></th>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
+                            <td width="25%">
+                              <select name="province_name" data-where="2" class="form-control ajax_address select2" style="background-color: #e6f7ff;">
+                                <option value="">-- เลือกจังหวัด --</option>
+                              </select>
+                            </td>
+                            <th width="25%" class="text-right" ><font size="4">ราคาสินค้า &nbsp;&nbsp;:</font></th>
+                            <td width="20%" ><input type="text" name="money" class="form-control" placeholder="ราคาสินค้า" id="show"></td>
+                            <th width="5%"><font size="4">บาท</font></th>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
+                            <td width="25%">
+                              <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
                                 <option value="">-- เลือกอำเภอ --</option>
                               </select>
                             </td>
-                            <td class="text-center"><input type="text" name="name_store" placeholder="ชื่อร้าน" class="form-control text-center" /></td>
-                            <td><input type="text" name="name_to" placeholder="ชื่อผู้รับ" class="form-control text-center" /></td>
-                            <td><input type="text" name="tel_to" placeholder="เบอร์ผู้รับ" class="form-control text-center" /></td>
-                           </tr>
+                            <th width="25%" class="text-right" ><font size="4">ค่ารถขนส่ง &nbsp;&nbsp;:</font></th>
+                            <td width="20%" ><input type="text" name="portage" class="form-control" value="0" ></td>
+                            <th width="5%"><font size="4">บาท</font></th>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right" ><font size="4">ผู้ประสานงาน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="name_to" placeholder="ชื่อผู้รับ" class="form-control" style="background-color: #e6f7ff;"></td>
+                            <th width="25%" class="text-right" ><font size="4">ค่าคนงานลงของ &nbsp;&nbsp;:</font></th>
+                            <td width="20%" ><input type="text" name="pay_portage" class="form-control" value="0"></td>
+                            <th width="5%"><font size="4">บาท</font></th>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right"><font size="4">เบอร์โทรประสานงาน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="tel_to" placeholder="เบอร์ผู้รับ" class="form-control" style="background-color: #e6f7ff;"></td>
+                            <th width="25%" class="text-right" ><font size="4">ใบจ่ายที่ &nbsp;&nbsp;:</font></th>
+                            <td width="20%"><input type="text" name="slip_number" class="form-control " value="-"></td>
+                            <th width="5%"><font size="4"></font></th>
+                          </tr>
                         </table>
                       </div>
                     </div>
-
                   </div>
               </div>
               <div align="center" class="box-footer">
-                <a type="button" href="order.php" class="btn btn-danger pull-left"> <= เมนูหลัก</a>
-                <button type="submit" class="btn btn-success" name="add" id="add"><i class="fa fa-save"></i> บันทึก ORDER</button>
+                <a type="button" href="list_order.php" class="btn btn-danger pull-left"> << กลับ </a>
+                <button type="submit" class="btn btn-success" name="add" id="add"><i class="fa fa-save"></i> บันทึกข้อมูล </button>
               </div>
             </div>
-            </form>
           </div>
         </div>
       </section>
-
+      </form>
       <!-- jQuery 3 -->
       <script src="../bower_components/jquery/dist/jquery.min.js">
       </script>
@@ -388,7 +363,6 @@ folder instead of downloading all of them to reduce the load. -->
       </script>
       <script type="text/javascript">
         $(function() {
-
           // เมื่อโหลดขึ้นมาครั้งแรก ให้ ajax ไปดึงข้อมูลจังหวัดทั้งหมดมาแสดงใน
           // ใน select ที่ชื่อ province_name 
           // หรือเราไม่ใช้ส่วนนี้ก็ได้ โดยไปใช้การ query ด้วย php แสดงจังหวัดทั้งหมดก็ได้
@@ -416,7 +390,6 @@ folder instead of downloading all of them to reduce the load. -->
                 $(".ajax_address").eq(i).html(chooseText[i]);
               }
             });
-
             var obj = $(this);
             var IDCheck = obj.val(); // ข้อมูลที่เราจะใช้เช็คกรณี where เช่น id ของจังหวัด
             var IDWhere = obj.data("where"); // ค่าจาก data-where ค่าน่าจะเป็นตัวฟิลด์เงื่อนไขที่เราจะใช้

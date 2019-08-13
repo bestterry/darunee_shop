@@ -11,8 +11,8 @@ $mysqli = connect();
 // array ชื่อตารางในฐานข้อมูลที่เราจะใช้
 $arr_tbl_name = array(
     "0"=>"tbl_geography",
-    "1"=>"tbl_provinces",
-    "2"=>"tbl_amphures",
+    "1"=>"tbl2_provinces",
+    "2"=>"tbl2_amphures",
     "3"=>"tbl_districts",
     "4"=>"tbl_zipcodes",
 );

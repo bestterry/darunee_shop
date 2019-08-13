@@ -85,7 +85,7 @@ folder instead of downloading all of them to reduce the load. -->
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" width="2000px">
+    <div class="content-wrapper" style="height: 4000px;">
       <!-- Main content -->
       <section class="content">
       <div class="col-md-12">
@@ -123,7 +123,7 @@ folder instead of downloading all of them to reduce the load. -->
                   while($value = $objq_addorder->fetch_assoc()){
                  ?>
                   <tr>
-                    <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>
+                    <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะส่งสินค้า [<?php echo '('.$value['id_addorder'].')  '.$value['name_customer'].'   บ.'.$value['village']; ?>] หรือไม่ ?')";>ส่ง</a></td>
                     <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
                     <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
                     <td class="text-center"><?php echo $value['id_addorder']; ?></td>

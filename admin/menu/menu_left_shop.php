@@ -222,7 +222,7 @@
                 <!--/ORDER ค้างส่ง -->
 
                 <!--สั่งสินค้า -->
-                <li><a href="../order/order.php" ><i class="fa fa-file-text-o"></i> สั่งสินค้า </a></li>
+                <li><a href="../order/list_order.php" ><i class="fa fa-file-text-o"></i> สั่งสินค้า </a></li>
                 <!--/สั่งสินค้า -->
 
                 <!-- เงินขายรายวัน -->

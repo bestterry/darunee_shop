@@ -1,34 +1,34 @@
-<?php 
-  require "../config_database/config.php";
+<?php
+ require "../config_database/config.php";
 
-  function DateThai($strDate)
-  {
-    $strYear = date("Y",strtotime($strDate))+543;
-    $strMonth= date("n",strtotime($strDate));
-    $strDay= date("j",strtotime($strDate));
-    $strHour= date("H",strtotime($strDate));
-    $strMinute= date("i",strtotime($strDate));
-    $strSeconds= date("s",strtotime($strDate));
-    $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-    $strMonthThai=$strMonthCut[$strMonth];
-    return "$strDay $strMonthThai $strYear";
-  }
+ function DateThai($strDate)
+ {
+   $strYear = date("Y",strtotime($strDate))+543;
+   $strMonth= date("n",strtotime($strDate));
+   $strDay= date("j",strtotime($strDate));
+   $strHour= date("H",strtotime($strDate));
+   $strMinute= date("i",strtotime($strDate));
+   $strSeconds= date("s",strtotime($strDate));
+   $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+   $strMonthThai=$strMonthCut[$strMonth];
+   return "$strDay $strMonthThai $strYear";
+ }
 
-    // $mysqli = connect();
-    $id_order_list = $_GET['id_order_list'];
-    //select SUM NUM PRODUCT 
-    $sql_order = "SELECT * FROM order_list 
-                    INNER JOIN product ON order_list.id_product = product.id_product
-                    WHERE order_list.id_order_list = $id_order_list";
-    $objq_order= mysqli_query($conn,$sql_order);
-    $objr_order= mysqli_fetch_array($objq_order);
+   // $mysqli = connect();
+   $id_order_list = $_GET['id_order_list'];
+   //select SUM NUM PRODUCT 
+   $sql_order = "SELECT * FROM order_list 
+                   INNER JOIN product ON order_list.id_product = product.id_product
+                   WHERE order_list.id_order_list = $id_order_list";
+   $objq_order= mysqli_query($conn,$sql_order);
+   $objr_order= mysqli_fetch_array($objq_order);
 
-    $amphur_id = $objr_order['amphur_id'];
+   $amphur_id = $objr_order['amphur_id'];
 
-    $sql_amphur = "SELECT * FROM tbl_amphures INNER JOIN tbl_provinces ON tbl_amphures.province_id = tbl_provinces.province_id
-    WHERE tbl_amphures.amphur_id = $amphur_id";
-    $objq_amphur = mysqli_query($conn,$sql_amphur);
-    $objr_amphur = mysqli_fetch_array($objq_amphur);
+   $sql_amphur = "SELECT * FROM tbl2_amphures INNER JOIN tbl2_provinces ON tbl2_amphures.province_id = tbl2_provinces.province_id
+   WHERE tbl2_amphures.amphur_id = $amphur_id";
+   $objq_amphur = mysqli_query($conn,$sql_amphur);
+   $objr_amphur = mysqli_fetch_array($objq_amphur);
 
 ?>
 <!DOCTYPE html>
@@ -38,7 +38,7 @@
   <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>รายการ ORDER </title>
+  <title>เพิ่ม ORDER ใหม่</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
@@ -66,28 +66,6 @@ folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
-  <style>
-          #customers {
-            
-            width: 100%;
-          }
-
-          #customers td, #customers th {
-            border: 1px solid #ddd;
-            padding: 8px;
-          }
-
-          #customers tr:nth-child(even){background-color: #f2f2f2;}
-
-
-          #customers th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: center;
-            background-color: #99CCFF;
-          
-          }
-        </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -106,7 +84,6 @@ folder instead of downloading all of them to reduce the load. -->
                 <!-- User image -->
                 <li class="user-header">
                   <img src="dist/img/user.png" class="img-circle" alt="User Image">
-
                   <p>
                     <small>สาขา : </small>
                   </p>
@@ -124,40 +101,73 @@ folder instead of downloading all of them to reduce the load. -->
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <section class="content-wrapper">
       <!-- Main content -->
       <section class="content">
-
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <a type="button" href="list_order.php" class="btn btn-success"><<== กลับ</a> 
-              <a type="button" href="../pdf_file/data_order.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-warning">พิมพ์</a>      
+              <div class="text-center">
+                <font size="5">
+                  <B align="center"> ข้อมูลสั่งสินค้า <font color="red"> </font></B>
+                </font>
+              </div> 
+              <div>
+              <a type="button" href="list_order.php" class="btn btn-danger "><< กลับ</a>
+              <a type="button" href="edit_order.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-success">edit</a>
+              <a type="button" href="../pdf_file/data_order.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-warning">PDF</a>
+              </div> 
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="finish.php" method="post" autocomplete="off">
                   <div class="row">
-                    <!-- ข้อมูลลูกค้า -->
-                    <div class="col-md-5">
-                      <div class="table-responsive">
+                     <!-- ข้อมูลสินค้า -->
+                     <div class="col-md-12">
+                      <div>
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">ใบสั่งที่ :</th>
-                            <th width="85%"><?php echo $objr_order['list_order']; ?></th>
+                            <td width="25%" class="text-right">ID &nbsp;&nbsp;:</td>
+                            <td width="25%" ><?php echo $objr_order["id_order_list"];?></td>
+                            <td width="25%" class="text-right" ></td>
+                            <td width="25%"></td>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">วันที่สั่ง :</th>
-                            <th width="85%"><?php echo DateThai($objr_order['date_order']);?></th>
+                            <td width="25%" class="text-right">ใบสั่งที่ &nbsp;&nbsp;:</td>
+                            <td width="25%" ><?php echo $objr_order["list_order"];?></td>
+                            <td width="25%" class="text-right" >ประเภทรถ &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['catagory_car'];?></td>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">รถเข้า รง. :</th>
-                            <th width="85%"><?php echo DateThai($objr_order['date_getorder']);?></th>
+                            <td width="25%" class="text-right" >วันที่สั่ง &nbsp;&nbsp;:</td>
+                            <td width="25%" ><?php echo DateThai($objr_order['date_order']); ?></td>
+                            <td width="25%" class="text-right">ทะเบียนรถ &nbsp;&nbsp;:</td>
+                            <td width="25%" ><?php echo $objr_order['licent_plate'];?></td>
+                            
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">รถมาถึง :</th>
-                            <th width="85%">
+                            <td width="25%" class="text-right" > สินค้า &nbsp;&nbsp;:</td>
+                            <td width="25%" ><?php echo $objr_order['full_name'];?></td>
+                            <td width="25%" class="text-right">พนักงานขับรถ &nbsp;&nbsp;:</td>
+                            <td width="25%"> <?php echo $objr_order['name_sent'];?></td>
+                          </tr>
+                          <tr>
+                            <td width="25%" class="text-right" >จำนวนสินค้า &nbsp;&nbsp;:</td>
+                            <td width="25%" ><?php echo $objr_order['num_product'].' '.$objr_order['unit'];?></td>
+                            <td width="25%" class="text-right" >เบอร์โทร พขร. &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['tel_sent'];?></td>
+                          </tr>
+                          <tr>
+                            <td width="25%" class="text-right" >ใบกำกับภาษี &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['vat'];?></td>
+                            <td width="25%" class="text-right">วันที่รถเข้าโรงงาน &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo DateThai($objr_order['date_getorder']);?></td>
+                          </tr>
+                          <tr>
+                            <td width="25%" class="text-right" >ผู้ออกใบสั่ง &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['name_author'];?></td>
+                            <td width="25%" class="text-right">วันที่รถมาถึง &nbsp;&nbsp;:</td>
+                            <td width="25%">
                               <?php 
                                 if(!isset($objr_order['date_receive'])){
                                   echo "-";
@@ -165,129 +175,79 @@ folder instead of downloading all of them to reduce the load. -->
                                   echo DateThai($objr_order['date_receive']);
                                 };
                               ?>
-                            </th>
+                            </td>
+                          </tr>
+                          </table>
+                           <table class="table table-bordered" id="dynamic_field">
+                          <tr>
+                            <td width="25%" class="text-right">ชื่อร้าน &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['name_store'];?></td>
+                            <td width="25%" class="text-right" >ราคาสินค้า/หน่วย &nbsp;&nbsp;:</td>
+                            <td width="10%" ><?php echo $objr_order['price'];?></td>
+                            <td width="15%">บาท</td>
+                            </td>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">สินค้า :</th>
-                            <th width="85%"><?php echo $objr_order['name_product'];?></th>
+                            <td width="25%" class="text-right" >จังหวัด &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_amphur['province_name'];?></td>
+                            <td width="25%" class="text-right" >ราคาสินค้า &nbsp;&nbsp;:</td>
+                            <td width="10%" ><?php echo $objr_order['money'];?></td>
+                            <td width="15%">บาท</td>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">จำนวน_หน่วย :</th>
-                            <th width="85%"><?php echo $objr_order['num_product'].'_'.$objr_order['unit'];?></th>
+                            <td width="25%" class="text-right" >อำเภอ &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_amphur['amphur_name'];?></td>
+                            <td width="25%" class="text-right" >ค่ารถขนส่ง &nbsp;&nbsp;:</td>
+                            <td width="10%" ><?php echo $objr_order['portage'];?></td>
+                            <td width="15%">บาท</td>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">ราคา/น. :</th>
-                            <th width="85%"><?php echo $objr_order['price'];?></th>
+                            <td width="25%" class="text-right" >ผู้ประสานงาน &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['name_to'];?></td>
+                            <td width="25%" class="text-right" >ค่าคนงานลงของ &nbsp;&nbsp;:</td>
+                            <td width="10%" ><?php echo $objr_order['pay_portage'];?></td>
+                            <td width="15%">บาท</td>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">เงินซื้อ(บ.) :</th>
-                            <th width="85%"><?php echo $objr_order['money'];?></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ภาษี :</th>
-                            <th width="85%"><?php echo $objr_order['vat'];?></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ค่าขนส่ง :</th>
-                            <th width="85%"><?php echo $objr_order['portage'];?></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ค่าลงของ :</th>
-                            <th width="85%"><?php echo $objr_order['pay_portage'];?></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ชื่อ พขร. :</th>
-                            <th width="85%"><?php echo $objr_order['name_sent'];?></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">เบอร์ พขร. :</th>
-                            <th width="85%"><?php echo $objr_order['tel_sent'];?></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ประเภทรถ :</th>
-                            <th width="85%"><?php echo $objr_order['catagory_car'];?></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ทะเบียนรถ :</th>
-                            <th width="85%"><?php echo $objr_order['licent_plate'];?></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ผู้เขียนใบสั่ง</th>
-                            <th width="85%"><?php echo $objr_order['name_author'];?></th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">สถานะ</th>
-                            <th width="85%">
-                              <?php  
-                                $status = $objr_order['status'];
-                                  if($status=="done"){
-                                ?>
-                                  <span class="label label-danger">ไม่ได้จ่าย</span>
-                                <?php
-                                  }else {
-                                ?>
-                                  <span class="label label-success">จ่ายแล้ว</span>
-                                <?php  
-                                  }
-                              ?>
-                            </th>
+                            <td width="25%" class="text-right">เบอร์โทรประสานงาน &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['tel_to'];?></td>
+                            <td width="25%" class="text-right" >ใบจ่ายที่ &nbsp;&nbsp;:</td>
+                            <td width="10%"><?php echo $objr_order['slip_number'];?></td>
+                            <td width="15%"></td>
                           </tr>
                         </table>
                       </div>
-                    </div>
-
-                    <!-- ข้อมูลสินค้้า -->
-                    <div class="col-md-7">
-                      <div class="table-responsive">
-                        <table class="table table-bordered" id="dynamic_field">
-                          <tr>
-                            <th bgcolor="#99CCFF" class="text-center" width="60%">จุดลงของ</th>
-                            <th bgcolor="#99CCFF" class="text-center" width="20%">ผู้รับ</th>
-                            <th bgcolor="#99CCFF" class="text-center" width="20%">เบอร์ผู้รับ</th>
-                          </tr>
-                          <tr>
-                            <td class="text-center"><?php echo $objr_order['name_store'].'    '.'อ.'.$objr_amphur['amphur_name'].'     จ.'.$objr_amphur['province_name']; ?></td>
-                            <td class="text-center"><?php echo $objr_order['name_to']; ?></td>
-                            <td class="text-center"><?php echo $objr_order['tel_to']; ?></td>
-                          </tr>
-                        </table>
-                      </div>
-                    </div>
                     </div>
                   </div>
-                    <div align="left" class="box-footer">
-                      </div> 
-                  </div> 
-                </form> 
-            </div> 
-          </div> 
-       </section> 
-    <!-- jQuery 3 -->
-    <script src="../bower_components/jquery/dist/jquery.min.js">
-    </script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js">
-    </script>
-    <!-- DataTables -->
-    <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js">
-    </script>
-    <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js">
-    </script>
-    <!-- SlimScroll -->
-    <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js">
-    </script>
-    <!-- FastClick -->
-    <script src="../bower_components/fastclick/lib/fastclick.js">
-    </script>
-    <!-- AdminLTE App -->
-    <script src="../dist/js/adminlte.min.js">
-    </script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../dist/js/demo.js">
-    </script>
-    <script src="../plugins/iCheck/icheck.min.js">
-    </script>
-
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- jQuery 3 -->
+      <script src="../bower_components/jquery/dist/jquery.min.js">
+      </script>
+      <!-- Bootstrap 3.3.7 -->
+      <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js">
+      </script>
+      <!-- DataTables -->
+      <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js">
+      </script>
+      <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js">
+      </script>
+      <!-- SlimScroll -->
+      <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js">
+      </script>
+      <!-- FastClick -->
+      <script src="../bower_components/fastclick/lib/fastclick.js">
+      </script>
+      <!-- AdminLTE App -->
+      <script src="../dist/js/adminlte.min.js">
+      </script>
+      <!-- AdminLTE for demo purposes -->
+      <script src="../dist/js/demo.js">
+      </script>
+      <script src="../plugins/iCheck/icheck.min.js">
+      </script>
 </body>
-
 </html>
