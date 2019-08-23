@@ -204,16 +204,16 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <td width="25%" class="text-right" >ผู้ประสานงาน &nbsp;&nbsp;:</td>
                             <td width="25%"><?php echo $objr_order['name_to'];?></td>
-                            <td width="25%" class="text-right" >ค่าคนงานลงของ &nbsp;&nbsp;:</td>
-                            <td width="10%" ><?php echo $objr_order['pay_portage'];?></td>
-                            <td width="15%">บาท</td>
+                            <td width="25%" class="text-right" >ใบจ่ายที่ &nbsp;&nbsp;:</td>
+                            <td width="10%"><?php echo $objr_order['slip_number'];?></td>
+                            <td width="15%"></td>
                           </tr>
                           <tr>
                             <td width="25%" class="text-right">เบอร์โทรประสานงาน &nbsp;&nbsp;:</td>
                             <td width="25%"><?php echo $objr_order['tel_to'];?></td>
-                            <td width="25%" class="text-right" >ใบจ่ายที่ &nbsp;&nbsp;:</td>
-                            <td width="10%"><?php echo $objr_order['slip_number'];?></td>
-                            <td width="15%"></td>
+                            <td width="25%" class="text-right" >หมายเหตุ &nbsp;&nbsp;:</td>
+                            <td width="20%" ><?php echo $objr_order['note'];?></td>
+                            <td width="5%"></td>
                           </tr>
                         </table>
                       </div>

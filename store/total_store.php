@@ -90,8 +90,7 @@
       $query_product = mysqli_query($conn,$list_product);
       
     ?>
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
+    <div class="col-md-12">
             <div class="box box-primary">
               <div class="box-header text-center with-border">
                 <font size="5">

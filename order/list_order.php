@@ -12,6 +12,16 @@
     $strMonthThai=$strMonthCut[$strMonth];
     return "$strDay $strMonthThai $strYear";
   }
+
+  function DateThai2($strDate)
+  {
+    $strYear = date("Y",strtotime($strDate));
+    $strMonth= date("n",strtotime($strDate));
+    $strDay= date("j",strtotime($strDate));
+    $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+    $strMonthThai=$strMonthCut[$strMonth];
+    return "$strDay";
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -69,7 +79,7 @@
           <div class="box-header with-border">
             <a type="button" href="../admin/admin.php" class="btn btn-danger "><< เมนูหลัก</a>
             <a type="button" href="add_order.php" class="btn btn-success">ใบสั่งใหม่</a>
-            <a type="button" href="../pdf_file/receive_order.php" class="btn btn-warning">PFD</a>
+            <a type="button" href="../pdf_file/receive_order.php" class="btn btn-warning">PDF</a>
           </div>
           <div class="box">
             <div class="box-header">
@@ -79,17 +89,18 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th class="text-center" width="5%">ข้อมูล</th>
+                    <th class="text-center" width="4%">ดู</th>
                     <th class="text-center" width="5%">ID</th>
-                    <th class="text-center" width="10%">ใบสั่งที่</th>
-                    <th class="text-center" width="13%">สินค้า_หน่วย</th>
+                    <th class="text-center" width="10%">ใบสั่ง</th>
+                    <th class="text-center" width="13%">สินค้า</th>
                     <th class="text-center" width="7%">จำนวน</th>
                     <th class="text-center" width="6%">ราคา</th>
-                    <th class="text-center" width="8%">เงินซื้อ</th>
-                    <th class="text-center" width="8%">ใบจ่าย</th>
-                    <th class="text-center" width="10%">วันที่สั่ง</th>
-                    <th class="text-center" width="10%">เข้ารง.</th>
-                    <th class="text-center" width="10%">มาถึง</th>
+                    <th class="text-center" width="8%">ซื้อ</th>
+                    <th class="text-center" width="8%">จ่าย</th>
+                    <th class="text-center" width="13%">สั่ง</th>
+                    <th class="text-center" width="4%">เข้า</th>
+                    <th class="text-center" width="4%">ถึง</th>
+                    <th class="text-center" width="10%">อำเภอ</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -100,24 +111,22 @@
                                     ORDER BY order_list.id_order_list DESC";
                     $objq_addorder = mysqli_query($conn,$order_list);
                     while($value = $objq_addorder->fetch_assoc()){
-                      $num_product = $value['num_product'];
-                      $price = $value['price'];
-                      $total_money = $num_product * $price;
                  ?>
                   <tr>
                     <td class="text-center"><a href="data_order.php?id_order_list=<?php echo $value['id_order_list']; ?>"><i class="fa fa-search-plus"></i></a></td>
                     <td class="text-center"><?php echo $value['id_order_list'];?></td>
                     <td class="text-center"><?php echo $value['list_order'];?></td>
                     <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit'];?></td>
-                    <td class="text-center" ><?php echo $num_product; ?></td>
-                    <td class="text-center" ><?php echo $price; ?></td>
-                    <td class="text-center" ><?php echo $total_money; ?></td>
+                    <td class="text-center" ><?php echo $value['num_product']; ?></td>
+                    <td class="text-center" ><?php echo $value['price']; ?></td>
+                    <td class="text-center" ><?php echo $value['money']; ?></td>
                     <td class="text-center"><?php echo $value['slip_number'];?></td>
                     <td class="text-center" ><?php echo DateThai($value['date_order']);?></td>
-                    <td class="text-center"><?php echo DateThai($value['date_getorder']);?></td>
+                    <td class="text-center"><?php echo DateThai2($value['date_getorder']);?></td>
                     <td class="text-center">
-                      <?php echo DateThai($value['date_receive']); ?>
+                      <?php echo DateThai2($value['date_receive']); ?>
                     </td>
+                    <td class="text-center"><?php echo $value['amphur_name'];?></td>
                   </tr>
                  <?php 
                   }

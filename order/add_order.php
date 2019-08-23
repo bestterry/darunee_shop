@@ -1,6 +1,13 @@
 <?php
   include("db_connect.php");
   $mysqli = connect();
+  
+  $id_order = "SELECT MAX(id_order_list) FROM order_list";
+  $objq_order = mysqli_query($mysqli,$id_order);
+  $objr_order = mysqli_fetch_array($objq_order);
+
+  $n_id = $objr_order['MAX(id_order_list)']+1;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,12 +48,6 @@ folder instead of downloading all of them to reduce the load. -->
   <script language="javascript">
     function fncSubmit()
     {
-      if(document.form1.id_order_list.value == "")
-      {
-        alert('กรุณาระบุ ID');
-        document.form1.id_order_list.focus();
-        return false;
-      }	
       if(document.form1.list_order.value == "")
       {
         alert('กรุณาระบุใบสั่งที่');
@@ -145,7 +146,12 @@ folder instead of downloading all of them to reduce the load. -->
       }
       document.form1.submit();
     }
+    function fncSum()
+        {
+          document.form1.money.value = parseFloat(document.form1.num_product.value) * parseFloat(document.form1.price.value);
+        }
   </script>
+
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -183,13 +189,7 @@ folder instead of downloading all of them to reduce the load. -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="height: 820px;">
       <!-- Main content -->
-      <form action="add_order_finish.php" name="frmMain" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
-      <script language="JavaScript">
-        function fncSum()
-        {
-          document.frmMain.money.value = parseFloat(document.frmMain.num_product.value) * parseFloat(document.frmMain.price.value);
-        }
-      </script>
+      <form action="add_order_finish.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
       <section class="content">
         <div class="col-md-12">
           <div class="box box-primary">
@@ -210,7 +210,7 @@ folder instead of downloading all of them to reduce the load. -->
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">ID &nbsp;&nbsp;:</font></th>
-                            <td width="25%" ><input type="text" name="id_order_list" class="form-control" placeholder="ID"  style="background-color: #e6f7ff;" ></td>
+                            <td width="25%" ><input type="text" name="id_order_list" class="form-control" value="<?php echo $n_id; ?>"  style="background-color: #e6f7ff;" readonly/></td>
                             <th width="25%"></th>
                             <td width="25%"></td>
                           </tr>
@@ -224,7 +224,7 @@ folder instead of downloading all of them to reduce the load. -->
                                 <option value="พ่วง">พ่วง</option>
                                 <option value="หกล้อ">หกล้อ</option>
                                 <option value="สิบล้อ">สิบล้อ</option>
-                                <option value="สิบล้อ">ขนส่ง</option>
+                                <option value="ขนส่ง">ขนส่ง</option>
                               </select>
                             </td>
                           </tr>
@@ -263,9 +263,8 @@ folder instead of downloading all of them to reduce the load. -->
                             <th width="25%" class="text-right" ><font size="4">ใบกำกับภาษี &nbsp;&nbsp;:</font></th>
                             <td width="25%">
                               <select name="vat" class="form-control text-center select2" style="width: 100%;">
-                                <option class="text-center" value="">-- เลือกภาษี --</option>
-                                <option value="มี">มี</option>
-                                <option value="ไม่มี">ไม่มี</option>
+                              <option value="ไม่มี">ไม่มี</option>
+                              <option value="มี">มี</option>
                               </select>
                             </td>
                             <th width="25%" class="text-right"><font size="4">วันที่รถเข้าโรงงาน &nbsp;&nbsp;:</font></th>
@@ -311,16 +310,16 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">ผู้ประสานงาน &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="name_to" placeholder="ชื่อผู้รับ" class="form-control" style="background-color: #e6f7ff;"></td>
-                            <th width="25%" class="text-right" ><font size="4">ค่าคนงานลงของ &nbsp;&nbsp;:</font></th>
-                            <td width="20%" ><input type="text" name="pay_portage" class="form-control" value="0"></td>
-                            <th width="5%"><font size="4">บาท</font></th>
+                            <th width="25%" class="text-right" ><font size="4">ใบจ่ายที่ &nbsp;&nbsp;:</font></th>
+                            <td width="20%" ><input type="text" name="slip_number" class="form-control " value="-"></td>
+                            <td width="5%"></td>
                           </tr>
                           <tr>
                             <th width="25%" class="text-right"><font size="4">เบอร์โทรประสานงาน &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="tel_to" placeholder="เบอร์ผู้รับ" class="form-control" style="background-color: #e6f7ff;"></td>
-                            <th width="25%" class="text-right" ><font size="4">ใบจ่ายที่ &nbsp;&nbsp;:</font></th>
-                            <td width="20%"><input type="text" name="slip_number" class="form-control " value="-"></td>
-                            <th width="5%"><font size="4"></font></th>
+                            <th width="25%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
+                            <td width="20%"><input type="text" name="note" class="form-control " value="-"></td>
+                            <td width="5%"></td>
                           </tr>
                         </table>
                       </div>

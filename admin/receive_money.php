@@ -10,6 +10,7 @@
                     INNER JOIN member ON rc_receive_money.id_member = member.id_member
                     GROUP BY rc_receive_money.id_receive_money DESC";
   $objq_receive = mysqli_query($conn,$receive_money);
+  
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +80,7 @@
       <?php require('menu/header_logout.php');?>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="height: autopx;">
       <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
@@ -89,21 +90,23 @@
         <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center"> รับเงินรายวัน </B>
+                <B align="center"> เงินรับรายวัน </B>
               </font>
             </div>
           <div class="mailbox-read-message">
           <table id="customers">
             <tbody>
               <tr>
-                <th class="text-center" width="15%">ชื่อ</th>
-                <th class="text-center" width="15%">ปฏิบัติงาน</th>
-                <th class="text-center" width="15%">เงินขาย(บ)</th>
-                <th class="text-center" width="15%">ประเภทรับเงิน</th>
+                <th class="text-center" width="10%">ชื่อ</th>
+                <th class="text-center" width="10%">งาน</th>
+                <th class="text-center" width="15%">พื้นที่</th>
+                <th class="text-center" width="10%">เงิน(บ)</th>
+                <th class="text-center" width="10%">ประเภท</th>
                 <th class="text-center" width="15%">วันที่รับเงิน</th>
                 <th class="text-center" width="10%">สนง.</th>
                 <th class="text-center" width="10%">หัวหน้า</th>
                 <th class="text-center" width="5%">จัดการ</th>
+                <th class="text-center" width="5%">ลบ</th>
               </tr>
               <?php
                 while($value = $objq_receive -> fetch_assoc()){
@@ -111,9 +114,10 @@
               <tr>
                 <td class="text-center" ><?php echo $value['name']; ?></td>
                 <td class="text-center" ><?php echo $value['name_practice']; ?></td>
+                <td class="text-center" ><?php echo $value['area']; ?></td>
                 <td class="text-center" ><?php echo $value['money']; ?></td>
                 <td class="text-center" ><?php echo $value['name_category']; ?></td>
-                <td class="text-center" ><?php echo Datethai($value['date']); ?></td>
+                <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
                 <td class="text-center" >
                   <?php 
                     $status = $value['status_office'];
@@ -145,6 +149,7 @@
                   ?>
                 </td>
                 <td class="text-center" > <a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="fa fa-cog"></a></td>
+                <td class="text-center" > <a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";>ลบ</a></td>
               </tr>
                 <?php }?>
             </tbody>
@@ -152,7 +157,11 @@
 
           <br>
           <br>
-
+          <div class="box-header text-center with-border">
+            <font size="5">
+              <B align="center"> เงินรวมไม่ได้รับ(ทีมส่ง) </B>
+            </font>
+          </div>
           <table id="customers">
             <tbody>
               <tr>
@@ -164,15 +173,54 @@
               </tr>
               <tr>
                 <?php 
-                  $rc_category = "SELECT * FROM rc_category"
+                  $rc_category = "SELECT * FROM rc_category";
+                  $objq_category = mysqli_query($conn,$rc_category);
+                  while($value = $objq_category->fetch_assoc()){
+                    $id_category = $value['id_category'];
+                    $sql_sum = "SELECT SUM(money) FROM rc_receive_money WHERE id_category = $id_category AND status_office = 'N' AND status_boss = 'N'";
+                    $objq_sum = mysqli_query($conn,$sql_sum);
+                    $objr_sum = mysqli_fetch_array($objq_sum);
                 ?>
-                <td class="text-center"> </td>
+                <td class="text-center"> <?php echo $objr_sum['SUM(money)']; ?> </td>
+                  <?php } ?>
               </tr>
             </tbody>
           </table>
+
+            <br>
+            <br>
+            <div class="box-header text-center with-border">
+              <font size="5">
+                <B align="center"> เงินรวมไม่ได้รับ(สำนักงาน) </B>
+              </font>
+            </div>
+            <table id="customers">
+              <tbody>
+                <tr>
+                  <th class="text-center" width="20%">สด</th>
+                  <th class="text-center" width="20%">เช็ค</th>
+                  <th class="text-center" width="20%">สกต.</th>
+                  <th class="text-center" width="20%">เชื่อ</th>
+                  <th class="text-center" width="20%">ฝากขาย</th>
+                </tr>
+                <tr>
+                  <?php 
+                    $rc_category = "SELECT * FROM rc_category";
+                    $objq_category = mysqli_query($conn,$rc_category);
+                    while($value = $objq_category->fetch_assoc()){
+                      $id_category = $value['id_category'];
+                      $sql_sum = "SELECT SUM(money) FROM rc_receive_money WHERE id_category = $id_category AND status_office = 'Y' AND status_boss = 'N'";
+                      $objq_sum = mysqli_query($conn,$sql_sum);
+                      $objr_sum = mysqli_fetch_array($objq_sum);
+                  ?>
+                  <td class="text-center"> <?php echo $objr_sum['SUM(money)']; ?> </td>
+                    <?php } ?>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="box-footer">
-            <a class="btn btn-danger pull-left" href="admin.php"><<== กลับเมนูหลัก</a>
+            <a class="btn btn-success pull-left" href="admin.php"><<== กลับสู่เมนูหลัก</a>
           </div>
         </div>
         </div>

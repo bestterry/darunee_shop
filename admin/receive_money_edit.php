@@ -13,6 +13,9 @@
   $objq_receive = mysqli_query($conn,$receive_money);
   $objr_receive = mysqli_fetch_array($objq_receive);
 
+  $id_practice = $objr_receive['id_practice'];
+  $id_category = $objr_receive['id_category'];
+
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +76,14 @@
             background-color: #99CCFF;
           
           }
+          select {
+            text-align: center;
+            text-align-last: center;
+          }
+          option {
+            text-align: center;
+            text-align-last: center;
+          }
         </style>
 </head>
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -83,7 +94,7 @@
   </header>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="height: 900px;">
+  <div class="content-wrapper" style="height: 500px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
     </section>
@@ -112,10 +123,11 @@
               <table id="customers">
                 <tbody>
                   <tr>
-                    <th class="text-center" width="20%">ชื่อ</th>
+                    <th class="text-center" width="15%">ชื่อ</th>
+                    <th class="text-center" width="15%">ปฏิบัติงาน</th>
                     <th class="text-center" width="20%">ปฏิบัติงาน</th>
-                    <th class="text-center" width="20%">เงินขาย(บ)</th>
-                    <th class="text-center" width="20%">ประเภทการรับเงิน</th>
+                    <th class="text-center" width="15%">เงินขาย(บ)</th>
+                    <th class="text-center" width="15%">ประเภทการรับเงิน</th>
                     <th class="text-center" width="20%">วันที่รับเงิน</th>
                   </tr>
                   <tr>
@@ -123,9 +135,26 @@
                       <?php echo $objr_receive['name'];?>
                       <input type="hidden" name="id_receive_money" value="<?php echo $id_receive_money;?>">
                     </td>
-                    <td class="text-center" ><?php echo $objr_receive['name_practice']; ?></td>
+                    <td>
+                    <select name="id_practice" class="form-control">
+                      <option value ="1" <?php if($id_practice == 1){ echo "selected='selected'";} ?>>ส่งของ</option>
+                      <option value="2"  <?php if($id_practice == 2){ echo "selected='selected'";}?>>ขนของ</option>
+                      <option value="3"  <?php if($id_practice == 3){ echo "selected='selected'";} ?>>เยี่ยม</option>
+                      <option value="4"  <?php if($id_practice == 4){ echo "selected='selected'";}?>>หน้าร้าน</option>
+                      <option value="5"  <?php if($id_practice == 5){ echo "selected='selected'";}?>>อื่นๆ</option>
+                    </select>
+                    </td>
+                    <td class="text-center" ><input type="text" name="area" class="form-control text-center" value="<?php echo $objr_receive['area']; ?>"></td>
                     <td class="text-center" ><input type="text" name="money" class="form-control text-center" value="<?php echo $objr_receive['money']; ?>"></td>
-                    <td class="text-center" ><?php echo $objr_receive['name_category']; ?></td>
+                    <td class="text-center" >
+                      <select name="id_category" class="form-control text-center">
+                        <option value ="1" <?php if($id_category == 1){ echo "selected='selected'";} ?>>สด</option>
+                        <option value="2"  <?php if($id_category == 2){ echo "selected='selected'";}?>>เช็ค</option>
+                        <option value="3"  <?php if($id_category == 3){ echo "selected='selected'";} ?>>สกต.</option>
+                        <option value="4"  <?php if($id_category == 4){ echo "selected='selected'";}?>>เชื่อ</option>
+                        <option value="5"  <?php if($id_category == 5){ echo "selected='selected'";}?>>ฝากขาย</option>
+                      </select>
+                    </td>
                     <td class="text-center" ><?php echo Datethai($objr_receive['date']); ?></td>
                   </tr>
                 </tbody>

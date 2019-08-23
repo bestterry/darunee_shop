@@ -1,4 +1,5 @@
 <?php 
+
     require "../config_database/config.php";
     $id_order_list = $_POST['id_order_list'];
     $list_order = $_POST['list_order'];
@@ -22,10 +23,10 @@
     $tel_to = $_POST['tel_to'];
     $slip_number = $_POST['slip_number'];
     $portage = $_POST['portage'];
-    $pay_portage = $_POST['pay_portage'];
+    $note = $_POST['note'];
 
-     $sql = "INSERT INTO order_list (id_order_list, list_order, id_product, num_product, price, money, vat, date_order, date_getorder, date_receive, name_sent, tel_sent, catagory_car,licent_plate, name_author, slip_number, name_store, amphur_id, province_id, name_to, tel_to, portage, pay_portage)
-                      VALUES ($id_order_list, '$list_order', $id_product,$num_product, $price, $money, '$vat', '$date_order','$date_getorder', '$date_receive', '$name_sent', '$tel_sent', '$catagory_car','$licent_plate', '$name_author', '$slip_number', '$name_store', $amphur_id, $province_id, '$name_to', '$tel_to', $portage, $pay_portage)";
+     $sql = "INSERT INTO order_list (id_order_list, list_order, id_product, num_product, price, money, vat, date_order, date_getorder, date_receive, name_sent, tel_sent, catagory_car,licent_plate, name_author, slip_number, name_store, amphur_id, province_id, name_to, tel_to, portage, note)
+                      VALUES ($id_order_list, '$list_order', $id_product,$num_product, $price, $money, '$vat', '$date_order','$date_getorder', '$date_receive', '$name_sent', '$tel_sent', '$catagory_car','$licent_plate', '$name_author', '$slip_number', '$name_store', $amphur_id, $province_id, '$name_to', '$tel_to', $portage, '$note')";
     mysqli_query($conn,$sql);
 
     $max_id = "SELECT MAX(id_order_list) FROM order_list";

@@ -1,5 +1,6 @@
 <?php 
-  require "../config_database/config.php";
+    include("db_connect.php");
+    $mysqli = connect();
 
   function DateThai($strDate)
   {
@@ -20,13 +21,13 @@
     $sql_order = "SELECT * FROM order_list 
                     INNER JOIN product ON order_list.id_product = product.id_product
                     WHERE order_list.id_order_list = $id_order_list";
-    $objq_order = mysqli_query($conn,$sql_order);
+    $objq_order = mysqli_query($mysqli,$sql_order);
     $objr_order = mysqli_fetch_array($objq_order);
 
     $amphur_id = $objr_order['amphur_id'];
     $sql_amphur = "SELECT * FROM tbl2_amphures INNER JOIN tbl2_provinces ON tbl2_amphures.province_id = tbl2_provinces.province_id
                   WHERE tbl2_amphures.amphur_id = $amphur_id";
-    $objq_amphur = mysqli_query($conn,$sql_amphur);
+    $objq_amphur = mysqli_query($mysqli,$sql_amphur);
     $objr_amphur = mysqli_fetch_array($objq_amphur);
 ?>
 <!DOCTYPE html>
@@ -66,7 +67,6 @@ folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
   <style>
     #customers {
-      
       width: 100%;
     }
 
@@ -83,6 +83,13 @@ folder instead of downloading all of them to reduce the load. -->
       background-color: #99CCFF;
     }
   </style>
+
+  <script language="javascript">
+     function fncSum()
+        {
+          document.form1.money.value = parseFloat(document.form1.num_product.value) * parseFloat(document.form1.price.value);
+        }
+  </script>
 
 </head>
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -169,7 +176,7 @@ folder instead of downloading all of them to reduce the load. -->
                           </tr>
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">จำนวนสินค้า &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="num_product" class="form-control" value="<?php echo $objr_order['num_product']; ?>"></td>
+                            <td width="25%"><input type="text" name="num_product" class="form-control" value="<?php echo $objr_order['num_product']; ?>" value="" OnChange="fncSum();"></td>
                             <th width="25%" class="text-right" ><font size="4">เบอร์โทร พขร. &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="tel_sent" class="form-control" value="<?php echo $objr_order['tel_sent']; ?>"></td>
                           </tr>
@@ -192,20 +199,36 @@ folder instead of downloading all of them to reduce the load. -->
                             <th width="25%" class="text-right"><font size="4">ชื่อร้าน &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="name_store" value="<?php echo $objr_order['name_store']; ?>" class="form-control " /></td>
                             <th width="25%" class="text-right" ><font size="4">ราคาสินค้า/หน่วย &nbsp;&nbsp;:</font></th>
-                            <td width="20%" ><input type="text" name="price" class="form-control" value="<?php echo $objr_order['price'];?>" ></td>
+                            <td width="20%" ><input type="text" name="price" class="form-control" value="<?php echo $objr_order['price'];?>" value="" OnChange="fncSum();"></td>
                             <th width="5%"><font size="4">บาท</font></th>
                             </td>
                           </tr>
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><?php echo 'จ.'.$objr_amphur['province_name']; ?></td>
+
+                            <td width="25%" class="text-left">
+                              <label for="inputEmail3" class="col-sm-4 control-label"><?php echo 'จ.'.$objr_amphur['province_name']; ?> </label>
+                              <div class="col-sm-8">
+                                <select name="province_name" data-where="2" class="form-control ajax_address select2" style="background-color: #e6f7ff;">
+                                  <option value="">-- เลือกจังหวัด --</option>
+                                </select>
+                              </div>
+                            </td>
+
                             <th width="25%" class="text-right" ><font size="4">ราคาสินค้า &nbsp;&nbsp;:</font></th>
-                            <td width="20%" ><input type="text" name="money" class="form-control" value="<?php echo $objr_order['money'];?>"></td>
+                            <td width="20%" ><input type="text" name="money" class="form-control" value="<?php echo $objr_order['money'];?>" id="show"></td>
                             <th width="5%"><font size="4">บาท</font></th>
                           </tr>
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><?php echo 'อ.'.$objr_amphur['amphur_name']; ?></td>
+                            <td width="25%">
+                              <label for="inputEmail3" class="col-sm-4 control-label"><?php echo 'อ.'.$objr_amphur['amphur_name']; ?> </label>
+                              <div class="col-sm-8">
+                                <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
+                                  <option value="">-- เลือกอำเภอ --</option>
+                                </select>
+                              </div>
+                            </td>
                             <th width="25%" class="text-right" ><font size="4">ค่ารถขนส่ง &nbsp;&nbsp;:</font></th>
                             <td width="20%" ><input type="text" name="portage" class="form-control" value="<?php echo $objr_order['portage'];?>" ></td>
                             <th width="5%"><font size="4">บาท</font></th>
@@ -213,15 +236,15 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">ผู้ประสานงาน &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="name_to" class="form-control" value="<?php echo $objr_order['name_to'];?>"/></td>
-                            <th width="25%" class="text-right" ><font size="4">ค่าคนงานลงของ &nbsp;&nbsp;:</font></th>
-                            <td width="20%" ><input type="text" name="pay_portage" class="form-control" value="<?php echo $objr_order['pay_portage'];?>" "></td>
-                            <th width="5%"><font size="4">บาท</font></th>
+                            <th width="25%" class="text-right" ><font size="4">ใบจ่ายที่ &nbsp;&nbsp;:</font></th>
+                            <td width="20%"><input type="text" name="slip_number" class="form-control " value="<?php echo $objr_order['slip_number'];?>"></td>
+                            <th width="5%"><font size="4"></font></th>
                           </tr>
                           <tr>
                             <th width="25%" class="text-right"><font size="4">เบอร์โทรประสานงาน &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="tel_to" value="<?php echo $objr_order['tel_to'];?>"  class="form-control "></td>
-                            <th width="25%" class="text-right" ><font size="4">ใบจ่ายที่ &nbsp;&nbsp;:</font></th>
-                            <td width="20%"><input type="text" name="slip_number" class="form-control " value="<?php echo $objr_order['slip_number'];?>" "></td>
+                            <th width="25%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
+                            <td width="20%" ><input type="text" name="note" class="form-control" value="<?php echo $objr_order['note'];?>"></td>
                             <th width="5%"><font size="4"></font></th>
                           </tr>
                         </table>
@@ -263,6 +286,56 @@ folder instead of downloading all of them to reduce the load. -->
     <script src="../dist/js/demo.js">
     </script>
     <script src="../plugins/iCheck/icheck.min.js">
+    </script>
+    <script type="text/javascript">
+      $(function() {
+        // เมื่อโหลดขึ้นมาครั้งแรก ให้ ajax ไปดึงข้อมูลจังหวัดทั้งหมดมาแสดงใน
+        // ใน select ที่ชื่อ province_name 
+        // หรือเราไม่ใช้ส่วนนี้ก็ได้ โดยไปใช้การ query ด้วย php แสดงจังหวัดทั้งหมดก็ได้
+        $.post("getAddress.php", {
+          IDTbl: 1
+        }, function(data) {
+          $("select[name=province_name]").html(data);
+        });
+        // สร้างตัวแปร สำหรับเก็บค่าข้อความให้เลือกรายการ เช่น เลือกจังหวัด
+        // เราจะเก็บค่านี้ไว้ใช้กรณีมีการรีเซ็ต หรือเปลี่ยนแปลงรายการใหม่
+        var chooseText = [];
+        $(".ajax_address").each(function(i, k) {
+          var initObj = $(".ajax_address").eq(i).find("option:eq(0)")[0];
+          chooseText[i] = initObj;
+        });
+
+        // ส่วนของการตรวจสอบ และดึงข้อมูล ajax สังเกตว่าเราใช้ css คลาสชื่อ ajax_address
+        // ดังนั้น css คลาสชื่อนี้จำเป็นต้องกำหนด หรือเราจะเปลี่ยนเป็นชื่ออื่นก็ได้ แต่จำไว้ว่า
+        // ต้องเปลี่ยนในส่วนนี้ด้วย
+        $(".ajax_address").on("change", function() {
+          var indexObj = $(".ajax_address").index(this); // เก็บค่า index ไว้ใช้งานสำหรับอ้างอิง
+          // วนลูปรีเซ็ตค่า select ของแต่ละรายการ โดยเอาค่าจาก array ด้านบนที่เราได้เก็บไว้
+          $(".ajax_address").each(function(i, k) {
+            if (i > indexObj) { // รีเซ็ตค่าของรายการที่ไม่ได้เลือก
+              $(".ajax_address").eq(i).html(chooseText[i]);
+            }
+          });
+          var obj = $(this);
+          var IDCheck = obj.val(); // ข้อมูลที่เราจะใช้เช็คกรณี where เช่น id ของจังหวัด
+          var IDWhere = obj.data("where"); // ค่าจาก data-where ค่าน่าจะเป็นตัวฟิลด์เงื่อนไขที่เราจะใช้
+          var targetObj = $("select[data-where='" + (IDWhere + 1) + "']"); // ตัวที่เราจะเปลี่ยนแปลงข้อมูล
+          if (targetObj.length > 0) { // ถ้ามี obj เป้าหมาย
+            targetObj.html("<option>.. กำลังโหลดข้อมูล.. </option>"); // แสดงสถานะกำลังโหลด  
+            setTimeout(function() { // หน่วงเวลานิดหน่อยให้เห็นการทำงาน ตัดเออกได้
+              // ส่งค่าไปทำการดึงข้อมูล option ตามเงื่อนไข
+              $.post("getAddress.php", {
+                IDTbl: IDWhere,
+                IDCheck: IDCheck,
+                IDWhere: IDWhere - 1
+              }, function(data) {
+                targetObj.html(data); // แสดงค่าผลลัพธ์
+              });
+            }, 0);
+          }
+        });
+
+      });
     </script>
 </body>
 

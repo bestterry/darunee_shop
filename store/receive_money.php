@@ -62,6 +62,12 @@
         document.form1.id_practice.focus();
         return false;
       }	
+      if(document.form1.area.value == "")
+      {
+        alert('กรุณาระบุพื้นที่ปฏิบัติงาน');
+        document.form1.area.focus();
+        return false;
+      }	
       if(document.form1.money.value == "")
       {
         alert('กรุณาระบุเงินขาย');
@@ -134,7 +140,7 @@
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center"> รับเงินรายวัน 
+                <B align="center"> เงินรับรายวัน 
                 <font size="5" color="red">
                   
                  </font>
@@ -149,11 +155,12 @@
               <table id="customers">
                 <tbody>
                   <tr>
-                    <th class="text-center" width="20%">ชื่อ</th>
+                    <th class="text-center" width="15%">ชื่อ</th>
                     <th class="text-center" width="20%">ปฏิบัติงาน</th>
-                    <th class="text-center" width="20%">เงินขาย(บ)</th>
-                    <th class="text-center" width="20%">ประเภทการรับเงิน</th>
-                    <th class="text-center" width="20%">วันที่รับเงิน</th>
+                    <th class="text-center" width="15%">พื้นที่</th>
+                    <th class="text-center" width="15%">เงินขาย(บ)</th>
+                    <th class="text-center" width="15%">ประเภทเงิน</th>
+                    <th class="text-center" width="15%">วันที่รับเงิน</th>
                   </tr>
                   <tr>
                     <td class="text-center">
@@ -172,6 +179,7 @@
                           ?>
                       </select>
                     </td>
+                    <td class="text-center" ><input type="text" name="area" class="form-control text-center"></td>
                     <td class="text-center" ><input type="text" name="money" class="form-control text-center"></td>
                     <td>
                     <select name="id_category"  class="form-control" style="width: 100%;">
@@ -191,7 +199,7 @@
               </table>
               </div>
               <div class="box-footer">
-                <a type="block" href="store.php" class="btn btn-danger pull-left"><<== กลับสู่เมนูหลัก</a> 
+                <a type="block" href="store.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
                 <button type="submit" type="submit" class="btn btn-success pull-right" name="add" id="add"> <i class="fa fa-save"></i> บันทึก </button>
               </div>
               </form>
@@ -204,11 +212,12 @@
               <table id="customers">
                 <tbody>
                   <tr>
-                    <th class="text-center" width="18%">ชื่อ</th>
+                    <th class="text-center" width="13%">ชื่อ</th>
                     <th class="text-center" width="18%">ปฏิบัติงาน</th>
-                    <th class="text-center" width="18%">เงินขาย(บ)</th>
-                    <th class="text-center" width="18%">ประเภทการรับเงิน</th>
-                    <th class="text-center" width="18%">วันที่รับเงิน</th>
+                    <th class="text-center" width="13%">พื้นที่</th>
+                    <th class="text-center" width="13%">เงินขาย(บ)</th>
+                    <th class="text-center" width="13%">ประเภทการรับเงิน</th>
+                    <th class="text-center" width="13%">วันที่รับเงิน</th>
                     <th class="text-center" width="10%">สถานะ</th>
                   </tr>
                   <?php
@@ -217,6 +226,7 @@
                   <tr>
                     <td class="text-center" ><?php echo $value['name']; ?></td>
                     <td class="text-center" ><?php echo $value['name_practice']; ?></td>
+                    <td class="text-center" ><?php echo $value['area']; ?></td>
                     <td class="text-center" ><?php echo $value['money']; ?></td>
                     <td class="text-center" ><?php echo $value['name_category']; ?></td>
                     <td class="text-center" ><?php echo Datethai($value['date']); ?></td>
@@ -224,7 +234,9 @@
                       <?php 
                           $status = $value['status_office'];
                           if( $status == 'Y'){
-                            echo "รับแล้ว";
+                           ?>
+                           <span class="label label-success pull-center"> รับแล้ว </span>
+                           <?php
                           }else{
                             echo "";
                           } 
