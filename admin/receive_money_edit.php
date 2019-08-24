@@ -94,29 +94,17 @@
   </header>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="height: 500px;">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-    </section>
-
-    
-
-    <!-- Main content -->
+  <div class="content-wrapper">
     <section class="content">
+    <div class="row">
       <div class="col-md-12">
-
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
                 <B align="center"> แก้ไขรับเงินรายวัน 
-                <font size="5" color="red">
-                  
-                 </font>
               </font>
               </B>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
             <!-- add_receive_money  -->
             <form action="algorithm/receive_money_edit.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
             <div class="mailbox-read-message">
@@ -125,7 +113,7 @@
                   <tr>
                     <th class="text-center" width="15%">ชื่อ</th>
                     <th class="text-center" width="15%">ปฏิบัติงาน</th>
-                    <th class="text-center" width="20%">ปฏิบัติงาน</th>
+                    <th class="text-center" width="20%">พื้นที่</th>
                     <th class="text-center" width="15%">เงินขาย(บ)</th>
                     <th class="text-center" width="15%">ประเภทการรับเงิน</th>
                     <th class="text-center" width="20%">วันที่รับเงิน</th>
@@ -159,24 +147,16 @@
                   </tr>
                 </tbody>
               </table>
-              </div>
               <div class="box-footer">
                 <a type="block" href="receive_money.php" class="btn btn-danger pull-left"><= กลับ</a> 
                 <button type="submit" type="submit" class="btn btn-success pull-right"> <i class="fa fa-save"></i> บันทึก </button>
               </div>
               </form>
-              <!-- //add_receive_money  -->
-
             </div>
-          </div>
         </div>
-    </div>
+      </div>
     </section>
-    <!-- /.content -->
-
   </div>
-  <!-- /.content-wrapper -->
-
   <?php require("../menu/footer.html"); ?>
  </div>
 

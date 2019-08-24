@@ -38,8 +38,35 @@
 <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
   <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+      <style>
+          #customers {
+            width: 100%;
+          }
+          #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+          }
+          #customers tr:nth-child(even){background-color: #f2f2f2;}
+          #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #99CCFF;
+          }
+          select {
+            text-align: center;
+            text-align-last: center;
+          }
+          option {
+            text-align: center;
+            text-align-last: center;
+          }
+          input {
+            text-align: center;
+            text-align-last: center;
+          }
+        </style>
 </head>
 <body class=" hold-transition skin-blue layout-top-nav ">
 <div class="wrapper">
@@ -69,9 +96,9 @@
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" width="5%" >ลำดับ</th>
                             <th class="text-center" >สินค้า_หน่วย</th>
-                            <th class="text-center" width="15%">จำนวน</th>
-                            <th class="text-center" width="15%">บ/หน่วย</th>
-                            <th class="text-center" width="15%">เงินขาย(บ)</th>
+                            <th class="text-center" width="20%">จำนวน</th>
+                            <th class="text-center" width="20%">บ/หน่วย</th>
+                            <th class="text-center" width="20%">เงินขาย(บ)</th>
                           </tr>
                           <?php
                             for($i=0;$i<count($_POST["id_numPD"]);$i++)
@@ -95,10 +122,10 @@
                             </td>
                             <td class="text-center" >
                               <input class = "hidden" type="text" name="id_numPD[]" value="<?php echo $id_numPD; ?>">
-                              <input class="text-center" type="text" name="num_product[]"   placeholder="<?php echo $objr_listproduct['unit'];?>">
+                              <input class="form-control" type="number" name="num_product[]"   placeholder="<?php echo $objr_listproduct['unit'];?>">
                             </td>
                             <td class="text-center">
-                              <input class="text-center" type="text" name="price_product[]" value="0">
+                              <input class="form-control" type="number" name="price_product[]" value="0">
                             </td>
                             <td></td>
                           </tr>
@@ -113,7 +140,7 @@
                         <tbody>
                         <tr bgcolor="#99CCFF">
                         <th class="text-center">หมายเหตุ : </th>
-                        <th class="text-center"> <input class="text-center" type="text" name="note" size="50"></th>
+                        <th class="text-center"> <input class="text-center form-control" type="text" name="note" size="50"></th>
                         </tr>
                         </tbody>
                       </table>

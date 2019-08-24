@@ -89,30 +89,34 @@
       document.form1.submit();
     }
   </script>
-
   <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         <style>
           #customers {
-            
             width: 100%;
           }
-
           #customers td, #customers th {
             border: 1px solid #ddd;
             padding: 8px;
           }
-
           #customers tr:nth-child(even){background-color: #f2f2f2;}
-
-
           #customers th {
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: center;
             background-color: #99CCFF;
-          
+          }
+          select {
+            text-align: center;
+            text-align-last: center;
+          }
+          option {
+            text-align: center;
+            text-align-last: center;
+          }
+          input {
+            text-align: center;
+            text-align-last: center;
           }
         </style>
 </head>
@@ -124,65 +128,48 @@
   </header>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="height: 900px;">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-    </section>
-
-    
-
+  <div class="content-wrapper" >
     <!-- Main content -->
     <section class="content">
-      <div class="col-md-12">
-
-
-      
+      <div class="row">
+        <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
-              <font size="5">
-                <B align="center"> เงินรับรายวัน 
-                <font size="5" color="red">
-                  
-                 </font>
-              </font>
-              </B>
+              <font size="5"><B align="center"> เงินขายรายวัน </B></font>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
             <!-- add_receive_money  -->
             <form action="algorithm/receive_money.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
-            <div class="mailbox-read-message">
-              <table id="customers">
-                <tbody>
+              <div class="mailbox-read-message">
+
+                <table class="table table-bordered" id="dynamic_field">
                   <tr>
-                    <th class="text-center" width="15%">ชื่อ</th>
-                    <th class="text-center" width="20%">ปฏิบัติงาน</th>
-                    <th class="text-center" width="15%">พื้นที่</th>
-                    <th class="text-center" width="15%">เงินขาย(บ)</th>
-                    <th class="text-center" width="15%">ประเภทเงิน</th>
-                    <th class="text-center" width="15%">วันที่รับเงิน</th>
+                    <th width="20%" class="text-right" ><font size="4">ชื่อ &nbsp;&nbsp;:</font></th>
+                    <td width="30%" >
+                      <input type="text" class="form-control" value="<?php echo $username; ?>"  style="background-color: #e6f7ff;" readonly/>
+                      <input type="hidden" name="id_member" value="<?php echo $id_member; ?>" >
+                    </td>
+                    <th width="20%" class="text-right" ><font size="4">เงินขาย &nbsp;&nbsp;:</font></th>
+                    <td width="30%"><input type="number" name="money" class="form-control text-center"></td>
                   </tr>
                   <tr>
-                    <td class="text-center">
-                      <?php echo $username;?>
-                      <input type="hidden" name="id_member" value="<?php echo $id_member;?>">
+                    <th width="20%" class="text-right"><font size="4" valign="middle">ประเภทเงิน &nbsp;&nbsp;:</font></th>
+                    <td width="30%" >
+                    <select name="id_practice"  class="form-control" style="width: 100%;">
+                        <option value="">-- ปฏิบัติงาน --</option>
+                        <?php 
+                          while ($value = $objq_practice -> fetch_assoc() ) {
+                        ?>
+                        <option value="<?php echo $value['id_practice']; ?>"><?php echo $value['name_practice']; ?></option>
+                        <?php
+                          }
+                        ?>
+                    </select>
                     </td>
-                    <td>
-                      <select name="id_practice"  class="form-control" style="width: 100%;">
-                          <option value="">-- ปฏิบัติงาน --</option>
-                          <?php 
-                            while ($value = $objq_practice -> fetch_assoc() ) {
-                          ?>
-                          <option value="<?php echo $value['id_practice']; ?>"><?php echo $value['name_practice']; ?></option>
-                          <?php
-                            }
-                          ?>
-                      </select>
-                    </td>
-                    <td class="text-center" ><input type="text" name="area" class="form-control text-center"></td>
-                    <td class="text-center" ><input type="text" name="money" class="form-control text-center"></td>
-                    <td>
-                    <select name="id_category"  class="form-control" style="width: 100%;">
+                    <th width="20%" class="text-right" ><font size="4">ประเภทเงิน &nbsp;&nbsp;:</font></th>
+                    <td width="30%">
+                      <select name="id_category"  class="form-control" style="width: 100%;">
                         <option value="">-- ประเภทเงิน --</option>
                         <?php 
                           while ($value = $objq_category -> fetch_assoc() ) {
@@ -191,23 +178,27 @@
                         <?php
                           }
                         ?>
-                    </select>
+                      </select>
                     </td>
-                    <td><input type="date" name="date" class="form-control"></td>
                   </tr>
-                </tbody>
-              </table>
+                  <tr>
+                    <th width="20%" class="text-right" ><font size="4">พื้นที่ &nbsp;&nbsp;:</font></th>
+                    <td width="30%" ><input type="text" name="area" class="form-control text-center"></td>
+                    <th width="20%" class="text-right"><font size="4">วันที่รับเงิน &nbsp;&nbsp;:</font></th>
+                    <td width="30%" ><input type="date" name="date" class="form-control"></td>
+                  </tr>
+                </table>
+
               </div>
               <div class="box-footer">
                 <a type="block" href="store.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
                 <button type="submit" type="submit" class="btn btn-success pull-right" name="add" id="add"> <i class="fa fa-save"></i> บันทึก </button>
               </div>
-              </form>
+            </form>
               <!-- //add_receive_money  -->
 
               <br>
               <br>
-
               <div class="mailbox-read-message">
               <table id="customers">
                 <tbody>
@@ -216,7 +207,7 @@
                     <th class="text-center" width="18%">ปฏิบัติงาน</th>
                     <th class="text-center" width="13%">พื้นที่</th>
                     <th class="text-center" width="13%">เงินขาย(บ)</th>
-                    <th class="text-center" width="13%">ประเภทการรับเงิน</th>
+                    <th class="text-center" width="13%">ประเภทเงิน</th>
                     <th class="text-center" width="13%">วันที่รับเงิน</th>
                     <th class="text-center" width="10%">สถานะ</th>
                   </tr>
@@ -253,10 +244,9 @@
             </div>
           </div>
         </div>
-    </div>
+      </div>
     </section>
     <!-- /.content -->
-
   </div>
   <!-- /.content-wrapper -->
 

@@ -69,9 +69,9 @@
                           <tr bgcolor="#99CCFF">
                             <th class="text-center" width="5%" >ลำดับ</th>
                             <th class="text-center" >สินค้า_หน่วย</th>
-                            <th class="text-center" width="15%">จำนวน</th>
-                            <th class="text-center" width="15%">บ/หน่วย</th>
-                            <th class="text-center" width="15%">เงินขาย(บ)</th>
+                            <th class="text-center" width="20%">จำนวน</th>
+                            <th class="text-center" width="20%">บ/หน่วย</th>
+                            <th class="text-center" width="20%">เงินขาย(บ)</th>
                           </tr>
                           <?php
                           $total_money = 0;
