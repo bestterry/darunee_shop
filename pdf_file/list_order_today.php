@@ -85,9 +85,9 @@ $pdf=new PDF('P','mm','A4');
                   $pdf->SetXY($x + 65, $y);
                 
                   //ที่อยู่ลูกค้า 
-                  $pdf->MultiCell( 140  , 7 , iconv( 'UTF-8','cp874' ,'สั่ง  '.DateThai($value['datetime']).'   '.$value['name_member'].'
-'.$value['id_addorder'].'  '.$value['name_customer'].'   '.$value['tel']  .'  
+                  $pdf->MultiCell( 140  , 7 , iconv( 'UTF-8','cp874' ,$value['name_customer'].'   '.$value['tel']  .'
 บ.'.$value['village'].'   ต.'.$value['district_name'].'อ.'.$value['amphur_name'].'จ.'.$value['province_name'].'
+'.$value['id_addorder'].'  สั่ง '.DateThai($value['datetime']).'   '.$value['name_member']  .'  
 # '.$value['note'].'
 '   .'  '  ) );
                 }  

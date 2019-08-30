@@ -325,6 +325,10 @@
           <!-- เงินขายรายวัน -->
           <li><a href="receive_money.php" ><i class="fa fa-money"></i> เงินขายรายวัน </a></li>
           <!-- /เงินขายรายวัน -->
+
+          <!-- เงินขายรายวัน -->
+          <li><a href="acc_market.php" ><i class="fa fa-money"></i> สกต. </a></li>
+          <!-- /เงินขายรายวัน -->
         </ul>
       </div>
       <!-- /.box-body -->

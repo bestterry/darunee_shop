@@ -101,56 +101,61 @@
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center"> แก้ไขรับเงินรายวัน 
+                <B align="center"> แก้ไขเงินขายรายวัน 
               </font>
               </B>
             </div>
             <!-- add_receive_money  -->
             <form action="algorithm/receive_money_edit.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
             <div class="mailbox-read-message">
-              <table id="customers">
-                <tbody>
+            <table class="table table-bordered" id="dynamic_field">
                   <tr>
-                    <th class="text-center" width="15%">ชื่อ</th>
-                    <th class="text-center" width="15%">ปฏิบัติงาน</th>
-                    <th class="text-center" width="20%">พื้นที่</th>
-                    <th class="text-center" width="15%">เงินขาย(บ)</th>
-                    <th class="text-center" width="15%">ประเภทการรับเงิน</th>
-                    <th class="text-center" width="20%">วันที่รับเงิน</th>
-                  </tr>
-                  <tr>
-                    <td class="text-center">
-                      <?php echo $objr_receive['name'];?>
+                    <th width="20%" class="text-right" ><font size="4">ชื่อ &nbsp;&nbsp;:</font></th>
+                    <td width="30%" >
+                      <input type="text" class="form-control text-center" value=" <?php echo $objr_receive['name'];?>"  style="background-color: #e6f7ff;" readonly/>
                       <input type="hidden" name="id_receive_money" value="<?php echo $id_receive_money;?>">
                     </td>
-                    <td>
-                    <select name="id_practice" class="form-control">
-                      <option value ="1" <?php if($id_practice == 1){ echo "selected='selected'";} ?>>ส่งของ</option>
-                      <option value="2"  <?php if($id_practice == 2){ echo "selected='selected'";}?>>ขนของ</option>
-                      <option value="3"  <?php if($id_practice == 3){ echo "selected='selected'";} ?>>เยี่ยม</option>
-                      <option value="4"  <?php if($id_practice == 4){ echo "selected='selected'";}?>>หน้าร้าน</option>
-                      <option value="5"  <?php if($id_practice == 5){ echo "selected='selected'";}?>>อื่นๆ</option>
-                    </select>
+                    <th width="20%" class="text-right" ><font size="4">เงินขาย &nbsp;&nbsp;:</font></th>
+                    <td width="30%"><input type="number" name="money" class="form-control text-center" value="<?php echo $objr_receive['money']; ?>"></td>
+                  </tr>
+                  <tr>
+                    <th width="20%" class="text-right"><font size="4" valign="middle">งาน &nbsp;&nbsp;:</font></th>
+                    <td width="30%" >
+                      <select name="id_practice"  class="form-control" style="width: 100%;">
+                        <option value="1" <?php if($id_practice == 1){ echo "selected='selected'";} ?>>ส่งของ</option>
+                        <option value="2"  <?php if($id_practice == 2){ echo "selected='selected'";}?>>ขนของ</option>
+                        <option value="3"  <?php if($id_practice == 3){ echo "selected='selected'";} ?>>เยี่ยม</option>
+                        <option value="4"  <?php if($id_practice == 4){ echo "selected='selected'";}?>>หน้าร้าน</option>
+                        <option value="5"  <?php if($id_practice == 5){ echo "selected='selected'";}?>>อื่นๆ</option>
+                      </select>
                     </td>
-                    <td class="text-center" ><input type="text" name="area" class="form-control text-center" value="<?php echo $objr_receive['area']; ?>"></td>
-                    <td class="text-center" ><input type="text" name="money" class="form-control text-center" value="<?php echo $objr_receive['money']; ?>"></td>
-                    <td class="text-center" >
-                      <select name="id_category" class="form-control text-center">
-                        <option value ="1" <?php if($id_category == 1){ echo "selected='selected'";} ?>>สด</option>
+                    <th width="20%" class="text-right" ><font size="4">รับ &nbsp;&nbsp;:</font></th>
+                    <td width="30%">
+                      <select name="id_category"  class="form-control" style="width: 100%;">
+                        <option value="1" <?php if($id_category == 1){ echo "selected='selected'";} ?>>สด</option>
                         <option value="2"  <?php if($id_category == 2){ echo "selected='selected'";}?>>เช็ค</option>
                         <option value="3"  <?php if($id_category == 3){ echo "selected='selected'";} ?>>สกต.</option>
                         <option value="4"  <?php if($id_category == 4){ echo "selected='selected'";}?>>เชื่อ</option>
                         <option value="5"  <?php if($id_category == 5){ echo "selected='selected'";}?>>ฝากขาย</option>
                       </select>
                     </td>
-                    <td class="text-center" ><?php echo Datethai($objr_receive['date']); ?></td>
                   </tr>
-                </tbody>
-              </table>
-              <div class="box-footer">
-                <a type="block" href="receive_money.php" class="btn btn-danger pull-left"><= กลับ</a> 
-                <button type="submit" type="submit" class="btn btn-success pull-right"> <i class="fa fa-save"></i> บันทึก </button>
-              </div>
+                  <tr>
+                    <th width="20%" class="text-right" ><font size="4">พื้นที่ &nbsp;&nbsp;:</font></th>
+                    <td width="30%" ><input type="text" name="area" value="<?php echo $objr_receive['area']; ?>" class="form-control text-center"></td>
+                    <th width="20%" class="text-right"><font size="4">วันรับ &nbsp;&nbsp;:</font></th>
+                    <td width="30%" ><input type="date" name="date" class="form-control text-center" value="<?php echo $objr_receive['date']; ?>"></td>
+                  </tr>
+                  <tr>
+                    <th width="20%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
+                    <td colspan="3" ><input type="text" name="note" value="<?php echo $objr_receive['note']; ?>" class="form-control text-center"></td>
+                  </tr>
+                </table>
+                
+                <div class="box-footer">
+                  <a type="block" href="receive_money.php" class="btn btn-danger pull-left"><< กลับ</a> 
+                  <button type="submit" type="submit" class="btn btn-success pull-right"> <i class="fa fa-save"></i> บันทึก </button>
+                </div>
               </form>
             </div>
         </div>

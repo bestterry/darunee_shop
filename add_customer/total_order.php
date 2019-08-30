@@ -99,7 +99,7 @@ folder instead of downloading all of them to reduce the load. -->
               <div class="text-center">
                 <B>
                   <font size="4">
-                    ORDER ค้างส่ง
+                    จำนวนค้างส่ง
                   </font>
                 </B>
               </div>

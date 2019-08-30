@@ -125,7 +125,7 @@
                               <input class="form-control" type="number" name="num_product[]"   placeholder="<?php echo $objr_listproduct['unit'];?>">
                             </td>
                             <td class="text-center">
-                              <input class="form-control" type="number" name="price_product[]" value="0">
+                              <input class="form-control" type="text" name="price_product[]" value="0">
                             </td>
                             <td></td>
                           </tr>

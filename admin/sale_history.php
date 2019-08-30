@@ -230,7 +230,7 @@
 
                             <!-- ------------------------------//รถรวม---------------------------- -->
 
-                            <?php for ($i=4; $i <= 18; $i++) { 
+                            <?php for ($i=4; $i <= 19; $i++) { 
                                                       $sql_member = "SELECT * FROM member WHERE id_member = $i";
                                                       $objq_member = mysqli_query($conn,$sql_member);
                                                       $objr_member = mysqli_fetch_array($objq_member);

@@ -134,15 +134,19 @@
       <div class="row">
         <div class="col-md-12">
           <div class="box box-primary">
-            <div class="box-header text-center with-border">
-              <font size="5"><B align="center"> เงินขายรายวัน </B></font>
+          <form action="algorithm/receive_money.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
+            <div class="box-header with-border">
+              <table class="table table-bordered" id="dynamic_field">
+                <tr>
+                  <th width="30%" ><a type="block" href="store.php" class="btn btn-danger pull-left"><< เมนูหลัก</a> </th>
+                  <td width="40%" class="text-center"><font size="5"><B align="center"> เงินขายรายวัน </B></font></td>
+                  <td width="30%"> <button type="submit" type="submit" class="btn btn-success pull-right" name="add" id="add"> <i class="fa fa-save"></i> บันทึกข้อมูล </button></td>
+                </tr>
+              </table>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
             <!-- add_receive_money  -->
-            <form action="algorithm/receive_money.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
-              <div class="mailbox-read-message">
-
                 <table class="table table-bordered" id="dynamic_field">
                   <tr>
                     <th width="20%" class="text-right" ><font size="4">ชื่อ &nbsp;&nbsp;:</font></th>
@@ -154,7 +158,7 @@
                     <td width="30%"><input type="number" name="money" class="form-control text-center"></td>
                   </tr>
                   <tr>
-                    <th width="20%" class="text-right"><font size="4" valign="middle">ประเภทเงิน &nbsp;&nbsp;:</font></th>
+                    <th width="20%" class="text-right"><font size="4" valign="middle">งาน &nbsp;&nbsp;:</font></th>
                     <td width="30%" >
                     <select name="id_practice"  class="form-control" style="width: 100%;">
                         <option value="">-- ปฏิบัติงาน --</option>
@@ -167,7 +171,7 @@
                         ?>
                     </select>
                     </td>
-                    <th width="20%" class="text-right" ><font size="4">ประเภทเงิน &nbsp;&nbsp;:</font></th>
+                    <th width="20%" class="text-right" ><font size="4">การรับ &nbsp;&nbsp;:</font></th>
                     <td width="30%">
                       <select name="id_category"  class="form-control" style="width: 100%;">
                         <option value="">-- ประเภทเงิน --</option>
@@ -184,32 +188,32 @@
                   <tr>
                     <th width="20%" class="text-right" ><font size="4">พื้นที่ &nbsp;&nbsp;:</font></th>
                     <td width="30%" ><input type="text" name="area" class="form-control text-center"></td>
-                    <th width="20%" class="text-right"><font size="4">วันที่รับเงิน &nbsp;&nbsp;:</font></th>
+                    <th width="20%" class="text-right"><font size="4">วันรับ &nbsp;&nbsp;:</font></th>
                     <td width="30%" ><input type="date" name="date" class="form-control"></td>
                   </tr>
+                  <tr>
+                    <th width="20%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
+                    <td colspan="3" ><input type="text" name="note" value="-" class="form-control"></td>
+                  </tr>
+                  <tr>
+                    <th width="20%" class="text-right" ><font size="4" color="red">Note &nbsp;&nbsp;:</font></th>
+                    <td colspan="3" ><font size="4" color="red">ต้องการแก้ไข หรือลบข้อมูล แจ้งสำนักงาน</font></td>
+                  </tr>
                 </table>
-
-              </div>
-              <div class="box-footer">
-                <a type="block" href="store.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
-                <button type="submit" type="submit" class="btn btn-success pull-right" name="add" id="add"> <i class="fa fa-save"></i> บันทึก </button>
-              </div>
             </form>
               <!-- //add_receive_money  -->
-
-              <br>
-              <br>
               <div class="mailbox-read-message">
               <table id="customers">
                 <tbody>
                   <tr>
-                    <th class="text-center" width="13%">ชื่อ</th>
-                    <th class="text-center" width="18%">ปฏิบัติงาน</th>
-                    <th class="text-center" width="13%">พื้นที่</th>
-                    <th class="text-center" width="13%">เงินขาย(บ)</th>
-                    <th class="text-center" width="13%">ประเภทเงิน</th>
-                    <th class="text-center" width="13%">วันที่รับเงิน</th>
-                    <th class="text-center" width="10%">สถานะ</th>
+                    <th class="text-center" width="9%">ชื่อ</th>
+                    <th class="text-center" width="9%">งาน</th>
+                    <th class="text-center" width="23%">พื้นที่</th>
+                    <th class="text-center" width="10%">เงินขาย</th>
+                    <th class="text-center" width="10%">รับ</th>
+                    <th class="text-center" width="10%">วันรับ</th>
+                    <th class="text-center" width="19%">หมายเหตุ</th>
+                    <th class="text-center" width="7%">รับแล้ว</th>
                   </tr>
                   <?php
                     while($value = $objq_receive -> fetch_assoc()){
@@ -221,17 +225,18 @@
                     <td class="text-center" ><?php echo $value['money']; ?></td>
                     <td class="text-center" ><?php echo $value['name_category']; ?></td>
                     <td class="text-center" ><?php echo Datethai($value['date']); ?></td>
+                    <td class="text-center" ><?php echo $value['note']; ?></td>
                     <td class="text-center" >
                       <?php 
                           $status = $value['status_office'];
                           if( $status == 'Y'){
                            ?>
-                           <span class="label label-success pull-center"> รับแล้ว </span>
+                            <span class="label label-success pull-center"> Y </span>
                            <?php
-                          }else{
-                            echo "";
-                          } 
-                      ?>
+                             }else{
+                           ?>
+                            <span class="label label-danger pull-center"> N </span>
+                          <?php } ?> 
                     </td>
                   </tr>
                     <?php }?>

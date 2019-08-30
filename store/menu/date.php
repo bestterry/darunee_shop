@@ -1,7 +1,7 @@
 <?php
  function DateThai($strDate)
  {
-   $strYear = date("Y",strtotime($strDate))+543;
+   $strYear = date("Y",strtotime($strDate))+543-2500;
    $strMonth= date("n",strtotime($strDate));
    $strDay= date("j",strtotime($strDate));
    $strHour= date("H",strtotime($strDate));

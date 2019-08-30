@@ -10,6 +10,7 @@
                     INNER JOIN member ON rc_receive_money.id_member = member.id_member
                     GROUP BY rc_receive_money.id_receive_money DESC";
   $objq_receive = mysqli_query($conn,$receive_money);
+  $objq_receive2 = mysqli_query($conn,$receive_money);
   
 ?>
 
@@ -86,91 +87,166 @@
         <div class="row">
           <div class="col-md-12">
             <div class="box box-primary">
-                <div class="box-header text-center with-border">
-                  <font size="5">
-                    <B align="center"> เงินรับรายวัน </B>
-                  </font>
-                </div>
-              <div class="mailbox-read-message">
-                <a type="button" href="admin.php" class="btn btn-danger "><<== กลับสู่เมนูหลัก</a>
-                <a type="button" href="../pdf_file/receive_money.php" class="btn btn-success ">PDF</a>
-                <br>
-                <br>
-              <table id="customers">
-                <tbody>
-                  <tr>
-                    <th class="text-center" width="10%">ชื่อ</th>
-                    <th class="text-center" width="10%">งาน</th>
-                    <th class="text-center" width="15%">พื้นที่</th>
-                    <th class="text-center" width="10%">เงิน(บ)</th>
-                    <th class="text-center" width="10%">ประเภท</th>
-                    <th class="text-center" width="15%">วันที่รับเงิน</th>
-                    <th class="text-center" width="10%">สนง.</th>
-                    <th class="text-center" width="10%">หัวหน้า</th>
-                    <th class="text-center" width="5%">จัดการ</th>
-                    <th class="text-center" width="5%">ลบ</th>
-                  </tr>
-                  <?php
-                    while($value = $objq_receive -> fetch_assoc()){
-                  ?>
-                  <tr>
-                    <td class="text-center" ><?php echo $value['name']; ?></td>
-                    <td class="text-center" ><?php echo $value['name_practice']; ?></td>
-                    <td class="text-center" ><?php echo $value['area']; ?></td>
-                    <td class="text-center" ><?php echo $value['money']; ?></td>
-                    <td class="text-center" ><?php echo $value['name_category']; ?></td>
-                    <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
-                    <td class="text-center" >
-                      <?php 
-                        $status = $value['status_office'];
-                          if( $status == 'Y'){
-                      ?>
-                      <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=N&&statusb=office" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังไม่ได้รับหรือไม่ ?')";>รับแล้ว</a>
-                      <?php
-                          }else{
-                      ?>
-                      <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=Y&&statusb=office" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นรับแล้วหรือไม่ ?')";>ไม่ได้รับ</a>
-                      <?php
-                            echo "";
-                          } 
-                      ?>
-                    </td>
-                    <td class="text-center" >
-                      <?php 
-                        $status_boss = $value['status_boss'];
-                          if( $status_boss == 'Y'){
-                      ?>
-                      <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=N&&statusb=boss" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังไม่ได้รับหรือไม่ ?')";>รับแล้ว</a>
-                      <?php
-                          }else{
-                      ?>
-                      <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=Y&&statusb=boss" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นรับแล้วหรือไม่ ?')";>ไม่ได้รับ</a>
-                      <?php
-                            echo "";
-                          } 
-                      ?>
-                    </td>
-                    <td class="text-center" > <a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="fa fa-cog"></a></td>
-                    <td class="text-center" > <a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";>ลบ</a></td>
-                  </tr>
-                    <?php }?>
-                </tbody>
+            <table class="table table-bordered" id="dynamic_field">
+                <tr>
+                  <th width="30%" > 
+                    <a type="button" href="admin.php" class="btn btn-danger "><< เมนูหลัก</a>
+                    <a type="button" href="../pdf_file/receive_money.php" class="btn btn-success ">PDF</a>
+                  </th>
+                  <td width="40%" class="text-center"><font size="5"><B align="center"> เงินขายรายวัน </B></font></td>
+                  <td width="30%"> </td>
+                </tr>
               </table>
+              <div class="mailbox-read-message">
+              <?php 
+                if ($id_member == 30) {
+               ?>
+                 <!-- boss -->
+                  <table id="customers">
+                    <tbody>
+                      <tr>
+                        <th class="text-center" width="5%">ลบ</th>
+                        <th class="text-center" width="5%">รับ</th>
+                        <th class="text-center" width="8%">ชื่อ</th>
+                        <th class="text-center" width="10%">งาน</th>
+                        <th class="text-center" width="9%">เงินขาย</th>
+                        <th class="text-center" width="9%">รับ</th>
+                        <th class="text-center" width="10%">วันรับ</th>
+                        <th class="text-center" width="10%">วันขาย</th>
+                        <th class="text-center" width="24%">หมายเหตุ</th>
+                        <th class="text-center" width="5%">สนง</th>
+                        <th class="text-center" width="5%">edit</th>
+                      </tr>
+                      <?php
+                        while($value = $objq_receive2 -> fetch_assoc()){
+                      ?>
+                      <tr>
+                        <td class="text-center" > <a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";>X</a></td>
+                        <td class="text-center" >
+                          <?php 
+                            $status_boss = $value['status_boss'];
+                              if( $status_boss == 'Y'){
+                          ?>
+                          <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=N&&statusb=boss" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังไม่ได้รับหรือไม่ ?')";>Y</a>
+                          <?php
+                              }else{
+                          ?>
+                          <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=Y&&statusb=boss" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นรับแล้วหรือไม่ ?')";>N</a>
+                          <?php
+                                echo "";
+                              } 
+                          ?>
+                        </td>
+                        <td class="text-center" ><?php echo $value['name']; ?></td>
+                        <td class="text-center" ><?php echo $value['name_practice']; ?></td>
+                        <td class="text-center" ><?php echo $value['money']; ?></td>
+                        <td class="text-center" ><?php echo $value['name_category']; ?></td>
+                        <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
+                        <td class="text-center" ><?php echo $value['date_buy']; ?></td>
+                        <td class="text-center" ><?php echo $value['note']; ?></td>
+                        <td class="text-center" >
+                          <?php 
+                              $status = $value['status_office'];
+                                if( $status == 'Y'){
+                            ?>
+                            <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=N&&statusb=office" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังไม่ได้รับหรือไม่ ?')";>Y</a>
+                            <?php
+                                }else{
+                            ?>
+                            <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=Y&&statusb=office" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นรับแล้วหรือไม่ ?')";>N</a>
+                            <?php
+                                  echo "";
+                                } 
+                          ?>
+                        </td>
+                        <td class="text-center" > <a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="fa fa-cog"></a></td>
+                      </tr>
+                        <?php }?>
+                    </tbody>
+                  </table>
+                  <!-- //-boss -->
 
+               <?php    
+                 }else{
+               ?>
+                  <!-- สนง -->
+                  <table id="customers">
+                    <tbody>
+                      <tr>
+                        <th class="text-center" width="5%">รับ</th>
+                        <th class="text-center" width="8%">ชื่อ</th>
+                        <th class="text-center" width="10%">งาน</th>
+                        <th class="text-center" width="10%">เงินขาย</th>
+                        <th class="text-center" width="8%">การรับ</th>
+                        <th class="text-center" width="10%">วันรับ</th>
+                        <th class="text-center" width="10%">วันขาย</th>
+                        <th class="text-center" width="32%">หมายเหตุ</th>
+                        <th class="text-center" width="7%">สนง</th>
+                      </tr>
+                      <?php
+                        while($value = $objq_receive -> fetch_assoc()){
+                      ?>
+                      <tr>
+                        <td class="text-center" >
+                          <?php 
+                            $status = $value['status_boss'];
+                              if( $status == 'Y'){
+                          ?>
+                            <span class="label label-success pull-center"> Y </span>
+                          <?php
+                              }else{
+                          ?>
+                            <span class="label label-danger pull-center"> N </span>
+                          <?php
+                                echo "";
+                              } 
+                          ?>
+                        </td>
+                        <td class="text-center" ><?php echo $value['name']; ?></td>
+                        <td class="text-center" ><?php echo $value['name_practice']; ?></td>
+                        <td class="text-center" ><?php echo $value['money']; ?></td>
+                        <td class="text-center" ><?php echo $value['name_category']; ?></td>
+                        <td class="text-center" ><?php echo $value['date_buy']; ?></td>
+                        <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
+                        <td class="text-center" ><?php echo $value['note']; ?></td>
+                        <td class="text-center" >
+                          <?php 
+                            $status = $value['status_office'];
+                              if( $status == 'Y'){
+                          ?>
+                          <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=N&&statusb=office" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังไม่ได้รับหรือไม่ ?')";>Y</a>
+                          <?php
+                              }else{
+                          ?>
+                          <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=Y&&statusb=office" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นรับแล้วหรือไม่ ?')";>N</a>
+                          <?php
+                                echo "";
+                              } 
+                          ?>
+                        </td>
+                      </tr>
+                        <?php }?>
+                    </tbody>
+                  </table>
+                  <!-- //สนง -->
+              <?php     
+                    }
+              ?>
+            
               <br>
               <br>
               <div class="box-header text-center with-border">
                 <font size="5">
-                  <B align="center"> เงินรวมไม่ได้รับ(ทีมส่ง) </B>
+                  <B align="center">เงินขายอยู่กับทีมส่ง </B>
                 </font>
               </div>
               <table id="customers">
                 <tbody>
                   <tr>
-                    <th class="text-center" width="20%">สด</th>
-                    <th class="text-center" width="20%">เช็ค</th>
+                    <th class="text-center" width="20%">เงินสด</th>
+                    <th class="text-center" width="20%">รับเช็ค</th>
                     <th class="text-center" width="20%">สกต.</th>
-                    <th class="text-center" width="20%">เชื่อ</th>
+                    <th class="text-center" width="20%">เงินเชื่อ</th>
                     <th class="text-center" width="20%">ฝากขาย</th>
                   </tr>
                   <tr>
@@ -193,16 +269,16 @@
                 <br>
                 <div class="box-header text-center with-border">
                   <font size="5">
-                    <B align="center"> เงินรวมไม่ได้รับ(สำนักงาน) </B>
+                    <B align="center">สำนักงานรับแล้ว</B>
                   </font>
                 </div>
                 <table id="customers">
                   <tbody>
                     <tr>
-                      <th class="text-center" width="20%">สด</th>
-                      <th class="text-center" width="20%">เช็ค</th>
+                      <th class="text-center" width="20%">เงินสด</th>
+                      <th class="text-center" width="20%">รับเช็ค</th>
                       <th class="text-center" width="20%">สกต.</th>
-                      <th class="text-center" width="20%">เชื่อ</th>
+                      <th class="text-center" width="20%">เงินเชื่อ</th>
                       <th class="text-center" width="20%">ฝากขาย</th>
                     </tr>
                     <tr>

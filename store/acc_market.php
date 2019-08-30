@@ -1,6 +1,7 @@
 <?php
 include("db_connect.php");
 $mysqli = connect();
+require "session.php"; 
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,12 +48,32 @@ folder instead of downloading all of them to reduce the load. -->
         document.form1.name_customer.focus();
         return false;
       }	
-      if(document.form1.tel.value == "")
+      if(document.form1.village.value == "")
       {
-        alert('กรุณาระบุเบอร์โทรศัพท์');
-        document.form1.tel.focus();		
+        alert('กรุณาระบุหมู่บ้าน');
+        document.form1.village.focus();		
         return false;
       }	
+      if(document.form1.province_name.value == "")
+      {
+        alert('กรุณาระบุจังหวัด');
+        document.form1.province_name.focus();
+        return false;
+      }	
+      if(document.form1.amphur_name.value == "")
+      {
+        alert('กรุณาระบุอำเภอ');
+        document.form1.amphur_name.focus();		
+        return false;
+      }	
+      if(document.form1.district_name.value == "")
+      {
+        alert('กรุณาระบุตำบล');
+        document.form1.district_name.focus();		
+        return false;
+      }	
+
+      
       
       document.form1.submit();
     }
@@ -61,37 +82,11 @@ folder instead of downloading all of them to reduce the load. -->
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
-  <div>
+  <div class="wrapper">
     <header class="main-header">
-      <nav class="navbar navbar-static-top">
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="dist/img/user.png" class="img-circle" alt="User Image">
-                  <p>
-                    <small>สาขา : </small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="login/logout.php" class="btn btn-danger btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <?php require('menu/header_logout.php');?>
     </header>
+    
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Main content -->
@@ -101,13 +96,13 @@ folder instead of downloading all of them to reduce the load. -->
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center"> ใบสั่งสินค้า <font color="red"> </font></B>
+                <B align="center"> เงินขาย สกต. <font color="red"> </font></B>
               </font>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="finish.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
+                <form action="algorithm/acc_market.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                   <div class="row">
                     <div class="col-md-5">
                       <div class="form-group">
@@ -127,13 +122,6 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
 
                       <div class="form-group">
-                          <label class="col-sm-2 control-label">โทร :</label>
-                          <div class="col-sm-10">
-                            <input class="form-control" name="tel" placeholder="เบอร์โทรศัพท์">
-                          </div>
-                        </div>
-
-                      <div class="form-group">
                         <label class="col-sm-2 control-label">จังหวัด :</label>
                         <div class="col-sm-10">
                           <select name="province_name" data-where="2" class="form-control ajax_address select2" >
@@ -141,7 +129,7 @@ folder instead of downloading all of them to reduce the load. -->
                           </select>
                         </div>
                       </div>
-                      <!-- /.form-group -->
+                      
                       <div class="form-group">
                         <label  class="col-sm-2 control-label">อำเภอ :</label>
                         <div class="col-sm-10">
@@ -150,7 +138,7 @@ folder instead of downloading all of them to reduce the load. -->
                           </select>
                         </div>
                       </div>
-                      <!-- /.form-group -->
+
                       <div class="form-group">
                         <label class="col-sm-2 control-label">ตำบล :</label>
                         <div class="col-sm-10">
@@ -173,8 +161,9 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#66b3ff" class="text-center" width="55%">สินค้า_หน่วย</th>
+                            <th bgcolor="#66b3ff" class="text-center" width="40%">สินค้า_หน่วย</th>
                             <th bgcolor="#66b3ff" class="text-center" width="15%">จำนวน</th>
+                            <th bgcolor="#66b3ff" class="text-center" width="15%">ราคา/น.</th>
                             <th bgcolor="#66b3ff" class="text-center" width="15%">จัดการ</th>
                           </tr>
                           <tr>
@@ -193,6 +182,7 @@ folder instead of downloading all of them to reduce the load. -->
                               </select>
                             </td>
                             <td><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td>
+                            <td><input type="text" name="price[]" placeholder="ราคา/น." class="form-control text-center" /></td>
                             <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success">เพิ่มสินค้า</button></td>
                           </tr>
                         </table>
@@ -204,7 +194,7 @@ folder instead of downloading all of them to reduce the load. -->
               </div>
               <div align="center" class="box-footer">
                 <a type="button" href="order.php" class="btn btn-danger pull-left"> <= เมนูหลัก</a>
-                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก ORDER</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก สกต.</button>
               </div>
             </div>
             </form>
@@ -295,7 +285,7 @@ $(document).ready(function(){
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td class="text-center"><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td><td  class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td class="text-center"><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="text" name="price[]" placeholder="ราคา/น." class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
 	});
 	
 	$(document).on('click', '.btn_remove', function(){

@@ -263,14 +263,7 @@
                             <!-- --------------------------------//ประวัติรับเข้าสินค้าระหว่างรถ-------------------------------- -->
 
                             <!-- --------------------------------ประวัติการขายสินค้า-------------------------------- -->
-                            <?php 
-                              $date = "SELECT * FROM sale_car_history
-                              WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_member = '$id_member'";
-                              $objq = mysqli_query($conn,$date);
-                              if(mysqli_num_rows($objq)==0){
-
-                              }else{
-                            ?>
+                           
                             <div class="box-header with-border">
                               <font size="4">
                                 <B> ข้อมูลการขาย 
@@ -298,32 +291,30 @@
                                   </th>
                                 </tr>
                                 <?php #endregion
-                                    while($value = $objq ->fetch_assoc()){
-                                      $id_sale = $value['id_sale_history'];
                                       $SQL_product = "SELECT * FROM product INNER JOIN sale_car_history 
                                                       ON product.id_product = sale_car_history.id_product 
-                                                      WHERE sale_car_history.id_sale_history='$id_sale'";
+                                                      WHERE DATE_FORMAT(sale_car_history.datetime,'%d-%m-%Y')='$strDate' AND sale_car_history.id_member = '$id_member'";
                                       $objq_product = mysqli_query($conn,$SQL_product);
-                                      $objr_product = mysqli_fetch_array($objq_product);
+                                      while($value_pd = $objq_product -> fetch_assoc()){
                                   ?>
                                 <tr>
                                   <td>
-                                    <?php echo $objr_product['name_product'].'_'. $objr_product['unit']; ?>
+                                    <?php echo $value_pd['name_product'].'_'. $value_pd['unit']; ?>
                                   </td>
                                   <td class="text-center">
-                                    <?php echo $objr_product['num'];?>
+                                    <?php echo $value_pd['num'];?>
                                   </td>
                                   <td class="text-center">
-                                    <?php echo $objr_product['price']; ?>
+                                    <?php echo $value_pd['price']; ?>
                                   </td>
                                   <td class="text-center">
-                                    <?php echo $objr_product['money']; ?>
+                                    <?php echo $value_pd['money']; ?>
                                   </td>
                                   <td class="text-center">
-                                    <?php echo $objr_product['note']; ?>
+                                    <?php echo $value_pd['note']; ?>
                                   </td>
                                   <td class="text-center">
-                                    <a onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')" href="algorithm/delete_sale.php?id_sale=<?php echo $id_sale;?>"=<?php echo $id_sale;?>">
+                                    <a onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')" href="algorithm/delete_sale.php?id_sale=<?php echo $value_pd['id_sale_history'];?>"
                                       <span class="glyphicon glyphicon-remove-circle"> </span>
                                     </a>
                                   </td>
@@ -333,8 +324,8 @@
                                 ?>
                               </tbody>
                             </table>
-                                  <?php }?>
-                            <!-- --------------------------------//ประวัติการขายสินค้า-------------------------------- -->
+                            <!-- --------------------------------//ประวัติการขายสินค้า------------------------- -->
+                            
                             <!-- --------------------------------ยอดขายสินค้า-------------------------------- -->
                             <div class="box-header with-border">
                               <font size="4">

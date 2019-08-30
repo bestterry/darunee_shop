@@ -59,7 +59,7 @@ require "menu/date.php";
       <!-- Main content -->
       <section class="content">
         <?php
-        $list_product = "SELECT * FROM product";
+        $list_product = "SELECT * FROM product WHERE NOT id_product = 12";
         $query_product = mysqli_query($conn, $list_product);
         $query_product2 = mysqli_query($conn, $list_product);
         ?>

@@ -26,16 +26,17 @@ class PDF extends FPDF
         $this->SetTextColor(0,0,0);
 
         $this->Cell(0,8, iconv( 'UTF-8','cp874' , 'ตารางบันทึกข้อมูลการรับเงิน') , 0 , 1,'L' );
-        $this->Cell(25,8,iconv('UTF-8','cp874','ชื่อ'),1,0,'C');
-        $this->Cell(30,8,iconv('UTF-8','cp874','งาน'),1,0,'C');
-        $this->Cell(50,8,iconv('UTF-8','cp874','พื้นที่ปฏิบัติงาน'),1,0,'C');
-        $this->Cell(25,8,iconv('UTF-8','cp874','เงิน(บ)'),1,0,'C');
-        $this->Cell(25,8,iconv('UTF-8','cp874','ประเภท'),1,0,'C');
-        $this->Cell(30,8,iconv('UTF-8','cp874','วันที่รับเงิน'),1,0,'C');
+        $this->Cell(20,8,iconv('UTF-8','cp874','ชื่อ'),1,0,'C');
+        $this->Cell(20,8,iconv('UTF-8','cp874','งาน'),1,0,'C');
+        $this->Cell(40,8,iconv('UTF-8','cp874','พื้นที่'),1,0,'C');
+        $this->Cell(20,8,iconv('UTF-8','cp874','เงินขาย'),1,0,'C');
+        $this->Cell(20,8,iconv('UTF-8','cp874','การรับ'),1,0,'C');
+        $this->Cell(25,8,iconv('UTF-8','cp874','รับเงินขาย'),1,0,'C');
+        $this->Cell(45,8,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
         $this->Cell(20,8,iconv('UTF-8','cp874','สนง'),1,0,'C');
-        $this->Cell(30,8,iconv('UTF-8','cp874','วันที่รับเงิน(สนง.)'),1,0,'C');
-        $this->Cell(20,8,iconv('UTF-8','cp874','หัวหน้า'),1,0,'C');
-        $this->Cell(30,8,iconv('UTF-8','cp874','วันที่รับเงิน(หัวหน้า)'),1,0,'C');
+        $this->Cell(25,8,iconv('UTF-8','cp874','รับเงินขาย'),1,0,'C');
+        $this->Cell(20,8,iconv('UTF-8','cp874','รับ'),1,0,'C');
+        $this->Cell(25,8,iconv('UTF-8','cp874','รับเงินขาย'),1,0,'C');
         $this->Ln(8); 
     }
     function Footer()
@@ -64,12 +65,13 @@ $pdf=new PDF('L','mm','A4');
                               GROUP BY rc_receive_money.id_receive_money DESC";
             $objq_receive = mysqli_query($conn,$receive_money);
             while($value = $objq_receive -> fetch_assoc()){
-              $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['name']),1,0,'C');
-              $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['name_practice']),1,0,'C');
-              $pdf->Cell(50,8,iconv('UTF-8','cp874',$value['area']),1,0,'C');
-              $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['money']),1,0,'C');
-              $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['name_category']),1,0,'C');
-              $pdf->Cell(30,8,iconv('UTF-8','cp874',Datethai($value['date'])),1,0,'C');
+              $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['name']),1,0,'C');
+              $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['name_practice']),1,0,'C');
+              $pdf->Cell(40,8,iconv('UTF-8','cp874',$value['area']),1,0,'C');
+              $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['money']),1,0,'C');
+              $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['name_category']),1,0,'C');
+              $pdf->Cell(25,8,iconv('UTF-8','cp874',Datethai($value['date'])),1,0,'C');
+              $pdf->Cell(45,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
 
               //สถานะ office
               if($value['status_office']=='Y'){
@@ -81,9 +83,9 @@ $pdf=new PDF('L','mm','A4');
 
               //นที่รับเงิน office
               if (empty($value['date_office'])) {
-                $pdf->Cell(30,8,iconv('UTF-8','cp874',''),1,0,'C');
+                $pdf->Cell(25,8,iconv('UTF-8','cp874',''),1,0,'C');
               }else {
-                $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['date_office']),1,0,'C');
+                $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['date_office']),1,0,'C');
               }
               //-วันที่รับเงิน office
 
@@ -97,9 +99,9 @@ $pdf=new PDF('L','mm','A4');
 
               //วันที่รับเงิน boss
               if (empty($value['date_boss'])) {
-                $pdf->Cell(30,8,iconv('UTF-8','cp874',''),1,0,'C');
+                $pdf->Cell(25,8,iconv('UTF-8','cp874',''),1,0,'C');
               }else {
-                $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['date_boss']),1,0,'C');
+                $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['date_boss']),1,0,'C');
               }
               //-วันที่รับเงิน boss
               $pdf->Ln(8); 

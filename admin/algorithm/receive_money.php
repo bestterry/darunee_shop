@@ -25,17 +25,15 @@
         if ($statusb == "office") {
           $update_rc_office = "UPDATE rc_receive_money SET status_office = '$status', date_office = '$th_date' WHERE id_receive_money = $id_receive_money";
           mysqli_query($conn,$update_rc_office);
-          
         }
         elseif ($statusb == "boss") {
-          $update_rc_boss = "UPDATE rc_receive_money SET status_boss = '$status', date_boss = '$th_date' WHERE id_receive_money = $id_receive_money";
+          $update_rc_boss = "UPDATE rc_receive_money SET status_office = '$status', status_boss = '$status', date_boss = '$th_date' WHERE id_receive_money = $id_receive_money";
           mysqli_query($conn,$update_rc_boss);
         }
     }else{
       if ($statusb == "office") {
         $update_rc_office = "UPDATE rc_receive_money SET status_office = '$status', date_office = '' WHERE id_receive_money = $id_receive_money";
         mysqli_query($conn,$update_rc_office);
-        
       } 
       elseif ($statusb == "boss") {
         $update_rc_boss = "UPDATE rc_receive_money SET status_boss = '$status', date_boss = '' WHERE id_receive_money = $id_receive_money";

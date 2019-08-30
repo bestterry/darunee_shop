@@ -60,42 +60,27 @@ folder instead of downloading all of them to reduce the load. -->
         document.form1.date_order.focus();		
         return false;
       }	
-      if(document.form1.date_getorder.value == "")
-      {
-        alert('กรุณาระบุรถเข้า รง. วันที่');
-        document.form1.date_getorder.focus();		
-        return false;
-      }	
       if(document.form1.id_product.value == "")
       {
         alert('กรุณาเลือกสินค้า');
         document.form1.id_product.focus();		
         return false;
-      }	
+      }
       if(document.form1.num_product.value == "")
       {
         alert('กรุณาระบุจำนวนสินค้า');
         document.form1.num_product.focus();		
         return false;
       }	
-      if(document.form1.price.value == "")
+      if(document.form1.name_author.value == "")
       {
-        alert('กรุณาระบุราคา/น.');
-        document.form1.price.focus();		
-        return false;
-      }	
-      if(document.form1.name_sent.value == "")
-      {
-        alert('กรุณาระบุชื่อ พขร.');
-        document.form1.name_sent.focus();		
-        return false;
-      }	
-      if(document.form1.tel_sent.value == "")
-      {
-        alert('กรุณาระบุเบอร์ พขร.');
-        document.form1.tel_sent.focus();		
+        alert('กรุณาระบุผู้เขียนใบสั่ง');
+        document.form1.name_author.focus();		
         return false;
       }
+      
+
+
       if(document.form1.catagory_car.value == "")
       {
         alert('กรุณาเลือกประเภทรถ');
@@ -108,10 +93,36 @@ folder instead of downloading all of them to reduce the load. -->
         document.form1.licent_plate.focus();		
         return false;
       }
-      if(document.form1.name_author.value == "")
+      if(document.form1.name_sent.value == "")
       {
-        alert('กรุณาระบุผู้เขียนใบสั่ง');
-        document.form1.name_author.focus();		
+        alert('กรุณาระบุพนักงานขับรถ.');
+        document.form1.name_sent.focus();		
+        return false;
+      }
+      if(document.form1.tel_sent.value == "")
+      {
+        alert('กรุณาระบุเบอร์ พขร.');
+        document.form1.tel_sent.focus();		
+        return false;
+      }      
+      if(document.form1.date_getorder.value == "")
+      {
+        alert('กรุณาระบุรถเข้า รง. วันที่');
+        document.form1.date_getorder.focus();		
+        return false;
+      }	
+      if(document.form1.date_receive.value == "")
+      {
+        alert('กรุณาระบุรถมาถึง');
+        document.form1.date_receive.focus();		
+        return false;
+      }	
+   
+
+      if(document.form1.name_store.value == "")
+      {
+        alert('กรุณาระบุชื่อร้าน');
+        document.form1.name_store.focus();		
         return false;
       }
       if(document.form1.province_name.value == "")
@@ -126,24 +137,26 @@ folder instead of downloading all of them to reduce the load. -->
         document.form1.amphur_name.focus();		
         return false;
       }
-      if(document.form1.name_store.value == "")
-      {
-        alert('กรุณาระบุชื่อร้าน');
-        document.form1.name_store.focus();		
-        return false;
-      }
+      
       if(document.form1.name_to.value == "")
       {
-        alert('กรุณาระบุชื่อผู้รับ');
+        alert('กรุณาระบุชื่อผู้ประสานงาน');
         document.form1.name_to.focus();		
         return false;
       }
       if(document.form1.tel_to.value == "")
       {
-        alert('กรุณาระบุเบอร์ผู้รับ');
+        alert('กรุณาระบุเบอร์ผู้ประสานงาน');
         document.form1.tel_to.focus();		
         return false;
       }
+      if(document.form1.price.value == "")
+      {
+        alert('กรุณาระบุราคา/น.');
+        document.form1.price.focus();		
+        return false;
+      }	
+   
       document.form1.submit();
     }
     function fncSum()
@@ -274,7 +287,7 @@ folder instead of downloading all of them to reduce the load. -->
                             <th width="25%" class="text-right" ><font size="4">ผู้ออกใบสั่ง &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="name_author" class="form-control" placeholder="ผู้ออกใบสั่ง" style="background-color: #e6f7ff;"></td>
                             <th width="25%" class="text-right"><font size="4">วันที่รถมาถึง &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="date" name="date_receive" class="form-control" value="-" ></td>
+                            <td width="25%"><input type="date" name="date_receive" class="form-control"></td>
                           </tr>
                           </table>
                            <table class="table table-bordered" id="dynamic_field">
