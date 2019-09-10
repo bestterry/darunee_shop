@@ -24,10 +24,11 @@
    $amphur_id = $_POST['amphur_name'];
    $district_id = $_POST['district_name'];
    $note = $_POST['note'];
+   $tel = $_POST['tel'];
    $count = COUNT($_POST['id_product']);
 
-    $sql = "INSERT INTO acc_market (name_customer, village, district_id, amphur_id, province_id, date_acc, note )
-            VALUES ('$name_customer', '$village', $district_id, $amphur_id, $province_id, '$th_date', '$note')";
+    $sql = "INSERT INTO acc_market (name_customer, village, district_id, amphur_id, province_id, date_acc, note,tel )
+            VALUES ('$name_customer', '$village', $district_id, $amphur_id, $province_id, '$th_date', '$note', '$tel')";
             mysqli_query($conn,$sql);
 
     $sql_maxid = "SELECT MAX(id_acc_market) FROM acc_market";
@@ -50,5 +51,5 @@
     }
 
 
-    header('location:../acc_market.php');
+    header('location:../acc_market_sale.php');
 ?>

@@ -1,7 +1,6 @@
 <?php
 include("db_connect.php");
 $mysqli = connect();
-require "session.php"; 
 ?>
 <!DOCTYPE html>
 <html>
@@ -84,29 +83,70 @@ folder instead of downloading all of them to reduce the load. -->
 <body class=" hold-transition skin-blue layout-top-nav">
   <div class="wrapper">
     <header class="main-header">
-    <?php require('menu/header_logout.php');?>
+    <?php //require('menu/header_logout.php');?>
     </header>
     
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Main content -->
       <section class="content">
-
+      <div class="row">
         <div class="col-md-12">
           <div class="box box-primary">
-          <form action="algorithm/acc_market.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
+          
             <div class="box-header text-center with-border">
             <table class="table table-bordered" >
                 <tr>
-                  <th width="30%" ><a type="block" href="store.php" class="btn btn-danger pull-left"><< เมนูหลัก</a></th>
-                  <td width="40%" class="text-center"><font size="5"><B align="center"> เงินขายรายวัน </B></font></td>
-                  <td width="30%"> <button type="submit" type="submit" class="btn btn-success pull-right"> <i class="fa fa-save"></i> บันทึกข้อมูล </button></td>
+                  <th width="30%" >
+                    <a type="block" href="admin.php" class="btn btn-danger"><< เมนูหลัก</a>
+
+                    <a href="#" data-toggle="modal" data-target="#cu" class="btn btn-success">PDF</a>
+                      <div class="modal fade" id="cu" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                          <form action="../pdf_file/acc_list.php" method="post">
+                            <div class="modal-content">
+                              <div class="modal-header text-center">
+                                <font size="5"><B> เงินขาย สกต. </B></font>
+                              </div>
+                              <div class="modal-body col-md-12 table-responsive mailbox-messages">
+                                <div class="table-responsive mailbox-messages">
+                                  <div class="col-md-6">
+                                    <div class="box-body">
+                                      <strong><i class="fa fa-file-text-o margin-r-6"></i> การใช้ </strong>
+                                      <p>&nbsp;&nbsp;&nbsp;&nbsp;-กรุณาเลือกวันที่ เพื่อดูข้อมูลเงินขาย สกต. ตามช่วงเวลา</p>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-group text-center">
+                                      <label>ตั้งเเต่ : </label>
+                                      <input type="date" name="aday">
+                                    </div>
+                                    <div class="form-group text-center">
+                                      <label>ถึง &nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                                      <input type="date" name="bday">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="submit"  class="btn btn-success pull-right">ถัดไป ==>></button>
+                                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                  </th>
+                  <td width="40%" class="text-center"><font size="5"><B align="center">ขาย สกต. </B></font></td>
+                  <td width="30%"></td>
                 </tr>
               </table>
             </div>
             <!-- /.box-header -->
+            
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
+                <form action="algorithm/acc_market.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                   <div class="row">
                     <div class="col-md-5">
                       <div class="form-group">
@@ -153,14 +193,28 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">หมายเหตุ :</label>
+                        <label class="col-sm-2 control-label">เบอร์โทร :</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="tel" class="form-control" value="-" maxlength="200">
+                        </div>
+                      </div>
 
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">หมายเหตุ :</label>
                         <div class="col-sm-10">
                           <input type="text" name="note" class="form-control" value="-" maxlength="200">
                         </div>
                       </div>
-                    </div>
 
+                      <div class="form-group">
+                      
+                        <div class="col-sm-12">
+                        <button type="submit" type="submit" class="btn btn-success pull-right"> <i class="fa fa-save"></i> บันทึกข้อมูล </button>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    
                     <div class="col-md-7">
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
@@ -193,17 +247,21 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
                     </div>
                     <!-- /.row -->
-                    
                   </div>
+                </form>
               </div>
-              <div align="center" class="box-footer">
-                <table class="table table-bordered" id="dynamic_field">
-                  <tr>
-                    <th bgcolor="#66b3ff" class="text-center" width="20%">วันที่</th>
-                    <th bgcolor="#66b3ff" class="text-center" width="20%">ชื่อลูกค้า</th>
-                    <th bgcolor="#66b3ff" class="text-center" width="45%">ที่อยู่</th>
-                    <th bgcolor="#66b3ff" class="text-center" width="15%">รายละเอียด</th>
-                  </tr>
+              <div  class="box-body">
+                <table id="example1" class="table table-bordered" >
+                  <thead>
+                    <tr>
+                      <th bgcolor="#66b3ff" class="text-center" width="10%">วันที่</th>
+                      <th bgcolor="#66b3ff" class="text-center" width="15%">ชื่อลูกค้า</th>
+                      <th bgcolor="#66b3ff" class="text-center" width="45%">ที่อยู่</th>
+                      <th bgcolor="#66b3ff" class="text-center" width="10%">ข้อมูล</th>
+                      <th bgcolor="#66b3ff" class="text-center" width="10%">แก้ไข</th>
+                      <th bgcolor="#66b3ff" class="text-center" width="10%">ลบ</th>
+                    </tr>
+                  </thead>
                   <?php 
                     $sql_acc = "SELECT * FROM acc_market INNER JOIN tbl_districts ON acc_market.district_id = tbl_districts.district_code
                                 INNER JOIN tbl_amphures  ON acc_market.amphur_id = tbl_amphures.amphur_id
@@ -211,17 +269,22 @@ folder instead of downloading all of them to reduce the load. -->
                     $objq_acc = mysqli_query($mysqli,$sql_acc);
                     while($value = $objq_acc->fetch_assoc()){
                   ?>
-                  <tr> 
-                    <td class="text-center"><?php echo $value['date_acc'];?></td>
-                    <td class="text-center"><?php echo $value['name_customer'];?></td>
-                    <td class="text-center"><?php echo $value['village'].'   ต.'.$value['district_name'].'  อ.'.$value['amphur_name'].'  จ.'.$value['province_name'];?></td>
-                    <td class="text-center" ><a href="acc_market_list.php?id_acc_market=<?php echo $value['id_acc_market']; ?>"><i class="fa fa-search-plus"></i></a></td>
-                  </tr>
-                  <?php }?>
+                  <tbody>
+                    <tr> 
+                      <td class="text-center"><?php echo $value['date_acc'];?></td>
+                      <td class="text-center"><?php echo $value['name_customer'];?></td>
+                      <td class="text-center"><?php echo $value['village'].'   ต.'.$value['district_name'].'  อ.'.$value['amphur_name'].'  จ.'.$value['province_name'].' '.$value['tel'];?></td>
+                      <td class="text-center" ><a href="acc_market_list.php?id_acc_market=<?php echo $value['id_acc_market']; ?>"><i class="fa fa-search-plus"></i></a></td>
+                      <td class="text-center" ><a href="acc_market_edit.php?id_acc_market=<?php echo $value['id_acc_market']; ?>" class="btn btn-success btn-xs" >แก้ไข</a></td>
+                      <td class="text-center" ><a href="algorithm/delete_list_acc.php?id_acc_market=<?php echo $value['id_acc_market']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการลบข้อมูล สกต.หรือไม?')";>ลบ</a></td>
+                    </tr>
+                    <?php }?>
+                  </tbody>
                 </table>
               </div>
             </div>
-            </form>
+            
+          </div>
           </div>
         </div>
       </section>
@@ -304,32 +367,45 @@ folder instead of downloading all of them to reduce the load. -->
         });
       </script>
 
-<script>
-$(document).ready(function(){
-	var i=1;
-	$('#add').click(function(){
-		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td class="text-center"><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="text" name="price[]" placeholder="ราคา/น." class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
-	});
-	
-	$(document).on('click', '.btn_remove', function(){
-		var button_id = $(this).attr("id"); 
-		$('#row'+button_id+'').remove();
-	});
-	
-	$('#submit').click(function(){		
-		$.ajax({
-			success:function(data)
-			{
-				alert(data);
-				$('#add_name')[0].reset();
-			}
-		});
-	});
-	
-});
-</script>
+      <script>
+      $(document).ready(function(){
+        var i=1;
+        $('#add').click(function(){
+          i++;
+          $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td class="text-center"><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="text" name="price[]" placeholder="ราคา/น." class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
+        });
+        
+        $(document).on('click', '.btn_remove', function(){
+          var button_id = $(this).attr("id"); 
+          $('#row'+button_id+'').remove();
+        });
+        
+        $('#submit').click(function(){		
+          $.ajax({
+            success:function(data)
+            {
+              alert(data);
+              $('#add_name')[0].reset();
+            }
+          });
+        });
+        
+      });
+      </script>
 
+        <script>
+        $(function () {
+          $('#example1').DataTable()
+          $('#example2').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+          })
+        })
+      </script>
 </body>
 
 </html>

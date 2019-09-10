@@ -229,6 +229,10 @@
                 <li><a href="receive_money.php" ><i class="fa fa-money"></i> เงินขายรายวัน </a></li>
                 <!-- /เงินขายรายวัน -->
 
+                <!-- สกต. -->
+                <li><a href="acc_market_sale.php" ><i class="fa fa-money"></i> เงิน สกต. </a></li>
+                <!-- /สกต. -->
+
                 <!-- สถานที่ทำงาน -->
                 <!-- <li><a href="working.php"><i class="fa fa-users"></i> ตารางปฏิบัติงาน </a></li> -->
                 <!-- /สถานที่ทำงาน -->

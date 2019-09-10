@@ -3,7 +3,6 @@
   require "../session.php"; 
   require "menu/date.php";
   $strDate = date('d-m-Y');
-
   $receive_money = "SELECT * FROM rc_receive_money 
                     INNER JOIN rc_practice ON rc_receive_money.id_practice = rc_practice.id_practice
                     INNER JOIN rc_category ON rc_receive_money.id_category = rc_category.id_category
@@ -11,7 +10,6 @@
                     GROUP BY rc_receive_money.id_receive_money DESC";
   $objq_receive = mysqli_query($conn,$receive_money);
   $objq_receive2 = mysqli_query($conn,$receive_money);
-  
 ?>
 
 <!DOCTYPE html>
@@ -106,14 +104,15 @@
                     <tbody>
                       <tr>
                         <th class="text-center" width="5%">ลบ</th>
+                        <th class="text-center" width="7%">ชื่อ</th>
                         <th class="text-center" width="5%">รับ</th>
-                        <th class="text-center" width="8%">ชื่อ</th>
-                        <th class="text-center" width="10%">งาน</th>
-                        <th class="text-center" width="9%">เงินขาย</th>
-                        <th class="text-center" width="9%">รับ</th>
-                        <th class="text-center" width="10%">วันรับ</th>
+                        <th class="text-center" width="7%">งาน</th>
+                        <th class="text-center" width="7%">เงิน</th>
+                        <th class="text-center" width="7%">รับ</th>
                         <th class="text-center" width="10%">วันขาย</th>
-                        <th class="text-center" width="24%">หมายเหตุ</th>
+                        <th class="text-center" width="10%">วันรับ</th>
+                        <th class="text-center" width="12%">พื้นที่</th>
+                        <th class="text-center" width="20%">หมายเหตุ</th>
                         <th class="text-center" width="5%">สนง</th>
                         <th class="text-center" width="5%">edit</th>
                       </tr>
@@ -122,6 +121,7 @@
                       ?>
                       <tr>
                         <td class="text-center" > <a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";>X</a></td>
+                        <td class="text-center" ><?php echo $value['name']; ?></td>
                         <td class="text-center" >
                           <?php 
                             $status_boss = $value['status_boss'];
@@ -137,12 +137,12 @@
                               } 
                           ?>
                         </td>
-                        <td class="text-center" ><?php echo $value['name']; ?></td>
                         <td class="text-center" ><?php echo $value['name_practice']; ?></td>
                         <td class="text-center" ><?php echo $value['money']; ?></td>
                         <td class="text-center" ><?php echo $value['name_category']; ?></td>
-                        <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
                         <td class="text-center" ><?php echo $value['date_buy']; ?></td>
+                        <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
+                        <td class="text-center" ><?php echo $value['area']; ?></td>
                         <td class="text-center" ><?php echo $value['note']; ?></td>
                         <td class="text-center" >
                           <?php 
@@ -178,8 +178,8 @@
                         <th class="text-center" width="10%">งาน</th>
                         <th class="text-center" width="10%">เงินขาย</th>
                         <th class="text-center" width="8%">การรับ</th>
-                        <th class="text-center" width="10%">วันรับ</th>
                         <th class="text-center" width="10%">วันขาย</th>
+                        <th class="text-center" width="10%">วันรับ</th>
                         <th class="text-center" width="32%">หมายเหตุ</th>
                         <th class="text-center" width="7%">สนง</th>
                       </tr>
@@ -237,7 +237,7 @@
               <br>
               <div class="box-header text-center with-border">
                 <font size="5">
-                  <B align="center">เงินขายอยู่กับทีมส่ง </B>
+                  <B align="center">เงินขายอยู่กับ(ทีมส่ง) </B>
                 </font>
               </div>
               <table id="customers">
@@ -269,7 +269,7 @@
                 <br>
                 <div class="box-header text-center with-border">
                   <font size="5">
-                    <B align="center">สำนักงานรับแล้ว</B>
+                    <B align="center">เงินขายอยู่กับ(สำนักงาน)</B>
                   </font>
                 </div>
                 <table id="customers">

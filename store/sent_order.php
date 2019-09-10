@@ -85,9 +85,10 @@ folder instead of downloading all of them to reduce the load. -->
       </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="height: 4000px;">
+    <div class="content-wrapper">
       <!-- Main content -->
       <section class="content">
+      <div class="row">
       <div class="col-md-12">
           <div class="box box-primary">
             <!-- /.box-header -->
@@ -102,44 +103,45 @@ folder instead of downloading all of them to reduce the load. -->
             <div class="col-md-12 text-center"><font size="4"><B>ORDER ค้างส่ง</B></font></div>
           </div>
             <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-              <table id="customers">
-                <tbody>
-                  <tr>
-                    <th class="text-center" width="5%">ส่ง</th>
-                    <th class="text-center" width="5%">สั่ง</th>
-                    <th class="text-center" width="5%">แก้</th>
-                    <th class="text-center" width="5%">ที่</th>
-                    <th class="text-center" width="75%">ที่อยู่ลูกค้า</th>
-                    <th class="text-center" width="5%">วัน</th>
-                  </tr>
-                 <?php 
-                  $sql_addorder = "SELECT * FROM addorder 
-                                   INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
-                                   INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
-                                   INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
-                                   WHERE addorder.status = 'pending' ORDER BY addorder.id_addorder DESC";
-                  $objq_addorder = mysqli_query($conn,$sql_addorder);
-                  while($value = $objq_addorder->fetch_assoc()){
-                 ?>
-                  <tr>
-                    <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะส่งสินค้า [<?php echo '('.$value['id_addorder'].')  '.$value['name_customer'].'   บ.'.$value['village']; ?>] หรือไม่ ?')";>ส่ง</a></td>
-                    <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
-                    <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
-                    <td class="text-center"><?php echo $value['id_addorder']; ?></td>
-                    <td ><?php echo $value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
-                    <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
-                  </tr>
-                 <?php 
-                  }
-                 ?>
-                </tbody>
-              </table>
-              </div>
+                <div class="mailbox-read-message">
+                <table id="customers">
+                  <tbody>
+                    <tr>
+                      <th class="text-center" width="5%">ส่ง</th>
+                      <th class="text-center" width="5%">สั่ง</th>
+                      <th class="text-center" width="5%">แก้</th>
+                      <th class="text-center" width="5%">ที่</th>
+                      <th class="text-center" width="75%">ที่อยู่ลูกค้า</th>
+                      <th class="text-center" width="5%">วัน</th>
+                    </tr>
+                  <?php 
+                    $sql_addorder = "SELECT * FROM addorder 
+                                    INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
+                                    INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
+                                    INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
+                                    WHERE addorder.status = 'pending' ORDER BY addorder.id_addorder DESC";
+                    $objq_addorder = mysqli_query($conn,$sql_addorder);
+                    while($value = $objq_addorder->fetch_assoc()){
+                  ?>
+                    <tr>
+                      <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะส่งสินค้า [<?php echo '('.$value['id_addorder'].')  '.$value['name_customer'].'   บ.'.$value['village']; ?>] หรือไม่ ?')";>ส่ง</a></td>
+                      <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
+                      <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
+                      <td class="text-center"><?php echo $value['id_addorder']; ?></td>
+                      <td ><?php echo $value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
+                      <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
+                    </tr>
+                  <?php 
+                    }
+                  ?>
+                  </tbody>
+                </table>
+                </div>
             </div>
             <div class="box-footer" align="center"> </div>
           </div>
           </form>
+        </div>
         </div>
       </section>
     </div>

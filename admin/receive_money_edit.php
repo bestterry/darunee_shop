@@ -101,14 +101,13 @@
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center"> แก้ไขเงินขายรายวัน 
+                <B align="center"> แก้ไขเงินขายรายวัน </B>
               </font>
-              </B>
             </div>
             <!-- add_receive_money  -->
             <form action="algorithm/receive_money_edit.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
-            <div class="mailbox-read-message">
-            <table class="table table-bordered" id="dynamic_field">
+              <div class="mailbox-read-message">
+                <table class="table table-bordered" id="dynamic_field">
                   <tr>
                     <th width="20%" class="text-right" ><font size="4">ชื่อ &nbsp;&nbsp;:</font></th>
                     <td width="30%" >
@@ -122,21 +121,21 @@
                     <th width="20%" class="text-right"><font size="4" valign="middle">งาน &nbsp;&nbsp;:</font></th>
                     <td width="30%" >
                       <select name="id_practice"  class="form-control" style="width: 100%;">
-                        <option value="1" <?php if($id_practice == 1){ echo "selected='selected'";} ?>>ส่งของ</option>
-                        <option value="2"  <?php if($id_practice == 2){ echo "selected='selected'";}?>>ขนของ</option>
+                        <option value="1"  <?php if($id_practice == 1){ echo "selected='selected'";} ?>>ส่งของ</option>
+                        <option value="2"  <?php if($id_practice == 2){ echo "selected='selected'";} ?>>ขนของ</option>
                         <option value="3"  <?php if($id_practice == 3){ echo "selected='selected'";} ?>>เยี่ยม</option>
-                        <option value="4"  <?php if($id_practice == 4){ echo "selected='selected'";}?>>หน้าร้าน</option>
-                        <option value="5"  <?php if($id_practice == 5){ echo "selected='selected'";}?>>อื่นๆ</option>
+                        <option value="4"  <?php if($id_practice == 4){ echo "selected='selected'";} ?>>หน้าร้าน</option>
+                        <option value="5"  <?php if($id_practice == 5){ echo "selected='selected'";} ?>>อื่นๆ</option>
                       </select>
                     </td>
                     <th width="20%" class="text-right" ><font size="4">รับ &nbsp;&nbsp;:</font></th>
                     <td width="30%">
                       <select name="id_category"  class="form-control" style="width: 100%;">
-                        <option value="1" <?php if($id_category == 1){ echo "selected='selected'";} ?>>สด</option>
-                        <option value="2"  <?php if($id_category == 2){ echo "selected='selected'";}?>>เช็ค</option>
+                        <option value="1"  <?php if($id_category == 1){ echo "selected='selected'";} ?>>สด</option>
+                        <option value="2"  <?php if($id_category == 2){ echo "selected='selected'";} ?>>เช็ค</option>
                         <option value="3"  <?php if($id_category == 3){ echo "selected='selected'";} ?>>สกต.</option>
-                        <option value="4"  <?php if($id_category == 4){ echo "selected='selected'";}?>>เชื่อ</option>
-                        <option value="5"  <?php if($id_category == 5){ echo "selected='selected'";}?>>ฝากขาย</option>
+                        <option value="4"  <?php if($id_category == 4){ echo "selected='selected'";} ?>>เชื่อ</option>
+                        <option value="5"  <?php if($id_category == 5){ echo "selected='selected'";} ?>>ฝากขาย</option>
                       </select>
                     </td>
                   </tr>
@@ -151,13 +150,14 @@
                     <td colspan="3" ><input type="text" name="note" value="<?php echo $objr_receive['note']; ?>" class="form-control text-center"></td>
                   </tr>
                 </table>
-                
+                  
                 <div class="box-footer">
                   <a type="block" href="receive_money.php" class="btn btn-danger pull-left"><< กลับ</a> 
                   <button type="submit" type="submit" class="btn btn-success pull-right"> <i class="fa fa-save"></i> บันทึก </button>
                 </div>
-              </form>
-            </div>
+
+            </form>
+          </div>
         </div>
       </div>
     </section>
