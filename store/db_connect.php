@@ -44,6 +44,7 @@ function select($sql)
 	}
 	return $result;	
 }
+
 //    ฟังก์ชันสำหรับการ insert ข้อมูล
 function insert($table,$data)
 {

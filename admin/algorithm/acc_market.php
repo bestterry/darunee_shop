@@ -1,23 +1,9 @@
 <?php 
     require "../../config_database/config.php";
 
-    function DateThai($strDate)
-    {
-      $strYear = date("Y",strtotime($strDate))+543-2500;
-      $strMonth= date("n",strtotime($strDate));
-      $strDay= date("j",strtotime($strDate));
-      $strHour= date("H",strtotime($strDate));
-      $strMinute= date("i",strtotime($strDate));
-      $strSeconds= date("s",strtotime($strDate));
-      $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-      $strMonthThai=$strMonthCut[$strMonth];
-      return "$strDay $strMonthThai $strYear";
-    }
-  
-    $date_now = date("Y-m-d");
-    $th_date = DateThai($date_now);
-    
-    
+
+    $date_now = date("Y-m-d H:i:s");
+      
    $name_customer = $_POST['name_customer'];
    $village = $_POST['village'];
    $province_id = $_POST['province_name'];
@@ -27,9 +13,14 @@
    $tel = $_POST['tel'];
    $count = COUNT($_POST['id_product']);
 
-    $sql = "INSERT INTO acc_market (name_customer, village, district_id, amphur_id, province_id, date_acc, note,tel )
-            VALUES ('$name_customer', '$village', $district_id, $amphur_id, $province_id, '$th_date', '$note', '$tel')";
-            mysqli_query($conn,$sql);
+    $sql = "INSERT INTO acc_market (name_customer, village, district_id, amphur_id, province_id, date_acc, note, tel )
+            VALUES ('$name_customer', '$village', $district_id, $amphur_id, $province_id, '$date_now', '$note', '$tel')";
+            if ($conn->query($sql) === TRUE) {
+              echo "New record created successfully";
+          } else {
+              echo "Error: " . $sql . "<br>" . $conn->error;
+          }
+            // mysqli_query($conn,$sql);
 
     $sql_maxid = "SELECT MAX(id_acc_market) FROM acc_market";
     $objq_maxid = mysqli_query($conn,$sql_maxid);
@@ -52,4 +43,4 @@
 
 
     header('location:../acc_market_sale.php');
-?>
+// ?>

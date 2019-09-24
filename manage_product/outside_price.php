@@ -78,7 +78,7 @@
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="price_product_finish.php" method="post" autocomplete="off">
+                <form action="outside_price2.php" method="post" autocomplete="off">
                   <table class="table table-bordered">
                     <tbody>
                       <tr bgcolor="#99CCFF">
@@ -89,16 +89,15 @@
                         <th class="text-center" width="15%">รวมเงิน(บ)</th>
                       </tr>
                       <?php
-                          
-                            for($i=0;$i<count($_POST["menu"]);$i++)
-                            {
-                              if(trim($_POST["menu"][$i]) != "")
-                                {
-                                  $id_numproduct = $_POST['menu'][$i];
-                                  $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_numproduct = $id_numproduct";
-                                  $objq_listproduct = mysqli_query($conn,$list_product);
-                                  $objr_listproduct = mysqli_fetch_array($objq_listproduct);
-                          ?>
+                          for($i=0;$i<count($_POST["menu"]);$i++)
+                          {
+                            if(trim($_POST["menu"][$i]) != "")
+                              {
+                                $id_numproduct = $_POST['menu'][$i];
+                                $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_numproduct = $id_numproduct";
+                                $objq_listproduct = mysqli_query($conn,$list_product);
+                                $objr_listproduct = mysqli_fetch_array($objq_listproduct);
+                      ?>
                       <tr>
                         <td class="text-center"><?php echo $i+1; ?></td>
                         <td><?php echo $objr_listproduct['name_product'].'_'.$objr_listproduct['unit']; ?></td>
@@ -106,28 +105,35 @@
                             <input class="hidden" type="text" name="id_numproduct[]" value="<?php echo $id_numproduct; ?>">
                             <input class="text-center" type="text" name="num_product[]" placeholder="<?php echo $objr_listproduct['unit'];?>">
                         </td>
-                        <td class="text-center"><input class="text-center" type="text" name="price_product[]"  placeholder="ราคา/หน่วย"> </td>
+                        <td class="text-center"><input class="text-center" type="text" name="price_product[]" placeholder="ราคา/หน่วย"> </td>
                         <td></td>
                       </tr>
                       <?php 
-                                  }
                               }
-                             ?>
+                          }
+                      ?>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <td bgcolor="#99CCFF" class="text-center">ผู้เบิกนอกเขต</td>
+                        <td colspan="2" bgcolor="#99CCFF" class="text-center">
+                          <select name="id_member" class="form-control text-center select2" style="width: 100%;">
+                          <option value="">------กรุณาเลือกผู้เบิก------</option>
+                            <?php #endregion
+                            $sql_outside = "SELECT * FROM outside";
+                            $objq_outside = mysqli_query($conn, $sql_outside);
+                            while ($outside = $objq_outside->fetch_assoc()) {
+                              $id_outside = $outside['id_outside'];
+                              
+                              ?>
+                              <option value="<?php echo $id_outside; ?>"><?php echo $outside['name'].'  '.$outside['province']; ?> </option>
+                            <?php   
+                              }
+                            ?>
+                          </select>
+                        </td>
                     </tbody>
                   </table>
-                  <div class="col-md-2">
-                    
-                  </div>
-                  <div class="col-md-10">
-                    <table class="table table-bordered">
-                      <tbody>
-                        <tr bgcolor="#99CCFF">
-                          <th class="text-center">หมายเหตุ</th>
-                          <th class="text-center"> <input class="text-center" type="text" size="50" name=" note" value="-"></th>
-                        </tr>
-                      </tbody>
-                    </table> 
-                  </div>
+                
               </div>
               <!-- /.mailbox-read-message -->
             </div>

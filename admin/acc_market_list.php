@@ -1,6 +1,7 @@
 <?php
   require "../config_database/config.php";
   require "../session.php";
+  require "menu/date.php";
   $id_acc_market = $_GET['id_acc_market'];
 ?>
 <!DOCTYPE html>
@@ -86,9 +87,9 @@ folder instead of downloading all of them to reduce the load. -->
                           while($value = $objq_acc->fetch_assoc()){
                         ?>
                         <tr> 
-                          <td class="text-center"><?php echo $value['date_acc'];?></td>
+                          <td class="text-center"><?php echo Datethai($value['date_acc']);?></td>
                           <td class="text-center"><?php echo $value['name_customer'];?></td>
-                          <td class="text-center"><?php echo $value['village'].'   ต.'.$value['district_name'].'  อ.'.$value['amphur_name'].'  จ.'.$value['province_name'];?></td>
+                          <td class="text-center"><?php echo $value['village'].'   ต.'.$value['district_name'].'  อ.'.$value['amphur_name'].'  จ.'.$value['province_name'].'  '.$value['tel'];?></td>
                         </tr>
                         <?php }?>
                       </table>

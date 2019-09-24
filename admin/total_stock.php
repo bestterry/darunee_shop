@@ -89,8 +89,7 @@
                 <tbody>
                   <tr class="info">
                     <th class="text-center" width="5%">ที่</th>
-                    <th class="text-center" width="15%">สินค้า</th>
-                    <th class="text-center" width="5%">หน่วย</th>
+                    <th class="text-center" width="17%">สินค้า_หน่วย</th>
                     <th class="text-center" width="5%">จุน</th>
                     <th class="text-center" width="5%">พาน</th>
                     <th class="text-center" width="5%">ดคต.</th>
@@ -100,7 +99,7 @@
                     <th class="text-center" width="5%">แม่จัน</th>
                     <th class="text-center" width="5%">ทีมจร</th>
                     <th class="text-center" width="5%">รถ</th>
-                    <th class="text-center" width="5%">ทั้งหมด</th>
+                    <th class="text-center" width="8%">ทั้งหมด</th>
                   </tr>
                   <?php 
                     $i=1;
@@ -113,10 +112,7 @@
                       <?php echo $a; ?>
                     </td>
                     <td class="text-center" >
-                      <?php echo $product['name_product']; ?>
-                    </td>
-                    <td class="text-center" >
-                      <?php echo $product['unit']; ?>
+                      <?php echo $product['name_product'].'_'.$product['unit']; ?>
                     </td>
                     <!-- -------------------------------จุน------------------------------------ -->
                     <?php 

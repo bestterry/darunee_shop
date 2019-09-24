@@ -87,57 +87,58 @@
   <script src="../dist/js/demo.js"></script>
   <script src="../plugins/iCheck/icheck.min.js"></script>
   <script>
-  $(function() {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging': true,
-      'lengthChange': false,
-      'searching': false,
-      'ordering': true,
-      'info': true,
-      'autoWidth': false
+    $(function() {
+      $('#example1').DataTable()
+      $('#example2').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+      })
     })
-  })
-  $(function() {
-    //Enable iCheck plugin for checkboxes
-    //iCheck for checkbox and radio inputs
-    $('.mailbox-messages input[type="checkbox"]').iCheck({
-      checkboxClass: 'icheckbox_flat-blue',
-      radioClass: 'iradio_flat-blue'
+    $(function() {
+      //Enable iCheck plugin for checkboxes
+      //iCheck for checkbox and radio inputs
+      $('.mailbox-messages input[type="checkbox"]').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue'
+      });
+      //Enable check and uncheck all functionality
+      $(".checkbox-toggle").click(function() {
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+          //Uncheck all checkboxes
+          $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+          $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        } else {
+          //Check all checkboxes
+          $(".mailbox-messages input[type='checkbox']").iCheck("check");
+          $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+      });
+      //Handle starring for glyphicon and font awesome
+      $(".mailbox-star").click(function(e) {
+        e.preventDefault();
+        //detect type
+        var $this = $(this).find("a > i");
+        var glyph = $this.hasClass("glyphicon");
+        var fa = $this.hasClass("fa");
+        //Switch states
+        if (glyph) {
+          $this.toggleClass("glyphicon-star");
+          $this.toggleClass("glyphicon-star-empty");
+        }
+        if (fa) {
+          $this.toggleClass("fa-star");
+          $this.toggleClass("fa-star-o");
+        }
+      });
     });
-    //Enable check and uncheck all functionality
-    $(".checkbox-toggle").click(function() {
-      var clicks = $(this).data('clicks');
-      if (clicks) {
-        //Uncheck all checkboxes
-        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-      } else {
-        //Check all checkboxes
-        $(".mailbox-messages input[type='checkbox']").iCheck("check");
-        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-      }
-      $(this).data("clicks", !clicks);
-    });
-    //Handle starring for glyphicon and font awesome
-    $(".mailbox-star").click(function(e) {
-      e.preventDefault();
-      //detect type
-      var $this = $(this).find("a > i");
-      var glyph = $this.hasClass("glyphicon");
-      var fa = $this.hasClass("fa");
-      //Switch states
-      if (glyph) {
-        $this.toggleClass("glyphicon-star");
-        $this.toggleClass("glyphicon-star-empty");
-      }
-      if (fa) {
-        $this.toggleClass("fa-star");
-        $this.toggleClass("fa-star-o");
-      }
-    });
-  });
   </script>
+
   <script type="text/javascript">
     $(function() {
 
@@ -174,7 +175,7 @@
         var IDWhere = obj.data("where"); // ค่าจาก data-where ค่าน่าจะเป็นตัวฟิลด์เงื่อนไขที่เราจะใช้
         var targetObj = $("select[data-where='" + (IDWhere + 1) + "']"); // ตัวที่เราจะเปลี่ยนแปลงข้อมูล
         if (targetObj.length > 0) { // ถ้ามี obj เป้าหมาย
-          targetObj.html("<option>.. กำลังโหลดข้อมูล.. </option>"); // แสดงสถานะกำลังโหลด  
+          targetObj.html("<option>.. กำลังโหลดข้อมูล .. </option>"); // แสดงสถานะกำลังโหลด  
           setTimeout(function() { // หน่วงเวลานิดหน่อยให้เห็นการทำงาน ตัดเออกได้
             // ส่งค่าไปทำการดึงข้อมูล option ตามเงื่อนไข
             $.post("getAddress.php", {
@@ -187,7 +188,6 @@
           }, 0);
         }
       });
-
     });
   </script>
 </body>

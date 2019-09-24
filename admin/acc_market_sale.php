@@ -1,6 +1,8 @@
 <?php
 include("db_connect.php");
+require 'menu/date.php';
 $mysqli = connect();
+ 
 ?>
 <!DOCTYPE html>
 <html>
@@ -100,13 +102,13 @@ folder instead of downloading all of them to reduce the load. -->
                   <th width="30%" >
                     <a type="block" href="admin.php" class="btn btn-danger"><< เมนูหลัก</a>
 
-                    <a href="#" data-toggle="modal" data-target="#cu" class="btn btn-success">PDF</a>
+                    <a href="#" data-toggle="modal" data-target="#cu" class="btn btn-success">เอกสารส่ง(PDF)</a>
                       <div class="modal fade" id="cu" role="dialog">
                         <div class="modal-dialog modal-lg">
-                          <form action="../pdf_file/acc_list.php" method="post">
+                          <form action="../pdf_file/acc_list1.php" method="post">
                             <div class="modal-content">
                               <div class="modal-header text-center">
-                                <font size="5"><B> เงินขาย สกต. </B></font>
+                                <font size="5"><B>เอกสารส่ง สกต.</B></font>
                               </div>
                               <div class="modal-body col-md-12 table-responsive mailbox-messages">
                                 <div class="table-responsive mailbox-messages">
@@ -137,7 +139,7 @@ folder instead of downloading all of them to reduce the load. -->
                         </div>
                       </div>
                   </th>
-                  <td width="40%" class="text-center"><font size="5"><B align="center">ขาย สกต. </B></font></td>
+                  <td width="40%" class="text-center"><font size="5"><B align="center">รายการขาย สกต. </B></font></td>
                   <td width="30%"></td>
                 </tr>
               </table>
@@ -228,15 +230,9 @@ folder instead of downloading all of them to reduce the load. -->
                             <td class="text-center">
                               <select name="id_product[]" class="form-control text-center select2" style="width: 100%;">
                                 <option class="text-center" value="">-- เลือกสินค้า --</option>
-                              <?php 
-                                  $product = "SELECT * FROM product";
-                                  $objq_product = mysqli_query($mysqli,$product);
-                                  while($value = $objq_product->fetch_array()){
-                                ?>
-                                  <option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option>
-                                <?php 
-                                  }
-                                ?>
+                                <option value="15">ปุ๋ยเคมีกวางฯ</option>
+                                <option value="11">สารปรับปรุงดินโซเล่</option>
+                                <option value="34">ปุ๋ยอินทรีย์กวางฯ</option>
                               </select>
                             </td>
                             <td><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td>
@@ -265,13 +261,14 @@ folder instead of downloading all of them to reduce the load. -->
                   <?php 
                     $sql_acc = "SELECT * FROM acc_market INNER JOIN tbl_districts ON acc_market.district_id = tbl_districts.district_code
                                 INNER JOIN tbl_amphures  ON acc_market.amphur_id = tbl_amphures.amphur_id
-                                INNER JOIN tbl_provinces ON acc_market.province_id = tbl_provinces.province_id";
+                                INNER JOIN tbl_provinces ON acc_market.province_id = tbl_provinces.province_id 
+                                ORDER BY acc_market.id_acc_market DESC";
                     $objq_acc = mysqli_query($mysqli,$sql_acc);
                     while($value = $objq_acc->fetch_assoc()){
                   ?>
                   <tbody>
                     <tr> 
-                      <td class="text-center"><?php echo $value['date_acc'];?></td>
+                      <td class="text-center"><?php echo Datethai3($value['date_acc']);?></td>
                       <td class="text-center"><?php echo $value['name_customer'];?></td>
                       <td class="text-center"><?php echo $value['village'].'   ต.'.$value['district_name'].'  อ.'.$value['amphur_name'].'  จ.'.$value['province_name'].' '.$value['tel'];?></td>
                       <td class="text-center" ><a href="acc_market_list.php?id_acc_market=<?php echo $value['id_acc_market']; ?>"><i class="fa fa-search-plus"></i></a></td>
@@ -372,7 +369,7 @@ folder instead of downloading all of them to reduce the load. -->
         var i=1;
         $('#add').click(function(){
           i++;
-          $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td class="text-center"><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="text" name="price[]" placeholder="ราคา/น." class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
+          $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option> <option value="15">ปุ๋ยเคมีกวางฯ</option><option value="11">สารปรับปรุงดินโซเล่</option><option value="34">ปุ๋ยอินทรีย์กวางฯ</option></select></td><td class="text-center"><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="text" name="price[]" placeholder="ราคา/น." class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
         });
         
         $(document).on('click', '.btn_remove', function(){

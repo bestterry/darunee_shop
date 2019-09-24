@@ -63,7 +63,7 @@ $pdf=new PDF('L','mm','A4');
                   $pdf->Cell(40,9,iconv('UTF-8','cp874','แม่จัน'),1,0,'C');
                   $pdf->Cell(40,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
                   $pdf->Ln(9);
-                  $sql_pd = "SELECT * FROM product";
+                  $sql_pd = "SELECT * FROM product WHERE NOT id_product = 12";
                     $objq_pd = mysqli_query($conn,$sql_pd);
                     while ($value_pd = $objq_pd->fetch_assoc()) {
                      $id_product = $value_pd['id_product'];
@@ -102,7 +102,7 @@ $pdf=new PDF('L','mm','A4');
                   }
                   $pdf->Cell(18,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
                   $pdf->Ln(9);
-                    $sql_product = "SELECT * FROM product";
+                    $sql_product = "SELECT * FROM product WHERE NOT id_product = 12";
                     $objq_product = mysqli_query($conn,$sql_product);
                     while($value_pd = $objq_product->fetch_assoc())
                     {
@@ -148,7 +148,7 @@ $pdf=new PDF('L','mm','A4');
                }
                $pdf->Cell(40,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
                $pdf->Ln(9);
-                 $sql_product = "SELECT * FROM product";
+                 $sql_product = "SELECT * FROM product WHERE NOT id_product = 12";
                  $objq_product = mysqli_query($conn,$sql_product);
                  while($value_pd = $objq_product->fetch_assoc())
                  {
@@ -194,7 +194,7 @@ $pdf=new PDF('L','mm','A4');
             }
             $pdf->Cell(20,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
             $pdf->Ln(9);
-              $sql_product = "SELECT * FROM product";
+              $sql_product = "SELECT * FROM product WHERE NOT id_product = 12";
               $objq_product = mysqli_query($conn,$sql_product);
               while($value_pd = $objq_product->fetch_assoc())
               {
@@ -240,7 +240,7 @@ $pdf=new PDF('L','mm','A4');
             }
             $pdf->Cell(50,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
             $pdf->Ln(9);
-              $sql_product = "SELECT * FROM product";
+              $sql_product = "SELECT * FROM product WHERE NOT id_product = 12";
               $objq_product = mysqli_query($conn,$sql_product);
               while($value_pd = $objq_product->fetch_assoc())
               {
@@ -286,7 +286,7 @@ $pdf=new PDF('L','mm','A4');
             }
             $pdf->Cell(30,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
             $pdf->Ln(9);
-              $sql_product = "SELECT * FROM product";
+              $sql_product = "SELECT * FROM product WHERE NOT id_product = 12";
               $objq_product = mysqli_query($conn,$sql_product);
               while($value_pd = $objq_product->fetch_assoc())
               {

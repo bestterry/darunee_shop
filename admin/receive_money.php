@@ -100,27 +100,29 @@
                 if ($id_member == 30) {
                ?>
                  <!-- boss -->
-                  <table id="customers">
-                    <tbody>
+                 <table id="example1" class="table table-bordered table-striped">
+                    <thead>
                       <tr>
                         <th class="text-center" width="5%">ลบ</th>
                         <th class="text-center" width="7%">ชื่อ</th>
                         <th class="text-center" width="5%">รับ</th>
                         <th class="text-center" width="7%">งาน</th>
+                        <th class="text-center" width="5%">สนง</th>
                         <th class="text-center" width="7%">เงิน</th>
                         <th class="text-center" width="7%">รับ</th>
-                        <th class="text-center" width="10%">วันขาย</th>
-                        <th class="text-center" width="10%">วันรับ</th>
-                        <th class="text-center" width="12%">พื้นที่</th>
+                        <th class="text-center" width="16%">วันขาย</th>
+                        <th class="text-center" width="16%">วันรับ</th>
+                        <!-- <th class="text-center" width="12%">พื้นที่</th> -->
                         <th class="text-center" width="20%">หมายเหตุ</th>
-                        <th class="text-center" width="5%">สนง</th>
                         <th class="text-center" width="5%">edit</th>
                       </tr>
+                    </thead>
+                    <tbody>
                       <?php
                         while($value = $objq_receive2 -> fetch_assoc()){
                       ?>
                       <tr>
-                        <td class="text-center" > <a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";>X</a></td>
+                        <td class="text-center" > <a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูล <?php echo $value['name']; ?> หรือไม่ ?')";>X</a></td>
                         <td class="text-center" ><?php echo $value['name']; ?></td>
                         <td class="text-center" >
                           <?php 
@@ -138,12 +140,6 @@
                           ?>
                         </td>
                         <td class="text-center" ><?php echo $value['name_practice']; ?></td>
-                        <td class="text-center" ><?php echo $value['money']; ?></td>
-                        <td class="text-center" ><?php echo $value['name_category']; ?></td>
-                        <td class="text-center" ><?php echo $value['date_buy']; ?></td>
-                        <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
-                        <td class="text-center" ><?php echo $value['area']; ?></td>
-                        <td class="text-center" ><?php echo $value['note']; ?></td>
                         <td class="text-center" >
                           <?php 
                               $status = $value['status_office'];
@@ -159,6 +155,12 @@
                                 } 
                           ?>
                         </td>
+                        <td class="text-center" ><?php echo $value['money']; ?></td>
+                        <td class="text-center" ><?php echo $value['name_category']; ?></td>
+                        <td class="text-center" ><?php echo $value['date_buy']; ?></td>
+                        <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
+                        <!-- <td class="text-center" ><?php echo $value['area']; ?></td> -->
+                        <td class="text-center" ><?php echo $value['note']; ?></td>
                         <td class="text-center" > <a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="fa fa-cog"></a></td>
                       </tr>
                         <?php }?>
@@ -170,8 +172,8 @@
                  }else{
                ?>
                   <!-- สนง -->
-                  <table id="customers">
-                    <tbody>
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
                       <tr>
                         <th class="text-center" width="5%">รับ</th>
                         <th class="text-center" width="8%">ชื่อ</th>
@@ -183,6 +185,8 @@
                         <th class="text-center" width="32%">หมายเหตุ</th>
                         <th class="text-center" width="7%">สนง</th>
                       </tr>
+                    </thead>
+                    <tbody>
                       <?php
                         while($value = $objq_receive -> fetch_assoc()){
                       ?>
@@ -325,6 +329,84 @@
   <!-- AdminLTE for demo purposes -->
   <script src="../dist/js/demo.js"></script>
   <script src="../plugins/iCheck/icheck.min.js"></script>
+  <script>
+    $(function () {
+      $('#example1').DataTable()
+      $('#example2').DataTable({
+        'paging'      : true,
+        'lengthChange': false,
+        'searching'   : false,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : false
+      }
+                              )
+    }
+    )
+    $(function () {
+      //Enable iCheck plugin for checkboxes
+      //iCheck for checkbox and radio inputs
+      $('.mailbox-read-message input[type="checkbox"]').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue'
+      }
+                                              );
+      //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+      //Enable check and uncheck all functionality
+      $(".checkbox-toggle").click(function () {
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+          //Uncheck all checkboxes
+          $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+          $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        }
+        else {
+          //Check all checkboxes
+          $(".mailbox-messages input[type='checkbox']").iCheck("check");
+          $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+      }
+                        );
+      //Handle starring for glyphicon and font awesome
+      $(".mailbox-star").click(function (e) {
+        e.preventDefault();
+        //detect type
+        var $this = $(this).find("a > i");
+        var glyph = $this.hasClass("glyphicon");
+        var fa = $this.hasClass("fa");
+        //Switch states
+        if (glyph) {
+          $this.toggleClass("glyphicon-star");
+          $this.toggleClass("glyphicon-star-empty");
+        }
+        if (fa) {
+          $this.toggleClass("fa-star");
+          $this.toggleClass("fa-star-o");
+        }
+      }
+                              );
+                              
+    }
+    );
+    </script>
+    <script>
+    $(function () {
+      $('#example1').DataTable()
+      $('#example2').DataTable({
+        'paging'      : true,
+        'lengthChange': false,
+        'searching'   : false,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : false
+      })
+    })
+  </script>
 </body>
 
 </html>

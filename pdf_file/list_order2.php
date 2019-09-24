@@ -102,7 +102,7 @@ $pdf=new PDF('P','mm','A4');
                   $pdf->MultiCell( 140  , 7 , iconv( 'UTF-8','cp874' ,$value['name_customer'].'   '.$value['tel']  .'
 บ.'.$value['village'].'   ต.'.$value['district_name'].'อ.'.$value['amphur_name'].'จ.'.$value['province_name'].'
 '.$value['id_addorder'].'  สั่ง '.DateThai($value['datetime']).'   '.$value['name_member']  .'  
-# '.$value['note'].'
+# '.'  '.'
 '   .'  '  ) );
                 }  
             }        

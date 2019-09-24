@@ -88,7 +88,7 @@ require "menu/date.php";
                     <th class="text-center" width="5%">ลิน</th>
                     <th class="text-center" width="5%">เอ</th>
                     <th class="text-center" width="5%">รงค์</th>
-                    <th class="text-center" width="5%">เอ๋</th>
+                    <th class="text-center" width="5%">เอ้ว</th>
                     <th class="text-center" width="5%">เกีติ</th>
                     <th class="text-center" width="5%">เดี่ว</th>
                     <th class="text-center" width="5%">อั๋น</th>
