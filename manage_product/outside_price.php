@@ -1,7 +1,6 @@
 <?php 
   require "../config_database/config.php"; 
   require "../session.php";
-  //require "session.php"; 
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +71,7 @@
           <div class="box box-primary">
             <div class="box-header text-center">
               <font size="5">
-                <B>รายการขายสินค้า</B>
+                <B>ขายสินค้านอกเขต</B>
               </font>
             </div>
             <!-- /.box-header -->
@@ -88,6 +87,7 @@
                         <th class="text-center" width="15%">บ/หน่วย</th>
                         <th class="text-center" width="15%">รวมเงิน(บ)</th>
                       </tr>
+                      <input class="hidden" type="text" name="id_zone" value="<?php echo $id_zone; ?>">
                       <?php
                           for($i=0;$i<count($_POST["menu"]);$i++)
                           {
@@ -100,12 +100,16 @@
                       ?>
                       <tr>
                         <td class="text-center"><?php echo $i+1; ?></td>
-                        <td><?php echo $objr_listproduct['name_product'].'_'.$objr_listproduct['unit']; ?></td>
+                        <td>
+                          <?php echo $objr_listproduct['name_product'].'_'.$objr_listproduct['unit']; ?>
+                          <input class="hidden" type="text" name="name_pd[]" value="<?php echo $objr_listproduct['name_product'].'_'.$objr_listproduct['unit']; ?>">
+                          <input class="hidden" type="text" name="id_product[]" value="<?php echo $objr_listproduct['id_product']; ?>">
+                        </td>
                         <td>
                             <input class="hidden" type="text" name="id_numproduct[]" value="<?php echo $id_numproduct; ?>">
-                            <input class="text-center" type="text" name="num_product[]" placeholder="<?php echo $objr_listproduct['unit'];?>">
+                            <input class="text-center" type="text" name="num_pd[]" placeholder="<?php echo $objr_listproduct['unit'];?>">
                         </td>
-                        <td class="text-center"><input class="text-center" type="text" name="price_product[]" placeholder="ราคา/หน่วย"> </td>
+                        <td class="text-center"><input class="text-center" type="text" name="price_pd[]" placeholder="ราคา/หน่วย"> </td>
                         <td></td>
                       </tr>
                       <?php 
@@ -116,18 +120,17 @@
                         <td style="visibility:collapse;"></td>
                         <td bgcolor="#99CCFF" class="text-center">ผู้เบิกนอกเขต</td>
                         <td colspan="2" bgcolor="#99CCFF" class="text-center">
-                          <select name="id_member" class="form-control text-center select2" style="width: 100%;">
-                          <option value="">------กรุณาเลือกผู้เบิก------</option>
+                          <select name="id_outside" class="form-control text-center select2" style="width: 100%;">
+                            <option value="">------กรุณาเลือกผู้เบิก------</option>
                             <?php #endregion
-                            $sql_outside = "SELECT * FROM outside";
-                            $objq_outside = mysqli_query($conn, $sql_outside);
-                            while ($outside = $objq_outside->fetch_assoc()) {
-                              $id_outside = $outside['id_outside'];
-                              
-                              ?>
-                              <option value="<?php echo $id_outside; ?>"><?php echo $outside['name'].'  '.$outside['province']; ?> </option>
+                              $sql_outside = "SELECT * FROM outside";
+                              $objq_outside = mysqli_query($conn, $sql_outside);
+                              while ($outside = $objq_outside->fetch_assoc()) {
+                                $id_outside = $outside['id_outside'];
+                            ?>
+                            <option value="<?php echo $id_outside; ?>"><?php echo $outside['name'].'  '.$outside['province']; ?> </option>
                             <?php   
-                              }
+                                }
                             ?>
                           </select>
                         </td>

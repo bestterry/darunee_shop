@@ -233,6 +233,10 @@
                 <li><a href="acc_market_sale.php" ><i class="fa fa-money"></i> เงิน สกต. </a></li>
                 <!-- /สกต. -->
 
+                <!-- นอกเขต. -->
+                <li><a href="outside.php" ><i class="fa fa-truck"></i> นอกเขต </a></li>
+                <!-- /นอกเขต. -->
+
                 <!-- สถานที่ทำงาน -->
                 <!-- <li><a href="working.php"><i class="fa fa-users"></i> ตารางปฏิบัติงาน </a></li> -->
                 <!-- /สถานที่ทำงาน -->
