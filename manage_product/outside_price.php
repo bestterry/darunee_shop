@@ -109,7 +109,7 @@
                             <input class="hidden" type="text" name="id_numproduct[]" value="<?php echo $id_numproduct; ?>">
                             <input class="text-center" type="text" name="num_pd[]" placeholder="<?php echo $objr_listproduct['unit'];?>">
                         </td>
-                        <td class="text-center"><input class="text-center" type="text" name="price_pd[]" placeholder="ราคา/หน่วย"> </td>
+                        <td class="text-center"><input class="text-center" type="text" name="price_pd[]" value="<?php echo $objr_listproduct['price_outside'];?>"> </td>
                         <td></td>
                       </tr>
                       <?php 

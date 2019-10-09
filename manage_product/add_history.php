@@ -68,43 +68,43 @@ require "../session.php";
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
               <table class="table table-striped table-bordered">
-    <tbody>
-      <tr class="info">
-        <th class="text-center" width="40%">สินค้า_หน่วย</th>
-        <th class="text-center" width="15%">จำนวนรับเข้า</th>
-        <th class="text-center" width="15%">ผู้ส่ง</th>
-        <th class="text-center" width="35%">หมายเหตุ</th>
-        <!-- <th class="text-center" width="10%">แก้ไข</th> -->
-      </tr>
-      <?php #endregion
-          $date = "SELECT * FROM add_history INNER JOIN product ON add_history.id_product = product.id_product INNER JOIN member ON add_history.id_member = member.id_member
-                    WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND add_history.id_zone = $id_zone";
-          $objq = mysqli_query($conn,$date);
-          while($value = $objq ->fetch_assoc()){
-      ?>
-      <tr>
-        <td>
-          <?php echo $value['name_product'].'_'.$value['unit']; ?>
-        </td>
-        <td class="text-center">
-          <?php echo $value['num_add'];?> 
-        </td>
-        <td class="text-center">
-          <?php echo $value['name'];?>
-        </td>
-        <td class="text-center">
-          <?php echo $value['note'];?>
-        </td>
-        <!-- <td class="text-center">
-          <a href="edit_add_history.php?id_add=<?php echo $value['id_add_history']; ?>"><span
-              class="glyphicon glyphicon-cog"></span></a>
-        </td> -->
-      </tr>
-      <?php
-                      }
-                    ?>
-    </tbody>
-  </table>
+                <tbody>
+                  <tr class="info">
+                    <th class="text-center" width="40%">สินค้า_หน่วย</th>
+                    <th class="text-center" width="15%">จำนวนรับเข้า</th>
+                    <th class="text-center" width="15%">ผู้ส่ง</th>
+                    <th class="text-center" width="35%">หมายเหตุ</th>
+                    <!-- <th class="text-center" width="10%">แก้ไข</th> -->
+                  </tr>
+                  <?php #endregion
+                      $date = "SELECT * FROM add_history INNER JOIN product ON add_history.id_product = product.id_product INNER JOIN member ON add_history.id_member = member.id_member
+                                WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND add_history.id_zone = $id_zone";
+                      $objq = mysqli_query($conn,$date);
+                      while($value = $objq ->fetch_assoc()){
+                  ?>
+                  <tr>
+                    <td>
+                      <?php echo $value['name_product'].'_'.$value['unit']; ?>
+                    </td>
+                    <td class="text-center">
+                      <?php echo $value['num_add'];?> 
+                    </td>
+                    <td class="text-center">
+                      <?php echo $value['name'];?>
+                    </td>
+                    <td class="text-center">
+                      <?php echo $value['note'];?>
+                    </td>
+                    <!-- <td class="text-center">
+                      <a href="edit_add_history.php?id_add=<?php echo $value['id_add_history']; ?>"><span
+                          class="glyphicon glyphicon-cog"></span></a>
+                    </td> -->
+                  </tr>
+                  <?php
+                                  }
+                                ?>
+                </tbody>
+              </table>
 </div>
 <!-- /.mailbox-read-message -->
 <div class="box-header with-border">

@@ -57,7 +57,7 @@
           <!-- /ขายสินค้า ลูกค้า-->
 
           <!-- ขายสินค้า นอกเขต-->
-          <li><a href="#" data-toggle="modal" data-target="#outside"><i class="fa fa-minus-square"></i> ขายสินค้า (<font color='red'>นอกเขต</font>)</a></li>
+          <li><a href="#" data-toggle="modal" data-target="#outside"><i class="fa fa-minus-square"></i> นอกเขต </li></a>
           <div class="modal fade" id="outside" role="dialog">
             <div class="modal-dialog modal-lg">
               <form action="manage_product/outside_price.php" method="post">

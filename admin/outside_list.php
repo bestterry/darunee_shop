@@ -51,6 +51,12 @@ folder instead of downloading all of them to reduce the load. -->
         document.form1.pay_money.focus();
         return false;
       }	
+      if(document.form1.account_rc.value == "")
+      {
+        alert('กรุณาระบุบัญชีรับโอน');
+        document.form1.account_rc.focus();
+        return false;
+      }	
       document.form1.submit();
     }
   </script>
@@ -76,10 +82,10 @@ folder instead of downloading all of them to reduce the load. -->
                 <tr>
                   <th width="30%" >
                     <a type="block" href="outside.php" class="btn btn-danger"><< กลับ</a>
-                    <a href="../pdf_file/outside_list.php?id_outside=<?php echo $id_outside;?>" class="btn btn-success">เอกสารส่ง(PDF)</a>
+                    <a href="../pdf_file/outside_list.php?id_outside=<?php echo $id_outside;?>" class="btn btn-success">ประวัติชำระเงิน(PDF)</a>
                   </th>
-                  <td width="40%" class="text-center"><font size="5"><B align="center"> ข้อมูลการสั่งของและชำระเงินนอกเขต </B></font></td>
-                  <td width="30%"></td>
+                  <td width="50%" class="text-center"><font size="5"><B align="center"> ข้อมูลชำระเงิน (นอกเขต) </B></font></td>
+                  <td width="20%"></td>
                 </tr>
               </table>
             </div>
@@ -87,63 +93,92 @@ folder instead of downloading all of them to reduce the load. -->
             
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <div class="row">
                   <form action="algorithm/update_outside.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                     <div class="col-md-12">
                       <div>
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th width="25%" class="text-right" ><font size="4">ชื่อ&nbsp;&nbsp;:</font></th>
+                            <th width="25%" class="text-right" ><font size="4">ชื่อลูกหนี้&nbsp;&nbsp;:</font></th>
                             <td width="25%" >
-                              <input type="text" class="form-control" value="<?php echo $objr_noutside['name'].' '.$objr_noutside['province'];?>"  style="background-color: #e6f7ff;" readonly/>
-                              </td>
-                            <th width="25%" class="text-right" ><font size="4" valign="middle">จำนวนเงินชำระ &nbsp;&nbsp;:</font></th>
+                              <input type="text" class="form-control" value="<?php echo $objr_noutside['name'];?>"  style="background-color: #e6f7ff;" readonly/>
+                            </td>
+                            <th width="25%" class="text-right" ><font size="4" valign="middle">จำนวนเงิน &nbsp;&nbsp;:</font></th>
                             <td width="25%">
                               <input type="number" name="pay_money" class="form-control" style="background-color: #e6f7ff;">
                               <input type="hidden" name="id_outside" value="<?php echo $id_outside; ?>">
                             </td>
                           </tr>
+                          <tr>
+                            <th width="25%" class="text-right"><font size="4">ยอดค้างชำระ&nbsp;&nbsp;:</font></th>
+                            <th width="25%">
+                            <?php 
+                              $sql_maxid = "SELECT MAX(id_outside_buy) FROM outside_buy_htr WHERE id_outside = $id_outside";
+                              $objq_maxid = mysqli_query($conn,$sql_maxid);
+                              $objr_maxid = mysqli_fetch_array($objq_maxid);
+                              $id_outside_buy = $objr_maxid['MAX(id_outside_buy)'];
+
+                              $sql_balance = "SELECT balance FROM outside_buy_htr WHERE id_outside_buy = $id_outside_buy";
+                              $objq_balance = mysqli_query($conn,$sql_balance);
+                              if (empty($objq_balance)) {
+                                $balance = '0'.'  '.'บาท';
+                              }else {
+                                $objr_balance = mysqli_fetch_array($objq_balance);
+                                $balance = $objr_balance['balance'].'  '.'บาท';
+                              }
+                            ?>
+                            <font color='red' size='4'><?php echo $balance; ?></font>
+                            </th>
+                            <th width="25%" class="text-right"><font size="4">บัญชีรับโอน&nbsp;&nbsp;:</font></th>
+                            <td width="25%"> <input type="text" name="account_rc" class="form-control" style="background-color: #e6f7ff;"></td>
+                          </tr>
                         </table>
                       </div>
                     </div>
-                    <div align="center" class="box-footer">
-                      <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการบันทึกข้อมูลหรือไม่?')";><i class="fa fa-save"></i> บันทึกข้อมูล </button>
+                    <div class="box-footer">
+                    <table class="table table-bordered" >
+                      <tr>
+                        <th width="30%"> </th>
+                        <td width="40%" class="text-center"><font size="5"><B align="center"> ประวัติการชำระเงิน </B></font></td>
+                        <td class="text-center" width="30%"><button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการบันทึกข้อมูลหรือไม่?')";><i class="fa fa-save"></i> บันทึกข้อมูลชำระเงิน </button></td>
+                      </tr>
+                    </table>
                     </div>
                   </form>
                     <div class="col-md-12">
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#66b3ff" class="text-center" width="20%">สินค้า_หน่วย</th>
-                            <th bgcolor="#66b3ff" class="text-center" width="10%">จำนวน</th>
-                            <th bgcolor="#66b3ff" class="text-center" width="10%">ราคา/น.</th>
-                            <th bgcolor="#66b3ff" class="text-center" width="10%">เงินซื้อ</th>
-                            <th bgcolor="#66b3ff" class="text-center" width="10%">เงินจ่าย</th>
-                            <th bgcolor="#66b3ff" class="text-center" width="15%">หนี้คงเหลือ</th>
-                            <th bgcolor="#66b3ff" class="text-center" width="10%">วันที่</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="20%">สินค้า_หน่วย</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="8%">จำนวน</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="8%">บ/หน่วย</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="9%">เป็นเงิน</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="10%">ยอดชำระ</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="10%">หนี้คงเหลือ</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="10%">บัญชีรับโอน</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="10%">วันที่</th>
                           </tr>
                           <?php 
                             $sql_outside = "SELECT * FROM outside_buy_htr 
                                             INNER JOIN product ON outside_buy_htr.id_product = product.id_product  
-                                            WHERE outside_buy_htr.id_outside = $id_outside";
+                                            WHERE outside_buy_htr.id_outside = $id_outside
+                                            ORDER BY outside_buy_htr.id_outside_buy DESC";
                             $objq_outside = mysqli_query($conn,$sql_outside);
                             while($value = $objq_outside->fetch_assoc()){
                           ?>
                           <tr>
-                            <td class="text-center"><?php echo $value['name_product']; ?></td>
+                            <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
                             <td class="text-center"><?php echo $value['num_pd']; ?></td>
                             <td class="text-center"><?php echo $value['price_pd']; ?></td>
                             <td class="text-center"><?php echo $value['purch_money']; ?></td>
                             <td class="text-center"><?php echo $value['pay_money']; ?></td>
-                            <td class="text-center"><?php echo $value['balance']; ?></td>
+                            <td class="text-center"><font color='red'><?php echo $value['balance']; ?></font></td>
+                            <td class="text-center"><?php echo $value['account_rc']; ?></td>
                             <td class="text-center"><?php echo Datethai($value['date_buy']); ?></td>
                           </tr>
                             <?php } ?>
                         </table>
                       </div>
                     </div>
-                    <!-- /.row -->
-                  </div>
                 
               </div>
             </div>
@@ -151,7 +186,12 @@ folder instead of downloading all of them to reduce the load. -->
           </div>
           </div>
         </div>
+        </div>
       </section>
+      </div>
+    <!-- /.content-wrapper -->
+        <?php require("../menu/footer.html"); ?>
+      </div>
 
       <!-- jQuery 3 -->
       <script src="../bower_components/jquery/dist/jquery.min.js">

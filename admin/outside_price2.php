@@ -1,6 +1,7 @@
 <?php 
   require "../config_database/config.php"; 
   require "../session.php";
+  require "menu/date.php";
 ?>
 
 <!DOCTYPE html>
@@ -38,13 +39,6 @@
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
   <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -54,7 +48,7 @@
   <div class="wrapper">
 
     <header class="main-header">
-    <?php require"menu/main_header.php";?>
+    <?php require('menu/header_logout.php');?>
     </header>
 
     <!-- Content Wrapper. Contains page content -->
@@ -71,7 +65,7 @@
           <div class="box box-primary">
             <div class="box-header text-center">
               <font size="5">
-                <B>ขายสินค้านอกเขต</B>
+                <B>ใบแจ้งหนี้</B>
               </font>
             </div>
             <!-- /.box-header -->
@@ -82,12 +76,14 @@
                     <tbody>
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="5%">ลำดับ</th>
-                        <th class="text-center">สินค้า_หน่วย</th>
+                        <th class="text-center" width="40%">สินค้า_หน่วย</th>
+                        <th class="text-center" width="10%">หน่วย</th>
                         <th class="text-center" width="15%">จำนวน</th>
                         <th class="text-center" width="15%">บ/หน่วย</th>
-                        <th class="text-center" width="15%">รวมเงิน(บ)</th>
+                        <th class="text-center" width="15%">เป็นเงิน</th>
                       </tr>
                       <?php
+                      $id_zone = $_POST['id_zone'];
                         $id_outside = $_POST['id_outside'];
                         $count = COUNT($_POST['id_numproduct']);
                         $total_money = 0;
@@ -100,7 +96,8 @@
                       ?>
                       <tr>
                         <td class="text-center"><?php echo $i+1;?></td>
-                        <td class="text-center"> <?php echo $_POST['name_pd'][$i];?></td>
+                        <td > <?php echo $_POST['name_pd'][$i];?></td>
+                        <td class="text-center"><?php echo $_POST['unit'][$i];?></td>
                         <td class="text-center"><?php echo $_POST['num_pd'][$i];?></td>
                         <td class="text-center"><?php echo $_POST['price_pd'][$i];?></td>
                         <td class="text-center"><?php echo $sum_money = $_POST['price_pd'][$i]*$_POST['num_pd'][$i];?></td>
@@ -118,17 +115,62 @@
                       ?>
                       <input class="hidden" type="text" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
                       <input class="hidden" type="text" name="id_outside" value="<?php echo $_POST['id_outside']; ?>">
+                      <tr bgcolor="#99CCFF">
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <th  class="text-center">รวมเงิน</th>
+                        <th class="text-center"><?php echo $total_money;?></th>
+                      </tr>
                       <tr>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        <td bgcolor="#99CCFF" class="text-center">รวมเงิน</td>
-                        <td colspan="2" bgcolor="#99CCFF" class="text-center"><?php echo $total_money;?></td>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <th style="visibility:collapse;"></th>
                       </tr>
-                      <tr>  
+                      <tr>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        <td bgcolor="#99CCFF" class="text-center">ผู้เบิกนอกเขต</td>
-                        <td colspan="2" bgcolor="#99CCFF" class="text-center"><?php echo $objr_outside['name'].'  '.$objr_outside['province']; ?></td>
+                        <td style="visibility:collapse;"></td>
+                        <td class="text-right">เบิกจาก  &nbsp;&nbsp;:</td>
+                        <td colspan="2" class="text-left">
+                        <?php #endregion
+                              $sql_zone = "SELECT * FROM zone WHERE id_zone = $id_zone";
+                              $objq_zone = mysqli_query($conn, $sql_zone);
+                              $objr_zone = mysqli_fetch_array($objq_zone);
+                              echo $objr_zone['name_zone'];
+                        ?>
+                          <input class="hidden" type="text" name="name_zone" value="<?php echo $objr_zone['name_zone']; ?>">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <td class="text-right">ผู้เบิก  &nbsp;&nbsp;:</td>
+                        <td colspan="2" class="text-left">
+                            <?php #endregion
+                              $sql_outside = "SELECT * FROM outside WHERE id_outside = $id_outside";
+                              $objq_outside = mysqli_query($conn, $sql_outside);
+                              $objr_outside = mysqli_fetch_array($objq_outside);
+                              echo $objr_outside['name'];
+                            ?>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <td class="text-right">วันที่  &nbsp;&nbsp;:</td>
+                        <td colspan="2" class="text-left">
+                        <?php #endregion
+                             echo DateThai($date = date("Y-m-d"));
+                        ?>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -139,8 +181,8 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-              <a type="block" href="../product.php" class="btn btn-success pull-left"> <<= กลับสู่หน้าหลัก </i> </a> 
-              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการบันทึกข้อมูลหรือไม่?')";><i class="fa fa-save"> บันทึก </i></button>
+              <a type="block" href="outside.php" class="btn btn-success pull-left"><< กลับ</i></a> 
+              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการบันทึกข้อมูลหรือไม่?')";><< บันทึก <i class="fa fa-save"></i></button>
             </div>
             </form>
             <!-- /.box-footer -->

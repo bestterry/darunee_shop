@@ -2,6 +2,7 @@
 require('fpdf.php');
 require('../config_database/config.php');
 require('../session.php'); 
+$id_outside = $_GET['id_outside'];
 
   function DateThai($strDate)
       {
@@ -13,7 +14,7 @@ require('../session.php');
       $strSeconds= date("s",strtotime($strDate));
       $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
       $strMonthThai=$strMonthCut[$strMonth];
-      return "$strDay $strMonthThai พ.ศ.$strYear";
+      return "$strDay $strMonthThai ";
       }
 
       $strDate = date('d-m-Y');
@@ -26,10 +27,11 @@ class PDF extends FPDF
         // Date
         $strDate = date('d-m-Y');
         // Arial bold 15
+
         $this->AddFont('angsana','','angsa.php');
         $this->SetFont('angsana','',16);
         $this->Cell(20,8,iconv('UTF-8','cp874','ข้อมูลการสั่งของและชำระเงิน'),0,1,'L');
-        $this->Text(150, 16,iconv('UTF-8','cp874','เขต'),1,0,'C');
+
     }
     // Page footer
     function Footer()
@@ -59,29 +61,34 @@ $pdf=new PDF('P','mm','A4');
             $pdf->Text(87, 19,iconv('UTF-8','cp874',''),1,0,'C');
             //สร้างตาราง
             $pdf->SetTextColor(0,0,0);
+            $sql_name = "SELECT * FROM outside WHERE id_outside = $id_outside";
+            $objq_name = mysqli_query($conn,$sql_name);
+            $objr_name = mysqli_fetch_array($objq_name);
+            $pdf->Text(150, 16,iconv('UTF-8','cp874',$objr_name['name'].' '.$objr_name['province']),1,0,'C');
             $pdf->Cell(50,8,iconv('UTF-8','cp874','สินค้า_หน่วย'),1,0,'C');
             $pdf->Cell(20,8,iconv('UTF-8','cp874','จำนวน'),1,0,'C');
             $pdf->Cell(20,8,iconv('UTF-8','cp874','ราคา/น.'),1,0,'C');
             $pdf->Cell(20,8,iconv('UTF-8','cp874','เงินซื้อ'),1,0,'C');
-            $pdf->Cell(20,8,iconv('UTF-8','cp874','หนี้คงเหลือ'),1,0,'C');
             $pdf->Cell(20,8,iconv('UTF-8','cp874','เงินจ่าย'),1,0,'C');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874','หนี้คงเหลือ'),1,0,'C');
             $pdf->Cell(20,8,iconv('UTF-8','cp874','บัญชีรับโอน'),1,0,'C');
             $pdf->Cell(20,8,iconv('UTF-8','cp874','วันที่'),1,0,'C');
             $pdf->Ln(8);
-            $date = "SELECT * FROM add_history 
-                     INNER JOIN product ON add_history.id_product = product.id_product 
-                     INNER JOIN member ON add_history.id_member = member.id_member
-                     INNER JOIN zone ON add_history.id_zone = zone.id_zone
-            WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
-            $objq = mysqli_query($conn,$date);
-            while($value = $objq ->fetch_assoc()){
-            $pdf->Cell(10,8,iconv('UTF-8','cp874',$i),1,0,'C');  
-            $pdf->Cell(50,8,iconv('UTF-8','cp874',$value['name_product'].'_'.$value['unit']),1,0,'L');
-            $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['num_add']),1,0,'C');
-            $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['name']),1,0,'C');
-            $pdf->Cell(25,8,iconv('UTF-8','cp874',$value['name_zone']),1,0,'C');
-            $pdf->Cell(40,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
+            $sql_outside = "SELECT * FROM outside_buy_htr 
+                            INNER JOIN product ON outside_buy_htr.id_product = product.id_product  
+                            WHERE outside_buy_htr.id_outside = $id_outside";
+            $objq_outside = mysqli_query($conn,$sql_outside);
+            while($value = $objq_outside->fetch_assoc()){
+            
+            $pdf->Cell(50,8,iconv('UTF-8','cp874',$value['name_product'].' '.$value['unit']),1,0,'C');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['num_pd']),1,0,'C');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['price_pd']),1,0,'C');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['purch_money']),1,0,'C');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['pay_money']),1,0,'C');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['balance']),1,0,'C');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['account_rc']),1,0,'C');
+            $pdf->Cell(20,8,iconv('UTF-8','cp874',Datethai($value['date_buy'])),1,0,'C');
             $pdf->Ln(8);
-            $i++; }                
+             }                
     $pdf->Output();
 ?>

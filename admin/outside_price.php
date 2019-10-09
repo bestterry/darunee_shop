@@ -76,9 +76,10 @@
                     <tbody>
                       <tr bgcolor="#99CCFF">
                         <th class="text-center" width="5%">ลำดับ</th>
-                        <th class="text-center" width="50%">สินค้า_หน่วย</th>
+                        <th class="text-center" width="45%">สินค้า</th>
+                        <th class="text-center" width="5%">หน่วย</th>
                         <th class="text-center" width="10%">คงเหลือ</th>
-                        <th class="text-center" width="10%">จำนวน</th>
+                        <th class="text-center" width="10%">จำนวนขาย</th>
                         <th class="text-center" width="10%">บ/หน่วย</th>
                         <th class="text-center" width="15%">เป็นเงิน</th>
                       </tr>
@@ -99,11 +100,12 @@
                       <tr>
                         <td class="text-center"><?php echo $i+1; ?></td>
                         <td>
-                          <?php echo $objr_listproduct['full_name'].'_'.$objr_listproduct['unit']; ?>
+                          <?php echo $objr_listproduct['full_name']; ?>
                           <input class="hidden" type="text" name="name_pd[]" value="<?php echo $objr_listproduct['full_name']; ?>">
                           <input class="hidden" type="text" name="unit[]" value="<?php echo $objr_listproduct['unit']; ?>">
                           <input class="hidden" type="text" name="id_product[]" value="<?php echo $objr_listproduct['id_product']; ?>">
                         </td>
+                        <td class="text-center"><?php echo $objr_listproduct['unit']; ?></td>
                         <td class="text-center"><?php echo $objr_listproduct['num']; ?></td>
                         <td class="text-center">
                           <input class="hidden" type="text" name="id_numproduct[]" value="<?php echo $objr_listproduct['id_numproduct']; ?>">
@@ -118,52 +120,64 @@
                       ?>
                       <input class="hidden" type="text" name="id_zone" value="<?php echo $id_zone; ?>">
                       <input class="hidden" type="text" name="id_outside" value="<?php echo $id_outside; ?>">
-                      <tr>
+                      <tr bgcolor="#99CCFF">
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        
+                        <th  class="text-center">รวมเงิน</th>
+                        <th class="text-center"></th>
                       </tr>
                       <tr>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        <th class="text-right">ผู้เบิก &nbsp;:</th>
-                        <th colspan="2" class="text-left">
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                      </tr>
+                      <tr>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <td style="visibility:collapse;"></td>
+                        <td class="text-right">ผู้เบิก &nbsp;:</td>
+                        <td colspan="2" class="text-left">
                             <?php #endregion
                               $sql_outside = "SELECT * FROM outside WHERE id_outside = $id_outside";
                               $objq_outside = mysqli_query($conn, $sql_outside);
                               $objr_outside = mysqli_fetch_array($objq_outside);
                               echo $objr_outside['name'];
                             ?>
-                        </th>
+                        </td>
                       </tr>
                       <tr>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        <th class="text-right">เบิกจาก &nbsp;:</th>
-                        <th colspan="2" class="text-left">
+                        <td style="visibility:collapse;"></td>
+                        <td class="text-right">เบิกจาก &nbsp;:</td>
+                        <td colspan="2" class="text-left">
                         <?php #endregion
                               $sql_zone = "SELECT * FROM zone WHERE id_zone = $id_zone";
                               $objq_zone = mysqli_query($conn, $sql_zone);
                               $objr_zone = mysqli_fetch_array($objq_zone);
                               echo $objr_zone['name_zone'];
                         ?>
-                        </th>
+                        </td>
                       </tr>
                       <tr>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        <th class="text-right">วันที่ &nbsp;:</th>
-                        <th colspan="2" class="text-left">
+                        <td style="visibility:collapse;"></td>
+                        <td class="text-right">วันที่ &nbsp;:</td>
+                        <td colspan="2" class="text-left">
                         <?php #endregion
                              echo DateThai($date = date("Y-m-d"));
                         ?>
-                        </th>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -175,7 +189,7 @@
             <!-- /.box-footer -->
             <div class="box-footer">
               <a type="block" href="outside.php" class="btn btn-success pull-left"><< กลับ</i></a> 
-              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการบันทึกข้อมูลหรือไม่?')";><i class="fa fa-save"> บันทึก </i></button>
+              <button type="submit" class="btn btn-success pull-right" ><i class="fa fa-calculator"> คำนวณเงิน </i></button>
             </div>
             </form>
             <!-- /.box-footer -->
