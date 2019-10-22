@@ -60,8 +60,8 @@
       <!-- Main content -->
       <section class="content">
         <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
           <div class="box box-primary">
             <div class="box-header text-center">
               <font size="5">
@@ -78,13 +78,14 @@
                         <th class="text-center" width="5%">ลำดับ</th>
                         <th class="text-center" width="45%">สินค้า</th>
                         <th class="text-center" width="5%">หน่วย</th>
-                        <th class="text-center" width="10%">คงเหลือ</th>
-                        <th class="text-center" width="10%">จำนวนขาย</th>
-                        <th class="text-center" width="10%">บ/หน่วย</th>
+                        <th class="text-center" width="12%">คงเหลือ</th>
+                        <th class="text-center" width="9%">จำนวนขาย</th>
+                        <th class="text-center" width="9%">บ/หน่วย</th>
                         <th class="text-center" width="15%">เป็นเงิน</th>
                       </tr>
                       
                       <?php
+                        $date_buy = $_POST['date_buy'];
                         $id_outside = $_POST['id_outside'];
                         $id_zone = $_POST['id_zone'];
                             for($i=0;$i<count($_POST["id_product"]);$i++)
@@ -109,15 +110,16 @@
                         <td class="text-center"><?php echo $objr_listproduct['num']; ?></td>
                         <td class="text-center">
                           <input class="hidden" type="text" name="id_numproduct[]" value="<?php echo $objr_listproduct['id_numproduct']; ?>">
-                          <input class="text-center" size="10" type="text" name="num_pd[]" placeholder="<?php echo $objr_listproduct['unit'];?>">
+                          <input class="text-center" size="8" type="text" name="num_pd[]" placeholder="<?php echo $objr_listproduct['unit'];?>">
                         </td>
-                        <td class="text-center"><input class="text-center" size="10" type="text" name="price_pd[]" value="<?php echo $objr_listproduct['price_outside'];?>"> </td>
+                        <td class="text-center"><input class="text-center" size="8" type="text" name="price_pd[]" value="<?php echo $objr_listproduct['price_outside'];?>"> </td>
                         <td></td>
                       </tr>
                       <?php 
                               }
                           }
                       ?>
+                      <input class="hidden" type="text" name="date_buy" value="<?php echo $date_buy; ?>">
                       <input class="hidden" type="text" name="id_zone" value="<?php echo $id_zone; ?>">
                       <input class="hidden" type="text" name="id_outside" value="<?php echo $id_outside; ?>">
                       <tr bgcolor="#99CCFF">
@@ -172,10 +174,10 @@
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        <td class="text-right">วันที่ &nbsp;:</td>
+                        <td class="text-right">วันที่ซื้อ &nbsp;:</td>
                         <td colspan="2" class="text-left">
                         <?php #endregion
-                             echo DateThai($date = date("Y-m-d"));
+                             echo DateThai($date_buy);
                         ?>
                         </td>
                       </tr>

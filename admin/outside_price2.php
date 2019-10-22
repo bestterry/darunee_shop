@@ -83,7 +83,8 @@
                         <th class="text-center" width="15%">เป็นเงิน</th>
                       </tr>
                       <?php
-                      $id_zone = $_POST['id_zone'];
+                      $date_buy = $_POST['date_buy'];
+                        $id_zone = $_POST['id_zone'];
                         $id_outside = $_POST['id_outside'];
                         $count = COUNT($_POST['id_numproduct']);
                         $total_money = 0;
@@ -113,6 +114,7 @@
                           $total_money = $total_money + $sum_money;
                          }
                       ?>
+                      <input class="hidden" type="text" name="date_buy" value="<?php echo $_POST['date_buy']; ?>">
                       <input class="hidden" type="text" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
                       <input class="hidden" type="text" name="id_outside" value="<?php echo $_POST['id_outside']; ?>">
                       <tr bgcolor="#99CCFF">
@@ -165,10 +167,10 @@
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        <td class="text-right">วันที่  &nbsp;&nbsp;:</td>
+                        <td class="text-right">วันที่ซื้อ  &nbsp;&nbsp;:</td>
                         <td colspan="2" class="text-left">
                         <?php #endregion
-                             echo DateThai($date = date("Y-m-d"));
+                             echo DateThai($date_buy);
                         ?>
                         </td>
                       </tr>

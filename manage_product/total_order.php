@@ -139,7 +139,7 @@ folder instead of downloading all of them to reduce the load. -->
                     
                     <?php
                       
-                        $sql_product = "SELECT * FROM product";
+                        $sql_product = "SELECT * FROM product WHERE NOT id_product = 12";
                         $objq_product = mysqli_query($conn,$sql_product);
                         while($value_pd = $objq_product->fetch_assoc())
                         {

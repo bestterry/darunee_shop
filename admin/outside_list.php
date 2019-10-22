@@ -57,6 +57,12 @@ folder instead of downloading all of them to reduce the load. -->
         document.form1.account_rc.focus();
         return false;
       }	
+      if(document.form1.date_buy.value == "")
+      {
+        alert('กรุณาระบุวันรับเงิน');
+        document.form1.date_buy.focus();
+        return false;
+      }	
       document.form1.submit();
     }
   </script>
@@ -99,9 +105,10 @@ folder instead of downloading all of them to reduce the load. -->
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">ชื่อลูกหนี้&nbsp;&nbsp;:</font></th>
-                            <td width="25%" >
-                              <input type="text" class="form-control" value="<?php echo $objr_noutside['name'];?>"  style="background-color: #e6f7ff;" readonly/>
-                            </td>
+                            <th width="25%">
+                              <font size="4"><?php echo $objr_noutside['name'];?></font>
+                              <input type="hidden" class="form-control" value="<?php echo $objr_noutside['name'];?>"  style="background-color: #e6f7ff;" readonly/>
+                            </th>
                             <th width="25%" class="text-right" ><font size="4" valign="middle">จำนวนเงิน &nbsp;&nbsp;:</font></th>
                             <td width="25%">
                               <input type="number" name="pay_money" class="form-control" style="background-color: #e6f7ff;">
@@ -109,27 +116,16 @@ folder instead of downloading all of them to reduce the load. -->
                             </td>
                           </tr>
                           <tr>
-                            <th width="25%" class="text-right"><font size="4">ยอดค้างชำระ&nbsp;&nbsp;:</font></th>
-                            <th width="25%">
-                            <?php 
-                              $sql_maxid = "SELECT MAX(id_outside_buy) FROM outside_buy_htr WHERE id_outside = $id_outside";
-                              $objq_maxid = mysqli_query($conn,$sql_maxid);
-                              $objr_maxid = mysqli_fetch_array($objq_maxid);
-                              $id_outside_buy = $objr_maxid['MAX(id_outside_buy)'];
-
-                              $sql_balance = "SELECT balance FROM outside_buy_htr WHERE id_outside_buy = $id_outside_buy";
-                              $objq_balance = mysqli_query($conn,$sql_balance);
-                              if (empty($objq_balance)) {
-                                $balance = '0'.'  '.'บาท';
-                              }else {
-                                $objr_balance = mysqli_fetch_array($objq_balance);
-                                $balance = $objr_balance['balance'].'  '.'บาท';
-                              }
-                            ?>
-                            <font color='red' size='4'><?php echo $balance; ?></font>
-                            </th>
+                            <th width="25%" class="text-right"></th>
+                            <th width="25%"></th>
                             <th width="25%" class="text-right"><font size="4">บัญชีรับโอน&nbsp;&nbsp;:</font></th>
                             <td width="25%"> <input type="text" name="account_rc" class="form-control" style="background-color: #e6f7ff;"></td>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right"></th>
+                            <th width="25%"></th>
+                            <th width="25%" class="text-right"><font size="4">วันรับเงิน&nbsp;&nbsp;:</font></th>
+                            <td width="25%"> <input type="date" name="date_buy" class="form-control" value="" style="background-color: #e6f7ff;"></td>
                           </tr>
                         </table>
                       </div>
@@ -146,37 +142,66 @@ folder instead of downloading all of them to reduce the load. -->
                   </form>
                     <div class="col-md-12">
                       <div class="table-responsive">
+                        <table class="table table-bordered" id="example1">
+                          <thead>
+                            <tr>
+                              <th bgcolor="#99CCFF" class="text-center" width="5%">ID</th>
+                              <th bgcolor="#99CCFF" class="text-center" width="17%">สินค้า_หน่วย</th>
+                              <th bgcolor="#99CCFF" class="text-center" width="8%">จำนวน</th>
+                              <th bgcolor="#99CCFF" class="text-center" width="10%">บ/หน่วย</th>
+                              <th bgcolor="#99CCFF" class="text-center" width="10%">เป็นเงิน</th>
+                              <th bgcolor="#99CCFF" class="text-center" width="11%">ยอดชำระ</th>
+                              <th bgcolor="#99CCFF" class="text-center" width="11%">บัญชีรับโอน</th>
+                              <th bgcolor="#99CCFF" class="text-center" width="12%">วันที่</th>
+                              <th bgcolor="#99CCFF" class="text-center" width="5%">edit</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php 
+                              $total_purch = 0;
+                              $total_pay = 0;
+                              $balance = 0;
+                              $sql_outside = "SELECT * FROM outside_buy_htr 
+                                              INNER JOIN product ON outside_buy_htr.id_product = product.id_product  
+                                              WHERE outside_buy_htr.id_outside = $id_outside
+                                              ORDER BY outside_buy_htr.id_outside_buy DESC";
+                              $objq_outside = mysqli_query($conn,$sql_outside);
+                              while($value = $objq_outside->fetch_assoc()){
+                            ?>
+                            <tr>
+                              <td class="text-center"><?php echo $value['id_outside_buy']; ?></td>
+                              <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
+                              <td class="text-center"><?php echo $value['num_pd']; ?></td>
+                              <td class="text-center"><?php echo $value['price_pd']; ?></td>
+                              <td class="text-center"><?php echo $value['purch_money']; ?></td>
+                              <td class="text-center"><?php echo $value['pay_money']; ?></td>
+                              <td class="text-center"><?php echo $value['account_rc']; ?></td>
+                              <td class="text-center"><?php echo Datethai3($value['date_buy']); ?></td>
+                              <td class="text-center"><a href="outside_list_edit.php?id_outside_buy=<?php echo $value['id_outside_buy']; ?>"><i class="fa fa-cog"></i></a></td>
+                            </tr>
+                            <?php
+                            $total_purch = $total_purch + $value['purch_money'];
+                            $total_pay = $total_pay + $value['pay_money'];
+                             } 
+                             ?>
+                          </tbody>
+                        </table>
+
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#99CCFF" class="text-center" width="20%">สินค้า_หน่วย</th>
-                            <th bgcolor="#99CCFF" class="text-center" width="8%">จำนวน</th>
-                            <th bgcolor="#99CCFF" class="text-center" width="8%">บ/หน่วย</th>
-                            <th bgcolor="#99CCFF" class="text-center" width="9%">เป็นเงิน</th>
-                            <th bgcolor="#99CCFF" class="text-center" width="10%">ยอดชำระ</th>
-                            <th bgcolor="#99CCFF" class="text-center" width="10%">หนี้คงเหลือ</th>
-                            <th bgcolor="#99CCFF" class="text-center" width="10%">บัญชีรับโอน</th>
-                            <th bgcolor="#99CCFF" class="text-center" width="10%">วันที่</th>
+                            <th width="25%" class="text-right" ><font size="4">รวมเงินซื้อ&nbsp;&nbsp;:</font></th>
+                            <th width="25%"><font size="4" color="red"><?php echo $total_purch; ?></font></th>
+                            <th width="25%" class="text-right" ><font size="4" valign="middle">รวมยอดชำระ&nbsp;&nbsp;:</font></th>
+                            <th width="25%"><font size="4" color="red"><?php echo $total_pay; ?></font></th>
                           </tr>
-                          <?php 
-                            $sql_outside = "SELECT * FROM outside_buy_htr 
-                                            INNER JOIN product ON outside_buy_htr.id_product = product.id_product  
-                                            WHERE outside_buy_htr.id_outside = $id_outside
-                                            ORDER BY outside_buy_htr.id_outside_buy DESC";
-                            $objq_outside = mysqli_query($conn,$sql_outside);
-                            while($value = $objq_outside->fetch_assoc()){
-                          ?>
                           <tr>
-                            <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
-                            <td class="text-center"><?php echo $value['num_pd']; ?></td>
-                            <td class="text-center"><?php echo $value['price_pd']; ?></td>
-                            <td class="text-center"><?php echo $value['purch_money']; ?></td>
-                            <td class="text-center"><?php echo $value['pay_money']; ?></td>
-                            <td class="text-center"><font color='red'><?php echo $value['balance']; ?></font></td>
-                            <td class="text-center"><?php echo $value['account_rc']; ?></td>
-                            <td class="text-center"><?php echo Datethai($value['date_buy']); ?></td>
+                            <th width="25%" class="text-right" ><font size="4">หนี้คงเหลือ&nbsp;&nbsp;:</font></th>
+                            <th width="25%"><font size="4" color="red"><?php echo $total_purch - $total_pay; ?></font></th>
+                            <th width="25%"  ></th>
+                            <td width="25%"> </td>
                           </tr>
-                            <?php } ?>
                         </table>
+
                       </div>
                     </div>
                 
@@ -218,6 +243,58 @@ folder instead of downloading all of them to reduce the load. -->
       </script>
       <script src="../plugins/iCheck/icheck.min.js">
       </script>
+      <script>
+        $(function() {
+          $('#example1').DataTable()
+          $('#example2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+          })
+        })
+        $(function() {
+          //Enable iCheck plugin for checkboxes
+          //iCheck for checkbox and radio inputs
+          $('.mailbox-messages input[type="checkbox"]').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue'
+          });
+          //Enable check and uncheck all functionality
+          $(".checkbox-toggle").click(function() {
+            var clicks = $(this).data('clicks');
+            if (clicks) {
+              //Uncheck all checkboxes
+              $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+              $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+            } else {
+              //Check all checkboxes
+              $(".mailbox-messages input[type='checkbox']").iCheck("check");
+              $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+            }
+            $(this).data("clicks", !clicks);
+          });
+          //Handle starring for glyphicon and font awesome
+          $(".mailbox-star").click(function(e) {
+            e.preventDefault();
+            //detect type
+            var $this = $(this).find("a > i");
+            var glyph = $this.hasClass("glyphicon");
+            var fa = $this.hasClass("fa");
+            //Switch states
+            if (glyph) {
+              $this.toggleClass("glyphicon-star");
+              $this.toggleClass("glyphicon-star-empty");
+            }
+            if (fa) {
+              $this.toggleClass("fa-star");
+              $this.toggleClass("fa-star-o");
+            }
+          });
+        });
+        </script>
 
 </body>
 

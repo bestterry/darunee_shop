@@ -237,6 +237,10 @@
                 <li><a href="outside.php" ><i class="fa fa-truck"></i> นอกเขต </a></li>
                 <!-- /นอกเขต. -->
 
+                <!-- นอกเขต. -->
+                <li><a href="store.php" ><i class="fa fa-user-circle-o"></i> ระเบียนร้านค้า </a></li>
+                <!-- /นอกเขต. -->
+
                 <!-- สถานที่ทำงาน -->
                 <!-- <li><a href="working.php"><i class="fa fa-users"></i> ตารางปฏิบัติงาน </a></li> -->
                 <!-- /สถานที่ทำงาน -->

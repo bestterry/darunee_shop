@@ -91,7 +91,7 @@
                           $query_product3 = mysqli_query($conn,$list_producto);
                   ?>
                   <!-- ------------------------------เบิกนอกเขต---------------------------- -->
-                 <form action="outside_price.php" method="post" >
+                 <form action="outside_price.php" method="post">
                   <div class="modal-content">
                    
                     <div class="modal-body col-md-12 table-responsive mailbox-messages">
@@ -122,8 +122,9 @@
                           <table class="table table-striped">
                             <thead>
                               <tr>
-                                <th bgcolor="#99CCFF" class="text-center" width="50%">ผู้เบิก (เขตการขาย)</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="50%">เบิกจาก (ทีมงาน)</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="40%">ผู้เบิก (เขตการขาย)</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="40%">เบิกจาก (ทีมงาน)</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="20%">วันที่ขาย</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -155,6 +156,7 @@
                                           }
                                       ?>
                                     </select>
+                                    <td><input type="date" name="date_buy" value="" class="form-control"></td>
                                   </td>
                                 </tr>
                             </tbody>
@@ -180,21 +182,19 @@
                           <div class="container">
 
                             <!-- ------------------------------ประวัติเบิกนอกเขตประวัติเบิกนอกเขต---------------------------- -->
-
                             <div class="box-header text-center with-border">
                               <font size="5"> <B> ประวัติเบิก (นอกเขต) </B></font>
                             </div>
-                           
                             <table id="example1" class="table table-striped table-bordered">
                               <thead>
                                 <tr class="info" >
-                                <th class="text-center" width="5%">ID</th>
+                                  <th class="text-center" width="5%">ID</th>
+                                  <th class="text-center" width="13%">วันที่เบิก</th>
+                                  <th class="text-center" width="25%">ผู้เบิก</th>
+                                  <th class="text-center" width="18%">เบิกจาก</th>
                                   <th class="text-center" width="20%">สินค้า_หน่วย</th>
                                   <th class="text-center" width="10%">จำนวน</th>
                                   <th class="text-center" width="10%">เป็นเงิน</th>
-                                  <th class="text-center" width="25%">ผู้เบิก</th>
-                                  <th class="text-center" width="18%">เบิกจาก</th>
-                                  <th class="text-center" width="13%">วันที่เบิก</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -209,19 +209,18 @@
                               ?>
                                 <tr>
                                   <td class="text-center"><?php echo $value1['id_outside_buy'];?></td>
+                                  <td class="text-center"><?php echo Datethai($value1['date_buy']);?></td>
+                                  <td class="text-center"><?php echo $value1['nick_name'];?></td>
+                                  <td class="text-center"><?php echo $value1['name_zone'];?></td>
                                   <td class="text-center"><?php echo $value1['name_product'].'_'.$value1['unit'];?></td>
                                   <td class="text-center"><?php echo $value1['num_pd'];?></td>
                                   <td class="text-center"><?php echo $value1['num_pd']*$value1['price_pd'];?></td>
-                                  <td class="text-center"><?php echo $value1['nick_name'];?></td>
-                                  <td class="text-center"><?php echo $value1['name_zone'];?></td>
-                                  <td class="text-center"><?php echo Datethai($value1['date_buy']);?></td>
                                 </tr>
                                <?php 
                                  }
                                ?> 
                               </tbody>
                             </table>
-
                             <!-- ------------------------------//ประวัติเบิกนอกเขตประวัติเบิกนอกเขต---------------------------- -->
                           </div>
                         </div>
@@ -363,19 +362,13 @@
                                 $objq_outside2 = mysqli_query($conn,$sql_outside2);
                                 while($value2 = $objq_outside2->fetch_assoc()){
                                   $id_outside2 = $value2['id_outside'];
-                                  $sql_maxid = "SELECT MAX(id_outside_buy) FROM outside_buy_htr WHERE id_outside = $id_outside2";
-                                  $objq_maxid = mysqli_query($conn,$sql_maxid);
-                                  $objr_maxid = mysqli_fetch_array($objq_maxid);
-                                  $id_outside_buy = $objr_maxid['MAX(id_outside_buy)'];
-
-                                  $sql_balance = "SELECT balance FROM outside_buy_htr WHERE id_outside_buy = $id_outside_buy";
-                                  $objq_balance = mysqli_query($conn,$sql_balance);
-                                  if (empty($objq_balance)) {
-                                    $balance = '0';
-                                  }else {
-                                    $objr_balance = mysqli_fetch_array($objq_balance);
-                                    $balance = $objr_balance['balance'];
-                                  }
+                                  $sql_m = "SELECT SUM(purch_money),SUM(pay_money) FROM outside_buy_htr WHERE id_outside = $id_outside2";
+                                  $objq_m = mysqli_query($conn,$sql_m);
+                                  $objr_m = mysqli_fetch_array($objq_m);
+                                  $purch_money = $objr_m['SUM(purch_money)'];
+                                  $pay_money = $objr_m['SUM(pay_money)'];
+                                  $balance = $purch_money - $pay_money;
+                                  
                               ?>
                                 <tr>
                                   <td class="text-center"><?php echo $value2['name'].' '.$value2['province'];?></td>

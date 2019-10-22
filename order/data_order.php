@@ -115,6 +115,7 @@ folder instead of downloading all of them to reduce the load. -->
               <div>
               <a type="button" href="list_order.php" class="btn btn-danger "><< กลับ</a>
               <a type="button" href="edit_order.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-success">edit</a>
+              <a type="button" href="algorithm/delete_order.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-danger" onClick="return confirm('คุณต้องการลบข้อมูลหรือไม่?')";>ลบ</a>
               <a type="button" href="../pdf_file/data_order.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-warning">PDF</a>
               </div> 
             </div>

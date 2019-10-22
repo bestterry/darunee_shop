@@ -5,6 +5,8 @@
   $id_zone = $_POST['id_zone'];
   $account_rc = $_POST['name_zone'];
   $total_money = 0;
+  $date_data = date("Y-m-d");;
+  $date_buy = $_POST['date_buy'];
   $sql_outside = "SELECT * FROM outside WHERE id_outside = $id_outside";
   $objq_outside = mysqli_query($conn,$sql_outside);
   $objr_outside = mysqli_fetch_array($objq_outside);
@@ -26,8 +28,8 @@
 
       if(!isset($max_id)){
       //-------------------------INSERT outside_buy_htr if-have't data---------------------------------------
-        $insert_outside_htr = "INSERT INTO outside_buy_htr (id_outside, id_product, id_zone, num_pd, price_pd, purch_money, balance, account_rc)
-                               VALUE ($id_outside, $id_product, $id_zone, $num_pd, $price_pd, $money, $money, '$account_rc')";  
+        $insert_outside_htr = "INSERT INTO outside_buy_htr (id_outside, id_product, id_zone, num_pd, price_pd, purch_money, balance, account_rc, date_buy, date_data)
+                               VALUE ($id_outside, $id_product, $id_zone, $num_pd, $price_pd, $money, $money, '$account_rc', '$date_buy', '$date_data')";  
        mysqli_query($conn,$insert_outside_htr);
       //-------------------------/INSERT outside_buy_htr---------------------------------------
       }else {
@@ -38,8 +40,8 @@
         $balance = $objr_balance['balance'];
         
           $t_balance = $money + $balance;
-          $insert_outside_htr = "INSERT INTO outside_buy_htr (id_outside, id_product, id_zone, num_pd, price_pd, purch_money, balance, account_rc)
-                                VALUE ($id_outside, $id_product, $id_zone, $num_pd, $price_pd, $money, $t_balance, '$account_rc')";  
+          $insert_outside_htr = "INSERT INTO outside_buy_htr (id_outside, id_product, id_zone, num_pd, price_pd, purch_money, balance, account_rc, date_buy, date_data)
+                                VALUE ($id_outside, $id_product, $id_zone, $num_pd, $price_pd, $money, $t_balance, '$account_rc', '$date_buy', '$date_data')";  
          mysqli_query($conn,$insert_outside_htr);
         //-------------------------/INSERT outside_buy_htr---------------------------------------
       }
