@@ -1,5 +1,6 @@
 <?php 
     require "../config_database/config.php"; 
+    print_r($_POST);
 ?>
 <!DOCTYPE html>
 <html>
@@ -126,21 +127,33 @@ folder instead of downloading all of them to reduce the load. -->
                           <table id="example1" class="table table-striped">
                             <thead>
                               <tr>
+                                <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="20%">ชื่อร้านค้า</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="40%">ที่อยู่</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="15%">เบอร์โทร</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="15%">ประเภท</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="5%">แก้ไข</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
+                              <?php 
+                                if($_POST['status']=="success"){
+
+                                
+                              ?>
+                                <td class="text-center"><a href="algorithm/sent_store.php?id_store=<?php ?>&&status=success" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>Y</a></td>
+                              <?php
+                              }else{
+                              ?>
+                                <td class="text-center"><a href="algorithm/sent_store.php?id_store=<?php ?>&&status=diss" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>Y</a></td>
+                              <?php
+                              }
+                              ?> 
                                 <td class="text-center">ร้านสุธัมงานดี</td>
                                 <td class="text-center">58 หมู่ที่5 ต.ท่าก๊อ อ.แม่สรวย จ.เชียงราย</td>
                                 <td class="text-center">085-145-2554</td>
                                 <td class="text-center">ร้านขายปุ๋ย</td>
-                                <td class="text-center">ยังไม่ได้เยี่ยม</td>
                                 <td class="text-center"><a href="store_edit.php" ><i class="fa fa-cog"></i></a></td>
                               </tr>
                             </tbody>

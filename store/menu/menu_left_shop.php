@@ -228,8 +228,6 @@
                           </tbody>
                         </table> 
                       </div>
-                        <!-- /.form-group -->
-
                         <div class="col-md-6">  
                           <table class="table table-bordered ">
                             <tbody>
@@ -324,6 +322,10 @@
 
           <!-- เงินขายรายวัน -->
           <li><a href="receive_money.php" ><i class="fa fa-money"></i> เงินขายรายวัน </a></li>
+          <!-- /เงินขายรายวัน -->
+
+          <!-- เงินขายรายวัน -->
+          <li><a href="visit_shop.php" ><i class="fa fa-user"></i>เยี่ยมร้าน</a></li>
           <!-- /เงินขายรายวัน -->
         </ul>
       </div>

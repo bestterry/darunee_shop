@@ -1,6 +1,7 @@
 <?php 
  include("db_connect.php");
  $mysqli = connect();
+ require "session.php"; 
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +47,7 @@
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
     <header class="main-header">
-     
+    <?php require('menu/header_logout.php');?>
     </header>
 
     <!-- Content Wrapper. Contains page content -->
@@ -63,8 +64,9 @@
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#store" data-toggle="tab">ทั้งหมด</a></li>
-                <li><a href="#store2" data-toggle="tab">ค้นหารายอำเภอ</a></li>
+                <li><a href="#store2" data-toggle="tab">ค้นหารายตำบล</a></li>
                 <li><a href="#store3" data-toggle="tab">เยี่ยมร้าน</a></li>
+                <li><a href="#add_store" data-toggle="tab">เพิ่มร้านค้าใหม่</a></li>
 
                 <div align="right">
                   <a href="admin.php" class="btn btn-success"><< เมนูหลัก</a>
@@ -82,31 +84,23 @@
                                   <table id="example1" class="table table-striped">
                                     <thead>
                                       <tr>
-                                        <th bgcolor="#99CCFF" class="text-center" width="5%">ID</th>
                                         <th bgcolor="#99CCFF" class="text-center" width="20%">ชื่อร้านค้า</th>
                                         <th bgcolor="#99CCFF" class="text-center" width="40%">ที่อยู่</th>
-                                        <th bgcolor="#99CCFF" class="text-center" width="13%">เบอร์โทร</th>
-                                        <th bgcolor="#99CCFF" class="text-center" width="12%">ประเภท</th>
+                                        <th bgcolor="#99CCFF" class="text-center" width="15%">เบอร์โทร</th>
+                                        <th bgcolor="#99CCFF" class="text-center" width="15%">ประเภท</th>
                                         <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
                                         <th bgcolor="#99CCFF" class="text-center" width="5%">แก้ไข</th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                     <!-- <?php 
-                                      $sql_store = "SELECT * FROM store";
-                                      $objq_store = mysqli_query($mysqli,$sql_store);
-                                      while($value = $objq_store->fetch_assoc()){
-                                     ?>
                                       <tr>
-                                        <td class="text-center"><?php echo $value['id_store'];?></td>
-                                        <td class="text-center"><?php echo $value['name_store'];?></td>
-                                        <td class="text-center"><?php echo $value['address'];?></td>
-                                        <td class="text-center"><?php echo $value['tel'];?></td>
-                                        <td class="text-center"></td>
-                                        <td class="text-center"></td>
+                                        <td class="text-center">ร้านสุธัมงานดี</td>
+                                        <td class="text-center">58 หมู่ที่5 ต.ท่าก๊อ อ.แม่สรวย จ.เชียงราย</td>
+                                        <td class="text-center">085-145-2554</td>
+                                        <td class="text-center">ร้านขายปุ๋ย</td>
+                                        <td class="text-center">ยังไม่ได้เยี่ยม</td>
                                         <td class="text-center"><a href="store_edit.php" ><i class="fa fa-cog"></i></a></td>
                                       </tr>
-                                      <?php }?> -->
                                     </tbody>
                                   </table>
                                 </div>
@@ -128,7 +122,7 @@
                           <div class="box-body">
                             <div class="row">
                               <div class="container">
-                                <form action="store_search.php" class="form-horizontal" method="post">
+                                <form action="visit_shop2.php" class="form-horizontal" method="post">
                                   <div class="col-md-8">
 
                                     <div class="form-group">
@@ -234,6 +228,90 @@
                                           class="fa fa-check-square-o"></i> ตกลง</button>
                                     </div>
                                   </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- ------------------------------เยี่ยมร้าน---------------------------- -->
+                      <!-- ------------------------------เยี่ยมร้าน---------------------------- -->
+                      <div class="tab-pane" id="add_store">
+                        <div class="box box-default">
+                          <div class="box-header with-border">
+
+                          </div>
+                          <!-- /.box-header -->
+                          <div class="box-body">
+                            <div class="row">
+                              <div class="container">
+                                <form action="store_search2.php" class="form-horizontal" method="post">
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                      <label class="col-sm-4 control-label">ชื่อร้านค้า :</label>
+                                      <div class="col-sm-8">
+                                        <input type="text" name="name_store" class="form-control text-center" placeholder="ชื่อร้านค้า">
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="col-sm-4 control-label">เบอร์โทรศัพท์ :</label>
+                                      <div class="col-sm-8">
+                                        <input type="text" name="name_store" class="form-control text-center" placeholder="เบอร์โทรศัพท์">
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="col-sm-4 control-label">ประเภทร้าน :</label>
+                                        <div class="col-sm-8">
+                                        <select name="status" class="form-control text-center select2" style="width: 100%;">
+                                          <option value="">------กรุณาเลือก------</option>
+                                          <option value="success">ร้านขายปุ๋ย</option>
+                                          <option value="diss">ร้านขายสมุนไพร</option>
+                                          <option value="diss">ร้านขายทุกสินค้า</option>
+                                          <option value="diss">อื่นๆ</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                      <label class="col-sm-4 control-label">จังหวัด :</label>
+                                      <div class="col-sm-8">
+                                        <select name="province_name" data-where="2"
+                                          class="form-control ajax_address select2">
+                                          <option value="">-- เลือกจังหวัด --</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                      <label class="col-sm-4 control-label">อำเภอ :</label>
+                                      <div class="col-sm-8">
+                                        <select name="amphur_name" data-where="3"
+                                          class="ajax_address form-control select2">
+                                          <option value="">-- เลือกอำเภอ --</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                      <label class="col-sm-4 control-label">ตำบล :</label>
+                                      <div class="col-sm-8">
+                                        <select name="district_name" data-where="4"
+                                          class="ajax_address form-control select2" style="width: 100%;">
+                                          <option value="">-- เลือกตำบล --</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="col-sm-4 control-label">หมู่บ้าน :</label>
+                                      <div class="col-sm-8">
+                                        <input type="text" name="address" class="form-control text-center" placeholder="หมู่บ้าน">
+                                      </div>
+                                    </div>
+                                  </div>
+                                    <div class="box-footer text-center">
+                                      <button type="submit" class="btn btn-success "><i class="fa fa-save"></i> บันทึก </button>
+                                    </div>
                                 </form>
                               </div>
                             </div>

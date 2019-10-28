@@ -1,5 +1,8 @@
 <?php 
-    require "../config_database/config.php"; 
+    include("db_connect.php");
+    $mysqli = connect();
+    require "session.php"; 
+    print_r($_POST);
 ?>
 <!DOCTYPE html>
 <html>
@@ -123,7 +126,7 @@ folder instead of downloading all of them to reduce the load. -->
                     <div class="modal-body col-md-12 table-responsive mailbox-messages">
                       <div class="table-responsive">
                         <div class="col-md-12">
-                          <table  class="table table-striped">
+                          <table id="example1" class="table table-striped">
                             <thead>
                               <tr>
                                 <th bgcolor="#99CCFF" class="text-center" width="20%">ชื่อร้านค้า</th>
@@ -135,40 +138,14 @@ folder instead of downloading all of them to reduce the load. -->
                               </tr>
                             </thead>
                             <tbody>
-                            <?php 
-                              $district_code = $_POST['district_name'];
-                              $sql_store = "SELECT * FROM store  
-                                            INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
-                                            INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
-                                            INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
-                                            WHERE store.district_code = $district_code";
-                              $objq_store = mysqli_query($conn,$sql_store);
-                              while($value = $objq_store->fetch_assoc()){
-                            ?>
                               <tr>
-                                <td class="text-center"><?php echo $value['name_store'];?></td>
-                                <td><?php echo 'บ.'.$value['address'].'  ต.'.$value['district_name'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
-                                <td class="text-center"><?php echo $value['tel'];?></td>
-                                <td class="text-center"><?php echo $value['category'];?></td>
-                                <td class="text-center">
-                                  <?php 
-                                    $status = $value['status'];
-                                    if($status = 'N'){
-                                  ?>
-                                    <a href="algorithm/sent_order.php?id_store=<?php echo $value['id_store']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังเยี่ยมแล้วหรือไม่ ?')";>ไม่เยี่ยม</a>
-                                  <?php 
-                                    }else {
-                                  ?>
-                                     <a href="algorithm/sent_order.php?id_store=<?php echo $value['id_store']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นไม่ได้เยี่ยมหรือไม่ ?')";>ไม่เยี่ยม</a>
-                                  <?php 
-                                   
-                                    }
-                                  ?>
-
-                                </td>
-                                <td class="text-center"><a href="store_edit.php?id_store=<?php echo $value['id_store']; ?>" ><i class="fa fa-cog"></i></a></td>
+                                <td class="text-center">ร้านสุธัมงานดี</td>
+                                <td class="text-center">58 หมู่ที่5 ต.ท่าก๊อ อ.แม่สรวย จ.เชียงราย</td>
+                                <td class="text-center">085-145-2554</td>
+                                <td class="text-center">ร้านขายปุ๋ย</td>
+                                <td class="text-center">ยังไม่ได้เยี่ยม</td>
+                                <td class="text-center"><a href="store_edit.php" ><i class="fa fa-cog"></i></a></td>
                               </tr>
-                              <?php }?>
                             </tbody>
                           </table>
                         </div>

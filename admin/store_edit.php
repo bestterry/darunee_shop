@@ -1,6 +1,14 @@
 <?php 
     include("db_connect.php");
     $mysqli = connect();
+    $id_store = $_GET['id_store'];
+    $sql_store = "SELECT * FROM store  
+    INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
+    INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
+    INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
+    WHERE store.id_store = $id_store";
+    $objq_store = mysqli_query($mysqli,$sql_store); 
+    $objr_store = mysqli_fetch_array($objq_store);
 ?>
 <!DOCTYPE html>
 <html>
@@ -123,11 +131,11 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <th width="25%" class="text-right"><font size="4" valign="middle">ชื่อร้านค้า &nbsp;&nbsp;:</font></th>
                             <td width="25%" > 
-                              <input type="text" name="tel" class="form-control" value="<?php ?>">
-                              <input type="hidden" name="id_store" class="form-control" value="<?php ?>">
+                              <input type="text" name="name_store" class="form-control" value="<?php echo $objr_store['name_store']; ?>">
+                              <input type="hidden" name="id_store" class="form-control" value="<?php echo $objr_store['id_store']; ?>">
                             </td>
                             <th width="25%" class="text-right" ><font size="4">เบอร์โทร &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="catagory_car" class="form-control" value="<?php  ?>"></td>
+                            <td width="25%"><input type="text" name="tel" class="form-control" value="<?php echo $objr_store['tel']; ?>"></td>
                           </tr>
                           </table>
                           <div class="col-md-3"></div>
@@ -136,13 +144,13 @@ folder instead of downloading all of them to reduce the load. -->
 
                            <tr>
                               <th width="35%" class="text-right" ><font size="4">ที่อยู่ &nbsp;&nbsp;:</font></th>
-                              <td width="65%" class="text-left"><input type="text" name="address" class="form-control" value="<?php  ?>สบก๊อ หมู่5"></div>
+                              <td width="65%" class="text-left"><input type="text" name="address" class="form-control" value="<?php echo $objr_store['address']; ?>"></div>
                             </tr>
 
                             <tr>
                               <th width="35%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
                               <td width="65%" class="text-left">
-                                <label for="inputEmail3" class="col-sm-4 control-label"><?php ?>เชียงราย</label>
+                                <label for="inputEmail3" class="col-sm-4 control-label"><?php echo $objr_store['province_name']; ?></label>
                                 <div class="col-sm-8">
                                   <select name="province_name" data-where="2" class="form-control ajax_address select2" style="background-color: #e6f7ff;">
                                     <option value="">-- เลือกจังหวัด --</option>
@@ -154,7 +162,7 @@ folder instead of downloading all of them to reduce the load. -->
                             <tr>
                               <th width="35%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
                               <td width="65%">
-                                <label for="inputEmail3" class="col-sm-4 control-label"><?php ?>แม่สรวย</label>
+                                <label for="inputEmail3" class="col-sm-4 control-label"><?php echo $objr_store['amphur_name']; ?></label>
                                 <div class="col-sm-8">
                                   <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
                                     <option value="">-- เลือกอำเภอ --</option>
@@ -166,7 +174,7 @@ folder instead of downloading all of them to reduce the load. -->
                             <tr>
                               <th width="35%" class="text-right" ><font size="4">ตำบล &nbsp;&nbsp;:</font></th>
                               <td width="65%">
-                                <label for="inputEmail3" class="col-sm-4 control-label"><?php ?>ท่าก๊อ </label>
+                                <label for="inputEmail3" class="col-sm-4 control-label"><?php echo $objr_store['district_name'];?> </label>
                                 <div class="col-sm-8">
                                   <select name="district_name" data-where="4" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
                                     <option value="">-- เลือกตำบล --</option>
