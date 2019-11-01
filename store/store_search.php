@@ -147,7 +147,7 @@ folder instead of downloading all of them to reduce the load. -->
                             ?>
                               <tr>
                                 <td class="text-center"><?php echo $value['name_store'];?></td>
-                                <td><?php echo $value['address'].'  ต.'.$value[' '].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
+                                <td><?php echo $value['address'].'  ต.'.$value['district_name'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
                                 <td class="text-center"><?php echo $value['tel'];?></td>
                                 <td class="text-center"><?php echo $value['category'];?></td>
                                 <td class="text-center">

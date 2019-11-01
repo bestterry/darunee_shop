@@ -78,10 +78,10 @@
                         <th class="text-center" width="5%">ลำดับ</th>
                         <th class="text-center" width="45%">สินค้า</th>
                         <th class="text-center" width="5%">หน่วย</th>
-                        <th class="text-center" width="12%">คงเหลือ</th>
-                        <th class="text-center" width="9%">จำนวนขาย</th>
+                        <th class="text-center" width="12%">สต๊อก</th>
+                        <th class="text-center" width="9%">จำนวน</th>
                         <th class="text-center" width="9%">บ/หน่วย</th>
-                        <th class="text-center" width="15%">เป็นเงิน</th>
+                        <th class="text-center" width="15%">เป็นเงิน(บ)</th>
                       </tr>
                       
                       <?php
@@ -174,7 +174,7 @@
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        <td class="text-right">วันที่ซื้อ &nbsp;:</td>
+                        <td class="text-right">วันที่ &nbsp;:</td>
                         <td colspan="2" class="text-left">
                         <?php #endregion
                              echo DateThai($date_buy);

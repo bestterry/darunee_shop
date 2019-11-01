@@ -1,5 +1,13 @@
 <?php 
     require "../config_database/config.php"; 
+    $district_name = $_POST['district_name'];
+    $status = $_POST['status'];
+    $sql_store = "SELECT * FROM store 
+                  INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
+                  INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
+                  INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
+                  WHERE store.district_code='$district_name' AND store.status = '$status'";
+    $objq_store = mysqli_query($conn,$sql_store);
     print_r($_POST);
 ?>
 <!DOCTYPE html>
@@ -110,7 +118,7 @@ folder instead of downloading all of them to reduce the load. -->
             <div class="box box-primary">
               <div class="box-header with-border">
                 <div class="text-center">
-                <a href="store.php" class="btn btn-success pull-left"><< เมนูหลัก</a>
+                <a href="store.php" class="btn btn-danger pull-left"><< กลับ</a>
                   <font size="5">
                     <B align="center">อำเภอ</B>
                   </font>
@@ -124,7 +132,7 @@ folder instead of downloading all of them to reduce the load. -->
                     <div class="modal-body col-md-12 table-responsive mailbox-messages">
                       <div class="table-responsive">
                         <div class="col-md-12">
-                          <table id="example1" class="table table-striped">
+                          <table class="table table-striped">
                             <thead>
                               <tr>
                                 <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
@@ -132,30 +140,30 @@ folder instead of downloading all of them to reduce the load. -->
                                 <th bgcolor="#99CCFF" class="text-center" width="40%">ที่อยู่</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="15%">เบอร์โทร</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="15%">ประเภท</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="5%">แก้ไข</th>
                               </tr>
                             </thead>
                             <tbody>
+                            <?php 
+                            while($value = $objq_store->fetch_assoc()){
+                            ?>
                               <tr>
                               <?php 
-                                if($_POST['status']=="success"){
-
-                                
+                                if($_POST['status']=="Y"){
                               ?>
-                                <td class="text-center"><a href="algorithm/sent_store.php?id_store=<?php ?>&&status=success" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>Y</a></td>
+                                <td class="text-center"><a class="btn btn-success btn-xs" >Y</a></td>
                               <?php
                               }else{
                               ?>
-                                <td class="text-center"><a href="algorithm/sent_store.php?id_store=<?php ?>&&status=diss" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>Y</a></td>
+                                <td class="text-center"><a class="btn btn-danger btn-xs">N</a></td>
                               <?php
                               }
                               ?> 
-                                <td class="text-center">ร้านสุธัมงานดี</td>
-                                <td class="text-center">58 หมู่ที่5 ต.ท่าก๊อ อ.แม่สรวย จ.เชียงราย</td>
-                                <td class="text-center">085-145-2554</td>
-                                <td class="text-center">ร้านขายปุ๋ย</td>
-                                <td class="text-center"><a href="store_edit.php" ><i class="fa fa-cog"></i></a></td>
+                                <td class="text-center"><?php echo $value['name_store'];?></td>
+                                <td class="text-center"><?php echo $value['address'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
+                                <td class="text-center"><?php echo $value['tel'];?></td>
+                                <td class="text-center"><?php echo $value['category'];?></td>
                               </tr>
+                            <?php }?>
                             </tbody>
                           </table>
                         </div>

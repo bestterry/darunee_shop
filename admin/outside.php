@@ -122,9 +122,9 @@
                           <table class="table table-striped">
                             <thead>
                               <tr>
-                                <th bgcolor="#99CCFF" class="text-center" width="40%">ผู้เบิก (เขตการขาย)</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="40%">เบิกจาก (ทีมงาน)</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="20%">วันที่ขาย</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="35%">ผู้เบิก (เขต)</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="35%">เบิกจาก (ทีมงาน)</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="30%">วันที่ขาย</th>
                               </tr>
                             </thead>
                             <tbody>

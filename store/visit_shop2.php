@@ -2,7 +2,14 @@
     include("db_connect.php");
     $mysqli = connect();
     require "session.php"; 
-    print_r($_POST);
+    $district_code = $_GET['district_name'];
+    $sql_store = "SELECT * FROM store  
+                  INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
+                  INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
+                  INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
+                  WHERE store.district_code = $district_code AND store.status = 'N'";
+    $objq_store = mysqli_query($mysqli,$sql_store);
+    $objr_store = mysqli_fetch_array($objq_store);
 ?>
 <!DOCTYPE html>
 <html>
@@ -74,34 +81,7 @@ folder instead of downloading all of them to reduce the load. -->
 <body class=" hold-transition skin-blue layout-top-nav">
   <div>
     <header class="main-header">
-      <nav class="navbar navbar-static-top">
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="dist/img/user.png" class="img-circle" alt="User Image">
-                  <p>
-                    <small>สาขา : </small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="login/logout.php" class="btn btn-danger btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <?php require('menu/header_logout.php');?>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -111,12 +91,16 @@ folder instead of downloading all of them to reduce the load. -->
           <div class="col-md-12">
             <div class="box box-primary">
               <div class="box-header with-border">
-                <div class="text-center">
-                <a href="store.php" class="btn btn-success pull-left"><< เมนูหลัก</a>
-                  <font size="5">
-                    <B align="center">อำเภอ</B>
-                  </font>
-                </div>
+                <table class="table table-bordered" >
+                  <tr>
+                    <th width="30%" >
+                      <a href="visit_shop.php" class="btn btn-danger"><< กลับ</a>
+                      <a href="visit_add.php?district_name=<?php echo $_GET['district_name']; ?>"  class="btn btn-warning"><i class="fa fa-plus-square"></i> เพิ่มร้านค้า </a>
+                    </th>
+                    <td width="50%" class="text-center"><font size="5"><B align="center">ตำบล<?php echo $objr_store['district_name'];?></B></font></td>
+                    <td width="20%"></td>
+                  </tr>
+                </table>
               </div>
               <!-- /.box-header -->
               <div class="box-body no-padding">
@@ -126,7 +110,7 @@ folder instead of downloading all of them to reduce the load. -->
                     <div class="modal-body col-md-12 table-responsive mailbox-messages">
                       <div class="table-responsive">
                         <div class="col-md-12">
-                          <table id="example1" class="table table-striped">
+                        <table class="table table-striped">
                             <thead>
                               <tr>
                                 <th bgcolor="#99CCFF" class="text-center" width="20%">ชื่อร้านค้า</th>
@@ -138,14 +122,33 @@ folder instead of downloading all of them to reduce the load. -->
                               </tr>
                             </thead>
                             <tbody>
+                            <?php 
+                             
+                              while($value = $objq_store->fetch_assoc()){
+                            ?>
                               <tr>
-                                <td class="text-center">ร้านสุธัมงานดี</td>
-                                <td class="text-center">58 หมู่ที่5 ต.ท่าก๊อ อ.แม่สรวย จ.เชียงราย</td>
-                                <td class="text-center">085-145-2554</td>
-                                <td class="text-center">ร้านขายปุ๋ย</td>
-                                <td class="text-center">ยังไม่ได้เยี่ยม</td>
-                                <td class="text-center"><a href="store_edit.php" ><i class="fa fa-cog"></i></a></td>
+                                <td class="text-center"><?php echo $value['name_store'];?></td>
+                                <td><?php echo $value['address'].'  ต.'.$value['district_name'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
+                                <td class="text-center"><?php echo $value['tel'];?></td>
+                                <td class="text-center"><?php echo $value['category'];?></td>
+                                <td class="text-center">
+                                  <?php 
+                                    if($value['status'] == "N"){
+                                  ?>
+                                    <a href="algorithm/update_ststore.php?id_store=<?php echo $value['id_store']; ?>&&status=N&&district_code=<?php echo $district_code; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเยี่ยมร้าน [<?php echo $value['name_store'];?>] หรือไม่ ?')";>เยี่ยมร้าน</a>
+                                  <?php 
+                                    }else {
+                                  ?>
+                                     <a href="algorithm/update_ststore.php?id_store=<?php echo $value['id_store']; ?>&&status=Y&&district_code=<?php echo $district_code; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นไม่ได้เยี่ยมหรือไม่ ?')";>เยี่ยมร้าน</a>
+                                  <?php 
+                                   
+                                    }
+                                  ?>
+
+                                </td>
+                                <td class="text-center"><a href="visit_edit.php?id_store=<?php echo $value['id_store']; ?>" ><i class="fa fa-cog"></i></a></td>
                               </tr>
+                              <?php }?>
                             </tbody>
                           </table>
                         </div>

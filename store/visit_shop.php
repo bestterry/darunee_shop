@@ -63,18 +63,17 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#store" data-toggle="tab">ทั้งหมด</a></li>
-                <li><a href="#store2" data-toggle="tab">ค้นหารายตำบล</a></li>
-                <li><a href="#store3" data-toggle="tab">เยี่ยมร้าน</a></li>
+                <!-- <li class="active"><a href="#store" data-toggle="tab">ทั้งหมด</a></li> -->
+                <li class="active"><a href="#store2" data-toggle="tab">ค้นหารายตำบล</a></li>
                 <li><a href="#add_store" data-toggle="tab">เพิ่มร้านค้าใหม่</a></li>
 
                 <div align="right">
-                  <a href="admin.php" class="btn btn-success"><< เมนูหลัก</a>
+                  <a href="store.php" class="btn btn-danger"><< เมนูหลัก</a>
                   </div> 
                   </ul> 
                    <div class="tab-content">
                       <!-- /.tab-pane -->
-                      <div class="tab-pane active" id="store">
+                      <div class="tab-pane" id="store">
                         <!-- ------------------------------ทั้งหมด---------------------------- -->
                         <form action="outside_price.php" method="post">
                           <div class="modal-content">
@@ -115,14 +114,14 @@
                       <!-- ------------------------------ทั้งหมด---------------------------- -->
 
                       <!-- ------------------------------ค้นหารายอำเภอ---------------------------- -->
-                      <div class="tab-pane" id="store2">
+                      <div class="tab-pane active" id="store2">
                         <div class="box box-default">
                           <div class="box-header with-border"> </div>
                           <!-- /.box-header -->
                           <div class="box-body">
                             <div class="row">
                               <div class="container">
-                                <form action="visit_shop2.php" class="form-horizontal" method="post">
+                                <form action="visit_shop2.php" class="form-horizontal" method="get">
                                   <div class="col-md-8">
 
                                     <div class="form-group">
@@ -235,7 +234,7 @@
                         </div>
                       </div>
                       <!-- ------------------------------เยี่ยมร้าน---------------------------- -->
-                      <!-- ------------------------------เยี่ยมร้าน---------------------------- -->
+                      <!-- ------------------------------เพิ่มร้าน---------------------------- -->
                       <div class="tab-pane" id="add_store">
                         <div class="box box-default">
                           <div class="box-header with-border">
@@ -245,7 +244,7 @@
                           <div class="box-body">
                             <div class="row">
                               <div class="container">
-                                <form action="store_search2.php" class="form-horizontal" method="post">
+                                <form action="algorithm/add_visit.php" class="form-horizontal" method="post">
                                   <div class="col-md-6">
                                     <div class="form-group">
                                       <label class="col-sm-4 control-label">ชื่อร้านค้า :</label>
@@ -256,18 +255,27 @@
                                     <div class="form-group">
                                       <label class="col-sm-4 control-label">เบอร์โทรศัพท์ :</label>
                                       <div class="col-sm-8">
-                                        <input type="text" name="name_store" class="form-control text-center" placeholder="เบอร์โทรศัพท์">
+                                        <input type="text" name="tel" class="form-control text-center" placeholder="เบอร์โทรศัพท์">
                                       </div>
                                     </div>
                                     <div class="form-group">
                                       <label class="col-sm-4 control-label">ประเภทร้าน :</label>
-                                        <div class="col-sm-8">
-                                        <select name="status" class="form-control text-center select2" style="width: 100%;">
+                                      <div class="col-sm-8">
+                                        <select name="category" class="form-control text-center select2" style="width: 100%;">
                                           <option value="">------กรุณาเลือก------</option>
-                                          <option value="success">ร้านขายปุ๋ย</option>
-                                          <option value="diss">ร้านขายสมุนไพร</option>
-                                          <option value="diss">ร้านขายทุกสินค้า</option>
-                                          <option value="diss">อื่นๆ</option>
+                                          <option value="ขายปุ๋ย">ขายปุ๋ย</option>
+                                          <option value="ขายของบริโภค">ขายของบริโภค</option>
+                                          <option value="ไม่กำหนด">ไม่กำหนด</option>
+                                          <option value="ขายทั้งสองชนิด">ขายทั้งสองชนิด</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="col-sm-4 control-label">สถานะ :</label>
+                                      <div class="col-sm-8">
+                                        <select name="status" class="form-control text-center select2" style="width: 100%;">
+                                          <option value="N">ไม่ได้เยี่ยม</option>
+                                          <option value="Y">เยี่ยมแล้ว</option>
                                         </select>
                                       </div>
                                     </div>
@@ -318,7 +326,7 @@
                           </div>
                         </div>
                       </div>
-                      <!-- ------------------------------เยี่ยมร้าน---------------------------- -->
+                      <!-- ------------------------------เพิ่มร้าน---------------------------- -->
                 </div>
             </div>
           </div>

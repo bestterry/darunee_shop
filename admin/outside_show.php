@@ -2,6 +2,7 @@
   require "../config_database/config.php"; 
   require "../session.php";
   require "menu/date.php";
+  $id_outsideb = $_GET['id_outside'];
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +72,6 @@
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="algorithm/add_outside.php" method="post" autocomplete="off">
                   <table class="table table-bordered">
                     <tbody>
                       <tr bgcolor="#99CCFF">
@@ -83,47 +83,42 @@
                         <th class="text-center" width="15%">เป็นเงิน(บ)</th>
                       </tr>
                       <?php
-                      $date_buy = $_POST['date_buy'];
-                        $id_zone = $_POST['id_zone'];
-                        $id_outside = $_POST['id_outside'];
-                        $count = COUNT($_POST['id_numproduct']);
                         $total_money = 0;
-                        $sum_money = 0;
-                        $sql_outside = "SELECT * FROM outside WHERE id_outside = $id_outside";
-                        $objq_outside = mysqli_query($conn,$sql_outside);
-                        $objr_outside = mysqli_fetch_array($objq_outside);
-                         for ($i=0; $i < $count; $i++) { 
-
+                        $id_outside_buy = $_POST['id_outside_buy'][0];
+                        $sql_outside2 = "SELECT * FROM outside_buy_htr INNER JOIN outside ON outside_buy_htr.id_outside = outside.id_outside WHERE outside_buy_htr.id_outside_buy = $id_outside_buy";
+                        $objq_outside2 = mysqli_query($conn,$sql_outside2);
+                        $objr_outside2 = mysqli_fetch_array($objq_outside2);
+                     
+                         for ($i=0; $i < count($_POST['id_outside_buy']); $i++) { 
+                          $id_outside = $_POST['id_outside_buy'][$i];
+                          $sql_outside = "SELECT * FROM outside_buy_htr 
+                                          INNER JOIN product ON outside_buy_htr.id_product = product.id_product
+                                          WHERE outside_buy_htr.id_outside_buy = $id_outside";
+                          $objq_outside = mysqli_query($conn,$sql_outside);
+                          $objr_outside = mysqli_fetch_array($objq_outside);
                       ?>
                       <tr>
                         <td class="text-center"><?php echo $i+1;?></td>
-                        <td > <?php echo $_POST['name_pd'][$i];?></td>
-                        <td class="text-center"><?php echo $_POST['unit'][$i];?></td>
-                        <td class="text-center"><?php echo $_POST['num_pd'][$i];?></td>
-                        <td class="text-center"><?php echo $_POST['price_pd'][$i];?></td>
-                        <td class="text-center"><?php echo $sum_money = $_POST['price_pd'][$i]*$_POST['num_pd'][$i];?></td>
-                        <!-- ข้อมุลส่งต่อ -->
-                          <input class="hidden" type="text" name="id_product[]" value="<?php echo $_POST['id_product'][$i]; ?>">
-                          <input class="hidden" type="text" name="id_numproduct[]" value="<?php echo $_POST['id_numproduct'][$i]; ?>">
-                          <input class="hidden" type="text" name="num_pd[]" value="<?php echo $_POST['num_pd'][$i]; ?>">
-                          <input class="hidden" type="text" name="price_pd[]" value="<?php echo $_POST['price_pd'][$i]; ?>">
-                          <input class="hidden" type="text" name="sum_money[]" value="<?php echo $sum_money; ?>">
-                        <!-- //ข้อมุลส่งต่อ -->
+                        <td class="text-center"><?php echo $objr_outside['name_product']; ?></td>
+                        <td class="text-center"><?php echo $objr_outside['unit'];?></td>
+                        <td class="text-center"><?php echo $objr_outside['num_pd'];?></td>
+                        <td class="text-center"><?php echo $objr_outside['price_pd'];?></td>
+                        <td class="text-center"><?php echo $objr_outside['purch_money'];?></td>
                       </tr>
                       <?php 
-                          $total_money = $total_money + $sum_money;
+                        $total_money = $total_money + $objr_outside['purch_money'];
                          }
                       ?>
-                      <input class="hidden" type="text" name="date_buy" value="<?php echo $_POST['date_buy']; ?>">
-                      <input class="hidden" type="text" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
-                      <input class="hidden" type="text" name="id_outside" value="<?php echo $_POST['id_outside']; ?>">
+                      <input class="hidden" type="text" name="date_buy" value="<?php  ?>">
+                      <input class="hidden" type="text" name="id_zone" value="<?php ?>">
+                      <input class="hidden" type="text" name="id_outside" value="<?php ?>">
                       <tr bgcolor="#99CCFF">
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <th  class="text-center">รวมเงิน</th>
-                        <th class="text-center"><?php echo $total_money;?></th>
+                        <th class="text-center"><?php echo $total_money; ?></th>
                       </tr>
                       <tr>
                         <td style="visibility:collapse;"></td>
@@ -140,12 +135,8 @@
                         <td class="text-right">เบิกจาก  &nbsp;&nbsp;:</td>
                         <td colspan="2" class="text-left">
                         <?php #endregion
-                              $sql_zone = "SELECT * FROM zone WHERE id_zone = $id_zone";
-                              $objq_zone = mysqli_query($conn, $sql_zone);
-                              $objr_zone = mysqli_fetch_array($objq_zone);
-                              echo $objr_zone['name_zone'];
+                            echo $objr_outside2['account_rc'];
                         ?>
-                          <input class="hidden" type="text" name="name_zone" value="<?php echo $objr_zone['name_zone']; ?>">
                         </td>
                       </tr>
                       <tr>
@@ -155,10 +146,7 @@
                         <td class="text-right">ผู้เบิก  &nbsp;&nbsp;:</td>
                         <td colspan="2" class="text-left">
                             <?php #endregion
-                              $sql_outside = "SELECT * FROM outside WHERE id_outside = $id_outside";
-                              $objq_outside = mysqli_query($conn, $sql_outside);
-                              $objr_outside = mysqli_fetch_array($objq_outside);
-                              echo $objr_outside['name'];
+                              echo $objr_outside2['name'];
                             ?>
                         </td>
                       </tr>
@@ -167,10 +155,10 @@
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        <td class="text-right">วันที่  &nbsp;&nbsp;:</td>
+                        <td class="text-right">วันที่ &nbsp;&nbsp;:</td>
                         <td colspan="2" class="text-left">
                         <?php #endregion
-                             echo DateThai($date_buy);
+                             echo DateThai($objr_outside2['date_buy']);
                         ?>
                         </td>
                       </tr>
@@ -183,10 +171,9 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-              <a type="block" href="outside.php" class="btn btn-success pull-left"><< กลับ</i></a> 
-              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการบันทึกข้อมูลหรือไม่?')";><< บันทึก <i class="fa fa-save"></i></button>
+              <a type="block" href="outside_list.php?id_outside=<?php echo $id_outsideb;?>" class="btn btn-success pull-left"> << กลับ</a> 
+            
             </div>
-            </form>
             <!-- /.box-footer -->
           </div>
           <!-- /. box -->

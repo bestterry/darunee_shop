@@ -1,13 +1,14 @@
 <?php 
     include("db_connect.php");
     $mysqli = connect();
+    require "session.php"; 
     $id_store = $_GET['id_store'];
     $sql_store = "SELECT * FROM store  
-    INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
-    INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
-    INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
-    WHERE store.id_store = $id_store";
-    $objq_store = mysqli_query($mysqli,$sql_store); 
+                  INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
+                  INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
+                  INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
+                  WHERE store.id_store = $id_store";
+    $objq_store = mysqli_query($mysqli,$sql_store);
     $objr_store = mysqli_fetch_array($objq_store);
     $category = $objr_store['category'];
     $status = $objr_store['status'];
@@ -48,87 +49,64 @@ folder instead of downloading all of them to reduce the load. -->
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
   <style>
-    #customers {
-      width: 100%;
-    }
+  #customers {
+    width: 100%;
+  }
 
-    #customers td, #customers th {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
+  #customers td,
+  #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
 
-    #customers tr:nth-child(even){background-color: #f2f2f2;}
-    #customers th {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      text-align: center;
-      background-color: #99CCFF;
-    }
+  #customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #99CCFF;
+  }
   </style>
 
   <script language="javascript">
-    //  function fncSum()
-    //     {
-    //       document.form1.money.value = parseFloat(document.form1.num_product.value) * parseFloat(document.form1.price.value);
-    //     }
+  //  function fncSum()
+  //     {
+  //       document.form1.money.value = parseFloat(document.form1.num_product.value) * parseFloat(document.form1.price.value);
+  //     }
   </script>
 
 </head>
+
 <body class=" hold-transition skin-blue layout-top-nav">
   <div>
     <header class="main-header">
-      <nav class="navbar navbar-static-top">
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="dist/img/user.png" class="img-circle" alt="User Image">
-                  <p>
-                    <small>สาขา : </small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="login/logout.php" class="btn btn-danger btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <?php require('menu/header_logout.php');?>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-     <div class="row">
-      <!-- Main content -->
-      <section class="content">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <div class="text-center">
-                <font size="5">
-                  <B align="center">แก้ไขร้านค้า</B>
-                </font>
-              </div> 
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-              <form action="algorithm/edit_store.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
-                  <div class="row">
-                     <!-- ข้อมูลสินค้า -->
-                     <div class="col-md-12">
-                      <div>
-                        
+      <div class="row">
+        <!-- Main content -->
+        <section class="content">
+          <div class="col-md-12">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <div class="text-center">
+                
+                  <font size="5">
+                    <B align="center">ตำบล<?php echo $objr_store['district_name'];?></B>
+                  </font>
+                </div>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body no-padding">
+                <div class="mailbox-read-message">
+                  <form action="algorithm/edit_store.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
+                    <div class="row">
+                          <!-- ข้อมูลสินค้า -->
+                      <div class="col-md-12">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
                             <th width="25%" class="text-right"><font size="4" valign="middle">ชื่อร้านค้า &nbsp;&nbsp;:</font></th>
@@ -143,9 +121,10 @@ folder instead of downloading all of them to reduce the load. -->
                             <th width="25%" class="text-right"><font size="4" valign="middle">ประเภท &nbsp;&nbsp;:</font></th>
                             <td width="25%" > 
                               <select name="category"  class="form-control" style="width: 100%;">
-                                <option value="ขายปุ๋ย"  <?php if($category == "ขายปุ๋ย"){ echo "selected='selected'";} ?>>ขายปุ๋ย</option>
-                                <option value="ขายสมุนไพร"  <?php if($category == "ขายสมุนไพร"){ echo "selected='selected'";} ?>>ขายสมุนไพร</option>
-                                <option value="ไม่กำหนด"  <?php if($category == "ไม่กำหนด"){ echo "selected='selected'";} ?>>ไม่กำหนด</option>
+                                <option value="ขายปุ๋ย" <?php if($category == "ขายปุ๋ย"){ echo "selected='selected'";} ?>>ขายปุ๋ย</option>
+                                <option value="ขายของบริโภค" <?php if($category == "ขายของบริโภค"){ echo "selected='selected'";} ?>>ขายของบริโภค</option>
+                                <option value="ไม่กำหนด" <?php if($category == "ไม่กำหนด"){ echo "selected='selected'";} ?>>ไม่กำหนด</option>
+                                <option value="ขายทั้งสองชนิด" <?php if($category == "ขายทั้งสองชนิด"){ echo "selected='selected'";} ?>>ขายทั้งสองชนิด</option>
                               </select>
                             </td>
                             <th width="25%" class="text-right" ><font size="4">สถานะ &nbsp;&nbsp;:</font></th>
@@ -153,16 +132,14 @@ folder instead of downloading all of them to reduce the load. -->
                               <select name="status"  class="form-control" style="width: 100%;">
                                 <option value="N"  <?php if($status == "N"){ echo "selected='selected'";} ?>>ไม่ได้เยี่ยม</option>
                                 <option value="Y"  <?php if($status == "Y"){ echo "selected='selected'";} ?>>เยี่ยมแล้ว</option>
-                               
                               </select>
                             </td>
                           </tr>
-                          </table>
-                          <div class="col-md-3"></div>
-                          <div class="col-md-6">
-                           <table class="table table-bordered" id="dynamic_field">
-
-                           <tr>
+                        </table>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                          <table class="table table-bordered" id="dynamic_field">
+                            <tr>
                               <th width="35%" class="text-right" ><font size="4">ที่อยู่ &nbsp;&nbsp;:</font></th>
                               <td width="65%" class="text-left"><input type="text" name="address" class="form-control" value="<?php echo $objr_store['address']; ?>"></div>
                             </tr>
@@ -190,7 +167,6 @@ folder instead of downloading all of them to reduce the load. -->
                                 </div>
                               </td>
                             </tr>
-
                             <tr>
                               <th width="35%" class="text-right" ><font size="4">ตำบล &nbsp;&nbsp;:</font></th>
                               <td width="65%">
@@ -202,51 +178,56 @@ folder instead of downloading all of them to reduce the load. -->
                                 </div>
                               </td>
                             </tr>
-                        </table>
+                          </table>
                         </div>
                         <div class="col-md-3"></div>
-
+                        </div>
+                        </div>
+                      </div>
+                      <div align="center" class="box-footer">
+                        <a type="button" href="visit_shop2.php?district_name=<?php echo $objr_store['district_code']; ?>" class="btn btn-danger pull-left" > << กลับ </a>
+                        <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลหรือไม่ ?')";><i class="fa fa-save" ></i> บันทึกข้อมูล </button>
+                        <a type="button" href="algorithm/delete_store.php?id_store=<?php echo $id_store; ?>&&district_name=<?php echo $objr_store['district_code']; ?>" class="btn btn-danger" onClick="return confirm('คุณต้องการที่จะลบข้อมูลร้านค้าหรือไม่ ?')";><i class="fa fa-minus-square"></i> ลบร้านค้า </a>
                       </div>
                     </div>
-                  </div>
-              </div>
-              <div align="center" class="box-footer">
-                <a type="button" href="store_search.php?district_name=<?php echo $objr_store['district_code']; ?>" class="btn btn-danger pull-left" > << กลับ </a>
-                <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลหรือไม่ ?')";><i class="fa fa-save" ></i> บันทึกข้อมูล </button>
-                <a type="button" href="algorithm/delete_store.php?id_store=<?php echo $id_store; ?>&&district_name=<?php echo $objr_store['district_code']; ?>" class="btn btn-danger" onClick="return confirm('คุณต้องการที่จะลบข้อมูลร้านค้าหรือไม่ ?')";><i class="fa fa-minus-square"></i> ลบร้านค้า </a>
+                  </form>
+                </div>
               </div>
             </div>
-            </form>
-            </div> 
-          </div> 
-       </section> 
-    <!-- jQuery 3 -->
+          </div>
+          
+      </div>
+      </form>
     </div>
-    <script src="../bower_components/jquery/dist/jquery.min.js">
-    </script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js">
-    </script>
-    <!-- DataTables -->
-    <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js">
-    </script>
-    <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js">
-    </script>
-    <!-- SlimScroll -->
-    <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js">
-    </script>
-    <!-- FastClick -->
-    <script src="../bower_components/fastclick/lib/fastclick.js">
-    </script>
-    <!-- AdminLTE App -->
-    <script src="../dist/js/adminlte.min.js">
-    </script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../dist/js/demo.js">
-    </script>
-    <script src="../plugins/iCheck/icheck.min.js">
-    </script>
-    <script type="text/javascript">
+  </div>
+  </section>
+  <!-- jQuery 3 -->
+  </div>
+  <script src="../bower_components/jquery/dist/jquery.min.js">
+  </script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js">
+  </script>
+  <!-- DataTables -->
+  <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js">
+  </script>
+  <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js">
+  </script>
+  <!-- SlimScroll -->
+  <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js">
+  </script>
+  <!-- FastClick -->
+  <script src="../bower_components/fastclick/lib/fastclick.js">
+  </script>
+  <!-- AdminLTE App -->
+  <script src="../dist/js/adminlte.min.js">
+  </script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="../dist/js/demo.js">
+  </script>
+  <script src="../plugins/iCheck/icheck.min.js">
+  </script>
+  <script type="text/javascript">
       $(function() {
         // เมื่อโหลดขึ้นมาครั้งแรก ให้ ajax ไปดึงข้อมูลจังหวัดทั้งหมดมาแสดงใน
         // ใน select ที่ชื่อ province_name 
