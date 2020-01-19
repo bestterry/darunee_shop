@@ -94,7 +94,7 @@
             <div class="box box-primary">
               <div class="box-header text-center with-border">
                 <font size="5">
-                  <B> สินค้าคงเหลือบนรถ </B>
+                  <B> สต๊อกรถ </B>
                 </font>
             </div>
             <!-- /.box-header -->

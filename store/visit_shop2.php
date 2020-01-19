@@ -9,7 +9,9 @@
                   INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
                   WHERE store.district_code = $district_code AND store.status = 'N'";
     $objq_store = mysqli_query($mysqli,$sql_store);
-    $objr_store = mysqli_fetch_array($objq_store);
+    
+    $objq_store2 = mysqli_query($mysqli,$sql_store);
+    $objr_store = mysqli_fetch_array($objq_store2);
 ?>
 <!DOCTYPE html>
 <html>
@@ -96,6 +98,7 @@ folder instead of downloading all of them to reduce the load. -->
                     <th width="30%" >
                       <a href="visit_shop.php" class="btn btn-danger"><< กลับ</a>
                       <a href="visit_add.php?district_name=<?php echo $_GET['district_name']; ?>"  class="btn btn-warning"><i class="fa fa-plus-square"></i> เพิ่มร้านค้า </a>
+                      <a href="../pdf_file/visit_shop.php?district_name=<?php echo $_GET['district_name']; ?>"  class="btn btn-success"> PDF </a>
                     </th>
                     <td width="50%" class="text-center"><font size="5"><B align="center">ตำบล<?php echo $objr_store['district_name'];?></B></font></td>
                     <td width="20%"></td>
@@ -113,11 +116,11 @@ folder instead of downloading all of them to reduce the load. -->
                         <table class="table table-striped">
                             <thead>
                               <tr>
+                                <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="20%">ชื่อร้านค้า</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="40%">ที่อยู่</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="15%">เบอร์โทร</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="15%">ประเภท</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="5%">แก้ไข</th>
                               </tr>
                             </thead>
@@ -127,10 +130,6 @@ folder instead of downloading all of them to reduce the load. -->
                               while($value = $objq_store->fetch_assoc()){
                             ?>
                               <tr>
-                                <td class="text-center"><?php echo $value['name_store'];?></td>
-                                <td><?php echo $value['address'].'  ต.'.$value['district_name'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
-                                <td class="text-center"><?php echo $value['tel'];?></td>
-                                <td class="text-center"><?php echo $value['category'];?></td>
                                 <td class="text-center">
                                   <?php 
                                     if($value['status'] == "N"){
@@ -146,6 +145,10 @@ folder instead of downloading all of them to reduce the load. -->
                                   ?>
 
                                 </td>
+                                <td class="text-center"><?php echo $value['name_store'];?></td>
+                                <td><?php echo $value['address'].'  ต.'.$value['district_name'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
+                                <td class="text-center"><?php echo $value['tel'];?></td>
+                                <td class="text-center"><?php echo $value['category'];?></td>
                                 <td class="text-center"><a href="visit_edit.php?id_store=<?php echo $value['id_store']; ?>" ><i class="fa fa-cog"></i></a></td>
                               </tr>
                               <?php }?>

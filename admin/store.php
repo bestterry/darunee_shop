@@ -80,9 +80,7 @@
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
     <header class="main-header">
-     
     </header>
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -94,247 +92,243 @@
         <div class="row">
           <!-- form start -->
           <div class="col-md-12">
-            <div class="nav-tabs-custom">
+           <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#store2" data-toggle="tab">ค้นหาตำบล</a></li>
-                <li><a href="#store3" data-toggle="tab">เยี่ยมร้าน</a></li>
+                <!-- <li><a href="#store3" data-toggle="tab">เยี่ยมร้าน</a></li> -->
                 <li><a href="#addstore" data-toggle="tab">เพิ่มร้าน</a></li>
-
+                <li><a href="#store3" data-toggle="tab">ตั้งค่า</a></li>
                 <div align="right">
                   <a href="admin.php" class="btn btn-success"><< เมนูหลัก</a>
-                  </div> 
-                  </ul> 
-                   <div class="tab-content">
-                      <!-- ------------------------------ค้นหารายอำเภอ---------------------------- -->
-                      <div class="tab-pane active" id="store2">
-                        <div class="box box-default">
-                          <div class="box-header with-border"> </div>
-                          <!-- /.box-header -->
-                          <div class="box-body">
-                            <div class="row">
-                              <div class="container">
-                                <form action="store_search.php" class="form-horizontal" method="get">
-                                  <div class="col-md-8">
+                </div> 
+              </ul> 
+              <div class="tab-content">
+                <!-- ------------------------------ค้นหารายอำเภอ---------------------------- -->
+                <div class="tab-pane active" id="store2">
+                  <div class="box box-default">
+                    <div class="box-header with-border"> </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="container">
+                          <form action="store_search.php" class="form-horizontal" method="get">
+                            <div class="col-md-8">
 
-                                    <div class="form-group">
-                                      <label class="col-sm-2 control-label">จังหวัด :</label>
-                                      <div class="col-sm-10">
-                                        <select name="province_name" data-where="2"
-                                          class="form-control ajax_address select2">
-                                          <option value="">-- เลือกจังหวัด --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                      <label class="col-sm-2 control-label">อำเภอ :</label>
-                                      <div class="col-sm-10">
-                                        <select name="amphur_name" data-where="3"
-                                          class="ajax_address form-control select2">
-                                          <option value="">-- เลือกอำเภอ --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                      <label class="col-sm-2 control-label">ตำบล :</label>
-                                      <div class="col-sm-10">
-                                        <select name="district_name" data-where="4"
-                                          class="ajax_address form-control select2" style="width: 100%;">
-                                          <option value="">-- เลือกตำบล --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <div align="center" class="box-footer">
-                                      <button type="submit" class="btn btn-success"><i class="fa fa-search"> ค้นหา </i></button>
-                                    </div>
-                                  </div>
-                                </form>
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label">จังหวัด :</label>
+                                <div class="col-sm-10">
+                                  <select name="province_name" data-where="2"
+                                    class="form-control ajax_address select2">
+                                    <option value="">-- เลือกจังหวัด --</option>
+                                  </select>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- ------------------------------//ค้นหารายอำเภอ---------------------------- -->
-
-                      <!-- ------------------------------เยี่ยมร้าน---------------------------- -->
-                      <div class="tab-pane" id="store3">
-                        <div class="box box-default">
-                          <div class="box-header with-border">
-
-                          </div>
-                          <!-- /.box-header -->
-                          <div class="box-body">
-                            <div class="row">
-                              <div class="container">
-                                <form action="store_search2.php" class="form-horizontal" method="post">
-                                  <div class="col-md-4">
-                                    <div class="box-body">
-                                      <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
-                                      <p> -กรุณาเลือก ระเบียนร้านค้า เยี่ยมแล้ว หรือไม่ได้เยี่ยม </p>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-8">
-                                  <div class="form-group">
-                                      <label class="col-sm-2 control-label">จังหวัด :</label>
-                                      <div class="col-sm-10">
-                                        <select name="province_name" data-where="2"
-                                          class="form-control ajax_address select2">
-                                          <option value="">-- เลือกจังหวัด --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                      <label class="col-sm-2 control-label">อำเภอ :</label>
-                                      <div class="col-sm-10">
-                                        <select name="amphur_name" data-where="3"
-                                          class="ajax_address form-control select2">
-                                          <option value="">-- เลือกอำเภอ --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                      <label class="col-sm-2 control-label">ตำบล :</label>
-                                      <div class="col-sm-10">
-                                        <select name="district_name" data-where="4"
-                                          class="ajax_address form-control select2" style="width: 100%;">
-                                          <option value="">-- เลือกตำบล --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                    <label class="col-sm-2 control-label">สถานะ :</label>
-                                      <div class="col-sm-10">
-                                      <select name="status" class="form-control text-center select2" style="width: 100%;">
-                                        <option value="">------กรุณาเลือก------</option>
-                                        <option value="Y">เยี่ยมแล้ว</option>
-                                        <option value="N">ไม่ได้เยี่ยม</option>
-                                      </select>
-                                    </div>
-                                    </div>
-                                    <div class="box-footer">
-                                      <button type="submit" class="btn btn-success pull-left"><i
-                                          class="fa fa-check-square-o"></i> ตกลง</button>
-                                    </div>
-                                  </div>
-                                </form>
+                              <!-- /.form-group -->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label">อำเภอ :</label>
+                                <div class="col-sm-10">
+                                  <select name="amphur_name" data-where="3"
+                                    class="ajax_address form-control select2">
+                                    <option value="">-- เลือกอำเภอ --</option>
+                                  </select>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- ------------------------------เยี่ยมร้าน---------------------------- -->
-
-                      <!-- ------------------------------เพิ่มร้าน---------------------------- -->
-                      <div class="tab-pane" id="addstore">
-                        <div class="box box-default">
-                          <div class="box-body">
-                            <div class="row">
-                              <div class="container">
-                              <form action="algorithm/add_store.php" class="form-horizontal" method="post" autocomplete="off" name="add_store" onSubmit="JavaScript:return addStore();">
-                                  <div class="row">
-                                    <!-- ข้อมูลสินค้า -->
-                                    <div class="col-md-12">
-                                      <div>
-                                        <table class="table table-bordered" id="dynamic_field">
-                                          <tr>
-                                            <th width="25%" class="text-right"><font size="4" valign="middle">ชื่อร้านค้า &nbsp;&nbsp;:</font></th>
-                                            <td width="25%" > 
-                                              <input type="text" name="name_store" class="form-control" value="">
-                                            </td>
-                                            <th width="25%" class="text-right" ><font size="4">เบอร์โทร &nbsp;&nbsp;:</font></th>
-                                            <td width="25%"><input type="text" name="tel" class="form-control" value=""></td>
-                                          </tr>
-                                          <tr>
-                                            <th width="25%" class="text-right"><font size="4" valign="middle">ประเภท &nbsp;&nbsp;:</font></th>
-                                            <td width="25%" > 
-                                              <select name="category" class="form-control" style="width: 100%;">
-                                                <option value="ขายปุ๋ย" selected='selected'>ขายปุ๋ย</option>
-                                                <option value="ขายสมุนไพร">ขายสมุนไพร</option>
-                                                <option value="ไม่กำหนด">ไม่กำหนด</option>
-                                              </select>
-                                            </td>
-                                            <th width="25%" class="text-right" ><font size="4">สถานะ &nbsp;&nbsp;:</font></th>
-                                            <td width="25%">
-                                              <select name="status"  class="form-control" style="width: 100%;">
-                                                <option value="N"  selected='selected'>ไม่ได้เยี่ยม</option>
-                                                <option value="Y" >เยี่ยมแล้ว</option>
-                                              
-                                              </select>
-                                            </td>
-                                          </tr>
-                                          </table>
-                                          <div class="col-md-3"></div>
-                                          <div class="col-md-6">
-                                          <table class="table table-bordered" id="dynamic_field">
-
-                                          <tr>
-                                              <th width="35%" class="text-right" ><font size="4">ที่อยู่ &nbsp;&nbsp;:</font></th>
-                                              <td width="65%" class="text-left"><input type="text" name="address" class="form-control" value=""></div>
-                                            </tr>
-                                            <tr>
-                                              <th width="35%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
-                                              <td width="65%" class="text-left">
-                                                <select name="province_name" data-where="2" class="form-control ajax_address select2" style="background-color: #e6f7ff;">
-                                                  <option value="">-- เลือกจังหวัด --</option>
-                                                </select>
-                                              </td>
-                                            </tr>
-
-                                            <tr>
-                                              <th width="35%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
-                                              <td width="65%">
-                                                <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
-                                                  <option value="">-- เลือกอำเภอ --</option>
-                                                </select>
-                                              </td>
-                                            </tr>
-
-                                            <tr>
-                                              <th width="35%" class="text-right" ><font size="4">ตำบล &nbsp;&nbsp;:</font></th>
-                                              <td width="65%">
-                                                <select name="district_name" data-where="4" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
-                                                  <option value="">-- เลือกตำบล --</option>
-                                                </select>
-                                              </td>
-                                            </tr>
-                                        </table>
-                                        </div>
-                                        <div class="col-md-3"></div>
-
-                                      </div>
-                                    </div>
-                                  </div>
+                              <!-- /.form-group -->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label">ตำบล :</label>
+                                <div class="col-sm-10">
+                                  <select name="district_name" data-where="4"
+                                    class="ajax_address form-control select2" style="width: 100%;">
+                                    <option value="">-- เลือกตำบล --</option>
+                                  </select>
+                                </div>
                               </div>
                               <div align="center" class="box-footer">
-                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึกข้อมูล </button>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-search"> ค้นหา </i></button>
                               </div>
                             </div>
-                            </form>
-                             </div>
-                            </div>
-                          </div>
+                          </form>
                         </div>
                       </div>
-                      <!-- ------------------------------เพิ่มร้าน---------------------------- -->
+                    </div>
+                  </div>
                 </div>
+                <!-- ------------------------------//ค้นหารายอำเภอ---------------------------- -->
+
+                <!-- ------------------------------เยี่ยมร้าน---------------------------- -->
+                <div class="tab-pane" id="store3">
+                  <div class="box box-default">
+                    <div class="box-header with-border">
+
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="container">
+                          <form action="store_search2.php" class="form-horizontal" method="post">
+                            <div class="col-md-4">
+                              <div class="box-body">
+                                <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
+                                <p> -กรุณาเลือก ระเบียนร้านค้า เยี่ยมแล้ว หรือไม่ได้เยี่ยม </p>
+                              </div>
+                            </div>
+                            <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">จังหวัด :</label>
+                                <div class="col-sm-10">
+                                  <select name="province_name" data-where="2"
+                                    class="form-control ajax_address select2">
+                                    <option value="">-- เลือกจังหวัด --</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <!-- /.form-group -->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label">อำเภอ :</label>
+                                <div class="col-sm-10">
+                                  <select name="amphur_name" data-where="3"
+                                    class="ajax_address form-control select2">
+                                    <option value="">-- เลือกอำเภอ --</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <!-- /.form-group -->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label">ตำบล :</label>
+                                <div class="col-sm-10">
+                                  <select name="district_name" data-where="4"
+                                    class="ajax_address form-control select2" style="width: 100%;">
+                                    <option value="">-- เลือกตำบล --</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                              <label class="col-sm-2 control-label">สถานะ :</label>
+                                <div class="col-sm-10">
+                                <select name="status" class="form-control text-center select2" style="width: 100%;">
+                                  <option value="">------กรุณาเลือก------</option>
+                                  <option value="Y">เยี่ยมแล้ว</option>
+                                  <option value="N">ไม่ได้เยี่ยม</option>
+                                </select>
+                              </div>
+                              </div>
+                              <div class="box-footer">
+                                <button type="submit" class="btn btn-success pull-left"><i
+                                    class="fa fa-check-square-o"></i> ตกลง</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ------------------------------เยี่ยมร้าน---------------------------- -->
+
+                <!-- ------------------------------เพิ่มร้าน---------------------------- -->
+                <div class="tab-pane" id="addstore">
+                  <div class="box box-default">
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="container">
+                        <form action="algorithm/add_store.php" class="form-horizontal" method="post" autocomplete="off" name="add_store" onSubmit="JavaScript:return addStore();">
+                            <div class="row">
+                              <!-- ข้อมูลสินค้า -->
+                              <div class="col-md-12">
+                                <div>
+                                  <table class="table table-bordered" id="dynamic_field">
+                                    <tr>
+                                      <th width="25%" class="text-right"><font size="4" valign="middle">ชื่อร้านค้า &nbsp;&nbsp;:</font></th>
+                                      <td width="25%" > 
+                                        <input type="text" name="name_store" class="form-control" value="">
+                                      </td>
+                                      <th width="25%" class="text-right" ><font size="4">เบอร์โทร &nbsp;&nbsp;:</font></th>
+                                      <td width="25%"><input type="text" name="tel" class="form-control" value=""></td>
+                                    </tr>
+                                    <tr>
+                                      <th width="25%" class="text-right"><font size="4" valign="middle">ประเภท &nbsp;&nbsp;:</font></th>
+                                      <td width="25%" > 
+                                        <select name="category" class="form-control" style="width: 100%;">
+                                          <option value="">------กรุณาเลือก------</option>
+                                          <option value="ขายปุ๋ย">ขายปุ๋ย</option>
+                                          <option value="ขายของบริโภค">ขายของบริโภค</option>
+                                          <option value="ขายทั้งสองชนิด">ขายทั้งสองชนิด</option>
+                                          <option value="ไม่กำหนด">ไม่กำหนด</option>
+                                          
+                                        </select>
+                                      </td>
+                                      <th width="25%" class="text-right" ><font size="4">สถานะ &nbsp;&nbsp;:</font></th>
+                                      <td width="25%">
+                                        <select name="status"  class="form-control" style="width: 100%;">
+                                          <option value="N"  selected='selected'>ไม่ได้เยี่ยม</option>
+                                          <option value="Y" >เยี่ยมแล้ว</option>
+                                        
+                                        </select>
+                                      </td>
+                                    </tr>
+                                    </table>
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                    <table class="table table-bordered" id="dynamic_field">
+
+                                    <tr>
+                                        <th width="35%" class="text-right" ><font size="4">ที่อยู่ &nbsp;&nbsp;:</font></th>
+                                        <td width="65%" class="text-left"><input type="text" name="address" class="form-control" value=""></div>
+                                      </tr>
+                                      <tr>
+                                        <th width="35%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
+                                        <td width="65%" class="text-left">
+                                          <select name="province_name" data-where="2" class="form-control ajax_address select2" style="background-color: #e6f7ff;">
+                                            <option value="">-- เลือกจังหวัด --</option>
+                                          </select>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        <th width="35%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
+                                        <td width="65%">
+                                          <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
+                                            <option value="">-- เลือกอำเภอ --</option>
+                                          </select>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        <th width="35%" class="text-right" ><font size="4">ตำบล &nbsp;&nbsp;:</font></th>
+                                        <td width="65%">
+                                          <select name="district_name" data-where="4" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
+                                            <option value="">-- เลือกตำบล --</option>
+                                          </select>
+                                        </td>
+                                      </tr>
+                                  </table>
+                                  </div>
+                                  <div class="col-md-3"></div>
+
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div align="center" class="box-footer">
+                          <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึกข้อมูล </button>
+                        </div>
+                      </div>
+                      </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ------------------------------เพิ่มร้าน---------------------------- -->
+
+                <!-- ------------------------------ตั้งค่า---------------------------- -->
+             </div>
             </div>
-          </div>
+           </div>
         </div>
+      </section>
+    <!-- /.content -->
     </div>
-  </div>
-  <!-- /.tab-pane -->
-  </div>
-  <!-- /.tab-content -->
-  </div>
-  <!-- /.nav-tabs-custom -->
-  </div>
-  </div>
-  </section>
-  <!-- /.content -->
-  </div>
   <!-- /.content-wrapper -->
 
   <?php require("../menu/footer.html"); ?>

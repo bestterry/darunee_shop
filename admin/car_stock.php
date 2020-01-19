@@ -59,7 +59,7 @@ require "menu/date.php";
       <!-- Main content -->
       <section class="content">
         <?php
-        $list_product = "SELECT * FROM product WHERE NOT id_product = 12";
+        $list_product = "SELECT * FROM product WHERE NOT id_product = 12 AND NOT id_product = 35";
         $query_product = mysqli_query($conn, $list_product);
         $query_product2 = mysqli_query($conn, $list_product);
         ?>
@@ -84,21 +84,15 @@ require "menu/date.php";
                   <tr class="info">
                     <th class="text-center" width="3%">ที่</th>
                     <th class="text-center" width="18%">สินค้า_หน่วย</th>
-                    <th class="text-center" width="5%">ยุทธ</th>
-                    <th class="text-center" width="5%">ลิน</th>
-                    <th class="text-center" width="5%">เอ</th>
-                    <th class="text-center" width="5%">รงค์</th>
-                    <th class="text-center" width="5%">เอ้ว</th>
-                    <th class="text-center" width="5%">เกีติ</th>
-                    <th class="text-center" width="5%">เดี่ว</th>
-                    <th class="text-center" width="5%">อั๋น</th>
-                    <th class="text-center" width="5%">เบส</th>
-                    <th class="text-center" width="5%">หนึ่ง</th>
-                    <th class="text-center" width="5%">-</th>
-                    <th class="text-center" width="5%">เอี่ว</th>
-                    <th class="text-center" width="5%">-</th>
-                    <th class="text-center" width="5%">เอ็กซ์</th>
-                    <th class="text-center" width="5%">รอน</th>
+
+                  <?php 
+                    $sql_member = "SELECT name_sub FROM member WHERE id_member BETWEEN 4 AND 18";
+                    $objq_member = mysqli_query($conn,$sql_member);
+                    while($value = $objq_member -> fetch_assoc()){
+                  ?>
+                    <th class="text-center" width="5%"><?php echo $value['name_sub'];?></th>
+                  <?php }?>
+                  
                     <th class="text-center" width="8%">รวม</th>
                   </tr>
                   <?php
@@ -116,21 +110,24 @@ require "menu/date.php";
                       <!-- -------------------------------รถ------------------------------------ -->
                       <?php
                       $total_num = 0;
+                      
                       for ($i = 4; $i <= 18; $i++) {
-
                         $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $i";
                         $objq_num = mysqli_query($conn, $SQL_num);
                         $objr_num = mysqli_fetch_array($objq_num);
+                        
                         if (!isset($objr_num['num'])) {
                           ?>
                           <td></td>
                         <?php
                       } else {
+                        $num_pd = $objr_num['num'];
                         ?>
-                          <td class="text-center"><?php echo $objr_num['num']; ?></td>
+                          <td class="text-center"><?php echo $num_pd; ?></td>
                         <?php
+                         $total_num = $total_num + $num_pd;
                       }
-                      $total_num = $total_num + $objr_num['num'];
+                     
                     }
                     ?>
                       <!-- -------------------------------//รถ------------------------------------ -->

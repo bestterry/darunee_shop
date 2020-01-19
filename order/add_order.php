@@ -111,12 +111,12 @@ folder instead of downloading all of them to reduce the load. -->
         document.form1.date_getorder.focus();		
         return false;
       }	
-      if(document.form1.date_receive.value == "")
-      {
-        alert('กรุณาระบุรถมาถึง');
-        document.form1.date_receive.focus();		
-        return false;
-      }	
+      // if(document.form1.date_receive.value == "")
+      // {
+      //   alert('กรุณาระบุรถมาถึง');
+      //   document.form1.date_receive.focus();		
+      //   return false;
+      // }	
    
 
       if(document.form1.name_store.value == "")
@@ -150,12 +150,12 @@ folder instead of downloading all of them to reduce the load. -->
         document.form1.tel_to.focus();		
         return false;
       }
-      if(document.form1.price.value == "")
-      {
-        alert('กรุณาระบุราคา/น.');
-        document.form1.price.focus();		
-        return false;
-      }	
+      // if(document.form1.price.value == "")
+      // {
+      //   alert('กรุณาระบุราคา/น.');
+      //   document.form1.price.focus();		
+      //   return false;
+      // }	
    
       document.form1.submit();
     }
@@ -242,8 +242,8 @@ folder instead of downloading all of them to reduce the load. -->
                             </td>
                           </tr>
                           <tr>
-                            <th width="25%" class="text-right" ><font size="4">วันที่สั่ง &nbsp;&nbsp;:</font></th>
-                            <td width="25%" ><input type="date" name="date_order" class="form-control" placeholder="วันที่สั่ง" value="" style="background-color: #e6f7ff;"></td>
+                            <th width="25%" class="text-right" ><font size="4">วันที่รถเข้าโรงงาน &nbsp;&nbsp;:</font></th>
+                            <td width="25%" ><input type="date" name="date_getorder" class="form-control" placeholder="วันที่สั่ง" value="" style="background-color: #e6f7ff;"></td>
                             <th width="25%" class="text-right"><font size="4">ทะเบียนรถ &nbsp;&nbsp;:</font></th>
                             <td width="25%" ><input type="text" name="licent_plate" class="form-control" placeholder="ทะเบียนรถ" style="background-color: #e6f7ff;"></td>
                           </tr>
@@ -273,30 +273,19 @@ folder instead of downloading all of them to reduce the load. -->
                             <td width="25%"><input type="text" name="tel_sent" class="form-control" placeholder="เบอร์ พขร." style="background-color: #e6f7ff;"></td>
                           </tr>
                           <tr>
-                            <th width="25%" class="text-right" ><font size="4">ใบกำกับภาษี &nbsp;&nbsp;:</font></th>
-                            <td width="25%">
-                              <select name="vat" class="form-control text-center select2" style="width: 100%;">
-                              <option value="ไม่มี">ไม่มี</option>
-                              <option value="มี">มี</option>
-                              </select>
-                            </td>
-                            <th width="25%" class="text-right"><font size="4">วันที่รถเข้าโรงงาน &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="date" name="date_getorder" class="form-control" value="-" style="background-color: #e6f7ff;"></td>
-                          </tr>
-                          <tr>
                             <th width="25%" class="text-right" ><font size="4">ผู้ออกใบสั่ง &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="name_author" class="form-control" placeholder="ผู้ออกใบสั่ง" style="background-color: #e6f7ff;"></td>
                             <th width="25%" class="text-right"><font size="4">วันที่รถมาถึง &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="date" name="date_receive" class="form-control"></td>
+                            <td width="25%"><input type="date" name="date_receive" class="form-control" value="-" style="background-color: #e6f7ff;"></td>
                           </tr>
                           </table>
+
                            <table class="table table-bordered" id="dynamic_field">
                           <tr>
                             <th width="25%" class="text-right"><font size="4">ชื่อร้าน &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="name_store" placeholder="ชื่อร้าน" class="form-control " style="background-color: #e6f7ff;"></td>
-                            <th width="25%" class="text-right" ><font size="4">ราคาสินค้า/หน่วย &nbsp;&nbsp;:</font></th>
-                            <td width="20%" ><input type="text" name="price" class="form-control" placeholder="ราคาสินค้า/หน่วย" value="" OnChange="fncSum();"></td>
-                            <th width="5%"><font size="4">บาท</font></th>
+                            <th width="25%" class="text-right" ><font size="4">ผู้ประสานงาน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="name_to" placeholder="ชื่อผู้รับ" class="form-control" style="background-color: #e6f7ff;"></td>
                           </tr>
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
@@ -305,9 +294,8 @@ folder instead of downloading all of them to reduce the load. -->
                                 <option value="">-- เลือกจังหวัด --</option>
                               </select>
                             </td>
-                            <th width="25%" class="text-right" ><font size="4">ราคาสินค้า &nbsp;&nbsp;:</font></th>
-                            <td width="20%" ><input type="text" name="money" class="form-control" placeholder="ราคาสินค้า" id="show"></td>
-                            <th width="5%"><font size="4">บาท</font></th>
+                            <th width="25%" class="text-right"><font size="4">เบอร์โทรประสานงาน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="tel_to" placeholder="เบอร์ผู้รับ" class="form-control" style="background-color: #e6f7ff;"></td>
                           </tr>
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
@@ -316,25 +304,11 @@ folder instead of downloading all of them to reduce the load. -->
                                 <option value="">-- เลือกอำเภอ --</option>
                               </select>
                             </td>
-                            <th width="25%" class="text-right" ><font size="4">ค่ารถขนส่ง &nbsp;&nbsp;:</font></th>
-                            <td width="20%" ><input type="text" name="portage" class="form-control" value="0" ></td>
-                            <th width="5%"><font size="4">บาท</font></th>
-                          </tr>
-                          <tr>
-                            <th width="25%" class="text-right" ><font size="4">ผู้ประสานงาน &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="name_to" placeholder="ชื่อผู้รับ" class="form-control" style="background-color: #e6f7ff;"></td>
-                            <th width="25%" class="text-right" ><font size="4">ใบจ่ายที่ &nbsp;&nbsp;:</font></th>
-                            <td width="20%" ><input type="text" name="slip_number" class="form-control " value="-"></td>
-                            <td width="5%"></td>
-                          </tr>
-                          <tr>
-                            <th width="25%" class="text-right"><font size="4">เบอร์โทรประสานงาน &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="tel_to" placeholder="เบอร์ผู้รับ" class="form-control" style="background-color: #e6f7ff;"></td>
                             <th width="25%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
-                            <td width="20%"><input type="text" name="note" class="form-control " value="-"></td>
-                            <td width="5%"></td>
+                            <td width="25%"><input type="text" name="note" class="form-control " value="-"></td>
                           </tr>
                         </table>
+                        
                       </div>
                     </div>
                   </div>

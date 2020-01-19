@@ -84,21 +84,15 @@ require "menu/date.php";
                   <tr class="info">
                     <th class="text-center" width="3%">ที่</th>
                     <th class="text-center" width="18%">สินค้า_หน่วย</th>
-                    <th class="text-center" width="5%">ยุทธ</th>
-                    <th class="text-center" width="5%">ลิน</th>
-                    <th class="text-center" width="5%">เอ</th>
-                    <th class="text-center" width="5%">รงค์</th>
-                    <th class="text-center" width="5%">เอ๋</th>
-                    <th class="text-center" width="5%">เกีติ</th>
-                    <th class="text-center" width="5%">เดี่ว</th>
-                    <th class="text-center" width="5%">อั๋น</th>
-                    <th class="text-center" width="5%">เบส</th>
-                    <th class="text-center" width="5%">หนึ่ง</th>
-                    <th class="text-center" width="5%">บอย</th>
-                    <th class="text-center" width="5%">เอี่ว</th>
-                    <th class="text-center" width="5%">หนุ่ย</th>
-                    <th class="text-center" width="5%">เอ็กซ์</th>
-                    <th class="text-center" width="5%">รอน</th>
+
+                  <?php 
+                    $sql_member = "SELECT name_sub FROM member WHERE id_member BETWEEN 4 AND 18";
+                    $objq_member = mysqli_query($conn,$sql_member);
+                    while($value = $objq_member -> fetch_assoc()){
+                  ?>
+                    <th class="text-center" width="5%"><?php echo $value['name_sub'];?></th>
+                  <?php }?>
+                  
                     <th class="text-center" width="8%">รวม</th>
                   </tr>
                   <?php

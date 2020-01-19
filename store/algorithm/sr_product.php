@@ -24,6 +24,10 @@ $num_after = $_POST['num_after'];
     $total_pd = $num_after * 24;
   }elseif ($id_product==32) {
     $total_pd = $num_after * 24;
+  }elseif ($id_product==37) {
+    $total_pd = $num_after * 48;
+  }elseif ($id_product==39) {
+    $total_pd = $num_after * 10;
   }
 
     $check_num = "SELECT num FROM numpd_car WHERE id_product = $id_product2 AND id_member = $id_member";

@@ -2,6 +2,7 @@
   require "../config_database/config.php";
   require "../session.php"; 
   $strDate = date('d-m-Y');
+  
 ?>
 
 <!DOCTYPE html>

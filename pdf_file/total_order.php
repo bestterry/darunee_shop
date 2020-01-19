@@ -43,7 +43,7 @@ require('../config_database/config.php');
       }
 
 // Instanciation of inherited class
-$pdf=new PDF('L','mm','A4');
+      $pdf=new PDF('L','mm','A3');
             // ตั้งค่าขอบกระดาษทุกด้าน 20 มิลลิเมตร
             $pdf->AliasNbPages();
             $pdf->SetMargins(5,10,10);
@@ -57,19 +57,19 @@ $pdf=new PDF('L','mm','A4');
                   $pdf->Ln(3);
                   $pdf->Cell(40,9,iconv('UTF-8','cp874',''),1,0,'C');
                   $pdf->Cell(40,9,iconv('UTF-8','cp874','พะเยา'),1,0,'C');
-                  $pdf->Cell(40,9,iconv('UTF-8','cp874','เวียงป่าเป้า'),1,0,'C');
+                  $pdf->Cell(40,9,iconv('UTF-8','cp874','เชียงราย'),1,0,'C');
                   $pdf->Cell(40,9,iconv('UTF-8','cp874','ลำปาง'),1,0,'C');
-                  $pdf->Cell(40,9,iconv('UTF-8','cp874','ฮอด'),1,0,'C');
-                  $pdf->Cell(40,9,iconv('UTF-8','cp874','แม่จัน'),1,0,'C');
+                  $pdf->Cell(40,9,iconv('UTF-8','cp874','ลำพูน'),1,0,'C');
+                  $pdf->Cell(40,9,iconv('UTF-8','cp874','เชียงใหม่'),1,0,'C');
                   $pdf->Cell(40,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
                   $pdf->Ln(9);
-                  $sql_pd = "SELECT * FROM product WHERE NOT id_product = 12";
+                  $sql_pd = "SELECT * FROM product WHERE NOT id_product = 12 AND NOT id_product = 35";
                     $objq_pd = mysqli_query($conn,$sql_pd);
                     while ($value_pd = $objq_pd->fetch_assoc()) {
                      $id_product = $value_pd['id_product'];
                      $pdf->Cell(40,9,iconv('UTF-8','cp874',$value_pd['name_product'].'_'.$value_pd['unit']),1,0,'C');
                      $total_num = 0;
-                      for ($i=1; $i < 6; $i++) { 
+                      for ($i=1; $i <= 5; $i++) { 
                         $sql_num = "SELECT SUM(num) FROM addorder 
                                     INNER JOIN listorder ON listorder.id_addorder = addorder.id_addorder 
                                     INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
@@ -98,9 +98,9 @@ $pdf=new PDF('L','mm','A4');
                   $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 1";
                   $objq_amphur = mysqli_query($conn,$sql_amphur);
                   while($value_am = $objq_amphur->fetch_assoc()){
-                    $pdf->Cell(18,9,iconv('UTF-8','cp874',$value_am['amphur_name']),1,0,'C');
+                    $pdf->Cell(25,9,iconv('UTF-8','cp874',$value_am['amphur_name']),1,0,'C');
                   }
-                  $pdf->Cell(18,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
+                  $pdf->Cell(25,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
                   $pdf->Ln(9);
                     $sql_product = "SELECT * FROM product WHERE NOT id_product = 12";
                     $objq_product = mysqli_query($conn,$sql_product);
@@ -123,13 +123,13 @@ $pdf=new PDF('L','mm','A4');
                             $objr_numpd = mysqli_fetch_array($objq_numpd);
                             $numpd = $objr_numpd['SUM(num)'];;
                             if (!isset($numpd)) {
-                              $pdf->Cell(18,9,iconv('UTF-8','cp874','-'),1,0,'C');
+                              $pdf->Cell(25,9,iconv('UTF-8','cp874','-'),1,0,'C');
                             }else{
-                              $pdf->Cell(18,9,iconv('UTF-8','cp874',$numpd),1,0,'C');
+                              $pdf->Cell(25,9,iconv('UTF-8','cp874',$numpd),1,0,'C');
                             }
                             $total_pd = $total_pd + $numpd;
                       }
-                  $pdf->Cell(18,9,iconv('UTF-8','cp874',$total_pd),1,0,'C');
+                  $pdf->Cell(25,9,iconv('UTF-8','cp874',$total_pd),1,0,'C');
                   $pdf->Ln(9);
                 }
                 //--ค้างส่งพะเยา//
@@ -137,16 +137,16 @@ $pdf=new PDF('L','mm','A4');
                //ค้างส่งเวียงป่าเป้า//
                $pdf->AddPage();
                $pdf->SetFont('angsana','',18);
-               $pdf->Text(145,9,iconv('UTF-8','cp874','ค้างส่ง : เขต เวียงป่าเป้า'),1,0,'C');
+               $pdf->Text(145,9,iconv('UTF-8','cp874','ค้างส่ง : เขต เชียงราย'),1,0,'C');
                $pdf->Ln(3);
                $pdf->SetFont('angsana','',16);
                $pdf->Cell(35,9,iconv('UTF-8','cp874',''),1,0,'C');
                $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 2";
                $objq_amphur = mysqli_query($conn,$sql_amphur);
                while($value_am = $objq_amphur->fetch_assoc()){
-                 $pdf->Cell(40,9,iconv('UTF-8','cp874',$value_am['amphur_name']),1,0,'C');
+                 $pdf->Cell(25,9,iconv('UTF-8','cp874',$value_am['amphur_name']),1,0,'C');
                }
-               $pdf->Cell(40,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
+               $pdf->Cell(25,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
                $pdf->Ln(9);
                  $sql_product = "SELECT * FROM product WHERE NOT id_product = 12";
                  $objq_product = mysqli_query($conn,$sql_product);
@@ -169,13 +169,13 @@ $pdf=new PDF('L','mm','A4');
                          $objr_numpd = mysqli_fetch_array($objq_numpd);
                          $numpd = $objr_numpd['SUM(num)'];;
                          if (!isset($numpd)) {
-                           $pdf->Cell(40,9,iconv('UTF-8','cp874','-'),1,0,'C');
+                           $pdf->Cell(25,9,iconv('UTF-8','cp874','-'),1,0,'C');
                          }else{
-                           $pdf->Cell(40,9,iconv('UTF-8','cp874',$numpd),1,0,'C');
+                           $pdf->Cell(25,9,iconv('UTF-8','cp874',$numpd),1,0,'C');
                          }
                          $total_pd = $total_pd + $numpd;
                    }
-               $pdf->Cell(40,9,iconv('UTF-8','cp874',$total_pd),1,0,'C');
+               $pdf->Cell(25,9,iconv('UTF-8','cp874',$total_pd),1,0,'C');
                $pdf->Ln(9);
              }
              //--ค้างส่งเวียงป่าเป้า//
@@ -190,9 +190,9 @@ $pdf=new PDF('L','mm','A4');
             $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 3";
             $objq_amphur = mysqli_query($conn,$sql_amphur);
             while($value_am = $objq_amphur->fetch_assoc()){
-              $pdf->Cell(20,9,iconv('UTF-8','cp874',$value_am['amphur_name']),1,0,'C');
+              $pdf->Cell(18,9,iconv('UTF-8','cp874',$value_am['amphur_name']),1,0,'C');
             }
-            $pdf->Cell(20,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
+            $pdf->Cell(18,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
             $pdf->Ln(9);
               $sql_product = "SELECT * FROM product WHERE NOT id_product = 12";
               $objq_product = mysqli_query($conn,$sql_product);
@@ -215,30 +215,30 @@ $pdf=new PDF('L','mm','A4');
                       $objr_numpd = mysqli_fetch_array($objq_numpd);
                       $numpd = $objr_numpd['SUM(num)'];;
                       if (!isset($numpd)) {
-                        $pdf->Cell(20,9,iconv('UTF-8','cp874','-'),1,0,'C');
+                        $pdf->Cell(18,9,iconv('UTF-8','cp874','-'),1,0,'C');
                       }else{
-                        $pdf->Cell(20,9,iconv('UTF-8','cp874',$numpd),1,0,'C');
+                        $pdf->Cell(18,9,iconv('UTF-8','cp874',$numpd),1,0,'C');
                       }
                       $total_pd = $total_pd + $numpd;
                 }
-            $pdf->Cell(20,9,iconv('UTF-8','cp874',$total_pd),1,0,'C');
+            $pdf->Cell(18,9,iconv('UTF-8','cp874',$total_pd),1,0,'C');
             $pdf->Ln(9);
             }
             //--ค้างส่งลำปาง//
 
-            //ค้างส่งฮอด//
+            //ค้างส่งลำพูน//
             $pdf->AddPage();
             $pdf->SetFont('angsana','',18);
-            $pdf->Text(145,9,iconv('UTF-8','cp874','ค้างส่ง : เขต ฮอด'),1,0,'C');
+            $pdf->Text(145,9,iconv('UTF-8','cp874','ค้างส่ง : เขต ลำพูน'),1,0,'C');
             $pdf->Ln(3);
             $pdf->SetFont('angsana','',16);
             $pdf->Cell(35,9,iconv('UTF-8','cp874',''),1,0,'C');
             $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 4";
             $objq_amphur = mysqli_query($conn,$sql_amphur);
             while($value_am = $objq_amphur->fetch_assoc()){
-              $pdf->Cell(50,9,iconv('UTF-8','cp874',$value_am['amphur_name']),1,0,'C');
+              $pdf->Cell(25,9,iconv('UTF-8','cp874',$value_am['amphur_name']),1,0,'C');
             }
-            $pdf->Cell(50,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
+            $pdf->Cell(25,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
             $pdf->Ln(9);
               $sql_product = "SELECT * FROM product WHERE NOT id_product = 12";
               $objq_product = mysqli_query($conn,$sql_product);
@@ -261,36 +261,36 @@ $pdf=new PDF('L','mm','A4');
                       $objr_numpd = mysqli_fetch_array($objq_numpd);
                       $numpd = $objr_numpd['SUM(num)'];;
                       if (!isset($numpd)) {
-                        $pdf->Cell(50,9,iconv('UTF-8','cp874','-'),1,0,'C');
+                        $pdf->Cell(25,9,iconv('UTF-8','cp874','-'),1,0,'C');
                       }else{
-                        $pdf->Cell(50,9,iconv('UTF-8','cp874',$numpd),1,0,'C');
+                        $pdf->Cell(25,9,iconv('UTF-8','cp874',$numpd),1,0,'C');
                       }
                       $total_pd = $total_pd + $numpd;
                 }
-            $pdf->Cell(50,9,iconv('UTF-8','cp874',$total_pd),1,0,'C');
+            $pdf->Cell(25,9,iconv('UTF-8','cp874',$total_pd),1,0,'C');
             $pdf->Ln(9);
             }
-            //--ค้างส่งฮอด//
-
-            //ค้างส่งแม่จัน//
+            //--ค้างส่งลำพูน//
+            
+            //ค้างส่งเชียงใหม่//
             $pdf->AddPage();
             $pdf->SetFont('angsana','',18);
-            $pdf->Text(145,9,iconv('UTF-8','cp874','ค้างส่ง : เขต แม่จัน'),1,0,'C');
+            $pdf->Text(145,9,iconv('UTF-8','cp874','ค้างส่ง : เขต เชียงใหม่'),1,0,'C');
             $pdf->Ln(3);
             $pdf->SetFont('angsana','',16);
-            $pdf->Cell(35,9,iconv('UTF-8','cp874',''),1,0,'C');
+            $pdf->Cell(20,9,iconv('UTF-8','cp874',''),1,0,'C');
             $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 5";
             $objq_amphur = mysqli_query($conn,$sql_amphur);
             while($value_am = $objq_amphur->fetch_assoc()){
-              $pdf->Cell(30,9,iconv('UTF-8','cp874',$value_am['amphur_name']),1,0,'C');
+              $pdf->Cell(15,9,iconv('UTF-8','cp874',$value_am['amphur_name']),1,0,'C');
             }
-            $pdf->Cell(30,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
+            $pdf->Cell(15,9,iconv('UTF-8','cp874','รวม'),1,0,'C');
             $pdf->Ln(9);
               $sql_product = "SELECT * FROM product WHERE NOT id_product = 12";
               $objq_product = mysqli_query($conn,$sql_product);
               while($value_pd = $objq_product->fetch_assoc())
               {
-                $pdf->Cell(35,9,iconv('UTF-8','cp874',$value_pd['name_product'].'_'.$value_pd['unit']),1,0,'C');
+                $pdf->Cell(20,9,iconv('UTF-8','cp874',$value_pd['name_product'].'_'.$value_pd['unit']),1,0,'C');
                 $total_pd = 0;
                     $id_product = $value_pd['id_product'];
                     $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 5";
@@ -307,16 +307,16 @@ $pdf=new PDF('L','mm','A4');
                       $objr_numpd = mysqli_fetch_array($objq_numpd);
                       $numpd = $objr_numpd['SUM(num)'];;
                       if (!isset($numpd)) {
-                        $pdf->Cell(30,9,iconv('UTF-8','cp874','-'),1,0,'C');
+                        $pdf->Cell(15,9,iconv('UTF-8','cp874','-'),1,0,'C');
                       }else{
-                        $pdf->Cell(30,9,iconv('UTF-8','cp874',$numpd),1,0,'C');
+                        $pdf->Cell(15,9,iconv('UTF-8','cp874',$numpd),1,0,'C');
                       }
                       $total_pd = $total_pd + $numpd;
                 }
-            $pdf->Cell(30,9,iconv('UTF-8','cp874',$total_pd),1,0,'C');
+            $pdf->Cell(15,9,iconv('UTF-8','cp874',$total_pd),1,0,'C');
             $pdf->Ln(9);
             }
-            //--ค้างส่งฮอด//
+            //--ค้างส่งเชียงใหม่//
 
 // --------------------------------------------------------------------------------------                     
     $pdf->Output();

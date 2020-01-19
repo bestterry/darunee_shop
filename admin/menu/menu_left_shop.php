@@ -6,7 +6,9 @@
         </div>
         <div class="box-body no-padding">
             <ul class="nav nav-pills nav-stacked" ata-widget="tree">
-
+            <?php
+                    if($id_member == 30 || $id_member == 33){
+            ?>
                 <!-- สต๊อกรวม -->
                 <li><a href="total_stock.php" ><i class="fa fa-home"></i> สต๊อกร้าน </a></li>
                 <!-- /สต๊อกรวม -->
@@ -133,10 +135,10 @@
                     </div>
                 </div>
                 <!--//รับเข้า -->
-                
-                 <!--เบิกออก -->
-                 <li><a href="#" data-toggle="modal" data-target="#myModal1"><i class="fa fa-archive"></i> เบิกออก </a></li>
-                <div class="modal fade" id="myModal1" role="dialog">
+
+                <!--เบิกออก -->
+                <li><a href="#" data-toggle="modal" data-target="#myModal1"><i class="fa fa-archive"></i> เบิกออก </a></li>
+                 <div class="modal fade" id="myModal1" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <form action="withdraw_product.php" method="post">
                             <div class="modal-content">
@@ -204,6 +206,7 @@
                     </div>
                 </div>
                 <!--//เบิกออก -->
+
             
                 <!--ข้อมูลการรับเข้า -->
                 <li><a href="add_history.php"><i class="fa fa-cloud-download"></i> ข้อมูลการรับเข้า </a></li>
@@ -212,10 +215,6 @@
                 <!--ข้อมูลการเบิก -->
                 <li><a href="withdraw_history.php"><i class="fa fa-cloud-upload"></i> ข้อมูลการเบิก </a></li>
                 <!--/ข้อมูลการเบิก -->
-
-                <!--จัดการข้อมูลสินค้า-พนักงาน -->
-                <li><a href="add_data.php" ><i class="fa fa-cog"></i> จัดการข้อมูล </a></li>
-                <!--/จัดการข้อมูลสินค้า-พนักงาน -->
 
                 <!--ORDER ค้างส่ง -->
                 <li><a href="../add_customer/order.php" ><i class="fa fa-columns"></i> ORDER ค้างส่ง </a></li>
@@ -241,9 +240,20 @@
                 <li><a href="store.php" ><i class="fa fa-user-circle-o"></i> ระเบียนร้านค้า </a></li>
                 <!-- /นอกเขต. -->
 
+                <!--จัดการข้อมูลสินค้า-พนักงาน -->
+                <li><a href="add_data.php" ><i class="fa fa-cog"></i> จัดการข้อมูล </a></li>
+                <!--/จัดการข้อมูลสินค้า-พนักงาน -->
+
+                <!-- สำรองจ่าย. -->
+                <!-- <li><a href="reserve_money.php" ><i class="fa fa-user-circle-o"></i> สำรองจ่าย </a></li> -->
+                <!-- /สำรองจ่าย. -->
+
                 <!-- สถานที่ทำงาน -->
                 <!-- <li><a href="working.php"><i class="fa fa-users"></i> ตารางปฏิบัติงาน </a></li> -->
                 <!-- /สถานที่ทำงาน -->
+                <?php
+                    }
+                ?>
             </ul>
         </div>
         <!-- /.box-body -->

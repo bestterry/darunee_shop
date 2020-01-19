@@ -63,9 +63,10 @@
               <ul class="nav nav-tabs">
                 <li><a href="#adduser" data-toggle="tab">เพิ่มพนักงาน</a></li>
                 <li><a href="#addproduct" data-toggle="tab">เพิ่มสินค้า</a></li>
-                <li><a href="#settingproduct" data-toggle="tab">แก้ไขข้อมูลสินค้า</a></li>
                 <li><a href="#settingproductcar" data-toggle="tab">แก้ไขจำนวนสินค้าในรถ</a></li>
                 <li><a href="#addproductcar" data-toggle="tab">เพิ่มสินค้าเข้ารถ</a></li>
+                <li><a href="#settingproduct" data-toggle="tab">แก้ไขข้อมูลสินค้า</a></li>
+                <li><a href="#settingemployee" data-toggle="tab">แก้ไขข้อมูลพนักงาน</a></li>
                 <div align="right">
                   <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
                 </div>
@@ -148,8 +149,15 @@
 
                             <div class="col-md-12">
                               <div class="form-group col-md-3">
-                                <label for="txtname">ชื่อสินค้า :</label>
+                                <label for="txtname">ชื่อสินค้าย่อ :</label>
                                 <input type="text" name="name_product" class="form-control" placeholder="ชื่อสินค้า">
+                              </div>
+                            </div>
+
+                            <div class="col-md-12">
+                              <div class="form-group col-md-3">
+                                <label for="txtname">ชื่อสินค้าเต็ม :</label>
+                                <input type="text" name="full_name" class="form-control" placeholder="ชื่อสินค้า">
                               </div>
                             </div>
 
@@ -163,7 +171,14 @@
                             <div class="col-md-12">
                               <div class="form-group col-md-2">
                                 <label for="inputPassword3">ราคาซื้อมา :</label>
-                                <input type="text" name="price_num" class="form-control" placeholder="ราคา">
+                                <input type="number" name="price_num" class="form-control" placeholder="ราคา">
+                              </div>
+                            </div>
+
+                            <div class="col-md-12">
+                              <div class="form-group col-md-2">
+                                <label for="inputPassword3">ราคาขาย :</label>
+                                <input type="number" name="price_outside" class="form-control" placeholder="ราคา">
                               </div>
                             </div>
                             <div class="box-footer" align="center">
@@ -176,62 +191,6 @@
                   </div>
                 </div>
                 <!-- /เพิ่มสินค้า -->
-
-                <!-- แก้ไขสินค้า -->
-                <div class="tab-pane" id="settingproduct">
-                  <div class="box box-default">
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="container">
-                          <form action="algorithm/add_product2.php" method="post" autocomplete="off">
-                            <div class="box-header with-border">
-                              <font size="4">
-                                <B>
-                                  แก้ไขข้อมูลสินค้า
-                                </B>
-                              </font>
-                            </div>
-                            <table class="table table-striped ">
-                              <tbody>
-                                <tr class="info" >
-                                  <th class="text-center">ชื่อสินค้า</th>
-                                  <th class="text-center" width="15%">หน่วย</th>
-                                  <th class="text-center" width="12%">แก้ไข</th>
-                                  <th class="text-center" width="12%">ลบ</th>
-                                </tr>
-                                <?php #endregion
-                                                  $total_money = 0;
-                                                  $date = "SELECT * FROM product";  
-                                                  $objq = mysqli_query($conn,$date);
-                                                  while($value = $objq ->fetch_assoc()){ 
-                                              ?>
-                                <tr>
-                                  <td>
-                                    <?php echo $value['name_product']; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <?php echo $value['unit']; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <a href="edit_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="btn btn-success"><i class="fa fa-cog"></i></a>
-                                  </td>
-                                  <td class="text-center">
-                                    <a href="algorithm/delete_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="btn btn-danger"><i class="fa fa-minus-square"></i></a>
-                                  </td>
-                                </tr>
-                                <?php
-                                  }
-                                ?>
-                              </tbody>
-                            </table>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- /เเก้ไขสินค้า -->
 
                 <!-- แก้ไขสินค้าในรถ -->
                 <div class="tab-pane" id="settingproductcar">
@@ -318,6 +277,114 @@
                   </div>
                 </div>
                 <!-- /เพิ่มสินค้ารถ -->
+                
+                <!-- แก้ไขสินค้า -->
+                <div class="tab-pane" id="settingproduct">
+                  <div class="box box-default">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="container">
+                          <form action="algorithm/add_product2.php" method="post" autocomplete="off">
+                            <div class="box-header with-border text-center">
+                              <font size="4">
+                                <B>
+                                  แก้ไขข้อมูลสินค้า
+                                </B>
+                              </font>
+                            </div>
+                            <table class="table table-striped ">
+                              <tbody>
+                                <tr class="info" >
+                                  <th class="text-center">ชื่อสินค้า</th>
+                                  <th class="text-center" width="15%">หน่วย</th>
+                                  <th class="text-center" width="12%">แก้ไข</th>
+                                  <th class="text-center" width="12%">ลบ</th>
+                                </tr>
+                                <?php #endregion
+                                                  $total_money = 0;
+                                                  $date = "SELECT * FROM product";  
+                                                  $objq = mysqli_query($conn,$date);
+                                                  while($value = $objq ->fetch_assoc()){ 
+                                              ?>
+                                <tr>
+                                  <td class="text-center">
+                                    <?php echo $value['name_product']; ?>
+                                  </td>
+                                  <td class="text-center">
+                                    <?php echo $value['unit']; ?>
+                                  </td>
+                                  <td class="text-center">
+                                    <a href="edit_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="btn btn-success"><i class="fa fa-cog"></i></a>
+                                  </td>
+                                  <td class="text-center">
+                                    <a href="algorithm/delete_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="btn btn-danger"><i class="fa fa-minus-square"></i></a>
+                                  </td>
+                                </tr>
+                                <?php
+                                  }
+                                ?>
+                              </tbody>
+                            </table>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /เเก้ไขสินค้า -->
+
+                 <!-- แก้ไขพนักงาน -->
+                 <div class="tab-pane" id="settingemployee">
+                  <div class="box box-default">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="container">
+                          <form action="algorithm/add_product2.php" method="post" autocomplete="off">
+                            <div class="box-header with-border text-center">
+                              <font size="4">
+                                <B>
+                                  แก้ไขข้อมูลสินค้า
+                                </B>
+                              </font>
+                            </div>
+                            <table class="table table-striped ">
+                              <tbody>
+                                <tr class="info" >
+                                  <th class="text-center" >ชื่อพนักงาน</th>
+                                  <th class="text-center" width="30%">สถานะ</th>
+                                  <th class="text-center" width="12%">แก้ไข</th>
+                                </tr>
+                                <?php #endregion
+                                                  $sql_member = "SELECT * FROM member";  
+                                                  $objq_member = mysqli_query($conn,$sql_member);
+                                                  while($value = $objq_member ->fetch_assoc()){ 
+                                              ?>
+                                <tr>
+                                  <td class="text-center">
+                                    <?php echo $value['name']; ?>
+                                  </td>
+                                  <td class="text-center">
+                                    <?php echo $value['status']; ?>
+                                  </td>
+                                  <td class="text-center">
+                                    <a href="edit_employee.php?id_member=<?php echo $value['id_member']; ?>" type="button" class="btn btn-success"><i class="fa fa-cog"></i></a>
+                                  </td>
+                                </tr>
+                                <?php
+                                  }
+                                ?>
+                              </tbody>
+                            </table>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /เเก้ไขพนักงาน -->
+
 
               </div>
               <!-- /.tab-content -->

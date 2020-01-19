@@ -33,8 +33,8 @@ class PDF extends FPDF
     function Header()
     {
         // Arial bold 15
-        $this->AddFont('angsana','','angsa.php');
-        $this->SetFont('angsana','',20);
+        $this->AddFont('angsana','b','angsa.php');
+        $this->SetFont('angsana','b',25);
         
         // Title
         $this->SetTextColor(0,0,0);
@@ -58,21 +58,24 @@ $pdf=new PDF('P','mm','A4');
               //สร้างหน้าเอกสาร
               $pdf->AddPage();
               $pdf->SetTextColor(255,0,0);
+              $pdf->SetFont('angsana','',20);
+              $pdf->Text(132, 154,iconv('UTF-8','cp874',$objr_order['licent_plate']),1,0,'L');
+              $pdf->SetTextColor(255,0,0);
               $pdf->SetFont('angsana','',25);
               $pdf->Text(60, 88,iconv('UTF-8','cp874',$objr_order['full_name']),1,0,'L');
               $pdf->Text(150, 48,iconv('UTF-8','cp874',$objr_order['list_order']),1,0,'C');
-              $pdf->Text(63, 98,iconv('UTF-8','cp874',$objr_order['num_product'].'    '.$objr_order['unit']),1,0,'L');
+              $pdf->Text(77, 98,iconv('UTF-8','cp874',$objr_order['num_product'].'    '.$objr_order['unit']),1,0,'L');
               $pdf->SetTextColor(0,0,0);
               $pdf->SetFont('angsana','',18);
               $pdf->Text(195, 10,iconv('UTF-8','cp874',$objr_order['id_order_list']),1,0,'C');
-              $pdf->Text(123, 58,iconv('UTF-8','cp874',DateThai($objr_order['date_order'])),1,0,'C');
+              $pdf->Text(140, 58,iconv('UTF-8','cp874',DateThai($objr_order['date_order'])),1,0,'C');
               $pdf->Text(55, 119,iconv('UTF-8','cp874',$objr_order['name_store'].'     '.'อ.'.$objr_amphur['amphur_name'].'   จ.'.$objr_amphur['province_name']),1,0,'C');
               $pdf->Text(75, 127,iconv('UTF-8','cp874',$objr_order['name_to']),1,0,'C');
               $pdf->Text(132, 127,iconv('UTF-8','cp874',$objr_order['tel_to']),1,0,'L');
               $pdf->Text(60, 147,iconv('UTF-8','cp874',$objr_order['name_sent']),1,0,'L');
               $pdf->Text(132, 147,iconv('UTF-8','cp874',$objr_order['tel_sent']),1,0,'C');
               $pdf->Text(70, 155,iconv('UTF-8','cp874',$objr_order['catagory_car']),1,0,'C');
-              $pdf->Text(132, 155,iconv('UTF-8','cp874',$objr_order['licent_plate']),1,0,'L');
+              
               $pdf->Text(79, 163,iconv('UTF-8','cp874',DateThai($objr_order['date_getorder'])),1,0,'C');
               $pdf->Text(57, 182,iconv('UTF-8','cp874',$objr_order['name_author']),1,0,'C');
               $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'                                                                                               ใบสั่งที่ ......................................') , 0 , 1,'C' );

@@ -121,11 +121,16 @@
                     <th width="20%" class="text-right"><font size="4" valign="middle">งาน &nbsp;&nbsp;:</font></th>
                     <td width="30%" >
                       <select name="id_practice"  class="form-control" style="width: 100%;">
-                        <option value="1"  <?php if($id_practice == 1){ echo "selected='selected'";} ?>>ส่งของ</option>
-                        <option value="2"  <?php if($id_practice == 2){ echo "selected='selected'";} ?>>ขนของ</option>
+                        <option value="1"  <?php if($id_practice == 1){ echo "selected='selected'";} ?>>ส่ง</option>
+                        <option value="2"  <?php if($id_practice == 2){ echo "selected='selected'";} ?>>ขน</option>
                         <option value="3"  <?php if($id_practice == 3){ echo "selected='selected'";} ?>>เยี่ยม</option>
-                        <option value="4"  <?php if($id_practice == 4){ echo "selected='selected'";} ?>>หน้าร้าน</option>
+                        <option value="4"  <?php if($id_practice == 4){ echo "selected='selected'";} ?>>ร้าน</option>
                         <option value="5"  <?php if($id_practice == 5){ echo "selected='selected'";} ?>>อื่นๆ</option>
+                        <option value="6"  <?php if($id_practice == 6){ echo "selected='selected'";} ?>>ลา</option>
+                        <option value="7"  <?php if($id_practice == 7){ echo "selected='selected'";} ?>>หยุด</option>
+                        <option value="9"  <?php if($id_practice == 9){ echo "selected='selected'";} ?>>เช็ค</option>
+                        <option value="10"  <?php if($id_practice == 10){ echo "selected='selected'";} ?>>เก็บเงิน</option>
+                        <option value="11"  <?php if($id_practice == 11){ echo "selected='selected'";} ?>>ขายส่ง</option>
                       </select>
                     </td>
                     <th width="20%" class="text-right" ><font size="4">รับ &nbsp;&nbsp;:</font></th>

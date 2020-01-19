@@ -1,20 +1,7 @@
 <?php
 require('fpdf.php');
 require('../config_database/config.php'); 
-  function DateThai($strDate)
-      {
-      $strYear = (date("Y",strtotime($strDate))+543)-2500;
-      $strMonth= date("n",strtotime($strDate));
-      $strDay= date("j",strtotime($strDate));
-      $strHour= date("H",strtotime($strDate));
-      $strMinute= date("i",strtotime($strDate));
-      $strSeconds= date("s",strtotime($strDate));
-      $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-      $strMonthThai=$strMonthCut[$strMonth];
-      return "$strDay $strMonthThai $strYear";
-      }
-
-      $strDate = date('d-m-Y');
+require('date/datetime.php');
 
 class PDF extends FPDF
   {
@@ -101,8 +88,8 @@ $pdf=new PDF('P','mm','A4');
                   //ที่อยู่ลูกค้า 
                   $pdf->MultiCell( 140  , 7 , iconv( 'UTF-8','cp874' ,$value['name_customer'].'   '.$value['tel']  .'
 บ.'.$value['village'].'   ต.'.$value['district_name'].'อ.'.$value['amphur_name'].'จ.'.$value['province_name'].'
-'.$value['id_addorder'].'  สั่ง '.DateThai($value['datetime']).'   '.$value['name_member']  .'  
-# '.'  '.'
+'.$value['id_addorder'].'  สั่ง '.DateThai($value['datetime']).'   '.$value['name_member']  .'  '. DateTime($value['datetime']).'
+# '.'   '.$value['note'].'
 '   .'  '  ) );
                 }  
             }        

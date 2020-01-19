@@ -182,7 +182,7 @@ folder instead of downloading all of them to reduce the load. -->
                               <select name="id_product[]" class="form-control text-center select2" style="width: 100%;">
                                 <option class="text-center" value="">-- เลือกสินค้า --</option>
                               <?php 
-                                  $product = "SELECT * FROM product";
+                                  $product = "SELECT * FROM product WHERE NOT id_product = 12 AND NOT id_product = 35";
                                   $objq_product = mysqli_query($mysqli,$product);
                                   while($value = $objq_product->fetch_array()){
                                 ?>

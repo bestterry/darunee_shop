@@ -6,7 +6,7 @@ require "../session.php";
 <!DOCTYPE html>
 <html>
 
-<head>
+<head> 
   <?php require('../font/font_style.php'); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,6 +93,10 @@ require "../session.php";
                                 $id_product2 = 10;
                               }elseif ($id_product==32) {
                                 $id_product2 = 33;
+                              }elseif ($id_product==37) {
+                                $id_product2 = 38;
+                              }elseif ($id_product==39) {
+                                $id_product2 = 40;
                               }
                               
                               ?>

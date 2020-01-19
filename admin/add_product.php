@@ -67,14 +67,12 @@
       <?php require('menu/header_logout.php');?>
     </header>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="height: 1000px;">
+    <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
       <!-- Main content -->
       <section class="content">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
           <div class="box box-primary">
 
             <div class="box-header text-center with-border">
@@ -95,7 +93,8 @@
               </font>
             </div>
             <!-- /.box-header -->
-            <div class="box-body no-padding ">
+            
+            <div class="box-body no-padding">
               <div class="mailbox-read-message">
                 <form action="add_product2.php" method="post">
                   <table class="table table-striped ">
@@ -173,10 +172,7 @@
             </form>
             <!-- /.box-footer -->
           </div>
-          <!-- /. box -->
-        </div>
-  </div>
-  </section>
+      </section>
   <!-- /.content -->
   <!-- /.content-wrapper -->
   <?php require("../menu/footer.html"); ?>

@@ -87,20 +87,18 @@
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
+              <div class=""></div>
                 <thead>
                   <tr>
-                    <th class="text-center" width="4%">ดู</th>
-                    <th class="text-center" width="5%">ID</th>
-                    <th class="text-center" width="10%">ใบสั่ง</th>
-                    <th class="text-center" width="13%">สินค้า</th>
-                    <th class="text-center" width="7%">จำนวน</th>
-                    <th class="text-center" width="6%">ราคา</th>
-                    <th class="text-center" width="8%">ซื้อ</th>
-                    <th class="text-center" width="8%">จ่าย</th>
-                    <th class="text-center" width="13%">สั่ง</th>
-                    <th class="text-center" width="4%">เข้า</th>
-                    <th class="text-center" width="4%">ถึง</th>
-                    <th class="text-center" width="10%">อำเภอ</th>
+                    <th class="text-center" width="5%">ดู</th>
+                    <th class="text-center" width="6%">ID</th>
+                    <th class="text-center" width="14%">สินค้า</th>
+                    <th class="text-center" width="6%">NO.</th>
+                    <th class="text-center" width="10%">เข้า</th>
+                    <th class="text-center" width="10%">ถึง</th>
+                    <th class="text-center" width="33%">ร้าน</th>
+                    <th class="text-center" width="15%">อำเภอ</th>
+                    <!-- <th class="text-center" width="10%">จังหวัด</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -108,6 +106,7 @@
                     $order_list = "SELECT * FROM order_list
                                     INNER JOIN product ON order_list.id_product = product.id_product
                                     INNER JOIN tbl2_amphures ON order_list.amphur_id = tbl2_amphures.amphur_id
+                                    INNER JOIN tbl2_provinces ON order_list.province_id = tbl2_provinces.province_id
                                     ORDER BY order_list.id_order_list DESC";
                     $objq_addorder = mysqli_query($conn,$order_list);
                     while($value = $objq_addorder->fetch_assoc()){
@@ -115,18 +114,13 @@
                   <tr>
                     <td class="text-center"><a href="data_order.php?id_order_list=<?php echo $value['id_order_list']; ?>"><i class="fa fa-search-plus"></i></a></td>
                     <td class="text-center"><?php echo $value['id_order_list'];?></td>
-                    <td class="text-center"><?php echo $value['list_order'];?></td>
                     <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit'];?></td>
                     <td class="text-center" ><?php echo $value['num_product']; ?></td>
-                    <td class="text-center" ><?php echo $value['price']; ?></td>
-                    <td class="text-center" ><?php echo $value['money']; ?></td>
-                    <td class="text-center"><?php echo $value['slip_number'];?></td>
-                    <td class="text-center" ><?php echo DateThai($value['date_order']);?></td>
-                    <td class="text-center"><?php echo DateThai2($value['date_getorder']);?></td>
-                    <td class="text-center">
-                      <?php echo DateThai2($value['date_receive']); ?>
-                    </td>
+                    <td class="text-center" ><?php echo DateThai($value['date_getorder']);?></td>
+                    <td class="text-center" ><?php echo DateThai($value['date_receive']) ;?></td>
+                    <td class="text-center"><?php echo $value['name_store'];?></td>
                     <td class="text-center"><?php echo $value['amphur_name'];?></td>
+                    <!-- <td class="text-center"><?php //echo $value['province_name'];?></td> -->
                   </tr>
                  <?php 
                   }

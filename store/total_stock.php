@@ -66,14 +66,14 @@
       <!-- Main content -->
       <section class="content">
         <?php 
-      $list_product = "SELECT * FROM product";
+      $list_product = "SELECT * FROM product WHERE NOT id_product = 12 AND NOT id_product = 35";
       $query_product = mysqli_query($conn,$list_product);
       $query_product2 = mysqli_query($conn,$list_product);
     ?>
         <div class="box box-primary">
           <div class="box-header text-center with-border">
             <B align="center"> 
-              <font size="5"> จำนวนสินค้าคงเหลือ </font>
+              <font size="5"> สต๊อกร้าน </font>
               <font size="5" color="red">  
                 <?php 
                     $strDate = date('d-m-Y');
@@ -85,22 +85,22 @@
           <!-- /.box-header -->
           <div class="box-body no-padding">
             <div class="mailbox-read-message">
-              <table class="table table-striped">
+              <table class="table table-striped table-bordered">
                 <tbody>
                   <tr class="info">
                     <th class="text-center" width="5%">ที่</th>
-                    <th class="text-center" width="15%">สินค้า</th>
-                    <th class="text-center" width="5%">หน่วย</th>
+                    <th class="text-center" width="12%">สินค้า_หน่วย</th>
                     <th class="text-center" width="5%">จุน</th>
                     <th class="text-center" width="5%">พาน</th>
                     <th class="text-center" width="5%">ดคต.</th>
                     <th class="text-center" width="5%">วปป.</th>
                     <th class="text-center" width="5%">ลำปาง</th>
-                    <th class="text-center" width="5%">ฮอด</th>
+                    <th class="text-center" width="5%">ลำพูน</th>
+                    <th class="text-center" width="5%">ขายส่ง</th>
                     <th class="text-center" width="5%">แม่จัน</th>
-                    <th class="text-center" width="5%">ฝาง</th>
+                    <th class="text-center" width="5%">ทีมจร</th>
                     <th class="text-center" width="5%">รถ</th>
-                    <th class="text-center" width="5%">ทั้งหมด</th>
+                    <th class="text-center" width="8%">ทั้งหมด</th>
                   </tr>
                   <?php 
                     $i=1;
@@ -113,10 +113,7 @@
                       <?php echo $a; ?>
                     </td>
                     <td class="text-center" >
-                      <?php echo $product['name_product']; ?>
-                    </td>
-                    <td class="text-center" >
-                      <?php echo $product['unit']; ?>
+                      <?php echo $product['name_product'].'_'.$product['unit']; ?>
                     </td>
                     <!-- -------------------------------จุน------------------------------------ -->
                     <?php 
@@ -203,7 +200,24 @@
                       
                       ?>
                     <!-- -------------------------------//ลป.------------------------------------ -->
-                     <!-- -------------------------------ฮอด.------------------------------------ -->
+                     <!-- -------------------------------ลพ.------------------------------------ -->
+                                         <?php 
+                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 10";
+                        $objq_num = mysqli_query($conn,$SQL_num);
+                        $objr_num = mysqli_fetch_array($objq_num);
+                        if(!isset($objr_num['num'])){
+                      ?>
+                    <td ></td>
+                    <?php
+                        }else{
+                      ?>
+                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                    <?php 
+                        } 
+                      
+                      ?>
+                    <!-- -------------------------------//ลพ.------------------------------------ -->
+                     <!-- -------------------------------ขายส่ง.------------------------------------ -->
                      <?php 
                         $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 7";
                         $objq_num = mysqli_query($conn,$SQL_num);
@@ -219,7 +233,7 @@
                         } 
                       
                       ?>
-                    <!-- -------------------------------//ฮอด.------------------------------------ -->
+                    <!-- -------------------------------//ขายส่ง.------------------------------------ -->
                      <!-- -------------------------------แม่จัน.------------------------------------ -->
                      <?php 
                         $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 5";
@@ -302,8 +316,8 @@
             </div>
           </div>
           <div class="box-footer">
-            <a href="store.php" class="btn btn-success pull-left"> <<== กลับสู่หน้าหลัก </a>
-            <a href="../pdf_file/admin_total_stock.php" class="btn btn-success pull-right"><i class="fa fa-print"> พิมพ์ </i></a>
+            <a href="admin.php" class="btn btn-success pull-left"> <<== กลับสู่เมนูหลัก </a>
+            <a href="../pdf_file/admin_total_stock.php" class="btn btn-success pull-right"> PDF </a>
           </div>
         </div>
     </div>

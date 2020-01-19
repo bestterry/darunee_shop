@@ -163,8 +163,8 @@ folder instead of downloading all of them to reduce the load. -->
                             <td width="25%"><input type="text" name="catagory_car" class="form-control" value="<?php echo $objr_order['catagory_car']; ?>"></td>
                           </tr>
                           <tr>
-                            <th width="25%" class="text-right" ><font size="4">วันที่สั่ง &nbsp;&nbsp;:</font></th>
-                            <td width="25%" ><input type="date" name="date_order" class="form-control" value="<?php echo $objr_order['date_order']; ?>"/></td>
+                            <th width="25%" class="text-right" ><font size="4">วันที่รถเข้าโรงงาน &nbsp;&nbsp;:</font></th>
+                            <td width="25%" ><input type="date" name="date_getorder" class="form-control" value="<?php echo $objr_order['date_getorder']; ?>"/></td>
                             <th width="25%" class="text-right"><font size="4">ทะเบียนรถ &nbsp;&nbsp;:</font></th>
                             <td width="25%" ><input type="text" name="licent_plate" class="form-control" value="<?php echo $objr_order['licent_plate']; ?>"></td>
                           </tr>
@@ -181,16 +181,10 @@ folder instead of downloading all of them to reduce the load. -->
                             <td width="25%"><input type="text" name="tel_sent" class="form-control" value="<?php echo $objr_order['tel_sent']; ?>"></td>
                           </tr>
                           <tr>
-                            <th width="25%" class="text-right" ><font size="4">ใบกำกับภาษี &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="vat" class="form-control" value="<?php echo $objr_order['vat']; ?>"></td></td>
-                            <th width="25%" class="text-right"><font size="4">วันที่รถเข้าโรงงาน &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="date" name="date_getorder"  class="form-control" value="<?php echo $objr_order['date_getorder']; ?>"></td>
-                          </tr>
-                          <tr>
                             <th width="25%" class="text-right" ><font size="4">ผู้ออกใบสั่ง &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="name_author" class="form-control" value="<?php echo $objr_order['name_author']; ?>"></td>
                             <th width="25%" class="text-right"><font size="4">วันที่รถมาถึง &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="date" name="date_receive" class="form-control" value="<?php echo $objr_order['date_receive']; ?>"></td>
+                            <td width="25%"><input type="date" name="date_receive"  class="form-control" value="<?php echo $objr_order['date_receive']; ?>"></td>
                           </tr>
                           </table>
 
@@ -198,14 +192,12 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <th width="25%" class="text-right"><font size="4">ชื่อร้าน &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="name_store" value="<?php echo $objr_order['name_store']; ?>" class="form-control " /></td>
-                            <th width="25%" class="text-right" ><font size="4">ราคาสินค้า/หน่วย &nbsp;&nbsp;:</font></th>
-                            <td width="20%" ><input type="text" name="price" class="form-control" value="<?php echo $objr_order['price'];?>" value="" OnChange="fncSum();"></td>
-                            <th width="5%"><font size="4">บาท</font></th>
+                            <th width="25%" class="text-right" ><font size="4">ผู้ประสานงาน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="name_to" class="form-control" value="<?php echo $objr_order['name_to'];?>"/></td>
                             </td>
                           </tr>
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
-
                             <td width="25%" class="text-left">
                               <label for="inputEmail3" class="col-sm-4 control-label"><?php echo 'จ.'.$objr_amphur['province_name']; ?> </label>
                               <div class="col-sm-8">
@@ -214,10 +206,8 @@ folder instead of downloading all of them to reduce the load. -->
                                 </select>
                               </div>
                             </td>
-
-                            <th width="25%" class="text-right" ><font size="4">ราคาสินค้า &nbsp;&nbsp;:</font></th>
-                            <td width="20%" ><input type="text" name="money" class="form-control" value="<?php echo $objr_order['money'];?>" id="show"></td>
-                            <th width="5%"><font size="4">บาท</font></th>
+                            <th width="25%" class="text-right"><font size="4">เบอร์โทรประสานงาน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="tel_to" value="<?php echo $objr_order['tel_to'];?>"  class="form-control "></td>
                           </tr>
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
@@ -229,23 +219,8 @@ folder instead of downloading all of them to reduce the load. -->
                                 </select>
                               </div>
                             </td>
-                            <th width="25%" class="text-right" ><font size="4">ค่ารถขนส่ง &nbsp;&nbsp;:</font></th>
-                            <td width="20%" ><input type="text" name="portage" class="form-control" value="<?php echo $objr_order['portage'];?>" ></td>
-                            <th width="5%"><font size="4">บาท</font></th>
-                          </tr>
-                          <tr>
-                            <th width="25%" class="text-right" ><font size="4">ผู้ประสานงาน &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="name_to" class="form-control" value="<?php echo $objr_order['name_to'];?>"/></td>
-                            <th width="25%" class="text-right" ><font size="4">ใบจ่ายที่ &nbsp;&nbsp;:</font></th>
-                            <td width="20%"><input type="text" name="slip_number" class="form-control " value="<?php echo $objr_order['slip_number'];?>"></td>
-                            <th width="5%"><font size="4"></font></th>
-                          </tr>
-                          <tr>
-                            <th width="25%" class="text-right"><font size="4">เบอร์โทรประสานงาน &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="tel_to" value="<?php echo $objr_order['tel_to'];?>"  class="form-control "></td>
                             <th width="25%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
-                            <td width="20%" ><input type="text" name="note" class="form-control" value="<?php echo $objr_order['note'];?>"></td>
-                            <th width="5%"><font size="4"></font></th>
+                            <td width="25%" ><input type="text" name="note" class="form-control" value="<?php echo $objr_order['note'];?>"></td>
                           </tr>
                         </table>
 

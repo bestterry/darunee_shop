@@ -265,8 +265,8 @@
                                           <option value="">------กรุณาเลือก------</option>
                                           <option value="ขายปุ๋ย">ขายปุ๋ย</option>
                                           <option value="ขายของบริโภค">ขายของบริโภค</option>
-                                          <option value="ไม่กำหนด">ไม่กำหนด</option>
                                           <option value="ขายทั้งสองชนิด">ขายทั้งสองชนิด</option>
+                                          <option value="ไม่กำหนด">ไม่กำหนด</option>
                                         </select>
                                       </div>
                                     </div>

@@ -133,10 +133,8 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#4dd2ff" class="text-center" width="40%">สินค้า</th>
+                            <th bgcolor="#4dd2ff" class="text-center" width="60%">สินค้า</th>
                             <th bgcolor="#4dd2ff" class="text-center" width="15%">จำนวน</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="15%">ราคา</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="15%">เงิน(บ)</th>
                             <th bgcolor="#4dd2ff" class="text-center" width="15%">จัดการ</th>
                           </tr>
                           <tr>
@@ -152,8 +150,6 @@ folder instead of downloading all of them to reduce the load. -->
                               <input type="hidden" name="id_product[]" value="<?php echo $value['id_product']; ?>">
                             </td>
                             <td><input type="text" name="num[]" class="form-control text-center" value="<?php echo $value['num']; ?>"></td>
-                            <td><input type="text" name="price[]" class="form-control text-center" value="<?php echo $value['price']; ?>"></td>
-                            <td></td>
                             <td class="text-center"><a href="algorithm/delete_list_order2.php?id_listorder=<?php echo $value['id_listorder']; ?>&&id_addorder=<?php echo $id_addorder; ?>" type="button" class="btn btn-danger">ลบ</a></td>
                           </tr>
                             <?php
@@ -164,7 +160,7 @@ folder instead of downloading all of them to reduce the load. -->
                               <select name="id_product2[]" class="form-control text-center select2" style="width: 100%;">
                                 <option value="list">-- เลือกสินค้า --</option>
                               <?php 
-                                  $product = "SELECT * FROM product";
+                                  $product = "SELECT * FROM product WHERE NOT id_product = 12 AND NOT id_product = 35";
                                   $objq_product = mysqli_query($conn,$product);
                                   while($value = $objq_product->fetch_array()){
                                 ?>
@@ -177,8 +173,6 @@ folder instead of downloading all of them to reduce the load. -->
                             <td>
                               <input type="text" name="num2[]" placeholder="จำนวน" class="form-control text-center" />
                             </td>
-                            <td><input type="text" name="price2[]" class="form-control text-center" value="<?php echo $value['price']; ?>"></td>
-                            <td></td>
                             <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success">เพิ่มสินค้า</button></td>
                           </tr>
                         </table>

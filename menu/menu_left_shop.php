@@ -110,7 +110,7 @@
           <!-- /ประวัติขายสินค้า -->
 
           <!-- เบิกสินค้า -->
-          <li><a href="#" data-toggle="modal" data-target="#myModal10"><i class="fa fa-cloud-upload"></i> เบิกออก </a></li>
+          <!-- <li><a href="#" data-toggle="modal" data-target="#myModal10"><i class="fa fa-cloud-upload"></i> เบิกออก </a></li>
           <div class="modal fade" id="myModal10" role="dialog">
             <div class="modal-dialog modal-lg">
               <form action="manage_product/draw_product.php" method="post">
@@ -150,11 +150,11 @@
                 </div>
               </form>
             </div>
-          </div>
+          </div> -->
           <!-- /เบิกสินค้า -->
 
           <!--รับเข้าสินค้า -->
-          <li><a href="#" data-toggle="modal" data-target="#myModal11"><i class="fa fa-cloud-download"></i> รับเข้า </a></li>
+          <!-- <li><a href="#" data-toggle="modal" data-target="#myModal11"><i class="fa fa-cloud-download"></i> รับเข้า </a></li>
           <div class="modal fade" id="myModal11" role="dialog">
             <div class="modal-dialog modal-lg">
               <form action="manage_product/add_num_product.php" method="post">
@@ -203,7 +203,7 @@
                 </div>
               </form>
             </div>
-          </div>
+          </div> -->
           <!--//รับเข้าสินค้า -->
 
            <!-- แยกสินค้า -->

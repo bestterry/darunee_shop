@@ -65,7 +65,6 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
-
       <!-- Main content -->
       <section class="content">
         <div class="row">
@@ -86,8 +85,8 @@
                <!-- /.tab-pane -->
                <div class="tab-pane active" id="saleoutside">
                   <?php 
-                          $list_producto = "SELECT * FROM product WHERE NOT id_product = 2 AND NOT id_product = 4 AND NOT id_product = 6 AND NOT id_product = 10
-                                          AND NOT id_product = 33 AND NOT id_product = 35 AND NOT id_product = 12";
+                          $list_producto = "SELECT * FROM product WHERE NOT id_product = 2 AND NOT id_product = 4 AND NOT id_product = 6
+                                          AND NOT id_product = 33 AND NOT id_product = 35 AND NOT id_product = 12 AND NOT id_product = 38";
                           $query_product3 = mysqli_query($conn,$list_producto);
                   ?>
                   <!-- ------------------------------เบิกนอกเขต---------------------------- -->

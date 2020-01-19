@@ -72,7 +72,9 @@
                             <th class="text-center" width="35%">สินค้า_หน่วย</th>
                             <th class="text-center" width="15%">คงเหลือ</th>
                           <tr>
-                            <?php while($product = $query_product1 ->fetch_assoc()){ ?>
+                            <?php 
+                              while($product = $query_product1 ->fetch_assoc()){ 
+                            ?>
                             <td class="text-center" >
                               <input type="checkbox" name="id_numPD[]" value="<?php echo $product['id_numPD_car']; ?>">
                             </td>
@@ -162,6 +164,28 @@
                           </tr>
                           <?php
                                                     }else if($id_product==32) { 
+                                            ?>
+                          <tr>
+                            <td class="text-center" >
+                              <input type="radio" class="minimal" name="id_numPD"
+                                value="<?php echo $product['id_numPD_car']; ?>">
+                            </td>
+                            <td ><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
+                            <td class="text-center" ><?php echo $product['num']; ?></td>
+                          </tr>
+                          <?php
+                                                    }else if($id_product==37) { 
+                                            ?>
+                          <tr>
+                            <td class="text-center" >
+                              <input type="radio" class="minimal" name="id_numPD"
+                                value="<?php echo $product['id_numPD_car']; ?>">
+                            </td>
+                            <td ><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
+                            <td class="text-center" ><?php echo $product['num']; ?></td>
+                          </tr>
+                          <?php
+                                                    }else if($id_product==39) { 
                                             ?>
                           <tr>
                             <td class="text-center" >
@@ -270,6 +294,10 @@
           <li><a href="sent_order.php" ><i class="fa fa-shopping-cart"></i> ORDER หน่วยรถ </a></li>
           <!-- /รายการรวมสต๊อกค้างส่ง -->
 
+          <!-- /สต๊อกรถ -->
+          <li><a href="total_order.php"><i class="fa fa-dropbox"></i> ORDER ค้างส่งรวม </a></li>
+          <!-- /สต๊อกรถ -->
+
          <!-- ค้นหา ORDER -->
          <li><a href="#" data-toggle="modal" data-target="#seachorder"><i class="fa fa-archive"></i> ค้นหา ORDER </a></li>
           <div class="modal fade" id="seachorder" role="dialog">
@@ -327,6 +355,10 @@
           <!-- เงินขายรายวัน -->
           <li><a href="visit_shop.php" ><i class="fa fa-user"></i>เยี่ยมร้าน</a></li>
           <!-- /เงินขายรายวัน -->
+
+          <!-- สำรองจ่าย. -->
+          <li><a href="reserve_money.php" ><i class="fa fa-user-circle-o"></i> สำรองจ่าย </a></li>
+          <!-- /สำรองจ่าย. -->
         </ul>
       </div>
       <!-- /.box-body -->

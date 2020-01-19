@@ -135,6 +135,7 @@ folder instead of downloading all of them to reduce the load. -->
                                   <option value="30"  <?php if($id_product == 30){ echo "selected='selected'";} ?>>กรดหยอดยาง ต้นยางคู่ลูกโลก</option>
                                   <option value="32"  <?php if($id_product == 32){ echo "selected='selected'";} ?>>น้ำปลาร้าต้มสุก เด็มเด็ม (ขวดเหลี่ยม)</option>
                                   <option value="34"  <?php if($id_product == 34){ echo "selected='selected'";} ?>>ปุ๋ยอินทรีย์กวางเหรียญทอง (50กก.)</option>
+                                  <option value="36"  <?php if($id_product == 36){ echo "selected='selected'";} ?>>มหาเทพฮอร์โมน</option>
                                   <option value="35"  <?php if($id_product == 35){ echo "selected='selected'";} ?>>ชำระเงิน</option>
                                 </select>
                             </th>

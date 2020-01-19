@@ -66,7 +66,7 @@
       <!-- Main content -->
       <section class="content">
         <?php 
-      $list_product = "SELECT * FROM product WHERE NOT id_product = 12";
+      $list_product = "SELECT * FROM product WHERE NOT id_product = 12 AND NOT id_product = 35";
       $query_product = mysqli_query($conn,$list_product);
       $query_product2 = mysqli_query($conn,$list_product);
     ?>
@@ -89,12 +89,13 @@
                 <tbody>
                   <tr class="info">
                     <th class="text-center" width="5%">ที่</th>
-                    <th class="text-center" width="17%">สินค้า_หน่วย</th>
+                    <th class="text-center" width="12%">สินค้า_หน่วย</th>
                     <th class="text-center" width="5%">จุน</th>
                     <th class="text-center" width="5%">พาน</th>
                     <th class="text-center" width="5%">ดคต.</th>
                     <th class="text-center" width="5%">วปป.</th>
                     <th class="text-center" width="5%">ลำปาง</th>
+                    <th class="text-center" width="5%">ลำพูน</th>
                     <th class="text-center" width="5%">ขายส่ง</th>
                     <th class="text-center" width="5%">แม่จัน</th>
                     <th class="text-center" width="5%">ทีมจร</th>
@@ -199,7 +200,24 @@
                       
                       ?>
                     <!-- -------------------------------//ลป.------------------------------------ -->
-                     <!-- -------------------------------ฮอด.------------------------------------ -->
+                     <!-- -------------------------------ลพ.------------------------------------ -->
+                                         <?php 
+                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 10";
+                        $objq_num = mysqli_query($conn,$SQL_num);
+                        $objr_num = mysqli_fetch_array($objq_num);
+                        if(!isset($objr_num['num'])){
+                      ?>
+                    <td ></td>
+                    <?php
+                        }else{
+                      ?>
+                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                    <?php 
+                        } 
+                      
+                      ?>
+                    <!-- -------------------------------//ลพ.------------------------------------ -->
+                     <!-- -------------------------------ขายส่ง.------------------------------------ -->
                      <?php 
                         $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 7";
                         $objq_num = mysqli_query($conn,$SQL_num);
@@ -215,7 +233,7 @@
                         } 
                       
                       ?>
-                    <!-- -------------------------------//ฮอด.------------------------------------ -->
+                    <!-- -------------------------------//ขายส่ง.------------------------------------ -->
                      <!-- -------------------------------แม่จัน.------------------------------------ -->
                      <?php 
                         $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 5";

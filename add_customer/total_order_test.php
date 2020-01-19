@@ -49,90 +49,93 @@ folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
-  <style type="text/css">
-    /* important styles */
-    .fixed-th-table-wrapper td,
-    .fixed-th-table-wrapper th,
-    .scrolled-td-table-wrapper td,
-    .scrolled-td-table-wrapper th {
-      /* Set background to non-transparent color
-          because two tables are one above another.
-        */
-      background: white;
-    }
-    .fixed-th-table-wrapper {
-      /* Make table out of flow */
-      position: absolute;
-    }
-    .fixed-th-table-wrapper th {
-        /* Place fixed-th-table th-cells above 
-          scrolled-td-table td-cells.
-        */
-        position: relative;
-        z-index: 1;
-    }
-    .scrolled-td-table-wrapper td {
-        /* Place scrolled-td-table td-cells
-          above fixed-th-table.
-        */
-        position: relative;
-    }
-    .scrolled-td-table-wrapper {
-      /* Make horizonal scrollbar if needed */
-    }
+<style type="text/css">
+  /* important styles */
 
-    /* Simulating border-collapse: collapse,
-      because fixed-th-table borders
-      are below ".scrolling-td-wrapper table" borders
-    */
+  .fixed-th-table-wrapper td,
+  .fixed-th-table-wrapper th,
+  .scrolled-td-table-wrapper td,
+  .scrolled-td-table-wrapper th {
+    /* Set background to non-transparent color
+        because two tables are one above another.
+      */
+    background: white;
+  }
+  .fixed-th-table-wrapper {
+    /* Make table out of flow */
+    position: absolute;
+  }
+  .fixed-th-table-wrapper th {
+      /* Place fixed-th-table th-cells above 
+        scrolled-td-table td-cells.
+      */
+      position: relative;
+      z-index: 1;
+  }
+  .scrolled-td-table-wrapper td {
+      /* Place scrolled-td-table td-cells
+        above fixed-th-table.
+      */
+      position: relative;
+  }
+  .scrolled-td-table-wrapper {
+    /* Make horizonal scrollbar if needed */
+   
+  }
 
-    table {
-        border-spacing: 0;
-    }
-    td {
-      border-style: solid;
-      border-color: black;
-      border-width: 1px 1px;
-      text-align: center;
-    }
-    th {
-      border-style: solid;
-      border-color: black;
-      border-width: 1px 1px;
-      text-align: center;
-      background-color: #99CCFF;
-    }
-    th:first-child {
-      border-left-width: 1px;
-      
-    }
-    tr:nth-child(even){background-color: #f2f2f2;}
-    tr:last-child td,
-    tr:last-child th {
-      border-bottom-width: 1px;
-    }
 
-    /* Unimportant styles */
+  /* Simulating border-collapse: collapse,
+    because fixed-th-table borders
+    are below ".scrolling-td-wrapper table" borders
+  */
 
-    div.ex1 {
-      position: fixed;
-      top: 60px;
-      bottom: 60px;
-      left: 60px;
-      right: 60px;
-      width: auto;
-      height: auto;
-      overflow: auto;
-    }
-      td, th {
-        padding: 5px;
-      }
-  </style>
+  table {
+      border-spacing: 0;
+  }
+  td {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 1px;
+    text-align: center;
+  }
+  th {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 1px;
+    text-align: center;
+    background-color: #99CCFF;
+  }
+  th:first-child {
+    border-left-width: 1px;
+    
+  }
+  tr:nth-child(even){background-color: #f2f2f2;}
+  tr:last-child td,
+  tr:last-child th {
+    border-bottom-width: 1px;
+  }
+
+  /* Unimportant styles */
+
+  div.ex1 {
+  position: fixed;
+	top: 60px;
+	bottom: 60px;
+	left: 60px;
+	right: 60px;
+	width: auto;
+	height: auto;
+	overflow: auto;
+}
+  td, th {
+    padding: 5px;
+  }
+</style>
 </head>
   <body>
       <div class="ex1">
       <div class="box-header with-border">
-        <!-- <a type="button" href="order.php" class="btn btn-danger"><= เมนูหลัก</a> -->
+        <a type="button" href="order.php" class="btn btn-danger"><= เมนูหลัก</a>
         <a type="button" href="../pdf_file/total_order.php" class="btn btn-success"> PDF </a>
       </div>
         <div>

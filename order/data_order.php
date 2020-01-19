@@ -140,8 +140,8 @@ folder instead of downloading all of them to reduce the load. -->
                             <td width="25%"><?php echo $objr_order['catagory_car'];?></td>
                           </tr>
                           <tr>
-                            <td width="25%" class="text-right" >วันที่สั่ง &nbsp;&nbsp;:</td>
-                            <td width="25%" ><?php echo DateThai($objr_order['date_order']); ?></td>
+                            <td width="25%" class="text-right" >วันที่เข้าโรงงาน &nbsp;&nbsp;:</td>
+                            <td width="25%" ><?php echo DateThai($objr_order['date_getorder']); ?></td>
                             <td width="25%" class="text-right">ทะเบียนรถ &nbsp;&nbsp;:</td>
                             <td width="25%" ><?php echo $objr_order['licent_plate'];?></td>
                             
@@ -159,64 +159,36 @@ folder instead of downloading all of them to reduce the load. -->
                             <td width="25%"><?php echo $objr_order['tel_sent'];?></td>
                           </tr>
                           <tr>
-                            <td width="25%" class="text-right" >ใบกำกับภาษี &nbsp;&nbsp;:</td>
-                            <td width="25%"><?php echo $objr_order['vat'];?></td>
-                            <td width="25%" class="text-right">วันที่รถเข้าโรงงาน &nbsp;&nbsp;:</td>
-                            <td width="25%"><?php echo DateThai($objr_order['date_getorder']);?></td>
-                          </tr>
-                          <tr>
                             <td width="25%" class="text-right" >ผู้ออกใบสั่ง &nbsp;&nbsp;:</td>
                             <td width="25%"><?php echo $objr_order['name_author'];?></td>
                             <td width="25%" class="text-right">วันที่รถมาถึง &nbsp;&nbsp;:</td>
-                            <td width="25%">
-                              <?php 
-                                if(!isset($objr_order['date_receive'])){
-                                  echo "-";
-                                }else{ 
-                                  echo DateThai($objr_order['date_receive']);
-                                };
-                              ?>
-                            </td>
+                            <td width="25%"><?php echo DateThai($objr_order['date_receive']);?></td>
                           </tr>
                           </table>
+
                            <table class="table table-bordered" id="dynamic_field">
                           <tr>
                             <td width="25%" class="text-right">ชื่อร้าน &nbsp;&nbsp;:</td>
                             <td width="25%"><?php echo $objr_order['name_store'];?></td>
-                            <td width="25%" class="text-right" >ราคาสินค้า/หน่วย &nbsp;&nbsp;:</td>
-                            <td width="10%" ><?php echo $objr_order['price'];?></td>
-                            <td width="15%">บาท</td>
+                            <td width="25%" class="text-right" >ผู้ประสานงาน &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['name_to'];?></td>
+                            
                             </td>
                           </tr>
                           <tr>
                             <td width="25%" class="text-right" >จังหวัด &nbsp;&nbsp;:</td>
                             <td width="25%"><?php echo $objr_amphur['province_name'];?></td>
-                            <td width="25%" class="text-right" >ราคาสินค้า &nbsp;&nbsp;:</td>
-                            <td width="10%" ><?php echo $objr_order['money'];?></td>
-                            <td width="15%">บาท</td>
+                            <td width="25%" class="text-right">เบอร์โทรประสานงาน &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['tel_to'];?></td>
                           </tr>
                           <tr>
                             <td width="25%" class="text-right" >อำเภอ &nbsp;&nbsp;:</td>
                             <td width="25%"><?php echo $objr_amphur['amphur_name'];?></td>
-                            <td width="25%" class="text-right" >ค่ารถขนส่ง &nbsp;&nbsp;:</td>
-                            <td width="10%" ><?php echo $objr_order['portage'];?></td>
-                            <td width="15%">บาท</td>
-                          </tr>
-                          <tr>
-                            <td width="25%" class="text-right" >ผู้ประสานงาน &nbsp;&nbsp;:</td>
-                            <td width="25%"><?php echo $objr_order['name_to'];?></td>
-                            <td width="25%" class="text-right" >ใบจ่ายที่ &nbsp;&nbsp;:</td>
-                            <td width="10%"><?php echo $objr_order['slip_number'];?></td>
-                            <td width="15%"></td>
-                          </tr>
-                          <tr>
-                            <td width="25%" class="text-right">เบอร์โทรประสานงาน &nbsp;&nbsp;:</td>
-                            <td width="25%"><?php echo $objr_order['tel_to'];?></td>
                             <td width="25%" class="text-right" >หมายเหตุ &nbsp;&nbsp;:</td>
-                            <td width="20%" ><?php echo $objr_order['note'];?></td>
-                            <td width="5%"></td>
+                            <td width="25%" ><?php echo $objr_order['note'];?></td>
                           </tr>
                         </table>
+                        
                       </div>
                     </div>
                   </div>

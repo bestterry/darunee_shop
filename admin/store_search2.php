@@ -8,7 +8,6 @@
                   INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
                   WHERE store.district_code='$district_name' AND store.status = '$status'";
     $objq_store = mysqli_query($conn,$sql_store);
-    print_r($_POST);
 ?>
 <!DOCTYPE html>
 <html>
@@ -120,7 +119,7 @@ folder instead of downloading all of them to reduce the load. -->
                 <div class="text-center">
                 <a href="store.php" class="btn btn-danger pull-left"><< กลับ</a>
                   <font size="5">
-                    <B align="center">อำเภอ</B>
+                    <B align="center">ตำบล</B>
                   </font>
                 </div>
               </div>
