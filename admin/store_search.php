@@ -1,5 +1,6 @@
 <?php 
     require "../config_database/config.php"; 
+    require "../session.php"; 
     $district_code = $_GET['district_name'];
     $sql_store = "SELECT * FROM store  
                   INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
@@ -7,7 +8,6 @@
                   INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
                   WHERE store.district_code = $district_code";
     $objq_store = mysqli_query($conn,$sql_store);
-
     $objq_store2 = mysqli_query($conn,$sql_store);
     $objr_store = mysqli_fetch_array($objq_store2);
 ?>
@@ -69,46 +69,13 @@ folder instead of downloading all of them to reduce the load. -->
   }
   </style>
 
-  <script language="javascript">
-  //  function fncSum()
-  //     {
-  //       document.form1.money.value = parseFloat(document.form1.num_product.value) * parseFloat(document.form1.price.value);
-  //     }
-  </script>
 
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
   <div>
     <header class="main-header">
-      <nav class="navbar navbar-static-top">
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="dist/img/user.png" class="img-circle" alt="User Image">
-                  <p>
-                    <small>สาขา : </small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="login/logout.php" class="btn btn-danger btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+     <?php require('menu/header_logout.php');?>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -118,10 +85,15 @@ folder instead of downloading all of them to reduce the load. -->
           <div class="col-md-12">
             <div class="box box-primary">
               <div class="box-header with-border">
+              <a type="button" href="store.php" class="btn btn-danger "><< กลับ</a>
+                <a type="button" href="algorithm/store_edit_amphur.php?district_code=<?php echo $district_code; ?>" class="btn btn-success " OnClick="return confirm('ต้องการเปลี่ยนสถานะเป็นส่งแล้วทั้งหมด หรือไม่')">เปลี่ยนสถานะ</a>
                 <div class="text-center">
-                <a href="store.php" class="btn btn-danger pull-left"><< กลับ</a>
                   <font size="5">
-                    <B align="center">ตำบล<?php echo $objr_store['district_name'];?></B>
+                    <B align="center">ตำบล
+                      <?php 
+                        echo $objr_store['district_name'];
+                      ?>
+                      </B>
                   </font>
                 </div>
               </div>
@@ -215,56 +187,56 @@ folder instead of downloading all of them to reduce the load. -->
   <script src="../plugins/iCheck/icheck.min.js">
   </script>
   <script>
-  $(function() {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging': true,
-      'lengthChange': false,
-      'searching': false,
-      'ordering': true,
-      'info': true,
-      'autoWidth': false
+    $(function() {
+      $('#example1').DataTable()
+      $('#example2').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+      })
     })
-  })
-  $(function() {
-    //Enable iCheck plugin for checkboxes
-    //iCheck for checkbox and radio inputs
-    $('.mailbox-messages input[type="checkbox"]').iCheck({
-      checkboxClass: 'icheckbox_flat-blue',
-      radioClass: 'iradio_flat-blue'
+    $(function() {
+      //Enable iCheck plugin for checkboxes
+      //iCheck for checkbox and radio inputs
+      $('.mailbox-messages input[type="checkbox"]').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue'
+      });
+      //Enable check and uncheck all functionality
+      $(".checkbox-toggle").click(function() {
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+          //Uncheck all checkboxes
+          $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+          $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        } else {
+          //Check all checkboxes
+          $(".mailbox-messages input[type='checkbox']").iCheck("check");
+          $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+      });
+      //Handle starring for glyphicon and font awesome
+      $(".mailbox-star").click(function(e) {
+        e.preventDefault();
+        //detect type
+        var $this = $(this).find("a > i");
+        var glyph = $this.hasClass("glyphicon");
+        var fa = $this.hasClass("fa");
+        //Switch states
+        if (glyph) {
+          $this.toggleClass("glyphicon-star");
+          $this.toggleClass("glyphicon-star-empty");
+        }
+        if (fa) {
+          $this.toggleClass("fa-star");
+          $this.toggleClass("fa-star-o");
+        }
+      });
     });
-    //Enable check and uncheck all functionality
-    $(".checkbox-toggle").click(function() {
-      var clicks = $(this).data('clicks');
-      if (clicks) {
-        //Uncheck all checkboxes
-        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-      } else {
-        //Check all checkboxes
-        $(".mailbox-messages input[type='checkbox']").iCheck("check");
-        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-      }
-      $(this).data("clicks", !clicks);
-    });
-    //Handle starring for glyphicon and font awesome
-    $(".mailbox-star").click(function(e) {
-      e.preventDefault();
-      //detect type
-      var $this = $(this).find("a > i");
-      var glyph = $this.hasClass("glyphicon");
-      var fa = $this.hasClass("fa");
-      //Switch states
-      if (glyph) {
-        $this.toggleClass("glyphicon-star");
-        $this.toggleClass("glyphicon-star-empty");
-      }
-      if (fa) {
-        $this.toggleClass("fa-star");
-        $this.toggleClass("fa-star-o");
-      }
-    });
-  });
   </script>
 </body>
 

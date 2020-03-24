@@ -143,6 +143,7 @@
                               <font size="4">
                                 <B>
                                   เพิ่มสินค้า
+                                  
                                 </B>
                               </font>
                             </div>
@@ -171,14 +172,14 @@
                             <div class="col-md-12">
                               <div class="form-group col-md-2">
                                 <label for="inputPassword3">ราคาซื้อมา :</label>
-                                <input type="number" name="price_num" class="form-control" placeholder="ราคา">
+                                <input type="number" name="price_num" class="form-control" value="0">
                               </div>
                             </div>
 
                             <div class="col-md-12">
                               <div class="form-group col-md-2">
                                 <label for="inputPassword3">ราคาขาย :</label>
-                                <input type="number" name="price_outside" class="form-control" placeholder="ราคา">
+                                <input type="number" name="price_outside" class="form-control" value="0">
                               </div>
                             </div>
                             <div class="box-footer" align="center">

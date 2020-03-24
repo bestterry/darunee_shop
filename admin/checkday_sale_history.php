@@ -243,7 +243,7 @@
                                   $total_money = 0;
                                         $SQL_product = "SELECT * FROM product INNER JOIN sale_car_history
                                                         ON product.id_product = sale_car_history.id_product 
-                                                        WHERE sale_car_history.id_member = $i AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day' AND sale_car_history.status = 'sale'";
+                                                        WHERE sale_car_history.id_member = $i AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
                                         $objq_product = mysqli_query($conn,$SQL_product);
                                         while($product = $objq_product -> fetch_assoc()){
                                   ?>

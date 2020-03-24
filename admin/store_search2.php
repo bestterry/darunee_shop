@@ -1,12 +1,12 @@
 <?php 
     require "../config_database/config.php"; 
-    $district_name = $_POST['district_name'];
+    $amphur_name = $_POST['amphur_name'];
     $status = $_POST['status'];
     $sql_store = "SELECT * FROM store 
                   INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
                   INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
                   INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
-                  WHERE store.district_code='$district_name' AND store.status = '$status'";
+                  WHERE store.amphur_id = '$amphur_name' AND store.status = '$status'";
     $objq_store = mysqli_query($conn,$sql_store);
 ?>
 <!DOCTYPE html>
@@ -118,15 +118,15 @@ folder instead of downloading all of them to reduce the load. -->
               <div class="box-header with-border">
                 <div class="text-center">
                 <a href="store.php" class="btn btn-danger pull-left"><< กลับ</a>
+                <a href="algorithm/changeST_store.php?amphur_name=<?php echo $amphur_name; ?>&&status=<?php echo $status; ?>" class="btn btn-success pull-right">เปลี่ยนสถานะ</a>
                   <font size="5">
-                    <B align="center">ตำบล</B>
+                    <B align="center"></B>
                   </font>
                 </div>
               </div>
               <!-- /.box-header -->
               <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                <form action="outside_price.php" method="post">
                   <div class="modal-content">
                     <div class="modal-body col-md-12 table-responsive mailbox-messages">
                       <div class="table-responsive">
@@ -149,16 +149,16 @@ folder instead of downloading all of them to reduce the load. -->
                               <?php 
                                 if($_POST['status']=="Y"){
                               ?>
-                                <td class="text-center"><a class="btn btn-success btn-xs" >Y</a></td>
+                                <td class="text-center"><small class="label bg-green" >Y</small></td>
                               <?php
                               }else{
                               ?>
-                                <td class="text-center"><a class="btn btn-danger btn-xs">N</a></td>
+                                <td class="text-center"><small class="label bg-red">N</small></td>
                               <?php
                               }
                               ?> 
                                 <td class="text-center"><?php echo $value['name_store'];?></td>
-                                <td class="text-center"><?php echo $value['address'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
+                                <td class="text-center"><?php echo $value['address'].' ต.'.$value['district_name'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
                                 <td class="text-center"><?php echo $value['tel'];?></td>
                                 <td class="text-center"><?php echo $value['category'];?></td>
                               </tr>
@@ -169,7 +169,6 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
                     </div>
                   </div>
-                </form>
                 </div>
               </div>
             </div>

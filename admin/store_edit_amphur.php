@@ -1,24 +1,15 @@
 <?php 
-    include("db_connect.php");
-    $mysqli = connect();
-    require "session.php"; 
-    $district_code = $_GET['district_name'];
-    
-    $sql_store = "SELECT * FROM store  
+    require "../config_database/config.php"; 
+    print_r($_POST);
+    $district_code = $_POST['district_name'];
+    $sql_store = "SELECT * FROM store 
                   INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
                   INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
                   INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
-                  WHERE store.district_code = $district_code AND store.status = 'N'";
-    $objq_store = mysqli_query($mysqli,$sql_store);
-    
-    $objq_store2 = mysqli_query($mysqli,$sql_store);
-    $objr_store = mysqli_fetch_array($objq_store2);
+                  WHERE store.district_code = '$district_code'";
+    $objq_store = mysqli_query($conn,$sql_store);
 
-    if(isset($objr_store)){
-      $district_name = "ตำบล  ".$objr_store['district_name'];
-    }else{
-      $district_name = "ไม่มีข้อมูลร้าน";
-    }
+    die();
 ?>
 <!DOCTYPE html>
 <html>
@@ -90,7 +81,34 @@ folder instead of downloading all of them to reduce the load. -->
 <body class=" hold-transition skin-blue layout-top-nav">
   <div>
     <header class="main-header">
-    <?php require('menu/header_logout.php');?>
+      <nav class="navbar navbar-static-top">
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="../dist/img/user.png" class="user-image" alt="User Image">
+                <span class="hidden-xs"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <img src="dist/img/user.png" class="img-circle" alt="User Image">
+                  <p>
+                    <small>สาขา : </small>
+                  </p>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-right">
+                    <a href="login/logout.php" class="btn btn-danger btn-flat">ออกจากระบบ</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -100,27 +118,22 @@ folder instead of downloading all of them to reduce the load. -->
           <div class="col-md-12">
             <div class="box box-primary">
               <div class="box-header with-border">
-                <table class="table table-bordered" >
-                  <tr>
-                    <th width="30%" >
-                      <a href="visit_shop.php" class="btn btn-danger"><< กลับ</a>
-                      <a href="visit_add.php?district_name=<?php echo $_GET['district_name']; ?>"  class="btn btn-warning"><i class="fa fa-plus-square"></i> เพิ่มร้านค้า </a>
-                      <a href="../pdf_file/visit_shop.php?district_name=<?php echo $_GET['district_name']; ?>"  class="btn btn-success"> PDF </a>
-                    </th>
-                    <td width="50%" class="text-center"><font size="5"><B align="center"><?php echo $district_name;?></B></font></td>
-                    <td width="20%"></td>
-                  </tr>
-                </table>
+                <div class="text-center">
+                <a href="store.php" class="btn btn-danger pull-left"><< กลับ</a>
+                <a href="algorithm/changeST_store.php?amphur_name=<?php echo $amphur_name; ?>&&status=<?php echo $status; ?>" class="btn btn-success pull-right">เปลี่ยนสถานะ</a>
+                  <font size="5">
+                    <B align="center"></B>
+                  </font>
+                </div>
               </div>
               <!-- /.box-header -->
               <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                <form action="outside_price.php" method="post">
                   <div class="modal-content">
                     <div class="modal-body col-md-12 table-responsive mailbox-messages">
                       <div class="table-responsive">
                         <div class="col-md-12">
-                        <table class="table table-striped">
+                          <table class="table table-striped">
                             <thead>
                               <tr>
                                 <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
@@ -128,44 +141,36 @@ folder instead of downloading all of them to reduce the load. -->
                                 <th bgcolor="#99CCFF" class="text-center" width="40%">ที่อยู่</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="15%">เบอร์โทร</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="15%">ประเภท</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="5%">แก้ไข</th>
                               </tr>
                             </thead>
                             <tbody>
                             <?php 
-                             
-                              while($value = $objq_store->fetch_assoc()){
+                            while($value = $objq_store->fetch_assoc()){
                             ?>
                               <tr>
-                                <td class="text-center">
-                                  <?php 
-                                    if($value['status'] == "N"){
-                                  ?>
-                                    <a href="algorithm/update_ststore.php?id_store=<?php echo $value['id_store']; ?>&&status=N&&district_code=<?php echo $district_code; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเยี่ยมร้าน [<?php echo $value['name_store'];?>] หรือไม่ ?')";>เยี่ยมร้าน</a>
-                                  <?php 
-                                    }else {
-                                  ?>
-                                     <a href="algorithm/update_ststore.php?id_store=<?php echo $value['id_store']; ?>&&status=Y&&district_code=<?php echo $district_code; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นไม่ได้เยี่ยมหรือไม่ ?')";>เยี่ยมร้าน</a>
-                                  <?php 
-                                   
-                                    }
-                                  ?>
-
-                                </td>
+                              <?php 
+                                if($_POST['status']=="Y"){
+                              ?>
+                                <td class="text-center"><small class="label bg-green" >Y</small></td>
+                              <?php
+                              }else{
+                              ?>
+                                <td class="text-center"><small class="label bg-red">N</small></td>
+                              <?php
+                              }
+                              ?> 
                                 <td class="text-center"><?php echo $value['name_store'];?></td>
-                                <td><?php echo $value['address'].'  ต.'.$value['district_name'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
+                                <td class="text-center"><?php echo $value['address'].' ต.'.$value['district_name'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
                                 <td class="text-center"><?php echo $value['tel'];?></td>
                                 <td class="text-center"><?php echo $value['category'];?></td>
-                                <td class="text-center"><a href="visit_edit.php?id_store=<?php echo $value['id_store']; ?>" ><i class="fa fa-cog"></i></a></td>
                               </tr>
-                              <?php }?>
+                            <?php }?>
                             </tbody>
                           </table>
                         </div>
                       </div>
                     </div>
                   </div>
-                </form>
                 </div>
               </div>
             </div>

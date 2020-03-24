@@ -10,9 +10,11 @@
   $province_id = $_POST['province_name'];
   $amphur_id = $_POST['amphur_name'];
   $district_code = $_POST['district_name'];
-
-  $insert_store = "INSERT INTO store (name_store, tel, category, status, address, province_id, amphur_id, district_code) 
-                   VALUE ('$name_store','$tel','$category','$status','$address',$province_id,$amphur_id,'$district_code')";
+  $latitude = $_POST['latitude'];
+  $longtitude = $_POST['longtitude'];
+  
+  $insert_store = "INSERT INTO store (name_store, tel, category, status, address, province_id, amphur_id, district_code, latitude, longtitude) 
+                   VALUE ('$name_store','$tel','$category','$status','$address',$province_id,$amphur_id,'$district_code', $latitude, $longtitude)";
       if ($conn->query($insert_store) === TRUE) {
         echo "New record created successfully";
     } else {

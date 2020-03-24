@@ -178,6 +178,21 @@ folder instead of downloading all of them to reduce the load. -->
                                 </div>
                               </td>
                             </tr>
+
+                            <tr>
+                              <th width="35%" class="text-right" ><font size="4">latitude &nbsp;&nbsp;:</font></th>
+                              <td width="65%">
+                                <input type="text" name="latitude" class="form-control" value="<?php echo $objr_store['latitude'];?>">
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <th width="35%" class="text-right" ><font size="4">longtitude &nbsp;&nbsp;:</font></th>
+                              <td width="65%">
+                                <input type="text" name="longtitude" class="form-control" value="<?php echo $objr_store['longtitude'];?>">
+                              </td>
+                            </tr>
+                            
                           </table>
                         </div>
                         <div class="col-md-3"></div>

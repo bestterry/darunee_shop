@@ -56,8 +56,6 @@
 
       <!-- Main content -->
       <section class="content">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
@@ -68,12 +66,14 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
                 <form action="algorithm/edit_product.php" method="post" autocomplete="off">
-                  <table class="table table-bordered table-hover">
+                  <table class="table table-bordered">
                     <tbody>
                       <tr bgcolor="#99CCFF">
-                        <th class="text-center" width="50%">ชื่อสินค้า</th>
-                        <th class="text-center">หน่วย</th>
-                        <th class="text-center">ราคาซื้อมา(บ)</th>
+                        <th class="text-center" width="25%">ชื่อย่อ</th>
+                        <th class="text-center" width="25%">ชื่อเต็ม</th>
+                        <th class="text-center" width="20%">หน่วย</th>
+                        <th class="text-center" width="15%">ราคาซื้อมา(บ)</th>
+                        <th class="text-center" width="15%">ราคาขาย(บ)</th>
                       </tr>
                       <?php
                               $id_product = $_GET['id_product'];
@@ -83,15 +83,13 @@
                           ?>
                       <tr>
                         <td class="text-center">
-                           <input type="text" name="name_product" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['name_product']; ?>">
-                           <input type="hidden" name="id_product" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['id_product']; ?>">
+                           <input type="hidden" name="id_product" class="form-control text-center " value="<?php echo $objr_listproduct['id_product']; ?>">
+                           <input type="text" name="name_product" class="form-control text-center " value="<?php echo $objr_listproduct['name_product']; ?>">
                         </td>
-                        <td>
-                          <input  type="text" name="unit" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['unit']; ?>">
-                        </td>
-                        <td>
-                          <input  type="text" name="price_num" class="form-control text-center col-md-1" value="<?php echo $objr_listproduct['price_num']; ?>">
-                        </td>
+                        <td><input  type="text" name="full_name" class="form-control text-center" value="<?php echo $objr_listproduct['full_name']; ?>"></td>
+                        <td><input  type="text" name="unit" class="form-control text-center" value="<?php echo $objr_listproduct['unit']; ?>"></td>
+                        <td><input  type="text" name="price_num" class="form-control text-center " value="<?php echo $objr_listproduct['price_num']; ?>"></td>
+                        <td><input  type="text" name="price_outside" class="form-control text-center " value="<?php echo $objr_listproduct['price_outside']; ?>"></td>
                       </tr>
                     </tbody>
                   </table>
@@ -105,8 +103,6 @@
             <!-- /.box-footer -->
             </form>
           </div>
-          <!-- /. box -->
-        </div>
     </div>
     </section>
     <!-- /.content -->

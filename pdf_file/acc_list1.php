@@ -187,7 +187,7 @@ class PDF extends FPDF
       $pdf->Ln(10);
       $pdf->Cell(70,10,iconv('UTF-8','cp874','ปุ๋ยอินทรีย์กวางฯ'),1,0,'C');
       $pdf->Cell(40,10,iconv('UTF-8','cp874',$total_num3),1,0,'C');
-      $pdf->Cell(40,10,iconv('UTF-8','cp874',620),1,0,'C');
+      $pdf->Cell(40,10,iconv('UTF-8','cp874',430),1,0,'C');
       $pdf->Cell(40,10,iconv('UTF-8','cp874',$money3),1,0,'C');
       $pdf->Ln(10);
       $pdf->Cell(110,10,iconv('UTF-8','cp874',''),0,0,'C');

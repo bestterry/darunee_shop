@@ -63,10 +63,36 @@ folder instead of downloading all of them to reduce the load. -->
   </style>
 
   <script language="javascript">
-  //  function fncSum()
-  //     {
-  //       document.form1.money.value = parseFloat(document.form1.num_product.value) * parseFloat(document.form1.price.value);
-  //     }
+    function fncSubmit()
+    {
+      if(document.form1.name_store.value == "")
+      {
+        alert('กรุณาระบุชื่อร้านค้า');
+        document.form1.name_store.focus();
+        return false;
+      }	
+      if(document.form1.tel.value == "")
+      {
+        alert('กรุณาระบุเบอร์โทรศัพท์');
+        document.form1.tel.focus();		
+        return false;
+      }	
+      if(document.form1.category.value == "")
+      {
+        alert('กรุณาเลือกประเภทร้านค้า');
+        document.form1.category.focus();		
+        return false;
+      }	
+      if(document.form1.address.value == "")
+      {
+        alert('กรุณาระบุหมู่บ้าน');
+        document.form1.address.focus();		
+        return false;
+      }
+      category
+      
+      document.form1.submit();
+    }
   </script>
 
 </head>
@@ -98,7 +124,7 @@ folder instead of downloading all of them to reduce the load. -->
                 <div class="mailbox-read-message">
                 <div class="row">
                   <div class="container">
-                    <form action="algorithm/add_visit.php" class="form-horizontal" method="post">
+                    <form action="algorithm/add_visit.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="col-sm-4 control-label">ชื่อร้านค้า :</label>
@@ -133,6 +159,8 @@ folder instead of downloading all of them to reduce the load. -->
                             </select>
                           </div>
                         </div>
+
+                        
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
@@ -170,6 +198,21 @@ folder instead of downloading all of them to reduce the load. -->
                             <input type="text" name="address" class="form-control text-center" placeholder="หมู่บ้าน">
                           </div>
                         </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">latitude :</label>
+                          <div class="col-sm-8">
+                            <input type="text" name="latitude" class="form-control text-center" value="0">
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">longtitude :</label>
+                          <div class="col-sm-8">
+                            <input type="text" name="longtitude" class="form-control text-center" value="0">
+                          </div>
+                        </div>
+                        
                       </div>
                         <div class="box-footer text-center">
                           <button type="submit" class="btn btn-success "><i class="fa fa-save"></i> บันทึก </button>

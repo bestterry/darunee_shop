@@ -169,7 +169,7 @@ folder instead of downloading all of them to reduce the load. -->
                   $sql_num = "SELECT SUM(num) FROM addorder 
                               INNER JOIN listorder ON listorder.id_addorder = addorder.id_addorder 
                               INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
-                              WHERE listorder.id_product = $id_product AND addorder.status = 'pending' AND tbl_amphures.id_area = $i";
+                              WHERE listorder.id_product = $id_product AND addorder.status = 'pending'";
                   $objq_num = mysqli_query($mysqli,$sql_num);
                   $objr_num = mysqli_fetch_array($objq_num);
                   $num = $objr_num['SUM(num)'];
@@ -210,7 +210,7 @@ folder instead of downloading all of them to reduce the load. -->
               <tr>
                 <th class="text-center" width="10%"></th>
               <?php 
-                $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 1";
+                $sql_amphur = "SELECT * FROM tbl_amphures where province_id = 44";
                 $objq_amphur = mysqli_query($mysqli,$sql_amphur);
                 while($value_am = $objq_amphur->fetch_assoc()){
               ?> 
@@ -234,7 +234,7 @@ folder instead of downloading all of them to reduce the load. -->
                     <?php
                     $total_pd = 0;
                     $id_product = $value_pd['id_product'];
-                    $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 1";
+                    $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = 44";
                     $objq_amphur = mysqli_query($mysqli,$sql_amphur);
                     while($value_am = $objq_amphur->fetch_assoc())
                     {
@@ -287,7 +287,7 @@ folder instead of downloading all of them to reduce the load. -->
               <tr>
                 <th class="text-center" width="10%"></th>
               <?php 
-                $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 2";
+                $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = 45";
                 $objq_amphur = mysqli_query($mysqli,$sql_amphur);
                 while($value_am = $objq_amphur->fetch_assoc()){
               ?> 
@@ -311,7 +311,7 @@ folder instead of downloading all of them to reduce the load. -->
                     <?php
                     $total_pd = 0;
                     $id_product = $value_pd['id_product'];
-                    $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 2";
+                    $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = 45";
                     $objq_amphur = mysqli_query($mysqli,$sql_amphur);
                     while($value_am = $objq_amphur->fetch_assoc())
                     {
@@ -364,7 +364,7 @@ folder instead of downloading all of them to reduce the load. -->
               <tr>
                 <th class="text-center" width="10%"></th>
               <?php 
-                $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 3";
+                $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = 40";
                 $objq_amphur = mysqli_query($mysqli,$sql_amphur);
                 while($value_am = $objq_amphur->fetch_assoc()){
               ?> 
@@ -386,7 +386,7 @@ folder instead of downloading all of them to reduce the load. -->
                     <?php
                     $total_pd = 0;
                     $id_product = $value_pd['id_product'];
-                    $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 3";
+                    $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = 40";
                     $objq_amphur = mysqli_query($mysqli,$sql_amphur);
                     while($value_am = $objq_amphur->fetch_assoc())
                     {
@@ -439,7 +439,7 @@ folder instead of downloading all of them to reduce the load. -->
               <tr>
                 <th class="text-center" width="10%"></th>
               <?php 
-                $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 4";
+                $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = 39";
                 $objq_amphur = mysqli_query($mysqli,$sql_amphur);
                 while($value_am = $objq_amphur->fetch_assoc()){
               ?> 
@@ -461,7 +461,7 @@ folder instead of downloading all of them to reduce the load. -->
                     <?php
                     $total_pd = 0;
                     $id_product = $value_pd['id_product'];
-                    $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 4";
+                    $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = 39";
                     $objq_amphur = mysqli_query($mysqli,$sql_amphur);
                     while($value_am = $objq_amphur->fetch_assoc())
                     {
@@ -514,7 +514,7 @@ folder instead of downloading all of them to reduce the load. -->
               <tr>
                 <th class="text-center" width="5%"></th>
               <?php 
-                $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 5";
+                $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = 38";
                 $objq_amphur = mysqli_query($mysqli,$sql_amphur);
                 while($value_am = $objq_amphur->fetch_assoc()){
               ?> 
@@ -536,7 +536,7 @@ folder instead of downloading all of them to reduce the load. -->
                   <?php
                     $total_pd = 0;
                     $id_product = $value_pd['id_product'];
-                    $sql_amphur = "SELECT * FROM tbl_amphures WHERE id_area = 5";
+                    $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = 38";
                     $objq_amphur = mysqli_query($mysqli,$sql_amphur);
                     while($value_am = $objq_amphur->fetch_assoc())
                     {

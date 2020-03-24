@@ -1,7 +1,11 @@
 <?php 
- include("db_connect.php");
- $mysqli = connect();
- require "session.php"; 
+  include("db_connect.php");
+  $mysqli = connect();
+  require "session.php"; 
+
+    $sql_province = "SELECT * FROM tbl_provinces";
+    $objq_province = mysqli_query($mysqli,$sql_province);
+    $objq_province2 = mysqli_query($mysqli,$sql_province);
 ?>
 
 <!DOCTYPE html>
@@ -63,55 +67,14 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <!-- <li class="active"><a href="#store" data-toggle="tab">ทั้งหมด</a></li> -->
                 <li class="active"><a href="#store2" data-toggle="tab">ค้นหารายตำบล</a></li>
-                <li><a href="#add_store" data-toggle="tab">เพิ่มร้านค้าใหม่</a></li>
+                <li><a href="#check" data-toggle="tab">ตรวจ</a></li>
 
                 <div align="right">
                   <a href="store.php" class="btn btn-danger"><< เมนูหลัก</a>
                   </div> 
                   </ul> 
                    <div class="tab-content">
-                      <!-- /.tab-pane -->
-                      <div class="tab-pane" id="store">
-                        <!-- ------------------------------ทั้งหมด---------------------------- -->
-                        <form action="outside_price.php" method="post">
-                          <div class="modal-content">
-                            <div class="modal-body col-md-12 table-responsive mailbox-messages">
-                              <div class="table-responsive">
-                                <div class="col-md-12">
-                                  <table id="example1" class="table table-striped">
-                                    <thead>
-                                      <tr>
-                                        <th bgcolor="#99CCFF" class="text-center" width="20%">ชื่อร้านค้า</th>
-                                        <th bgcolor="#99CCFF" class="text-center" width="40%">ที่อยู่</th>
-                                        <th bgcolor="#99CCFF" class="text-center" width="15%">เบอร์โทร</th>
-                                        <th bgcolor="#99CCFF" class="text-center" width="15%">ประเภท</th>
-                                        <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
-                                        <th bgcolor="#99CCFF" class="text-center" width="5%">แก้ไข</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <td class="text-center">ร้านสุธัมงานดี</td>
-                                        <td class="text-center">58 หมู่ที่5 ต.ท่าก๊อ อ.แม่สรวย จ.เชียงราย</td>
-                                        <td class="text-center">085-145-2554</td>
-                                        <td class="text-center">ร้านขายปุ๋ย</td>
-                                        <td class="text-center">ยังไม่ได้เยี่ยม</td>
-                                        <td class="text-center"><a href="store_edit.php" ><i class="fa fa-cog"></i></a></td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="submit" class="btn btn-success pull-right">ถัดไป >></button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                      <!-- ------------------------------ทั้งหมด---------------------------- -->
 
                       <!-- ------------------------------ค้นหารายอำเภอ---------------------------- -->
                       <div class="tab-pane active" id="store2">
@@ -165,162 +128,113 @@
                       </div>
                       <!-- ------------------------------//ค้นหารายอำเภอ---------------------------- -->
 
-                      <!-- ------------------------------เยี่ยมร้าน---------------------------- -->
-                      <div class="tab-pane" id="store3">
-                        <div class="box box-default">
-                          <div class="box-header with-border">
-
-                          </div>
-                          <!-- /.box-header -->
-                          <div class="box-body">
-                            <div class="row">
-                              <div class="container">
-                                <form action="store_search2.php" class="form-horizontal" method="post">
-                                  <div class="col-md-4">
-                                    <div class="box-body">
-                                      <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
-                                      <p> -กรุณาเลือก ระเบียนร้านค้า เยี่ยมแล้ว หรือไม่ได้เยี่ยม </p>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-8">
-                                  <div class="form-group">
-                                      <label class="col-sm-2 control-label">จังหวัด :</label>
-                                      <div class="col-sm-10">
-                                        <select name="province_name" data-where="2"
-                                          class="form-control ajax_address select2">
-                                          <option value="">-- เลือกจังหวัด --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                      <label class="col-sm-2 control-label">อำเภอ :</label>
-                                      <div class="col-sm-10">
-                                        <select name="amphur_name" data-where="3"
-                                          class="ajax_address form-control select2">
-                                          <option value="">-- เลือกอำเภอ --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                      <label class="col-sm-2 control-label">ตำบล :</label>
-                                      <div class="col-sm-10">
-                                        <select name="district_name" data-where="4"
-                                          class="ajax_address form-control select2" style="width: 100%;">
-                                          <option value="">-- เลือกตำบล --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                    <label class="col-sm-2 control-label">สถานะ :</label>
-                                      <div class="col-sm-10">
-                                      <select name="status" class="form-control text-center select2" style="width: 100%;">
-                                        <option value="">------กรุณาเลือก------</option>
-                                        <option value="success">เยี่ยมแล้ว</option>
-                                        <option value="diss">ไม่ได้เยี่ยม</option>
-                                      </select>
-                                    </div>
-                                    </div>
-                                    <div class="box-footer">
-                                      <button type="submit" class="btn btn-success pull-left"><i
-                                          class="fa fa-check-square-o"></i> ตกลง</button>
-                                    </div>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- ------------------------------เยี่ยมร้าน---------------------------- -->
                       <!-- ------------------------------เพิ่มร้าน---------------------------- -->
-                      <div class="tab-pane" id="add_store">
+                      <div class="tab-pane" id="check">
                         <div class="box box-default">
-                          <div class="box-header with-border">
-
-                          </div>
-                          <!-- /.box-header -->
                           <div class="box-body">
                             <div class="row">
                               <div class="container">
-                                <form action="algorithm/add_visit.php" class="form-horizontal" method="post">
-                                  <div class="col-md-6">
-                                    <div class="form-group">
-                                      <label class="col-sm-4 control-label">ชื่อร้านค้า :</label>
-                                      <div class="col-sm-8">
-                                        <input type="text" name="name_store" class="form-control text-center" placeholder="ชื่อร้านค้า">
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <label class="col-sm-4 control-label">เบอร์โทรศัพท์ :</label>
-                                      <div class="col-sm-8">
-                                        <input type="text" name="tel" class="form-control text-center" placeholder="เบอร์โทรศัพท์">
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <label class="col-sm-4 control-label">ประเภทร้าน :</label>
-                                      <div class="col-sm-8">
-                                        <select name="category" class="form-control text-center select2" style="width: 100%;">
-                                          <option value="">------กรุณาเลือก------</option>
-                                          <option value="ขายปุ๋ย">ขายปุ๋ย</option>
-                                          <option value="ขายของบริโภค">ขายของบริโภค</option>
-                                          <option value="ขายทั้งสองชนิด">ขายทั้งสองชนิด</option>
-                                          <option value="ไม่กำหนด">ไม่กำหนด</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <label class="col-sm-4 control-label">สถานะ :</label>
-                                      <div class="col-sm-8">
-                                        <select name="status" class="form-control text-center select2" style="width: 100%;">
-                                          <option value="N">ไม่ได้เยี่ยม</option>
-                                          <option value="Y">เยี่ยมแล้ว</option>
-                                        </select>
-                                      </div>
-                                    </div>
+                                <div class="box-header text-center with-border">
+                                    <B align="center"> 
+                                      <font size="4">  </font>
+                                    </B>
                                   </div>
-                                  <div class="col-md-6">
-                                    <div class="form-group">
-                                      <label class="col-sm-4 control-label">จังหวัด :</label>
-                                      <div class="col-sm-8">
-                                        <select name="province_name" data-where="2"
-                                          class="form-control ajax_address select2">
-                                          <option value="">-- เลือกจังหวัด --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                      <label class="col-sm-4 control-label">อำเภอ :</label>
-                                      <div class="col-sm-8">
-                                        <select name="amphur_name" data-where="3"
-                                          class="ajax_address form-control select2">
-                                          <option value="">-- เลือกอำเภอ --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                      <label class="col-sm-4 control-label">ตำบล :</label>
-                                      <div class="col-sm-8">
-                                        <select name="district_name" data-where="4"
-                                          class="ajax_address form-control select2" style="width: 100%;">
-                                          <option value="">-- เลือกตำบล --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <label class="col-sm-4 control-label">หมู่บ้าน :</label>
-                                      <div class="col-sm-8">
-                                        <input type="text" name="address" class="form-control text-center" placeholder="หมู่บ้าน">
-                                      </div>
-                                    </div>
-                                  </div>
-                                    <div class="box-footer text-center">
-                                      <button type="submit" class="btn btn-success "><i class="fa fa-save"></i> บันทึก </button>
-                                    </div>
-                                </form>
+                                  <table class="table table-striped table-bordered">
+                                    <tbody>
+                                      <tr class="info">
+                                        <th class="text-center" width="50%">จังหวัด</th>
+                                        <th class="text-center" width="25%">เยี่ยมแล้ว</th>
+                                        <th class="text-center" width="25%">ไม่ได้เยี่ยม</th>
+                                      </tr>
+                                      <?php 
+                                        while($value_pr2 = $objq_province2->fetch_array()){
+                                          $province_id = $value_pr2['province_id'];
+                                        //   //ร้านค้าเยี่ยมแล้ว//
+                                        $sql_a = "SELECT id_store FROM store WHERE status = 'Y' AND province_id = $province_id";
+                                        if ($result=mysqli_query($mysqli,$sql_a))
+                                          {
+                                          // Return the number of rows in result set
+                                          $rowcount1=mysqli_num_rows($result);
+                                          }else{
+                                            $rowcount1 = 0;
+                                          }
+                                          //ร้านค้าเยี่ยมแล้ว//
+
+                                          //ร้านค้ายังไม่ได้เยี่ยม//
+                                        $sql_b = "SELECT id_store FROM store WHERE status = 'N' AND province_id = $province_id";
+                                        if ($result2=mysqli_query($mysqli,$sql_b))
+                                          {
+                                          // Return the number of rows in result set
+                                          $rowcount2=mysqli_num_rows($result2);
+                                          }else{
+                                            $rowcount2 = 0;
+                                          }
+                                          //ร้านค้ายังไม่ได้เยี่ยม//
+                                      ?>
+                                      <tr>
+                                        <td class="text-center"><?php echo $value_pr2['province_name']; ?></td>
+                                        <td class="text-center"><?php echo $rowcount1; ?></td>
+                                        <td class="text-center"><?php echo $rowcount2; ?></td>
+                                      </tr>
+                                        <?php }?>
+                                    </tbody>
+                                  </table>
+                              <?php 
+                                while($value_pr = $objq_province->fetch_array()){
+                                  $province_id = $value_pr['province_id'];
+                              ?>
+
+
+                                <div class="box-header text-center with-border">
+                                  <B align="center"> 
+                                    <font size="4"> <?php echo $value_pr['province_name'];?> </font>
+                                  </B>
+                                </div>
+                                <table class="table table-striped table-bordered">
+                                  <tbody>
+                                    <tr class="info">
+                                      <th class="text-center" width="50%">อำเภอ</th>
+                                      <th class="text-center" width="25%">เยี่ยมแล้ว</th>
+                                      <th class="text-center" width="25%">ไม่ได้เยี่ยม</th>
+                                    </tr>
+                                    
+                                    <?php 
+                                      $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = $province_id";
+                                      $objq_amphur = mysqli_query($mysqli,$sql_amphur);
+                                      while($value_am = $objq_amphur->fetch_array()){
+                                        $amphur_id = $value_am['amphur_id'];
+
+                                        //ร้านค้าเยี่ยมแล้ว//
+                                        $sql_a = "SELECT id_store FROM store WHERE status = 'Y' AND amphur_id = $amphur_id";
+                                        if ($result=mysqli_query($mysqli,$sql_a))
+                                          {
+                                          // Return the number of rows in result set
+                                          $rowcount1=mysqli_num_rows($result);
+                                          }else{
+                                            $rowcount1 = 0;
+                                          }
+                                          //ร้านค้าเยี่ยมแล้ว//
+
+                                          //ร้านค้ายังไม่ได้เยี่ยม//
+                                        $sql_b = "SELECT id_store FROM store WHERE status = 'N' AND amphur_id = $amphur_id";
+                                        if ($result2=mysqli_query($mysqli,$sql_b))
+                                          {
+                                          // Return the number of rows in result set
+                                          $rowcount2=mysqli_num_rows($result2);
+                                          }else{
+                                            $rowcount2 = 0;
+                                          }
+                                          //ร้านค้ายังไม่ได้เยี่ยม//
+                                    ?>
+                                    <tr>
+                                      <td class="text-center"><?php echo $value_am['amphur_name']; ?></td>
+                                      <td class="text-center"><?php echo $rowcount1; ?></td>
+                                      <td class="text-center"><?php echo $rowcount2; ?></td>
+                                    </tr>
+                                      <?php } ?>
+                                  </tbody>
+                                </table>
+                              <?php  } ?>
                               </div>
                             </div>
                           </div>

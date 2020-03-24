@@ -144,8 +144,9 @@ folder instead of downloading all of them to reduce the load. -->
                             <td width="25%" > 
                               <select name="category"  class="form-control" style="width: 100%;">
                                 <option value="ขายปุ๋ย"  <?php if($category == "ขายปุ๋ย"){ echo "selected='selected'";} ?>>ขายปุ๋ย</option>
-                                <option value="ขายสมุนไพร"  <?php if($category == "ขายสมุนไพร"){ echo "selected='selected'";} ?>>ขายสมุนไพร</option>
+                                <option value="ขายของบริโภค"  <?php if($category == "ขายของบริโภค"){ echo "selected='selected'";} ?>>ขายของบริโภค</option>
                                 <option value="ไม่กำหนด"  <?php if($category == "ไม่กำหนด"){ echo "selected='selected'";} ?>>ไม่กำหนด</option>
+                                <option value="ขายทั้งสองชนิด"  <?php if($category == "ขายทั้งสองชนิด"){ echo "selected='selected'";} ?>>ขายทั้งสองชนิด</option>
                               </select>
                             </td>
                             <th width="25%" class="text-right" ><font size="4">สถานะ &nbsp;&nbsp;:</font></th>
@@ -202,6 +203,21 @@ folder instead of downloading all of them to reduce the load. -->
                                 </div>
                               </td>
                             </tr>
+
+                            <tr>
+                              <th width="35%" class="text-right" ><font size="4">latitude &nbsp;&nbsp;:</font></th>
+                              <td width="65%">
+                                <input type="text" name="latitude" class="form-control" value="<?php echo $objr_store['latitude'];?>">
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <th width="35%" class="text-right" ><font size="4">longtitude &nbsp;&nbsp;:</font></th>
+                              <td width="65%">
+                                <input type="text" name="longtitude" class="form-control" value="<?php echo $objr_store['longtitude'];?>">
+                              </td>
+                            </tr>
+
                         </table>
                         </div>
                         <div class="col-md-3"></div>
