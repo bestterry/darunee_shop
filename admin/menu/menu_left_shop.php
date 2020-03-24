@@ -80,7 +80,7 @@
                                 <div class="modal-body col-md-12 table-responsive mailbox-messages">
                                   <div class="table-responsive mailbox-messages">
 
-                                    <table class="table table-bordered table-hover">
+                                    <table class="table table-bordered">
                                     <tbody>
                                         <tr>
                                         <th class="text-center" width="30%"><font size="5">สต๊อก</font></th>
@@ -106,7 +106,7 @@
                                     </table> 
                                     <br> 
 
-                                  <table class="table table-bordered table-hover">
+                                  <table class="table table-bordered ">
                                     <tbody>
                                         <tr>
                                         <th class="text-center" width="30%"><font size="5">ผู้ส่ง</font></th>
@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="modal-body col-md-12 table-responsive mailbox-messages">
                                   <div class="table-responsive mailbox-messages">
-                                    <table class="table table-bordered table-hover">
+                                    <table class="table table-bordered">
                                     <tbody>
                                         <tr>
                                         <th class="text-center" width="30%"><font size="5">สต๊อก</font></th>
@@ -173,7 +173,7 @@
                                     </table> 
                                     <br> 
 
-                                  <table class="table table-bordered table-hover">
+                                  <table class="table table-bordered">
                                     <tbody>
                                         <tr>
                                         <th class="text-center" width="30%"><font size="5">ผู้เบิก</font></th>

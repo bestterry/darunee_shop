@@ -76,7 +76,6 @@ require "menu/date.php";
             </B>
           </div>
           
-          <!-- /.box-header -->
           <div class="box-body no-padding">
             <div class="mailbox-read-message">
               <table class="table table-striped table-bordered">
@@ -86,11 +85,11 @@ require "menu/date.php";
                     <th class="text-center" width="18%">สินค้า_หน่วย</th>
 
                   <?php 
-                    $sql_member = "SELECT name_sub FROM member WHERE id_member BETWEEN 4 AND 18";
+                    $sql_member = "SELECT name_sub FROM member WHERE id_member BETWEEN 3 AND 18";
                     $objq_member = mysqli_query($conn,$sql_member);
                     while($value = $objq_member -> fetch_assoc()){
                   ?>
-                    <th class="text-center" width="5%"><?php echo $value['name_sub'];?></th>
+                    <th class="text-center" width="4%"><?php echo $value['name_sub'];?></th>
                   <?php }?>
                   
                     <th class="text-center" width="8%">รวม</th>
@@ -111,7 +110,7 @@ require "menu/date.php";
                       <?php
                       $total_num = 0;
                       
-                      for ($i = 4; $i <= 18; $i++) {
+                      for ($i = 3; $i <= 18; $i++) {
                         $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $i";
                         $objq_num = mysqli_query($conn, $SQL_num);
                         $objr_num = mysqli_fetch_array($objq_num);

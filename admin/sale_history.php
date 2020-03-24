@@ -230,14 +230,14 @@
 
                             <!-- ------------------------------//รถรวม---------------------------- -->
 
-                            <?php for ($i=4; $i <= 19; $i++) { 
+                            <?php for ($i=3; $i <= 19; $i++) { 
                                                       $sql_member = "SELECT * FROM member WHERE id_member = $i";
                                                       $objq_member = mysqli_query($conn,$sql_member);
                                                       $objr_member = mysqli_fetch_array($objq_member);
 
                                                       $check = " SELECT * FROM product INNER JOIN sale_car_history
                                                                 ON product.id_product = sale_car_history.id_product 
-                                                                WHERE sale_car_history.id_member = $i AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND sale_car_history.status = 'sale' ";
+                                                                WHERE sale_car_history.id_member = $i AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' ";
                                                       $objq_check = mysqli_query($conn,$check);
                                                       $objr_check = mysqli_fetch_array($objq_check);
                                                       if(!isset($objr_check['num'])){

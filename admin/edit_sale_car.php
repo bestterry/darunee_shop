@@ -113,6 +113,7 @@
                             </table>
                             <div class="box-footer" align="center">
                               <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"></i> บันทึก </button>
+                              <a href="algorithm/delete_sale_car.php?id_sale_history=<?php echo $id_sale_history;?>" class="btn btn-danger" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";> ลบ </a>
                             </div>
                           </form>
                         </div>

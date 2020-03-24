@@ -231,14 +231,15 @@
                       </B>
                       <table class="table table-striped ">
                         <tbody>
-                          <tr class="info" >
-                            <th class="text-center" width="20%">สินค้า_หน่วย</th>
-                            <th class="text-center" width="13%">จำนวน</th>
-                            <th class="text-center" width="12%">บ/หน่วย</th>
-                            <th class="text-center" width="13%">เงินขาย(บ)</th>
-                            <th class="text-center" width="32%">รายละเอียด</th>
-                            <th class="text-center" width="32%">เวลา</th>
-                          </tr>
+                        <tr class="info" >
+                          <th class="text-center" width="20%">สินค้า_หน่วย</th>
+                          <th class="text-center" width="12%">จำนวน</th>
+                          <th class="text-center" width="11%">บ/หน่วย</th>
+                          <th class="text-center" width="11%">เงินขาย(บ)</th>
+                          <th class="text-center" width="30%">รายละเอียด</th>
+                          <th class="text-center" width="10%">เวลา</th>
+                          <th class="text-center" width="6%">แก้ไข</th>
+                        </tr>
                           <?php #endregion
                                   $total_money = 0;
                                         $SQL_product = "SELECT * FROM product INNER JOIN sale_car_history
@@ -265,6 +266,9 @@
                             </td>
                             <td class="text-center">
                               <?php echo DateThai2($product['datetime']); ?>
+                            </td>
+                            <td class="text-center" >
+                              <a href="edit_sale_car.php?id_sale_history=<?php echo $product['id_sale_history']; ?>"><i class="fa fa-cog"></i></a>
                             </td>
                           </tr>
                           <?php 
