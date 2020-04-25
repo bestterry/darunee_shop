@@ -170,8 +170,10 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#99CCFF" class="text-center" width="70%">สินค้า</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="55%">สินค้า</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="15%">บ/น.</th>
                             <th bgcolor="#99CCFF" class="text-center" width="15%">จำนวน</th>
+                            <th bgcolor="#99CCFF" class="text-center" width="15%">เงิน</th>
                           </tr>
                           <?php 
                                 $total_money = 0;
@@ -180,14 +182,21 @@ folder instead of downloading all of them to reduce the load. -->
                                                     WHERE listorder.id_addorder = $id_addorder";
                                 $objq_listorder = mysqli_query($conn,$seach_listorder);
                                 while($value = $objq_listorder->fetch_assoc()){
+                                  $money = $value['money'];
                           ?>
                           <tr>
                             <td><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
+                            <td class="text-center"><?php echo $value['price']; ?></td>
                             <td class="text-center"><?php echo $value['num']; ?></td>
+                            <td class="text-center"><?php echo $value['money']; ?></td>
                           </tr>
                           <?php
+                            $total_money = $total_money + $money;
                            } 
+                            
                           ?>
+                          <th bgcolor="#99CCFF" colspan="3" class="text-center" >รวมเงิน</th>
+                          <th class="text-center" ><?php echo $total_money;?></th>
                         </table>
                       </div>
                     </div>

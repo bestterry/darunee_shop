@@ -22,8 +22,7 @@ $mysqli = connect();
   <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-folder instead of downloading all of them to reduce the load. -->
+
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="../bower_components/morris.js/morris.css">
@@ -66,28 +65,7 @@ folder instead of downloading all of them to reduce the load. -->
       <nav class="navbar navbar-static-top">
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="dist/img/user.png" class="img-circle" alt="User Image">
-                  <p>
-                    <small>สาขา : </small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="login/logout.php" class="btn btn-danger btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
+            
           </ul>
         </div>
       </nav>
@@ -99,10 +77,16 @@ folder instead of downloading all of them to reduce the load. -->
 
         <div class="col-md-12">
           <div class="box box-primary">
-            <div class="box-header text-center with-border">
-              <font size="5">
-                <B align="center"> ใบสั่งสินค้า <font color="red"> </font></B>
-              </font>
+            <div class="box-header with-border">
+              
+              <div class="text-center">
+                <font size="5">
+                  <B align="center"> เพิ่ม ORDER <font color="red"> </font></B>
+                </font>
+              </div>
+              <div>
+                <a type="button" href="order.php" class="btn btn-danger pull-left"> << กลับ </a>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -110,32 +94,10 @@ folder instead of downloading all of them to reduce the load. -->
                 <form action="finish.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                   <div class="row">
                     <div class="col-md-5">
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">ลูกค้า :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="name_customer" class="form-control" placeholder="ชื่อลูกค้า">
-                        </div>
-                      </div>
-                      <!-- /.form-group -->
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">บ้าน :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="village" class="form-control" placeholder="หมู่บ้าน">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                          <label class="col-sm-2 control-label">โทร :</label>
-                          <div class="col-sm-10">
-                            <input class="form-control" name="tel" placeholder="เบอร์โทรศัพท์">
-                          </div>
-                        </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">จังหวัด :</label>
-                        <div class="col-sm-10">
+                     
+                        <div class="form-group">
+                        <label class="col-sm-4 control-label">จังหวัด :</label>
+                        <div class="col-sm-8">
                           <select name="province_name" data-where="2" class="form-control ajax_address select2" >
                             <option value="">-- เลือกจังหวัด --</option>
                           </select>
@@ -143,8 +105,8 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
                       <!-- /.form-group -->
                       <div class="form-group">
-                        <label  class="col-sm-2 control-label">อำเภอ :</label>
-                        <div class="col-sm-10">
+                        <label  class="col-sm-4 control-label">อำเภอ :</label>
+                        <div class="col-sm-8">
                           <select name="amphur_name" data-where="3" class="ajax_address form-control select2" >
                             <option value="">-- เลือกอำเภอ --</option>
                           </select>
@@ -152,18 +114,41 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
                       <!-- /.form-group -->
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">ตำบล :</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 control-label">ตำบล :</label>
+                        <div class="col-sm-8">
                           <select name="district_name" data-where="4" class="ajax_address form-control select2" style="width: 100%;">
                             <option value="">-- เลือกตำบล --</option>
                           </select>
                         </div>
                       </div>
 
+                      <!-- /.form-group -->
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">หมายเหตุ :</label>
+                        <label class="col-sm-4 control-label">บ้าน (หมู่) :</label>
 
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
+                          <input type="text" name="village" class="form-control" placeholder="หมู่บ้าน">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">ลูกค้า :</label>
+                        <div class="col-sm-8">
+                          <input type="text" name="name_customer" class="form-control" placeholder="ชื่อลูกค้า">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label class="col-sm-4 control-label">โทร :</label>
+                          <div class="col-sm-8">
+                            <input class="form-control" name="tel" placeholder="เบอร์โทรศัพท์">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">หมายเหตุ :</label>
+
+                        <div class="col-sm-8">
                           <input type="text" name="note" class="form-control" value="-" maxlength="200">
                         </div>
                       </div>
@@ -173,13 +158,15 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#66b3ff" class="text-center" width="55%">สินค้า_หน่วย</th>
-                            <th bgcolor="#66b3ff" class="text-center" width="15%">จำนวน</th>
-                            <th bgcolor="#66b3ff" class="text-center" width="15%">จัดการ</th>
+                            <th class="text-center" width="30%"><font color="red" >สินค้า_หน่วย </font></th>
+                            <th class="text-center" width="20%"><font color="red" >บ/น.</font></th>
+                            <th class="text-center" width="15%"><font color="red" >จำนวน </font></th>
+                            <th class="text-center" width="25%"><font color="red" >เงิน </font></th>
+                            <th class="text-center" width="10%"><font color="red" >#</font></th>
                           </tr>
                           <tr>
                             <td class="text-center">
-                              <select name="id_product[]" class="form-control text-center select2" style="width: 100%;">
+                              <select name="id_product[]" class="form-control text-center" onchange="sSelect(this.value)" style="width: 100%;">
                                 <option class="text-center" value="">-- เลือกสินค้า --</option>
                               <?php 
                                   $product = "SELECT * FROM product WHERE NOT id_product = 12 AND NOT id_product = 35";
@@ -192,8 +179,10 @@ folder instead of downloading all of them to reduce the load. -->
                                 ?>
                               </select>
                             </td>
-                            <td><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td>
-                            <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success">เพิ่มสินค้า</button></td>
+                            <td><input type="number" name="price[]" id="price" onKeyUp="calcfunc()" placeholder="บ/น" class="form-control text-center" value=""/></td>
+                            <td><input type="number" name="num[]"   id="num"   onKeyUp="calcfunc()" placeholder="จำนวน" class="form-control text-center" value=""/></td>
+                            <td><input type="number" name="money[]" id="money" placeholder="เงิน" class="form-control text-center" value=""/></td>
+                            <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success"><i class="fa fa-plus"></i></button></td>
                           </tr>
                         </table>
                       </div>
@@ -203,7 +192,7 @@ folder instead of downloading all of them to reduce the load. -->
                   </div>
               </div>
               <div align="center" class="box-footer">
-                <a type="button" href="order.php" class="btn btn-danger pull-left"> <= เมนูหลัก</a>
+                
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก ORDER</button>
               </div>
             </div>
@@ -290,31 +279,151 @@ folder instead of downloading all of them to reduce the load. -->
         });
       </script>
 
-<script>
-$(document).ready(function(){
-	var i=1;
-	$('#add').click(function(){
-		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td class="text-center"><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td><td  class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
-	});
-	
-	$(document).on('click', '.btn_remove', function(){
-		var button_id = $(this).attr("id"); 
-		$('#row'+button_id+'').remove();
-	});
-	
-	$('#submit').click(function(){		
-		$.ajax({
-			success:function(data)
-			{
-				alert(data);
-				$('#add_name')[0].reset();
-			}
-		});
-	});
-	
-});
-</script>
+    <script>
+        $(document).ready(function(){
+          var i=1; 
+          $('#add').click(function(){
+            i++;
+            $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control" onchange="sSelect'+i+'(this.value)" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td><input type="number" name="price[]" id="price'+i+'" onKeyUp="calcfunc'+i+'()" placeholder="บ/น" class="form-control text-center" /></td><td class="text-center"><input type="text" name="num[]" id="num'+i+'" onKeyUp="calcfunc'+i+'()" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="number" name="money[]" id="money'+i+'" placeholder="เงิน" class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><i class="fa fa-minus"></i></button></td></tr>');
+            console.log(i);
+          });
+          
+          $(document).on('click', '.btn_remove', function(){
+            var button_id = $(this).attr("id"); 
+            $('#row'+button_id+'').remove();
+          });
+          
+          $('#submit').click(function(){		
+            $.ajax({
+              success:function(data)
+              {
+                alert(data);
+                $('#add_name')[0].reset();
+              }
+            });
+          });
+          
+        });
+
+        function sSelect(value){
+            $.ajax({
+                      type:"POST",
+                      url:"select_product.php",
+                      data:{value:value},
+                      success:function(data){
+                        $("#price").val(data);
+                      }
+                  });
+  
+              return false;
+              }
+
+            
+
+        function sSelect2(value){
+            $.ajax({
+                      type:"POST",
+                      url:"select_product.php",
+                      data:{value:value},
+                      success:function(data){
+                        $("#price2").val(data);
+                      }
+                  });
+  
+              return false;
+              }
+        
+        function sSelect3(value){
+            $.ajax({
+                      type:"POST",
+                      url:"select_product.php",
+                      data:{value:value},
+                      success:function(data){
+                        $("#price3").val(data);
+                      }
+                  });
+  
+              return false;
+              }
+              
+        function sSelect4(value){
+            $.ajax({
+                      type:"POST",
+                      url:"select_product.php",
+                      data:{value:value},
+                      success:function(data){
+                        $("#price4").val(data);
+                      }
+                  });
+  
+              return false;
+              }
+              
+        function sSelect5(value){
+            $.ajax({
+                      type:"POST",
+                      url:"select_product.php",
+                      data:{value:value},
+                      success:function(data){
+                        $("#price5").val(data);
+                      }
+                  });
+  
+              return false;
+              }
+
+        function sSelect6(value){
+            $.ajax({
+                      type:"POST",
+                      url:"select_product.php",
+                      data:{value:value},
+                      success:function(data){
+                        $("#price6").val(data);
+                      }
+                  });
+  
+              return false;
+              }
+              
+        function calcfunc() {
+              var val1 = parseFloat(document.form1.price.value);
+              var val2 = parseFloat(document.form1.num.value);
+              document.form1.money.value=val1*val2;
+            }
+
+        function calcfunc2() {
+            var val1 = parseFloat(document.form1.price2.value);
+            var val2 = parseFloat(document.form1.num2.value);
+            document.form1.money2.value=val1*val2;
+          }
+
+          function calcfunc3() {
+            var val1 = parseFloat(document.form1.price3.value);
+            var val2 = parseFloat(document.form1.num3.value);
+            document.form1.money3.value=val1*val2;
+          }
+
+          function calcfunc4() {
+            var val1 = parseFloat(document.form1.price4.value);
+            var val2 = parseFloat(document.form1.num4.value);
+            document.form1.money4.value=val1*val2;
+          }
+
+          function calcfunc5() {
+            var val1 = parseFloat(document.form1.price5.value);
+            var val2 = parseFloat(document.form1.num5.value);
+            document.form1.money5.value=val1*val2;
+          }
+
+          function calcfunc6() {
+            var val1 = parseFloat(document.form1.price6.value);
+            var val2 = parseFloat(document.form1.num6.value);
+            document.form1.money6.value=val1*val2;
+          }
+            
+
+    </script>
+      
 
 </body>
 

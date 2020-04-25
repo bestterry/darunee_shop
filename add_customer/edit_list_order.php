@@ -1,16 +1,16 @@
 <?php
-include("db_connect.php");
-$mysqli = connect();
+  include("db_connect.php");
+  $mysqli = connect();
 
-  $id_addorder = $_GET['id_addorder'];
+    $id_addorder = $_GET['id_addorder'];
 
-  $sql_addorder = "SELECT * FROM addorder 
-                   INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
-                   INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
-                   INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
-                   WHERE id_addorder = $id_addorder";
-  $objq_addorder = mysqli_query($mysqli,$sql_addorder);
-  $objr_addorder = mysqli_fetch_array($objq_addorder);
+    $sql_addorder = "SELECT * FROM addorder 
+                    INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
+                    INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
+                    INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
+                    WHERE id_addorder = $id_addorder";
+    $objq_addorder = mysqli_query($mysqli,$sql_addorder);
+    $objr_addorder = mysqli_fetch_array($objq_addorder);
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,8 +32,6 @@ $mysqli = connect();
   <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="../bower_components/morris.js/morris.css">
@@ -65,10 +63,15 @@ folder instead of downloading all of them to reduce the load. -->
       <section class="content">
       <div class="col-md-12">
           <div class="box box-primary">
-            <div class="box-header text-center with-border">
-              <font size="4">
+            <div class="box-header with-border">
+            <div>
+              <a type="button" href="list_order.php" class="btn btn-danger pull-left"> << กลับ</a>
+            </div>
+            <div class="text-center">
+             <font size="4">
                 <B align="center">เเก้ไข ORDER <font color="red"> </font></B>
               </font>
+            </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -76,57 +79,58 @@ folder instead of downloading all of them to reduce the load. -->
                 <form action="edit_list_order_finish.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                   <div class="row">
                     <div class="col-md-5">
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">ลูกค้า :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="name_customer" class="form-control" value="<?php echo $objr_addorder['name_customer'];?>">
-                          <input type="hidden" name="id_addorder" value="<?php echo $id_addorder; ?>">
-                        </div>
-                      </div>
-                      <!-- /.form-group -->
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">บ้าน :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="village" class="form-control" value="<?php echo $objr_addorder['village'];?>">
-                        </div>
-                      </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">โทร :</label>
-                        <div class="col-sm-10">
-                          <input class="form-control" name="tel" value="<?php echo $objr_addorder['tel'];?>">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">หมายเหตุ :</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" name="note" class="form-control"  maxlength="25" value="<?php echo $objr_addorder['note'];?>">
-                         </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">จังหวัด :</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 control-label">จังหวัด :</label>
+                        <div class="col-sm-8">
                           <input class="form-control" value="<?php echo $objr_addorder['province_name'];?>" disabled/>
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">อำเภอ :</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 control-label">อำเภอ :</label>
+                        <div class="col-sm-8">
                           <input class="form-control" value="<?php echo $objr_addorder['amphur_name'];?>" disabled/>
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">ตำบล :</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 control-label">ตำบล :</label>
+                        <div class="col-sm-8">
                           <input class="form-control" value="<?php echo $objr_addorder['district_name'];?>" disabled>
                         </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">บ้าน (ม) :</label>
+
+                        <div class="col-sm-8">
+                          <input type="text" name="village" class="form-control" value="<?php echo $objr_addorder['village'];?>">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">ลูกค้า :</label>
+
+                        <div class="col-sm-8">
+                          <input type="text" name="name_customer" class="form-control" value="<?php echo $objr_addorder['name_customer'];?>">
+                          <input type="hidden" name="id_addorder" value="<?php echo $id_addorder; ?>">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">โทร :</label>
+                        <div class="col-sm-8">
+                          <input class="form-control" name="tel" value="<?php echo $objr_addorder['tel'];?>">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">หมายเหตุ :</label>
+
+                        <div class="col-sm-8">
+                          <input type="text" name="note" class="form-control"  maxlength="25" value="<?php echo $objr_addorder['note'];?>">
+                         </div>
                       </div>
 
                     </div>
@@ -134,9 +138,11 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#4dd2ff" class="text-center" width="55%">สินค้า_หน่วย</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="15%">จำนวน</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="15%">จัดการ</th>
+                            <th class="text-center" width="30%"> <font color="red"> สินค้า_หน่วย </font> </th>
+                            <th class="text-center" width="20%"> <font color="red"> บ/น </font></th>
+                            <th class="text-center" width="15%"> <font color="red"> จำนวน </font></th>
+                            <th class="text-center" width="25%"> <font color="red"> เงิน </font></th>
+                            <th class="text-center" width="10%"> <font color="red"> # </font></th>
                           </tr>
                           <tr>
                             <?php 
@@ -149,8 +155,10 @@ folder instead of downloading all of them to reduce the load. -->
                               <input type="text" class="form-control text-center" value="<?php echo $value['name_product'].'_'.$value['unit']; ?>" disabled/>
                               <input type="hidden" name="id_listorder[]" value="<?php echo $value['id_listorder']; ?>">
                             </td>
+                            <td><input type="text" name="price[]" class="form-control text-center" value="<?php echo $value['price']; ?>"></td>
                             <td><input type="text" name="num[]" class="form-control text-center" value="<?php echo $value['num']; ?>"></td>
-                            <td class="text-center"><a href="delete_list_order2.php?id_listorder=<?php echo $value['id_listorder']; ?>&&id_addorder=<?php echo $id_addorder; ?>" type="button" class="btn btn-danger">ลบ</a></td>
+                            <td><input type="text" name="money[]" class="form-control text-center" value="<?php echo $value['money']; ?>"></td>
+                            <td class="text-center"><a href="delete_list_order2.php?id_listorder=<?php echo $value['id_listorder']; ?>&&id_addorder=<?php echo $id_addorder; ?>" type="button" class="btn btn-danger"><i class="fa fa-minus"></i></a></td>
                           </tr>
                             <?php
                             }
@@ -170,10 +178,10 @@ folder instead of downloading all of them to reduce the load. -->
                                 ?>
                               </select>
                             </td>
-                            <td>
-                              <input type="text" name="num2[]" placeholder="จำนวน" class="form-control text-center" />
-                            </td>
-                            <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success">เพิ่มสินค้า</button></td>
+                            <td><input type="text" name="price2[]" placeholder="บ/น" class="form-control text-center"/></td>
+                            <td><input type="text" name="num2[]" placeholder="จำนวน" class="form-control text-center"/></td>
+                            <td><input type="text" name="money2[]" placeholder="เงิน" class="form-control text-center"/></td>
+                            <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success"><i class="fa fa-plus"></i></button></td>
                           </tr>
                         </table>
                       </div>
@@ -182,8 +190,7 @@ folder instead of downloading all of them to reduce the load. -->
                   </div>
               </div>
               <div align="center" class="box-footer">
-                <a type="button" href="list_order.php" class="btn btn-danger pull-left"> <<== กลับ</a>
-                <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";>  บันทึก ORDER </button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";>  บันทึก ORDER </button>
               </div>
             </div>
             </form>
@@ -274,7 +281,7 @@ $(document).ready(function(){
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product2[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td class="text-center"><input type="text" name="num2[]" placeholder="จำนวน" class="form-control " /><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product2[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td><input type="text" name="price2[]" placeholder="บ/น" class="form-control text-center" /></td><td class="text-center"><input type="text" name="num2[]" placeholder="จำนวน" class="form-control " /><td><input type="text" name="money2[]" placeholder="เงิน" class="form-control text-center"/></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><i class="fa fa-minus"></i></button></td></tr>');
 	});
 	
 	$(document).on('click', '.btn_remove', function(){

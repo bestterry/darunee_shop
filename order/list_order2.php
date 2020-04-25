@@ -1,6 +1,5 @@
 <?php
   require "../config_database/config.php";
-  require "../config_database/session.php";
   function DateThai($strDate)
   {
     $strYear = date("Y",strtotime($strDate))+543-2500;
@@ -11,7 +10,7 @@
     $strSeconds= date("s",strtotime($strDate));
     $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
     $strMonthThai=$strMonthCut[$strMonth];
-    return "$strDay $strMonthThai$strYear";
+    return "$strDay $strMonthThai  $strYear";
   }
 
   function DateThai2($strDate)
@@ -24,18 +23,16 @@
     return "$strDay";
   }
 
-  $sql_invoice = "SELECT SUM(money) FROM order_list WHERE invoice = 'NO'";
-  $objq_invoice = mysqli_query($conn,$sql_invoice);
-  $objr_invoice = mysqli_fetch_array($objq_invoice);
-
+  $aday = $_POST['aday'];
+  $bday = $_POST['bday'];
   $order_list = "SELECT * FROM order_list
-  INNER JOIN product ON order_list.id_product = product.id_product
-  INNER JOIN tbl2_amphures ON order_list.amphur_id = tbl2_amphures.amphur_id
-  INNER JOIN tbl2_provinces ON order_list.province_id = tbl2_provinces.province_id
-  ORDER BY order_list.id_order_list DESC";
-  $objq_addorder = mysqli_query($conn,$order_list);
-
-?>
+                  INNER JOIN product ON order_list.id_product = product.id_product
+                  INNER JOIN tbl2_amphures ON order_list.amphur_id = tbl2_amphures.amphur_id
+                  INNER JOIN tbl2_provinces ON order_list.province_id = tbl2_provinces.province_id
+                  WHERE (order_list.date_receive between '$aday 00:00:00' and '$bday 23:59:59')
+                  ORDER BY order_list.id_order_list DESC";
+    $objq_addorder = mysqli_query($conn,$order_list);
+    ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,16 +66,10 @@
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
-
-  <style>
-    .button2 {
-      background-color: #b35900;
-      color : white;
-      } /* Back & continue */
-  </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
+  <div>
     <header class="main-header">
       <nav class="navbar navbar-static-top">
         <div class="navbar-custom-menu">
@@ -97,33 +88,24 @@
             <div class="box box-primary">
               <!-- /.box-header -->
               <div class="box-header with-border">
-                <div class="col-sm-12">
+              <div class="col-sm-12">
                  
-                    <a type="button" href="../admin/admin.php" class="btn button2 pull-left"><< เมนูหลัก</a>
-                  
-                    <a type="button" href="add_order.php" class="btn btn-success pull-right"> <i class="fa fa-plus"></i> ใบสั่งใหม่</a>
+                 <div class="col-md-8">
+                   <a type="button" href="list_order.php" class="btn btn-danger "><< กลับ</a>
+                 </div>
+                 <div class="col-md-4">
+                   <a type="button" href="add_order.php" class="btn btn-success">ใบสั่งใหม่</a>
+                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default"> สินค้าสั่งซื้อ </button>
+                   <a type="button" href="../pdf_file/receive_order.php" class="btn btn-warning ">PDF</a>
+                 </div>
                 
+               </div>
+                <div class="text-center">
+                  <font size="5">
+                    <B> ประวัติการสั่งสินค้า </B>
+                  </font>
                 </div>
-
-                <div class="col-sm-12 text-center">
-                    <font size="5">
-                      <B> ประวัติ (สั่งซื้อสินค้า) </B>
-                    </font>
-                </div>
-                <?php 
-                  if($status_user == 'boss'){
-                ?>
-                <div class="col-sm-12 text-left">
-                    <font size="3" color="red">
-                      <B>[ ยอดหนี้ค้างจ่าย : <?php echo $objr_invoice['SUM(money)'];?> ]</B>
-                    </font>
-                </div>
-                <?php 
-                  }else{
-                  }
-                ?>
               </div>
-
               <div class="box">
                 <div class="box-header">
                 </div>
@@ -132,17 +114,17 @@
                   <table id="example1" class="table table-bordered">
                     <thead>
                       <tr>
-                        <th class="text-center" width="7%"><font color="red">#</font></th>
-                        <th class="text-center" width="6%"><font color="red">ID</font></th>
-                        <th class="text-center" width="13%"><font color="red">วันสั่ง</font></th>
-                        <th class="text-center" width="10%"><font color="red">ใบสั่ง</font></th>
-                        <th class="text-center" width="13%"><font color="red">สินค้า</font></th>
-                        <th class="text-center" width="6%"><font color="red">U</font></th>
-                        <th class="text-center" width="5%"><font color="red">#</font></th>
-                        <th class="text-center" width="10%"><font color="red">เงินซื้อ</font></th>
-                        <th class="text-center" width="12%"><font color="red">มาถึง</font></th>
-                        <th class="text-center" width="10%"><font color="red">อำเภอ</font></th>
-                        <th class="text-center" width="8%"><font color="red">จ่าย</font></th>
+                        <th class="text-center" width="7%">#</th>
+                        <th class="text-center" width="6%">ID</th>
+                        <th class="text-center" width="10%">ใบสั่ง</th>
+                        <th class="text-center" width="13%">สินค้า</th>
+                        <th class="text-center" width="6%">จำนวน</th>
+                        <th class="text-center" width="8%">บ/น.</th>
+                        <th class="text-center" width="10%">เงินซื้อ</th>
+                        <th class="text-center" width="10%">เข้ารับ</th>
+                        <th class="text-center" width="10%">มาถึง</th>
+                        <th class="text-center" width="12%">อำเภอ</th>
+                        <th class="text-center" width="8%">จ่าย</th>
                         <!-- <th class="text-center" width="10%">จังหวัด</th> -->
                       </tr>
                     </thead>
@@ -153,12 +135,12 @@
                       <tr>
                         <td class="text-center"><a href="data_order.php?id_order_list=<?php echo $value['id_order_list']; ?>" class="btn btn-success btn-xs">ข้อมูล</a></td>
                         <td class="text-center"><?php echo $value['id_order_list'];?></td>
-                        <td class="text-center" ><?php echo DateThai($value['date_order']);?></td>
                         <td class="text-center"><?php echo $value['list_order'];?></td>
                         <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit'];?></td>
-                        <td class="text-center" ><?php echo $value['price']; ?></td>
                         <td class="text-center" ><?php echo $value['num_product']; ?></td>
-                        <td class="text-center" ><?php echo $value['money']; ?></td>
+                        <td class="text-center" ><?php echo $value['price_num']; ?></td>
+                        <td class="text-center" ><?php echo $value['price_num']*$value['num_product']; ?></td>
+                        <td class="text-center" ><?php echo DateThai($value['date_getorder']);?></td>
                         <td class="text-center" ><?php echo DateThai($value['date_receive']) ;?></td>
                         <td class="text-center"><?php echo $value['amphur_name'];?></td>
                         <td class="text-center"><?php echo $value['invoice'];?></td>

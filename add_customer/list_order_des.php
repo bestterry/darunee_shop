@@ -14,6 +14,21 @@
     return "$strDay $strMonthThai $strYear";
   }
 
+  function Datetime($strDate)
+  {
+  $strYear = (date("Y",strtotime($strDate))+543)-2500;
+  $strMonth= date("n",strtotime($strDate));
+  $strDay= date("j",strtotime($strDate));
+  $strHour= date("H",strtotime($strDate));
+  $strMinute= date("i",strtotime($strDate));
+  $strSeconds= date("s",strtotime($strDate));
+  $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+  $strMonthThai=$strMonthCut[$strMonth];
+  return "$strHour:$strMinute น.";
+  }
+
+$strDate = date('d-m-Y');
+
     $mysqli = connect();
     $id_addorder = $_GET['id_addorder'];
     $sql_addorder = "SELECT * FROM addorder 
@@ -125,10 +140,17 @@ folder instead of downloading all of them to reduce the load. -->
 
         <div class="col-md-12">
           <div class="box box-primary">
-            <div class="box-header text-center with-border">
-              <font size="5">
-                <B align="center"> ใบสั่งสินค้า <font color="red"> </font></B>
-              </font>
+            <div class="box-header with-border">
+              
+              <div class=" text-center ">
+                <font size="5">
+                  <B align="center"> ข้อมูลสั่งสินค้า <font color="red"> </font></B>
+                </font>
+              </div>
+              <div>
+                <a type="button" href="list_order.php" class="btn btn-danger"><< กลับ</a> 
+              </div>
+             
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -140,38 +162,33 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">ชื่อ :</th>
-                            <th width="85%"><?php echo $objr_addorder['name_customer'].'        '.$objr_addorder['tel']; ?></th>
+                            <th width="100%"><?php echo $id_addorder.'        '.$objr_addorder['name_customer']; ?></th>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">ที่อยู่ :</th>
-                            <th width="85%">
+                            <th width="100%">
                               <?php 
-                                echo 'บ.'.$objr_addorder['village'].' '.'ต.'.$objr_addorder['district_name'].' '.'อ.'.$objr_addorder['amphur_name'].' '.'จ.'.$objr_addorder['province_name'];
+                                echo 'บ.'.$objr_addorder['village'];
                               ?>
                             </th>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">วันที่สั่ง :</th>
-                            <th width="85%">
+                            <th width="100%">
                               <?php 
-                                echo DateThai($objr_addorder['datetime']);
+                                echo 'ต.'.$objr_addorder['district_name'].' '.'อ.'.$objr_addorder['amphur_name'].' '.'จ.'.$objr_addorder['province_name'];
                               ?>
                             </th>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">หมายเหตุ :</th>
-                            <th width="85%">
+                            <th width="100%">
+                              <?php 
+                                echo 'สั่ง  '.DateThai($objr_addorder['datetime']).' '. $objr_addorder['name_member'].'        '.Datetime($objr_addorder['datetime']).'        '.$objr_addorder['tel'];
+                              ?>
+                            </th>
+                          </tr>
+                          <tr>
+                            <th width="100%">
                               <?php 
                                 echo $objr_addorder['note'];
-                              ?>
-                            </th>
-                          </tr>
-                          <tr>
-                            <th bgcolor="#99CCFF" width="25%">ผู้บันทึก :</th>
-                            <th width="85%">
-                              <?php 
-                                echo $objr_addorder['name_member'];
                               ?>
                             </th>
                           </tr>
@@ -184,8 +201,10 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#99CCFF" class="text-center" width="70%">สินค้า_หน่วย</th>
-                            <th bgcolor="#99CCFF" class="text-center" width="15%">จำนวน</th>
+                            <th class="text-center" width="35%"> <font color="red">สินค้า_หน่วย</font> </th>
+                            <th class="text-center" width="20%"> <font color="red">บ/น</font> </th>
+                            <th class="text-center" width="20%"><font color="red">จำนวน</font></th>
+                            <th class="text-center" width="25%"><font color="red">เงิน</font></th>
                           </tr>
                           <?php 
                                 $total_money = 0;
@@ -194,14 +213,21 @@ folder instead of downloading all of them to reduce the load. -->
                                                     WHERE listorder.id_addorder = $id_addorder";
                                 $objq_listorder = mysqli_query($mysqli,$seach_listorder);
                                 while($value = $objq_listorder->fetch_assoc()){
+                                  $money = $value['money'];
                           ?>
                           <tr>
                             <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
+                            <td class="text-center"><?php echo $value['price']; ?></td>
                             <td class="text-center"><?php echo $value['num']; ?></td>
+                            <td class="text-center"><?php echo $money; ?></td>
                           </tr>
                           <?php
-                           } 
+                            $total_money = $total_money + $money;
+                           }  
+                           
                           ?>
+                            <th colspan="3" class="text-center" width="55%"><font color="red">รวมเงิน</font></th>
+                            <th  class="text-center" width="15%"><font color="red"><?php echo  $total_money; ?></font> </th>
                         </table>
                       </div>
                     </div>
@@ -209,32 +235,37 @@ folder instead of downloading all of them to reduce the load. -->
                   </div>
               </div>
               <div align="left" class="box-footer">
-                <a type="button" href="list_order.php" class="btn btn-success">
-                  <<== กลับ</a> </div> </div> </form> </div> </div> </section> <!-- jQuery 3 -->
-                    <script src="../bower_components/jquery/dist/jquery.min.js">
-                    </script>
-                    <!-- Bootstrap 3.3.7 -->
-                    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js">
-                    </script>
-                    <!-- DataTables -->
-                    <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js">
-                    </script>
-                    <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js">
-                    </script>
-                    <!-- SlimScroll -->
-                    <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js">
-                    </script>
-                    <!-- FastClick -->
-                    <script src="../bower_components/fastclick/lib/fastclick.js">
-                    </script>
-                    <!-- AdminLTE App -->
-                    <script src="../dist/js/adminlte.min.js">
-                    </script>
-                    <!-- AdminLTE for demo purposes -->
-                    <script src="../dist/js/demo.js">
-                    </script>
-                    <script src="../plugins/iCheck/icheck.min.js">
-                    </script>
+              
+              </div> 
+            </div> 
+          </form> 
+        </div> 
+      </div> 
+    </section> <!-- jQuery 3 -->
+    <script src="../bower_components/jquery/dist/jquery.min.js">
+    </script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js">
+    </script>
+    <!-- DataTables -->
+    <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js">
+    </script>
+    <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js">
+    </script>
+    <!-- SlimScroll -->
+    <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js">
+    </script>
+    <!-- FastClick -->
+    <script src="../bower_components/fastclick/lib/fastclick.js">
+    </script>
+    <!-- AdminLTE App -->
+    <script src="../dist/js/adminlte.min.js">
+    </script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../dist/js/demo.js">
+    </script>
+    <script src="../plugins/iCheck/icheck.min.js">
+    </script>
 
 </body>
 

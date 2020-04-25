@@ -64,7 +64,7 @@ require "menu/date.php";
         $query_product2 = mysqli_query($conn, $list_product);
         ?>
         <div class="box box-primary">
-        <div class="box-header text-center with-border">
+          <div class="box-header text-center with-border">
             <B align="center"> 
               <font size="5"> สต๊อกรถ </font>
               <font size="5" color="red">  
@@ -79,21 +79,25 @@ require "menu/date.php";
           <div class="box-body no-padding">
             <div class="mailbox-read-message">
               <table class="table table-striped table-bordered">
-                <tbody>
+
+                <thead>
                   <tr class="info">
                     <th class="text-center" width="3%">ที่</th>
                     <th class="text-center" width="18%">สินค้า_หน่วย</th>
 
-                  <?php 
-                    $sql_member = "SELECT name_sub FROM member WHERE id_member BETWEEN 3 AND 18";
-                    $objq_member = mysqli_query($conn,$sql_member);
-                    while($value = $objq_member -> fetch_assoc()){
-                  ?>
+                    <?php 
+                      $sql_member = "SELECT name_sub FROM member WHERE id_member BETWEEN 3 AND 18";
+                      $objq_member = mysqli_query($conn,$sql_member);
+                      while($value = $objq_member -> fetch_assoc()){
+                    ?>
                     <th class="text-center" width="4%"><?php echo $value['name_sub'];?></th>
-                  <?php }?>
+                    <?php }?>
                   
                     <th class="text-center" width="8%">รวม</th>
                   </tr>
+                </thead>
+
+                <tbody>
                   <?php
                   $a = 1;
                   while ($product = $query_product->fetch_assoc()) {
@@ -140,14 +144,17 @@ require "menu/date.php";
                     <?php $a++;
                   } ?>
                 </tbody>
+
               </table>
             </div>
           </div>
+
           <div class="box-footer">
-            <a href="admin.php" class="btn btn-success pull-left"> <<== กลับสู่เมนูหลัก </a>
+            <a href="admin.php" class="btn btn-danger pull-left"> << เมนูหลัก </a>
             <a href="../pdf_file/admin_car_stock.php" class="btn btn-success pull-right"> PDF </a>
           </div>
         </div>
+        
     </div>
   </div>
   </section>

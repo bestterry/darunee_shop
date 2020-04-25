@@ -49,22 +49,6 @@ folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
-  <style>
-    #customers {
-      width: 100%;
-    }
-    #customers td, #customers th {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
-    #customers tr:nth-child(even){background-color: #f2f2f2;}
-    #customers th {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      text-align: center;
-      background-color: #99CCFF;
-    }
-  </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -73,13 +57,11 @@ folder instead of downloading all of them to reduce the load. -->
       <nav class="navbar navbar-static-top">
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->
             
           </ul>
         </div>
       </nav>
     </header>
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Main content -->
       <section class="content">
@@ -88,24 +70,23 @@ folder instead of downloading all of them to reduce the load. -->
             <div class="box box-primary">
               <!-- /.box-header -->
             <div class="box-header with-border">
-              <a type="button" href="order.php" class="btn btn-danger "><= เมนูหลัก</a>
-              <a type="button" href="../pdf_file/list_order.php" class="btn btn-success ">พิมพ์จังหวัด</a>
-              <a type="button" href="../pdf_file/list_order2.php" class="btn btn-success ">พิมพ์อำเภอ</a>
-              <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-success ">ORDER วันนี้</a>
+              <a type="button" href="order.php" class="btn btn-danger pull-left"><< เมนูหลัก</a>
+              <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-success pull-right">ORDER วันนี้</a>
             </div>
               <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                <table id="customers">
-                  <tbody>
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
                     <tr>
-                      <th class="text-center" width="5%">ส่ง</th>
-                      <th class="text-center" width="5%">สั่ง</th>
-                      <th class="text-center" width="5%">แก้</th>
-                      <th class="text-center" width="5%">ลบ</th>
-                      <th class="text-center" width="5%">ที่</th>
-                      <th class="text-center" width="70%">ORDER ค้างส่ง</th>
-                      <th class="text-center" width="5%">วัน</th>
+                      <th class="text-center" width="5%">#</th>
+                      <th class="text-center" width="75%">ข้อมูล ORDER ค้างส่ง</th>
+                      <th class="text-center" width="5%">#</th>
+                      <th class="text-center" width="5%">#</th>
+                      <th class="text-center" width="5%">#</th>
+                      <th class="text-center" width="5%">#</th>
                     </tr>
+                  </thead>
+                    <tbody>
                   <?php 
                     $sql_addorder = "SELECT * FROM addorder 
                                     INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
@@ -116,13 +97,12 @@ folder instead of downloading all of them to reduce the load. -->
                     while($value = $objq_addorder->fetch_assoc()){
                   ?>
                     <tr>
-                      <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>
-                      <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
+                      <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>             
+                      <td ><?php echo $value['id_addorder'].' '.$value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
                       <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
-                      <td class="text-center" ><a href="delete_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";>ลบ</a></td>
-                      <td class="text-center"><?php echo $value['id_addorder']; ?></td>
-                      <td ><?php echo $value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
                       <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
+                      <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
+                      <td class="text-center" ><a href="delete_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";>ลบ</a></td>
                     </tr>
                   <?php 
                     }
@@ -177,58 +157,6 @@ folder instead of downloading all of them to reduce the load. -->
        )
     }
      )
-    $(function () {
-      //Enable iCheck plugin for checkboxes
-      //iCheck for checkbox and radio inputs
-      $('.mailbox-read-message input[type="checkbox"]').iCheck({
-        checkboxClass: 'icheckbox_flat-blue',
-        radioClass: 'iradio_flat-blue'
-      }
-      
-                                                          );
-      //iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass   : 'iradio_minimal-blue'
-    })
-
-      //Enable check and uncheck all functionality
-      $(".checkbox-toggle").click(function () {
-        var clicks = $(this).data('clicks');
-        if (clicks) {
-          //Uncheck all checkboxes
-          $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-          $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-        }
-        else {
-          //Check all checkboxes
-          $(".mailbox-messages input[type='checkbox']").iCheck("check");
-          $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-        }
-        $(this).data("clicks", !clicks);
-      }
-                                 );
-      //Handle starring for glyphicon and font awesome
-      $(".mailbox-star").click(function (e) {
-        e.preventDefault();
-        //detect type
-        var $this = $(this).find("a > i");
-        var glyph = $this.hasClass("glyphicon");
-        var fa = $this.hasClass("fa");
-        //Switch states
-        if (glyph) {
-          $this.toggleClass("glyphicon-star");
-          $this.toggleClass("glyphicon-star-empty");
-        }
-        if (fa) {
-          $this.toggleClass("fa-star");
-          $this.toggleClass("fa-star-o");
-        }
-      }
-                              );
-                              
-    }
-     );
   </script>
 
 </body>

@@ -7,10 +7,13 @@
                   INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
                   INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
                   INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
+                  INNER JOIN store_category ON store.id_category = store_category.id
+                  INNER JOIN store_product_category ON store.id_product_category = store_product_category.id
                   WHERE store.id_store = $id_store";
     $objq_store = mysqli_query($mysqli,$sql_store);
     $objr_store = mysqli_fetch_array($objq_store);
-    $category = $objr_store['category'];
+    $name_category = $objr_store['name_category'];
+    $name_product_category = $objr_store['name_product_category'];
     $status = $objr_store['status'];
 ?>
 <!DOCTYPE html>
@@ -120,11 +123,10 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <th width="25%" class="text-right"><font size="4" valign="middle">ประเภท &nbsp;&nbsp;:</font></th>
                             <td width="25%" > 
-                              <select name="category"  class="form-control" style="width: 100%;">
-                                <option value="ขายปุ๋ย" <?php if($category == "ขายปุ๋ย"){ echo "selected='selected'";} ?>>ขายปุ๋ย</option>
-                                <option value="ขายของบริโภค" <?php if($category == "ขายของบริโภค"){ echo "selected='selected'";} ?>>ขายของบริโภค</option>
-                                <option value="ไม่กำหนด" <?php if($category == "ไม่กำหนด"){ echo "selected='selected'";} ?>>ไม่กำหนด</option>
-                                <option value="ขายทั้งสองชนิด" <?php if($category == "ขายทั้งสองชนิด"){ echo "selected='selected'";} ?>>ขายทั้งสองชนิด</option>
+                                <select name="id_category"  class="form-control" style="width: 100%;">
+                                <option value="1"  <?php if($name_category == "ร้านค้าส่ง"){ echo "selected='selected'";} ?>>ร้านค้าส่ง</option>
+                                <option value="2"  <?php if($name_category == "ร้านค้าปลีก"){ echo "selected='selected'";} ?>>ร้านค้าปลีก</option>
+                                <option value="3"  <?php if($name_category == "รถส่งของ"){ echo "selected='selected'";} ?>>รถส่งของ</option>
                               </select>
                             </td>
                             <th width="25%" class="text-right" ><font size="4">สถานะ &nbsp;&nbsp;:</font></th>
@@ -133,6 +135,20 @@ folder instead of downloading all of them to reduce the load. -->
                                 <option value="N"  <?php if($status == "N"){ echo "selected='selected'";} ?>>ไม่ได้เยี่ยม</option>
                                 <option value="Y"  <?php if($status == "Y"){ echo "selected='selected'";} ?>>เยี่ยมแล้ว</option>
                               </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th width="25%" class="text-right"><font size="4" valign="middle">ขาย &nbsp;&nbsp;:</font></th>
+                            <td width="25%" > 
+                              <select name="id_product_category"  class="form-control" style="width: 100%;">
+                                <option value="1"  <?php if($name_product_category == "ปุ๋ย"){ echo "selected='selected'";} ?>>ปุ๋ย</option>
+                                <option value="2"  <?php if($name_product_category == "ของกิน"){ echo "selected='selected'";} ?>>ของกิน</option>
+                                <option value="3"  <?php if($name_product_category == "ทั้งสอง"){ echo "selected='selected'";} ?>>ทั้งสอง</option>
+                              </select>
+                            </td>
+                            <th width="25%" class="text-right" > </th>
+                            <td width="25%">
+                              
                             </td>
                           </tr>
                         </table>

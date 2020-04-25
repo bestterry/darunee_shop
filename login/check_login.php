@@ -28,4 +28,7 @@
           if ($status == 'admin') {
             header('location:../admin/admin.php');
           }     
+          if ($status == 'boss') {
+            header('location:../admin/admin.php');
+          } 
 ?>

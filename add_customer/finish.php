@@ -10,9 +10,11 @@
   $note = $_POST['note'];
   $mysqli = connect();
   
+
   $insert_addorder = "INSERT INTO addorder (name_customer, tel, village, district_code, amphur_id, province_id, note, status)
                       VALUES ('$name_customer', '$tel', '$village', $id_district, $id_amphur, $id_province, '$note', 'pending')";
   mysqli_query($mysqli,$insert_addorder);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -106,11 +108,11 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#0099ff" width="25%">ชื่อ :</th>
+                            <th bgcolor="#99CCFF" width="25%">ชื่อ :</th>
                             <th width="85%"><?php echo $name_customer; ?></th>
                           </tr>
                           <tr>
-                            <th bgcolor="#0099ff" width="25%">ที่อยู่ :</th>
+                            <th bgcolor="#99CCFF" width="25%">ที่อยู่ :</th>
                             <th width="85%">
                               <?php 
                                 $sql_district = "SELECT * FROM tbl_districts WHERE district_code = $id_district";
@@ -130,11 +132,11 @@ folder instead of downloading all of them to reduce the load. -->
                             </th>
                           </tr>
                           <tr>
-                            <th bgcolor="#0099ff" width="25%">เบอร์โทร :</th>
+                            <th bgcolor="#99CCFF" width="25%">เบอร์โทร :</th>
                             <th width="85%"><?php echo $tel; ?></th>
                           </tr>
                           <tr>
-                            <th bgcolor="#0099ff" width="25%">หมายเหตุ :</th>
+                            <th bgcolor="#99CCFF" width="25%">หมายเหตุ :</th>
                             <th width="85%"><?php echo $note; ?></th>
                           </tr>
                         </table>
@@ -146,23 +148,28 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#0099ff" class="text-center" width="70%">สินค้า</th>
-                            <th bgcolor="#0099ff" class="text-center" width="15%">จำนวน</th>
+                            <th bgcolor="99CCFF" class="text-center" width="55%">สินค้า</th>
+                            <th bgcolor="99CCFF" class="text-center" width="15%">จำนวน</th>
+                            <th bgcolor="99CCFF" class="text-center" width="15%">บ/น</th>
+                            <th bgcolor="99CCFF" class="text-center" width="15%">เงิน</th>
                           </tr>
                           <?php 
+                            $total_money = 0;
                             $num_product = COUNT($_POST['id_product']);
                             for ($i=0; $i < $num_product; $i++) { 
 
                                 $id_product = $_POST['id_product'][$i];
                                 $num = $_POST['num'][$i];
+                                $price = $_POST['price'][$i];
+                                $money = $_POST['money'][$i];
 
                                 $seach_idaddorder = "SELECT MAX(id_addorder) AS id_addorder FROM addorder";
                                 $objq_addorder = mysqli_query($mysqli,$seach_idaddorder);
                                 $objr_addorder = mysqli_fetch_array($objq_addorder);
                                 $id_addorder = $objr_addorder['id_addorder'];
 
-                                $insert_listorder = "INSERT INTO listorder (id_product, num, id_addorder)
-                                                    VALUES ($id_product, $num, $id_addorder)";
+                                $insert_listorder = "INSERT INTO listorder (id_product, num, price, money, id_addorder)
+                                                    VALUES ($id_product, $num, $price, $money, $id_addorder)";
                                 mysqli_query($mysqli,$insert_listorder);
 
                                 $sql_product = "SELECT * FROM product WHERE id_product = $id_product";
@@ -172,10 +179,15 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <td  class="text-center"><?php echo $objr_product['name_product'].'_'.$objr_product['unit']; ?></td>
                             <td class="text-center"><?php echo $num; ?></td>
+                            <td class="text-center"><?php echo $price; ?></td>
+                            <td class="text-center"><?php echo $money; ?></td>
                           </tr>
                           <?php
+                               $total_money = $total_money + $money;
                             }
                           ?>
+                            <th bgcolor="#99CCFF" colspan="3" class="text-center" width="55%">รวมเงิน</th>
+                            <th  class="text-center" width="15%"> <?php echo  $total_money; ?> </th>
                         </table>
                       </div>
                     </div>
@@ -183,7 +195,7 @@ folder instead of downloading all of them to reduce the load. -->
                   </div>
               </div>
               <div class="box-footer">
-                <a type="button" href="order.php" class="btn btn-danger"> <<== กลับสู่หน้าหลัก</a> 
+                <a type="button" href="order.php" class="btn btn-danger"> << กลับหน้าหลัก</a> 
                 <a type="button" href="add_order.php" class="btn btn-success">เพิ่มใบสั่งสินค้า</a> 
                 </div> 
               </div> 

@@ -14,7 +14,7 @@
                         <form action="../pdf_file/list_order3.php" method="post">
                             <div class="modal-content">
                                 <div class="modal-header text-center">
-                                    <font size="5"><B> ค้นหา (รายอำเภอ) </B></font>
+                                    <font size="5"><B> ค้นหา ORDER รายอำเภอ </B></font>
                                 </div>
                                 <div class="modal-body col-md-12 table-responsive mailbox-messages">
                                   <div class="table-responsive mailbox-messages">
@@ -48,8 +48,8 @@
                                   </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="submit"  class="btn btn-success pull-right">ถัดไป ==>></button>
-                                  <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
+                                  <button type="submit"  class="btn btn-success pull-right">ถัดไป >></button>
+                                  <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><< กลับ</button>
                                 </div>
                             </div>
                         </form>
@@ -58,7 +58,7 @@
                 <!-- ค้นหา ORDER -->
 
                 <!-- ค้นหา สินค้า -->
-                <li><a href="#" data-toggle="modal" data-target="#seachproduct"><i class="fa fa-archive"></i> ค้นหา (รายอำเภอ <font color="red">ส่งแล้ว</font>) </a></li>
+                <!-- <li><a href="#" data-toggle="modal" data-target="#seachproduct"><i class="fa fa-archive"></i> ค้นหา (รายอำเภอ <font color="red">ส่งแล้ว</font>) </a></li> -->
                  <div class="modal fade" id="seachproduct" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <form action="../pdf_file/list_order4.php" method="post">
@@ -110,7 +110,7 @@
                 <!-- ค้นหา ORDER -->
 
                 <!-- เพิ่มรายการสั่งสินค้า -->
-                <li><a href="add_order.php" ><i class="fa fa-home"></i> เพิ่มใหม่ </a></li>
+                <li><a href="add_order.php" ><i class="fa fa-home"></i> เพิ่ม ORDER </a></li>
                 <!-- /เพิ่มรายการสั่งสินค้า -->
 
                 <!-- ORDER ค้างส่ง -->
@@ -122,7 +122,7 @@
                 <!-- /รายการรวมสต๊อกค้างส่ง -->
 
                 <!-- ORDER ส่งแล้ว -->
-                <li><a href="list_order_success.php" ><i class="fa fa-check-square-o"></i> รายการส่งแล้ว </a></li>
+                <!-- <li><a href="list_order_success.php" ><i class="fa fa-check-square-o"></i> รายการส่งแล้ว </a></li> -->
                 <!-- /ORDER ส่งแล้ว -->
 
             </ul>

@@ -132,7 +132,7 @@ folder instead of downloading all of them to reduce the load. -->
   <body>
       <div class="ex1">
       <div class="box-header with-border">
-        <!-- <a type="button" href="order.php" class="btn btn-danger"><= เมนูหลัก</a> -->
+        <a type="button" href="order.php" class="btn btn-danger"><< เมนูหลัก</a>
         <a type="button" href="../pdf_file/total_order.php" class="btn btn-success"> PDF </a>
       </div>
         <div>
@@ -142,56 +142,58 @@ folder instead of downloading all of them to reduce the load. -->
             </font>
           </B>
         </div>
-        <table >
+        <table border="3" width="1000" >
+          <thead>
+            <tr>
+              <th class="text-center" width="12%">สินค้า_หน่วย</th>
+              <th class="text-center" width="12%">เชียงใหม่</th>
+              <th class="text-center" width="12%">ลำปาง</th>
+              <th class="text-center" width="12%">พะเยา</th>
+              <th class="text-center" width="12%">เชียงราย</th>
+              <th class="text-center" width="12%">ลำพูน</th>
+              <th class="text-center" width="12%">แพร่</th>
+              <th class="text-center" width="12%">รวม</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr>
-              <th class="text-center" width="14%">สินค้า_หน่วย</th>
-              <th class="text-center" width="14%">พะเยา</th>
-              <th class="text-center" width="14%">เชียงราย</th>
-              <th class="text-center" width="14%">ลำปาง</th>
-              <th class="text-center" width="14%">ลำพูน</th>
-              <th class="text-center" width="14%">เชียงใหม่</th>
-              <th class="text-center" width="14%">รวม</th>
-            </tr>
-          <?php 
-              $sql_pd = "SELECT * FROM product WHERE NOT id_product = 12 AND NOT id_product = 35";
-              $objq_pd = mysqli_query($mysqli,$sql_pd);
-              while ($value_pd = $objq_pd->fetch_assoc()) {
-              $id_product = $value_pd['id_product'];
-            ?>
-            <tr>
-              <td class="text-center"><?php echo $value_pd['name_product'].'_'.$value_pd['unit']; ?></td>
-              <?php 
-                $total_num = 0;
-                for ($i=1; $i < 6; $i++) { 
-                  
-                
-                  $sql_num = "SELECT SUM(num) FROM addorder 
-                              INNER JOIN listorder ON listorder.id_addorder = addorder.id_addorder 
-                              INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
-                              WHERE listorder.id_product = $id_product AND addorder.status = 'pending'";
-                  $objq_num = mysqli_query($mysqli,$sql_num);
-                  $objr_num = mysqli_fetch_array($objq_num);
-                  $num = $objr_num['SUM(num)'];
-              ?>
-              <td class="text-center">
-                <?php 
-                  if (!isset($num)) {
-                    echo "-";
-                  }else{
-                    echo $num;
-                  } 
-                ?>
-              </td>
-                <?php 
-                $total_num = $total_num + $num;
-                } 
-                ?>
-              <td class="text-center" ><?php echo $total_num; ?></td>
-            </tr>
             <?php 
-              }
-            ?>
+                    $sql_pd = "SELECT * FROM product WHERE status_stock = 1";
+                    $objq_pd = mysqli_query($mysqli,$sql_pd);
+                    while ($value_pd = $objq_pd->fetch_assoc()) {
+                     $id_product = $value_pd['id_product'];
+                  ?>
+                  <tr>
+                    <td class="text-center"><?php echo $value_pd['name_product'].'_'.$value_pd['unit']; ?></td>
+                    <?php 
+                      $total_num = 0;
+                      $sql_pv = "SELECT * FROM tbl_provinces";
+                      $objq_pv = mysqli_query($mysqli,$sql_pv);
+                      while($value_pv = $objq_pv -> fetch_assoc()){
+                        $id_province = $value_pv['province_id'];
+                        $sql_num = "SELECT SUM(num) FROM listorder INNER JOIN addorder ON listorder.id_addorder = addorder.id_addorder 
+                                    WHERE listorder.id_product = $id_product AND addorder.province_id = $id_province AND addorder.status = 'pending'";
+                        $objq_num = mysqli_query($mysqli,$sql_num);
+                        $objr_num = mysqli_fetch_array($objq_num);
+                        $num = $objr_num['SUM(num)'];
+                    ?>
+                    <td class="text-center">
+                      <?php 
+                        if (!isset($num)) {
+                          echo "-";
+                        }else{
+                          echo $num;
+                        } 
+                      ?>
+                    </td>
+                      <?php 
+                      $total_num = $total_num + $num;
+                      }
+                      ?>
+                    <td class="text-center" ><?php echo $total_num; ?></td>
+                  </tr>
+                  <?php 
+                    }
+                  ?>
           </tbody>
         </table>
 
@@ -205,7 +207,7 @@ folder instead of downloading all of them to reduce the load. -->
             </font>
           </B>
         </div>
-        <table >
+        <table border="3" width="1000">
           <tbody>
               <tr>
                 <th class="text-center" width="10%"></th>
@@ -282,7 +284,7 @@ folder instead of downloading all of them to reduce the load. -->
             </font>
           </B>
         </div>
-        <table id="customers">
+        <table border="3" width="1000">
           <tbody>
               <tr>
                 <th class="text-center" width="10%"></th>
@@ -359,7 +361,7 @@ folder instead of downloading all of them to reduce the load. -->
             </font>
           </B>
         </div>
-        <table id="customers">
+        <table border="3" width="1000">
           <tbody>
               <tr>
                 <th class="text-center" width="10%"></th>
@@ -434,7 +436,7 @@ folder instead of downloading all of them to reduce the load. -->
             </font>
           </B>
         </div>
-        <table id="customers">
+        <table border="3" width="1000">
           <tbody>
               <tr>
                 <th class="text-center" width="10%"></th>
@@ -509,7 +511,7 @@ folder instead of downloading all of them to reduce the load. -->
             </font>
           </B>
         </div>
-        <table id="customers" >
+        <table border="3" width="1800" >
           <tbody>
               <tr>
                 <th class="text-center" width="5%"></th>
@@ -573,6 +575,82 @@ folder instead of downloading all of them to reduce the load. -->
           </tbody>
         </table>
         <!-- //ค้างส่งเชียงใหม่ -->
+
+        <!-- ค้างส่งแพร่ -->
+        <br>
+        <br>
+
+        <div>
+          <B>
+            <font size="4">
+              <?php echo 'ค้างส่ง : ';?> เขต แพร่
+            </font>
+          </B>
+        </div>
+        <table border="3" width="1000" >
+          <tbody>
+              <tr>
+                <th class="text-center" width="10%"></th>
+              <?php 
+                $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = 42";
+                $objq_amphur = mysqli_query($mysqli,$sql_amphur);
+                while($value_am = $objq_amphur->fetch_assoc()){
+              ?> 
+                  
+                    <th class="text-center" width="10%"><?php echo $value_am['amphur_name'];?></th>
+                  
+                  <?php }?>
+                
+                <th class="text-center">รวม</th>
+              </tr>
+              <tr>
+              <?php
+                  $sql_product = "SELECT * FROM product WHERE NOT id_product = 12  AND NOT id_product = 35";
+                  $objq_product = mysqli_query($mysqli,$sql_product);
+                  while($value_pd = $objq_product->fetch_assoc())
+                  {
+              ?>
+                    <td class="text-center"><?php echo $value_pd['name_product'].'_'.$value_pd['unit'];?></td>
+                  <?php
+                    $total_pd = 0;
+                    $id_product = $value_pd['id_product'];
+                    $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = 42";
+                    $objq_amphur = mysqli_query($mysqli,$sql_amphur);
+                    while($value_am = $objq_amphur->fetch_assoc())
+                    {
+                      
+                      $amphur_id = $value_am['amphur_id'];
+                      $sql_numpd = "SELECT SUM(num) FROM listorder 
+                                    INNER JOIN addorder ON listorder.id_addorder = addorder.id_addorder
+                                    INNER JOIN product ON listorder.id_product = product.id_product
+                                    WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'";
+                      $objq_numpd = mysqli_query($mysqli,$sql_numpd);
+                      $objr_numpd = mysqli_fetch_array($objq_numpd);
+                      $numpd = $objr_numpd['SUM(num)'];
+                  ?>
+                      <td class="text-center">
+                        <?php 
+                        if (!isset($numpd)) {
+                          echo "-";
+                        }else{
+                          echo $numpd;
+                        }
+                        
+                        ?>
+                      </td>
+                  <?php 
+                    $total_pd = $total_pd + $numpd;
+                    }
+                  ?>
+                  <td class="text-center"><?php echo "$total_pd";?></td>
+                  </tr>
+              <?php 
+                  }
+              ?>
+                
+          </tbody>
+        </table>
+        <!-- //ค้างส่งแพร่ -->
       </div>
   </body>
 </html>

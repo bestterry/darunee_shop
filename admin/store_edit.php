@@ -6,10 +6,13 @@
     INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
     INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
     INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
+    INNER JOIN store_category ON store.id_category = store_category.id
+    INNER JOIN store_product_category ON store.id_product_category = store_product_category.id
     WHERE store.id_store = $id_store";
     $objq_store = mysqli_query($mysqli,$sql_store); 
     $objr_store = mysqli_fetch_array($objq_store);
-    $category = $objr_store['category'];
+    $name_category = $objr_store['name_category'];
+    $name_product_category = $objr_store['name_product_category'];
     $status = $objr_store['status'];
 ?>
 <!DOCTYPE html>
@@ -32,10 +35,7 @@
   <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
-  <!-- Morris chart -->
+ 
   <link rel="stylesheet" href="../bower_components/morris.js/morris.css">
   <!-- jvectormap -->
   <link rel="stylesheet" href="../bower_components/jvectormap/jquery-jvectormap.css">
@@ -116,7 +116,7 @@ folder instead of downloading all of them to reduce the load. -->
             <div class="box-header with-border">
               <div class="text-center">
                 <font size="5">
-                  <B align="center">แก้ไขร้านค้า</B>
+                  <B align="center">เพิ่มเติมแก้ไข (ข้อมูลร้านค้า)</B>
                 </font>
               </div> 
             </div>
@@ -127,106 +127,102 @@ folder instead of downloading all of them to reduce the load. -->
                   <div class="row">
                      <!-- ข้อมูลสินค้า -->
                      <div class="col-md-12">
-                      <div>
-                        
-                        <table class="table table-bordered" id="dynamic_field">
-                          <tr>
-                            <th width="25%" class="text-right"><font size="4" valign="middle">ชื่อร้านค้า &nbsp;&nbsp;:</font></th>
-                            <td width="25%" > 
-                              <input type="text" name="name_store" class="form-control" value="<?php echo $objr_store['name_store']; ?>">
-                              <input type="hidden" name="id_store" class="form-control" value="<?php echo $objr_store['id_store']; ?>">
-                            </td>
-                            <th width="25%" class="text-right" ><font size="4">เบอร์โทร &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="tel" class="form-control" value="<?php echo $objr_store['tel']; ?>"></td>
-                          </tr>
-                          <tr>
-                            <th width="25%" class="text-right"><font size="4" valign="middle">ประเภท &nbsp;&nbsp;:</font></th>
-                            <td width="25%" > 
-                              <select name="category"  class="form-control" style="width: 100%;">
-                                <option value="ขายปุ๋ย"  <?php if($category == "ขายปุ๋ย"){ echo "selected='selected'";} ?>>ขายปุ๋ย</option>
-                                <option value="ขายของบริโภค"  <?php if($category == "ขายของบริโภค"){ echo "selected='selected'";} ?>>ขายของบริโภค</option>
-                                <option value="ไม่กำหนด"  <?php if($category == "ไม่กำหนด"){ echo "selected='selected'";} ?>>ไม่กำหนด</option>
-                                <option value="ขายทั้งสองชนิด"  <?php if($category == "ขายทั้งสองชนิด"){ echo "selected='selected'";} ?>>ขายทั้งสองชนิด</option>
+                      <table class="table table-bordered" id="dynamic_field">
+                        <tr>
+                          <th width="20%" class="text-right"><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
+                          <td width="30%" > 
+                            <label for="inputEmail3" class="col-sm-4 control-label"><?php echo $objr_store['province_name']; ?></label>
+                            <div class="col-sm-8">
+                              <select name="province_name" data-where="2" class="form-control ajax_address select2" style="background-color: #e6f7ff;">
+                                <option value="">-- เลือกจังหวัด --</option>
                               </select>
-                            </td>
-                            <th width="25%" class="text-right" ><font size="4">สถานะ &nbsp;&nbsp;:</font></th>
-                            <td width="25%">
-                              <select name="status"  class="form-control" style="width: 100%;">
-                                <option value="N"  <?php if($status == "N"){ echo "selected='selected'";} ?>>ไม่ได้เยี่ยม</option>
-                                <option value="Y"  <?php if($status == "Y"){ echo "selected='selected'";} ?>>เยี่ยมแล้ว</option>
-                               
+                            </div>
+                          </td>
+                          <th width="25%" class="text-right"><font size="4" valign="middle">ชื่อร้านค้า &nbsp;&nbsp;:</font></th>
+                          <td width="25%" > 
+                            <input type="text" name="name_store" class="form-control" value="<?php echo $objr_store['name_store']; ?>">
+                            <input type="hidden" name="id_store" class="form-control" value="<?php echo $objr_store['id_store']; ?>">
+                          </td>
+                        </tr>
+                        <tr>
+                          <th width="20%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
+                          <td width="30%">
+                            <label for="inputEmail3" class="col-sm-4 control-label"><?php echo $objr_store['amphur_name']; ?></label>
+                            <div class="col-sm-8">
+                              <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
+                                <option value="">-- เลือกอำเภอ --</option>
                               </select>
-                            </td>
-                          </tr>
-                          </table>
-                          <div class="col-md-3"></div>
-                          <div class="col-md-6">
-                           <table class="table table-bordered" id="dynamic_field">
-
-                           <tr>
-                              <th width="35%" class="text-right" ><font size="4">ที่อยู่ &nbsp;&nbsp;:</font></th>
-                              <td width="65%" class="text-left"><input type="text" name="address" class="form-control" value="<?php echo $objr_store['address']; ?>"></div>
-                            </tr>
-
-                            <tr>
-                              <th width="35%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
-                              <td width="65%" class="text-left">
-                                <label for="inputEmail3" class="col-sm-4 control-label"><?php echo $objr_store['province_name']; ?></label>
-                                <div class="col-sm-8">
-                                  <select name="province_name" data-where="2" class="form-control ajax_address select2" style="background-color: #e6f7ff;">
-                                    <option value="">-- เลือกจังหวัด --</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <th width="35%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
-                              <td width="65%">
-                                <label for="inputEmail3" class="col-sm-4 control-label"><?php echo $objr_store['amphur_name']; ?></label>
-                                <div class="col-sm-8">
-                                  <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
-                                    <option value="">-- เลือกอำเภอ --</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <th width="35%" class="text-right" ><font size="4">ตำบล &nbsp;&nbsp;:</font></th>
-                              <td width="65%">
-                                <label for="inputEmail3" class="col-sm-4 control-label"><?php echo $objr_store['district_name'];?> </label>
-                                <div class="col-sm-8">
-                                  <select name="district_name" data-where="4" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
-                                    <option value="">-- เลือกตำบล --</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <th width="35%" class="text-right" ><font size="4">latitude &nbsp;&nbsp;:</font></th>
-                              <td width="65%">
-                                <input type="text" name="latitude" class="form-control" value="<?php echo $objr_store['latitude'];?>">
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <th width="35%" class="text-right" ><font size="4">longtitude &nbsp;&nbsp;:</font></th>
-                              <td width="65%">
-                                <input type="text" name="longtitude" class="form-control" value="<?php echo $objr_store['longtitude'];?>">
-                              </td>
-                            </tr>
-
-                        </table>
-                        </div>
-                        <div class="col-md-3"></div>
-
-                      </div>
+                            </div>
+                          </td>
+                            <th width="25%" class="text-right" ><font size="4">ที่อยู่ &nbsp;&nbsp;:</font></th>
+                            <td width="25%" class="text-left"><input type="text" name="address" class="form-control" value="<?php echo $objr_store['address']; ?>"></div> 
+                          </td>
+                        </tr>
+                        <tr>
+                          <th width="20%" class="text-right" ><font size="4">ตำบล &nbsp;&nbsp;:</font></th>
+                          <td width="30%">
+                            <label for="inputEmail3" class="col-sm-4 control-label"><?php echo $objr_store['district_name'];?> </label>
+                            <div class="col-sm-8">
+                              <select name="district_name" data-where="4" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
+                                <option value="">-- เลือกตำบล --</option>
+                              </select>
+                            </div>
+                          </td>
+                          <th width="25%" class="text-right" ><font size="4">เบอร์โทร &nbsp;&nbsp;:</font></th>
+                          <td width="25%"><input type="text" name="tel" class="form-control" value="<?php echo $objr_store['tel']; ?>"></td> 
+                          </td>
+                        </tr>
+                        <tr>
+                          <th width="20%" class="text-right" ><font size="4">latitude &nbsp;&nbsp;:</font></th>
+                          <td width="30%">
+                            <input type="text" name="latitude" class="form-control" value="<?php echo $objr_store['latitude'];?>">
+                          </td>
+                          <th width="25%" class="text-right"><font size="4" valign="middle">ประเภทร้าน &nbsp;&nbsp;:</font></th>
+                          <td width="25%" > 
+                            <select name="id_category"  class="form-control" style="width: 100%;">
+                              <option value="1"  <?php if($name_category == "ร้านค้าส่ง"){ echo "selected='selected'";} ?>>ร้านค้าส่ง</option>
+                              <option value="2"  <?php if($name_category == "ร้านค้าปลีก"){ echo "selected='selected'";} ?>>ร้านค้าปลีก</option>
+                              <option value="3"  <?php if($name_category == "รถส่งของ"){ echo "selected='selected'";} ?>>รถส่งของ</option>
+                            </select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th width="20%" class="text-right" ><font size="4">longtitude &nbsp;&nbsp;:</font></th>
+                          <td width="30%">
+                            <input type="text" name="longtitude" class="form-control" value="<?php echo $objr_store['longtitude'];?>">
+                          </td>
+                          <th width="25%" class="text-right"><font size="4" valign="middle">ขาย &nbsp;&nbsp;:</font></th>
+                          <td width="25%" > 
+                            <select name="id_product_category"  class="form-control" style="width: 100%;">
+                              <option value="1"  <?php if($name_product_category == "ปุ๋ย"){ echo "selected='selected'";} ?>>ปุ๋ย</option>
+                              <option value="2"  <?php if($name_product_category == "ของกิน"){ echo "selected='selected'";} ?>>ของกิน</option>
+                              <option value="3"  <?php if($name_product_category == "ทั้งสอง"){ echo "selected='selected'";} ?>>ทั้งสอง</option>
+                            </select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th width="20%" class="text-right"><font size="4" valign="middle">ประเภทร้าน &nbsp;&nbsp;:</font></th>
+                          <td width="30%" > 
+                            <select name="id_category"  class="form-control" style="width: 100%;">
+                              <option value="1"  <?php if($name_category == "ร้านค้าส่ง"){ echo "selected='selected'";} ?>>ร้านค้าส่ง</option>
+                              <option value="2"  <?php if($name_category == "ร้านค้าปลีก"){ echo "selected='selected'";} ?>>ร้านค้าปลีก</option>
+                              <option value="3"  <?php if($name_category == "รถส่งของ"){ echo "selected='selected'";} ?>>รถส่งของ</option>
+                            </select>
+                          </td>
+                          <th width="25%" class="text-right" ><font size="4">สถานะ &nbsp;&nbsp;:</font></th>
+                          <td width="25%">
+                            <select name="status"  class="form-control" style="width: 100%;">
+                              <option value="N"  <?php if($status == "N"){ echo "selected='selected'";} ?>>ไม่ได้เยี่ยม</option>
+                              <option value="Y"  <?php if($status == "Y"){ echo "selected='selected'";} ?>>เยี่ยมแล้ว</option>
+                            </select>
+                          </td>
+                        </tr>
+                      </table>
                     </div>
                   </div>
               </div>
               <div align="center" class="box-footer">
+                <input type="hidden" name="id_store" class="form-control" value="<?php echo $objr_store['id_store']; ?>">
                 <a type="button" href="store_search.php?district_name=<?php echo $objr_store['district_code']; ?>" class="btn btn-danger pull-left" > << กลับ </a>
                 <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลหรือไม่ ?')";><i class="fa fa-save" ></i> บันทึกข้อมูล </button>
                 <a type="button" href="algorithm/delete_store.php?id_store=<?php echo $id_store; ?>&&district_name=<?php echo $objr_store['district_code']; ?>" class="btn btn-danger" onClick="return confirm('คุณต้องการที่จะลบข้อมูลร้านค้าหรือไม่ ?')";><i class="fa fa-minus-square"></i> ลบร้านค้า </a>

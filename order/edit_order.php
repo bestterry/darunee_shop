@@ -15,6 +15,10 @@
     return "$strDay $strMonthThai $strYear";
   }
 
+    $sql_product = "SELECT * FROM product WHERE status_order = 1";
+    $objq_product = mysqli_query($mysqli,$sql_product);
+     
+
     // $mysqli = connect();
     $id_order_list = $_GET['id_order_list'];
     //select SUM NUM PRODUCT 
@@ -29,6 +33,13 @@
                   WHERE tbl2_amphures.amphur_id = $amphur_id";
     $objq_amphur = mysqli_query($mysqli,$sql_amphur);
     $objr_amphur = mysqli_fetch_array($objq_amphur);
+
+    $portage = $objr_order['portage'];
+    if(!isset($portage)){
+     $Vportage = 0;
+    }else{
+     $Vportage = $portage;
+    } 
 ?>
 <!DOCTYPE html>
 <html>
@@ -82,6 +93,11 @@ folder instead of downloading all of them to reduce the load. -->
       text-align: center;
       background-color: #99CCFF;
     }
+
+    .button2 {
+      background-color: #b35900;
+      color : white;
+      } /* Back & continue */
   </style>
 
   <script language="javascript">
@@ -131,9 +147,10 @@ folder instead of downloading all of them to reduce the load. -->
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
+              <div> <a type="button" href="data_order.php?id_order_list=<?php echo $id_order_list;?>" class="btn button2 pull-left"> << กลับ </a> </div>
               <div class="text-center">
                 <font size="5">
-                  <B align="center"> แก้ไข - เพิ่มเติมข้อมูลใบสั่ง <font color="red"> </font></B>
+                  <B align="center"> แก้ไขเพิ่มเติม (ข้อมูลใบสั่ง) </B>
                 </font>
               </div> 
             </div>
@@ -144,61 +161,80 @@ folder instead of downloading all of them to reduce the load. -->
                   <div class="row">
                      <!-- ข้อมูลสินค้า -->
                      <div class="col-md-12">
-                      <div>
-                        
+                     
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th width="25%" class="text-right"><font size="4" valign="middle">ID &nbsp;&nbsp;:</font></th>
-                            <td width="25%" ><input type="text" name="id_order_list" class="form-control" value="<?php echo $id_order_list; ?>" disabled></td>
-                            <th width="25%"></th>
-                            <td width="25%"></td>
+                            <th width="20%" class="text-right"><font size="4" valign="middle">ID &nbsp;&nbsp;:</font></th>
+                            <td width="30%" ><input type="text" name="id_order_list" class="form-control" value="<?php echo $id_order_list; ?>" disabled></td>
+                            <th width="25%" class="text-right" ><font size="4">ค่าขนส่ง &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="portage" class="form-control" value="<?php echo $Vportage; ?>"></td>
                           </tr>
                           <tr>
-                            <th width="25%" class="text-right"><font size="4" valign="middle">ใบสั่งที่ &nbsp;&nbsp;:</font></th>
-                            <td width="25%" > 
-                              <input type="text" name="list_order" class="form-control" value="<?php echo $objr_order['list_order']; ?>">
-                              <input type="hidden" name="id_order_list" class="form-control" value="<?php echo $id_order_list; ?>">
+                            <th width="20%" class="text-right"><font size="4" valign="middle">ใบสั่งที่ &nbsp;&nbsp;:</font></th>
+                            <td width="30%" > 
+                            <input type="text" name="list_order" class="form-control" value="<?php echo $objr_order['list_order']; ?>">
+                            <input type="hidden" name="id_order_list" class="form-control" value="<?php echo $id_order_list; ?>">
                             </td>
                             <th width="25%" class="text-right" ><font size="4">ประเภทรถ &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="catagory_car" class="form-control" value="<?php echo $objr_order['catagory_car']; ?>"></td>
                           </tr>
                           <tr>
-                            <th width="25%" class="text-right" ><font size="4">วันที่รถเข้าโรงงาน &nbsp;&nbsp;:</font></th>
-                            <td width="25%" ><input type="date" name="date_getorder" class="form-control" value="<?php echo $objr_order['date_getorder']; ?>"/></td>
+                            <th width="20%" class="text-right" ><font size="4">วันที่สั่ง &nbsp;&nbsp;:</font></th>
+                            <td width="30%" ><input type="date" name="date_order" class="form-control" value="<?php echo $objr_order['date_order']; ?>"/></td>
                             <th width="25%" class="text-right"><font size="4">ทะเบียนรถ &nbsp;&nbsp;:</font></th>
                             <td width="25%" ><input type="text" name="licent_plate" class="form-control" value="<?php echo $objr_order['licent_plate']; ?>"></td>
                           </tr>
                           <tr>
-                            <th width="25%" class="text-right" ><font size="4"> สินค้า &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" class="form-control" value="<?php echo $objr_order['full_name']; ?>" disabled></th>
+                            <th width="20%" class="text-right" ><font size="4"> สินค้า &nbsp;&nbsp;:</font></th>
+                            <td width="30%">
+                              <label for="inputEmail3" class="col-sm-6 control-label"><?php echo $objr_order['full_name']; ?> </label>
+                              <div class="col-sm-6">
+                                <select name="id_product" class=" form-control" style="background-color: #e6f7ff;" >
+                                  <option value="">-- เลือกสนค้า --</option>
+                                  <?php
+                                    while($value = $objq_product->fetch_assoc()){
+                                  ?>
+                                  <option value="<?php echo $value['id_product'];?>"><?php echo $value['full_name']. '('.$value['unit'].')';?></option>
+                                  <?php
+                                    }
+                                  ?>
+                                </select>
+                              </div>
+                            </th>
                             <th width="25%" class="text-right"><font size="4">พนักงานขับรถ &nbsp;&nbsp;:</font></th>
                             <td width="25%"> <input type="text" name="name_sent" class="form-control" value="<?php echo $objr_order['name_sent']; ?>"></td>
                           </tr>
                           <tr>
-                            <th width="25%" class="text-right" ><font size="4">จำนวนสินค้า &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="num_product" class="form-control" value="<?php echo $objr_order['num_product']; ?>" value="" OnChange="fncSum();"></td>
+                            <th width="20%" class="text-right" ><font size="4">จำนวนสินค้า &nbsp;&nbsp;:</font></th>
+                            <td width="30%"><input type="text" name="num_product"  onKeyUp="calcfunc()" class="form-control" value="<?php echo $objr_order['num_product']; ?>"></td>
                             <th width="25%" class="text-right" ><font size="4">เบอร์โทร พขร. &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="tel_sent" class="form-control" value="<?php echo $objr_order['tel_sent']; ?>"></td>
                           </tr>
                           <tr>
-                            <th width="25%" class="text-right" ><font size="4">ผู้ออกใบสั่ง &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="name_author" class="form-control" value="<?php echo $objr_order['name_author']; ?>"></td>
+                            <th width="20%" class="text-right"><font size="4">ราคาต่อหน่วย &nbsp;&nbsp;:</font></th>
+                            <td width="30%"><input type="number" name="price"  onKeyUp="calcfunc()"  class="form-control" value="<?php echo $objr_order['price']; ?>"></td>
+                            <th width="25%" class="text-right"><font size="4">วันที่เข้ารับ &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="date" name="date_getorder"  class="form-control" value="<?php echo $objr_order['date_getorder']; ?>"></td>
+                          </tr>
+                          <tr>
+                            <th width="20%" class="text-right"><font size="4">ราคาสินค้า &nbsp;&nbsp;:</font></th>
+                            <td width="30%"><input type="number" name="money"  class="form-control" value="<?php echo $objr_order['money']; ?>"></td>
                             <th width="25%" class="text-right"><font size="4">วันที่รถมาถึง &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="date" name="date_receive"  class="form-control" value="<?php echo $objr_order['date_receive']; ?>"></td>
                           </tr>
-                          </table>
+                        </table>
 
-                           <table class="table table-bordered" id="dynamic_field">
+                        <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th width="25%" class="text-right"><font size="4">ชื่อร้าน &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="name_store" value="<?php echo $objr_order['name_store']; ?>" class="form-control " /></td>
+                            <th width="15%" class="text-right"><font size="4">ชื่อร้าน &nbsp;&nbsp;:</font></th>
+                            <td width="35%"><input type="text" name="name_store" value="<?php echo $objr_order['name_store']; ?>" class="form-control " /></td>
                             <th width="25%" class="text-right" ><font size="4">ผู้ประสานงาน &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="name_to" class="form-control" value="<?php echo $objr_order['name_to'];?>"/></td>
                             </td>
                           </tr>
                           <tr>
-                            <th width="25%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
-                            <td width="25%" class="text-left">
+                            <th width="15%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
+                            <td width="35%" class="text-left">
                               <label for="inputEmail3" class="col-sm-4 control-label"><?php echo 'จ.'.$objr_amphur['province_name']; ?> </label>
                               <div class="col-sm-8">
                                 <select name="province_name" data-where="2" class="form-control ajax_address select2" style="background-color: #e6f7ff;">
@@ -210,8 +246,8 @@ folder instead of downloading all of them to reduce the load. -->
                             <td width="25%"><input type="text" name="tel_to" value="<?php echo $objr_order['tel_to'];?>"  class="form-control "></td>
                           </tr>
                           <tr>
-                            <th width="25%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
-                            <td width="25%">
+                            <th width="15%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
+                            <td width="35%">
                               <label for="inputEmail3" class="col-sm-4 control-label"><?php echo 'อ.'.$objr_amphur['amphur_name']; ?> </label>
                               <div class="col-sm-8">
                                 <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
@@ -219,17 +255,21 @@ folder instead of downloading all of them to reduce the load. -->
                                 </select>
                               </div>
                             </td>
-                            <th width="25%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
-                            <td width="25%" ><input type="text" name="note" class="form-control" value="<?php echo $objr_order['note'];?>"></td>
+                            <th width="25%" class="text-right" ><font size="4">ผู้ออกใบสั่ง &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="name_author" class="form-control" value="<?php echo $objr_order['name_author']; ?>"></td>
+                          </tr>
+                          <tr>
+                            <th width="15%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
+                            <td width="35%"><input type="text" name="note" class="form-control" value="<?php echo $objr_order['note'];?>"></td>
+                            <th width="25%" style="background-color:#ff9999;" class="text-right"><font size="4">ใบจ่าย &nbsp;&nbsp;:</font></th>
+                            <td width="25%" style="background-color:#ff9999;"><input type="text" name="invoice" class="form-control" value="<?php echo $objr_order['invoice']; ?>"></td>
+                          </tr>
                           </tr>
                         </table>
-
-                      </div>
                     </div>
                   </div>
               </div>
               <div align="center" class="box-footer">
-                <a type="button" href="data_order.php?id_order_list=<?php echo $id_order_list;?>" class="btn btn-danger pull-left"> << กลับ </a>
                 <button type="submit" class="btn btn-success" name="add" id="add"><i class="fa fa-save"></i> บันทึกข้อมูล </button>
               </div>
             </div>
@@ -311,6 +351,12 @@ folder instead of downloading all of them to reduce the load. -->
         });
 
       });
+
+      function calcfunc() {
+              var val1 = parseFloat(document.form1.price.value);
+              var val2 = parseFloat(document.form1.num_product.value);
+              document.form1.money.value=val1*val2;
+            }
     </script>
 </body>
 

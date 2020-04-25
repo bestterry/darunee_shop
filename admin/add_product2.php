@@ -44,24 +44,30 @@
   <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <script language="javascript">
+    function fncSubmit() {
+      if (document.form1.add_num.value == "") {
+        alert('กรุณาระบุจำนวน');
+        document.form1.num.focus();
+        return false;
+      }
+      if (document.form1.name.value == "") {
+        alert('กรุณาระบุชื่อผู้รับเข้าสินค้า');
+        document.form1.name.focus();
+        return false;
+      }
+      document.form1.submit();
+    }
+  </script>
+    <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
-  <script language="javascript">
-  function fncSubmit() {
-    if (document.form1.add_num.value == "") {
-      alert('กรุณาระบุจำนวน');
-      document.form1.num.focus();
-      return false;
-    }
-    if (document.form1.name.value == "") {
-      alert('กรุณาระบุชื่อผู้รับเข้าสินค้า');
-      document.form1.name.focus();
-      return false;
-    }
-    document.form1.submit();
-  }
-  </script>
   <div class="wrapper">
     <header class="main-header">
       <?php require('menu/header_logout.php');?>
@@ -75,28 +81,27 @@
 
       <!-- Main content -->
       <section class="content">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center">รับเข้าสินค้า : <?php echo $objr_zone['name_zone'];?></B>
+                <B align="center">รับสินค้าเข้า : <?php echo $objr_zone['name_zone'];?></B>
               </font>
             </div>
-            <div class="text-right with-border">
+            <div class="text-center with-border">
               <font size="4">
-                <B > ผู้ส่งสินค้า : 
+                <B > ผู้ส่ง : 
                         <?php 
                             echo $_POST['name']; 
                         ?>   
-                </B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </B>
               </font>
 
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
                 <form action="algorithm/add_product.php" method="post" autocomplete="off">
-                  <table class="table table-striped ">
+                  <table class="table table-bordered">
                           <tbody>
                       <?php 
                           $id_member = $_POST['id_member'];
@@ -139,14 +144,14 @@
                       
                           else{
                         ?>
-                      <tr bgcolor="#99CCFF">
-                        <th class="text-center" width="5%">ลำดับ
+                      <tr>
+                        <th class="text-center" width="25%"> <font color="red">ที่</font> 
                         </th>
-                        <th class="text-center" width="35%">สินค้า_หน่วย
+                        <th class="text-center" width="25%"> <font color="red">สินค้า_หน่วย</font>
                         </th>
-                        <th class="text-center" width="20%">จำนวนที่มี
+                        <th class="text-center" width="25%"> <font color="red">จำนวนที่มี</font>
                         </th>
-                        <th class="text-center" width="20%">จำนวนรับเข้า
+                        <th class="text-center" width="25%"> <font color="red">จำนวนรับเข้า</font>
                         </th </tr> <?php
                      for ($i=0; $i < count($_POST['id_numpd_car']); $i++) { 
                        
@@ -160,7 +165,7 @@
                           <input type="hidden" name="id_numpd_car[]" value="<?php echo $list['id_numPD_car']; ?>">
                           <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
                         </td>
-                        <td class="text-left">
+                        <td class="text-center">
                           <?php echo $list['name_product'].'_'.$list['unit']; ?>
                         </td>
                         <td class="text-center">
@@ -176,17 +181,14 @@
                     </tbody>
                   </table>
                   <div class="col-md-12">
-                  <table class="table table-bordered">
+                    <table class="table table-bordered">
                       <tbody>
-                        <tr bgcolor="#99CCFF">
-                          <th class="text-center">หมายเหตุ :</th>
-                          <th class="text-center"><input class="text-center" type="text" name="note" value="-" size="50"> </th>
-                            <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
-                            
+                        <tr>
+                          <th class="text-center">หมายเหตุ : <input size="50" class="text-center" type="text" name="note" value="-">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         </tr>
                       </tbody>
                     </table>
-                    <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
+                    <input type="hidden" name="id_zone"   value="<?php echo $_POST['id_zone']; ?>">
                     <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
                   </div>
               </div>
@@ -194,9 +196,8 @@
             <!-- /.box-body -->
             <!-- /.box-footer -->
             <div class="box-footer">
-              <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
-              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save">
-                    บันทึก</i></button>
+              <a type="block" href="admin.php" class="btn button2 pull-left"><< เมนูหลัก</a> 
+              <button type="submit" class="btn btn-success center" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"> รับสินค้าเข้า</i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             </form>
             <!-- /.box-footer -->

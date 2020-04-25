@@ -77,19 +77,25 @@ folder instead of downloading all of them to reduce the load. -->
         document.form1.tel.focus();		
         return false;
       }	
-      if(document.form1.category.value == "")
+      
+      if(document.form1.address.value == "")
       {
-        alert('กรุณาเลือกประเภทร้านค้า');
-        document.form1.category.focus();		
+        alert('กรุณาเลือกประเภทร้าน');
+        document.form1.address.focus();		
         return false;
-      }	
+      }
+      if(document.form1.id_category.value == "")
+      {
+        alert('กรุณาเลือกประเภทสินค้า');
+        document.form1.id_product_category.focus();		
+        return false;
+      }
       if(document.form1.address.value == "")
       {
         alert('กรุณาระบุหมู่บ้าน');
         document.form1.address.focus();		
         return false;
       }
-      category
       
       document.form1.submit();
     }
@@ -141,15 +147,27 @@ folder instead of downloading all of them to reduce the load. -->
                         <div class="form-group">
                           <label class="col-sm-4 control-label">ประเภทร้าน :</label>
                           <div class="col-sm-8">
-                            <select name="category" class="form-control text-center select2" style="width: 100%;">
+                            <select name="id_category" class="form-control" style="width: 100%;">
                               <option value="">------กรุณาเลือก------</option>
-                              <option value="ขายปุ๋ย">ขายปุ๋ย</option>
-                              <option value="ขายของบริโภค">ขายของบริโภค</option>
-                              <option value="ไม่กำหนด">ไม่กำหนด</option>
-                              <option value="ขายทั้งสองชนิด">ขายทั้งสองชนิด</option>
+                              <option value="1">ร้านค้าส่ง</option>
+                              <option value="2">ร้านค้าปลีก</option>
+                              <option value="3">รถขนส่ง</option>
                             </select>
                           </div>
                         </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">ประเภทร้าน :</label>
+                          <div class="col-sm-8">
+                            <select name="id_product_category" class="form-control" style="width: 100%;">
+                              <option value="">------กรุณาเลือก------</option>
+                              <option value="1">ปุ๋ย</option>
+                              <option value="2">ของกิน</option>
+                              <option value="3">ทั้งสอง</option>
+                            </select>
+                          </div>
+                        </div>
+
                         <div class="form-group">
                           <label class="col-sm-4 control-label">สถานะ :</label>
                           <div class="col-sm-8">
@@ -159,8 +177,6 @@ folder instead of downloading all of them to reduce the load. -->
                             </select>
                           </div>
                         </div>
-
-                        
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">

@@ -108,11 +108,11 @@ folder instead of downloading all of them to reduce the load. -->
                   <tbody>
                     <tr>
                       <th class="text-center" width="5%">ส่ง</th>
-                      <th class="text-center" width="5%">สั่ง</th>
-                      <th class="text-center" width="5%">แก้</th>
                       <th class="text-center" width="5%">ที่</th>
                       <th class="text-center" width="75%">ที่อยู่ลูกค้า</th>
                       <th class="text-center" width="5%">วัน</th>
+                      <th class="text-center" width="5%">ข้อมูล</th>
+                      <th class="text-center" width="5%">แก้</th>
                     </tr>
                   <?php 
                     $sql_addorder = "SELECT * FROM addorder 
@@ -125,11 +125,11 @@ folder instead of downloading all of them to reduce the load. -->
                   ?>
                     <tr>
                       <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะส่งสินค้า [<?php echo '('.$value['id_addorder'].')  '.$value['name_customer'].'   บ.'.$value['village']; ?>] หรือไม่ ?')";>ส่ง</a></td>
-                      <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
-                      <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
                       <td class="text-center"><?php echo $value['id_addorder']; ?></td>
                       <td ><?php echo $value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
                       <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
+                      <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
+                      <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
                     </tr>
                   <?php 
                     }

@@ -62,11 +62,11 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li><a href="#timeline" data-toggle="tab">ยอดเบิกสินค้าวันนี้</a></li>
+                <li class="active"><a href="#timeline" data-toggle="tab">ยอดเบิกสินค้าวันนี้</a></li>
                 <li><a href="#change" data-toggle="tab">โอนสินค้าระหว่างรถ</a></li>
                 <li><a href="#checkday" data-toggle="tab">ยอดเบิกย้อนหลัง</a></li>
                 <div align="right">
-                  <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+                  <a href="admin.php" class="btn btn-danger"><< เมนูหลัก</a>
                 </div>
               </ul>
               <div class="tab-content">
@@ -87,7 +87,7 @@
                             <!-- ------------------------------ยอดขายรวม---------------------------- -->
                             <div class="box-header with-border">
                               <p align="center">
-                                <font size="5"><B>ยอดเบิกสินค้า
+                                <font size="5"><B>ประวัติเบิกสินค้า
                                   <font color="red">
                                   <?php 
                                     $strDate = date('d-m-Y');
@@ -101,12 +101,13 @@
                             <table class="table table-striped">
                               <tbody>
                                 <tr class="info">
-                                  <th class="text-center" width="5%">ลำดับ</th>
+                                  <th class="text-center" width="5%">ที่</th>
                                   <th class="text-center" width="25%">สินค้า_หน่วย</th>
                                   <th class="text-center" width="8%">จำนวน</th>
                                   <th class="text-center" width="10%">ผู้เบิก</th>
                                   <th class="text-center" width="10%">เบิกจาก</th>
-                                  <th class="text-center" width="36%">หมายเหตุ</th>
+                                  <th class="text-center" width="30%">หมายเหตุ</th>
+                                  <th class="text-center" width="6%">เวลา</th>
                                 </tr>
                                 <?php #endregion
                                 $i = 1;
@@ -122,7 +123,7 @@
                                     <td class="text-center">
                                       <?php echo $i; ?>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                       <?php echo $value['name_product'] . '_' . $value['unit']; ?>
                                     </td>
                                     <td class="text-center">
@@ -137,6 +138,9 @@
                                     <td class="text-center">
                                       <?php echo $value['note']; ?>
                                     </td>
+                                    <td class="text-center">
+                                    <?php echo DateThai2($value['datetime']); ?>
+                                    </td>
                                   </tr>
                                   <?php
                                   $i++;
@@ -148,16 +152,16 @@
 
 
                             <!-- ------------------------------ยอดขายรวม---------------------------- -->
-                            <div class="box-header with-border">
-                              <font size="4">
+                            <div class="box-header text-center with-border">
+                              <font size="5">
                                 <B>ยอดเบิกสินค้า</B>
                               </font>
                             </div>
                             <table class="table table-striped">
                               <tbody>
                                 <tr class="info">
-                                  <th class="text-center" width="40%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="20%">จำนวน</th>
+                                  <th class="text-center" width="50%">สินค้า_หน่วย</th>
+                                  <th class="text-center" width="50%">จำนวน</th>
                                 </tr>
                                 <?php #endregion
                                 $sql_history = "SELECT * FROM product";
@@ -173,7 +177,7 @@
                                   if (isset($num_product)) {
                                     ?>
                                     <tr>
-                                      <td>
+                                      <td class="text-center">
                                         <?php echo $history['name_product'] .'_'. $history['unit']; ?>
                                       </td>
                                       <td class="text-center">
@@ -208,25 +212,32 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                       <div class="row">
-                        <div class="container">
+                        
                           <form action="checkday_withdraw_history.php" method="post">
-                            <div class="col-md-5">
-                              <div class="box-body">
-                                <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
-                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบข้อมูลการเบิกย้อนหลัง</p>
-                              </div>
-                            </div>
-                            <div class="col-md-5">
-                              <div class="form-group">
-                                <label>วันที่ : </label>
-                                <input type="date" name="day">
-                              </div>
-                              <div class="box-footer">
-                                <button type="submit" class="btn btn-success pull-left"><i class="fa fa-check-square-o"></i> ตกลง</button>
+                            <div class="row">
+                              <div class="container">
+                                <div class="col-md-12">
+                                  <div class="box-body">
+                                    <div class="form-group">
+                                      <label class="col-sm-4 control-label text-right"><font size="5"> การเบิกสินค้า วันที่ :</font></label>
+                                      <div class="col-sm-4">
+                                        <input class="form-control" type="date" name="day">
+                                      </div>
+                                      <div class="col-sm-4"></div>
+                                    </div>
+                                  </div>
+
+                                  <div class="box-footer text-center">
+                                    <div align="center" >
+                                      <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> ดูประวัติการเบิก </button>
+                                    </div>
+                                  </div>
+
+                                </div>
                               </div>
                             </div>
                           </form>
-                        </div>
+                        
                       </div>
                     </div>
                   </div>
@@ -245,7 +256,7 @@
                     <table class="table table-striped">
                       <tbody>
                         <tr class="info">
-                          <th class="text-center" width="5%">ลำดับ</th>
+                          <th class="text-center" width="5%">ที่</th>
                           <th class="text-center" width="30%">สินค้า_หน่วย</th>
                           <th class="text-center" width="12%">จำนวน</th>
                           <th class="text-center" width="12%">ผู้ส่ง</th>
@@ -270,7 +281,7 @@
                             <td class="text-center">
                               <?php echo $i; ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                               <?php echo $value['name_product'] . '_' . $value['unit']; ?>
                             </td>
                             <td class="text-center">

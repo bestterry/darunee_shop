@@ -44,6 +44,12 @@
       <!-- Google Font -->
       <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        <style>
+          .button2 {
+            background-color: #b35900;
+            color : white;
+            } /* Back & continue */
+        </style>
     </head>
 
     <body class=" hold-transition skin-blue layout-top-nav ">
@@ -75,24 +81,23 @@
 
           <!-- Main content -->
           <section class="content">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-12">
               <div class="box box-primary">
                 <div class="box-header text-center with-border">
                   <font size="5">
-                    <B align="center">เบิกสินค้าจาก : <?php echo $objr_zone['name_zone'];?>
+                    <B align="center">เบิกสินค้าจาก : <?php echo $objr_zone['name_zone'];?>&nbsp;&nbsp;
                     </B>
                   </font>
                 </div>
-                <div class="text-right with-border">
-              <font size="4">
-                <B > ผู้เบิก : 
-                        <?php 
-                            echo $_POST['name']; 
-                        ?>   
-                </B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </font>
-            </div>
+                <div class="text-center with-border">
+                  <font size="4">
+                    <B > ผู้เบิก : 
+                            <?php 
+                                echo $_POST['name']; 
+                            ?>   
+                    </B>
+                  </font>
+                </div>
 
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
@@ -100,14 +105,14 @@
                     <form action="algorithm/withdraw_product.php" method="post" autocomplete="off">
                       <table class="table table-bordered">
                         <tbody>
-                          <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="5%">ลำดับ
+                          <tr>
+                            <th class="text-center" width="25%"><font color="red">ที่</font> </th>
                             </th>
-                            <th class="text-center" width="35%">สินค้า_หน่วย
+                            <th class="text-center" width="25%"><font color="red">สินค้า_หน่วย</font>
                             </th>
-                            <th class="text-center" width="20%">จำนวนที่มี
+                            <th class="text-center" width="25%"><font color="red">จำนวนที่มี</font>
                             </th>
-                            <th class="text-center" width="20%">จำนวนขอเบิก
+                            <th class="text-center" width="25%"><font color="red">จำนวนรับเข้า</font>
                             </th> 
                           </tr> 
                       <?php
@@ -123,7 +128,7 @@
                               <input type="hidden" name="id_numproduct[]" value="<?php echo $list['id_numproduct']; ?>">
                               <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
                             </td>
-                            <td>
+                            <td class="text-center">
                               <?php echo $list['name_product'].'_'.$list['unit']; ?>
                             </td>
                             <td class="text-center">
@@ -138,10 +143,10 @@
                         </tbody>
                       </table>
                       <div class="col-md-12">
-                      <table class="table table-bordered table-hover">
+                        <table class="table table-bordered">
                           <tbody>
                             <tr>
-                              <th class="text-center">หมายเหตุ : <input size="50" class="text-center" type="text" name="note" value="<?php echo '-'; ?>"></th>
+                              <th class="text-center">หมายเหตุ : <input size="50" class="text-center" type="text" name="note" value="<?php echo '-'; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             </tr>
                           </tbody>
                         </table>
@@ -154,9 +159,9 @@
                 </div>
                 <!-- /.box-body -->
                 <!-- /.box-footer -->
-                <div class="box-footer">
-                  <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
-                  <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"> บันทึก</i></button>
+                <div class="box-footer text-center">
+                  <a type="block" href="admin.php" class="btn button2 pull-left"><< เมนูหลัก</a> 
+                  <button type="submit" class="btn btn-success center" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"> เบิกสินค้าออก </i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
                 </form>
                 <!-- /.box-footer -->

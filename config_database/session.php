@@ -15,5 +15,6 @@
   $username = $objr_name['name'];
   $id_zone = $objr_name['id_zone'];
   $name_zone = $objr_name['name_zone'];
+  $status_user = $objr_name['status'];
   
 ?>

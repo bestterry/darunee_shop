@@ -61,12 +61,11 @@
     <header class="main-header">
       <?php require('menu/header_logout.php');?>
     </header>
-    <div class="content-wrapper" style="height: 1400px;">
+    <div class="content-wrapper">
       <section class="content-header">
       </section>
       <section class="content">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="row">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <div align="right">
@@ -81,15 +80,21 @@
                 <table class="table table-striped table-bordered">
                   <tbody>
                     <tr class="info" >
-                    <th class="text-center" width="15%">วันที่</th>
-                      <th class="text-center" width="25%">เงินขาย</th>
-                      <th class="text-center" width="13%">เงินขายสะสม</th>
-                      <th class="text-center" width="15%">เงินขายเฉลี่ย</th>
+                      <th class="text-center" width="14%">วันที่</th>
+                      <th class="text-center" width="14%">เงินขาย</th>
+                      <th class="text-center" width="14%">เงินขายสะสม</th>
+                      <th class="text-center" width="14%">เงินขายเฉลี่ย</th>
+                      <th class="text-center" width="14%">กำไร</th>
+                      <th class="text-center" width="14%">กำไรรวม</th>
+                      <th class="text-center" width="14%">กำไรเฉลี่ย</th>
                     </tr>
                     <?php
                         $total_money = 0;
                         $i = 1;
-                        $sql_day_car = "SELECT SUM(money) as sum_money,DAY(datetime),MONTH(datetime),YEAR(datetime) FROM sale_car_history WHERE (datetime between '$aday 00:00:00' and '$bday 23:59:59') GROUP BY DAY(datetime),MONTH(datetime),YEAR(datetime)";
+                       
+                        $sql_day_car = "SELECT SUM(money) as sum_money,DAY(datetime),MONTH(datetime),YEAR(datetime) FROM sale_car_history 
+                                        
+                                        WHERE (datetime between '$aday 00:00:00' and '$bday 23:59:59') GROUP BY DAY(datetime),MONTH(datetime),YEAR(datetime)";
                         $objq_day_car = mysqli_query($conn,$sql_day_car);
                         while ($value = $objq_day_car -> fetch_assoc() ) {
                           
@@ -101,26 +106,47 @@
                           $price_history = "SELECT SUM(money) FROM price_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat'";
                           $objq_price_history = mysqli_query($conn,$price_history);
                           $objr_price_history = mysqli_fetch_array($objq_price_history);
-
                           $money_car = $value['sum_money'];
                           $money_store = $objr_price_history['SUM(money)'];
                           $all_money = $money_car + $money_store;
                           $total_money = $total_money + $all_money;
+
+                          //profit
+                          $profit = 0;
+                          $total_profit = 0;
+                          $sql_product = "SELECT id_product,price_num FROM product";
+                          $objq_product = mysqli_query($conn,$sql_product);
+                          while($value_pd = $objq_product->fetch_assoc()){
+                            $id_product = $value_pd['id_product'];
+                            $price_num = $value_pd['price_num'];
+                            $sql_salecar = "SELECT num,price FROM sale_car_history WHERE id_product = '$id_product' AND DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' ";
+                            $objq_carsale = mysqli_query($conn,$sql_salecar);
+                            while($value_carsale = $objq_carsale->fetch_assoc()){
+                              $price = $value_carsale['price'];
+                              $num = $value_carsale['num'];
+                              $profit = ($num * $price) - ($num * $price_num);
+                            }
+                            $total_profit = $total_profit + $profit;
+                          }
+
                     ?>
                     <tr>
                     <td class="text-center"><?php echo DateThai($date); ?></td>
                       <td class="text-center"><?php echo $all_money;?></td>
                       <td class="text-center"><?php echo $total_money;?></td>
                       <td class="text-center"><?php echo round($total_money/$i);?></td>
+                      <td class="text-center"><?php echo  $total_profit;?></td>
+                      <td class="text-center"><?php ?></td>
+                      <td class="text-center"><?php ?></td>
                     </tr>
                       <?php $i++;}?>
                   </tbody>
                 </table>
               </div>
             </div>
+          </div>
         </div>
-    </div>
-    </section>
+      </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

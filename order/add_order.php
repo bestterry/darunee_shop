@@ -78,6 +78,12 @@ folder instead of downloading all of them to reduce the load. -->
         document.form1.name_author.focus();		
         return false;
       }
+      if(document.form1.portage.value == "")
+      {
+        alert('กรุณาระบุค่าขนส่ง');
+        document.form1.portage.focus();		
+        return false;
+      }
       
 
 
@@ -164,7 +170,12 @@ folder instead of downloading all of them to reduce the load. -->
           document.form1.money.value = parseFloat(document.form1.num_product.value) * parseFloat(document.form1.price.value);
         }
   </script>
-
+    <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -207,11 +218,15 @@ folder instead of downloading all of them to reduce the load. -->
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
-            <div class="text-center">
-              <font size="5">
-                <B align="center"> ข้อมูลสั่งสินค้า </B>
-              </font>
-            </div> 
+              <div>
+                <a type="button" href="list_order.php" class="btn button2 pull-left"> << กลับ </a>
+              </div> 
+            
+              <div class="text-center">
+                <font size="5">
+                  <B align="center"> ข้อมูล (สั่งซื้อสินค้า) </B>
+                </font>
+              </div> 
             <div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -224,9 +239,10 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">ID &nbsp;&nbsp;:</font></th>
                             <td width="25%" ><input type="text" name="id_order_list" class="form-control" value="<?php echo $n_id; ?>"  style="background-color: #e6f7ff;" readonly/></td>
-                            <th width="25%"></th>
-                            <td width="25%"></td>
+                            <th width="25%" class="text-right" ><font size="4">ค่าขนส่ง &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="number" name="portage" class="form-control" placeholder="ค่าขนส่ง" value="0"></td>
                           </tr>
+
                           <tr>
                             <th width="25%" class="text-right"><font size="4" valign="middle">ใบสั่งที่ &nbsp;&nbsp;:</font></th>
                             <td width="25%" > <input type="text" name="list_order" class="form-control" placeholder="ใบสั่งที่" style="background-color: #e6f7ff;"></td>
@@ -234,26 +250,28 @@ folder instead of downloading all of them to reduce the load. -->
                             <td width="25%">
                               <select name="catagory_car" class="form-control text-center select2" style="background-color: #e6f7ff;">
                                 <option class="text-center" value="">-- เลือกประเภทรถ --</option>
-                                <option value="พ่วง">พ่วง</option>
-                                <option value="หกล้อ">หกล้อ</option>
-                                <option value="สิบล้อ">สิบล้อ</option>
-                                <option value="ขนส่ง">ขนส่ง</option>
+                                <option value="พ่วง">รถพ่วง</option>
+                                <option value="หกล้อ">รถหกล้อ</option>
+                                <option value="สิบล้อ">รถสิบล้อ</option>
+                                <option value="ขนส่ง">ฝากขนส่ง</option>
                               </select>
                             </td>
                           </tr>
+
                           <tr>
-                            <th width="25%" class="text-right" ><font size="4">วันที่รถเข้าโรงงาน &nbsp;&nbsp;:</font></th>
-                            <td width="25%" ><input type="date" name="date_getorder" class="form-control" placeholder="วันที่สั่ง" value="" style="background-color: #e6f7ff;"></td>
+                            <th width="25%" class="text-right" ><font size="4">วันที่สั่ง &nbsp;&nbsp;:</font></th>
+                            <td width="25%" ><input type="date" name="date_order" class="form-control" placeholder="วันที่สั่ง" value="-" style="background-color: #e6f7ff;"></td>
                             <th width="25%" class="text-right"><font size="4">ทะเบียนรถ &nbsp;&nbsp;:</font></th>
-                            <td width="25%" ><input type="text" name="licent_plate" class="form-control" placeholder="ทะเบียนรถ" style="background-color: #e6f7ff;"></td>
+                            <td width="25%" ><input type="text" name="licent_plate" class="form-control" placeholder="ทะเบียนรถ" value="-" style="background-color: #e6f7ff;"></td>
                           </tr>
+
                           <tr>
                             <th width="25%" class="text-right" ><font size="4"> สินค้า &nbsp;&nbsp;:</font></th>
                             <td width="25%" >
-                              <select name="id_product" class="form-control text-center select2" style="background-color: #e6f7ff;">
+                              <select name="id_product" id="id_product" class="form-control text-center" onchange="sSelect(this.value)" style="background-color: #e6f7ff;">
                                 <option class="text-center" value="">-- เลือกสินค้า --</option>
                                 <?php 
-                                  $product = "SELECT * FROM product";
+                                  $product = "SELECT * FROM product WHERE status_order = 1";
                                   $objq_product = mysqli_query($mysqli,$product);
                                   while($value = $objq_product->fetch_array()){
                                 ?>
@@ -264,39 +282,50 @@ folder instead of downloading all of them to reduce the load. -->
                               </select>
                             </td>
                             <th width="25%" class="text-right"><font size="4">พนักงานขับรถ &nbsp;&nbsp;:</font></th>
-                            <td width="25%"> <input type="text" name="name_sent" class="form-control" placeholder="ชื่อ พขร." style="background-color: #e6f7ff;"></td>
+                            <td width="25%"> <input type="text" name="name_sent" class="form-control" placeholder="ชื่อ พขร." value="-" style="background-color: #e6f7ff;"></td>
                           </tr>
+
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">จำนวนสินค้า &nbsp;&nbsp;:</font></th>
-                            <td width="25%" ><input type="text" name="num_product" class="form-control" style="background-color: #e6f7ff;" value="" OnChange="fncSum();"></td>
+                            <td width="25%" ><input type="number" name="num_product" onKeyUp="calcfunc()" class="form-control" style="background-color: #e6f7ff;" value=""></td>
                             <th width="25%" class="text-right" ><font size="4">เบอร์โทร พขร. &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="tel_sent" class="form-control" placeholder="เบอร์ พขร." style="background-color: #e6f7ff;"></td>
+                            <td width="25%"><input type="text" name="tel_sent" class="form-control" placeholder="เบอร์ พขร." value="-" style="background-color: #e6f7ff;"></td>
                           </tr>
-                          <tr>
-                            <th width="25%" class="text-right" ><font size="4">ผู้ออกใบสั่ง &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="name_author" class="form-control" placeholder="ผู้ออกใบสั่ง" style="background-color: #e6f7ff;"></td>
-                            <th width="25%" class="text-right"><font size="4">วันที่รถมาถึง &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="date" name="date_receive" class="form-control" value="-" style="background-color: #e6f7ff;"></td>
-                          </tr>
-                          </table>
 
-                           <table class="table table-bordered" id="dynamic_field">
+                          <tr>
+                            <th width="25%" class="text-right" ><font size="4">ราคาต่อหน่วย &nbsp;&nbsp;:</font></th>
+                            <td width="25%" ><input type="number" name="price_num" class="form-control" id="price_num" onKeyUp="calcfunc()" style="background-color: #e6f7ff;" value="0"></td>
+                            <th width="25%" class="text-right" ><font size="4">วันที่เข้ารับ &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="date" name="date_getorder" class="form-control" ></td>
+                          </tr>
+
+                          <tr>
+                            <th width="25%" class="text-right" ><font size="4">ราคาสินค้า &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="money" class="form-control" placeholder="เงินซื้อ" value="0"></td>
+                            <th width="25%" class="text-right"><font size="4">วันที่รถมาถึง &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="date" name="date_receive" class="form-control" value="" ></td>
+                          </tr>
+                        </table>
+
+                        <table class="table table-bordered" id="dynamic_field">
                           <tr>
                             <th width="25%" class="text-right"><font size="4">ชื่อร้าน &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="name_store" placeholder="ชื่อร้าน" class="form-control " style="background-color: #e6f7ff;"></td>
+                            <td width="25%"><input type="text" name="name_store" placeholder="ชื่อร้าน" class="form-control " value="-" style="background-color: #e6f7ff;"></td>
                             <th width="25%" class="text-right" ><font size="4">ผู้ประสานงาน &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="name_to" placeholder="ชื่อผู้รับ" class="form-control" style="background-color: #e6f7ff;"></td>
+                            <td width="25%"><input type="text" name="name_to" placeholder="ผู้ประสานงาน" class="form-control" value="-" style="background-color: #e6f7ff;"></td>
                           </tr>
+
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
                             <td width="25%">
-                              <select name="province_name" data-where="2" class="form-control ajax_address select2" style="background-color: #e6f7ff;">
+                              <select name="province_name" data-where="2" class="form-control ajax_address select2" value="-" style="background-color: #e6f7ff;">
                                 <option value="">-- เลือกจังหวัด --</option>
                               </select>
                             </td>
                             <th width="25%" class="text-right"><font size="4">เบอร์โทรประสานงาน &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="text" name="tel_to" placeholder="เบอร์ผู้รับ" class="form-control" style="background-color: #e6f7ff;"></td>
+                            <td width="25%"><input type="text" name="tel_to" placeholder="เบอร์ผู้รับ" value="-" class="form-control" style="background-color: #e6f7ff;"></td>
                           </tr>
+
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
                             <td width="25%">
@@ -304,8 +333,15 @@ folder instead of downloading all of them to reduce the load. -->
                                 <option value="">-- เลือกอำเภอ --</option>
                               </select>
                             </td>
+                            <th width="25%" class="text-right" ><font size="4">ผู้ออกใบสั่ง &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="name_author" value="" class="form-control " placeholder="ผู้ออกใบสั่ง" style="background-color: #e6f7ff;"></td>
+                          </tr>
+
+                          <tr>
                             <th width="25%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="note" class="form-control " value="-"></td>
+                            <th width="25%" class="text-right"><font size="4">ใบจ่าย &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="text" name="invoice" class="form-control" value="NO"></td>
                           </tr>
                         </table>
                         
@@ -314,7 +350,6 @@ folder instead of downloading all of them to reduce the load. -->
                   </div>
               </div>
               <div align="center" class="box-footer">
-                <a type="button" href="list_order.php" class="btn btn-danger pull-left"> << กลับ </a>
                 <button type="submit" class="btn btn-success" name="add" id="add"><i class="fa fa-save"></i> บันทึกข้อมูล </button>
               </div>
             </div>
@@ -397,6 +432,30 @@ folder instead of downloading all of them to reduce the load. -->
 
         });
       </script>
+
+      <script type="text/javascript">		
+        function sSelect(value){
+          // index = document.getElementById('id_product').selectedIndex;					
+          // elected_text = document.getElementById('id_product').options[index].text;			
+          // document.getElementById('input_text').value = document.getElementById('id_product').value;
+          $.ajax({
+                    type:"POST",
+                    url:"select_product.php",
+                    data:{value:value},
+                    success:function(data){
+                       $("#price_num").val(data);
+                    }
+                });
+ 
+            return false;
+	        	}
+
+            function calcfunc() {
+              var val1 = parseFloat(document.form1.price_num.value);
+              var val2 = parseFloat(document.form1.num_product.value);
+              document.form1.money.value=val1*val2;
+            }
+      </script> 
 </body>
 
 </html>

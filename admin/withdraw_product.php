@@ -42,16 +42,17 @@
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
   <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
+
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -76,88 +77,91 @@
     </header>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="height: 1000px;">
+    <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
 
       <!-- Main content -->
       <section class="content">
+        <div class="row">
+          <div class="container">
+            <form action="withdraw_product2.php" method="post">
+              <div class="box box-primary">
+                    <div class="box-header text-center with-border">
+                      <font size="5">
+                        <B align="center"> เบิกสินค้าจาก : <?php echo $objr_zone['name_zone'];?></B>&nbsp;&nbsp;&nbsp;
+                      </font>
+                    </div>
+                    <div class="text-center with-border">
+                      <font size="4">
+                      &nbsp;&nbsp; <B > ผู้เบิก : 
+                                <?php 
+                                    $sql_member = "SELECT * FROM member WHERE id_member = '$_POST[id_member]'";
+                                    $objq_member = mysqli_query($conn,$sql_member);
+                                    $member = mysqli_fetch_array($objq_member);
+                                    echo $member['name']; 
+                                ?>   
+                        </B>
+                      </font>
+                    </div>
 
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-          <div class="box box-primary">
-            <div class="box-header text-center with-border">
-              <font size="5">
-                <B align="center"> เบิกสินค้าจาก : <?php echo $objr_zone['name_zone'];?>   </B>
-              </font>
-            </div>
-            <div class="text-right with-border">
-              <font size="4">
-                <B > ผู้เบิก : 
-                        <?php 
-                            $sql_member = "SELECT * FROM member WHERE id_member = '$_POST[id_member]'";
-                            $objq_member = mysqli_query($conn,$sql_member);
-                            $member = mysqli_fetch_array($objq_member);
-                            echo $member['name']; 
-                        ?>   
-                </B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </font>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-                <form action="withdraw_product2.php" method="post">
-                  <table class="table table-striped ">
-                    <tbody>
-                      <tr class="info" >
-                        <th class="text-center" width="5%">เลือก
-                        </th>
-                        <th class="text-center" width="30%">สินค้า_หน่วย
-                        </th>
-                        <th class="text-center" width="15%">จำนวนที่มี
-                        </th>
-                      </tr>
-                      <?php
-                      $i=1;
-                      $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_zone = '$_POST[id_zone]'";
-                      $objq_listproduct = mysqli_query($conn,$list_product);
-                          while($list = $objq_listproduct->fetch_assoc()){
-                      ?>
-                      <tr>
-                        <td class="text-center">
-                          <input type="checkbox" name="id_num_product[]" value="<?php echo $list['id_numproduct']; ?>">
-                        </td>
-                        <td>
-                          <?php echo $list['name_product'].'_'.$list['unit']; ?>
-                        </td>
-                        <td class="text-center">
-                          <?php echo $list['num'];?>
-                        </td>
-                      </tr>
-                      <?php 
-                          $i++; }
-                      ?>
-                    </tbody>
-                  </table>
+                    
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+                      <div class="mailbox-read-message">
+                        <div>
+                          <a type="block" href="admin.php" class="btn button2 pull-left"><< เมนูหลัก </a> 
+                          <button type="submit" class="btn button2 pull-right">ต่อไป >> </button>
+                        </div>
+                        <br><br>
+                        
+                          <table class="table table-striped ">
+                            <tbody>
+                              <tr >
+                                <th class="text-center" width="33%"><font color="red">เลือก</font>
+                                </th>
+                                <th class="text-center" width="33%"><font color="red">สินค้า_หน่วย</font></th>
+                                </th>
+                                <th class="text-center" width="33%"><font color="red">จำนวนที่มี</font>
+                                </th>
+                              </tr>
+                              <?php
+                              $i=1;
+                              $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_zone = '$_POST[id_zone]'";
+                              $objq_listproduct = mysqli_query($conn,$list_product);
+                                  while($list = $objq_listproduct->fetch_assoc()){
+                              ?>
+                              <tr>
+                                <td class="text-center">
+                                  <input type="checkbox" name="id_num_product[]" value="<?php echo $list['id_numproduct']; ?>">
+                                </td>
+                                <td class="text-center">
+                                  <?php echo $list['name_product'].'_'.$list['unit']; ?>
+                                </td>
+                                <td class="text-center">
+                                  <?php echo $list['num'];?>
+                                </td>
+                              </tr>
+                              <?php 
+                                  $i++; }
+                              ?>
+                            </tbody>
+                          </table>
                             <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
                             <input type="hidden" name="name" value="<?php echo $member['name']; ?>">
                             <input type="hidden" name="id_member" value="<?php echo $member['id_member']; ?>">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
               </div>
-            </div>
-            <div class="box-footer">
-              <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก </a> 
-              <button type="submit" class="btn btn-success pull-right">ต่อไป =>> </button>
-            </div>
             </form>
-            <!-- /.box-footer -->
           </div>
         </div>
-    </div>
-  </div>
-  <!-- /. box -->
-  </div>
-  </section>
+          
+      </section>
   <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

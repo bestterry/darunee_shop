@@ -92,17 +92,18 @@ folder instead of downloading all of them to reduce the load. -->
             </div>
               <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                <table id="customers">
-                  <tbody>
-                    <tr>
-                      <th class="text-center" width="5%">ส่ง</th>
-                      <th class="text-center" width="5%">สั่ง</th>
-                      <th class="text-center" width="5%">แก้</th>
-                      <th class="text-center" width="5%">ลบ</th>
-                      <th class="text-center" width="5%">ที่</th>
-                      <th class="text-center" width="70%">ORDER ค้างส่ง</th>
-                      <th class="text-center" width="5%">วัน</th>
-                    </tr>
+                <table id="example1">
+                    <thead>
+                      <tr>
+                        <th class="text-center" width="5%">ส่ง</th>
+                        <th class="text-center" width="5%">สั่ง</th>
+                        <th class="text-center" width="5%">แก้</th>
+                        <th class="text-center" width="5%">ลบ</th>
+                        <th class="text-center" width="5%">ที่</th>
+                        <th class="text-center" width="70%">ORDER ค้างส่ง</th>
+                        <th class="text-center" width="5%">วัน</th>
+                      </tr>
+                    </thead>
                   <?php 
                     $sql_addorder = "SELECT * FROM addorder 
                                     INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
@@ -112,6 +113,7 @@ folder instead of downloading all of them to reduce the load. -->
                     $objq_addorder = mysqli_query($mysqli,$sql_addorder);
                     while($value = $objq_addorder->fetch_assoc()){
                   ?>
+                  <tbody>
                     <tr>
                       <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>
                       <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>

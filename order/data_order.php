@@ -1,6 +1,6 @@
 <?php
  require "../config_database/config.php";
-
+ require "../config_database/session.php";
  function DateThai($strDate)
  {
    $strYear = date("Y",strtotime($strDate))+543;
@@ -66,6 +66,14 @@ folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
+  <style>
+    .button2 {
+      background-color: #b35900;
+      color : white;
+      } /* Back & continue */
+
+  </style>
+
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -74,28 +82,7 @@ folder instead of downloading all of them to reduce the load. -->
       <nav class="navbar navbar-static-top">
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="dist/img/user.png" class="img-circle" alt="User Image">
-                  <p>
-                    <small>สาขา : </small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                    <a href="login/logout.php" class="btn btn-danger btn-flat">ออกจากระบบ</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
+           
           </ul>
         </div>
       </nav>
@@ -107,17 +94,38 @@ folder instead of downloading all of them to reduce the load. -->
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
+              <div class='col-sm-12'>
+                <div class="col-sm-4">
+                  <a type="button" href="list_order.php" class="btn button2 "><< กลับ</a>
+                </div>
+                <div class="col-sm-4 text-center">
+                  <a type="button" href="../pdf_file/data_order.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-warning">ใบสั่งซื้อ</a>
+                  <a type="button" href="../pdf_file/data_order2.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-warning">หลังใบสั่ง</a>
+                </div>
+                <div class="col-sm-4 text-right">
+                <?php 
+                  if($status_user == 'boss'){
+                ?>
+                  <a type="button" href="algorithm/delete_order.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-danger" onClick="return confirm('คุณต้องการลบข้อมูลหรือไม่?')";>ลบใบสั่ง</a>
+                 <?php 
+                    }else{
+
+                  }
+                 ?> 
+                  <a type="button" href="edit_order.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-success pull">edit >></a>
+                
+                </div>
+              </div> 
+
+              <br>
+              <br>
+              <br>
               <div class="text-center">
                 <font size="5">
-                  <B align="center"> ข้อมูลสั่งสินค้า <font color="red"> </font></B>
+                  <B align="center">ข้อมูล (สั่งซื้อสินค้า) </B>
                 </font>
               </div> 
-              <div>
-              <a type="button" href="list_order.php" class="btn btn-danger "><< กลับ</a>
-              <a type="button" href="edit_order.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-success">edit</a>
-              <a type="button" href="algorithm/delete_order.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-danger" onClick="return confirm('คุณต้องการลบข้อมูลหรือไม่?')";>ลบ</a>
-              <a type="button" href="../pdf_file/data_order.php?id_order_list=<?php echo $id_order_list; ?>" class="btn btn-warning">PDF</a>
-              </div> 
+             
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -130,8 +138,8 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <td width="25%" class="text-right">ID &nbsp;&nbsp;:</td>
                             <td width="25%" ><?php echo $objr_order["id_order_list"];?></td>
-                            <td width="25%" class="text-right" ></td>
-                            <td width="25%"></td>
+                            <td width="25%" class="text-right" >ค่าขนส่ง &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['portage'];?></td>
                           </tr>
                           <tr>
                             <td width="25%" class="text-right">ใบสั่งที่ &nbsp;&nbsp;:</td>
@@ -140,11 +148,10 @@ folder instead of downloading all of them to reduce the load. -->
                             <td width="25%"><?php echo $objr_order['catagory_car'];?></td>
                           </tr>
                           <tr>
-                            <td width="25%" class="text-right" >วันที่เข้าโรงงาน &nbsp;&nbsp;:</td>
-                            <td width="25%" ><?php echo DateThai($objr_order['date_getorder']); ?></td>
+                            <td width="25%" class="text-right" >วันที่สั่ง &nbsp;&nbsp;:</td>
+                            <td width="25%" ><?php echo DateThai($objr_order['date_order']); ?></td>
                             <td width="25%" class="text-right">ทะเบียนรถ &nbsp;&nbsp;:</td>
                             <td width="25%" ><?php echo $objr_order['licent_plate'];?></td>
-                            
                           </tr>
                           <tr>
                             <td width="25%" class="text-right" > สินค้า &nbsp;&nbsp;:</td>
@@ -159,14 +166,20 @@ folder instead of downloading all of them to reduce the load. -->
                             <td width="25%"><?php echo $objr_order['tel_sent'];?></td>
                           </tr>
                           <tr>
-                            <td width="25%" class="text-right" >ผู้ออกใบสั่ง &nbsp;&nbsp;:</td>
-                            <td width="25%"><?php echo $objr_order['name_author'];?></td>
+                            <td width="25%" class="text-right" >ราคาต่อหน่วย &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['price'];?></td>
+                            <td width="25%" class="text-right">วันที่เข้ารับ &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo DateThai($objr_order['date_getorder']);?></td>
+                          </tr>
+                          <tr>
+                            <td width="25%" class="text-right" >ราคาสินค้า &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['money'];?></td>
                             <td width="25%" class="text-right">วันที่รถมาถึง &nbsp;&nbsp;:</td>
                             <td width="25%"><?php echo DateThai($objr_order['date_receive']);?></td>
                           </tr>
-                          </table>
+                        </table>
 
-                           <table class="table table-bordered" id="dynamic_field">
+                        <table class="table table-bordered" id="dynamic_field">
                           <tr>
                             <td width="25%" class="text-right">ชื่อร้าน &nbsp;&nbsp;:</td>
                             <td width="25%"><?php echo $objr_order['name_store'];?></td>
@@ -184,8 +197,14 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <td width="25%" class="text-right" >อำเภอ &nbsp;&nbsp;:</td>
                             <td width="25%"><?php echo $objr_amphur['amphur_name'];?></td>
+                            <td width="25%" class="text-right" >ผู้ออกใบสั่ง &nbsp;&nbsp;:</td>
+                            <td width="25%" ><?php echo $objr_order['name_author'];?></td>
+                          </tr>
+                          <tr>
                             <td width="25%" class="text-right" >หมายเหตุ &nbsp;&nbsp;:</td>
-                            <td width="25%" ><?php echo $objr_order['note'];?></td>
+                            <td width="25%"><?php echo $objr_order['note'];?></td>
+                            <td width="25%" class="text-right" >ใบจ่าย &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['invoice'];?></td>
                           </tr>
                         </table>
                         

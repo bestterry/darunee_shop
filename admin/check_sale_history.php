@@ -61,84 +61,92 @@
     <header class="main-header">
       <?php require('menu/header_logout.php');?>
     </header>
-    <div class="content-wrapper" style="height: 1000px;">
+    <div class="content-wrapper">
       <section class="content-header">
       </section>
       <section class="content">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+       <div class="row">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <div align="right">
-                <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+                <a href="sale_history.php" class="btn btn-success"><< กลับ</a>
               </div>
               <font size="5">
-                <B> ยอดขาย <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
+                <B> ยอดขายสะสม <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
               </font>
             </div>
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-              <table class="table table-striped ">
+
+              <table class="table table-striped table-bordered">
                 <tbody>
                   <tr class="info" >
-                      <th bgcolor="#99CCFF" width="40%" class="text-center">สินค้า_หน่วย </th>
-                      <th bgcolor="#99CCFF" width="15%" class="text-center">จำนวน</th>
-                      <th bgcolor="#99CCFF" width="15%" class="text-center">เงินขาย(บ)</th>
-                    </tr>
-                    <?php #endregion
-                        $total_money = 0;
-                        $total_all_money = 0;
-                        $date = "SELECT * FROM product ";
-                        $objq = mysqli_query($conn,$date);
-                        while($value = $objq ->fetch_assoc()){ 
-                          $id_product = $value['id_product'];
-                          $sql_num = "SELECT SUM(num),SUM(money) FROM price_history WHERE (datetime between '$aday 00:00:00' and '$bday 23:59:59') AND id_product = $id_product";
-                          $objq_num = mysqli_query($conn,$sql_num);
-                          $objr_num = mysqli_fetch_array($objq_num);
-                          $num = $objr_num['SUM(num)'];
-                          $num_money = $objr_num['SUM(money)'];
+                    <th class="text-center" width="30%">สินค้า_หน่วย</th>
+                    <th class="text-center" width="14%">จำนวน</th>
+                    <th class="text-center" width="14%">บ/หน่วย</th>
+                    <th class="text-center" width="14%">ทุนซื้อ</th>
+                    <th class="text-center" width="14%">เงินขาย</th>
+                    <th class="text-center" width="14%">กำไรขาย</th>
+                  </tr>
+                  <?php
+                  $a = 0;
+                  $b = 0;
+                  $total_money = 0;
+                    $sql_checkproduct = "SELECT * FROM product";
+                    $objq_checkprouct = mysqli_query($conn,$sql_checkproduct);
+                    while($value = $objq_checkprouct-> fetch_assoc()){
+                      $id_product = $value['id_product'];
+                      $price_num = $value['price_num'];
 
-                          $sql_num_car = "SELECT SUM(num),SUM(money) FROM sale_car_history WHERE (datetime between '$aday 00:00:00' and '$bday 23:59:59') AND id_product = $id_product";
-                          $objq_num_car = mysqli_query($conn,$sql_num_car);
-                          $objr_num_car = mysqli_fetch_array($objq_num_car);
-                          $num_car = $objr_num_car['SUM(num)'];
-                          $num_money_car = $objr_num_car['SUM(money)'];
+                      $sql_salecar = "SELECT SUM(num),SUM(money) FROM sale_car_history 
+                                      WHERE id_product = $id_product AND (datetime between '$aday 00:00:00' and '$bday 23:59:59')";
+                      $objq_salecar = mysqli_query($conn,$sql_salecar);
+                      $objr_salecar = mysqli_fetch_array($objq_salecar);
+                      $num_salecar = $objr_salecar['SUM(num)'];
+                      $money_salecar = $objr_salecar['SUM(money)'];
 
-                          $total_num = $num + $num_car;
-                          $total_money = $num_money + $num_money_car;
+                      $sql_salestore = "SELECT SUM(num),SUM(money) FROM price_history 
+                                        WHERE id_product = $id_product AND (datetime between '$aday 00:00:00' and '$bday 23:59:59')";
+                      $objq_salestore = mysqli_query($conn,$sql_salestore);
+                      $objr_salestore = mysqli_fetch_array($objq_salestore);
+                      $num_salestore = $objr_salestore['SUM(num)'];
+                      $money_salestore = $objr_salestore['SUM(money)'];
 
-                          if($total_num==0) {
-
-                    }else{
-              ?>
-                    <tr>
-                      <td>
-                        <?php echo $value['name_product'].'_'.$value['unit']; ?>
-                      </td>
-                      <td class="text-center">
-                        <?php echo $total_num;?>
-                      </td>
-                      <td class="text-center">
-                        <?php echo $total_money; ?>
-                      </td>
-                    </tr>
-                    <?php
-                  $total_all_money = $total_all_money + $total_money;
-                    }
+                      $total_num = $num_salecar + $num_salestore;
+                      $total_salemoney = $money_salecar + $money_salestore;
+                      $price_product = $total_num * $price_num;
+                      $profit_sale = $total_salemoney - $price_product;
+                  ?>
+                  <tr>
+                    <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit'];?></td>
+                    <td class="text-center"><?php echo $total_num; ?></td>
+                    <td class="text-center"><?php echo $price_num; ?></td>
+                    <td class="text-center"><?php echo round($price_product); ?></td>
+                    <td class="text-center"><?php echo round($total_salemoney); ?></td>
+                    <td class="text-center"><?php echo round($profit_sale); ?></td>
+                  </tr>
+                  <?php 
+                    $a = $a + $total_salemoney;
+                    $b = $b + $price_product;
+                    $total_money = $total_money + $profit_sale; 
                   }
                   ?>
-                    <tr>
-                      <th bgcolor="#EAF4FF"></th>
-                      <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
-                      <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_all_money; ?></th>
-                    </tr>
-                  </tbody>
-                </table>
+                  <tr>
+                    <th bgcolor="#EAF4FF"></th>
+                    <th bgcolor="#EAF4FF"></th>
+                    <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
+                    <th bgcolor="#EAF4FF" class="text-center"><?php echo round($b); ?></th>
+                    <th bgcolor="#EAF4FF" class="text-center"><?php echo round($a); ?></th>
+                    <th bgcolor="#EAF4FF" class="text-center"><?php echo round($total_money); ?></th>
+                  </tr>
+                </tbody>
+              </table>
+             
               </div>
-            </div>
+         </div>
         </div>
-    </div>
-    </section>
+       </div>
+     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

@@ -8,6 +8,8 @@
                   INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
                   INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
                   INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
+                  INNER JOIN store_category ON store.id_category = store_category.id
+                  INNER JOIN store_product_category ON store.id_product_category = store_product_category.id
                   WHERE store.district_code = $district_code AND store.status = 'N'";
     $objq_store = mysqli_query($mysqli,$sql_store);
     
@@ -123,11 +125,11 @@ folder instead of downloading all of them to reduce the load. -->
                         <table class="table table-striped">
                             <thead>
                               <tr>
-                                <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="20%">ชื่อร้านค้า</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="40%">ที่อยู่</th>
+                               <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="40%">ข้อมูลร้านค้า</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="15%">เบอร์โทร</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="15%">ประเภท</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="15%">ร้าน</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="15%">ขาย</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="5%">แก้ไข</th>
                               </tr>
                             </thead>
@@ -152,10 +154,10 @@ folder instead of downloading all of them to reduce the load. -->
                                   ?>
 
                                 </td>
-                                <td class="text-center"><?php echo $value['name_store'];?></td>
-                                <td><?php echo $value['address'].'  ต.'.$value['district_name'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
+                                <td><?php echo $value['name_store'].'  '.$value['address'].'  '.' ต.'.$value['district_name'].'  '.'อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
                                 <td class="text-center"><?php echo $value['tel'];?></td>
-                                <td class="text-center"><?php echo $value['category'];?></td>
+                                <td class="text-center"><?php echo $value['name_category'];?></td>
+                                <td class="text-center"><?php echo $value['name_product_category'];?></td>
                                 <td class="text-center"><a href="visit_edit.php?id_store=<?php echo $value['id_store']; ?>" ><i class="fa fa-cog"></i></a></td>
                               </tr>
                               <?php }?>

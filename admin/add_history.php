@@ -4,6 +4,19 @@ require "../config_database/config.php";
 require "../session.php";
 require "menu/date.php";
 
+function Datetime($strDate)
+  {
+    $strYear = date("Y",strtotime($strDate))+543;
+    $strMonth= date("n",strtotime($strDate));
+    $strDay= date("j",strtotime($strDate));
+    $strHour= date("H",strtotime($strDate));
+    $strMinute= date("i",strtotime($strDate));
+    $strSeconds= date("s",strtotime($strDate));
+    $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+    $strMonthThai=$strMonthCut[$strMonth];
+    return "$strHour.$strMinute";
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +56,12 @@ require "menu/date.php";
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -64,10 +83,10 @@ require "menu/date.php";
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li><a href="#timeline" data-toggle="tab">ยอดรับเข้าวันนี้</a></li>
+                <li class="active"><a href="#timeline" data-toggle="tab">ยอดรับเข้าวันนี้</a></li>
                 <li><a href="#checkday" data-toggle="tab">ยอดรับเข้าย้อนหลัง</a></li>
                 <div align="right">
-                  <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+                  <a href="admin.php" class="btn button2"><< เมนูหลัก </a>
                 </div>
               </ul>
               <div class="tab-content">
@@ -89,7 +108,7 @@ require "menu/date.php";
                             <div class="box-header with-border">
                               <p align="center">
                                 <font size="5">
-                                  <B>รับเข้าสินค้า 
+                                  <B>ประวัติ ( รับเข้าสินค้า ) 
                                     <font color="red">
                                   <?php 
                                         $strDate = date('d-m-Y');
@@ -103,12 +122,13 @@ require "menu/date.php";
                             <table class="table table-striped ">
                             <tbody>
                               <tr class="info" >
-                                  <th class="text-center" width="5%">ลำดับ</th>
-                                  <th class="text-center" width="30%">สินค้า_หน่วย</th>
+                                  <th class="text-center" width="5%">ที่</th>
+                                  <th class="text-center" width="25%">สินค้า_หน่วย</th>
                                   <th class="text-center" width="10%">จำนวน</th>
                                   <th class="text-center" width="13%">ผู้ส่ง</th>
                                   <th class="text-center" width="13%">รับเข้า</th>
-                                  <th class="text-center" width="30%">หมายเหตุ</th>
+                                  <th class="text-center" width="25%">หมายเหตุ</th>
+                                  <th class="text-center" width="10%">เวลา</th>
                                 </tr>
                                 <?php #endregion
                                 $i = 1;
@@ -124,7 +144,7 @@ require "menu/date.php";
                                     <td class="text-center">
                                       <?php echo $i; ?>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                       <?php echo $value['name_product'] . '_' . $value['unit']; ?>
                                     </td>
                                     <td class="text-center">
@@ -139,6 +159,9 @@ require "menu/date.php";
                                     <td class="text-center">
                                       <?php echo $value['note']; ?>
                                     </td>
+                                    <td class="text-center">
+                                      <?php echo Datetime($value['datetime']); ?>
+                                    </td>
                                   </tr>
                                   <?php
                                   $i++;
@@ -150,14 +173,14 @@ require "menu/date.php";
 
 
                             <!-- ------------------------------ยอดขายรวม---------------------------- -->
-                            <div class="box-header with-border">
-                              <font size="4"><B>ยอดรับเข้าสินค้า</B></font> 
+                            <div class="box-header with-border text-center">
+                              <font size="5"><B>ยอดรับเข้าสินค้า</B></font> 
                             </div>
                             <table class="table table-striped ">
                               <tbody>
                                 <tr class="info" >
-                                  <th class="text-center" width="40%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="20%">จำนวน</th>
+                                  <th class="text-center" width="50%">สินค้า_หน่วย</th>
+                                  <th class="text-center" width="50%">จำนวน</th>
                                 </tr>
                                 <?php #endregion
                                 $sql_history = "SELECT * FROM product";
@@ -173,7 +196,7 @@ require "menu/date.php";
                                   if (isset($num_product)) {
                                     ?>
                                     <tr>
-                                      <td>
+                                      <td class="text-center">
                                         <?php echo $history['name_product'] . '_' . $history['unit']; ?>
                                       </td>
                                       <td class="text-center">
@@ -210,19 +233,26 @@ require "menu/date.php";
                       <div class="row">
                         <div class="container">
                           <form action="checkday_add_history.php" method="post">
-                            <div class="col-md-5">
-                              <div class="box-body">
-                                <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
-                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบข้อมูลรับเข้าสินค้าย้อนหลัง</p>
-                              </div>
-                            </div>
-                            <div class="col-md-5">
-                              <div class="form-group">
-                                <label>วันที่ : </label>
-                                <input type="date" name="day">
-                              </div>
-                              <div class="box-footer">
-                                <button type="submit" class="btn btn-success pull-left"><i class="fa fa-check-square-o"></i> ตกลง</button>
+                            <div class="row">
+                              <div class="container">
+                                <div class="col-md-12">
+                                  <div class="box-body">
+                                    <div class="form-group">
+                                      <label class="col-sm-4 control-label text-right"> <font size="5"> ดูข้อมูลรับสินค้าเข้า วันที :</font></label>
+                                      <div class="col-sm-4">
+                                        <input class="form-control" type="date" name="day">
+                                      </div>
+                                      <div class="col-sm-4"></div>
+                                    </div>
+                                  </div>
+
+                                  <div class="box-footer text-center">
+                                    <div align="center" >
+                                      <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> ดูข้อมูลยอดขาย </button>
+                                    </div>
+                                  </div>
+
+                                </div>
                               </div>
                             </div>
                           </form>

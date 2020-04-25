@@ -6,6 +6,8 @@
                   INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
                   INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
                   INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
+                  INNER JOIN store_category ON store.id_category = store_category.id
+                  INNER JOIN store_product_category ON store.id_product_category = store_product_category.id
                   WHERE store.district_code = $district_code";
     $objq_store = mysqli_query($conn,$sql_store);
     $objq_store2 = mysqli_query($conn,$sql_store);
@@ -32,7 +34,7 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
-folder instead of downloading all of them to reduce the load. -->
+
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="../bower_components/morris.js/morris.css">
@@ -89,9 +91,9 @@ folder instead of downloading all of them to reduce the load. -->
                 <a type="button" href="algorithm/store_edit_amphur.php?district_code=<?php echo $district_code; ?>" class="btn btn-success " OnClick="return confirm('ต้องการเปลี่ยนสถานะเป็นส่งแล้วทั้งหมด หรือไม่')">เปลี่ยนสถานะ</a>
                 <div class="text-center">
                   <font size="5">
-                    <B align="center">ตำบล
+                    <B align="center">
                       <?php 
-                        echo $objr_store['district_name'];
+                        echo 'ต.'.$objr_store['district_name'].' อ.'.$objr_store['amphur_name'].' จ.'.$objr_store['province_name'];
                       ?>
                       </B>
                   </font>
@@ -108,11 +110,10 @@ folder instead of downloading all of them to reduce the load. -->
                           <table  class="table table-striped">
                             <thead>
                               <tr>
-                                <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="20%">ชื่อร้านค้า</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="35%">ที่อยู่</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="15%">เบอร์โทร</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="15%">ประเภท</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="10%">เยี่ยม</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="65%">ข้อมูลร้านค้า</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="10%">ร้าน</th>
+                                <th bgcolor="#99CCFF" class="text-center" width="10%">ขาย</th>
                                 <th bgcolor="#99CCFF" class="text-center" width="5%">แก้ไข</th>
                               </tr>
                             </thead>
@@ -125,21 +126,21 @@ folder instead of downloading all of them to reduce the load. -->
                                   <?php 
                                     if($value['status'] == "N"){
                                   ?>
-                                    <a href="algorithm/update_ststore.php?id_store=<?php echo $value['id_store']; ?>&&status=N&&district_code=<?php echo $district_code; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังเยี่ยมแล้วหรือไม่ ?')";>ไม่เยี่ยม</a>
+                                    <a href="algorithm/update_ststore.php?id_store=<?php echo $value['id_store']; ?>&&status=N&&district_code=<?php echo $district_code; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังเยี่ยมแล้วหรือไม่ ?')";><i class="fa fa-close"></i></a>
                                   <?php 
                                     }else {
                                   ?>
-                                     <a href="algorithm/update_ststore.php?id_store=<?php echo $value['id_store']; ?>&&status=Y&&district_code=<?php echo $district_code; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นไม่ได้เยี่ยมหรือไม่ ?')";>เยี่ยมแล้ว</a>
+                                     <a href="algorithm/update_ststore.php?id_store=<?php echo $value['id_store']; ?>&&status=Y&&district_code=<?php echo $district_code; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นไม่ได้เยี่ยมหรือไม่ ?')";><i class="fa fa-check"></i></a>
                                   <?php 
                                    
                                     }
                                   ?>
 
                                 </td>
-                                <td class="text-center"><?php echo $value['name_store'];?></td>
-                                <td><?php echo $value['address'].'  '.' ต.'.$value['district_name'].'  '.'อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
-                                <td class="text-center"><?php echo $value['tel'];?></td>
-                                <td class="text-center"><?php echo $value['category'];?></td>
+                                <td><?php echo $value['name_store'].'  '.$value['address'].'  '.' ต.'.$value['district_name'].'  '.'อ.'.$value['amphur_name'].' จ.'.$value['province_name'].' '.$value['tel'];?></td>
+                                
+                                <td class="text-center"><?php echo $value['name_category'];?></td>
+                                <td class="text-center"><?php echo $value['name_product_category'];?></td>
                                 <td class="text-center"><a href="store_edit.php?id_store=<?php echo $value['id_store']; ?>" ><i class="fa fa-cog"></i></a></td>
                               </tr>
                               <?php }?>

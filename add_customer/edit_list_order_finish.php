@@ -16,9 +16,11 @@ $id_product2 = $_POST['id_product2'][0];
   //update listorder
   for ($i=0; $i < count($_POST['id_listorder']); $i++) { 
       $id_listorder = $_POST['id_listorder'][$i];
+      $price = $_POST['price'][$i];
       $num = $_POST['num'][$i];
+      $money = $_POST['money'][$i];
 
-      $sql_Ulistorder = "UPDATE listorder SET num = $num WHERE id_listorder = $id_listorder";
+      $sql_Ulistorder = "UPDATE listorder SET num = $num, price = $price, money = $money WHERE id_listorder = $id_listorder";
       mysqli_query($conn,$sql_Ulistorder);
   }
   //-update listorder
@@ -28,10 +30,11 @@ $id_product2 = $_POST['id_product2'][0];
   }else {
     for ($i=0; $i < count($_POST['id_product2']); $i++) { 
       $id_product2 = $_POST['id_product2'][$i];
+      $price2 = $_POST['price2'][$i];
       $num2 = $_POST['num2'][$i];
-
-      $sql_Ilistorder = "INSERT INTO listorder (id_product, num, id_addorder)
-                         VALUES ($id_product2, $num2, $id_addorder);";
+      $money2 = $_POST['money2'][$i];
+      $sql_Ilistorder = "INSERT INTO listorder (id_product, num, price, money, id_addorder)
+                         VALUES ($id_product2, $num2, $price2, $money2, $id_addorder);";
       mysqli_query($conn,$sql_Ilistorder);
     }
   }
