@@ -109,7 +109,7 @@
                                 <td class="text-center">
                                   <input type="checkbox" name="id_product[]" value="<?php echo $product['id_product']; ?>">
                                 </td>
-                                <td><?php echo $product['full_name']; ?></td>
+                                <td class="text-center"><?php echo $product['full_name']; ?></td>
                                 <td class="text-center"><?php echo $product['unit']; ?></td>
                               <?php } ?>
                             </tr>
@@ -201,14 +201,13 @@
                                 $sql_outside = "SELECT * FROM outside_buy_htr 
                                                 INNER JOIN product ON outside_buy_htr.id_product = product.id_product
                                                 INNER JOIN outside ON outside_buy_htr.id_outside = outside.id_outside
-                                                INNER JOIN zone ON outside_buy_htr.id_zone = zone.id_zone
-                                                ORDER BY outside_buy_htr.id_outside_buy DESC";
+                                                INNER JOIN zone ON outside_buy_htr.id_zone = zone.id_zone" ;
                                 $objq_outside = mysqli_query($conn,$sql_outside);
                                 while($value1 = $objq_outside->fetch_assoc()){
                               ?>
                                 <tr>
                                   <td class="text-center"><?php echo $value1['id_outside_buy'];?></td>
-                                  <td class="text-center"><?php echo Datethai($value1['date_buy']);?></td>
+                                  <td class="text-center"><?php echo DateThai3($value1['date_buy']);?></td>
                                   <td class="text-center"><?php echo $value1['nick_name'];?></td>
                                   <td class="text-center"><?php echo $value1['name_zone'];?></td>
                                   <td class="text-center"><?php echo $value1['name_product'].'_'.$value1['unit'];?></td>
@@ -234,23 +233,18 @@
 
                 <!-- tab-pane -->
                 <div class="tab-pane" id="checkday">
-                  <div class="box box-default">
-                    <div class="box-header with-border">
-
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="container">
-                          <form action="outside_list.php" method="get">
-                            <div class="col-md-5">
-                              <div class="box-body">
-                                <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
-                                <p> -กรุณาเลือกเขตการขาย เพื่อตรวจสอบข้อมูลการสั่งของและชำระเงิน</p>
-                              </div>
-                            </div>
-                            <div class="col-md-5">
-                              <div class="form-group">
+                  <form action="outside_list.php" method="get">
+                    <div class="box box-default">
+                      <div class="box-header with-border text-center">
+                        <B><font size="5">ข้อมูลการชำระเงิน</font></B>
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                        <div class="row">
+                          <div class="col-md-3 text-right"><B><font size="4">เขตการขาย :</font></B> </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              
                                 <select name="id_outside" class="form-control text-center select2" style="width: 100%;">
                                   <option value="">------กรุณาเลือกเขตการขาย------</option>
                                   <?php #endregion
@@ -262,40 +256,39 @@
                                       }
                                   ?>
                                 </select>
-                              </div>
-                              <div class="box-footer">
-                                <button type="submit" class="btn btn-success pull-left"><i class="fa fa-check-square-o"></i> ตกลง</button>
-                              </div>
+                              
                             </div>
-                          </form>
+                          </div>
+                          <div class="col-md-3"></div>
                         </div>
                       </div>
+                      <div class="box-footer text-center">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> ตกลง</button>
+                      </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
                 <!-- /.tab-pane -->
 
                  <!-- tab-pane -->
                  <div class="tab-pane" id="checkoutside">
-                  <div class="box box-default">
-                    <div class="box-header with-border">
-
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="container">
-                          <form action="outside_list2.php" method="post">
-                            <div class="col-md-4">
-                              <div class="box-body">
-                                <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
-                                <p> -กรุณาเลือกเดือน และ พ.ศ. เพื่อตรวจข้อมูลการสั่งสินค้านอกเขตแต่ล่ะเดือน </p>
-                              </div>
+                  <form action="outside_list2.php" method="post">
+                    <div class="box box-default">
+                      <div class="box-header with-border text-center">
+                        <B><font size="5">ยอดสั่งรายเดือน</font></B>
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                        <div class="row">
+                          <div class="col-md-2"></div>
+                          <div class="col-md-8">
+                            <div class="col-md-2 text-right">
+                              <B><font size="4">เดือน :</font></B>
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
                                 <select name="month" class="form-control text-center select2" style="width: 100%;">
-                                  <option value="">------กรุณาเลือกเดือน------</option>
+                                  <option value=""> กรุณาเลือกเดือน</option>
                                   <option value="01">มกราคม</option>
                                   <option value="02">กุมภาพันธ์</option>
                                   <option value="03">มีนาคม</option>
@@ -311,10 +304,13 @@
                                 </select>
                               </div>
                             </div>
+                            <div class="col-md-2 text-right">
+                              <B><font size="4">พ.ศ. :</font></B>
+                            </div>
                             <div class="col-md-4">
                               <div class="form-group">
                                 <select name="year" class="form-control text-center select2" style="width: 100%;">
-                                  <option value="">------กรุณาเลือก พ.ศ.------</option>
+                                  <option value="">กรุณาเลือก พ.ศ.</option>
                                   <option value="2019">2562</option>
                                   <option value="2020">2563</option>
                                   <option value="2021">2564</option>
@@ -323,14 +319,16 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-success pull-left"><i class="fa fa-check-square-o"></i> ตกลง</button>
-                            </div>
-                          </form>
+                          </div>
+                          <div class="col-md-2"></div>
                         </div>
                       </div>
+
+                      <div class="box-footer text-center">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> ตกลง</button>
+                      </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
                 <!-- /.tab-pane -->
 
@@ -377,8 +375,8 @@
                                  $total_balance = $total_balance + $balance;
                                 }
                                ?> 
-                               <tr  class="info">
-                               <th class="text-right">เงินรวม</th>
+                               <tr class="info">
+                               <th class="text-center">เงินรวม</th>
                                <th class="text-center"><?php echo $total_balance; ?></th>
                                </tr>
                               </tbody>

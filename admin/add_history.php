@@ -119,16 +119,16 @@ function Datetime($strDate)
                                 </font>
                               </p>
                             </div>
-                            <table class="table table-striped ">
+                            <table class="table">
                             <tbody>
-                              <tr class="info" >
-                                  <th class="text-center" width="5%">ที่</th>
-                                  <th class="text-center" width="25%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="10%">จำนวน</th>
-                                  <th class="text-center" width="13%">ผู้ส่ง</th>
-                                  <th class="text-center" width="13%">รับเข้า</th>
-                                  <th class="text-center" width="25%">หมายเหตุ</th>
-                                  <th class="text-center" width="10%">เวลา</th>
+                              <tr>
+                                  <th class="text-center" width="5%"><font color="red">ที่</font></th>
+                                  <th class="text-center" width="25%"><font color="red">สินค้า_หน่วย</font></th>
+                                  <th class="text-center" width="10%"><font color="red">จำนวน</font></th>
+                                  <th class="text-center" width="13%"><font color="red">ผู้ส่ง</font></th>
+                                  <th class="text-center" width="13%"><font color="red">รับเข้า</font></th>
+                                  <th class="text-center" width="25%"><font color="red">หมายเหตุ</font></th>
+                                  <th class="text-center" width="10%"><font color="red">เวลา</font></th>
                                 </tr>
                                 <?php #endregion
                                 $i = 1;
@@ -176,11 +176,11 @@ function Datetime($strDate)
                             <div class="box-header with-border text-center">
                               <font size="5"><B>ยอดรับเข้าสินค้า</B></font> 
                             </div>
-                            <table class="table table-striped ">
+                            <table class="table">
                               <tbody>
-                                <tr class="info" >
-                                  <th class="text-center" width="50%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="50%">จำนวน</th>
+                                <tr>
+                                  <th class="text-right" width="50%"> <font color="red">สินค้า_หน่วย</font></th>
+                                  <th class="text-left" width="50%"><font color="red">จำนวน</font></th>
                                 </tr>
                                 <?php #endregion
                                 $sql_history = "SELECT * FROM product";
@@ -196,10 +196,10 @@ function Datetime($strDate)
                                   if (isset($num_product)) {
                                     ?>
                                     <tr>
-                                      <td class="text-center">
+                                      <td class="text-right">
                                         <?php echo $history['name_product'] . '_' . $history['unit']; ?>
                                       </td>
-                                      <td class="text-center">
+                                      <td class="text-left">
                                         <?php echo $num_product; ?>
                                       </td>
                                     </tr>
@@ -238,11 +238,10 @@ function Datetime($strDate)
                                 <div class="col-md-12">
                                   <div class="box-body">
                                     <div class="form-group">
-                                      <label class="col-sm-4 control-label text-right"> <font size="5"> ดูข้อมูลรับสินค้าเข้า วันที :</font></label>
-                                      <div class="col-sm-4">
+                                      <label class="col-sm-6 control-label text-right"> <font size="5"> ดูข้อมูลรับสินค้าเข้า วันที :</font></label>
+                                      <div class="col-sm-6">
                                         <input class="form-control" type="date" name="day">
                                       </div>
-                                      <div class="col-sm-4"></div>
                                     </div>
                                   </div>
 

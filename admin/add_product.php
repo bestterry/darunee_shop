@@ -169,7 +169,7 @@
 
                 <div class="box-footer">
                   <a type="block" href="admin.php" class="btn button2 pull-left"><< เมนูหลัก</a> 
-                  <button type="submit" class="btn button2 pull-right">ต่อไป >> </button>
+                  <button type="submit" class="btn button2 pull-right">ถัดไป >> </button>
                 </div>
               </form>
               <!-- /.box-footer -->

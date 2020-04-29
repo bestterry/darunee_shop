@@ -51,6 +51,14 @@ folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
+
+  <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
+
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -108,12 +116,13 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">ชื่อ :</th>
-                            <th width="85%"><?php echo $name_customer; ?></th>
+                            <th width="100%"><?php echo $name_customer; ?></th>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">ที่อยู่ :</th>
-                            <th width="85%">
+                            <th width="100%"><?php echo $village; ?></th>
+                          </tr>
+                          <tr>
+                            <th width="100%">
                               <?php 
                                 $sql_district = "SELECT * FROM tbl_districts WHERE district_code = $id_district";
                                 $objq_district = mysqli_query($mysqli,$sql_district);
@@ -127,17 +136,15 @@ folder instead of downloading all of them to reduce the load. -->
                                 $objq_province = mysqli_query($mysqli,$sql_province);
                                 $objr_province = mysqli_fetch_array($objq_province);
 
-                                echo "$village".' '.'ต.'.$objr_district['district_name'].' '.'อ.'.$objr_amphur['amphur_name'].' '.'จ.'.$objr_province['province_name'];
+                                echo 'ต.'.$objr_district['district_name'].' '.'อ.'.$objr_amphur['amphur_name'].' '.'จ.'.$objr_province['province_name'];
                               ?>
                             </th>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">เบอร์โทร :</th>
-                            <th width="85%"><?php echo $tel; ?></th>
+                            <th width="100%"><?php echo $tel; ?></th>
                           </tr>
                           <tr>
-                            <th bgcolor="#99CCFF" width="25%">หมายเหตุ :</th>
-                            <th width="85%"><?php echo $note; ?></th>
+                            <th width="100%"><?php echo $note; ?></th>
                           </tr>
                         </table>
                       </div>
@@ -148,10 +155,10 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="99CCFF" class="text-center" width="55%">สินค้า</th>
-                            <th bgcolor="99CCFF" class="text-center" width="15%">จำนวน</th>
-                            <th bgcolor="99CCFF" class="text-center" width="15%">บ/น</th>
-                            <th bgcolor="99CCFF" class="text-center" width="15%">เงิน</th>
+                            <th class="text-center" width="55%"><font color="red">สินค้า_หน่วย</font></th>
+                            <th class="text-center" width="15%"><font color="red">บ/น</font></th>
+                            <th class="text-center" width="15%"><font color="red">จำนวน</font></th>
+                            <th class="text-center" width="15%"><font color="red">เงิน</font></th>
                           </tr>
                           <?php 
                             $total_money = 0;
@@ -178,16 +185,16 @@ folder instead of downloading all of them to reduce the load. -->
                           ?>
                           <tr>
                             <td  class="text-center"><?php echo $objr_product['name_product'].'_'.$objr_product['unit']; ?></td>
-                            <td class="text-center"><?php echo $num; ?></td>
                             <td class="text-center"><?php echo $price; ?></td>
+                            <td class="text-center"><?php echo $num; ?></td>
                             <td class="text-center"><?php echo $money; ?></td>
                           </tr>
                           <?php
                                $total_money = $total_money + $money;
                             }
                           ?>
-                            <th bgcolor="#99CCFF" colspan="3" class="text-center" width="55%">รวมเงิน</th>
-                            <th  class="text-center" width="15%"> <?php echo  $total_money; ?> </th>
+                            <th colspan="3" class="text-center" width="55%"><font color="red">รวมเงิน</font></th>
+                            <th  class="text-center" width="15%"><font color="red"><?php echo  $total_money; ?></font> </th>
                         </table>
                       </div>
                     </div>
@@ -195,8 +202,13 @@ folder instead of downloading all of them to reduce the load. -->
                   </div>
               </div>
               <div class="box-footer">
-                <a type="button" href="order.php" class="btn btn-danger"> << กลับหน้าหลัก</a> 
-                <a type="button" href="add_order.php" class="btn btn-success">เพิ่มใบสั่งสินค้า</a> 
+                <div class="col-xs-5"> 
+                  <a type="button" href="order.php" class="btn btn-danger"> << กลับ</a> 
+                </div>
+                <div class="col-xs-6"> 
+                <a type="button" href="add_order.php" class="btn button2">เพิ่มใบสั่งสินค้า</a> 
+                </div>
+                
                 </div> 
               </div> 
             </form> 

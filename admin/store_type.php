@@ -1,14 +1,14 @@
 <?php 
     require "../config_database/config.php"; 
     require "../session.php"; 
-    $district_code = $_GET['district_name'];
+    $id_category = $_GET['id_category'];
     $sql_store = "SELECT * FROM store  
                   INNER JOIN tbl_districts ON store.district_code = tbl_districts.district_code
                   INNER JOIN tbl_amphures ON store.amphur_id = tbl_amphures.amphur_id
                   INNER JOIN tbl_provinces ON store.province_id = tbl_provinces.province_id
                   INNER JOIN store_category ON store.id_category = store_category.id
                   INNER JOIN store_product_category ON store.id_product_category = store_product_category.id
-                  WHERE store.district_code = $district_code";
+                  WHERE store.id_category = $id_category";
     $objq_store = mysqli_query($conn,$sql_store);
     $objq_store2 = mysqli_query($conn,$sql_store);
     $objr_store = mysqli_fetch_array($objq_store2);
@@ -93,12 +93,11 @@
             <div class="box box-primary">
               <div class="box-header with-border">
               <a type="button" href="store.php" class="btn button2"><< กลับ</a>
-                <a type="button" href="algorithm/store_edit_amphur.php?district_code=<?php echo $district_code; ?>" class="btn btn-success pull-right" OnClick="return confirm('ต้องการเปลี่ยนสถานะเป็นส่งแล้วทั้งหมด หรือไม่')">เปลี่ยนสถานะ</a>
                 <div class="text-center">
                   <font size="5">
                     <B align="center">
                       <?php 
-                        echo 'ต.'.$objr_store['district_name'].' อ.'.$objr_store['amphur_name'].' จ.'.$objr_store['province_name'];
+                        echo 'ร้าน'.$objr_store['name_category'];
                       ?>
                       </B>
                   </font>
@@ -112,7 +111,7 @@
                     <div class="modal-body col-md-12 table-responsive mailbox-messages">
                       <div class="table-responsive">
                         <div class="col-md-12">
-                          <table  class="table table-striped">
+                          <table id="example1" class="table table-striped">
                             <thead>
                               <tr>
                                 <th bgcolor="#99CCFF" class="text-center" width="10%">เยี่ยม</th>

@@ -11,8 +11,8 @@
     WHERE store.id_store = $id_store";
     $objq_store = mysqli_query($mysqli,$sql_store); 
     $objr_store = mysqli_fetch_array($objq_store);
-    $name_category = $objr_store['name_category'];
-    $name_product_category = $objr_store['name_product_category'];
+    $id_category = $objr_store['id_category'];
+    $id_product_category = $objr_store['id_product_category'];
     $status = $objr_store['status'];
 ?>
 <!DOCTYPE html>
@@ -47,24 +47,28 @@
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
-  <style>
-    #customers {
-      width: 100%;
-    }
+    <style>
+      #customers {
+        width: 100%;
+      }
 
-    #customers td, #customers th {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
+      #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
 
-    #customers tr:nth-child(even){background-color: #f2f2f2;}
-    #customers th {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      text-align: center;
-      background-color: #99CCFF;
-    }
-  </style>
+      #customers tr:nth-child(even){background-color: #f2f2f2;}
+      #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #99CCFF;
+      }
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
 
   <script language="javascript">
     //  function fncSum()
@@ -129,8 +133,8 @@
                      <div class="col-md-12">
                       <table class="table table-bordered" id="dynamic_field">
                         <tr>
-                          <th width="20%" class="text-right"><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
-                          <td width="30%" > 
+                          <th width="15%" class="text-right"><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
+                          <td width="35%" > 
                             <label for="inputEmail3" class="col-sm-4 control-label"><?php echo $objr_store['province_name']; ?></label>
                             <div class="col-sm-8">
                               <select name="province_name" data-where="2" class="form-control ajax_address select2" style="background-color: #e6f7ff;">
@@ -145,8 +149,8 @@
                           </td>
                         </tr>
                         <tr>
-                          <th width="20%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
-                          <td width="30%">
+                          <th width="15%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
+                          <td width="35%">
                             <label for="inputEmail3" class="col-sm-4 control-label"><?php echo $objr_store['amphur_name']; ?></label>
                             <div class="col-sm-8">
                               <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
@@ -159,8 +163,8 @@
                           </td>
                         </tr>
                         <tr>
-                          <th width="20%" class="text-right" ><font size="4">ตำบล &nbsp;&nbsp;:</font></th>
-                          <td width="30%">
+                          <th width="15%" class="text-right" ><font size="4">ตำบล &nbsp;&nbsp;:</font></th>
+                          <td width="35%">
                             <label for="inputEmail3" class="col-sm-4 control-label"><?php echo $objr_store['district_name'];?> </label>
                             <div class="col-sm-8">
                               <select name="district_name" data-where="4" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
@@ -173,42 +177,36 @@
                           </td>
                         </tr>
                         <tr>
-                          <th width="20%" class="text-right" ><font size="4">latitude &nbsp;&nbsp;:</font></th>
-                          <td width="30%">
+                          <th width="15%" class="text-right" ><font size="4">LAT &nbsp;&nbsp;:</font></th>
+                          <td width="35%">
                             <input type="text" name="latitude" class="form-control" value="<?php echo $objr_store['latitude'];?>">
                           </td>
                           <th width="25%" class="text-right"><font size="4" valign="middle">ประเภทร้าน &nbsp;&nbsp;:</font></th>
                           <td width="25%" > 
                             <select name="id_category"  class="form-control" style="width: 100%;">
-                              <option value="1"  <?php if($name_category == "ร้านค้าส่ง"){ echo "selected='selected'";} ?>>ร้านค้าส่ง</option>
-                              <option value="2"  <?php if($name_category == "ร้านค้าปลีก"){ echo "selected='selected'";} ?>>ร้านค้าปลีก</option>
-                              <option value="3"  <?php if($name_category == "รถส่งของ"){ echo "selected='selected'";} ?>>รถส่งของ</option>
+                              <option value="1"  <?php if($id_category == 1){ echo "selected='selected'";} ?>>ร้านค้าส่ง</option>
+                              <option value="2"  <?php if($id_category == 2){ echo "selected='selected'";} ?>>ร้านค้าปลีก</option>
+                              <option value="3"  <?php if($id_category == 3){ echo "selected='selected'";} ?>>รถส่งของ</option>
                             </select>
                           </td>
                         </tr>
                         <tr>
-                          <th width="20%" class="text-right" ><font size="4">longtitude &nbsp;&nbsp;:</font></th>
-                          <td width="30%">
+                          <th width="15%" class="text-right" ><font size="4">LONG &nbsp;&nbsp;:</font></th>
+                          <td width="35%">
                             <input type="text" name="longtitude" class="form-control" value="<?php echo $objr_store['longtitude'];?>">
                           </td>
-                          <th width="25%" class="text-right"><font size="4" valign="middle">ขาย &nbsp;&nbsp;:</font></th>
+                          <th width="25%" class="text-right"><font size="4" valign="middle">ประเภทสินค้า &nbsp;&nbsp;:</font></th>
                           <td width="25%" > 
                             <select name="id_product_category"  class="form-control" style="width: 100%;">
-                              <option value="1"  <?php if($name_product_category == "ปุ๋ย"){ echo "selected='selected'";} ?>>ปุ๋ย</option>
-                              <option value="2"  <?php if($name_product_category == "ของกิน"){ echo "selected='selected'";} ?>>ของกิน</option>
-                              <option value="3"  <?php if($name_product_category == "ทั้งสอง"){ echo "selected='selected'";} ?>>ทั้งสอง</option>
+                              <option value="1"  <?php if($id_product_category == 1){ echo "selected='selected'";} ?>>ปุ๋ย</option>
+                              <option value="2"  <?php if($id_product_category == 2){ echo "selected='selected'";} ?>>ของกิน</option>
+                              <option value="3"  <?php if($id_product_category == 3){ echo "selected='selected'";} ?>>ทั้งสอง</option>
                             </select>
                           </td>
                         </tr>
                         <tr>
-                          <th width="20%" class="text-right"><font size="4" valign="middle">ประเภทร้าน &nbsp;&nbsp;:</font></th>
-                          <td width="30%" > 
-                            <select name="id_category"  class="form-control" style="width: 100%;">
-                              <option value="1"  <?php if($name_category == "ร้านค้าส่ง"){ echo "selected='selected'";} ?>>ร้านค้าส่ง</option>
-                              <option value="2"  <?php if($name_category == "ร้านค้าปลีก"){ echo "selected='selected'";} ?>>ร้านค้าปลีก</option>
-                              <option value="3"  <?php if($name_category == "รถส่งของ"){ echo "selected='selected'";} ?>>รถส่งของ</option>
-                            </select>
-                          </td>
+                          <th width="15%" class="text-right"><font size="4" valign="middle"> </font></th>
+                          <td width="35%">  </td>
                           <th width="25%" class="text-right" ><font size="4">สถานะ &nbsp;&nbsp;:</font></th>
                           <td width="25%">
                             <select name="status"  class="form-control" style="width: 100%;">
@@ -223,9 +221,9 @@
               </div>
               <div align="center" class="box-footer">
                 <input type="hidden" name="id_store" class="form-control" value="<?php echo $objr_store['id_store']; ?>">
-                <a type="button" href="store_search.php?district_name=<?php echo $objr_store['district_code']; ?>" class="btn btn-danger pull-left" > << กลับ </a>
+                <a type="button" href="store_search.php?district_name=<?php echo $objr_store['district_code']; ?>" class="btn button2 pull-left" > << กลับ </a>
                 <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลหรือไม่ ?')";><i class="fa fa-save" ></i> บันทึกข้อมูล </button>
-                <a type="button" href="algorithm/delete_store.php?id_store=<?php echo $id_store; ?>&&district_name=<?php echo $objr_store['district_code']; ?>" class="btn btn-danger" onClick="return confirm('คุณต้องการที่จะลบข้อมูลร้านค้าหรือไม่ ?')";><i class="fa fa-minus-square"></i> ลบร้านค้า </a>
+                <a type="button" href="algorithm/delete_store.php?id_store=<?php echo $id_store; ?>&&district_name=<?php echo $objr_store['district_code']; ?>" class="btn btn-danger pull-right" onClick="return confirm('คุณต้องการที่จะลบข้อมูลร้านค้าหรือไม่ ?')";><i class="fa fa-minus-square"></i> ลบร้านค้า </a>
               </div>
             </div>
             </form>

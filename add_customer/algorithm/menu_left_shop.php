@@ -48,8 +48,8 @@
                                   </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="submit"  class="btn btn-success pull-right">ถัดไป >></button>
-                                  <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><< กลับ</button>
+                                  <button type="submit"  class="btn button2 pull-right">ถัดไป >></button>
+                                  <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< กลับ</button>
                                 </div>
                             </div>
                         </form>

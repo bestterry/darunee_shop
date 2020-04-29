@@ -74,14 +74,14 @@
                 <form action="outside_price2.php" method="post" autocomplete="off">
                 <table class="table table-bordered">
                     <tbody>
-                      <tr bgcolor="#99CCFF">
-                        <th class="text-center" width="5%">ลำดับ</th>
-                        <th class="text-center" width="45%">สินค้า</th>
-                        <th class="text-center" width="5%">หน่วย</th>
-                        <th class="text-center" width="12%">สต๊อก</th>
-                        <th class="text-center" width="9%">จำนวน</th>
-                        <th class="text-center" width="9%">บ/หน่วย</th>
-                        <th class="text-center" width="15%">เป็นเงิน(บ)</th>
+                      <tr>
+                        <th class="text-center" width="5%"><font color="red">ที่</font></th>
+                        <th class="text-center" width="45%"><font color="red">สินค้า</font></th>
+                        <th class="text-center" width="5%"><font color="red">หน่วย</font></th>
+                        <th class="text-center" width="12%"><font color="red">ของที่มี</font></th>
+                        <th class="text-center" width="9%"><font color="red">จำนวน</font></th>
+                        <th class="text-center" width="9%"><font color="red">บ/หน่วย</font></th>
+                        <th class="text-center" width="15%"><font color="red">เป็นเงิน</font></th>
                       </tr>
                       
                       <?php
@@ -100,7 +100,7 @@
                       ?>
                       <tr>
                         <td class="text-center"><?php echo $i+1; ?></td>
-                        <td>
+                        <td class="text-center">
                           <?php echo $objr_listproduct['full_name']; ?>
                           <input class="hidden" type="text" name="name_pd[]" value="<?php echo $objr_listproduct['full_name']; ?>">
                           <input class="hidden" type="text" name="unit[]" value="<?php echo $objr_listproduct['unit']; ?>">

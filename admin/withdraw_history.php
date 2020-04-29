@@ -98,16 +98,16 @@
                                  </font>
                               </p>
                             </div>
-                            <table class="table table-striped">
+                            <table class="table">
                               <tbody>
-                                <tr class="info">
-                                  <th class="text-center" width="5%">ที่</th>
-                                  <th class="text-center" width="25%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="8%">จำนวน</th>
-                                  <th class="text-center" width="10%">ผู้เบิก</th>
-                                  <th class="text-center" width="10%">เบิกจาก</th>
-                                  <th class="text-center" width="30%">หมายเหตุ</th>
-                                  <th class="text-center" width="6%">เวลา</th>
+                                <tr >
+                                  <th class="text-center" width="5%"> <font color="red">ที่</font> </th>
+                                  <th class="text-center" width="25%"><font color="red">สินค้า_หน่วย</font></th>
+                                  <th class="text-center" width="8%"><font color="red">จำนวน</font></th>
+                                  <th class="text-center" width="10%"><font color="red">ผู้เบิก</font></th>
+                                  <th class="text-center" width="10%"><font color="red">เบิกจาก</font></th>
+                                  <th class="text-center" width="30%"><font color="red">หมายเหตุ</font></th>
+                                  <th class="text-center" width="6%"><font color="red">เวลา</font></th>
                                 </tr>
                                 <?php #endregion
                                 $i = 1;
@@ -157,11 +157,11 @@
                                 <B>ยอดเบิกสินค้า</B>
                               </font>
                             </div>
-                            <table class="table table-striped">
+                            <table class="table">
                               <tbody>
-                                <tr class="info">
-                                  <th class="text-center" width="50%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="50%">จำนวน</th>
+                                <tr>
+                                  <th class="text-center" width="50%"><font color="red">สินค้า_หน่วย</font></th>
+                                  <th class="text-center" width="50%"><font color="red">จำนวน</font></th>
                                 </tr>
                                 <?php #endregion
                                 $sql_history = "SELECT * FROM product";

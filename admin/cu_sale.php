@@ -24,7 +24,7 @@
   <?php require('../font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ทีมงานคุณดารุณี</title>
+  <title>ทีมงานคุณดารุณี</title> b  
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -69,7 +69,7 @@
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <div align="right">
-                <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+                <a href="admin.php" class="btn btn-success"><< เมนูหลัก</a>
               </div>
               <font size="5">
                 <B> เงินขาย <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
@@ -80,16 +80,14 @@
                 <table class="table table-striped table-bordered">
                   <tbody>
                     <tr class="info" >
-                      <th class="text-center" width="14%">วันที่</th>
-                      <th class="text-center" width="14%">เงินขาย</th>
-                      <th class="text-center" width="14%">เงินขายสะสม</th>
-                      <th class="text-center" width="14%">เงินขายเฉลี่ย</th>
-                      <th class="text-center" width="14%">กำไร</th>
-                      <th class="text-center" width="14%">กำไรรวม</th>
-                      <th class="text-center" width="14%">กำไรเฉลี่ย</th>
+                      <th class="text-center" width="25%">วันที่</th>
+                      <th class="text-center" width="25%">เงินขาย</th>
+                      <th class="text-center" width="25%">เงินขายสะสม</th>
+                      <th class="text-center" width="25%">เงินขายเฉลี่ย</th>
                     </tr>
                     <?php
                         $total_money = 0;
+                        $total_profit2 = 0;
                         $i = 1;
                        
                         $sql_day_car = "SELECT SUM(money) as sum_money,DAY(datetime),MONTH(datetime),YEAR(datetime) FROM sale_car_history 
@@ -111,34 +109,12 @@
                           $all_money = $money_car + $money_store;
                           $total_money = $total_money + $all_money;
 
-                          //profit
-                          $profit = 0;
-                          $total_profit = 0;
-                          $sql_product = "SELECT id_product,price_num FROM product";
-                          $objq_product = mysqli_query($conn,$sql_product);
-                          while($value_pd = $objq_product->fetch_assoc()){
-                            $id_product = $value_pd['id_product'];
-                            $price_num = $value_pd['price_num'];
-                            $sql_salecar = "SELECT num,price FROM sale_car_history WHERE id_product = '$id_product' AND DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' ";
-                            $objq_carsale = mysqli_query($conn,$sql_salecar);
-                            while($value_carsale = $objq_carsale->fetch_assoc()){
-                              $price = $value_carsale['price'];
-                              $num = $value_carsale['num'];
-                              $profit = ($num * $price) - ($num * $price_num);
-                            }
-                            $total_profit = $total_profit + $profit;
-                          }
-
                     ?>
                     <tr>
                     <td class="text-center"><?php echo DateThai($date); ?></td>
                       <td class="text-center"><?php echo $all_money;?></td>
                       <td class="text-center"><?php echo $total_money;?></td>
                       <td class="text-center"><?php echo round($total_money/$i);?></td>
-                      <td class="text-center"><?php echo  $total_profit;?></td>
-                      <td class="text-center"><?php ?></td>
-                      <td class="text-center"><?php ?></td>
-                    </tr>
                       <?php $i++;}?>
                   </tbody>
                 </table>

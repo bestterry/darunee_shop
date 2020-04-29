@@ -5,6 +5,9 @@
   $objq_province = mysqli_query($mysqli,$sql_province);
   $objq_province2 = mysqli_query($mysqli,$sql_province);
 
+   $sql_sc = "SELECT * FROM store_category";
+   $objq_sc = mysqli_query($mysqli,$sql_sc);
+
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +83,12 @@
           document.add_store.submit();
         }
     </script>
+    <style>
+          .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -100,11 +109,12 @@
            <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#search" data-toggle="tab">ค้นหาระเบียนร้าน</a></li>
+                <li><a href="#search_type" data-toggle="tab">ค้นหาประเภทร้าน</a></li>
                 <li><a href="#addstore" data-toggle="tab">เพิ่มร้าน</a></li>
                 <li><a href="#check" data-toggle="tab">จำนวนร้าน</a></li>
                 <li><a href="#setting_amphur" data-toggle="tab">ตั้งค่าสถานะ</a></li>
                 <div align="right">
-                  <a href="admin.php" class="btn btn-success"><< เมนูหลัก</a>
+                  <a href="admin.php" class="btn button2"><< เมนูหลัก</a>
                 </div> 
               </ul> 
               <div class="tab-content">
@@ -165,9 +175,58 @@
                 </div>
                 <!-- ------------------------------//ค้นหารายอำเภอ---------------------------- -->
 
+                <!-- ------------------------------ค้นหาประเภทร้าน---------------------------- -->
+                <div class="tab-pane" id="search_type">
+                  <div class="box box-default">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="container">
+                          <form action="store_type.php" class="form-horizontal" method="get">
+                            <div class="col-md-12">
+
+                              <div class="form-group">
+                                <label class="col-sm-4 control-label">ประเภทร้าน :</label>
+                                <div class="col-sm-4">
+                                  <select name="id_category" class="form-control">
+                                    <option value="">-- เลือกประเภทร้าน --</option>
+                                    <?php
+                                      while($value_sc = $objq_sc ->fetch_assoc()){
+                                    ?>
+                                    <option value="<?php echo $value_sc['id'];?>"><?php echo $value_sc['name_category'];?></option>
+                                    <?php    
+                                      }
+                                    ?>
+                                  </select>
+                                  <div class="col-sm-4"></div>
+                                </div>
+                              </div>
+                              <div class="box-footer">
+                                <div align="center" >
+                                  <button type="submit" class="btn btn-success"><i class="fa fa-search"> ค้นหา </i></button>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ------------------------------//ค้นหาประเภทร้าน---------------------------- -->
+
                 <!-- ------------------------------เพิ่มร้าน---------------------------- -->
                 <div class="tab-pane" id="addstore">
                   <div class="box box-default">
+                    <div class="box-header with-border">
+                      <div class="text-center">
+                        <font size="5">
+                          <B align="center">
+                            เพิ่มร้านค้า
+                          </B>
+                        </font>
+                      </div>
+                    </div>
                     <div class="box-body">
                       <form action="algorithm/add_store.php" class="form-horizontal" method="post" autocomplete="off" name="add_store" onSubmit="JavaScript:return addStore();">
                         <div class="row">
@@ -175,26 +234,62 @@
                             <div class="col-md-12">
                               
                               <table class="table table-bordered" id="dynamic_field">
-
                                 <tr>
+                                  <th width="25%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
+                                  <td width="25%" class="text-left">
+                                    <select name="province_name" data-where="2" class="form-control ajax_address select2" style="background-color: #e6f7ff;">
+                                      <option value="">-- เลือกจังหวัด --</option>
+                                    </select>
                                   <th width="25%" class="text-right"><font size="4" valign="middle">ชื่อร้านค้า &nbsp;&nbsp;:</font></th>
                                   <td width="25%" > 
                                     <input type="text" name="name_store" class="form-control" value="">
+                                  </td>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th width="25%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
+                                  <td width="25%">
+                                    <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
+                                      <option value="">-- เลือกอำเภอ --</option>
+                                    </select>
+                                  </td>
+                                  <th width="25%" class="text-right" ><font size="4">ที่อยู่ &nbsp;&nbsp;:</font></th>
+                                  <td width="25%" class="text-left"><input type="text" name="address" class="form-control" value=""></td>
+                                </tr>
+
+                                <tr>
+                                  <th width="25%" class="text-right" ><font size="4">ตำบล &nbsp;&nbsp;:</font></th>
+                                  <td width="25%">
+                                    <select name="district_name" data-where="4" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
+                                      <option value="">-- เลือกตำบล --</option>
+                                    </select>
+                                  </td>
+                                  <th width="25%" class="text-right" ><font size="4">เบอร์โทร &nbsp;&nbsp;:</font></th>
+                                  <td width="25%"><input type="text" name="tel" class="form-control" value=""></td>
+                                </tr>
+
+                                <tr>
+                                  <th width="25%" class="text-right" ><font size="4">LAT &nbsp;&nbsp;:</font></th>
+                                  <td width="25%">
+                                    <input type="text" name="latitude" class="form-control" value="0">
                                   </td>
                                   <th width="25%" class="text-right"><font size="4" valign="middle">ประเภทร้าน &nbsp;&nbsp;:</font></th>
                                   <td width="25%" > 
                                     <select name="id_category" class="form-control" style="width: 100%;">
                                       <option value="">------กรุณาเลือก------</option>
-                                      <option value="1">ร้านค้าส่ง</option>
-                                      <option value="2">ร้านค้าปลีก</option>
-                                      <option value="3">รถขนส่ง</option>
+                                      <option value="1">ส่ง</option>
+                                      <option value="2">ปลีก</option>
+                                      <option value="3">รถเร่</option>
                                     </select>
                                   </td>
                                 </tr>
 
                                 <tr>
-                                  <th width="25%" class="text-right" ><font size="4">เบอร์โทร &nbsp;&nbsp;:</font></th>
-                                  <td width="25%"><input type="text" name="tel" class="form-control" value=""></td>
+                                  <th width="25%" class="text-right" ><font size="4">LONG &nbsp;&nbsp;:</font></th>
+                                  <td width="25%">
+                                    <input type="text" name="longtitude" class="form-control" value="0">
+                                  </td>
                                   <th width="25%" class="text-right"><font size="4" valign="middle">ประเภทสินค้า &nbsp;&nbsp;:</font></th>
                                   <td width="25%" > 
                                     <select name="id_product_category" class="form-control" style="width: 100%;">
@@ -207,8 +302,8 @@
                                 </tr>
 
                                 <tr>
-                                  <th width="25%" class="text-right" ><font size="4">ที่อยู่ &nbsp;&nbsp;:</font></th>
-                                  <td width="25%" class="text-left"><input type="text" name="address" class="form-control" value=""></div>
+                                  <th width="25%" class="text-right" ></th>
+                                  <td width="25%" class="text-left"></td>
                                   <th width="25%" class="text-right" ><font size="4">สถานะ &nbsp;&nbsp;:</font></th>
                                   <td width="25%">
                                   <select name="status" class="form-control" style="width: 100%;">
@@ -218,44 +313,6 @@
                                     </select>
                                   </td>
                                 </tr>
-
-                                <tr>
-                                  <th width="25%" class="text-right" ><font size="4">จังหวัด &nbsp;&nbsp;:</font></th>
-                                  <td width="25%" class="text-left">
-                                    <select name="province_name" data-where="2" class="form-control ajax_address select2" style="background-color: #e6f7ff;">
-                                      <option value="">-- เลือกจังหวัด --</option>
-                                    </select>
-                                    <th width="25%" class="text-right" ><font size="4">Latitude &nbsp;&nbsp;:</font></th>
-                                  <td width="25%">
-                                    <input type="text" name="latitude" class="form-control" value="0">
-                                  </td>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <th width="25%" class="text-right" ><font size="4">อำเภอ &nbsp;&nbsp;:</font></th>
-                                  <td width="25%">
-                                    <select name="amphur_name" data-where="3" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
-                                      <option value="">-- เลือกอำเภอ --</option>
-                                    </select>
-                                  </td>
-                                  <th width="25%" class="text-right" ><font size="4">Longtitude &nbsp;&nbsp;:</font></th>
-                                  <td width="25%">
-                                    <input type="text" name="longtitude" class="form-control" value="0">
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <th width="25%" class="text-right" ><font size="4">ตำบล &nbsp;&nbsp;:</font></th>
-                                  <td width="25%">
-                                    <select name="district_name" data-where="4" class="ajax_address form-control select2" style="background-color: #e6f7ff;" >
-                                      <option value="">-- เลือกตำบล --</option>
-                                    </select>
-                                  </td>
-                                  <th width="25%" class="text-right" ></th>
-                                  <td width="25%"></td>
-                                </tr>
-
                               </table>
 
                             </div>
@@ -273,21 +330,25 @@
                 <!-- ------------------------------ตรวจสอบ---------------------------- -->
                 <div class="tab-pane" id="check">
                   <div class="box box-default">
+                    <div class="box-header with-border">
+                      <div class="text-center">
+                        <font size="5">
+                          <B align="center">
+                            จำนวนร้านค้า (ตามระเบียน)
+                          </B>
+                        </font>
+                      </div>
+                    </div>
                     <div class="box-body">
                       <div class="row">
                         <div class="container">
-                          <div class="box-header text-center with-border">
-                              <B align="center"> 
-                                <font size="4">  </font>
-                              </B>
-                            </div>
                             <table class="table table-striped table-bordered">
                               <tbody>
-                                <tr class="info">
-                                  <th class="text-center" width="40%">จังหวัด</th>
-                                  <th class="text-center" width="20%">จำนวนร้าน</th>
-                                  <th class="text-center" width="20%">เยี่ยมแล้ว</th>
-                                  <th class="text-center" width="20%">ไม่ได้เยี่ยม</th>
+                                <tr>
+                                  <th class="text-center" width="40%"><font color="red">จังหวัด</font></th>
+                                  <th class="text-center" width="20%"><font color="red">จำนวนร้าน</font></th>
+                                  <th class="text-center" width="20%"><font color="red">เยี่ยมแล้ว</font></th>
+                                  <th class="text-center" width="20%"><font color="red">ไม่ได้เยี่ยม</font></th>
                                 </tr>
                                 <?php 
                                   while($value_pr2 = $objq_province2->fetch_array()){
@@ -343,16 +404,16 @@
 
                           <div class="box-header text-center with-border">
                             <B align="center"> 
-                              <font size="4"> <?php echo $value_pr['province_name'];?> </font>
+                              <font size="4" color="red"> <?php echo $value_pr['province_name'];?> </font>
                             </B>
                           </div>
                           <table class="table table-striped table-bordered">
                             <tbody>
-                              <tr class="info">
-                                <th class="text-center" width="40%">อำเภอ</th>
-                                <th class="text-center" width="20%">จำนวนร้าน</th>
-                                <th class="text-center" width="20%">เยี่ยมแล้ว</th>
-                                <th class="text-center" width="20%">ไม่ได้เยี่ยม</th>
+                              <tr>
+                                <th class="text-center" width="40%"><font color="red">อำเภอ</font></th>
+                                <th class="text-center" width="20%"><font color="red">จำนวนร้าน</font></th>
+                                <th class="text-center" width="20%"><font color="red">เยี่ยมแล้ว</font></th>
+                                <th class="text-center" width="20%"><font color="red">ไม่ได้เยี่ยม</font></th>
                               </tr>
                               
                               <?php 

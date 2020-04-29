@@ -74,7 +74,7 @@
         background-color: #b35900;
         color : white;
         } /* Back & continue */
-    </style>
+  </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -164,7 +164,7 @@
                         <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
                         <!-- <td class="text-center" ><?php echo $value['area']; ?></td> -->
                         <td class="text-center" ><?php echo $value['note']; ?></td>
-                        <td class="text-center" ><a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs">แก้</a></td>
+                        <td class="text-center" ><a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="fa fa-pencil"></a></td>
                       </tr>
                         <?php }?>
                     </tbody>
@@ -274,38 +274,6 @@
 
                 <br>
                 <br>
-                <div class="box-header text-center with-border">
-                  <font size="5">
-                    <B align="center">เงินขายอยู่กับ(สำนักงาน)</B>
-                  </font>
-                </div>
-                <table id="customers">
-                  <tbody>
-                    <tr>
-                      <th class="text-center" width="20%">เงินสด</th>
-                      <th class="text-center" width="20%">รับเช็ค</th>
-                      <th class="text-center" width="20%">ขาย สกต.</th>
-                      <th class="text-center" width="20%">เงินเชื่อ</th>
-                      <th class="text-center" width="20%">ฝากขาย</th>
-                    </tr>
-                    <tr>
-                      <?php 
-                        $rc_category = "SELECT * FROM rc_category";
-                        $objq_category = mysqli_query($conn,$rc_category);
-                        while($value = $objq_category->fetch_assoc()){
-                          $id_category = $value['id_category'];
-                          $sql_sum = "SELECT SUM(money) FROM rc_receive_money WHERE id_category = $id_category AND status_office = 'Y' AND status_boss = 'N'";
-                          $objq_sum = mysqli_query($conn,$sql_sum);
-                          $objr_sum = mysqli_fetch_array($objq_sum);
-                      ?>
-                      <td class="text-center"> <?php echo $objr_sum['SUM(money)']; ?> </td>
-                        <?php } ?>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <br><br>
-
                 <div class="box-header text-center with-border">
                   <font size="5">
                     <B>เงินขายค้างรับ</B>  

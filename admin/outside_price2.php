@@ -75,12 +75,12 @@
                   <table class="table table-bordered">
                     <tbody>
                       <tr bgcolor="#99CCFF">
-                        <th class="text-center" width="5%">ลำดับ</th>
-                        <th class="text-center" width="40%">สินค้า_หน่วย</th>
-                        <th class="text-center" width="10%">หน่วย</th>
-                        <th class="text-center" width="15%">จำนวน</th>
-                        <th class="text-center" width="15%">บ/หน่วย</th>
-                        <th class="text-center" width="15%">เป็นเงิน(บ)</th>
+                        <th class="text-center" width="5%"><font color="red">ที่</font></th>
+                        <th class="text-center" width="40%"><font color="red">สินค้า</font></th>
+                        <th class="text-center" width="10%"><font color="red">หน่วย</font></th>
+                        <th class="text-center" width="15%"><font color="red">จำนวน</font></th>
+                        <th class="text-center" width="15%"><font color="red">บ/หน่วย</font></th>
+                        <th class="text-center" width="15%"><font color="red">เป็นเงิน</font></th>
                       </tr>
                       <?php
                       $date_buy = $_POST['date_buy'];

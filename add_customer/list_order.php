@@ -49,6 +49,14 @@ folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
+
+  <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
+
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -70,7 +78,7 @@ folder instead of downloading all of them to reduce the load. -->
             <div class="box box-primary">
               <!-- /.box-header -->
             <div class="box-header with-border">
-              <a type="button" href="order.php" class="btn btn-danger pull-left"><< เมนูหลัก</a>
+              <a type="button" href="order.php" class="btn button2 pull-left"><< เมนูหลัก</a>
               <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-success pull-right">ORDER วันนี้</a>
             </div>
               <div class="box-body no-padding">
@@ -99,7 +107,7 @@ folder instead of downloading all of them to reduce the load. -->
                     <tr>
                       <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>             
                       <td ><?php echo $value['id_addorder'].' '.$value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
-                      <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
+                      <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="fa fa-pencil" ></a></td>
                       <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
                       <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
                       <td class="text-center" ><a href="delete_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";>ลบ</a></td>

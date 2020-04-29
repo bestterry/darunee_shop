@@ -79,6 +79,12 @@ folder instead of downloading all of them to reduce the load. -->
       document.form1.submit();
     }
   </script>
+  <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
   
 </head>
 
@@ -100,9 +106,9 @@ folder instead of downloading all of them to reduce the load. -->
             <table class="table table-bordered" >
                 <tr>
                   <th width="30%" >
-                    <a type="block" href="admin.php" class="btn btn-danger"><< เมนูหลัก</a>
+                    <a type="block" href="admin.php" class="btn button2"><< เมนูหลัก</a>
 
-                    <a href="#" data-toggle="modal" data-target="#cu" class="btn btn-success">เอกสารส่ง(PDF)</a>
+                    <a href="#" data-toggle="modal" data-target="#cu" class="btn btn-warning">เอกสารส่ง(PDF)</a>
                       <div class="modal fade" id="cu" role="dialog">
                         <div class="modal-dialog modal-lg">
                           <form action="../pdf_file/acc_list1.php" method="post">
@@ -152,24 +158,24 @@ folder instead of downloading all of them to reduce the load. -->
                   <div class="row">
                     <div class="col-md-5">
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">ชื่อลูกค้า :</label>
+                        <label class="col-sm-4 control-label">ชื่อลูกค้า :</label>
 
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                           <input type="text" name="name_customer" class="form-control" placeholder="ชื่อลูกค้า">
                         </div>
                       </div>
                       <!-- /.form-group -->
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">บ้าน :</label>
+                        <label class="col-sm-4 control-label">บ้าน :</label>
 
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                           <input type="text" name="village" class="form-control" placeholder="หมู่บ้าน">
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">จังหวัด :</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 control-label">จังหวัด :</label>
+                        <div class="col-sm-8">
                           <select name="province_name" data-where="2" class="form-control ajax_address select2" >
                             <option value="">-- เลือกจังหวัด --</option>
                           </select>
@@ -177,8 +183,8 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
                       
                       <div class="form-group">
-                        <label  class="col-sm-2 control-label">อำเภอ :</label>
-                        <div class="col-sm-10">
+                        <label  class="col-sm-4 control-label">อำเภอ :</label>
+                        <div class="col-sm-8">
                           <select name="amphur_name" data-where="3" class="ajax_address form-control select2" >
                             <option value="">-- เลือกอำเภอ --</option>
                           </select>
@@ -186,8 +192,8 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">ตำบล :</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 control-label">ตำบล :</label>
+                        <div class="col-sm-8">
                           <select name="district_name" data-where="4" class="ajax_address form-control select2" style="width: 100%;">
                             <option value="">-- เลือกตำบล --</option>
                           </select>
@@ -195,15 +201,15 @@ folder instead of downloading all of them to reduce the load. -->
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">เบอร์โทร :</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 control-label">เบอร์โทร :</label>
+                        <div class="col-sm-8">
                           <input type="text" name="tel" class="form-control" value="-" maxlength="200">
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">หมายเหตุ :</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 control-label">หมายเหตุ :</label>
+                        <div class="col-sm-8">
                           <input type="text" name="note" class="form-control" value="-" maxlength="200">
                         </div>
                       </div>
@@ -223,8 +229,8 @@ folder instead of downloading all of them to reduce the load. -->
                           <tr>
                             <th bgcolor="#66b3ff" class="text-center" width="40%">สินค้า_หน่วย</th>
                             <th bgcolor="#66b3ff" class="text-center" width="15%">จำนวน</th>
-                            <th bgcolor="#66b3ff" class="text-center" width="15%">ราคา/น.</th>
-                            <th bgcolor="#66b3ff" class="text-center" width="15%">จัดการ</th>
+                            <th bgcolor="#66b3ff" class="text-center" width="15%">บ/น</th>
+                            <th bgcolor="#66b3ff" class="text-center" width="15%">#</th>
                           </tr>
                           <tr>
                             <td class="text-center">
@@ -237,7 +243,7 @@ folder instead of downloading all of them to reduce the load. -->
                             </td>
                             <td><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td>
                             <td><input type="text" name="price[]" placeholder="ราคา/น." class="form-control text-center" /></td>
-                            <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success">เพิ่มสินค้า</button></td>
+                            <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success"><i class="fa fa-plus"></i></button></td>
                           </tr>
                         </table>
                       </div>
@@ -251,11 +257,11 @@ folder instead of downloading all of them to reduce the load. -->
                   <thead>
                     <tr>
                       <th bgcolor="#66b3ff" class="text-center" width="10%">วันที่</th>
-                      <th bgcolor="#66b3ff" class="text-center" width="15%">ชื่อลูกค้า</th>
+                      <th bgcolor="#66b3ff" class="text-center" width="27%">ชื่อลูกค้า</th>
                       <th bgcolor="#66b3ff" class="text-center" width="45%">ที่อยู่</th>
-                      <th bgcolor="#66b3ff" class="text-center" width="10%">ข้อมูล</th>
-                      <th bgcolor="#66b3ff" class="text-center" width="10%">แก้ไข</th>
-                      <th bgcolor="#66b3ff" class="text-center" width="10%">ลบ</th>
+                      <th bgcolor="#66b3ff" class="text-center" width="6%">#</th>
+                      <th bgcolor="#66b3ff" class="text-center" width="6%">#</th>
+                      <th bgcolor="#66b3ff" class="text-center" width="6%">#</th>
                     </tr>
                   </thead>
                   <?php 
@@ -272,7 +278,7 @@ folder instead of downloading all of them to reduce the load. -->
                       <td class="text-center"><?php echo $value['name_customer'];?></td>
                       <td class="text-center"><?php echo $value['village'].'   ต.'.$value['district_name'].'  อ.'.$value['amphur_name'].'  จ.'.$value['province_name'].' '.$value['tel'];?></td>
                       <td class="text-center" ><a href="acc_market_list.php?id_acc_market=<?php echo $value['id_acc_market']; ?>"><i class="fa fa-search-plus"></i></a></td>
-                      <td class="text-center" ><a href="acc_market_edit.php?id_acc_market=<?php echo $value['id_acc_market']; ?>" class="btn btn-success btn-xs" >แก้ไข</a></td>
+                      <td class="text-center" ><a href="acc_market_edit.php?id_acc_market=<?php echo $value['id_acc_market']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
                       <td class="text-center" ><a href="algorithm/delete_list_acc.php?id_acc_market=<?php echo $value['id_acc_market']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการลบข้อมูล สกต.หรือไม?')";>ลบ</a></td>
                     </tr>
                     <?php }?>
@@ -369,7 +375,7 @@ folder instead of downloading all of them to reduce the load. -->
         var i=1;
         $('#add').click(function(){
           i++;
-          $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option> <option value="15">ปุ๋ยเคมีกวางฯ</option><option value="11">สารปรับปรุงดินโซเล่</option><option value="34">ปุ๋ยอินทรีย์กวางฯ</option></select></td><td class="text-center"><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="text" name="price[]" placeholder="ราคา/น." class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
+          $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option> <option value="15">ปุ๋ยเคมีกวางฯ</option><option value="11">สารปรับปรุงดินโซเล่</option><option value="34">ปุ๋ยอินทรีย์กวางฯ</option></select></td><td class="text-center"><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="text" name="price[]" placeholder="ราคา/น." class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger"><i class="fa fa-minus"></i></button></td></tr>');
         });
         
         $(document).on('click', '.btn_remove', function(){

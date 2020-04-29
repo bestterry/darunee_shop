@@ -72,55 +72,54 @@ folder instead of downloading all of them to reduce the load. -->
                   <div class="row">
                     <div class="col-md-5">
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">ลูกค้า :</label>
-
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 control-label">ลูกค้า :</label>
+                        <div class="col-sm-8">
                           <input type="text" name="name_customer" class="form-control" value="<?php echo $objr_acc['name_customer'];?>">
                           <input type="hidden" name="id_acc_market" value="<?php echo $id_acc_market; ?>">
                         </div>
                       </div>
                       <!-- /.form-group -->
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">บ้าน :</label>
+                        <label class="col-sm-4 control-label">บ้าน :</label>
 
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                           <input type="text" name="village" class="form-control" value="<?php echo $objr_acc['village'];?>">
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">ตำบล :</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 control-label">ตำบล :</label>
+                        <div class="col-sm-8">
                           <input class="form-control" value="<?php echo $objr_acc['district_name'];?>" disabled>
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">อำเภอ :</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 control-label">อำเภอ :</label>
+                        <div class="col-sm-8">
                           <input class="form-control" value="<?php echo $objr_acc['amphur_name'];?>" disabled/>
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">จังหวัด :</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 control-label">จังหวัด :</label>
+                        <div class="col-sm-8">
                           <input class="form-control" value="<?php echo $objr_acc['province_name'];?>" disabled/>
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">เบอร์โทร :</label>
+                        <label class="col-sm-4 control-label">เบอร์โทร :</label>
 
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                           <input type="text" name="tel" class="form-control"  value="<?php echo $objr_acc['tel'];?>">
                          </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">หมายเหตุ :</label>
+                        <label class="col-sm-4 control-label">หมายเหตุ :</label>
 
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                           <input type="text" name="note" class="form-control" value="<?php echo $objr_acc['note'];?>">
                          </div>
                       </div>
@@ -131,10 +130,10 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th bgcolor="#4dd2ff" class="text-center" width="40%">สินค้า_หน่วย</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="15%">จำนวน</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="15%">ราคา/น.</th>
-                            <th bgcolor="#4dd2ff" class="text-center" width="15%">จัดการ</th>
+                            <th bgcolor="#66b3ff" class="text-center" width="40%">สินค้า_หน่วย</th>
+                            <th bgcolor="#66b3ff" class="text-center" width="15%">จำนวน</th>
+                            <th bgcolor="#66b3ff" class="text-center" width="15%">บ/น.</th>
+                            <th bgcolor="#66b3ff" class="text-center" width="15%">#</th>
                           </tr>
                           <tr>
                             <?php 
@@ -149,7 +148,7 @@ folder instead of downloading all of them to reduce the load. -->
                             </td>
                             <td><input type="text" name="num_product[]" class="form-control text-center" value="<?php echo $value['num_product']; ?>"></td>
                             <td><input type="text" name="price[]" class="form-control text-center" value="<?php echo $value['price']; ?>"></td>
-                            <td class="text-center"><a href="algorithm/delete_acc_market.php?id_acc_market_list=<?php echo $value['id_acc_market_list']; ?>&&id_acc_market=<?php echo $id_acc_market;?>" type="button" class="btn btn-danger">ลบ</a></td>
+                            <td class="text-center"><a href="algorithm/delete_acc_market.php?id_acc_market_list=<?php echo $value['id_acc_market_list']; ?>&&id_acc_market=<?php echo $id_acc_market;?>" type="button" class="btn btn-danger"><i class="fa fa-minus"></i></a></td>
                           </tr>
                             <?php
                             }
@@ -171,7 +170,7 @@ folder instead of downloading all of them to reduce the load. -->
                             </td>
                             <td><input type="text" name="num_product2[]" placeholder="จำนวน" class="form-control text-center" /></td>
                             <td><input type="text" name="price2[]" placeholder="ราคา/น." class="form-control text-center" /></td>
-                            <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success">เพิ่มสินค้า</button></td>
+                            <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success"><i class="fa fa-plus"></i></button></td>
                           </tr>
                         </table>
                       </div>
@@ -220,7 +219,7 @@ folder instead of downloading all of them to reduce the load. -->
           var i=1;
           $('#add').click(function(){
             i++;
-            $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product2[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($conn,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td class="text-center"><input type="text" name="num_product2[]" placeholder="จำนวน" class="form-control text-center" /></td><td class="text-center"><input type="text" name="price2[]" placeholder="ราคา/น." class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></td></tr>');
+            $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product2[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($conn,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td class="text-center"><input type="text" name="num_product2[]" placeholder="จำนวน" class="form-control text-center" /></td><td class="text-center"><input type="text" name="price2[]" placeholder="ราคา/น." class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><i class="fa fa-minus"></i></button></td></tr>');
           });
           
           $(document).on('click', '.btn_remove', function(){

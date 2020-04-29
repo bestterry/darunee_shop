@@ -145,13 +145,11 @@
                           else{
                         ?>
                       <tr>
-                        <th class="text-center" width="25%"> <font color="red">ที่</font> 
+                        <th class="text-center" width="33%"> <font color="red">สินค้า_หน่วย</font>
                         </th>
-                        <th class="text-center" width="25%"> <font color="red">สินค้า_หน่วย</font>
+                        <th class="text-center" width="33%"> <font color="red">จำนวนที่มี</font>
                         </th>
-                        <th class="text-center" width="25%"> <font color="red">จำนวนที่มี</font>
-                        </th>
-                        <th class="text-center" width="25%"> <font color="red">จำนวนรับเข้า</font>
+                        <th class="text-center" width="33%"> <font color="red">จำนวนรับเข้า</font>
                         </th </tr> <?php
                      for ($i=0; $i < count($_POST['id_numpd_car']); $i++) { 
                        
@@ -161,11 +159,8 @@
                           $list = mysqli_fetch_array($objq_listproduct);
                       ?> <tr>
                         <td class="text-center">
-                          <?php echo $i+1; ?>
                           <input type="hidden" name="id_numpd_car[]" value="<?php echo $list['id_numPD_car']; ?>">
                           <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
-                        </td>
-                        <td class="text-center">
                           <?php echo $list['name_product'].'_'.$list['unit']; ?>
                         </td>
                         <td class="text-center">

@@ -56,6 +56,13 @@ $mysqli = connect();
       document.form1.submit();
     }
   </script>
+
+    <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
   
 </head>
 
@@ -85,7 +92,7 @@ $mysqli = connect();
                 </font>
               </div>
               <div>
-                <a type="button" href="order.php" class="btn btn-danger pull-left"> << กลับ </a>
+                <a type="button" href="order.php" class="btn button2 pull-left"> << กลับ </a>
               </div>
             </div>
             <!-- /.box-header -->
@@ -124,7 +131,7 @@ $mysqli = connect();
 
                       <!-- /.form-group -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label">บ้าน (หมู่) :</label>
+                        <label class="col-sm-4 control-label">บ้าน(ม) :</label>
 
                         <div class="col-sm-8">
                           <input type="text" name="village" class="form-control" placeholder="หมู่บ้าน">

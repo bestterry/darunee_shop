@@ -127,12 +127,17 @@ folder instead of downloading all of them to reduce the load. -->
       td, th {
         padding: 5px;
       }
-  </style>
+
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
 </head>
   <body>
       <div class="ex1">
       <div class="box-header with-border">
-        <a type="button" href="order.php" class="btn btn-danger"><< เมนูหลัก</a>
+        <a type="button" href="order.php" class="btn button2"><< เมนูหลัก</a>
         <a type="button" href="../pdf_file/total_order.php" class="btn btn-success"> PDF </a>
       </div>
         <div>
@@ -227,7 +232,7 @@ folder instead of downloading all of them to reduce the load. -->
               
               <?php
                 
-                  $sql_product = "SELECT * FROM product WHERE NOT id_product = 12  AND NOT id_product = 35";
+                  $sql_product = "SELECT * FROM product WHERE status_stock = 1";
                   $objq_product = mysqli_query($mysqli,$sql_product);
                   while($value_pd = $objq_product->fetch_assoc())
                   {
@@ -304,7 +309,7 @@ folder instead of downloading all of them to reduce the load. -->
               
               <?php
                 
-                  $sql_product = "SELECT * FROM product WHERE NOT id_product = 12  AND NOT id_product = 35";
+                  $sql_product = "SELECT * FROM product WHERE status_stock = 1";
                   $objq_product = mysqli_query($mysqli,$sql_product);
                   while($value_pd = $objq_product->fetch_assoc())
                   {
@@ -379,7 +384,7 @@ folder instead of downloading all of them to reduce the load. -->
               </tr>
               <tr>
               <?php
-                  $sql_product = "SELECT * FROM product WHERE NOT id_product = 12  AND NOT id_product = 35";
+                  $sql_product = "SELECT * FROM product WHERE status_stock = 1";
                   $objq_product = mysqli_query($mysqli,$sql_product);
                   while($value_pd = $objq_product->fetch_assoc())
                   {
@@ -454,7 +459,7 @@ folder instead of downloading all of them to reduce the load. -->
               </tr>
               <tr>
               <?php
-                  $sql_product = "SELECT * FROM product WHERE NOT id_product = 12  AND NOT id_product = 35";
+                  $sql_product = "SELECT * FROM product WHERE status_stock = 1";
                   $objq_product = mysqli_query($mysqli,$sql_product);
                   while($value_pd = $objq_product->fetch_assoc())
                   {
@@ -529,7 +534,7 @@ folder instead of downloading all of them to reduce the load. -->
               </tr>
               <tr>
               <?php
-                  $sql_product = "SELECT * FROM product WHERE NOT id_product = 12  AND NOT id_product = 35";
+                  $sql_product = "SELECT * FROM product WHERE status_stock = 1";
                   $objq_product = mysqli_query($mysqli,$sql_product);
                   while($value_pd = $objq_product->fetch_assoc())
                   {
@@ -605,7 +610,7 @@ folder instead of downloading all of them to reduce the load. -->
               </tr>
               <tr>
               <?php
-                  $sql_product = "SELECT * FROM product WHERE NOT id_product = 12  AND NOT id_product = 35";
+                  $sql_product = "SELECT * FROM product WHERE status_stock = 1";
                   $objq_product = mysqli_query($mysqli,$sql_product);
                   while($value_pd = $objq_product->fetch_assoc())
                   {

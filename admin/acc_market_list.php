@@ -39,7 +39,12 @@ folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
-  
+  <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -60,7 +65,7 @@ folder instead of downloading all of them to reduce the load. -->
             <table class="table table-bordered" >
                 <tr>
                   <th width="30%" >
-                    <a type="block" href="acc_market_sale.php" class="btn btn-danger pull-left"><< ย้อนกลับ</a>
+                    <a type="block" href="acc_market_sale.php" class="btn button2 pull-left"><< ย้อนกลับ</a>
                   </th>
                   <td width="40%" class="text-center"><font size="5"><B align="center"> เงินขาย สกต. </B></font></td>
                   <td width="30%"></td>
@@ -76,8 +81,8 @@ folder instead of downloading all of them to reduce the load. -->
                       <table class="table table-bordered">
                         <tr>
                           <th bgcolor="#66b3ff" class="text-center" width="20%">วันที่</th>
-                          <th bgcolor="#66b3ff" class="text-center" width="20%">ชื่อลูกค้า</th>
-                          <th bgcolor="#66b3ff" class="text-center" width="60%">ที่อยู่</th>
+                          <th bgcolor="#66b3ff" class="text-center" width="30%">ชื่อลูกค้า</th>
+                          <th bgcolor="#66b3ff" class="text-center" width="50%">ที่อยู่</th>
                         </tr>
                         <?php 
                           $sql_acc = "SELECT * FROM acc_market INNER JOIN tbl_districts ON acc_market.district_id = tbl_districts.district_code
@@ -99,7 +104,7 @@ folder instead of downloading all of them to reduce the load. -->
                         <tr>
                           <th bgcolor="#66b3ff" class="text-center" width="25%">สินค้า_หน่วย</th>
                           <th bgcolor="#66b3ff" class="text-center" width="15%">จำนวน</th>
-                          <th bgcolor="#66b3ff" class="text-center" width="15%">ราคา/น.</th>
+                          <th bgcolor="#66b3ff" class="text-center" width="15%">บ/น.</th>
                           <th bgcolor="#66b3ff" class="text-center" width="15%">เงินขาย</th>
                           <th bgcolor="#66b3ff" class="text-center" width="15%">เงิน สกต.</th>
                           <th bgcolor="#66b3ff" class="text-center" width="15%">คืน.เพิ่มเติม</th>
@@ -132,7 +137,7 @@ folder instead of downloading all of them to reduce the load. -->
                           
                         ?>
                         <tr> 
-                          <th bgcolor="#e6e6e6" class="text-right" colspan="3">รวม</th>
+                          <th bgcolor="#e6e6e6" class="text-center" colspan="3">รวม</th>
                           <th bgcolor="#e6e6e6" class="text-center"><?php echo $c; ?></th>
                           <th bgcolor="#e6e6e6" class="text-center"><?php echo $d; ?></th>
                           <th bgcolor="#e6e6e6" class="text-center"><?php echo $e; ?></th> 

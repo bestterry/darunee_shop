@@ -110,11 +110,11 @@
                             </div>
 
                             <!-- ------------------------------ยอดขาย---------------------------- -->
-                            <table class="table table table-striped ">
+                            <table class="table">
                               <thead>
-                                <tr class="info" >
-                                  <th class="text-center" width="50%">หน่วยขาย</th>
-                                  <th class="text-center" width="50%">เงินขาย</th>
+                                <tr >
+                                  <th class="text-right" width="50%"> <font color="red">หน่วยขาย</font></th>
+                                  <th class="text-left" width="50%"><font color="red">เงินขาย</font></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -126,8 +126,8 @@
 
                                 ?>
                                 <tr>
-                                  <td class="text-center" >หน้าร้าน</td>
-                                  <td class="text-center" ><?php echo $sum_wp;?></td>
+                                  <td class="text-right" >หน้าร้าน</td>
+                                  <td class="text-left" ><?php echo $sum_wp;?></td>
                                 </tr>
                                 <?php 
                                   $total_money = 0;
@@ -153,8 +153,8 @@
                                       if (isset($sum_money) && !$sum_money == 0) {
                                 ?> 
                                 <tr>
-                                  <td class="text-center"><?php echo $name;?></td>
-                                  <td class="text-center"><?php echo $sum_money;?></td>
+                                  <td class="text-right"><?php echo $name;?></td>
+                                  <td class="text-left"><?php echo $sum_money;?></td>
                                 </tr>
                                 <?php 
                                       }else{
@@ -166,8 +166,8 @@
                                 <?php 
                                     }
                                 ?>
-                                  <th class="info text-center">รวมเงิน</th>
-                                  <th class="info text-center"><?php echo $total_money+$sum_wp;?></th>
+                                  <th class=" text-right"><font color="red">เงินรวม</font></th>
+                                  <th class=" text-left"><font color="red"><?php echo $total_money+$sum_wp;?></font></th>
                               </tbody>
                             </table>
                             <!-- ------------------------------ยอดขาย---------------------------- -->
@@ -245,20 +245,22 @@
 
 
                             <!-- ------------------------------หน้าร้าน---------------------------- -->
-                            <B>
-                              <font color="red" size="4">
-                                หน้าร้าน
-                              </font>
-                            </B>
-                            <table class="table table-striped table-bordered">
+                            <div class="text-center">
+                              <B>
+                                <font size="5">
+                                  หน้าร้าน
+                                </font>
+                              </B>
+                            </div>
+                            <table class="table">
                               <thead>
-                                <tr class="info" >
-                                  <th class="text-center" width="20%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="8%">จำนวน</th>
-                                  <th class="text-center" width="10%">บ/หน่วย</th>
-                                  <th class="text-center" width="10%">เงินขาย</th>
-                                  <th class="text-center" width="36%">รายละเอียด</th>
-                                  <th class="text-center" width="16%">ร้าน</th>
+                                <tr>
+                                  <th class="text-center" width="20%"> <font color="red">สินค้า_หน่วย</font></th>
+                                  <th class="text-center" width="8%"><font color="red">จำนวน</font></th>
+                                  <th class="text-center" width="10%"><font color="red">บ/หน่วย</font></th>
+                                  <th class="text-center" width="10%"><font color="red">เงินขาย</font></th>
+                                  <th class="text-center" width="36%"><font color="red">รายละเอียด</font></th>
+                                  <th class="text-center" width="16%"><font color="red">ร้าน</font></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -296,12 +298,12 @@
                                                     }
                                                   ?>
                                 <tr>
-                                  <th bgcolor="#EAF4FF" class="text-center"></th>
-                                  <th bgcolor="#EAF4FF" class="text-center"></th>
-                                  <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
-                                  <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_money;?></th>
-                                  <th bgcolor="#EAF4FF" class="text-center"></th>
-                                  <th bgcolor="#EAF4FF"></th>
+                                  <th class="text-center"></th>
+                                  <th class="text-center"></th>
+                                  <th class="text-center"><font color="red">รวมเงิน</font></th>
+                                  <th class="text-center"><font color="red"><?php echo $total_money;?></font></th>
+                                  <th class="text-center"></th>
+                                  <th></th>
                                 </tr>
                               </tbody>
                             </table>
@@ -323,21 +325,23 @@
 
                                                       }else{
                                                     ?>
-                            <B>
-                              <font color="red" size="4">
-                                <?php echo $objr_member['name']; ?>
-                              </font>
-                            </B>
-                            <table class="table table-striped table-bordered">
+                            <div class="text-center">
+                              <B>
+                                <font size="5">
+                                  <?php echo $objr_member['name']; ?>
+                                </font>
+                              </B>
+                            </div>
+                            <table class="table">
                               <thead>
-                                <tr class="info" >
-                                  <th class="text-center" width="20%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="8%">จำนวน</th>
-                                  <th class="text-center" width="10%">บ/หน่วย</th>
-                                  <th class="text-center" width="10%">เงินขาย</th>
-                                  <th class="text-center" width="36%">รายละเอียด</th>
-                                  <th class="text-center" width="8%">เวลา</th>
-                                  <th class="text-center" width="8%">#</th>
+                                <tr>
+                                  <th class="text-center" width="20%"><font color="red">สินค้า_หน่วย</font></th>
+                                  <th class="text-center" width="8%"><font color="red">จำนวน</font></th>
+                                  <th class="text-center" width="10%"><font color="red">บ/หน่วย</font></th>
+                                  <th class="text-center" width="10%"><font color="red">เงินขาย</font></th>
+                                  <th class="text-center" width="36%"><font color="red">รายละเอียด</font></th>
+                                  <th class="text-center" width="8%"><font color="red">เวลา</font></th>
+                                  <th class="text-center" width="8%"><font color="red">#</font></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -369,7 +373,7 @@
                                     <?php echo DateThai2($product['datetime']); ?>
                                   </td>
                                   <td class="text-center" >
-                                    <a href="edit_sale_car.php?id_sale_history=<?php echo $product['id_sale_history']; ?>" class="btn btn-danger btn-xs">แก้</a>
+                                    <a href="edit_sale_car.php?id_sale_history=<?php echo $product['id_sale_history']; ?>" > <i class="fa fa-pencil"></i> </a>
                                   </td>
                                 </tr>
                                 <?php 
@@ -377,13 +381,13 @@
                                                   } 
                                               ?>
                                 <tr>
-                                  <td bgcolor="#EAF4FF"></td>
-                                  <td bgcolor="#EAF4FF"></td>
-                                  <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
-                                  <th bgcolor="#EAF4FF" class="text-center"><?php echo $total_money;?></th>
-                                  <td bgcolor="#EAF4FF"></td>
-                                  <td bgcolor="#EAF4FF"></td>
-                                  <td bgcolor="#EAF4FF"></td>
+                                  <td ></td>
+                                  <td ></td>
+                                  <th class="text-center"><font color="red">รวมเงิน</font></th>
+                                  <th class="text-center"><font color="red"><?php echo $total_money;?></font></th>
+                                  <td ></td>
+                                  <td ></td>
+                                  <td ></td>
                                 </tr>
                               </tbody>
                             </table>
