@@ -87,7 +87,7 @@
                             <!-- ------------------------------ยอดขายรวม---------------------------- -->
                             <div class="box-header with-border">
                               <p align="center">
-                                <font size="5"><B>ประวัติเบิกสินค้า
+                                <font size="5"><B>ประวัติ(เบิกสินค้าออก)
                                   <font color="red">
                                   <?php 
                                     $strDate = date('d-m-Y');
@@ -160,8 +160,8 @@
                             <table class="table">
                               <tbody>
                                 <tr>
-                                  <th class="text-center" width="50%"><font color="red">สินค้า_หน่วย</font></th>
-                                  <th class="text-center" width="50%"><font color="red">จำนวน</font></th>
+                                  <th class="text-right" width="50%"><font color="red">สินค้า_หน่วย &nbsp;:</font></th>
+                                  <th class="text-left" width="50%"><font color="red">จำนวน</font></th>
                                 </tr>
                                 <?php #endregion
                                 $sql_history = "SELECT * FROM product";
@@ -177,10 +177,10 @@
                                   if (isset($num_product)) {
                                     ?>
                                     <tr>
-                                      <td class="text-center">
-                                        <?php echo $history['name_product'] .'_'. $history['unit']; ?>
+                                      <td class="text-right">
+                                        <?php echo $history['name_product'] .'_'. $history['unit']; ?> &nbsp;:
                                       </td>
-                                      <td class="text-center">
+                                      <td class="text-left">
                                         <?php echo $num_product; ?>
                                       </td>
                                     </tr>

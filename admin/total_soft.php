@@ -107,15 +107,15 @@
                     <div class="box-body">
                       <div class="mailbox-read-message col-md-12">
                         <!-- ------------------------------กำไร---------------------------- -->
-                        <table class="table table-striped table-bordered">
+                        <table class="table">
                           <thead>
-                            <tr class="info" >
-                              <th class="text-center" width="30%">สินค้า_หน่วย</th>
-                              <th class="text-center" width="14%">จำนวน</th>
-                              <th class="text-center" width="14%">ทุน/หน่วย</th>
-                              <th class="text-center" width="14%">ทุนซื้อ</th>
-                              <th class="text-center" width="14%">เงินขาย</th>
-                              <th class="text-center" width="14%">กำไรขาย</th>
+                            <tr>
+                              <th class="text-center" width="17%"> <font color="red">สินค้า_หน่วย</font> </th>
+                              <th class="text-center" width="16%"> <font color="red">จำนวน</font> </th>
+                              <th class="text-center" width="16%"> <font color="red">ทุน/หน่วย</font> </th>
+                              <th class="text-center" width="16%"> <font color="red">ทุนซื้อ</font> </th>
+                              <th class="text-center" width="16%"> <font color="red">เงินขาย</font> </th>
+                              <th class="text-center" width="16%"> <font color="red">กำไรขาย</font> </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -164,12 +164,12 @@
                               }
                             ?>
                             <tr>
-                              <th bgcolor="#EAF4FF"></th>
-                              <th bgcolor="#EAF4FF" ></th>
-                              <th bgcolor="#EAF4FF" class="text-center">รวมเงิน</th>
-                              <th bgcolor="#EAF4FF" class="text-center"><?php echo round($b); ?></th>
-                              <th bgcolor="#EAF4FF" class="text-center"><?php echo round($a); ?></th>
-                              <th bgcolor="#EAF4FF" class="text-center"><?php echo round($total_money); ?></th>
+                              <th></th>
+                              <th></th>
+                              <th class="text-center"> <font color="red">รวมเงิน</font> </th>
+                              <th class="text-center"> <font color="red"><?php echo round($b); ?></font></th>
+                              <th class="text-center"> <font color="red"><?php echo round($a); ?></font> </th>
+                              <th class="text-center"> <font color="red"><?php echo round($total_money); ?></font> </th>
                             </tr>
                           </tbody>
                         </table> 
@@ -183,34 +183,30 @@
                 <!-- tab-pane -->
                 <div class="tab-pane" id="profit_back">
                   <div class="box box-default">
-                    <div class="box-header with-border">
-
+                    <div class="box-header with-border text-center">
+                      <B><font size="5">กำไรขายตามช่วงเวลา</font></B>
                     </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="container">
-                          <form action="profit_back.php" method="post">
-                            <div class="col-md-5">
-                              <div class="box-body">
-                                <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
-                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบกำไรขายย้อนหลัง</p>
+                    <form action="profit_back.php" method="post">
+                      <div class="box-body">
+                        <div class="row">
+                          <div class="container">
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-xs-4 col-md-4 text-right"> <label> <font size="5">วันที่ :</font></label> </div>
+                                <div class="col-xs-4 col-md-4">
+                                  <input type="date" class="form-control" name="day">
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                </div>
                               </div>
                             </div>
-                            <div class="col-md-5">
-                              <div class="form-group">
-                                <label>วันที่ : </label>
-                                <input type="date" name="day">
-                              </div>
-                              <div class="box-footer">
-                                <button type="submit" class="btn btn-success pull-left"><i
-                                    class="fa fa-check-square-o"></i> ตกลง</button>
-                              </div>
-                            </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                      <div class="box-footer text-center">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> ดูกำไรย้อนหลัง </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
                 <!-- /.tab-pane -->
@@ -218,38 +214,33 @@
                 <!-- tab-pane -->
                 <div class="tab-pane" id="profit_duration">
                   <div class="box box-default">
-                    <div class="box-header with-border">
-
+                    <div class="box-header with-border text-center">
+                      <B><font size="5">กำไรขายตามช่วงเวลา</font></B>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="container">
-                          <form action="profit_duration.php" method="post">
-                            <div class="col-md-5">
-                              <div class="box-body">
-                                <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้ </strong>
-                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบกำไรขายย้อนหลัง</p>
+                    <form action="profit_duration.php" method="post">
+                      <div class="box-body">
+                        <div class="row">
+                          <div class="container">
+                            <div class="col-md-6">
+                              <div class="form-group text-center">
+                                <label> <font size="5">ตั้งเเต่</font></label>
+                                <input type="date"  class="form-control"  name="aday">
                               </div>
                             </div>
-                            <div class="col-md-5">
-                              <div class="form-group">
-                                <label>ตั้งเเต่ : </label>
-                                <input type="date" name="aday">
-                              </div>
-                              <div class="form-group">
-                                <label>ถึง &nbsp;&nbsp;&nbsp;&nbsp;:</label>
-                                <input type="date" name="bday">
-                              </div>
-                              <div class="box-footer">
-                                <button type="submit" class="btn btn-success pull-left"><i
-                                    class="fa fa-check-square-o"></i> ตกลง</button>
+                            <div class="col-md-6">
+                              <div class="form-group text-center">
+                                <label><font size="5">ถึง</font></label></label>
+                                <input type="date" class="form-control" name="bday">
                               </div>
                             </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                      <div class="box-footer text-center">
+                        <button type="submit" class="btn btn-success "><i class="fa fa-check-square-o"></i> ดูยอดตามช่วงเวลา</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
                 <!-- /.tab-pane -->

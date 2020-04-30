@@ -1,5 +1,5 @@
 <?php 
-require "../config_database/config.php";
+require "../../config_database/config.php";
 
 $id_addorder = $_POST['id_addorder'];
 $name_customer = $_POST['name_customer'];
@@ -7,11 +7,21 @@ $village = $_POST['village'];
 $tel = $_POST['tel'];
 $note = $_POST['note']; 
 $id_product2 = $_POST['id_product2'][0];
+$province_id = $_POST['province_name'];
+$amphur_id = $_POST['amphur_name'];
+$district_code = $_POST['district_name'];
 
-  //update addorder
-    $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', note = '$note' WHERE id_addorder = $id_addorder";
-    mysqli_query($conn,$sql_Uaddorder);
-  //-update addorder
+if(empty($province_id)){
+   //update addorder
+   $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', note = '$note' WHERE id_addorder = $id_addorder";
+   mysqli_query($conn,$sql_Uaddorder);
+ //-update addorder
+}else{
+   //update addorder
+   $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', province_id = '$province_id', amphur_id = '$amphur_id', district_code = '$district_code', note = '$note' WHERE id_addorder = $id_addorder";
+   mysqli_query($conn,$sql_Uaddorder);
+ //-update addorder
+} 
 
   //update listorder
   for ($i=0; $i < count($_POST['id_listorder']); $i++) { 
@@ -40,5 +50,5 @@ $id_product2 = $_POST['id_product2'][0];
   }
   //-addorder
 
-  header('location:edit_list_order.php?id_addorder='.$id_addorder);
+  header('location:../edit_list_order.php?id_addorder='.$id_addorder);
 ?>

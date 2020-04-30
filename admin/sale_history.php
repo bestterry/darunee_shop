@@ -113,7 +113,7 @@
                             <table class="table">
                               <thead>
                                 <tr >
-                                  <th class="text-right" width="50%"> <font color="red">หน่วยขาย</font></th>
+                                  <th class="text-right" width="50%"> <font color="red">หน่วยขาย &nbsp;:</font></th>
                                   <th class="text-left" width="50%"><font color="red">เงินขาย</font></th>
                                 </tr>
                               </thead>
@@ -126,7 +126,7 @@
 
                                 ?>
                                 <tr>
-                                  <td class="text-right" >หน้าร้าน</td>
+                                  <td class="text-right" >หน้าร้าน &nbsp;: </td>
                                   <td class="text-left" ><?php echo $sum_wp;?></td>
                                 </tr>
                                 <?php 
@@ -153,7 +153,7 @@
                                       if (isset($sum_money) && !$sum_money == 0) {
                                 ?> 
                                 <tr>
-                                  <td class="text-right"><?php echo $name;?></td>
+                                  <td class="text-right"><?php echo $name;?>&nbsp; : </td>
                                   <td class="text-left"><?php echo $sum_money;?></td>
                                 </tr>
                                 <?php 
@@ -166,7 +166,7 @@
                                 <?php 
                                     }
                                 ?>
-                                  <th class=" text-right"><font color="red">เงินรวม</font></th>
+                                  <th class=" text-right"><font color="red">เงินรวม &nbsp;:</font></th>
                                   <th class=" text-left"><font color="red"><?php echo $total_money+$sum_wp;?></font></th>
                               </tbody>
                             </table>
@@ -257,10 +257,11 @@
                                 <tr>
                                   <th class="text-center" width="20%"> <font color="red">สินค้า_หน่วย</font></th>
                                   <th class="text-center" width="8%"><font color="red">จำนวน</font></th>
-                                  <th class="text-center" width="10%"><font color="red">บ/หน่วย</font></th>
-                                  <th class="text-center" width="10%"><font color="red">เงินขาย</font></th>
-                                  <th class="text-center" width="36%"><font color="red">รายละเอียด</font></th>
-                                  <th class="text-center" width="16%"><font color="red">ร้าน</font></th>
+                                  <th class="text-center" width="8%"><font color="red">บ/หน่วย</font></th>
+                                  <th class="text-center" width="8%"><font color="red">เงินขาย</font></th>
+                                  <th class="text-center" width="30%"><font color="red">รายละเอียด</font></th>
+                                  <th class="text-center" width="10%"><font color="red">เวลา</font></th>
+                                  <th class="text-center" width="15%"><font color="red">ร้าน</font></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -288,6 +289,9 @@
                                   </td>
                                   <td class="text-center">
                                     <?php echo $value['note']; ?>
+                                  </td>
+                                  <td class="text-center">
+                                    <?php echo DateThai2($value['datetime']); ?>
                                   </td>
                                   <td class="text-center">
                                     <?php echo $value['name_zone']; ?>

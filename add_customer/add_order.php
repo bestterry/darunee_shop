@@ -156,7 +156,7 @@ $mysqli = connect();
                         <label class="col-sm-4 control-label">หมายเหตุ :</label>
 
                         <div class="col-sm-8">
-                          <input type="text" name="note" class="form-control" value="-" maxlength="200">
+                          <input type="text" name="note" class="form-control" value="-">
                         </div>
                       </div>
                     </div>

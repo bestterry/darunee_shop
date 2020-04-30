@@ -58,7 +58,7 @@
                 <!-- ค้นหา ORDER -->
 
                 <!-- ค้นหา สินค้า -->
-                <!-- <li><a href="#" data-toggle="modal" data-target="#seachproduct"><i class="fa fa-archive"></i> ค้นหา (รายอำเภอ <font color="red">ส่งแล้ว</font>) </a></li> -->
+                <li><a href="#" data-toggle="modal" data-target="#seachproduct"><i class="fa fa-archive"></i> ค้นหา (รายอำเภอ <font color="red">ส่งแล้ว</font>) </a></li>
                  <div class="modal fade" id="seachproduct" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <form action="../pdf_file/list_order4.php" method="post">

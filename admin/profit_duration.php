@@ -45,6 +45,12 @@
   <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -72,29 +78,21 @@
                     <div class="container">
 
                     <div class="box-header text-center with-border">
-                      <font size="5">
-                        <B>กำไรขายสินค้า 
-                          <font size="5" color="red">
-                            <?php 
-                                //echo DateThai($day);
-                            ?>
-                          </font>
-                         </B>  
-                      </font>                        
+                      <font size="5"><B> กำไรขาย ตั้งแต่ <font color="red"><?php echo DateThai($aday);?></font>  ถึง <font color="red"><?php echo DateThai($bday);?></font> </B></font>                        
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
 
                       <div class="row">
-                        <table class="table table-striped table-bordered">
+                        <table class="table">
                               <tbody>
-                                <tr class="info" >
-                                  <th class="text-center" width="30%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="14%">จำนวน</th>
-                                  <th class="text-center" width="14%">บ/หน่วย</th>
-                                  <th class="text-center" width="14%">ทุนซื้อ(บ)</th>
-                                  <th class="text-center" width="14%">เงินขาย(บ)</th>
-                                  <th class="text-center" width="14%">กำไรขาย(บ)</th>
+                                <tr>
+                                  <th class="text-center" width="30%"> <font color="red">สินค้า_หน่วย</font> </th>
+                                  <th class="text-center" width="14%"> <font color="red">จำนวน</font> </th>
+                                  <th class="text-center" width="14%"> <font color="red">บ/หน่วย</font> </th>
+                                  <th class="text-center" width="14%"> <font color="red">ทุนซื้อ</font> </th>
+                                  <th class="text-center" width="14%"> <font color="red">เงินขาย</font> </th>
+                                  <th class="text-center" width="14%"> <font color="red">กำไรขาย</font> </th>
                                 </tr>
                                 <?php
                                 $a = 0;
@@ -126,12 +124,12 @@
                                     $profit_sale = $total_salemoney - $price_product;
                                 ?>
                                 <tr>
-                                <td><?php echo $value['name_product'].'_'.$value['unit'];?></td>
-                                  <td class="text-center"><?php echo $total_num; ?></td>
-                                  <td class="text-center"><?php echo $price_num; ?></td>
-                                  <td class="text-center"><?php echo round($price_product); ?></td>
-                                  <td class="text-center"><?php echo round($total_salemoney); ?></td>
-                                  <td class="text-center"><?php echo round($profit_sale); ?></td>
+                                  <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit'];?></td>
+                                  <td class="text-center"><?php if($total_num=="0"){ echo "-";}else{ echo $total_num; }  ?></td>
+                                  <td class="text-center"><?php if($price_num=="0"){ echo "-";}else{ echo $price_num; }  ?></td>
+                                  <td class="text-center"><?php if($price_product=="0"){ echo "-";}else{ echo $price_product; } ?></td>
+                                  <td class="text-center"><?php if($total_salemoney=="0"){ echo "-";}else{ echo $total_salemoney; } ?></td>
+                                  <td class="text-center"><?php if($profit_sale=="0"){ echo "-";}else{ echo $profit_sale; } ?></td>
                                 </tr>
                                 <?php 
                                  $a = $a + $total_salemoney;
@@ -140,12 +138,12 @@
                                 }
                                 ?>
                                 <tr>
-                                  <th bgcolor="#EAF4FF"></th>
-                                  <th bgcolor="#EAF4FF"></th>
-                                  <th bgcolor="#EAF4FF" class="text-right">รวมเงิน</th>
-                                  <th bgcolor="#EAF4FF" class="text-center"><?php echo round($b); ?></th>
-                                  <th bgcolor="#EAF4FF" class="text-center"><?php echo round($a); ?></th>
-                                  <th bgcolor="#EAF4FF" class="text-center"><?php echo round($total_money); ?></th>
+                                  <th></th>
+                                  <th></th>
+                                  <th class="text-center"> <font color="red">รวมเงิน</font> </th>
+                                  <th class="text-center"> <font color="red"><?php echo round($b); ?></font></th>
+                                  <th class="text-center"> <font color="red"><?php echo round($a); ?></font></th>
+                                  <th class="text-center"> <font color="red"><?php echo round($total_money); ?></font></th>
                                 </tr>
                               </tbody>
                             </table>
@@ -157,7 +155,7 @@
                 </div>
                 <div class="box-footer" align="center">
                   <!-- <a href="../pdf_file/admin_saleday_history.php?day=<?php echo $day;?>" class="btn btn-success" target="_blank"><i class="fa fa-print"> พิมพ์ </i></a> -->
-                  <a href="profit.php" class="btn btn-success pull-left" ><== ย้อนกลับหน้าหลัก </a>
+                  <a href="total_soft.php" class="btn button2 pull-left" ><< ย้อนกลับ </a>
                 </div>
               </div>
             </div>

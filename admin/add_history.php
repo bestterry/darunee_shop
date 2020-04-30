@@ -179,7 +179,7 @@ function Datetime($strDate)
                             <table class="table">
                               <tbody>
                                 <tr>
-                                  <th class="text-right" width="50%"> <font color="red">สินค้า_หน่วย</font></th>
+                                  <th class="text-right" width="50%"> <font color="red">สินค้า_หน่วย &nbsp;:</font></th>
                                   <th class="text-left" width="50%"><font color="red">จำนวน</font></th>
                                 </tr>
                                 <?php #endregion
@@ -197,7 +197,7 @@ function Datetime($strDate)
                                     ?>
                                     <tr>
                                       <td class="text-right">
-                                        <?php echo $history['name_product'] . '_' . $history['unit']; ?>
+                                        <?php echo $history['name_product'] . '_' . $history['unit']; ?> &nbsp;:
                                       </td>
                                       <td class="text-left">
                                         <?php echo $num_product; ?>

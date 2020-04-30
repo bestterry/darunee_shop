@@ -76,27 +76,42 @@
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="edit_list_order_finish.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
+                <form action="algorithm/edit_list_order.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                   <div class="row">
                     <div class="col-md-5">
 
                       <div class="form-group">
                         <label class="col-sm-4 control-label">จังหวัด :</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
+                          <select name="province_name" data-where="2" class="form-control ajax_address select2" >
+                            <option value="">-- เลือกจังหวัด --</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-4">
                           <input class="form-control" value="<?php echo $objr_addorder['province_name'];?>" disabled/>
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label class="col-sm-4 control-label">อำเภอ :</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
+                          <select name="amphur_name" data-where="3" class="ajax_address form-control select2" >
+                            <option value="">-- เลือกอำเภอ --</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-4">
                           <input class="form-control" value="<?php echo $objr_addorder['amphur_name'];?>" disabled/>
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label class="col-sm-4 control-label">ตำบล :</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
+                          <select name="district_name" data-where="4" class="ajax_address form-control select2" style="width: 100%;">
+                            <option value="">-- เลือกตำบล --</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-4">
                           <input class="form-control" value="<?php echo $objr_addorder['district_name'];?>" disabled>
                         </div>
                       </div>
@@ -155,9 +170,9 @@
                               <input type="text" class="form-control text-center" value="<?php echo $value['name_product'].'_'.$value['unit']; ?>" disabled/>
                               <input type="hidden" name="id_listorder[]" value="<?php echo $value['id_listorder']; ?>">
                             </td>
-                            <td><input type="text" name="price[]" class="form-control text-center" value="<?php echo $value['price']; ?>"></td>
-                            <td><input type="text" name="num[]" class="form-control text-center" value="<?php echo $value['num']; ?>"></td>
-                            <td><input type="text" name="money[]" class="form-control text-center" value="<?php echo $value['money']; ?>"></td>
+                            <td><input type="text" name="price[]" id="price" onKeyUp="calcfunc()" class="form-control text-center" value="<?php echo $value['price']; ?>"></td>
+                            <td><input type="text" name="num[]"   id="num"   onKeyUp="calcfunc()" class="form-control text-center" value="<?php echo $value['num']; ?>"></td>
+                            <td><input type="text" name="money[]" id="money" class="form-control text-center" value="<?php echo $value['money']; ?>"></td>
                             <td class="text-center"><a href="delete_list_order2.php?id_listorder=<?php echo $value['id_listorder']; ?>&&id_addorder=<?php echo $id_addorder; ?>" type="button" class="btn btn-danger"><i class="fa fa-minus"></i></a></td>
                           </tr>
                             <?php
@@ -178,9 +193,9 @@
                                 ?>
                               </select>
                             </td>
-                            <td><input type="text" name="price2[]" placeholder="บ/น" class="form-control text-center"/></td>
-                            <td><input type="text" name="num2[]" placeholder="จำนวน" class="form-control text-center"/></td>
-                            <td><input type="text" name="money2[]" placeholder="เงิน" class="form-control text-center"/></td>
+                            <td><input type="text" name="price2[]" id="price6" onKeyUp="calcfunc6()" placeholder="บ/น" class="form-control text-center"/></td>
+                            <td><input type="text" name="num2[]"   id="num6"   onKeyUp="calcfunc6()" placeholder="จำนวน" class="form-control text-center"/></td>
+                            <td><input type="text" name="money2[]" id="money6"  placeholder="เงิน" class="form-control text-center"/></td>
                             <td class="text-center"><button type="button" name="add" id="add" class="btn btn-success"><i class="fa fa-plus"></i></button></td>
                           </tr>
                         </table>
@@ -276,31 +291,68 @@
         });
       </script>
 
-<script>
-$(document).ready(function(){
-	var i=1;
-	$('#add').click(function(){
-		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product2[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td><input type="text" name="price2[]" placeholder="บ/น" class="form-control text-center" /></td><td class="text-center"><input type="text" name="num2[]" placeholder="จำนวน" class="form-control " /><td><input type="text" name="money2[]" placeholder="เงิน" class="form-control text-center"/></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><i class="fa fa-minus"></i></button></td></tr>');
-	});
-	
-	$(document).on('click', '.btn_remove', function(){
-		var button_id = $(this).attr("id"); 
-		$('#row'+button_id+'').remove();
-	});
-	
-	$('#submit').click(function(){		
-		$.ajax({
-			success:function(data)
-			{
-				alert(data);
-				$('#add_name')[0].reset();
-			}
-		});
-	});
-	
-});
-</script>
+      <script>
+        $(document).ready(function(){
+          var i=1;
+          $('#add').click(function(){
+            i++;
+            $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control" onchange="sSelect'+i+'(this.value)" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td><input type="number" name="price[]" id="price'+i+'" onKeyUp="calcfunc'+i+'()" placeholder="บ/น" class="form-control text-center" /></td><td class="text-center"><input type="text" name="num[]" id="num'+i+'" onKeyUp="calcfunc'+i+'()" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="number" name="money[]" id="money'+i+'" placeholder="เงิน" class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><i class="fa fa-minus"></i></button></td></tr>');
+            console.log(i);
+            });
+          
+          $(document).on('click', '.btn_remove', function(){
+            var button_id = $(this).attr("id"); 
+            $('#row'+button_id+'').remove();
+          });
+          
+          $('#submit').click(function(){		
+            $.ajax({
+              success:function(data)
+              {
+                alert(data);
+                $('#add_name')[0].reset();
+              }
+            });
+          });
+          
+        });
+
+      function calcfunc() {
+          var val1 = parseFloat(document.form1.price.value);
+          var val2 = parseFloat(document.form1.num.value);
+          document.form1.money.value=val1*val2;
+        }
+
+    function calcfunc2() {
+        var val1 = parseFloat(document.form1.price2.value);
+        var val2 = parseFloat(document.form1.num2.value);
+        document.form1.money2.value=val1*val2;
+      }
+
+      function calcfunc3() {
+        var val1 = parseFloat(document.form1.price3.value);
+        var val2 = parseFloat(document.form1.num3.value);
+        document.form1.money3.value=val1*val2;
+      }
+
+      function calcfunc4() {
+        var val1 = parseFloat(document.form1.price4.value);
+        var val2 = parseFloat(document.form1.num4.value);
+        document.form1.money4.value=val1*val2;
+      }
+
+      function calcfunc5() {
+        var val1 = parseFloat(document.form1.price5.value);
+        var val2 = parseFloat(document.form1.num5.value);
+        document.form1.money5.value=val1*val2;
+      }
+
+      function calcfunc6() {
+        var val1 = parseFloat(document.form1.price6.value);
+        var val2 = parseFloat(document.form1.num6.value);
+        document.form1.money6.value=val1*val2;
+      }
+    </script>
 
 </body>
 

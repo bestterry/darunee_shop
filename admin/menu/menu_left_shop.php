@@ -179,19 +179,19 @@
                 <!-- /สต๊อกรถ -->
 
                 <!-- ยอดขาย -->
-                <li><a href="sale_history.php" ><i class="fa fa-money"></i> เงินขาย (&nbsp;รายคน&nbsp;&nbsp;)</a></li>
+                <li><a href="sale_history.php" ><i class="fa fa-money"></i>เงินขาย (รายคน)</a></li>
                 <!-- /ยอดขาย -->
 
                 <!-- ยอดขาย -->
-                <li><a href="total_soft.php" ><i class="fa fa-money"></i>  เงินขาย (รายสินค้า) </a></li>
+                <li><a href="total_soft.php" ><i class="fa fa-money"></i>เงินขาย (รายสินค้า) </a></li>
                 <!-- /ยอดขาย -->
 
                 <!-- เงินขายรายวัน -->
-                <li><a href="receive_money.php" ><i class="fa fa-money"></i> เงินขาย (&nbsp;รายวัน&nbsp;&nbsp;) </a></li>
+                <li><a href="receive_money.php" ><i class="fa fa-money"></i>เงินขาย (รายวัน) </a></li>
                 <!-- /เงินขายรายวัน -->
 
                 <!--เงินสะสม -->
-                <li><a href="#" data-toggle="modal" data-target="#cu"><i class="fa fa-money"></i> เงินขาย (&nbsp;&nbsp;สะสม&nbsp;&nbsp;) </a></li>
+                <li><a href="#" data-toggle="modal" data-target="#cu"><i class="fa fa-money"></i>เงินขาย (สะสม) </a></li>
                 <div class="modal fade" id="cu" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <form action="cu_sale.php" method="post">
@@ -230,7 +230,7 @@
                 <!--//เงินสะสม -->
 
                 <!-- สกต. -->
-                <li><a href="acc_market_sale.php" ><i class="fa fa-money"></i> เงินขาย (&nbsp;&nbsp;สกต&nbsp;&nbsp;&nbsp;) </a></li>
+                <li><a href="acc_market_sale.php" ><i class="fa fa-money"></i>เงินขาย (สกต.) </a></li>
                 <!-- /สกต. -->
 
                  <!-- กำไรขาย -->

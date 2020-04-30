@@ -123,9 +123,9 @@
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 3";
                       $objq_num = mysqli_query($conn,$SQL_num);
                       $objr_num = mysqli_fetch_array($objq_num);
-                      if(!isset($objr_num['num'])){
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
                     ?>
-                  <td ></td>
+                  <td class="text-center">-</td>
                   <?php
                       }else{
                     ?>
@@ -140,9 +140,9 @@
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 4";
                       $objq_num = mysqli_query($conn,$SQL_num);
                       $objr_num = mysqli_fetch_array($objq_num);
-                      if(!isset($objr_num['num'])){
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
                     ?>
-                  <td ></td>
+                  <td class="text-center">-</td>
                   <?php
                       }else{
                     ?>
@@ -157,9 +157,9 @@
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 2";
                       $objq_num = mysqli_query($conn,$SQL_num);
                       $objr_num = mysqli_fetch_array($objq_num);
-                      if(!isset($objr_num['num'])){
-                    ?>
-                  <td ></td>
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
                   <?php
                       }else{
                     ?>
@@ -174,9 +174,9 @@
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 1";
                       $objq_num = mysqli_query($conn,$SQL_num);
                       $objr_num = mysqli_fetch_array($objq_num);
-                      if(!isset($objr_num['num'])){
-                    ?>
-                  <td ></td>
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
                   <?php
                       }else{
                     ?>
@@ -191,9 +191,9 @@
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 6";
                       $objq_num = mysqli_query($conn,$SQL_num);
                       $objr_num = mysqli_fetch_array($objq_num);
-                      if(!isset($objr_num['num'])){
-                    ?>
-                  <td ></td>
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
                   <?php
                       }else{
                     ?>
@@ -208,9 +208,9 @@
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 10";
                       $objq_num = mysqli_query($conn,$SQL_num);
                       $objr_num = mysqli_fetch_array($objq_num);
-                      if(!isset($objr_num['num'])){
-                    ?>
-                  <td ></td>
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
                   <?php
                       }else{
                     ?>
@@ -225,9 +225,9 @@
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 7";
                       $objq_num = mysqli_query($conn,$SQL_num);
                       $objr_num = mysqli_fetch_array($objq_num);
-                      if(!isset($objr_num['num'])){
-                    ?>
-                  <td ></td>
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
                   <?php
                       }else{
                     ?>
@@ -242,9 +242,9 @@
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 5";
                       $objq_num = mysqli_query($conn,$SQL_num);
                       $objr_num = mysqli_fetch_array($objq_num);
-                      if(!isset($objr_num['num'])){
-                    ?>
-                  <td ></td>
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
                   <?php
                       }else{
                     ?>
@@ -259,9 +259,9 @@
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 9";
                       $objq_num = mysqli_query($conn,$SQL_num);
                       $objr_num = mysqli_fetch_array($objq_num);
-                      if(!isset($objr_num['num'])){
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
                     ?>
-                  <td ></td>
+                  <td class="text-center">-</td>
                   <?php
                       }else{
                     ?>
@@ -279,9 +279,9 @@
                       $objq_num_car = mysqli_query($conn,$SQL_num_car);
                       $objr_num_car = mysqli_fetch_array($objq_num_car);
                       $total_numcar = $objr_num_car['SUM(num)'];
-                      if(!isset($total_numcar)){
-                    ?>
-                  <td ></td>
+                      if((!isset($total_numcar)) || ($total_numcar == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
                   <?php
                       }else{
                     ?>
@@ -300,9 +300,9 @@
                       $total_num = $objr_num['SUM(num)'];
                       $total_numstore = $total_numcar+$total_num;
                       
-                      if(!isset($total_numstore)){
-                    ?>
-                  <td ></td>
+                      if($total_numstore == 0 ){
+                        ?>
+                      <td class="text-center">0</td>
                   <?php
                       }else{
                     ?>
@@ -379,10 +379,9 @@
                       $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $i";
                       $objq_num = mysqli_query($conn, $SQL_num);
                       $objr_num = mysqli_fetch_array($objq_num);
-                      
-                      if (!isset($objr_num['num'])) {
-                        ?>
-                        <td></td>
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0)){
+                    ?>
+                  <td class="text-center">-</td>
                       <?php
                     } else {
                       $num_pd = $objr_num['num'];

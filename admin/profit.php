@@ -44,6 +44,12 @@
   <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -68,11 +74,11 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li><a href="#profit_today" data-toggle="tab">กำไรขายวันนี้</a></li>
+                <li class="active"><a href="#profit_today" data-toggle="tab">กำไรขายวันนี้</a></li>
                 <li><a href="#profit_back" data-toggle="tab">กำไรขายย้อนหลัง</a></li>
                 <li><a href="#profit_duration" data-toggle="tab">กำไรขายตามช่วงเวลา</a></li>
                 <div align="right">
-                  <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+                  <a href="admin.php" class="btn button2"><< เมนูหลัก</a>
                 </div>
               </ul>
               <div class="tab-content">
@@ -174,8 +180,8 @@
                 <!-- tab-pane -->
                 <div class="tab-pane" id="profit_back">
                   <div class="box box-default">
-                    <div class="box-header with-border">
-
+                    <div class="box-header with-border text-center">
+                      
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">

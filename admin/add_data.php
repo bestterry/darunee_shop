@@ -61,14 +61,14 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li><a href="#adduser" data-toggle="tab">เพิ่มพนักงาน</a></li>
+                <li class="active"><a href="#adduser" data-toggle="tab">เพิ่มพนักงาน</a></li>
                 <li><a href="#addproduct" data-toggle="tab">เพิ่มสินค้า</a></li>
                 <li><a href="#settingproductcar" data-toggle="tab">แก้ไขจำนวนสินค้าในรถ</a></li>
                 <li><a href="#addproductcar" data-toggle="tab">เพิ่มสินค้าเข้ารถ</a></li>
                 <li><a href="#settingproduct" data-toggle="tab">แก้ไขข้อมูลสินค้า</a></li>
                 <li><a href="#settingemployee" data-toggle="tab">แก้ไขข้อมูลพนักงาน</a></li>
                 <div align="right">
-                  <a href="admin.php" class="btn btn-success"><<== กลับสู่เมนูหลัก</a>
+                  <a href="admin.php" class="btn btn-danger"><< เมนูหลัก</a>
                 </div>
               </ul>
               <div class="tab-content">
@@ -78,17 +78,12 @@
                     <form action="algorithm/add_user.php" method="post" autocomplete="off">
                       <div class="box box-default">
                         <!-- /.box-header -->
+                        <div class="box-header with-border text-center">
+                          <font size="5"><B> เพิ่มพนักงาน</B> </font>
+                        </div>
                         <div class="box-body">
                           <div class="row">
                             <div class="container">
-                              <div class="box-header with-border">
-                                <font size="4">
-                                  <B>
-                                    เพิ่มพนักงาน
-                                  </B>
-                                </font>
-                              </div>
-
                               <div class="col-md-12">
                                 <div class="form-group col-md-3">
                                   <label for="txtname">ชื่อ :</label>
@@ -288,19 +283,15 @@
                         <div class="container">
                           <form action="algorithm/add_product2.php" method="post" autocomplete="off">
                             <div class="box-header with-border text-center">
-                              <font size="4">
-                                <B>
-                                  แก้ไขข้อมูลสินค้า
-                                </B>
-                              </font>
+                              <font size="4"><B>แก้ไขข้อมูลสินค้า</B></font>
                             </div>
-                            <table class="table table-striped ">
+                            <table class="table">
                               <tbody>
-                                <tr class="info" >
-                                  <th class="text-center">ชื่อสินค้า</th>
-                                  <th class="text-center" width="15%">หน่วย</th>
-                                  <th class="text-center" width="12%">แก้ไข</th>
-                                  <th class="text-center" width="12%">ลบ</th>
+                                <tr >
+                                  <th class="text-center" width="25%"> <font color="red">ชื่อสินค้า</font> </th>
+                                  <th class="text-center" width="25%"> <font color="red">หน่วย</font> </th>
+                                  <th class="text-center" width="25%"> <font color="red">แก้ไข</font> </th>
+                                  <th class="text-center" width="25%"> <font color="red">ลบ</font> </th>
                                 </tr>
                                 <?php #endregion
                                                   $total_money = 0;
@@ -316,10 +307,10 @@
                                     <?php echo $value['unit']; ?>
                                   </td>
                                   <td class="text-center">
-                                    <a href="edit_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="btn btn-success"><i class="fa fa-cog"></i></a>
+                                    <a href="edit_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="fa fa-pencil"></a>
                                   </td>
                                   <td class="text-center">
-                                    <a href="algorithm/delete_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="btn btn-danger"><i class="fa fa-minus-square"></i></a>
+                                    <a href="algorithm/delete_product.php?id_product=<?php echo $value['id_product']; ?>" type="button"><i class="fa fa-minus-square"></i></a>
                                   </td>
                                 </tr>
                                 <?php
@@ -339,38 +330,31 @@
                  <div class="tab-pane" id="settingemployee">
                   <div class="box box-default">
                     <!-- /.box-header -->
+                    <div class="box-header with-border text-center">
+                      <font size="5"><B> แก้ไขข้อมูลพนักงาน</B> </font>
+                    </div>
                     <div class="box-body">
                       <div class="row">
                         <div class="container">
                           <form action="algorithm/add_product2.php" method="post" autocomplete="off">
-                            <div class="box-header with-border text-center">
-                              <font size="4">
-                                <B>
-                                  แก้ไขข้อมูลสินค้า
-                                </B>
-                              </font>
-                            </div>
-                            <table class="table table-striped ">
+                           
+                            <table class="table">
                               <tbody>
-                                <tr class="info" >
-                                  <th class="text-center" >ชื่อพนักงาน</th>
-                                  <th class="text-center" width="30%">สถานะ</th>
-                                  <th class="text-center" width="12%">แก้ไข</th>
+                                <tr>
+                                  <th class="text-center" width="33%"> <font color="red">ชื่อพนักงาน</font> </th>
+                                  <th class="text-center" width="33%"> <font color="red">สถานะ</font> </th>
+                                  <th class="text-center" width="33%"> <font color="red">แก้ไข</font> </th>
                                 </tr>
                                 <?php #endregion
-                                                  $sql_member = "SELECT * FROM member";  
-                                                  $objq_member = mysqli_query($conn,$sql_member);
-                                                  while($value = $objq_member ->fetch_assoc()){ 
-                                              ?>
+                                    $sql_member = "SELECT * FROM member";  
+                                    $objq_member = mysqli_query($conn,$sql_member);
+                                    while($value = $objq_member ->fetch_assoc()){ 
+                                ?>
                                 <tr>
+                                  <td class="text-center"><?php echo $value['name']; ?></td>
+                                  <td class="text-center"> <?php echo $value['status']; ?></td>
                                   <td class="text-center">
-                                    <?php echo $value['name']; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <?php echo $value['status']; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <a href="edit_employee.php?id_member=<?php echo $value['id_member']; ?>" type="button" class="btn btn-success"><i class="fa fa-cog"></i></a>
+                                    <a href="edit_employee.php?id_member=<?php echo $value['id_member']; ?>" type="button" class="fa fa-pencil"></a>
                                   </td>
                                 </tr>
                                 <?php
@@ -419,56 +403,56 @@
   <script src="../dist/js/demo.js"></script>
   <script src="../plugins/iCheck/icheck.min.js"></script>
   <script>
-  $(function() {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging': true,
-      'lengthChange': false,
-      'searching': false,
-      'ordering': true,
-      'info': true,
-      'autoWidth': false
+    $(function() {
+      $('#example1').DataTable()
+      $('#example2').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+      })
     })
-  })
-  $(function() {
-    //Enable iCheck plugin for checkboxes
-    //iCheck for checkbox and radio inputs
-    $('.mailbox-messages input[type="checkbox"]').iCheck({
-      checkboxClass: 'icheckbox_flat-blue',
-      radioClass: 'iradio_flat-blue'
+    $(function() {
+      //Enable iCheck plugin for checkboxes
+      //iCheck for checkbox and radio inputs
+      $('.mailbox-messages input[type="checkbox"]').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue'
+      });
+      //Enable check and uncheck all functionality
+      $(".checkbox-toggle").click(function() {
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+          //Uncheck all checkboxes
+          $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+          $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        } else {
+          //Check all checkboxes
+          $(".mailbox-messages input[type='checkbox']").iCheck("check");
+          $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+      });
+      //Handle starring for glyphicon and font awesome
+      $(".mailbox-star").click(function(e) {
+        e.preventDefault();
+        //detect type
+        var $this = $(this).find("a > i");
+        var glyph = $this.hasClass("glyphicon");
+        var fa = $this.hasClass("fa");
+        //Switch states
+        if (glyph) {
+          $this.toggleClass("glyphicon-star");
+          $this.toggleClass("glyphicon-star-empty");
+        }
+        if (fa) {
+          $this.toggleClass("fa-star");
+          $this.toggleClass("fa-star-o");
+        }
+      });
     });
-    //Enable check and uncheck all functionality
-    $(".checkbox-toggle").click(function() {
-      var clicks = $(this).data('clicks');
-      if (clicks) {
-        //Uncheck all checkboxes
-        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-      } else {
-        //Check all checkboxes
-        $(".mailbox-messages input[type='checkbox']").iCheck("check");
-        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-      }
-      $(this).data("clicks", !clicks);
-    });
-    //Handle starring for glyphicon and font awesome
-    $(".mailbox-star").click(function(e) {
-      e.preventDefault();
-      //detect type
-      var $this = $(this).find("a > i");
-      var glyph = $this.hasClass("glyphicon");
-      var fa = $this.hasClass("fa");
-      //Switch states
-      if (glyph) {
-        $this.toggleClass("glyphicon-star");
-        $this.toggleClass("glyphicon-star-empty");
-      }
-      if (fa) {
-        $this.toggleClass("fa-star");
-        $this.toggleClass("fa-star-o");
-      }
-    });
-  });
   </script>
 </body>
 
