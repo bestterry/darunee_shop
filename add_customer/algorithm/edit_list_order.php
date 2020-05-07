@@ -11,14 +11,22 @@ $province_id = $_POST['province_name'];
 $amphur_id = $_POST['amphur_name'];
 $district_code = $_POST['district_name'];
 
+
+  if (empty($_POST['request'])) {
+    $request = "N";
+  }else{
+    $request = "Y";
+  }
+
+
 if(empty($province_id)){
    //update addorder
-   $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', note = '$note' WHERE id_addorder = $id_addorder";
+   $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', note = '$note', request = '$request' WHERE id_addorder = $id_addorder";
    mysqli_query($conn,$sql_Uaddorder);
  //-update addorder
 }else{
    //update addorder
-   $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', province_id = '$province_id', amphur_id = '$amphur_id', district_code = '$district_code', note = '$note' WHERE id_addorder = $id_addorder";
+   $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', province_id = '$province_id', amphur_id = '$amphur_id', district_code = '$district_code', note = '$note', request = '$request' WHERE id_addorder = $id_addorder";
    mysqli_query($conn,$sql_Uaddorder);
  //-update addorder
 } 

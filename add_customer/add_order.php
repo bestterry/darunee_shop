@@ -286,150 +286,150 @@ $mysqli = connect();
         });
       </script>
 
-    <script>
-        $(document).ready(function(){
-          var i=1; 
-          $('#add').click(function(){
-            i++;
-            $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control" onchange="sSelect'+i+'(this.value)" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td><input type="number" name="price[]" id="price'+i+'" onKeyUp="calcfunc'+i+'()" placeholder="บ/น" class="form-control text-center" /></td><td class="text-center"><input type="text" name="num[]" id="num'+i+'" onKeyUp="calcfunc'+i+'()" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="number" name="money[]" id="money'+i+'" placeholder="เงิน" class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><i class="fa fa-minus"></i></button></td></tr>');
-            console.log(i);
-          });
-          
-          $(document).on('click', '.btn_remove', function(){
-            var button_id = $(this).attr("id"); 
-            $('#row'+button_id+'').remove();
-          });
-          
-          $('#submit').click(function(){		
-            $.ajax({
-              success:function(data)
-              {
-                alert(data);
-                $('#add_name')[0].reset();
-              }
+      <script>
+          $(document).ready(function(){
+            var i=1; 
+            $('#add').click(function(){
+              i++;
+              $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control" onchange="sSelect'+i+'(this.value)" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option><?php $product = "SELECT * FROM product";$objq_product = mysqli_query($mysqli,$product);while($value = $objq_product->fetch_array()){?><option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'].'_'.$value['unit'];?></option> <?php }?></select></td><td><input type="number" name="price[]" id="price'+i+'" onKeyUp="calcfunc'+i+'()" placeholder="บ/น" class="form-control text-center" /></td><td class="text-center"><input type="text" name="num[]" id="num'+i+'" onKeyUp="calcfunc'+i+'()" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="number" name="money[]" id="money'+i+'" placeholder="เงิน" class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><i class="fa fa-minus"></i></button></td></tr>');
+              console.log(i);
             });
-          });
-          
-        });
-
-        function sSelect(value){
-            $.ajax({
-                      type:"POST",
-                      url:"select_product.php",
-                      data:{value:value},
-                      success:function(data){
-                        $("#price").val(data);
-                      }
-                  });
-  
-              return false;
-              }
-
             
+            $(document).on('click', '.btn_remove', function(){
+              var button_id = $(this).attr("id"); 
+              $('#row'+button_id+'').remove();
+            });
+            
+            $('#submit').click(function(){		
+              $.ajax({
+                success:function(data)
+                {
+                  alert(data);
+                  $('#add_name')[0].reset();
+                }
+              });
+            });
+            
+          });
 
-        function sSelect2(value){
-            $.ajax({
-                      type:"POST",
-                      url:"select_product.php",
-                      data:{value:value},
-                      success:function(data){
-                        $("#price2").val(data);
-                      }
-                  });
-  
-              return false;
-              }
-        
-        function sSelect3(value){
-            $.ajax({
-                      type:"POST",
-                      url:"select_product.php",
-                      data:{value:value},
-                      success:function(data){
-                        $("#price3").val(data);
-                      }
-                  });
-  
-              return false;
-              }
+          function sSelect(value){
+              $.ajax({
+                        type:"POST",
+                        url:"select_product.php",
+                        data:{value:value},
+                        success:function(data){
+                          $("#price").val(data);
+                        }
+                    });
+    
+                return false;
+                }
+
               
-        function sSelect4(value){
-            $.ajax({
-                      type:"POST",
-                      url:"select_product.php",
-                      data:{value:value},
-                      success:function(data){
-                        $("#price4").val(data);
-                      }
-                  });
-  
-              return false;
-              }
-              
-        function sSelect5(value){
-            $.ajax({
-                      type:"POST",
-                      url:"select_product.php",
-                      data:{value:value},
-                      success:function(data){
-                        $("#price5").val(data);
-                      }
-                  });
-  
-              return false;
+
+          function sSelect2(value){
+              $.ajax({
+                        type:"POST",
+                        url:"select_product.php",
+                        data:{value:value},
+                        success:function(data){
+                          $("#price2").val(data);
+                        }
+                    });
+    
+                return false;
+                }
+          
+          function sSelect3(value){
+              $.ajax({
+                        type:"POST",
+                        url:"select_product.php",
+                        data:{value:value},
+                        success:function(data){
+                          $("#price3").val(data);
+                        }
+                    });
+    
+                return false;
+                }
+                
+          function sSelect4(value){
+              $.ajax({
+                        type:"POST",
+                        url:"select_product.php",
+                        data:{value:value},
+                        success:function(data){
+                          $("#price4").val(data);
+                        }
+                    });
+    
+                return false;
+                }
+                
+          function sSelect5(value){
+              $.ajax({
+                        type:"POST",
+                        url:"select_product.php",
+                        data:{value:value},
+                        success:function(data){
+                          $("#price5").val(data);
+                        }
+                    });
+    
+                return false;
+                }
+
+          function sSelect6(value){
+              $.ajax({
+                        type:"POST",
+                        url:"select_product.php",
+                        data:{value:value},
+                        success:function(data){
+                          $("#price6").val(data);
+                        }
+                    });
+    
+                return false;
+                }
+                
+          function calcfunc() {
+                var val1 = parseFloat(document.form1.price.value);
+                var val2 = parseFloat(document.form1.num.value);
+                document.form1.money.value=val1*val2;
               }
 
-        function sSelect6(value){
-            $.ajax({
-                      type:"POST",
-                      url:"select_product.php",
-                      data:{value:value},
-                      success:function(data){
-                        $("#price6").val(data);
-                      }
-                  });
-  
-              return false;
-              }
-              
-        function calcfunc() {
-              var val1 = parseFloat(document.form1.price.value);
-              var val2 = parseFloat(document.form1.num.value);
-              document.form1.money.value=val1*val2;
+          function calcfunc2() {
+              var val1 = parseFloat(document.form1.price2.value);
+              var val2 = parseFloat(document.form1.num2.value);
+              document.form1.money2.value=val1*val2;
             }
 
-        function calcfunc2() {
-            var val1 = parseFloat(document.form1.price2.value);
-            var val2 = parseFloat(document.form1.num2.value);
-            document.form1.money2.value=val1*val2;
-          }
+            function calcfunc3() {
+              var val1 = parseFloat(document.form1.price3.value);
+              var val2 = parseFloat(document.form1.num3.value);
+              document.form1.money3.value=val1*val2;
+            }
 
-          function calcfunc3() {
-            var val1 = parseFloat(document.form1.price3.value);
-            var val2 = parseFloat(document.form1.num3.value);
-            document.form1.money3.value=val1*val2;
-          }
+            function calcfunc4() {
+              var val1 = parseFloat(document.form1.price4.value);
+              var val2 = parseFloat(document.form1.num4.value);
+              document.form1.money4.value=val1*val2;
+            }
 
-          function calcfunc4() {
-            var val1 = parseFloat(document.form1.price4.value);
-            var val2 = parseFloat(document.form1.num4.value);
-            document.form1.money4.value=val1*val2;
-          }
+            function calcfunc5() {
+              var val1 = parseFloat(document.form1.price5.value);
+              var val2 = parseFloat(document.form1.num5.value);
+              document.form1.money5.value=val1*val2;
+            }
 
-          function calcfunc5() {
-            var val1 = parseFloat(document.form1.price5.value);
-            var val2 = parseFloat(document.form1.num5.value);
-            document.form1.money5.value=val1*val2;
-          }
+            function calcfunc6() {
+              var val1 = parseFloat(document.form1.price6.value);
+              var val2 = parseFloat(document.form1.num6.value);
+              document.form1.money6.value=val1*val2;
+            }
+              
 
-          function calcfunc6() {
-            var val1 = parseFloat(document.form1.price6.value);
-            var val2 = parseFloat(document.form1.num6.value);
-            document.form1.money6.value=val1*val2;
-          }
-            
-
-    </script>
+      </script>
       
 
 </body>

@@ -50,26 +50,6 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <style>
-    #customers {
-      
-      width: 100%;
-    }
-
-    #customers td, #customers th {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
-
-    #customers tr:nth-child(even){background-color: #f2f2f2;}
-
-
-    #customers th {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      text-align: center;
-      background-color: #99CCFF;
-    
-    }
       .button2 {
         background-color: #b35900;
         color : white;
@@ -240,38 +220,6 @@
                     }
               ?>
             
-              <br>
-              <br>
-              <div class="box-header text-center with-border">
-                <font size="5">
-                  <B align="center">เงินขายอยู่กับ(ทีมส่ง) </B>
-                </font>
-              </div>
-              <table id="customers">
-                <tbody>
-                  <tr>
-                    <th class="text-center" width="20%">เงินสด</th>
-                    <th class="text-center" width="20%">รับเช็ค</th>
-                    <th class="text-center" width="20%">ขาย สกต.</th>
-                    <th class="text-center" width="20%">เงินเชื่อ</th>
-                    <th class="text-center" width="20%">ฝากขาย</th>
-                  </tr>
-                  <tr>
-                    <?php 
-                      $rc_category = "SELECT * FROM rc_category";
-                      $objq_category = mysqli_query($conn,$rc_category);
-                      while($value = $objq_category->fetch_assoc()){
-                        $id_category = $value['id_category'];
-                        $sql_sum = "SELECT SUM(money) FROM rc_receive_money WHERE id_category = $id_category AND status_office = 'N' AND status_boss = 'N'";
-                        $objq_sum = mysqli_query($conn,$sql_sum);
-                        $objr_sum = mysqli_fetch_array($objq_sum);
-                    ?>
-                    <td class="text-center"> <?php echo $objr_sum['SUM(money)']; ?> </td>
-                      <?php } ?>
-                  </tr>
-                </tbody>
-              </table>
-
                 <br>
                 <br>
                 <div class="box-header text-center with-border">
@@ -279,15 +227,15 @@
                     <B>เงินขายค้างรับ</B>  
                   </font>                        
                 </div>
-                <table id="customers">
+                <table class="table table-bordered table-striped">
                   <thead>
-                    <tr class="info" >
-                      <th class="text-center" width="25%">หน่วยขาย</th>
-                      <th class="text-center" width="15%">เงินสด</th>
-                      <th class="text-center" width="15%">รับเช็ค</th>
-                      <th class="text-center" width="15%">ขาย สกต.</th>
-                      <th class="text-center" width="15%">เงินเชื่อ</th>
-                      <th class="text-center" width="15%">ฝากขาย</th>
+                    <tr>
+                      <th class="text-center" width="25%"> <font color="red">หน่วยขาย</font> </th>
+                      <th class="text-center" width="15%"> <font color="red">เงินสด</font> </th>
+                      <th class="text-center" width="15%"> <font color="red">รับเช็ค</font> </th>
+                      <th class="text-center" width="15%"> <font color="red">ขาย สกต.</font> </th>
+                      <th class="text-center" width="15%"> <font color="red">เงินเชื่อ</font> </th>
+                      <th class="text-center" width="15%"> <font color="red">ฝากขาย</font> </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -308,7 +256,7 @@
                         if (isset($of_money) && !$of_money == 0) {
                           $value_rc = $of_money;
                         }else{
-                              $value_rc = 0;
+                              $value_rc = '-';
                         } 
                     ?>
                       <td class="text-center" ><?php echo $value_rc; ?></td>
@@ -320,9 +268,7 @@
                                           WHERE status = 'employee'
                                           AND NOT id_member = 3
                                           AND NOT id_member = 8
-                                          AND NOT id_member = 19
-                                          AND NOT id_member = 28 
-                                          AND NOT id_member = 32";
+                                          AND NOT id_member = 19";
                         $objq_member = mysqli_query($conn,$sql_idmember);
                         while($value = $objq_member->fetch_assoc()){
                           $id_member = $value['id_member'];
@@ -342,7 +288,7 @@
                         if (isset($rc_money) && !$rc_money == 0) {
                           $value_rc = $rc_money;
                         }else{
-                              $value_rc = 0;
+                              $value_rc = '-';
                         } 
                     ?>
                           <td class="text-center" ><?php echo $value_rc; ?></td>
@@ -353,7 +299,7 @@
                         }
                     ?>
                     <tr>
-                      <th class="info text-center">รวม</th>
+                      <th class="text-center"> <font color="red">รวมเงิน</font> </th>
                       <?php 
                       $objq_category3 = mysqli_query($conn,$sql_category);
                       while($value_category = $objq_category3->fetch_assoc()){
@@ -368,11 +314,47 @@
                               $value_tt = 0;
                         } 
                     ?>
-                      <th class="info text-center" ><?php echo $value_tt; ?></th>
+                      <th class="text-center" > <font color="red"><?php echo $value_tt; ?></font> </th>
                     <?php } ?>
                     </tr>
                   </tbody>
                 </table>
+                <br>
+                <br>
+              <div class="box-header text-center with-border">
+                <font size="5">
+                  <B align="center">เงินขายอยู่กับ(ทีมส่ง) </B>
+                </font>
+              </div>
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th class="text-center" width="25%"> <font color="red">หน่วยรถ</font> </th>
+                    <th class="text-center" width="15%"> <font color="red">เงินสด</font> </th>
+                    <th class="text-center" width="15%"> <font color="red">รับเช็ค</font> </th>
+                    <th class="text-center" width="15%"> <font color="red">ขาย สกต.</font> </th>
+                    <th class="text-center" width="15%"> <font color="red">เงินเชื่อ</font> </th>
+                    <th class="text-center" width="15%"> <font color="red">ฝากขาย</font> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center"></td>
+                    <?php 
+                      $rc_category = "SELECT * FROM rc_category";
+                      $objq_category = mysqli_query($conn,$rc_category);
+                      while($value = $objq_category->fetch_assoc()){
+                        $id_category = $value['id_category'];
+                        $sql_sum = "SELECT SUM(money) FROM rc_receive_money WHERE id_category = $id_category AND status_office = 'N' AND status_boss = 'N'";
+                        $objq_sum = mysqli_query($conn,$sql_sum);
+                        $objr_sum = mysqli_fetch_array($objq_sum);
+                    ?>
+                    <td class="text-center"> <?php echo $objr_sum['SUM(money)']; ?> </td>
+                      <?php } ?>
+                  </tr>
+                </tbody>
+              </table>
+
               </div>
 
               <div class="box-footer">

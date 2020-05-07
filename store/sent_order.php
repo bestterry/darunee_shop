@@ -1,5 +1,6 @@
 <?php
   require "../config_database/config.php";
+  require "../config_database/session.php";
   function DateThai($strDate)
   {
     $strYear = date("Y",strtotime($strDate))+543;
@@ -33,8 +34,6 @@
   <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="../bower_components/morris.js/morris.css">
@@ -48,28 +47,6 @@ folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
-  <style>
-          #customers {
-            
-            width: 100%;
-          }
-
-          #customers td, #customers th {
-            border: 1px solid #ddd;
-            padding: 8px;
-          }
-
-          #customers tr:nth-child(even){background-color: #f2f2f2;}
-
-
-          #customers th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: center;
-            background-color: #99CCFF;
-          
-          }
-  </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
@@ -104,16 +81,19 @@ folder instead of downloading all of them to reduce the load. -->
           </div>
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                <table id="customers">
-                  <tbody>
+                <table id="example2" class="table table-bordered table-striped">
+                  <thead>
                     <tr>
                       <th class="text-center" width="5%">ส่ง</th>
                       <th class="text-center" width="5%">ที่</th>
-                      <th class="text-center" width="75%">ที่อยู่ลูกค้า</th>
+                      <th class="text-center" width="70%">ที่อยู่ลูกค้า</th>
+                      <th class="text-center" width="5%">ทวง</th>
+                      <th class="text-center" width="5%">เบิก</th>
                       <th class="text-center" width="5%">วัน</th>
                       <th class="text-center" width="5%">ข้อมูล</th>
-                      <th class="text-center" width="5%">แก้</th>
                     </tr>
+                  </thead>
+                  <tbody>
                   <?php 
                     $sql_addorder = "SELECT * FROM addorder 
                                     INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
@@ -122,14 +102,36 @@ folder instead of downloading all of them to reduce the load. -->
                                     WHERE addorder.status = 'pending' ORDER BY addorder.id_addorder DESC";
                     $objq_addorder = mysqli_query($conn,$sql_addorder);
                     while($value = $objq_addorder->fetch_assoc()){
+                      $id_wd = $value['id_wd'];
+                      $request = $value['request'];
                   ?>
                     <tr>
                       <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะส่งสินค้า [<?php echo '('.$value['id_addorder'].')  '.$value['name_customer'].'   บ.'.$value['village']; ?>] หรือไม่ ?')";>ส่ง</a></td>
                       <td class="text-center"><?php echo $value['id_addorder']; ?></td>
                       <td ><?php echo $value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
+                      <?php
+                        if($request == "N") {
+                      ?>
+                      <td class="text-center" ><a class="btn btn-danger btn-xs">N</a></td>
+                      <?php
+                        }else{
+                      ?>
+                      <td class="text-center" ><a class="btn btn-success btn-xs">Y</a></td>
+                      <?php }?>
+
+                      <?php
+                        if(empty($id_wd)) {
+                      ?>
+                      <td class="text-center"><a  href="algorithm/update_id_wd.php?id_member=<?php echo $id_member; ?>&&id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-danger btn-xs">N</a></td>
+                      <?php
+                        }else{
+                      ?>
+                      <td class="text-center" ><a class="btn btn-success btn-xs">Y</a></td>
+                      <?php }?>
+                      <!-- <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td> -->
                       <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
                       <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
-                      <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td>
+                      
                     </tr>
                   <?php 
                     }
@@ -173,9 +175,9 @@ folder instead of downloading all of them to reduce the load. -->
     $(function () {
       $('#example1').DataTable()
       $('#example2').DataTable({
-        'paging'      : true,
+        'paging'      : false,
         'lengthChange': false,
-        'searching'   : false,
+        'searching'   : true,
         'ordering'    : true,
         'info'        : true,
         'autoWidth'   : false

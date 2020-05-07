@@ -89,11 +89,11 @@
                   <div class="box box-default">
                   <div class="box-header text-center with-border">
                       <font size="5">
-                        <B> รายการขายรายวัน </B>
+                        <B> สรุปรายวัน </B>
                       </font>
                     </div>
                     <!-- /.box-header -->
-                    <form action="checkday_sale_history.php" method="post">
+                    <form action="abstract_today2.php" method="post">
                       <div class="row">
                         <div class="container">
                           <div class="col-md-12">
@@ -154,6 +154,7 @@
   <script src="../dist/js/demo.js"></script>
   <script src="../plugins/iCheck/icheck.min.js"></script>
   <script>
+
       $(document).ready( function() {
           var now = new Date();
       

@@ -1,20 +1,10 @@
 <?php 
   require "../config_database/config.php";
   require "../session.php"; 
+  require "menu/date.php";
   $aday = $_POST['aday'];
   $bday = $_POST['bday'];
-  function DateThai($strDate)
-	{
-		$strYear = date("Y",strtotime($strDate))+543;
-		$strMonth= date("n",strtotime($strDate));
-		$strDay= date("j",strtotime($strDate));
-		$strHour= date("H",strtotime($strDate));
-		$strMinute= date("i",strtotime($strDate));
-		$strSeconds= date("s",strtotime($strDate));
-		$strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-		$strMonthThai=$strMonthCut[$strMonth];
-		return "$strDay $strMonthThai $strYear";
-	}
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +14,7 @@
   <?php require('../font/font_style.php');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ทีมงานคุณดารุณี</title> b  
+  <title>ทีมงานคุณดารุณี</title>
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -72,7 +62,7 @@
                 <a href="admin.php" class="btn btn-success"><< เมนูหลัก</a>
               </div>
               <font size="5">
-                <B> เงินขาย <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
+                <B> เงินขายสะสม <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
               </font>
             </div>
             <div class="box-body no-padding">
@@ -80,10 +70,9 @@
                 <table class="table table-striped table-bordered">
                   <tbody>
                     <tr class="info" >
-                      <th class="text-center" width="25%">วันที่</th>
-                      <th class="text-center" width="25%">เงินขาย</th>
-                      <th class="text-center" width="25%">เงินขายสะสม</th>
-                      <th class="text-center" width="25%">เงินขายเฉลี่ย</th>
+                      <th class="text-center" width="33%">วันที่</th>
+                      <th class="text-center" width="33%">เงินขาย</th>
+                      <th class="text-center" width="33%">เงินขายสะสม</th>
                     </tr>
                     <?php
                         $total_money = 0;
@@ -111,10 +100,9 @@
 
                     ?>
                     <tr>
-                    <td class="text-center"><?php echo DateThai($date); ?></td>
+                    <td class="text-center"><?php echo DateThai3($date); ?></td>
                       <td class="text-center"><?php echo $all_money;?></td>
                       <td class="text-center"><?php echo $total_money;?></td>
-                      <td class="text-center"><?php echo round($total_money/$i);?></td>
                       <?php $i++;}?>
                   </tbody>
                 </table>

@@ -4,11 +4,6 @@
   require "../session.php"; 
   require "menu/date.php";
 
-  $list_product = "SELECT * FROM product";
-  $query_product = mysqli_query($conn,$list_product);
-  $query_product2 = mysqli_query($conn,$list_product);
-  $objq_profit = mysqli_query($conn,$list_product);
-  $strDate = date('d-m-Y');
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +74,7 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#profit_today" data-toggle="tab">ยอดจำหน่าย</a></li>
+                <li class="active"><a href="#profit_today" data-toggle="tab">กำไรขายวันนี้</a></li>
                 <li><a href="#profit_back" data-toggle="tab">กำไรขายย้อนหลัง</a></li>
                 <li><a href="#profit_duration" data-toggle="tab">กำไรขายตามช่วงเวลา</a></li>
                 <div align="right">
@@ -94,9 +89,10 @@
                   <div class="box box-default">
                     <div class="box-header text-center with-border">
                       <font size="5">
-                        <B>กำไรขาย 
+                        <B>กำไรขายสินค้า 
                           <font size="5" color="red">
                             <?php 
+                                $strDate = date('d-m-Y');
                                 echo DateThai($strDate);
                             ?>
                           </font>
@@ -105,26 +101,27 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                      <div class="mailbox-read-message col-md-12">
-                        <!-- ------------------------------กำไร---------------------------- -->
-                        <table class="table">
+
+                      <div class="row">
+                        <table class="table table-striped table-bordered">
                           <thead>
-                            <tr>
-                              <th class="text-center" width="17%"> <font color="red">สินค้า_หน่วย</font> </th>
-                              <th class="text-center" width="16%"> <font color="red">จำนวน</font> </th>
-                              <th class="text-center" width="16%"> <font color="red">ทุน/หน่วย</font> </th>
-                              <th class="text-center" width="16%"> <font color="red">ทุนซื้อ</font> </th>
-                              <th class="text-center" width="16%"> <font color="red">เงินขาย</font> </th>
-                              <th class="text-center" width="16%"> <font color="red">กำไรขาย</font> </th>
+                            <tr class="info" >
+                              <th class="text-center" width="30%">สินค้า_หน่วย</th>
+                              <th class="text-center" width="14%">จำนวน</th>
+                              <th class="text-center" width="14%">บ/หน่วย</th>
+                              <th class="text-center" width="14%">ทุนซื้อ(บ)</th>
+                              <th class="text-center" width="14%">เงินขาย(บ)</th>
+                              <th class="text-center" width="14%">กำไรขาย(บ)</th>
                             </tr>
                           </thead>
                           <tbody>
-                          <?php
+                            <?php
                             $a = 0;
                             $b = 0;
                             $total_money = 0;
-                              
-                              while($value = $objq_profit-> fetch_assoc()){
+                              $sql_checkproduct = "SELECT * FROM product";
+                              $objq_checkprouct = mysqli_query($conn,$sql_checkproduct);
+                              while($value = $objq_checkprouct-> fetch_assoc()){
                                 $id_product = $value['id_product'];
                                 $price_num = $value['price_num'];
 
@@ -144,12 +141,13 @@
                                 $total_salemoney = $money_salecar + $money_salestore;
                                 $price_product = $total_num * $price_num;
                                 $profit_sale = $total_salemoney - $price_product;
+
                                 if($total_salemoney == 0){
 
                                 }else{
                             ?>
                             <tr>
-                              <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit'];?></td>
+                              <td><?php echo $value['name_product'].'_'.$value['unit'];?></td>
                               <td class="text-center"><?php echo $total_num; ?></td>
                               <td class="text-center"><?php echo $price_num; ?></td>
                               <td class="text-center"><?php echo round($price_product); ?></td>
@@ -161,19 +159,18 @@
                                 $a = $a + $total_salemoney;
                                 $b = $b + $price_product;
                                 $total_money = $total_money + $profit_sale; 
-                              }
+                            }
                             ?>
                             <tr>
-                              <th></th>
-                              <th></th>
-                              <th class="text-center"> <font color="red">รวมเงิน</font> </th>
-                              <th class="text-center"> <font color="red"><?php echo round($b); ?></font></th>
-                              <th class="text-center"> <font color="red"><?php echo round($a); ?></font> </th>
-                              <th class="text-center"> <font color="red"><?php echo round($total_money); ?></font> </th>
+                              <th bgcolor="#EAF4FF"></th>
+                              <th bgcolor="#EAF4FF" ></th>
+                              <th bgcolor="#EAF4FF" class="text-right">รวมเงิน</th>
+                              <th bgcolor="#EAF4FF" class="text-center"><?php echo round($b); ?></th>
+                              <th bgcolor="#EAF4FF" class="text-center"><?php echo round($a); ?></th>
+                              <th bgcolor="#EAF4FF" class="text-center"><?php echo round($total_money); ?></th>
                             </tr>
                           </tbody>
-                        </table> 
-                        <!-- ------------------------------//กำไร---------------------------- -->
+                        </table>
                       </div>
                     </div>
                   </div>
@@ -184,29 +181,33 @@
                 <div class="tab-pane" id="profit_back">
                   <div class="box box-default">
                     <div class="box-header with-border text-center">
-                      <B><font size="5">กำไรขายตามช่วงเวลา</font></B>
+                      
                     </div>
-                    <form action="profit_back.php" method="post">
-                      <div class="box-body">
-                        <div class="row">
-                          <div class="container">
-                            <div class="col-md-12">
-                              <div class="row">
-                                <div class="col-xs-4 col-md-4 text-right"> <label> <font size="5">วันที่ :</font></label> </div>
-                                <div class="col-xs-4 col-md-4">
-                                  <input type="date" class="form-control" name="day">
-                                </div>
-                                <div class="col-xs-4 col-md-4">
-                                </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="container">
+                          <form action="profit_back.php" method="post">
+                            <div class="col-md-5">
+                              <div class="box-body">
+                                <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้</strong>
+                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบกำไรขายย้อนหลัง</p>
                               </div>
                             </div>
-                          </div>
+                            <div class="col-md-5">
+                              <div class="form-group">
+                                <label>วันที่ : </label>
+                                <input type="date" name="day">
+                              </div>
+                              <div class="box-footer">
+                                <button type="submit" class="btn btn-success pull-left"><i
+                                    class="fa fa-check-square-o"></i> ตกลง</button>
+                              </div>
+                            </div>
+                          </form>
                         </div>
                       </div>
-                      <div class="box-footer text-center">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> ดูกำไรย้อนหลัง </button>
-                      </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
                 <!-- /.tab-pane -->
@@ -214,33 +215,38 @@
                 <!-- tab-pane -->
                 <div class="tab-pane" id="profit_duration">
                   <div class="box box-default">
-                    <div class="box-header with-border text-center">
-                      <B><font size="5">กำไรขายตามช่วงเวลา</font></B>
+                    <div class="box-header with-border">
+
                     </div>
                     <!-- /.box-header -->
-                    <form action="profit_duration.php" method="post">
-                      <div class="box-body">
-                        <div class="row">
-                          <div class="container">
-                            <div class="col-md-6">
-                              <div class="form-group text-center">
-                                <label> <font size="5">ตั้งเเต่</font></label>
-                                <input type="date"  class="form-control"  name="aday">
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="container">
+                          <form action="profit_duration.php" method="post">
+                            <div class="col-md-5">
+                              <div class="box-body">
+                                <strong><i class="fa fa-file-text-o margin-r-5"></i> การใช้ </strong>
+                                <p> -กรุณาเลือกวันที่ เพื่อตรวจสอบกำไรขายย้อนหลัง</p>
                               </div>
                             </div>
-                            <div class="col-md-6">
-                              <div class="form-group text-center">
-                                <label><font size="5">ถึง</font></label></label>
-                                <input type="date" class="form-control" name="bday">
+                            <div class="col-md-5">
+                              <div class="form-group">
+                                <label>ตั้งเเต่ : </label>
+                                <input type="date" name="aday">
+                              </div>
+                              <div class="form-group">
+                                <label>ถึง &nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                                <input type="date" name="bday">
+                              </div>
+                              <div class="box-footer">
+                                <button type="submit" class="btn btn-success pull-left"><i
+                                    class="fa fa-check-square-o"></i> ตกลง</button>
                               </div>
                             </div>
-                          </div>
+                          </form>
                         </div>
                       </div>
-                      <div class="box-footer text-center">
-                        <button type="submit" class="btn btn-success "><i class="fa fa-check-square-o"></i> ดูยอดตามช่วงเวลา</button>
-                      </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
                 <!-- /.tab-pane -->

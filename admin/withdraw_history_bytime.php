@@ -3,7 +3,9 @@
   require "../session.php";
   require "menu/date.php";
 
-  $day = $_POST['day'];
+  $aday = $_POST['aday'];
+  $bday = $_POST['bday'];
+
   $list_product = "SELECT * FROM product WHERE status_stock = 1";
   $objq_product = mysqli_query($conn,$list_product);
   $objq_product2 = mysqli_query($conn,$list_product);
@@ -80,13 +82,10 @@
                 <div class="box-header with-border">
                   <p align="center">
                     <font size="5">
-                      <B>ยอดเบิกสินค้า 
-                        <font color="red">
-                      <?php 
-                        $strDate = date('d-m-Y'); 
-                        echo DateThai($day);
-                      ?>
-                        </font> 
+                      <B>ยอดเบิกสินค้า ตั้งแต่
+                      <font color="red"> <?php echo DateThai($aday); ?></font> 
+                      ถึง 
+                      <font color="red"> <?php echo DateThai($bday); ?></font> 
                       </B>
                     </font>
                   </p>
@@ -102,7 +101,7 @@
                         <?php 
                           while($value = $objq_member->fetch_assoc()){
                         ?>
-                        <td class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></td>
+                        <th class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
                         <?php 
                           }
                         ?>
@@ -126,7 +125,7 @@
                             
                             $id_member = $value_member['id_member'];
                             $sql_draw = "SELECT SUM(num_draw) FROM draw_history WHERE id_product = $id_product 
-                                        AND id_member = $id_member AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
+                                        AND id_member = $id_member AND (datetime between '$aday 00:00:00' and '$bday 23:59:59')";
                             $objq_draw = mysqli_query($conn,$sql_draw);
                             $objr_draw = mysqli_fetch_array($objq_draw);
 
@@ -149,73 +148,6 @@
                       ?>
                     </tbody>
                   </table>
-                  <br>
-                  <br>
-                  <div class="text-center">
-                    <font size="5"><B>ประวัติการเบิกสินค้า
-                     <font color="red">
-                      <?php 
-                        $strDate = date('d-m-Y'); 
-                        echo DateThai($day);
-                      ?>
-                        </font> 
-                      </B>
-                    </font>
-                  </div>
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th class="text-center" width="5%"> <font color="red">ที่</font> </th>
-                        <th class="text-center" width="25%"> <font color="red">สินค้า_หน่วย</font> </th>
-                        <th class="text-center" width="8%"> <font color="red">จำนวน</font> </th>
-                        <th class="text-center" width="10%"> <font color="red">ผู้เบิก</font> </th>
-                        <th class="text-center" width="10%"> <font color="red">เบิกจาก</font></th>
-                        <th class="text-center" width="30%"> <font color="red">หมายเหตุ</font> </th>
-                        <th class="text-center" width="6%"> <font color="red">เวลา</font> </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php #endregion
-                      $i = 1;
-                      $date = "SELECT * FROM draw_history 
-                                INNER JOIN product ON draw_history.id_product = product.id_product 
-                                INNER JOIN member ON draw_history.id_member = member.id_member
-                                INNER JOIN zone ON draw_history.id_zone = zone.id_zone
-                                WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
-                      $objq = mysqli_query($conn, $date);
-                      while ($value = $objq->fetch_assoc()) {
-                        ?>
-                        <tr>
-                          <td class="text-center">
-                            <?php echo $i; ?>
-                          </td>
-                          <td class="text-center">
-                            <?php echo $value['name_product'] . '_' . $value['unit']; ?>
-                          </td>
-                          <td class="text-center">
-                            <?php echo $value['num_draw']; ?>
-                          </td>
-                          <td class="text-center">
-                            <?php echo $value['name']; ?>
-                          </td>
-                          <td class="text-center">
-                            <?php echo $value['name_zone']; ?>
-                          </td>
-                          <td class="text-center">
-                            <?php echo $value['note']; ?>
-                          </td>
-                          <td class="text-center">
-                            <?php echo DateThai2($value['datetime']); ?>
-                          </td>
-                        </tr>
-                        <?php
-                        $i++;
-                      }
-                      ?>
-                    </tbody>
-                  </table>
-                  <!-- ------------------------------//ยอดขายรวม---------------------------- -->
-                  
                 </div>
               </div>
             </div>

@@ -53,6 +53,24 @@ $pdf=new PDF('P','mm','A4');
                 $objq_addorder = mysqli_query($conn,$sql_addorder);
                 while($value = $objq_addorder->fetch_assoc ())
                 { 
+                  $request = $value['request'];
+                  if($request == 'Y'){
+                    $request_ans = '[ ทวง ]';
+                  }else{
+                    $request_ans = '';
+                  }
+
+                  $id_wd = $value['id_wd'];
+                  if($id_wd == 0) {
+                    $test = '';
+                  }else{
+                    $sql_member = "SELECT name FROM member WHERE id_member = $id_wd";
+                    $objq_member = mysqli_query($conn,$sql_member);
+                    $objr_member = mysqli_fetch_array($objq_member);
+                    $test = "[ เบิก : ". $objr_member['name'] ." ]";
+                  }
+
+
                   $id_addorder = $value['id_addorder'];
                   $pdf->SetFont('cordia','',24);
                   $pdf->SetTextColor(255,0,0); 
@@ -87,7 +105,7 @@ $pdf=new PDF('P','mm','A4');
                   $pdf->SetXY($x + 100, $y);
                 
                   //ที่อยู่ลูกค้า 
-                  $pdf->MultiCell( 140  , 7 , iconv( 'UTF-8','cp874' ,$value['id_addorder'].' '.$value['name_customer']. '
+                  $pdf->MultiCell( 140  , 7 , iconv( 'UTF-8','cp874' ,$value['id_addorder'].' '.$value['name_customer']. '       '.$request_ans .'       '.$test.'
 บ.'.$value['village']. '
 ต.'.$value['district_name'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'].'
 '.DateThai($value['datetime']).' '.$value['name_member']  .' '. DateTime($value['datetime']).' '.$value['tel']  .'

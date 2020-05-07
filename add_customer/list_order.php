@@ -73,57 +73,77 @@ folder instead of downloading all of them to reduce the load. -->
     <div class="content-wrapper">
       <!-- Main content -->
       <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-            <div class="box box-primary">
-              <!-- /.box-header -->
-            <div class="box-header with-border">
-              <a type="button" href="order.php" class="btn button2 pull-left"><< เมนูหลัก</a>
-              <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-success pull-right">ORDER วันนี้</a>
-            </div>
-              <div class="box-body no-padding">
-                <div class="mailbox-read-message">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th class="text-center" width="5%">#</th>
-                      <th class="text-center" width="75%">ข้อมูล ORDER ค้างส่ง</th>
-                      <th class="text-center" width="5%">#</th>
-                      <th class="text-center" width="5%">#</th>
-                      <th class="text-center" width="5%">#</th>
-                      <th class="text-center" width="5%">#</th>
-                    </tr>
-                  </thead>
-                    <tbody>
-                  <?php 
-                    $sql_addorder = "SELECT * FROM addorder 
-                                    INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
-                                    INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
-                                    INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
-                                    WHERE addorder.status = 'pending' ORDER BY addorder.id_addorder DESC";
-                    $objq_addorder = mysqli_query($mysqli,$sql_addorder);
-                    while($value = $objq_addorder->fetch_assoc()){
-                  ?>
-                    <tr>
-                      <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>             
-                      <td ><?php echo $value['id_addorder'].' '.$value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
-                      <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="fa fa-pencil" ></a></td>
-                      <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
-                      <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
-                      <td class="text-center" ><a href="delete_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";>ลบ</a></td>
-                    </tr>
-                  <?php 
-                    }
-                  ?>
-                  </tbody>
-                </table>
+        <div class="row">
+          <div class="col-md-12">
+              <div class="box box-primary">
+                <!-- /.box-header -->
+                <div class="box-header with-border">
+                  <a type="button" href="order.php" class="btn button2 pull-left"><< เมนูหลัก</a>
+                  <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-success pull-right">ORDER วันนี้</a>
                 </div>
+                <div class="box-body no-padding">
+                  <div class="mailbox-read-message">
+                    <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th class="text-center" width="5%">#</th>
+                          <th class="text-center" width="70%">ข้อมูล ORDER ค้างส่ง</th>
+                          <th class="text-center" width="5%">ทวง</th>
+                          <th class="text-center" width="5%">เบิก</th>
+                          <th class="text-center" width="5%">#</th>
+                          <th class="text-center" width="5%">#</th>
+                          <th class="text-center" width="5%">#</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php 
+                          $sql_addorder = "SELECT * FROM addorder 
+                                          INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code
+                                          INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
+                                          INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
+                                          WHERE addorder.status = 'pending' ORDER BY addorder.id_addorder DESC";
+                          $objq_addorder = mysqli_query($mysqli,$sql_addorder);
+                          while($value = $objq_addorder->fetch_assoc()){
+                            $request = $value['request'];
+                            $id_wd = $value['id_wd'];
+                        ?>
+                        <tr>
+                          <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>             
+                          <td ><?php echo $value['id_addorder'].' '.$value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
+                          <?php
+                            if($request == "N") {
+                          ?>
+                          <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-danger btn-xs">N</a></td>
+                          <?php
+                            }else{
+                          ?>
+                          <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs">Y</a></td>
+                          <?php }?>
+                          <?php
+                            if(empty($id_wd)) {
+                          ?>
+                          <td class="text-center"><a href="algorithm/update_id_wd.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=N" class="btn btn-danger btn-xs">N</a></td>
+                          <?php
+                            }else{
+                          ?>
+                          <td class="text-center" ><a href="algorithm/update_id_wd.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=Y" class="btn btn-success btn-xs">Y</a></td>
+                          <?php }?>
+                          <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="fa fa-pencil" ></a></td>
+                          <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
+                          <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
+                         </tr>
+                        <?php 
+                          }
+                        ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="box-footer" align="center"> </div>
               </div>
-              <div class="box-footer" align="center"> </div>
             </div>
           </div>
         </div>
-      </div>
       </section>
     </div>
 

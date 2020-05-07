@@ -3,6 +3,13 @@
   require "../session.php"; 
   require "menu/date.php";
 
+  $member = "SELECT * FROM member 
+            WHERE status = 'employee' AND NOT id_member = 28 AND NOT id_member = 32";
+  $objq_member = mysqli_query($conn,$member);
+
+  $list_product = "SELECT * FROM product";
+  $query_product = mysqli_query($conn,$list_product);
+
   $day = $_POST['day'];
 ?>
 
@@ -58,126 +65,157 @@
     <?php require('menu/header_logout.php');?>
     </header>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-      </section>
-
-      <!-- Main content -->
       <section class="content">
         <div class="row">
-          <!-- form start -->
           <div class="col-md-12">
             <div class="form-group">
               <div class="box box-default">
-                <!-- /.box-header -->
+
+                <div class="box-header text-center with-border">
+                  <a href="profit.php" class="btn button2 pull-left" ><< ย้อนกลับ </a>
+                  <font size="5">
+                    <B>ยอดจำหน่าย 
+                      <font size="5" color="red">
+                        <?php 
+                            echo DateThai($day);
+                        ?>
+                      </font>
+                      </B>  
+                  </font>                        
+                </div>
+                
                 <div class="box-body">
                   <div class="row">
-                    <div class="container">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <th class="text-center" width="30%"> <font color="red">สินค้า_หน่วย</font> </th>
+                          <th class="text-center" width="14%"> <font color="red">จำนวน</font> </th>
+                          <th class="text-center" width="14%"> <font color="red">ทุน/หน่วย</font> </th>
+                          <th class="text-center" width="14%"> <font color="red">ทุนซื้อ</font> </th>
+                          <th class="text-center" width="14%"> <font color="red">เงินขาย</font> </th>
+                          <th class="text-center" width="14%"> <font color="red">กำไรขาย</font> </th>
+                        </tr>
+                        <?php
+                        $a = 0;
+                        $b = 0;
+                        $total_money = 0;
+                          $sql_checkproduct = "SELECT * FROM product WHERE status_stock = 1";
+                          $objq_checkprouct = mysqli_query($conn,$sql_checkproduct);
+                          while($value = $objq_checkprouct-> fetch_assoc()){
+                            $id_product = $value['id_product'];
+                            $price_num = $value['price_num'];
 
-                    <div class="box-header text-center with-border">
-                      <font size="5">
-                        <B>กำไรขาย 
-                          <font size="5" color="red">
-                            <?php 
-                                echo DateThai($day);
-                            ?>
-                          </font>
-                         </B>  
-                      </font>                        
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
+                            $sql_salecar = "SELECT SUM(num),SUM(money) FROM sale_car_history WHERE id_product = $id_product AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
+                            $objq_salecar = mysqli_query($conn,$sql_salecar);
+                            $objr_salecar = mysqli_fetch_array($objq_salecar);
+                            $num_salecar = $objr_salecar['SUM(num)'];
+                            $money_salecar = $objr_salecar['SUM(money)'];
 
-                      <div class="row">
-                        <table class="table">
-                              <tbody>
-                                <tr>
-                                  <th class="text-center" width="30%"> <font color="red">สินค้า_หน่วย</font> </th>
-                                  <th class="text-center" width="14%"> <font color="red">จำนวน</font> </th>
-                                  <th class="text-center" width="14%"> <font color="red">บ/หน่วย</font> </th>
-                                  <th class="text-center" width="14%"> <font color="red">ทุนซื้อ</font> </th>
-                                  <th class="text-center" width="14%"> <font color="red">เงินขาย</font> </th>
-                                  <th class="text-center" width="14%"> <font color="red">กำไรขาย</font> </th>
-                                </tr>
-                                <?php
-                                $a = 0;
-                                $b = 0;
-                                $total_money = 0;
-                                  $sql_checkproduct = "SELECT * FROM product WHERE status_stock = 1";
-                                  $objq_checkprouct = mysqli_query($conn,$sql_checkproduct);
-                                  while($value = $objq_checkprouct-> fetch_assoc()){
-                                    $id_product = $value['id_product'];
-                                    $price_num = $value['price_num'];
+                            $sql_salestore = "SELECT SUM(num),SUM(money) FROM price_history WHERE id_product = $id_product AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
+                            $objq_salestore = mysqli_query($conn,$sql_salestore);
+                            $objr_salestore = mysqli_fetch_array($objq_salestore);
+                            $num_salestore = $objr_salestore['SUM(num)'];
+                            $money_salestore = $objr_salestore['SUM(money)'];
 
-                                    $sql_salecar = "SELECT SUM(num),SUM(money) FROM sale_car_history WHERE id_product = $id_product AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
-                                    $objq_salecar = mysqli_query($conn,$sql_salecar);
-                                    $objr_salecar = mysqli_fetch_array($objq_salecar);
-                                    $num_salecar = $objr_salecar['SUM(num)'];
-                                    $money_salecar = $objr_salecar['SUM(money)'];
-
-                                    $sql_salestore = "SELECT SUM(num),SUM(money) FROM price_history WHERE id_product = $id_product AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
-                                    $objq_salestore = mysqli_query($conn,$sql_salestore);
-                                    $objr_salestore = mysqli_fetch_array($objq_salestore);
-                                    $num_salestore = $objr_salestore['SUM(num)'];
-                                    $money_salestore = $objr_salestore['SUM(money)'];
-
-                                    $total_num = $num_salecar + $num_salestore;
-                                    $total_salemoney = $money_salecar + $money_salestore;
-                                    $price_product = $total_num * $price_num;
-                                    $profit_sale = $total_salemoney - $price_product;
-                                ?>
-                                <tr>
-                                  <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit'];?></td>
-                                  <td class="text-center"><?php if($total_num=="0"){ echo "-";}else{ echo $total_num; }  ?></td>
-                                  <td class="text-center"><?php if($price_num=="0"){ echo "-";}else{ echo $price_num; }  ?></td>
-                                  <td class="text-center"><?php if($price_product=="0"){ echo "-";}else{ echo $price_product; } ?></td>
-                                  <td class="text-center"><?php if($total_salemoney=="0"){ echo "-";}else{ echo $total_salemoney; } ?></td>
-                                  <td class="text-center"><?php if($profit_sale=="0"){ echo "-";}else{ echo $profit_sale; } ?></td>
-                                </tr>
-                                <?php 
-                                 $a = $a + $total_salemoney;
-                                 $b = $b + $price_product;
-                                 $total_money = $total_money + $profit_sale; 
-                                }
-                                ?>
-                                <tr>
-                                  <th></th>
-                                  <th ></th>
-                                  <th class="text-center"> <font color="red">รวมเงิน</font> </th>
-                                  <th class="text-center"> <font color="red"><?php echo round($b); ?></font> </th>
-                                  <th class="text-center"> <font color="red"><?php echo round($a); ?></font> </th>
-                                  <th class="text-center"> <font color="red"><?php echo round($total_money); ?></font> </th>
-                                </tr>
-                              </tbody>
-                            </table>
-                      </div>
-                    </div>
-
-                    </div>
+                            $total_num = $num_salecar + $num_salestore;
+                            $total_salemoney = $money_salecar + $money_salestore;
+                            $price_product = $total_num * $price_num;
+                            $profit_sale = $total_salemoney - $price_product;
+                        ?>
+                        <tr>
+                          <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit'];?></td>
+                          <td class="text-center"><?php if($total_num=="0"){ echo "-";}else{ echo $total_num; }  ?></td>
+                          <td class="text-center"><?php if($price_num=="0"){ echo "-";}else{ echo $price_num; }  ?></td>
+                          <td class="text-center"><?php if($price_product=="0"){ echo "-";}else{ echo $price_product; } ?></td>
+                          <td class="text-center"><?php if($total_salemoney=="0"){ echo "-";}else{ echo $total_salemoney; } ?></td>
+                          <td class="text-center"><?php if($profit_sale=="0"){ echo "-";}else{ echo $profit_sale; } ?></td>
+                        </tr>
+                        <?php 
+                          $a = $a + $total_salemoney;
+                          $b = $b + $price_product;
+                          $total_money = $total_money + $profit_sale; 
+                        }
+                        ?>
+                        <tr>
+                          <th></th>
+                          <th ></th>
+                          <th class="text-center"> <font color="red">รวมเงิน</font> </th>
+                          <th class="text-center"> <font color="red"><?php echo round($b); ?></font> </th>
+                          <th class="text-center"> <font color="red"><?php echo round($a); ?></font> </th>
+                          <th class="text-center"> <font color="red"><?php echo round($total_money); ?></font> </th>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                </div>
-                <div class="box-footer" align="center">
-                  <!-- <a href="../pdf_file/admin_saleday_history.php?day=<?php echo $day;?>" class="btn btn-success" target="_blank"><i class="fa fa-print"> พิมพ์ </i></a> -->
-                  <a href="total_soft.php" class="btn button2 pull-left" ><< หน้าหลัก </a>
+                  <br>
+
+                  <!-- ------------------------------ยอดขายรายคน---------------------------- -->
+                  <div align="center"><font color="blue" size="5"><B>ยอดขาย</B></font></div>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <td class="text-center" width="10%"><font color="red">สินค้า_หน่วย</font></td>
+                          <?php 
+                            while($value = $objq_member->fetch_assoc()){
+                          ?>
+                          <td class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></td>
+                          <?php 
+                            }
+                          ?>
+                          <td class="text-center" width="6%"><font color="red">รวม</font></td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php 
+                        
+                          while($value = $query_product->fetch_assoc()){
+                            $id_product = $value['id_product'];
+                        ?>
+                        <tr>
+                        <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
+                        <?php 
+                            $total_num = 0;
+                            $member = "SELECT * FROM member 
+                                      WHERE status = 'employee' AND NOT id_member = 28 AND NOT id_member = 32";
+                            $objq_member4 = mysqli_query($conn,$member);
+                            while($value_member = $objq_member4->fetch_assoc()){
+                              $id_member = $value_member['id_member'];
+                              $sql_car = "SELECT SUM(num) FROM sale_car_history WHERE id_product = $id_product 
+                                          AND id_member = $id_member AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
+                              $objq_car = mysqli_query($conn,$sql_car);
+                              $objr_car = mysqli_fetch_array($objq_car);
+
+                              if(isset($objr_car['SUM(num)'])){
+                                $num_car = $objr_car['SUM(num)'];
+                                
+                              }else{
+                                $num_car = "-";
+                              }
+                        ?>
+                          <td class="text-center" ><?php echo $num_car; ?></td>
+                        <?php 
+                          $total_num = $total_num + $objr_car['SUM(num)'];
+                            }
+                        ?>
+                          <td class="text-center" ><?php echo $total_num; ?></td>
+                        </tr>
+                        <?php
+                          }
+                        ?>
+                      </tbody>
+                    </table>
+                    <br>
+                  <!-- ------------------------------//ยอดขายรายคน---------------------------- -->
                 </div>
               </div>
             </div>
           </div>
-          <!-- /.tab-content -->
         </div>
-        <!-- /.nav-tabs-custom -->
+      </section>
     </div>
-
-
-  </div>
-  </section>
-  <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <?php require("../menu/footer.html"); ?>
+    <?php require("../menu/footer.html"); ?>
   </div>
 
   <!-- jQuery 3 -->

@@ -11,8 +11,8 @@
   $mysqli = connect();
   
 
-  $insert_addorder = "INSERT INTO addorder (name_customer, tel, village, district_code, amphur_id, province_id, note, status)
-                      VALUES ('$name_customer', '$tel', '$village', $id_district, $id_amphur, $id_province, '$note', 'pending')";
+  $insert_addorder = "INSERT INTO addorder (name_customer, tel, village, district_code, amphur_id, province_id, note, status, id_wd)
+                      VALUES ('$name_customer', '$tel', '$village', $id_district, $id_amphur, $id_province, '$note', 'pending', 0)";
   mysqli_query($mysqli,$insert_addorder);
 
 ?>

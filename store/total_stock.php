@@ -98,7 +98,7 @@
                     <th class="text-center" width="5%">ลำพูน</th>
                     <th class="text-center" width="5%">ขายส่ง</th>
                     <th class="text-center" width="5%">แม่จัน</th>
-                    <th class="text-center" width="5%">ทีมจร</th>
+                    <th class="text-center" width="5%">แพร่</th>
                     <th class="text-center" width="5%">รถ</th>
                     <th class="text-center" width="8%">ทั้งหมด</th>
                   </tr>
@@ -251,9 +251,9 @@
                       
                       ?>
                     <!-- -------------------------------//แม่จัน.------------------------------------ -->
-                     <!-- -------------------------------ฝาง.------------------------------------ -->
+                     <!-- -------------------------------แพร่.------------------------------------ -->
                      <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 9";
+                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 11";
                         $objq_num = mysqli_query($conn,$SQL_num);
                         $objr_num = mysqli_fetch_array($objq_num);
                         if(!isset($objr_num['num'])){
@@ -267,7 +267,7 @@
                         } 
                       
                       ?>
-                    <!-- -------------------------------//ฝาง.------------------------------------ -->
+                    <!-- -------------------------------//แพร่.------------------------------------ -->
 
 
                     <!-- -------------------------------รวมรถ------------------------------------ -->

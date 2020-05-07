@@ -57,7 +57,7 @@
                  </div>
                 <!-- ค้นหา ORDER -->
 
-                <!-- ค้นหา สินค้า -->
+                <!-- ค้นหา order ส่งแล้ว -->
                 <li><a href="#" data-toggle="modal" data-target="#seachproduct"><i class="fa fa-archive"></i> ค้นหา (รายอำเภอ <font color="red">ส่งแล้ว</font>) </a></li>
                  <div class="modal fade" id="seachproduct" role="dialog">
                     <div class="modal-dialog modal-lg">

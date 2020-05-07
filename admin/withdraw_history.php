@@ -2,6 +2,8 @@
   require "../config_database/config.php";
   require "../session.php";
   require "menu/date.php";
+
+  $strDate = date('d-m-Y'); 
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +43,12 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+  </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -62,152 +70,21 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#timeline" data-toggle="tab">ยอดเบิกสินค้าวันนี้</a></li>
-                <li><a href="#change" data-toggle="tab">โอนสินค้าระหว่างรถ</a></li>
-                <li><a href="#checkday" data-toggle="tab">ยอดเบิกย้อนหลัง</a></li>
+                <li class="active"><a href="#checkday" data-toggle="tab">ยอดเบิกรายวัน</a></li>
+                <li><a href="#bytime" data-toggle="tab">ตามช่วงเวลา</a></li>
+                <li><a href="#change" data-toggle="tab">โอนระหว่างรถ</a></li>
+                
                 <div align="right">
-                  <a href="admin.php" class="btn btn-danger"><< เมนูหลัก</a>
+                  <a href="admin.php" class="btn button2"><< เมนูหลัก</a>
                 </div>
               </ul>
               <div class="tab-content">
-                <!-- /.tab-pane -->
-                <div class="active tab-pane" id="timeline">
-                  <div class="form-group">
-                    <div class="box box-default">
-                      <!-- /.box-header -->
-                      <div class="box-body">
-                        <div class="row">
-                          <div class="container">
-                            <?php
-                            $list_product = "SELECT * FROM product";
-                            $query_product = mysqli_query($conn, $list_product);
-                            $query_product2 = mysqli_query($conn, $list_product);
-                            
-                            ?>
-                            <!-- ------------------------------ยอดขายรวม---------------------------- -->
-                            <div class="box-header with-border">
-                              <p align="center">
-                                <font size="5"><B>ประวัติ(เบิกสินค้าออก)
-                                  <font color="red">
-                                  <?php 
-                                    $strDate = date('d-m-Y');
-                                    echo DateThai($strDate); 
-                                  ?>
-                                  </font>
-                                  </B>
-                                 </font>
-                              </p>
-                            </div>
-                            <table class="table">
-                              <tbody>
-                                <tr >
-                                  <th class="text-center" width="5%"> <font color="red">ที่</font> </th>
-                                  <th class="text-center" width="25%"><font color="red">สินค้า_หน่วย</font></th>
-                                  <th class="text-center" width="8%"><font color="red">จำนวน</font></th>
-                                  <th class="text-center" width="10%"><font color="red">ผู้เบิก</font></th>
-                                  <th class="text-center" width="10%"><font color="red">เบิกจาก</font></th>
-                                  <th class="text-center" width="30%"><font color="red">หมายเหตุ</font></th>
-                                  <th class="text-center" width="6%"><font color="red">เวลา</font></th>
-                                </tr>
-                                <?php #endregion
-                                $i = 1;
-                                $date = "SELECT * FROM draw_history 
-                                    INNER JOIN product ON draw_history.id_product = product.id_product 
-                                    INNER JOIN member ON draw_history.id_member = member.id_member
-                                    INNER JOIN zone ON draw_history.id_zone = zone.id_zone
-                                    WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
-                                $objq = mysqli_query($conn, $date);
-                                while ($value = $objq->fetch_assoc()) {
-                                  ?>
-                                  <tr>
-                                    <td class="text-center">
-                                      <?php echo $i; ?>
-                                    </td>
-                                    <td class="text-center">
-                                      <?php echo $value['name_product'] . '_' . $value['unit']; ?>
-                                    </td>
-                                    <td class="text-center">
-                                      <?php echo $value['num_draw']; ?>
-                                    </td>
-                                    <td class="text-center">
-                                      <?php echo $value['name']; ?>
-                                    </td>
-                                    <td class="text-center">
-                                      <?php echo $value['name_zone']; ?>
-                                    </td>
-                                    <td class="text-center">
-                                      <?php echo $value['note']; ?>
-                                    </td>
-                                    <td class="text-center">
-                                    <?php echo DateThai2($value['datetime']); ?>
-                                    </td>
-                                  </tr>
-                                  <?php
-                                  $i++;
-                                }
-                                ?>
-                              </tbody>
-                            </table>
-                            <!-- ------------------------------//ยอดขายรวม---------------------------- -->
-
-
-                            <!-- ------------------------------ยอดขายรวม---------------------------- -->
-                            <div class="box-header text-center with-border">
-                              <font size="5">
-                                <B>ยอดเบิกสินค้า</B>
-                              </font>
-                            </div>
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <th class="text-right" width="50%"><font color="red">สินค้า_หน่วย &nbsp;:</font></th>
-                                  <th class="text-left" width="50%"><font color="red">จำนวน</font></th>
-                                </tr>
-                                <?php #endregion
-                                $sql_history = "SELECT * FROM product";
-                                $objq_history = mysqli_query($conn, $sql_history);
-                                while ($history = $objq_history->fetch_assoc()) {
-                                  $id_product = $history['id_product'];
-                                  $total_sale = "SELECT SUM(draw_history.num_draw) FROM draw_history 
-                                              INNER JOIN product ON draw_history.id_product=product.id_product
-                                              WHERE draw_history.id_product = '$id_product' AND DATE_FORMAT(draw_history.datetime,'%d-%m-%Y')='$strDate'";
-                                  $objq_sale = mysqli_query($conn, $total_sale);
-                                  $objr_sale = mysqli_fetch_array($objq_sale);
-                                  $num_product = $objr_sale['SUM(draw_history.num_draw)'];
-                                  if (isset($num_product)) {
-                                    ?>
-                                    <tr>
-                                      <td class="text-right">
-                                        <?php echo $history['name_product'] .'_'. $history['unit']; ?> &nbsp;:
-                                      </td>
-                                      <td class="text-left">
-                                        <?php echo $num_product; ?>
-                                      </td>
-                                    </tr>
-                                  <?php }
-                              } ?>
-                              </tbody>
-                            </table>
-                            <!-- ------------------------------//ยอดขายรวม---------------------------- -->
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="box-footer" align="center">
-                        <a href="../pdf_file/admin_draw_history.php" class="btn btn-success"><i class="fa fa-print">
-                            พิมพ์ </i></a>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!-- /.tab-pane -->
 
                 <!-- tab-pane -->
-                <div class="tab-pane" id="checkday">
+                <div class="active tab-pane" id="checkday">
                   <div class="box box-default">
-                    <div class="box-header with-border">
-
+                    <div class="text-center box-header with-border">
+                      <B><font size="5">  ยอดเบิกสินค้า(รายวัน) </font></B> 
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -219,9 +96,9 @@
                                 <div class="col-md-12">
                                   <div class="box-body">
                                     <div class="form-group">
-                                      <label class="col-sm-4 control-label text-right"><font size="5"> การเบิกสินค้า วันที่ :</font></label>
+                                      <label class="col-sm-4 control-label text-right"></label>
                                       <div class="col-sm-4">
-                                        <input class="form-control" type="date" name="day">
+                                        <input class="form-control" type="date" name="day" id="datePicker">
                                       </div>
                                       <div class="col-sm-4"></div>
                                     </div>
@@ -229,7 +106,7 @@
 
                                   <div class="box-footer text-center">
                                     <div align="center" >
-                                      <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> ดูประวัติการเบิก </button>
+                                      <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> ตกลง </button>
                                     </div>
                                   </div>
 
@@ -243,6 +120,42 @@
                   </div>
                 </div>
                 <!-- /.tab-pane -->
+
+                <div class="tab-pane" id="bytime">
+                  <div class="box box-default">
+                    <div class="text-center box-header with-border">
+                      <B><font size="5"> ยอดเบิกสินค้า (ตามช่วงเวลา) </font></B> 
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <form action="withdraw_history_bytime.php" method="post">
+                          <div class="box-body">
+                            <div class="row">
+                              <div class="container">
+                                <div class="col-md-6">
+                                  <div class="form-group text-center">
+                                    <label> <font size="5">ตั้งเเต่</font></label>
+                                    <input type="date"  class="form-control"  name="aday">
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-group text-center">
+                                    <label><font size="5">ถึง</font></label></label>
+                                    <input type="date" class="form-control" name="bday">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="box-footer text-center">
+                            <button type="submit" class="btn btn-success "><i class="fa fa-check-square-o"></i> ตกลง </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <!-- tab-pane -->
                 <div class="tab-pane" id="change">
@@ -339,56 +252,17 @@
   <script src="../dist/js/demo.js"></script>
   <script src="../plugins/iCheck/icheck.min.js"></script>
   <script>
-    $(function() {
-      $('#example1').DataTable()
-      $('#example2').DataTable({
-        'paging': true,
-        'lengthChange': false,
-        'searching': false,
-        'ordering': true,
-        'info': true,
-        'autoWidth': false
-      })
-    })
-    $(function() {
-      //Enable iCheck plugin for checkboxes
-      //iCheck for checkbox and radio inputs
-      $('.mailbox-messages input[type="checkbox"]').iCheck({
-        checkboxClass: 'icheckbox_flat-blue',
-        radioClass: 'iradio_flat-blue'
+      $(document).ready( function() {
+          var now = new Date();
+      
+          var day = ("0" + now.getDate()).slice(-2);
+          var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+          var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+
+        $('#datePicker').val(today);
       });
-      //Enable check and uncheck all functionality
-      $(".checkbox-toggle").click(function() {
-        var clicks = $(this).data('clicks');
-        if (clicks) {
-          //Uncheck all checkboxes
-          $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-          $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-        } else {
-          //Check all checkboxes
-          $(".mailbox-messages input[type='checkbox']").iCheck("check");
-          $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-        }
-        $(this).data("clicks", !clicks);
-      });
-      //Handle starring for glyphicon and font awesome
-      $(".mailbox-star").click(function(e) {
-        e.preventDefault();
-        //detect type
-        var $this = $(this).find("a > i");
-        var glyph = $this.hasClass("glyphicon");
-        var fa = $this.hasClass("fa");
-        //Switch states
-        if (glyph) {
-          $this.toggleClass("glyphicon-star");
-          $this.toggleClass("glyphicon-star-empty");
-        }
-        if (fa) {
-          $this.toggleClass("fa-star");
-          $this.toggleClass("fa-star-o");
-        }
-      });
-    });
   </script>
 </body>
 

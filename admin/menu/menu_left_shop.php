@@ -179,11 +179,11 @@
                 <!-- /สต๊อกรถ -->
 
                 <!-- ยอดขาย -->
-                <li><a href="sale_history.php" ><i class="fa fa-money"></i>เงินขาย (รายคน)</a></li>
+                <li><a href="sale_history.php" ><i class="fa fa-money"></i>รายการขาย (รายคน)</a></li>
                 <!-- /ยอดขาย -->
 
                 <!-- ยอดขาย -->
-                <li><a href="total_soft.php" ><i class="fa fa-money"></i>เงินขาย (รายสินค้า) </a></li>
+                <li><a href="profit.php" ><i class="fa fa-money"></i>ยอดจำหน่าย (รายสินค้า) </a></li>
                 <!-- /ยอดขาย -->
 
                 <!-- เงินขายรายวัน -->
@@ -240,6 +240,10 @@
                 <!-- นอกเขต. -->
                 <li><a href="store.php" ><i class="fa fa-user-circle-o"></i> ระเบียนร้านค้า </a></li>
                 <!-- /นอกเขต. -->
+
+                <!-- สรุปข้อมูล -->
+                <li><a href="abstract_today.php" ><i class="fa fa-money"></i>สรุปข้อมูล (รายวัน) </a></li>
+                <!-- /สรุปข้อมูล -->
 
                 <!--จัดการข้อมูลสินค้า-พนักงาน -->
                 <li><a href="add_data.php" ><i class="fa fa-cog"></i> จัดการข้อมูล </a></li>

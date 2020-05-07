@@ -3,7 +3,9 @@
   require "../session.php";
   require "menu/date.php";
 
-  $day = $_POST['day'];
+  $aday = $_POST['aday'];
+  $bday = $_POST['bday'];
+
   $list_product = "SELECT * FROM product WHERE status_stock = 1";
   $objq_product = mysqli_query($conn,$list_product);
   $objq_product2 = mysqli_query($conn,$list_product);
@@ -80,13 +82,10 @@
                 <div class="box-header with-border">
                   <p align="center">
                     <font size="5">
-                      <B>ยอดเบิกสินค้า 
-                        <font color="red">
-                      <?php 
-                        $strDate = date('d-m-Y'); 
-                        echo DateThai($day);
-                      ?>
-                        </font> 
+                      <B>ยอดรับสินค้า ตั้งแต่
+                      <font color="red"> <?php echo DateThai($aday); ?></font> 
+                      ถึง 
+                      <font color="red"> <?php echo DateThai($bday); ?></font> 
                       </B>
                     </font>
                   </p>
@@ -98,7 +97,7 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th class="text-center" width="10%"><font color="red">สินค้า_หน่วย</font></th>
+                        <td class="text-center" width="10%"><font color="red">สินค้า_หน่วย</font></td>
                         <?php 
                           while($value = $objq_member->fetch_assoc()){
                         ?>
@@ -106,7 +105,7 @@
                         <?php 
                           }
                         ?>
-                        <th class="text-center" width="6%"><font color="red">รวม</font></th>
+                        <td class="text-center" width="6%"><font color="red">รวม</font></td>
                       </tr>
                     </thead>
                     <tbody>
@@ -125,13 +124,13 @@
                           while($value_member = $objq_member2->fetch_assoc()){
                             
                             $id_member = $value_member['id_member'];
-                            $sql_draw = "SELECT SUM(num_draw) FROM draw_history WHERE id_product = $id_product 
-                                        AND id_member = $id_member AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
+                            $sql_draw = "SELECT SUM(num_add) FROM add_history WHERE id_product = $id_product 
+                                        AND id_member = $id_member AND (datetime between '$aday 00:00:00' and '$bday 23:59:59')";
                             $objq_draw = mysqli_query($conn,$sql_draw);
                             $objr_draw = mysqli_fetch_array($objq_draw);
 
-                            if(isset($objr_draw['SUM(num_draw)'])){
-                              $num_draw = $objr_draw['SUM(num_draw)'];
+                            if(isset($objr_draw['SUM(num_add)'])){
+                              $num_draw = $objr_draw['SUM(num_add)'];
                               
                             }else{
                               $num_draw = "-";
@@ -139,7 +138,7 @@
                       ?>
                         <td class="text-center" ><?php echo $num_draw; ?></td>
                       <?php 
-                        $total_num = $total_num + $objr_draw['SUM(num_draw)'];
+                        $total_num = $total_num + $objr_draw['SUM(num_add)'];
                           }
                       ?>
                         <td class="text-center" ><?php echo $total_num; ?></td>
@@ -149,73 +148,6 @@
                       ?>
                     </tbody>
                   </table>
-                  <br>
-                  <br>
-                  <div class="text-center">
-                    <font size="5"><B>ประวัติการเบิกสินค้า
-                     <font color="red">
-                      <?php 
-                        $strDate = date('d-m-Y'); 
-                        echo DateThai($day);
-                      ?>
-                        </font> 
-                      </B>
-                    </font>
-                  </div>
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th class="text-center" width="5%"> <font color="red">ที่</font> </th>
-                        <th class="text-center" width="25%"> <font color="red">สินค้า_หน่วย</font> </th>
-                        <th class="text-center" width="8%"> <font color="red">จำนวน</font> </th>
-                        <th class="text-center" width="10%"> <font color="red">ผู้เบิก</font> </th>
-                        <th class="text-center" width="10%"> <font color="red">เบิกจาก</font></th>
-                        <th class="text-center" width="30%"> <font color="red">หมายเหตุ</font> </th>
-                        <th class="text-center" width="6%"> <font color="red">เวลา</font> </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php #endregion
-                      $i = 1;
-                      $date = "SELECT * FROM draw_history 
-                                INNER JOIN product ON draw_history.id_product = product.id_product 
-                                INNER JOIN member ON draw_history.id_member = member.id_member
-                                INNER JOIN zone ON draw_history.id_zone = zone.id_zone
-                                WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
-                      $objq = mysqli_query($conn, $date);
-                      while ($value = $objq->fetch_assoc()) {
-                        ?>
-                        <tr>
-                          <td class="text-center">
-                            <?php echo $i; ?>
-                          </td>
-                          <td class="text-center">
-                            <?php echo $value['name_product'] . '_' . $value['unit']; ?>
-                          </td>
-                          <td class="text-center">
-                            <?php echo $value['num_draw']; ?>
-                          </td>
-                          <td class="text-center">
-                            <?php echo $value['name']; ?>
-                          </td>
-                          <td class="text-center">
-                            <?php echo $value['name_zone']; ?>
-                          </td>
-                          <td class="text-center">
-                            <?php echo $value['note']; ?>
-                          </td>
-                          <td class="text-center">
-                            <?php echo DateThai2($value['datetime']); ?>
-                          </td>
-                        </tr>
-                        <?php
-                        $i++;
-                      }
-                      ?>
-                    </tbody>
-                  </table>
-                  <!-- ------------------------------//ยอดขายรวม---------------------------- -->
-                  
                 </div>
               </div>
             </div>

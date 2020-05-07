@@ -162,31 +162,31 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th width="100%"><?php echo $id_addorder.'        '.$objr_addorder['name_customer']; ?></th>
+                            <th width="100%" class="text-right"><?php echo $id_addorder.'        '.$objr_addorder['name_customer']; ?></th>
                           </tr>
                           <tr>
-                            <th width="100%">
+                            <th width="100%"  class="text-right">
                               <?php 
                                 echo 'บ.'.$objr_addorder['village'];
                               ?>
                             </th>
                           </tr>
                           <tr>
-                            <th width="100%">
+                            <th width="100%" class="text-right">
                               <?php 
                                 echo 'ต.'.$objr_addorder['district_name'].' '.'อ.'.$objr_addorder['amphur_name'].' '.'จ.'.$objr_addorder['province_name'];
                               ?>
                             </th>
                           </tr>
                           <tr>
-                            <th width="100%">
+                            <th width="100%" class="text-right">
                               <?php 
                                 echo 'สั่ง  '.DateThai($objr_addorder['datetime']).' '. $objr_addorder['name_member'].'        '.Datetime($objr_addorder['datetime']).'        '.$objr_addorder['tel'];
                               ?>
                             </th>
                           </tr>
                           <tr>
-                            <th width="100%">
+                            <th width="100%" class="text-right">
                               <?php 
                                 echo $objr_addorder['note'];
                               ?>
