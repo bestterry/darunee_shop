@@ -40,6 +40,67 @@
   <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+
+      input:checked + .slider {
+        background-color: #2196F3;
+      }
+
+      input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
+      }
+    </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -75,46 +136,81 @@
                 <!-- เพิ่มพนักงาน -->
                 <div class="active tab-pane" id="adduser">
                   <div class="form-group">
-                    <form action="algorithm/add_user.php" method="post" autocomplete="off">
+                    <form class="form-horizontal" action="algorithm/add_user.php" method="post" autocomplete="off">
                       <div class="box box-default">
                         <!-- /.box-header -->
                         <div class="box-header with-border text-center">
                           <font size="5"><B> เพิ่มพนักงาน</B> </font>
                         </div>
-                        <div class="box-body">
+                        <div class="box-body with-border">
                           <div class="row">
-                            <div class="container">
-                              <div class="col-md-12">
-                                <div class="form-group col-md-3">
-                                  <label for="txtname">ชื่อ :</label>
-                                  <input type="text" name="name" class="form-control" placeholder="ชื่อ">
+                            <div class="col-md-3 col-sm-3"></div>
+
+                            <div class="col-md-6 col-sm-6">
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-6 control-label">ชื่อ</label>
+                                  <div class="col-sm-9 col-md-9 col-6">
+                                    <input class="form-control" type="text" name="name">
+                                  </div>
                                 </div>
                               </div>
 
-                              <div class="col-md-12">
-                                <div class="form-group col-md-4">
-                                  <label for="txtlastname">username :</label>
-                                  <input type="text" name="username" class="form-control" placeholder="username">
-                                </div>
-                                <div class="form-group col-md-4">
-                                  <label for="txtlastname">password :</label>
-                                  <input type="text" name="password" class="form-control" placeholder="password">
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-6 control-label">ชื่อเล่น</label>
+                                  <div class="col-sm-9 col-md-9 col-6">
+                                    <input class="form-control" type="text" name="sub_name">
+                                  </div>
                                 </div>
                               </div>
 
-                              <div class="col-md-12">
-                                <div class="form-group col-md-2">
-                                  <label for="inputPassword3">สถานะ :</label>
-                                  <select class="form-control select2" style="width: 100%;" name="status">
-                                    <option selected="selected">...กรุณาเลือกสถานะ...</option>
-                                    <option name="admin" value="admin">ผู้ดูเเลระบบ</option>
-                                    <option name="sale" value="sale">พนักงานหน้าร้าน</option>
-                                    <option name="employee" value="employee">พนักงานส่งของ</option>
-                                  </select>
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-6 control-label">สถานะ</label>
+                                  <div class="col-sm-9 col-md-9 col-6">
+                                    <select name="status" class="form-control" style="width: 100%;">
+                                      <option value="admin">ผู้ดูแลระบบ</option>
+                                      <option value="sale">หน้าร้าน</option>
+                                      <option value="employee">พนักงานส่งของ</option>
+                                      <option value="boss">หัวหน้า</option>
+                                    </select>
+                                  </div>
                                 </div>
                               </div>
 
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-6 control-label">Username</label>
+                                  <div class="col-sm-9 col-md-9 col-6">
+                                    <input class="form-control" type="text" name="username">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-6 control-label">Password</label>
+                                  <div class="col-sm-9 col-md-9 col-6">
+                                    <input class="form-control" type="text" name="password">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-6 control-label">แสดงหน่วยรถ</label>
+                                  <div class="col-sm-9 col-md-9 col-6">
+                                    <label class="switch">
+                                      <input type="checkbox" name="status_car">
+                                      <span class="slider round"></span>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
+
+                            <div class="col-md-3 col-sm-3"></div>
                           </div>
                         </div>
                         <div class="box-footer" align="center">

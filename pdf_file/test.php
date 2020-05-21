@@ -1,74 +1,28 @@
 <?php
 require('fpdf.php');
 require('../config_database/config.php'); 
-  function DateThai($strDate)
-      {
-      $strYear = date("Y",strtotime($strDate))+543;
-      $strMonth= date("n",strtotime($strDate));
-      $strDay= date("j",strtotime($strDate));
-      $strHour= date("H",strtotime($strDate));
-      $strMinute= date("i",strtotime($strDate));
-      $strSeconds= date("s",strtotime($strDate));
-      $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
-      $strMonthThai=$strMonthCut[$strMonth];
-      return "$strDay $strMonthThai พ.ศ.$strYear";
-      }
+ 
+$sql_car = "SELECT id_member,name FROM member WHERE 
+status='employee' AND NOT id_member = 3 AND NOT id_member = 8 AND NOT id_member = 19
+AND NOT id_member = 32 AND NOT id_member = 28";
+$objq_car = mysqli_query($conn,$sql_car);
 
-      $strDate = date('d-m-Y');
+while($value_car = $objq_car->fetch_assoc()){
+$id_member = $value_car['id_member']; 
+$i = 1;
+$sql_ferti = "SELECT * FROM sent_ferti
+  INNER JOIN type_lift ON sent_ferti.id_type_lift = type_lift.id
+  INNER JOIN member ON sent_ferti.id_member = member.id_member 
+  WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='2020-05-14' AND sent_ferti.id_member = $id_member";
+$objq_ferti = mysqli_query($conn,$sql_ferti);
+echo $num_row = mysqli_num_rows($objq_ferti);
 
-class PDF extends FPDF
-  {
-  // Page header
-    function Header()
-    {
-        // Date
-        $strDate = date('d-m-Y');
-        // Arial bold 15
-        $this->AddFont('angsana','','angsa.php');
-        $this->SetFont('angsana','',20);
-        
-        //Date
-        $this->SetTextColor(255,0,0); 
-        $this->Text(80, 9,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
-        // Title
-        $this->SetTextColor(0,0,0);
-        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'ใบสั่งออร์เดอร์') , 0 , 1,'L' ); 
-        $this->Ln(5);
-    }
-    // Page footer
-    function Footer()
-    {
-          
-            $this->SetY(-20);
-            $this->AddFont('angsana','','angsa.php');
-            $this->SetFont('angsana','',14);
-            $this->SetTextColor(0,0,0);
-            $this->Cell(0,10,iconv('UTF-8','cp874','หน้า ').($this->PageNo()),0,1,'C');
-    }
-  }
+if($num_row == 0){
+  echo "1".'<br>';
+}else{
+  echo "2".'<br>';
+}
 
-// Instanciation of inherited class
-$pdf=new PDF('P','mm','A4');
-            // ตั้งค่าขอบกระดาษทุกด้าน 20 มิลลิเมตร
-            $pdf->AliasNbPages();
-            $pdf->SetMargins(4, 5 ,5);
-            $pdf->AddFont('angsana','','angsa.php');
+}
 
-            $pdf->AddPage();
-            $pdf->SetFont('angsana','',20);
-         
-            $x = $pdf->GetX();
-            $y = $pdf->GetY();
-            
-            $col1="PILOT REMARKS\n\n";
-            $pdf->MultiCell(80, 10, 'test2', 1, 1);
-            
-            $pdf->SetXY($x + 80, $y);
-            
-            $col2="Pilot's Name and Signature\n";
-            $pdf->MultiCell(80, 10, 'testsetset', 1);
-            $pdf->Ln(0);
-                         
-// --------------------------------------------------------------------------------------                     
-    $pdf->Output();
 ?>

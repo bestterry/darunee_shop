@@ -359,6 +359,11 @@
           <!-- สำรองจ่าย. -->
           <li><a href="reserve_money.php" ><i class="fa fa-user-circle-o"></i> สำรองจ่าย </a></li>
           <!-- /สำรองจ่าย. -->
+
+            <!-- สำรองจ่าย. -->
+            <li><a href="sent_fertilizer.php" ><i class="fa fa-user-circle-o"></i> ค่าปุ๋ย </a></li>
+          <!-- /สำรองจ่าย. -->
+
         </ul>
       </div>
       <!-- /.box-body -->

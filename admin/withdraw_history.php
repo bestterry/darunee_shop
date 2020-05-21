@@ -4,6 +4,14 @@
   require "menu/date.php";
 
   $strDate = date('d-m-Y'); 
+  $list_product = "SELECT * FROM product WHERE status_stock = 1";
+  $objq_product = mysqli_query($conn,$list_product);
+  $objq_product2 = mysqli_query($conn,$list_product);
+  $objq_product3 = mysqli_query($conn,$list_product);
+
+  $member = "SELECT * FROM member 
+             WHERE status = 'employee' AND NOT id_member = 28 AND NOT id_member = 32";
+  $objq_member = mysqli_query($conn,$member);
 ?>
 
 <!DOCTYPE html>
@@ -70,18 +78,159 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#checkday" data-toggle="tab">ยอดเบิกรายวัน</a></li>
-                <li><a href="#bytime" data-toggle="tab">ตามช่วงเวลา</a></li>
-                <li><a href="#change" data-toggle="tab">โอนระหว่างรถ</a></li>
+              <li class="active"><a href="#today" data-toggle="tab">ยอดเบิกวันนี้</a></li>
+                <li><a href="#checkday" data-toggle="tab">รายวัน</a></li>
+                <li><a href="#bytime" data-toggle="tab">ช่วงเวลา</a></li>
+                <li><a href="#change" data-toggle="tab">ระหว่างรถ</a></li>
                 
                 <div align="right">
+                  <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> เบิกสินค้า </a>
                   <a href="admin.php" class="btn button2"><< เมนูหลัก</a>
                 </div>
               </ul>
               <div class="tab-content">
 
                 <!-- tab-pane -->
-                <div class="active tab-pane" id="checkday">
+                <div class="active tab-pane" id="today">
+                  <div class="box box-default">
+                    <div class="text-center box-header with-border">
+                      <B><font size="5">  ยอดเบิกสินค้า(วันนี้) </font></B> 
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="box-body">
+                            <!-- ------------------------------ยอดขายรวม---------------------------- -->
+                              <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center" width="10%"><font color="red">สินค้า_หน่วย</font></th>
+                                    <?php 
+                                      while($value = $objq_member->fetch_assoc()){
+                                    ?>
+                                    <td class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></td>
+                                    <?php 
+                                      }
+                                    ?>
+                                    <th class="text-center" width="6%"><font color="red">รวม</font></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <?php 
+                                  
+                                    while($value = $objq_product->fetch_assoc()){
+                                      $id_product = $value['id_product'];
+                                  ?>
+                                  <tr>
+                                  <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
+                                  <?php 
+                                      $total_num = 0;
+                                      $member = "SELECT * FROM member 
+                                                WHERE status = 'employee' AND NOT id_member = 28 AND NOT id_member = 32";
+                                      $objq_member2 = mysqli_query($conn,$member);
+                                      while($value_member = $objq_member2->fetch_assoc()){
+                                        
+                                        $id_member = $value_member['id_member'];
+                                        $sql_draw = "SELECT SUM(num_draw) FROM draw_history WHERE id_product = $id_product 
+                                                    AND id_member = $id_member AND DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
+                                        $objq_draw = mysqli_query($conn,$sql_draw);
+                                        $objr_draw = mysqli_fetch_array($objq_draw);
+
+                                        if(isset($objr_draw['SUM(num_draw)'])){
+                                          $num_draw = $objr_draw['SUM(num_draw)'];
+                                          
+                                        }else{
+                                          $num_draw = "-";
+                                        }
+                                  ?>
+                                    <td class="text-center" ><?php echo $num_draw; ?></td>
+                                  <?php 
+                                    $total_num = $total_num + $objr_draw['SUM(num_draw)'];
+                                      }
+                                  ?>
+                                    <td class="text-center" ><?php echo $total_num; ?></td>
+                                  </tr>
+                                  <?php
+                                    }
+                                  ?>
+                                </tbody>
+                              </table>
+                              <br>
+                              <br>
+                              <div class="text-center">
+                                <font size="5"><B>ประวัติการเบิกสินค้า
+                                <font color="red">
+                                  <?php 
+                                    echo DateThai($strDate);
+                                  ?>
+                                    </font> 
+                                  </B>
+                                </font>
+                              </div>
+                              <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center" width="5%"> <font color="red">ที่</font> </th>
+                                    <th class="text-center" width="25%"> <font color="red">สินค้า_หน่วย</font> </th>
+                                    <th class="text-center" width="8%"> <font color="red">จำนวน</font> </th>
+                                    <th class="text-center" width="10%"> <font color="red">ผู้เบิก</font> </th>
+                                    <th class="text-center" width="10%"> <font color="red">เบิกจาก</font></th>
+                                    <th class="text-center" width="30%"> <font color="red">หมายเหตุ</font> </th>
+                                    <th class="text-center" width="6%"> <font color="red">เวลา</font> </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <?php #endregion
+                                  $i = 1;
+                                  $date = "SELECT * FROM draw_history 
+                                            INNER JOIN product ON draw_history.id_product = product.id_product 
+                                            INNER JOIN member ON draw_history.id_member = member.id_member
+                                            INNER JOIN zone ON draw_history.id_zone = zone.id_zone
+                                            WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate'";
+                                  $objq = mysqli_query($conn, $date);
+                                  while ($value = $objq->fetch_assoc()) {
+                                    ?>
+                                    <tr>
+                                      <td class="text-center">
+                                        <?php echo $i; ?>
+                                      </td>
+                                      <td class="text-center">
+                                        <?php echo $value['name_product'] . '_' . $value['unit']; ?>
+                                      </td>
+                                      <td class="text-center">
+                                        <?php echo $value['num_draw']; ?>
+                                      </td>
+                                      <td class="text-center">
+                                        <?php echo $value['name']; ?>
+                                      </td>
+                                      <td class="text-center">
+                                        <?php echo $value['name_zone']; ?>
+                                      </td>
+                                      <td class="text-center">
+                                        <?php echo $value['note']; ?>
+                                      </td>
+                                      <td class="text-center">
+                                        <?php echo DateThai2($value['datetime']); ?>
+                                      </td>
+                                    </tr>
+                                    <?php
+                                    $i++;
+                                  }
+                                  ?>
+                                </tbody>
+                              </table>
+                            <!-- ------------------------------//ยอดขายรวม---------------------------- -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.tab-pane -->
+
+                <!-- tab-pane -->
+                <div class="tab-pane" id="checkday">
                   <div class="box box-default">
                     <div class="text-center box-header with-border">
                       <B><font size="5">  ยอดเบิกสินค้า(รายวัน) </font></B> 
@@ -233,6 +382,75 @@
     <!-- /.content-wrapper -->
 
     <?php require("../menu/footer.html"); ?>
+
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <form action="withdraw_product.php" method="post">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <font size="5"><B align = "center"> เบิกสินค้า </B></font>
+            </div>
+            <div class="modal-body col-md-12 table-responsive mailbox-messages">
+              <div class="table-responsive mailbox-messages">
+                <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                    <th class="text-center" width="30%"><font size="5">เบิกจาก STOCK</font></th>
+                    <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                    <select name ="id_zone" class="form-control text-center select2" style="width: 100%;">
+                        <?php #endregion
+                        $sql_member = "SELECT * FROM zone ";
+                        $objq_member = mysqli_query($conn,$sql_member);
+                        while($member = $objq_member -> fetch_assoc()){
+                            if ($member['id_zone']==8) {
+                                
+                            }else{
+                        ?>
+                            <option value="<?php echo $member['id_zone']; ?>"><?php echo $member['name_zone']; ?></option>
+                        <?php
+                            }   
+                        } 
+                        ?>
+                    </select>
+                    </th>
+                    </tr>
+                </tbody>
+                </table> 
+                <br> 
+
+              <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                    <th class="text-center" width="30%"><font size="5">ผู้ขอเบิก</font></th>
+                    <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                    <select name ="id_member" class="form-control text-center select2" style="width: 100%;">
+                        <?php #endregion
+                        $sql_member = "SELECT * FROM member WHERE status = 'employee'";
+                        $objq_member = mysqli_query($conn,$sql_member);
+                        while($member = $objq_member -> fetch_assoc()){
+                            
+                        ?>
+                            <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?></option>
+                        <?php
+                          } 
+                        ?>
+                    </select>
+                    </th>
+                    </tr>
+                </tbody>
+                </table>
+                
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit"  class="btn button2 pull-right">ถัดไป >></button>
+              <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< ย้อนกลับ</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
   </div>
 
   <!-- jQuery 3 -->

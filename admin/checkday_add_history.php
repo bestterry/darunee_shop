@@ -56,7 +56,7 @@ $day = $_POST['day'];
         background-color: #b35900;
         color : white;
         } /* Back & continue */
-  </style>
+    </style>
   </head>
 
   <body class=" hold-transition skin-blue layout-top-nav ">
@@ -78,7 +78,7 @@ $day = $_POST['day'];
                   <div align="left">
                     <a href="admin.php" class="btn button2"><< เมนูหลัก</a>
                   </div>
-                        <!-- ------------------------------ยอดขายรวม---------------------------- -->
+                  <!-- ------------------------------ยอดขายรวม---------------------------- -->
                   <div class="box-header with-border">
                     <p align="center">
                       <font size="5"> <B>ยอดรับสินค้า <font color="red"> <?php echo DateThai($day); ?></font></B></font>

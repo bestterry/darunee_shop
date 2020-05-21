@@ -106,7 +106,8 @@
                       $request = $value['request'];
                   ?>
                     <tr>
-                      <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะส่งสินค้า [<?php echo '('.$value['id_addorder'].')  '.$value['name_customer'].'   บ.'.$value['village']; ?>] หรือไม่ ?')";>ส่ง</a></td>
+                      <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" 
+                          onClick="return confirm('คุณต้องการที่จะส่งสินค้า [<?php echo '('.$value['id_addorder'].')  '.$value['name_customer'].'   บ.'.$value['village']; ?>] หรือไม่ ?')";>ส่ง</a></td>
                       <td class="text-center"><?php echo $value['id_addorder']; ?></td>
                       <td ><?php echo $value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
                       <?php
@@ -122,7 +123,8 @@
                       <?php
                         if(empty($id_wd)) {
                       ?>
-                      <td class="text-center"><a  href="algorithm/update_id_wd.php?id_member=<?php echo $id_member; ?>&&id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-danger btn-xs">N</a></td>
+                      <td class="text-center"><a  href="algorithm/update_id_wd.php?id_member=<?php echo $id_member; ?>&&id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-danger btn-xs"
+                          onClick="return confirm('คุณต้องการที่จะเบิกร้าน [<?php echo '('.$value['id_addorder'].')  '.$value['name_customer'].'   บ.'.$value['village']; ?>] หรือไม่ ?')";>N</a></td>
                       <?php
                         }else{
                       ?>
@@ -172,72 +174,72 @@
     <script src="../plugins/iCheck/icheck.min.js">
     </script>
     <script>
-    $(function () {
-      $('#example1').DataTable()
-      $('#example2').DataTable({
-        'paging'      : false,
-        'lengthChange': false,
-        'searching'   : true,
-        'ordering'    : true,
-        'info'        : true,
-        'autoWidth'   : false
+      $(function () {
+        $('#example1').DataTable()
+        $('#example2').DataTable({
+          'paging'      : false,
+          'lengthChange': false,
+          'searching'   : true,
+          'ordering'    : true,
+          'info'        : true,
+          'autoWidth'   : false
+        }
+                                )
       }
-                              )
-    }
-     )
-    $(function () {
-      //Enable iCheck plugin for checkboxes
-      //iCheck for checkbox and radio inputs
-      $('.mailbox-read-message input[type="checkbox"]').iCheck({
-        checkboxClass: 'icheckbox_flat-blue',
-        radioClass: 'iradio_flat-blue'
-      }
-      
-                                                          );
-      //iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass   : 'iradio_minimal-blue'
-    })
+      )
+      $(function () {
+        //Enable iCheck plugin for checkboxes
+        //iCheck for checkbox and radio inputs
+        $('.mailbox-read-message input[type="checkbox"]').iCheck({
+          checkboxClass: 'icheckbox_flat-blue',
+          radioClass: 'iradio_flat-blue'
+        }
+        
+                                                            );
+        //iCheck for checkbox and radio inputs
+      $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+        checkboxClass: 'icheckbox_minimal-blue',
+        radioClass   : 'iradio_minimal-blue'
+      })
 
-      //Enable check and uncheck all functionality
-      $(".checkbox-toggle").click(function () {
-        var clicks = $(this).data('clicks');
-        if (clicks) {
-          //Uncheck all checkboxes
-          $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-          $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        //Enable check and uncheck all functionality
+        $(".checkbox-toggle").click(function () {
+          var clicks = $(this).data('clicks');
+          if (clicks) {
+            //Uncheck all checkboxes
+            $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+            $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+          }
+          else {
+            //Check all checkboxes
+            $(".mailbox-messages input[type='checkbox']").iCheck("check");
+            $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+          }
+          $(this).data("clicks", !clicks);
         }
-        else {
-          //Check all checkboxes
-          $(".mailbox-messages input[type='checkbox']").iCheck("check");
-          $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+                                  );
+        //Handle starring for glyphicon and font awesome
+        $(".mailbox-star").click(function (e) {
+          e.preventDefault();
+          //detect type
+          var $this = $(this).find("a > i");
+          var glyph = $this.hasClass("glyphicon");
+          var fa = $this.hasClass("fa");
+          //Switch states
+          if (glyph) {
+            $this.toggleClass("glyphicon-star");
+            $this.toggleClass("glyphicon-star-empty");
+          }
+          if (fa) {
+            $this.toggleClass("fa-star");
+            $this.toggleClass("fa-star-o");
+          }
         }
-        $(this).data("clicks", !clicks);
+                                );
+                                
       }
-                                 );
-      //Handle starring for glyphicon and font awesome
-      $(".mailbox-star").click(function (e) {
-        e.preventDefault();
-        //detect type
-        var $this = $(this).find("a > i");
-        var glyph = $this.hasClass("glyphicon");
-        var fa = $this.hasClass("fa");
-        //Switch states
-        if (glyph) {
-          $this.toggleClass("glyphicon-star");
-          $this.toggleClass("glyphicon-star-empty");
-        }
-        if (fa) {
-          $this.toggleClass("fa-star");
-          $this.toggleClass("fa-star-o");
-        }
-      }
-                              );
-                              
-    }
-     );
-  </script>
+      );
+    </script>
 
 </body>
 

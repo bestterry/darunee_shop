@@ -344,11 +344,12 @@
               <thead>
                 <tr class="info">
                   <th class="text-center" width="3%">ที่</th>
-                  <th class="text-center" width="18%">สินค้า_หน่วย</th>
+                  <th class="text-center" width="15%">สินค้า_หน่วย</th>
 
                   <?php 
-                    $sql_member = "SELECT name_sub FROM member WHERE id_member BETWEEN 3 AND 18";
+                    $sql_member = "SELECT id_member,name_sub FROM member WHERE status_car = 1";
                     $objq_member = mysqli_query($conn,$sql_member);
+                    $objq_member2 = mysqli_query($conn,$sql_member);
                     while($value = $objq_member -> fetch_assoc()){
                   ?>
                   <th class="text-center" width="4%"><?php echo $value['name_sub'];?></th>
@@ -375,8 +376,10 @@
                     <?php
                     $total_num = 0;
                     
-                    for ($i = 3; $i <= 18; $i++) {
-                      $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $i";
+                    $objq_member2 = mysqli_query($conn,$sql_member);
+                    while($value2 = $objq_member2 -> fetch_assoc()){
+                      $id_member = $value2['id_member'];
+                      $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $id_member";
                       $objq_num = mysqli_query($conn, $SQL_num);
                       $objr_num = mysqli_fetch_array($objq_num);
                       if((!isset($objr_num['num'])) || ($objr_num['num'] == 0)){

@@ -44,5 +44,5 @@ require '../../config_database/config.php';
     }
   
 
-  header('location:../admin.php');
+  header('location:../add_history.php');
 ?>

@@ -104,7 +104,7 @@ $pdf=new PDF('P','mm','A4');
                   $pdf->SetXY($x + 100, $y);
                 
                   //ที่อยู่ลูกค้า 
-                  $pdf->MultiCell( 140  , 7 , iconv( 'UTF-8','cp874' ,$value['id_addorder'].' '.$value['name_customer']. '       '.$request_ans .'       '.$test.'
+                  $pdf->MultiCell( 140  , 7 , iconv( 'UTF-8','cp874' ,$value['id_addorder'].' '.$value['name_customer']. '    '.$request_ans .'    '.$test.'
 บ.'.$value['village']. '
 ต.'.$value['district_name'].' อ.'.$value['amphur_name'].' จ.'.$value['province_name'].'
 '.DateThai($value['datetime']).' '.$value['name_member']  .' '. DateTime($value['datetime']).' '.$value['tel']  .'

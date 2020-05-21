@@ -80,7 +80,6 @@
                         $i = 1;
                        
                         $sql_day_car = "SELECT SUM(money) as sum_money,DAY(datetime),MONTH(datetime),YEAR(datetime) FROM sale_car_history 
-                                        
                                         WHERE (datetime between '$aday 00:00:00' and '$bday 23:59:59') GROUP BY DAY(datetime),MONTH(datetime),YEAR(datetime)";
                         $objq_day_car = mysqli_query($conn,$sql_day_car);
                         while ($value = $objq_day_car -> fetch_assoc() ) {

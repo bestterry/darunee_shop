@@ -15,7 +15,7 @@
                 <!--/สั่งสินค้า -->
 
                 <!--รับเข้า -->
-                <li><a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-download"></i> รับสินค้าเข้า </a></li>
+                <!-- <li><a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-download"></i> รับสินค้าเข้า </a></li>
                 <div class="modal fade" id="myModal2" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <form action="add_product.php" method="post">
@@ -25,51 +25,50 @@
                                 </div>
                                 <div class="modal-body col-md-12 table-responsive mailbox-messages">
                                   <div class="table-responsive mailbox-messages">
-
                                     <table class="table table-bordered">
-                                    <tbody>
-                                        <tr>
-                                        <th class="text-center" width="30%"><font size="5">รับเข้า STOCK</font></th>
-                                        <th bgcolor="#99CCFF" class="text-center" width="70%"> 
-                                        <select name ="id_zone" class="form-control text-center select2" style="width: 100%;">
-                                            <?php #endregion
-                                            $sql_member = "SELECT * FROM zone ";
-                                            $objq_member = mysqli_query($conn,$sql_member);
-                                            while($member = $objq_member -> fetch_assoc()){
-                                                if ($member['id_zone']==8) {
-                                                    
-                                                }else{
-                                            ?>
-                                                <option value="<?php echo $member['id_zone']; ?>"><?php echo $member['name_zone']; ?></option>
-                                            <?php 
-                                                }
-                                              } 
-                                            ?>
-                                        </select>
-                                        </th>
-                                        </tr>
-                                    </tbody>
+                                        <tbody>
+                                            <tr>
+                                            <th class="text-center" width="30%"><font size="5">รับเข้า STOCK</font></th>
+                                            <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                                            <select name ="id_zone" class="form-control text-center select2" style="width: 100%;">
+                                                <?php #endregion
+                                                $sql_member = "SELECT * FROM zone ";
+                                                $objq_member = mysqli_query($conn,$sql_member);
+                                                while($member = $objq_member -> fetch_assoc()){
+                                                    if ($member['id_zone']==8) {
+                                                        
+                                                    }else{
+                                                ?>
+                                                    <option value="<?php echo $member['id_zone']; ?>"><?php echo $member['name_zone']; ?></option>
+                                                <?php 
+                                                    }
+                                                } 
+                                                ?>
+                                            </select>
+                                            </th>
+                                            </tr>
+                                        </tbody>
                                     </table> 
                                     <br> 
 
                                   <table class="table table-bordered ">
                                     <tbody>
-                                        <tr>
-                                        <th class="text-center" width="30%"><font size="5">ผู้ส่งของ</font></th>
-                                        <th bgcolor="#99CCFF" class="text-center" width="70%"> 
-                                        <select name ="id_member" class="form-control text-center select2" style="width: 100%;">
-                                            <?php #endregion
-                                            $sql_member = "SELECT * FROM member WHERE status = 'employee'";
-                                            $objq_member = mysqli_query($conn,$sql_member);
-                                            while($member = $objq_member -> fetch_assoc()){
-                                            ?>
-                                                <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                        </th>
-                                        </tr>
+                                    <tr>
+                                    <th class="text-center" width="30%"><font size="5">ผู้ส่งของ</font></th>
+                                    <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                                    <select name ="id_member" class="form-control text-center select2" style="width: 100%;">
+                                        <?php #endregion
+                                        $sql_member = "SELECT * FROM member WHERE status = 'employee'";
+                                        $objq_member = mysqli_query($conn,$sql_member);
+                                        while($member = $objq_member -> fetch_assoc()){
+                                        ?>
+                                            <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    </th>
+                                    </tr>
                                     </tbody>
-                                    </table>
+                                   </table>
                                   </div>
                                 </div>
                                 <div class="modal-footer">
@@ -79,7 +78,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> -->
                 <!--//รับเข้า -->
 
                 <!--ข้อมูลการรับเข้า -->
@@ -87,8 +86,8 @@
                 <!--/ข้อมูลการรับเข้า -->
 
                 <!--เบิกออก -->
-                <li><a href="#" data-toggle="modal" data-target="#myModal1"><i class="fa fa-upload"></i> เบิกสินค้าออก </a></li>
-                 <div class="modal fade" id="myModal1" role="dialog">
+                <!-- <li><a href="#" data-toggle="modal" data-target="#myModal1"><i class="fa fa-upload"></i> เบิกสินค้าออก </a></li>
+                <div class="modal fade" id="myModal1" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <form action="withdraw_product.php" method="post">
                             <div class="modal-content">
@@ -154,7 +153,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> -->
                 <!--//เบิกออก -->
 
                 <!--ข้อมูลการเบิก -->
@@ -244,6 +243,10 @@
                 <!-- สรุปข้อมูล -->
                 <li><a href="abstract_today.php" ><i class="fa fa-money"></i>สรุปข้อมูล (รายวัน) </a></li>
                 <!-- /สรุปข้อมูล -->
+
+                <!-- ค่าส่งปุ๋ย -->
+                <li><a href="sent_fertilizer.php" ><i class="fa fa-money"></i>ค่าส่งปุ๋ย </a></li>
+                <!-- /ค่าส่งปุ๋ย -->
 
                 <!--จัดการข้อมูลสินค้า-พนักงาน -->
                 <li><a href="add_data.php" ><i class="fa fa-cog"></i> จัดการข้อมูล </a></li>
