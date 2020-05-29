@@ -65,15 +65,24 @@
                 <B> เงินขายสะสม <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
               </font>
             </div>
-            <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-                <table class="table table-striped table-bordered">
-                  <tbody>
-                    <tr class="info" >
-                      <th class="text-center" width="33%">วันที่</th>
-                      <th class="text-center" width="33%">เงินขาย</th>
-                      <th class="text-center" width="33%">เงินขายสะสม</th>
+            <div class="box-body">
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-striped">
+                  <thead>
+                    <tr class="info">
+                      <th class="text-center" width="12%">วันที่</th>
+                      <th class="text-center" width="11%">เงินขาย</th>
+                      <th class="text-center" width="11%">เงินขายสะสม</th>
+                      <th class="text-center" width="11%">SOLE</th>
+                      <th class="text-center" width="11%">กวาง</th>
+                      <th class="text-center" width="11%">HD</th>
+                      <th class="text-center" width="11%">SHD</th>
+                      <th class="text-center" width="11%">VH</th>
+                      <th class="text-center" width="11%">ปร</th>
                     </tr>
+                  </thead>
+                  <tbody>
                     <?php
                         $total_money = 0;
                         $total_profit2 = 0;
@@ -94,18 +103,50 @@
                           $objr_price_history = mysqli_fetch_array($objq_price_history);
                           $money_car = $value['sum_money'];
                           $money_store = $objr_price_history['SUM(money)'];
-                          $all_money = $money_car + $money_store;
+                          $all_money = $money_car + $money_store; 
                           $total_money = $total_money + $all_money;
 
+                          $price_sole = "SELECT SUM(num) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 11";
+                          $objq_sole = mysqli_query($conn,$price_sole);
+                          $objr_sole = mysqli_fetch_array($objq_sole);
+
+                          $price_deer = "SELECT SUM(num) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 34";
+                          $objq_deer = mysqli_query($conn,$price_deer);
+                          $objr_deer = mysqli_fetch_array($objq_deer);
+
+                          $price_hd = "SELECT SUM(num) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 3";
+                          $objq_hd = mysqli_query($conn,$price_hd);
+                          $objr_hd = mysqli_fetch_array($objq_hd);
+
+                          $price_shd = "SELECT SUM(num) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 1";
+                          $objq_shd = mysqli_query($conn,$price_shd);
+                          $objr_shd = mysqli_fetch_array($objq_shd);
+
+                          $price_vh = "SELECT SUM(num) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 5";
+                          $objq_vh = mysqli_query($conn,$price_vh);
+                          $objr_vh = mysqli_fetch_array($objq_vh);
+
+                          $price_fish = "SELECT SUM(num) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 32";
+                          $objq_fish = mysqli_query($conn,$price_fish);
+                          $objr_fish = mysqli_fetch_array($objq_fish);
                     ?>
                     <tr>
-                    <td class="text-center"><?php echo DateThai3($date); ?></td>
+                      <td class="text-center"><?php echo DateThai3($date); ?></td>
                       <td class="text-center"><?php echo $all_money;?></td>
                       <td class="text-center"><?php echo $total_money;?></td>
-                      <?php $i++;}?>
+                      <td class="text-center"><?php echo $objr_sole['SUM(num)'];?></td>
+                      <td class="text-center"><?php echo $objr_deer['SUM(num)'];?></td>
+                      <td class="text-center"><?php echo $objr_hd['SUM(num)'];?></td>
+                      <td class="text-center"><?php echo $objr_shd['SUM(num)'];?></td>
+                      <td class="text-center"><?php echo $objr_vh['SUM(num)'];?></td>
+                      <td class="text-center"><?php echo $objr_fish['SUM(num)'];?></td>
+                    </tr>
+                    <?php $i++;}?>
                   </tbody>
                 </table>
               </div>
+            </div>
+                
             </div>
           </div>
         </div>

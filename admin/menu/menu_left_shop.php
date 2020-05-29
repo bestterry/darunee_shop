@@ -11,7 +11,7 @@
             ?>
 
                 <!--สั่งสินค้า -->
-                <li><a href="../order/list_order.php" ><i class="fa fa-file-text-o"></i> สั่งซื้อสินค้า </a></li>
+                <li><a href="../order/list_order.php" ><i class="fa fa-file-text-o"></i> สั่งซื้อ </a></li>
                 <!--/สั่งสินค้า -->
 
                 <!--รับเข้า -->
@@ -82,7 +82,7 @@
                 <!--//รับเข้า -->
 
                 <!--ข้อมูลการรับเข้า -->
-                <li><a href="add_history.php"><i class="fa fa-cloud-download"></i> ประวัติ (รับเข้า) </a></li>
+                <li><a href="add_history.php"><i class="fa fa-cloud-download"></i> รับเข้า </a></li>
                 <!--/ข้อมูลการรับเข้า -->
 
                 <!--เบิกออก -->
@@ -157,7 +157,7 @@
                 <!--//เบิกออก -->
 
                 <!--ข้อมูลการเบิก -->
-                <li><a href="withdraw_history.php"><i class="fa fa-cloud-upload"></i> ประวัติ (เบิกออก) </a></li>
+                <li><a href="withdraw_history.php"><i class="fa fa-cloud-upload"></i> เบิกออก </a></li>
                 <!--/ข้อมูลการเบิก -->
 
 
@@ -166,7 +166,7 @@
                 <!-- /สต๊อกรวม -->
 
                 <!--ORDER ค้างส่ง -->
-                <li><a href="../add_customer/order.php" ><i class="fa fa-columns"></i> ORDER </a></li>
+                <li><a href="../add_customer/list_order.php" ><i class="fa fa-columns"></i> ORDER </a></li>
                 <!--/ORDER ค้างส่ง -->
 
                 <!-- นอกเขต. -->
@@ -178,15 +178,19 @@
                 <!-- /สต๊อกรถ -->
 
                 <!-- ยอดขาย -->
-                <li><a href="sale_history.php" ><i class="fa fa-money"></i>รายการขาย (รายคน)</a></li>
+                <li><a href="sale_history.php" ><i class="fa fa-money"></i>รายการขาย</a></li>
                 <!-- /ยอดขาย -->
 
                 <!-- ยอดขาย -->
-                <li><a href="profit.php" ><i class="fa fa-money"></i>ยอดจำหน่าย (รายสินค้า) </a></li>
+                <li><a href="profit.php" ><i class="fa fa-money"></i>ยอดจำหน่าย</a></li>
                 <!-- /ยอดขาย -->
 
+                <!-- สรุปข้อมูล -->
+                <li><a href="abstract_today.php" ><i class="fa fa-money"></i>ยอดเบิกรับขาย (ตรวจ)</a></li>
+                <!-- /สรุปข้อมูล -->
+
                 <!-- เงินขายรายวัน -->
-                <li><a href="receive_money.php" ><i class="fa fa-money"></i>เงินขาย (รายวัน) </a></li>
+                <li><a href="receive_money.php" ><i class="fa fa-money"></i>เงินขาย (ค้างรับ) </a></li>
                 <!-- /เงินขายรายวัน -->
 
                 <!--เงินสะสม -->
@@ -196,7 +200,7 @@
                         <form action="cu_sale.php" method="post">
                             <div class="modal-content">
                                 <div class="modal-header text-center">
-                                    <font size="5"><B> เงินสะขายสม </B></font>
+                                    <font size="5"><B> เงินขายสะสม </B></font>
                                 </div>
                                 <div class="modal-body col-md-12 table-responsive mailbox-messages">
                                   <div class="table-responsive mailbox-messages">
@@ -239,10 +243,6 @@
                 <!-- นอกเขต. -->
                 <li><a href="store.php" ><i class="fa fa-user-circle-o"></i> ระเบียนร้านค้า </a></li>
                 <!-- /นอกเขต. -->
-
-                <!-- สรุปข้อมูล -->
-                <li><a href="abstract_today.php" ><i class="fa fa-money"></i>สรุปข้อมูล (รายวัน) </a></li>
-                <!-- /สรุปข้อมูล -->
 
                 <!-- ค่าส่งปุ๋ย -->
                 <li><a href="sent_fertilizer.php" ><i class="fa fa-money"></i>ค่าส่งปุ๋ย </a></li>

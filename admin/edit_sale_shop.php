@@ -42,6 +42,12 @@
   <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -64,59 +70,59 @@
               <div class="tab-content">
               
                   <div class="box box-default">
-                    <!-- /.box-header -->
+                    <div class="box-header with-border text-center">
+                      <font size="5" >
+                        <B>
+                          แก้ไขรายการขาย
+                        </B>
+                      </font>
+                      <div align="right">
+                        <a href="sale_history.php" class="btn button2"> << กลับ </a>
+                        </div>
+                    </div>
+                  <form action="algorithm/edit_price_history.php" method="post" autocomplete="off">
                     <div class="box-body">
                       <div class="row">
-                        <div class="container">
-                          <form action="algorithm/edit_price_history.php" method="post" autocomplete="off">
-                            <div class="box-header with-border text-center">
-                              <font size="5" >
-                                <B>
-                                  แก้ไขรายการขาย
-                                </B>
-                              </font>
-                            </div>
-                            <table class="table table-bordered">
-                              <tbody>
-                                <tr bgcolor="#99CCFF">
-                                  <th class="text-center" width="21%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="13%">จำนวน</th>
-                                  <th class="text-center" width="11%">บ/หน่วย</th>
-                                  <th class="text-center" width="11%">เงินขาย(บ)</th>
-                                  <th class="text-center" width="24%">รายละเอียด</th>
-                                  <th class="text-center" width="10%">ผู้ขาย</th>
-                                  <th class="text-center" width="10%">เวลา</th>
-                                </tr>
-                                <?php #endregion
-                                    $id_price = $_GET['id_price_history'];
-                                    $data = "SELECT * FROM price_history 
-                                             INNER JOIN product ON price_history.id_product = product.id_product 
-                                             INNER JOIN zone ON price_history.id_zone = zone.id_zone
-                                             WHERE price_history.id_price_history = $id_price";  
-                                            
-                                    $objq = mysqli_query($conn,$data);
-                                    $objr = mysqli_fetch_array($objq);
-                                ?>
-                                <tr>
-                                  <input  type="hidden" name="id_price_history" class="form-control text-center" value="<?php echo $objr['id_price_history'];?>">
-                                  <td class="text-center"><?php echo $objr['name_product'].'_'.$objr['unit']; ?></td>
-                                  <td><input type="number" name="num" class="form-control text-center" value="<?php echo $objr['num'];?>"></td>
-                                  <td><input type="number" name="price" class="form-control text-center" value="<?php echo $objr['price'];?>"></td>
-                                  <td><input type="number" name="money" class="form-control text-center" value="<?php echo $objr['money'];?>"></td>
-                                  <td><input type="text" name="note"  class="form-control text-center" value="<?php echo $objr['note'];?>"></td>
-                                  <td class="text-center"><?php echo $objr['name_zone']; ?></td>
-                                  <td class="text-center"> <?php echo DateThai2($objr['datetime']); ?></td>
-                                </tr>
-                              </tbody>
-                            </table>
-                            <div class="box-footer" align="center">
-                              <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"></i> บันทึก </button>
-                              <a href="algorithm/delete_price_history.php?id_price_history=<?php echo $id_price_history;?>" class="btn btn-danger" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";> ลบ </a>
-                            </div>
-                          </form>
-                        </div>
+                        <table class="table table-bordered">
+                          <tbody>
+                            <tr>
+                              <th class="text-center" width="20%"> <font color="red">สินค้า_หน่วย</font> </th>
+                              <th class="text-center" width="10%"> <font color="red">จำนวน</font> </th>
+                              <th class="text-center" width="10%"> <font color="red">บ/หน่วย</font> </th>
+                              <th class="text-center" width="10%"> <font color="red">เงินขาย</font> </th>
+                              <th class="text-center" width="30%"> <font color="red">รายละเอียด</font> </th>
+                              <th class="text-center" width="10%"> <font color="red">ผู้ขาย</font> </th>
+                              <th class="text-center" width="10%"> <font color="red">เวลา</font> </th>
+                            </tr>
+                            <?php #endregion
+                                $id_price = $_GET['id_price_history'];
+                                $data = "SELECT * FROM price_history 
+                                          INNER JOIN product ON price_history.id_product = product.id_product 
+                                          INNER JOIN zone ON price_history.id_zone = zone.id_zone
+                                          WHERE price_history.id_price_history = $id_price";  
+                                        
+                                $objq = mysqli_query($conn,$data);
+                                $objr = mysqli_fetch_array($objq);
+                            ?>
+                            <tr>
+                              <input  type="hidden" name="id_price_history" class="form-control text-center" value="<?php echo $objr['id_price_history'];?>">
+                              <td class="text-center"><?php echo $objr['name_product'].'_'.$objr['unit']; ?></td>
+                              <td><input type="number" name="num" class="form-control text-center" value="<?php echo $objr['num'];?>"></td>
+                              <td><input type="number" name="price" class="form-control text-center" value="<?php echo $objr['price'];?>"></td>
+                              <td><input type="number" name="money" class="form-control text-center" value="<?php echo $objr['money'];?>"></td>
+                              <td><input type="text" name="note"  class="form-control text-center" value="<?php echo $objr['note'];?>"></td>
+                              <td class="text-center"><?php echo $objr['name_zone']; ?></td>
+                              <td class="text-center"> <?php echo DateThai2($objr['datetime']); ?></td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
+                    <div class="box-footer" align="center">
+                      <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"></i> บันทึก </button>
+                      <a href="algorithm/delete_price_history.php?id_price_history=<?php echo $id_price_history;?>" class="btn btn-danger" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";> ลบรายการขาย </a>
+                    </div>
+                  </form>
                   </div>
                 <!-- /เเก้ไขสินค้า -->
               </div>

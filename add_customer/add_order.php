@@ -82,17 +82,17 @@ $mysqli = connect();
       <!-- Main content -->
       <section class="content">
 
-        <div class="col-md-12">
+        <div class="col-12">
           <div class="box box-primary">
             <div class="box-header with-border">
-              
-              <div class="text-center">
-                <font size="5">
-                  <B align="center"> เพิ่ม ORDER <font color="red"> </font></B>
-                </font>
-              </div>
-              <div>
-                <a type="button" href="order.php" class="btn button2 pull-left"> << กลับ </a>
+              <div class="col-12">
+                <div class="col-5 col-sm-5 col-xl-5 col-md-5">
+                  <a type="button" href="list_order.php" class="btn button2 pull-left"> << กลับ </a>
+                </div>
+                <div class="col-7 col-sm-7 col-xl-7 col-md-7">
+                  <font size="5"><B> เพิ่ม ORDER</B></font>
+                </div>
+               
               </div>
             </div>
             <!-- /.box-header -->

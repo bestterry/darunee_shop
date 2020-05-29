@@ -15,5 +15,5 @@
 
     $conn->close();
 
-    header('location:../edit_sale_car.php?id_sale_history='.$id_sale_history);
+    header('location:../sale_history.php');
 ?>

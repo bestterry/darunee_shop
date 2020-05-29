@@ -9,7 +9,7 @@
   $query_product2 = mysqli_query($conn,$list_product);
   $objq_profit = mysqli_query($conn,$list_product);
   
-  $strDate = date('d-m-Y');
+  $strDate = date('Y-m-d');
 ?>
 
 <!DOCTYPE html>
@@ -76,15 +76,92 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#profit_back" data-toggle="tab">ยอดจำหน่ายรายวัน</a></li>
-                <li><a href="#profit_duration" data-toggle="tab">ตามช่วงเวลา</a></li>
+                <li class="active"><a href="#profit_today" data-toggle="tab">ยอดจำหน่ายวันนี้</a></li>
+                <li><a href="#profit_back" data-toggle="tab">รายวัน</a></li>
+                <li><a href="#profit_duration" data-toggle="tab">ช่วงเวลา</a></li>
                 <div align="right">
                   <a href="admin.php" class="btn button2"><< เมนูหลัก</a>
                 </div>
               </ul>
               <div class="tab-content">
+
+              <!-- tab-pane -->
+              <div class="active tab-pane" id="profit_today">
+                  <div class="box box-default">
+                    <div class="box-header with-border text-center">
+                      <B><font size="5">ยอดจำหน่ายวันนี้</font></B>
+                    </div>
+                    <div class="box-body">
+                      <div class="row">
+                        <table class="table">
+                          <tbody>
+                            <tr>
+                              <th class="text-center" width="30%"> <font color="red">สินค้า_หน่วย</font> </th>
+                              <th class="text-center" width="14%"> <font color="red">จำนวน</font> </th>
+                              <th class="text-center" width="14%"> <font color="red">ทุน/หน่วย</font> </th>
+                              <th class="text-center" width="14%"> <font color="red">ทุนซื้อ</font> </th>
+                              <th class="text-center" width="14%"> <font color="red">เงินขาย</font> </th>
+                              <th class="text-center" width="14%"> <font color="red">กำไรขาย</font> </th>
+                            </tr>
+                            <?php
+                            $a = 0;
+                            $b = 0;
+                            $total_money = 0;
+                              $sql_checkproduct = "SELECT * FROM product WHERE status_stock = 1";
+                              $objq_checkprouct = mysqli_query($conn,$sql_checkproduct);
+                              while($value = $objq_checkprouct-> fetch_assoc()){
+                                $id_product = $value['id_product'];
+                                $price_num = $value['price_num'];
+
+                                $sql_salecar = "SELECT SUM(num),SUM(money) FROM sale_car_history WHERE id_product = $id_product AND DATE_FORMAT(datetime,'%Y-%m-%d')='$strDate'";
+                                $objq_salecar = mysqli_query($conn,$sql_salecar);
+                                $objr_salecar = mysqli_fetch_array($objq_salecar);
+                                $num_salecar = $objr_salecar['SUM(num)'];
+                                $money_salecar = $objr_salecar['SUM(money)'];
+
+                                $sql_salestore = "SELECT SUM(num),SUM(money) FROM price_history WHERE id_product = $id_product AND DATE_FORMAT(datetime,'%Y-%m-%d')='$strDate'";
+                                $objq_salestore = mysqli_query($conn,$sql_salestore);
+                                $objr_salestore = mysqli_fetch_array($objq_salestore);
+                                $num_salestore = $objr_salestore['SUM(num)'];
+                                $money_salestore = $objr_salestore['SUM(money)'];
+
+                                $total_num = $num_salecar + $num_salestore;
+                                $total_salemoney = $money_salecar + $money_salestore;
+                                $price_product = $total_num * $price_num;
+                                $profit_sale = $total_salemoney - $price_product;
+                            ?>
+                            <tr>
+                              <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit'];?></td>
+                              <td class="text-center"><?php if($total_num=="0"){ echo "-";}else{ echo $total_num; }  ?></td>
+                              <td class="text-center"><?php if($price_num=="0"){ echo "-";}else{ echo $price_num; }  ?></td>
+                              <td class="text-center"><?php if($price_product=="0"){ echo "-";}else{ echo $price_product; } ?></td>
+                              <td class="text-center"><?php if($total_salemoney=="0"){ echo "-";}else{ echo $total_salemoney; } ?></td>
+                              <td class="text-center"><?php if($profit_sale=="0"){ echo "-";}else{ echo $profit_sale; } ?></td>
+                            </tr>
+                            <?php 
+                              $a = $a + $total_salemoney;
+                              $b = $b + $price_product;
+                              $total_money = $total_money + $profit_sale; 
+                            }
+                            ?>
+                            <tr>
+                              <th></th>
+                              <th ></th>
+                              <th class="text-center"> <font color="red">รวมเงิน</font> </th>
+                              <th class="text-center"> <font color="red"><?php echo round($b); ?></font> </th>
+                              <th class="text-center"> <font color="red"><?php echo round($a); ?></font> </th>
+                              <th class="text-center"> <font color="red"><?php echo round($total_money); ?></font> </th>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.tab-pane -->
+
                 <!-- tab-pane -->
-                <div class="active tab-pane" id="profit_back">
+                <div class="tab-pane" id="profit_back">
                   <div class="box box-default">
                     <div class="box-header with-border text-center">
                       <B><font size="5">ยอดจำหน่ายรายวัน</font></B>

@@ -58,5 +58,5 @@ if(empty($province_id)){
   }
   //-addorder
 
-  header('location:../edit_list_order.php?id_addorder='.$id_addorder);
+  header('location:../list_order_des.php?id_addorder='.$id_addorder);
 ?>

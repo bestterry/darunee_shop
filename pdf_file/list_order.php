@@ -3,6 +3,12 @@ require('fpdf.php');
 require('../config_database/config.php'); 
 require('date/datetime.php');
 
+$sql_provinces = "SELECT tbl_provinces.province_id FROM tbl_provinces 
+                  INNER JOIN addorder ON tbl_provinces.province_id = addorder.province_id
+                  WHERE addorder.status = 'pending'
+                  GROUP BY tbl_provinces.province_id";
+            $objq_province = mysqli_query($conn,$sql_provinces);
+
 class PDF extends FPDF
   {
   // Page header
@@ -43,11 +49,7 @@ $pdf=new PDF('P','mm','A4');
             $pdf->AddFont('cordia','','cordia.php');
             $pdf->SetFont('cordia','',16);
             //วนลูปหาอำเภอที่มีใน addorder
-            $sql_provinces = "SELECT tbl_provinces.province_id FROM tbl_provinces 
-                             INNER JOIN addorder ON tbl_provinces.province_id = addorder.province_id
-                             WHERE addorder.status = 'pending'
-                             GROUP BY tbl_provinces.province_id";
-            $objq_province = mysqli_query($conn,$sql_provinces);
+            
             while($value_pv = $objq_province -> fetch_assoc())
             { 
                 $pdf->AddPage();

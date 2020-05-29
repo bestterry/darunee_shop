@@ -98,7 +98,7 @@
                     <th class="text-center" width="5%">ลำพูน</th>
                     <th class="text-center" width="5%">ขายส่ง</th>
                     <th class="text-center" width="5%">แม่จัน</th>
-                    <th class="text-center" width="5%">แพร่</th>
+                    <th class="text-center" width="5%">แจ้ห่ม</th>
                     <th class="text-center" width="5%">รถ</th>
                     <th class="text-center" width="8%">ทั้งหมด</th>
                   </tr>

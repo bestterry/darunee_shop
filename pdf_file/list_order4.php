@@ -87,6 +87,7 @@ $pdf=new PDF('P','mm','A4');
                   $x = $pdf->GetX();
                   $y = $pdf->GetY();
                   //รายการสินค้า
+                  $total_money = 0;
                   $sql_listorder = "SELECT * FROM listorder
                                     INNER JOIN product ON listorder.id_product = product.id_product
                                     WHERE listorder.id_addorder = $id_addorder";
@@ -97,7 +98,7 @@ $pdf=new PDF('P','mm','A4');
                     $pdf->Cell(16,7, iconv( 'UTF-8','cp874' ,$list['price']),0,0,'R');
                     $pdf->Cell(20,7, iconv( 'UTF-8','cp874',$list['money']),0,0,'R');
                     $pdf->Ln(7);
-                    $total_money = $total_money + $money;
+                    $total_money = $total_money + $list['money'];
                   }
                   $pdf->Cell(51,7, iconv( 'UTF-8','cp874' ,''),0,0,'L');
                   $pdf->Cell(20,7, iconv( 'UTF-8','cp874' ,'[ '. $total_money .' ]'),0,0,'R');

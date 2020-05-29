@@ -9,9 +9,7 @@ $day = $_POST['day'];
   $objq_product2 = mysqli_query($conn,$list_product);
   $objq_product3 = mysqli_query($conn,$list_product);
 
-  $member = "SELECT * FROM member 
-             WHERE status = 'employee' AND NOT id_member = 3 AND NOT id_member = 8 
-             AND NOT id_member = 19 AND NOT id_member = 28 AND NOT id_member = 32";
+  $member = "SELECT * FROM member WHERE status_car = 1";
   $objq_member = mysqli_query($conn,$member);
   $objq_member3 = mysqli_query($conn,$member);
   $objq_member5 = mysqli_query($conn,$member);
@@ -78,17 +76,18 @@ $day = $_POST['day'];
           <div class="col-md-12">
             <div class="form-group">
               <div class="box box-default">
+                <div class="box-header text-center with-border">
+                  <div align="right">
+                    <!-- <a href="../pdf_file/admin_saleday_history.php?day=<?php echo $day;?>" class="btn btn-success" target="_blank"><i class="fa fa-print"> พิมพ์ </i></a> -->
+                    <a href="abstract_today.php" class="btn button2 pull-left"> << ย้อนกลับ </a>
+                  </div>
+                  <div align="center"><font size="5" color="blue"><B>สรุปรายวัน</B></font> &nbsp; <font size="5" color="red"><B><?php echo DateThai3($day); ?></B></font></div>
+                  
+                </div>
                 <div class="box-body">
                   <div class="row">
-                    <div class="box-header text-center with-border">
-                      <div align="right">
-                        <!-- <a href="../pdf_file/admin_saleday_history.php?day=<?php echo $day;?>" class="btn btn-success" target="_blank"><i class="fa fa-print"> พิมพ์ </i></a> -->
-                        <a href="abstract_today.php" class="btn button2 pull-left"> << ย้อนกลับ </a>
-                      </div>
-                      <div align="center"><font size="5" color="blue"><B>สรุปรายวัน</B></font> &nbsp; <font size="5" color="red"><B><?php echo DateThai3($day); ?></B></font></div>
-                      <div align="center"><font size="5"><B>ยอดเบิก</B></font></div>
-                    </div>
-                    <div class="container">
+                    <div align="center"><font size="5"><B>จำนวนสินค้าเบิก</B></font></div>
+                    <div class="col-12 col-sm-12 col-md-12 col-xl-12 ">
                       <table class="table table-striped ">
                         <thead>
                           <tr>
@@ -96,11 +95,11 @@ $day = $_POST['day'];
                             <?php 
                               while($value = $objq_member->fetch_assoc()){
                             ?>
-                            <th class="text-center" width="6%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
+                            <th class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
                             <?php 
                               }
                             ?>
-                            <th class="text-center" width="6%"><font color="red">รวม</font></th>
+                            <th class="text-center" width="5%"><font color="red">รวม</font></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -110,12 +109,10 @@ $day = $_POST['day'];
                               $id_product = $value['id_product'];
                           ?>
                           <tr>
-                          <th class="text-center" ><?php echo $value['name_product'].'_'.$value['unit']; ?></th>
+                          <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
                           <?php 
                               $total_num = 0;
-                              $member = "SELECT * FROM member 
-                                        WHERE status = 'employee' AND NOT id_member = 3 AND NOT id_member = 8 AND
-                                        NOT id_member = 19 AND NOT id_member = 28 AND NOT id_member = 32";
+                              $member = "SELECT * FROM member WHERE status_car = 1";
                               $objq_member2 = mysqli_query($conn,$member);
                               while($value_member = $objq_member2->fetch_assoc()){
                                 
@@ -145,11 +142,9 @@ $day = $_POST['day'];
                         </tbody>
                       </table>
                     </div>
-                    
-
                     <br>
-                    <div align="center"><font size="5"><B>ยอดรับเข้า</B></font></div>
-                     <div class="container">
+                    <div align="center"><font size="5"><B>จำนวนสินค้ารับเข้า</B></font></div>
+                    <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                       <table class="table table-striped">
                         <thead>
                           <tr>
@@ -157,11 +152,11 @@ $day = $_POST['day'];
                             <?php 
                               while($value = $objq_member3->fetch_assoc()){
                             ?>
-                            <th class="text-center" width="6%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
+                            <th class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
                             <?php 
                               }
                             ?>
-                            <th class="text-center" width="6%"><font color="red">รวม</font></th>
+                            <th class="text-center" width="5%"><font color="red">รวม</font></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -171,12 +166,10 @@ $day = $_POST['day'];
                               $id_product = $value['id_product'];
                           ?>
                           <tr>
-                          <th class="text-center" ><?php echo $value['name_product'].'_'.$value['unit']; ?></th>
+                          <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
                           <?php 
                               $total_num = 0;
-                              $member = "SELECT * FROM member 
-                                        WHERE status = 'employee' AND NOT id_member = 3 AND NOT id_member = 8 AND
-                                        NOT id_member = 19 AND NOT id_member = 28 AND NOT id_member = 32";
+                              $member = "SELECT * FROM member WHERE status_car = 1";
                               $objq_member2 = mysqli_query($conn,$member);
                               while($value_member = $objq_member2->fetch_assoc()){
                                 $id_member = $value_member['id_member'];
@@ -202,14 +195,13 @@ $day = $_POST['day'];
                           <?php
                             }
                           ?>
+                          
                         </tbody>
                       </table>
-                     </div>
-                      
-
+                    </div>
                     <br>
-                    <div align="center"><font size="5"><B>ยอดขาย</B></font></div>
-                     <div class="container">
+                    <div align="center"><font size="5"><B>จำนวนสินค้าขาย</B></font></div>
+                    <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                       <table class="table table-striped">
                         <thead>
                           <tr>
@@ -217,11 +209,11 @@ $day = $_POST['day'];
                             <?php 
                               while($value = $objq_member5->fetch_assoc()){
                             ?>
-                            <th class="text-center" width="6%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
+                            <th class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
                             <?php 
                               }
                             ?>
-                            <th class="text-center" width="6%"><font color="red">รวม</font></th>
+                            <th class="text-center" width="5%"><font color="red">รวม</font></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -231,12 +223,11 @@ $day = $_POST['day'];
                               $id_product = $value['id_product'];
                           ?>
                           <tr>
-                          <th class="text-center" ><?php echo $value['name_product'].'_'.$value['unit']; ?></th>
+                          <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
                           <?php 
                               $total_num = 0;
                               $member = "SELECT * FROM member 
-                                        WHERE status = 'employee' AND NOT id_member = 3 AND NOT id_member = 8 AND
-                                        NOT id_member = 19 AND NOT id_member = 28 AND NOT id_member = 32";
+                                        WHERE status_car = 1";
                               $objq_member4 = mysqli_query($conn,$member);
                               while($value_member = $objq_member4->fetch_assoc()){
                                 $id_member = $value_member['id_member'];
@@ -264,9 +255,7 @@ $day = $_POST['day'];
                           ?>
                         </tbody>
                       </table>
-                     </div>
-                      
-
+                    </div>
                   </div>
                 </div>
                 

@@ -98,7 +98,7 @@
                 <div class="active tab-pane" id="today">
                   <div class="box box-default">
                     <div class="box-header text-center with-border">
-                        <font size="5">
+                        <font size="5" color="blue">
                           <B> รายการขายวันนี้ </B>
                         </font>
                     </div>
@@ -243,15 +243,14 @@
                           <!-- ------------------------------//หน้าร้าน---------------------------- -->
 
                           <!-- ------------------------------//รถรวม---------------------------- -->
-                            <?php 
-                              for ($i=3; $i <= 19; $i++) { 
-                              $sql_member = "SELECT * FROM member WHERE id_member = $i";
+                            <?php  
+                              $sql_member = "SELECT * FROM member";
                               $objq_member = mysqli_query($conn,$sql_member);
-                              $objr_member = mysqli_fetch_array($objq_member);
-
+                              while($value_member = $objq_member -> fetch_assoc()){
+                                $id_member = $value_member['id_member'];
                               $check = " SELECT * FROM product INNER JOIN sale_car_history
                                         ON product.id_product = sale_car_history.id_product 
-                                        WHERE sale_car_history.id_member = $i AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day' ";
+                                        WHERE sale_car_history.id_member = $id_member AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day' ";
                               $objq_check = mysqli_query($conn,$check);
                               $objr_check = mysqli_fetch_array($objq_check);
                               if(!isset($objr_check['num'])){
@@ -261,7 +260,7 @@
                             <div class="text-center">
                               <B>
                                 <font size="5" color="blue">
-                                  <?php echo $objr_member['name']; ?>
+                                  <?php echo $value_member['name']; ?>
                                 </font>
                               </B>
                             </div>
@@ -282,7 +281,7 @@
                                 $total_money = 0;
                                       $SQL_product = "SELECT * FROM product INNER JOIN sale_car_history
                                                       ON product.id_product = sale_car_history.id_product 
-                                                      WHERE sale_car_history.id_member = $i AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day' ";
+                                                      WHERE sale_car_history.id_member = $id_member AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day' ";
                                       $objq_product = mysqli_query($conn,$SQL_product);
                                       while($product = $objq_product -> fetch_assoc()){
                                 ?>

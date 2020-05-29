@@ -9,11 +9,37 @@
   $tel = $_POST['tel'];
   $note = $_POST['note'];
   $mysqli = connect();
-  
+  $date = date('Y-m-d H:i:s');
 
   $insert_addorder = "INSERT INTO addorder (name_customer, tel, village, district_code, amphur_id, province_id, note, status, id_wd)
                       VALUES ('$name_customer', '$tel', '$village', $id_district, $id_amphur, $id_province, '$note', 'pending', 0)";
   mysqli_query($mysqli,$insert_addorder);
+
+  function DateThai($strDate)
+  {
+    $strYear = date("Y",strtotime($strDate))+543;
+    $strMonth= date("n",strtotime($strDate));
+    $strDay= date("j",strtotime($strDate));
+    $strHour= date("H",strtotime($strDate));
+    $strMinute= date("i",strtotime($strDate));
+    $strSeconds= date("s",strtotime($strDate));
+    $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+    $strMonthThai=$strMonthCut[$strMonth];
+    return "$strDay $strMonthThai $strYear";
+  }
+
+  function Datetime($strDate)
+  {
+  $strYear = (date("Y",strtotime($strDate))+543)-2500;
+  $strMonth= date("n",strtotime($strDate));
+  $strDay= date("j",strtotime($strDate));
+  $strHour= date("H",strtotime($strDate));
+  $strMinute= date("i",strtotime($strDate));
+  $strSeconds= date("s",strtotime($strDate));
+  $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+  $strMonthThai=$strMonthCut[$strMonth];
+  return "$strHour:$strMinute น.";
+  }
 
 ?>
 <!DOCTYPE html>
@@ -103,7 +129,7 @@ folder instead of downloading all of them to reduce the load. -->
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center"> ใบสั่งสินค้า <font color="red"> </font></B>
+                <B align="center"> ข้อมูลสั่งสินค้า <font color="red"> </font></B>
               </font>
             </div>
             <!-- /.box-header -->
@@ -116,13 +142,13 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th width="100%"><?php echo $name_customer; ?></th>
+                            <th width="100%" class="text-right"><?php echo $name_customer; ?></th>
                           </tr>
                           <tr>
-                            <th width="100%"><?php echo $village; ?></th>
+                            <th width="100%" class="text-right"><?php echo $village; ?></th>
                           </tr>
                           <tr>
-                            <th width="100%">
+                            <th width="100%" class="text-right">
                               <?php 
                                 $sql_district = "SELECT * FROM tbl_districts WHERE district_code = $id_district";
                                 $objq_district = mysqli_query($mysqli,$sql_district);
@@ -141,10 +167,10 @@ folder instead of downloading all of them to reduce the load. -->
                             </th>
                           </tr>
                           <tr>
-                            <th width="100%"><?php echo $tel; ?></th>
+                            <th width="100%" class="text-right">สั่ง <?php echo Datethai($date).' '.'สนง.'.' '.Datetime($date).' '.$tel; ?></th>
                           </tr>
                           <tr>
-                            <th width="100%"><?php echo $note; ?></th>
+                            <th width="100%" class="text-right"><?php echo $note; ?></th>
                           </tr>
                         </table>
                       </div>
@@ -155,9 +181,9 @@ folder instead of downloading all of them to reduce the load. -->
                       <div class="table-responsive">
                         <table class="table table-bordered" id="dynamic_field">
                           <tr>
-                            <th class="text-center" width="55%"><font color="red">สินค้า_หน่วย</font></th>
-                            <th class="text-center" width="15%"><font color="red">บ/น</font></th>
-                            <th class="text-center" width="15%"><font color="red">จำนวน</font></th>
+                            <th class="text-center" width="35%"><font color="red">สินค้า_หน่วย</font></th>
+                            <th class="text-center" width="20%"><font color="red">บ/น</font></th>
+                            <th class="text-center" width="20%"><font color="red">จำนวน</font></th>
                             <th class="text-center" width="15%"><font color="red">เงิน</font></th>
                           </tr>
                           <?php 
@@ -203,7 +229,7 @@ folder instead of downloading all of them to reduce the load. -->
               </div>
               <div class="box-footer">
                 <div class="col-xs-5"> 
-                  <a type="button" href="order.php" class="btn btn-danger"> << กลับ</a> 
+                  <a type="button" href="list_order.php" class="btn btn-danger"> << กลับ</a> 
                 </div>
                 <div class="col-xs-6"> 
                 <a type="button" href="add_order.php" class="btn button2">เพิ่มใบสั่งสินค้า</a> 
@@ -214,31 +240,32 @@ folder instead of downloading all of them to reduce the load. -->
             </form> 
           </div> 
           </div> 
-        </section> <!-- jQuery 3 -->
-                    <script src="../bower_components/jquery/dist/jquery.min.js">
-                    </script>
-                    <!-- Bootstrap 3.3.7 -->
-                    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js">
-                    </script>
-                    <!-- DataTables -->
-                    <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js">
-                    </script>
-                    <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js">
-                    </script>
-                    <!-- SlimScroll -->
-                    <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js">
-                    </script>
-                    <!-- FastClick -->
-                    <script src="../bower_components/fastclick/lib/fastclick.js">
-                    </script>
-                    <!-- AdminLTE App -->
-                    <script src="../dist/js/adminlte.min.js">
-                    </script>
-                    <!-- AdminLTE for demo purposes -->
-                    <script src="../dist/js/demo.js">
-                    </script>
-                    <script src="../plugins/iCheck/icheck.min.js">
-                    </script>
+        </section> 
+        <!-- jQuery 3 -->
+        <script src="../bower_components/jquery/dist/jquery.min.js">
+        </script>
+        <!-- Bootstrap 3.3.7 -->
+        <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js">
+        </script>
+        <!-- DataTables -->
+        <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js">
+        </script>
+        <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js">
+        </script>
+        <!-- SlimScroll -->
+        <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js">
+        </script>
+        <!-- FastClick -->
+        <script src="../bower_components/fastclick/lib/fastclick.js">
+        </script>
+        <!-- AdminLTE App -->
+        <script src="../dist/js/adminlte.min.js">
+        </script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="../dist/js/demo.js">
+        </script>
+        <script src="../plugins/iCheck/icheck.min.js">
+        </script>
 
 </body>
 

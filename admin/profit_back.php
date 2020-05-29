@@ -149,65 +149,6 @@
                       </tbody>
                     </table>
                   </div>
-                  <br>
-
-                  <!-- ------------------------------ยอดขายรายคน---------------------------- -->
-                  <div align="center"><font color="blue" size="5"><B>ยอดขาย</B></font></div>
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <td class="text-center" width="10%"><font color="red">สินค้า_หน่วย</font></td>
-                          <?php 
-                            while($value = $objq_member->fetch_assoc()){
-                          ?>
-                          <td class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></td>
-                          <?php 
-                            }
-                          ?>
-                          <td class="text-center" width="6%"><font color="red">รวม</font></td>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php 
-                        
-                          while($value = $query_product->fetch_assoc()){
-                            $id_product = $value['id_product'];
-                        ?>
-                        <tr>
-                        <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
-                        <?php 
-                            $total_num = 0;
-                            $member = "SELECT * FROM member 
-                                      WHERE status = 'employee' AND NOT id_member = 28 AND NOT id_member = 32";
-                            $objq_member4 = mysqli_query($conn,$member);
-                            while($value_member = $objq_member4->fetch_assoc()){
-                              $id_member = $value_member['id_member'];
-                              $sql_car = "SELECT SUM(num) FROM sale_car_history WHERE id_product = $id_product 
-                                          AND id_member = $id_member AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
-                              $objq_car = mysqli_query($conn,$sql_car);
-                              $objr_car = mysqli_fetch_array($objq_car);
-
-                              if(isset($objr_car['SUM(num)'])){
-                                $num_car = $objr_car['SUM(num)'];
-                                
-                              }else{
-                                $num_car = "-";
-                              }
-                        ?>
-                          <td class="text-center" ><?php echo $num_car; ?></td>
-                        <?php 
-                          $total_num = $total_num + $objr_car['SUM(num)'];
-                            }
-                        ?>
-                          <td class="text-center" ><?php echo $total_num; ?></td>
-                        </tr>
-                        <?php
-                          }
-                        ?>
-                      </tbody>
-                    </table>
-                    <br>
-                  <!-- ------------------------------//ยอดขายรายคน---------------------------- -->
                 </div>
               </div>
             </div>

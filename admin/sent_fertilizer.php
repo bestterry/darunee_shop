@@ -74,19 +74,117 @@
             <div class="col-md-12">
               <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                  <li class="active"><a href="#checkday" data-toggle="tab">ค่าส่งปุ๋ยรายวัน</a></li>
-                  <li><a href="#bytime" data-toggle="tab">ค่าส่งปุ๋ยตามช่วงเวลา</a></li>
+                  <li class="active"><a href="#today" data-toggle="tab">ค่าส่งปุ๋ยวันนี้</a></li>
+                  <li><a href="#checkday" data-toggle="tab">รายวัน</a></li>
+                  <li><a href="#bytime" data-toggle="tab">ช่วงเวลา</a></li>
+                  <a href="admin.php" class="btn button2 pull-right"><< เมนูหลัก</a>
                 </ul>
                 <div class="tab-content">
 
-                  <div class="active tab-pane" id="checkday">
+                  <div class="active tab-pane" id="today">
+                    <div class="box box-default">
+                      <div class="box-header with-border">
+                        <div class="row">
+                          <div class="col-md-12 col-12">
+                              <div class="col-md-3 col-sm-3 col-3">
+                                <div align="left">
+                                
+                                </div>
+                              </div>
+
+                              <div class="col-md-6 col-sm-6 col-6">
+                                <p align="center">
+                                  <font size="5">
+                                    <B>ค่าส่งปุ๋ยวันนี้</B>
+                                  </font>
+                                </p>
+                              </div>
+
+                              <div class="col-md-3 col-sm-3 col-3">
+                                <div align="right">
+                                
+                                </div>
+                              </div>
+                          
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-body">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <table class="table table-striped" id="example2">
+                              <thead>
+                              <tr>
+                                <th class="text-center" width="5%"> <font color="red">ที่</font> </th>
+                                <th class="text-center" width="10%"> <font color="red">ชื่อ</font> </th>
+                                <th class="text-center" width="10%"> <font color="red">ยก</font> </th>
+                                <th class="text-center" width="8%"> <font color="red">รถ</font> </th>
+                                <th class="text-center" width="8%"> <font color="red">คน</font> </th>
+                                <th class="text-center" width="8%"> <font color="red">กส</font> </th>
+                                <th class="text-center" width="8%"> <font color="red">ค่ายก</font> </th>
+                                <th class="text-center" width="8%"> <font color="red">ค่ารถ</font> </th>
+                                <th class="text-center" width="25%"> <font color="red">ชื่อทีมยก</font> </th>
+                                <th class="text-center" width="5%"> <font color="red">เวลา</font> </th>
+                                <th class="text-center" width="5%"> <font color="red">แก้ไข</font> </th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <?php 
+                                $i = 1;
+                                $day = date('Y-m-d');
+                                $sql_ferti = "SELECT * FROM sent_ferti
+                                              INNER JOIN type_lift ON sent_ferti.id_type_lift = type_lift.id
+                                              INNER JOIN member ON sent_ferti.id_member = member.id_member 
+                                              WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
+                                $objq_ferti = mysqli_query($conn,$sql_ferti);
+                                while($value = $objq_ferti->fetch_assoc()){
+                                  $id_car = $value['id_car'];
+                                  $sql = "SELECT name FROM member WHERE id_member = $id_car";
+                                  $objq = mysqli_query($conn,$sql);
+                                  $objr = mysqli_fetch_array($objq);
+
+                                  $id_member = $value['id_member'];
+
+                                  if($id_member == $id_car){
+                                    $car_rental = $value['num_ferti']*0.75;
+                                  }else{
+                                    $car_rental = "-";
+                                  }
+                              ?>
+                              <tr>
+                                <td class="text-center"><?php echo $i; ?></td>
+                                <td class="text-center"><?php echo $value['name'];?></td>
+                                <td class="text-center"><?php echo $value['name_type_lift'];?></td>
+                                <td class="text-center"><?php echo $objr['name'];?></td>
+                                <td class="text-center"><?php echo $value['num_cus'];?></td>
+                                <td class="text-center"><?php echo $value['num_ferti'];?></td>
+                                <td class="text-center"><?php echo $value['money'];?></td>
+                                <td class="text-center"><?php echo $car_rental;?></td>
+                                <td class="text-center"><?php echo $value['note'];?></td>
+                                <td class="text-center"><?php echo Datethai2($value['datetime']);?></td>
+                                <td class="text-center"> 
+                                  <a href="sent_fertilizer_edit.php?id_sent_ferti=<?php echo $value['id_sent_ferti']; ?>&&day=<?php echo $day; ?>" > <i class="fa fa-pencil"></i> </a>
+                                </td>
+                              </tr>
+                              <?php
+                                $i++;
+                                }
+                              ?>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane" id="checkday">
                     <div class="box box-default">
                     <div class="box-header with-border">
                       <div class="row">
                         <div class="col-md-12 col-12">
                             <div class="col-md-3 col-sm-3 col-3">
                               <div align="left">
-                                <a href="admin.php" class="btn button2"><< เมนูหลัก</a>
                               </div>
                             </div>
 
@@ -172,6 +270,7 @@
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -211,6 +310,18 @@
 
           $('#datePicker').val(today);
         });
+
+        $(function() {
+          $('#example1').DataTable()
+          $('#example2').DataTable({
+            'paging': false,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+          })
+        })
     </script>
   </body>
 

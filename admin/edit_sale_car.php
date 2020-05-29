@@ -42,6 +42,13 @@
   <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <style>
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+    </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -63,63 +70,63 @@
           <div class="col-md-12">
               <div class="tab-content">
               
-                  <div class="box box-default">
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="container">
-                          <form action="algorithm/edit_sale_car.php" method="post" autocomplete="off">
-                            <div class="box-header with-border text-center">
-                              <font size="5" >
-                                <B>
-                                  แก้ไขรายการขาย
-                                </B>
-                              </font>
-                            </div>
-                            <table class="table table-bordered">
-                              <tbody>
-                                <tr bgcolor="#99CCFF">
-                                  <th class="text-center" width="21%">สินค้า_หน่วย</th>
-                                  <th class="text-center" width="13%">จำนวน</th>
-                                  <th class="text-center" width="11%">บ/หน่วย</th>
-                                  <th class="text-center" width="11%">เงินขาย(บ)</th>
-                                  <th class="text-center" width="24%">รายละเอียด</th>
-                                  <th class="text-center" width="10%">ผู้ขาย</th>
-                                  <th class="text-center" width="10%">เวลา</th>
-                                </tr>
-                                <?php #endregion
-                                    $id_sale_history = $_GET['id_sale_history'];
-                                    $data = "SELECT * FROM sale_car_history 
-                                             INNER JOIN product ON sale_car_history.id_product = product.id_product 
-                                             INNER JOIN member ON sale_car_history.id_member = member.id_member
-                                             WHERE sale_car_history.id_sale_history = $id_sale_history";  
-                                    $objq = mysqli_query($conn,$data);
-                                    while($value = $objq ->fetch_assoc()){ 
-                                ?>
-                                <tr>
-                                  <input  type="hidden" name="id_sale_history" class="form-control text-center" value="<?php echo $value['id_sale_history'];?>">
-                                  <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
-                                  <td class="text-center"><?php echo $value['num']; ?></td>
-                                  <td><input  type="number" name="price" class="form-control text-center" value="<?php echo $value['price'];?>"></td>
-                                  <td><input  type="number" name="money" class="form-control text-center" value="<?php echo $value['money'];?>"></td>
-                                  <td><input  type="text" name="note"  class="form-control text-center" value="<?php echo $value['note'];?>"></td>
-                                  <td class="text-center"><?php echo $value['name']; ?></td>
-                                  <td class="text-center"> <?php echo DateThai2($value['datetime']); ?></td>
-                                </tr>
-                                <?php
-                                  }
-                                ?>
-                              </tbody>
-                            </table>
-                            <div class="box-footer" align="center">
-                              <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"></i> บันทึก </button>
-                              <a href="algorithm/delete_sale_car.php?id_sale_history=<?php echo $id_sale_history;?>" class="btn btn-danger" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";> ลบ </a>
-                            </div>
-                          </form>
-                        </div>
+                <div class="box box-default">
+                    <div class="box-header with-border text-center">
+                      <font size="5" >
+                        <B>
+                          แก้ไขรายการขาย
+                        </B>
+                      </font>
+                      <div align="right">
+                        <a href="sale_history.php" class="btn button2"> << กลับ </a>
                       </div>
                     </div>
-                  </div>
+                  <form action="algorithm/edit_sale_car.php" method="post" autocomplete="off">
+                    <div class="box-body">
+                      <div class="row">
+                        <table class="table table-bordered">
+                          <tbody>
+                            <tr>
+                              <th class="text-center" width="20%"> <font color="red">สินค้า_หน่วย</font> </th>
+                              <th class="text-center" width="10%"> <font color="red">จำนวน</font> </th>
+                              <th class="text-center" width="10%"> <font color="red">บ/หน่วย</font> </th>
+                              <th class="text-center" width="10%"> <font color="red">เงินขาย</font> </th>
+                              <th class="text-center" width="30%"> <font color="red">รายละเอียด</font> </th>
+                              <th class="text-center" width="10%"> <font color="red">ผู้ขาย</font> </th>
+                              <th class="text-center" width="10%"> <font color="red">เวลา</font> </th>
+                            </tr>
+                            <?php #endregion
+                                $id_sale_history = $_GET['id_sale_history'];
+                                $data = "SELECT * FROM sale_car_history 
+                                          INNER JOIN product ON sale_car_history.id_product = product.id_product 
+                                          INNER JOIN member ON sale_car_history.id_member = member.id_member
+                                          WHERE sale_car_history.id_sale_history = $id_sale_history";  
+                                $objq = mysqli_query($conn,$data);
+                                while($value = $objq ->fetch_assoc()){ 
+                            ?>
+                            <tr>
+                              <input  type="hidden" name="id_sale_history" class="form-control text-center" value="<?php echo $value['id_sale_history'];?>">
+                              <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
+                              <td class="text-center"><?php echo $value['num']; ?></td>
+                              <td><input  type="number" name="price" class="form-control text-center" value="<?php echo $value['price'];?>"></td>
+                              <td><input  type="number" name="money" class="form-control text-center" value="<?php echo $value['money'];?>"></td>
+                              <td><input  type="text" name="note"  class="form-control text-center" value="<?php echo $value['note'];?>"></td>
+                              <td class="text-center"><?php echo $value['name']; ?></td>
+                              <td class="text-center"> <?php echo DateThai2($value['datetime']); ?></td>
+                            </tr>
+                            <?php
+                              }
+                            ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="box-footer" align="center">
+                      <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"></i> บันทึก </button>
+                      <a href="algorithm/delete_sale_car.php?id_sale_history=<?php echo $id_sale_history;?>" class="btn btn-danger" onClick="return confirm('คุณต้องการที่จะลบข้อมูลนี้หรือไม่ ?')";> ลบรายการขาย </a>
+                    </div>
+                  </form>
+                </div>
                 <!-- /เเก้ไขสินค้า -->
               </div>
               <!-- /.tab-content -->

@@ -69,7 +69,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="box box-primary">
-            <table class="table table-bordered" id="dynamic_field">
+              <table class="table table-bordered" id="dynamic_field">
                 <tr>
                   <th width="30%" > 
                     <a type="button" href="admin.php" class="btn button2 "><< เมนูหลัก</a>
@@ -79,81 +79,80 @@
                 </tr>
               </table>
               <div class="mailbox-read-message">
-              <?php 
-                if ($id_member == 30) {
-               ?>
+                <?php 
+                  if ($id_member == 30) {
+                ?>
                  <!-- boss -->
-                 <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th class="text-center" width="5%">#</th>
-                        <th class="text-center" width="7%">ชื่อ</th>
-                        <th class="text-center" width="5%">#</th>
-                        <th class="text-center" width="7%">งาน</th>
-                        <th class="text-center" width="5%">#</th>
-                        <th class="text-center" width="7%">เงิน</th>
-                        <th class="text-center" width="7%">#</th>
-                        <th class="text-center" width="12%">วันขาย</th>
-                        <th class="text-center" width="12%">วันรับเงิน</th>
-                        <!-- <th class="text-center" width="12%">พื้นที่</th> -->
-                        <th class="text-center" width="28%">หมายเหตุ</th>
-                        <th class="text-center" width="5%">#</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                        while($value = $objq_receive2 -> fetch_assoc()){
-                      ?>
-                      <tr>
-                        <td class="text-center" > <a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูล <?php echo $value['name']; ?> หรือไม่ ?')";>ลบ</a></td>
-                        <td class="text-center" ><?php echo $value['name']; ?></td>
-                        <td class="text-center" >
-                          <?php 
-                            $status_boss = $value['status_boss'];
-                              if( $status_boss == 'Y'){
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center" width="5%">#</th>
+                      <th class="text-center" width="7%">ชื่อ</th>
+                      <th class="text-center" width="5%">#</th>
+                      <th class="text-center" width="7%">งาน</th>
+                      <th class="text-center" width="5%">#</th>
+                      <th class="text-center" width="7%">เงิน</th>
+                      <th class="text-center" width="7%">#</th>
+                      <th class="text-center" width="12%">วันขาย</th>
+                      <th class="text-center" width="12%">วันรับเงิน</th>
+                      <!-- <th class="text-center" width="12%">พื้นที่</th> -->
+                      <th class="text-center" width="28%">หมายเหตุ</th>
+                      <th class="text-center" width="5%">#</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      while($value = $objq_receive2 -> fetch_assoc()){
+                    ?>
+                    <tr>
+                      <td class="text-center" > <a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูล <?php echo $value['name']; ?> หรือไม่ ?')";>ลบ</a></td>
+                      <td class="text-center" ><?php echo $value['name']; ?></td>
+                      <td class="text-center" >
+                        <?php 
+                          $status_boss = $value['status_boss'];
+                            if( $status_boss == 'Y'){
+                        ?>
+                        <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=N&&statusb=boss" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังไม่ได้รับหรือไม่ ?')";>.รับ</a>
+                        <?php
+                            }else{
+                        ?>
+                        <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=Y&&statusb=boss" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นรับแล้วหรือไม่ ?')";>รับ.</a>
+                        <?php
+                              echo "";
+                            } 
+                        ?>
+                      </td>
+                      <td class="text-center" ><?php echo $value['name_practice']; ?></td>
+                      <td class="text-center" >
+                        <?php 
+                            $status = $value['status_office'];
+                              if( $status == 'Y'){
                           ?>
-                          <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=N&&statusb=boss" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังไม่ได้รับหรือไม่ ?')";>.รับ</a>
+                          <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=N&&statusb=office" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังไม่ได้รับหรือไม่ ?')";>.สนง</a>
                           <?php
                               }else{
                           ?>
-                          <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=Y&&statusb=boss" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นรับแล้วหรือไม่ ?')";>รับ.</a>
+                          <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=Y&&statusb=office" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นรับแล้วหรือไม่ ?')";>สนง.</a>
                           <?php
                                 echo "";
                               } 
-                          ?>
-                        </td>
-                        <td class="text-center" ><?php echo $value['name_practice']; ?></td>
-                        <td class="text-center" >
-                          <?php 
-                              $status = $value['status_office'];
-                                if( $status == 'Y'){
-                            ?>
-                            <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=N&&statusb=office" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังไม่ได้รับหรือไม่ ?')";>.สนง</a>
-                            <?php
-                                }else{
-                            ?>
-                            <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=Y&&statusb=office" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นรับแล้วหรือไม่ ?')";>สนง.</a>
-                            <?php
-                                  echo "";
-                                } 
-                          ?>
-                        </td>
-                        <td class="text-center" ><?php echo $value['money']; ?></td>
-                        <td class="text-center" ><?php echo $value['name_category']; ?></td>
-                        <td class="text-center" ><?php echo $value['date_buy']; ?></td>
-                        <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
-                        <!-- <td class="text-center" ><?php echo $value['area']; ?></td> -->
-                        <td class="text-center" ><?php echo $value['note']; ?></td>
-                        <td class="text-center" ><a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="fa fa-pencil"></a></td>
-                      </tr>
-                        <?php }?>
-                    </tbody>
-                  </table>
+                        ?>
+                      </td>
+                      <td class="text-center" ><?php echo $value['money']; ?></td>
+                      <td class="text-center" ><?php echo $value['name_category']; ?></td>
+                      <td class="text-center" ><?php echo $value['date_buy']; ?></td>
+                      <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
+                      <!-- <td class="text-center" ><?php echo $value['area']; ?></td> -->
+                      <td class="text-center" ><?php echo $value['note']; ?></td>
+                      <td class="text-center" ><a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="fa fa-pencil"></a></td>
+                    </tr>
+                      <?php }?>
+                  </tbody>
+                </table>
                   <!-- //-boss -->
-
-               <?php    
-                 }else{
-               ?>
+                  <?php    
+                    }else{
+                  ?>
                   <!-- สนง -->
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
@@ -216,17 +215,46 @@
                     </tbody>
                   </table>
                   <!-- //สนง -->
-              <?php     
-                    }
-              ?>
-            
+                  <?php     
+                        }
+                  ?>
                 <br>
                 <br>
                 <div class="box-header text-center with-border">
                   <font size="5">
-                    <B>เงินขายค้างรับ</B>  
-                  </font>                        
+                    <B align="center">เงินขายค้างรับ</B>
+                  </font>
                 </div>
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center" width="25%"> <font color="red">หน่วยรถ</font> </th>
+                      <th class="text-center" width="15%"> <font color="red">เงินสด</font> </th>
+                      <th class="text-center" width="15%"> <font color="red">รับเช็ค</font> </th>
+                      <th class="text-center" width="15%"> <font color="red">ขาย สกต.</font> </th>
+                      <th class="text-center" width="15%"> <font color="red">เงินเชื่อ</font> </th>
+                      <th class="text-center" width="15%"> <font color="red">ฝากขาย</font> </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center"></td>
+                      <?php 
+                        $rc_category = "SELECT * FROM rc_category";
+                        $objq_category = mysqli_query($conn,$rc_category);
+                        while($value = $objq_category->fetch_assoc()){
+                          $id_category = $value['id_category'];
+                          $sql_sum = "SELECT SUM(money) FROM rc_receive_money WHERE id_category = $id_category AND status_office = 'N' AND status_boss = 'N'";
+                          $objq_sum = mysqli_query($conn,$sql_sum);
+                          $objr_sum = mysqli_fetch_array($objq_sum);
+                      ?>
+                      <td class="text-center"> <?php echo $objr_sum['SUM(money)']; ?> </td>
+                        <?php } ?>
+                    </tr>
+                  </tbody>
+                </table>
+                <br>
+                <br>
                 <table class="table table-bordered table-striped">
                   <thead>
                     <tr>
@@ -319,46 +347,6 @@
                     </tr>
                   </tbody>
                 </table>
-                <br>
-                <br>
-              <div class="box-header text-center with-border">
-                <font size="5">
-                  <B align="center">เงินขายอยู่กับ(ทีมส่ง) </B>
-                </font>
-              </div>
-              <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th class="text-center" width="25%"> <font color="red">หน่วยรถ</font> </th>
-                    <th class="text-center" width="15%"> <font color="red">เงินสด</font> </th>
-                    <th class="text-center" width="15%"> <font color="red">รับเช็ค</font> </th>
-                    <th class="text-center" width="15%"> <font color="red">ขาย สกต.</font> </th>
-                    <th class="text-center" width="15%"> <font color="red">เงินเชื่อ</font> </th>
-                    <th class="text-center" width="15%"> <font color="red">ฝากขาย</font> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="text-center"></td>
-                    <?php 
-                      $rc_category = "SELECT * FROM rc_category";
-                      $objq_category = mysqli_query($conn,$rc_category);
-                      while($value = $objq_category->fetch_assoc()){
-                        $id_category = $value['id_category'];
-                        $sql_sum = "SELECT SUM(money) FROM rc_receive_money WHERE id_category = $id_category AND status_office = 'N' AND status_boss = 'N'";
-                        $objq_sum = mysqli_query($conn,$sql_sum);
-                        $objr_sum = mysqli_fetch_array($objq_sum);
-                    ?>
-                    <td class="text-center"> <?php echo $objr_sum['SUM(money)']; ?> </td>
-                      <?php } ?>
-                  </tr>
-                </tbody>
-              </table>
-
-              </div>
-
-              <div class="box-footer">
-               
               </div>
             </div>
           </div>

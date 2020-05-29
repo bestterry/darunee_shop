@@ -77,80 +77,7 @@
                 <div align="left">
                   <a href="admin.php" class="btn button2"><< เมนูหลัก</a>
                 </div>
-                <div class="box-header with-border">
-                  <p align="center">
-                    <font size="5">
-                      <B>ยอดเบิกสินค้า 
-                        <font color="red">
-                      <?php 
-                        $strDate = date('d-m-Y'); 
-                        echo DateThai($day);
-                      ?>
-                        </font> 
-                      </B>
-                    </font>
-                  </p>
-                </div>
-
                 <div class="box-body with-border">
-                  <!-- ------------------------------ยอดขายรวม---------------------------- -->
-                  
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th class="text-center" width="10%"><font color="red">สินค้า_หน่วย</font></th>
-                        <?php 
-                          while($value = $objq_member->fetch_assoc()){
-                        ?>
-                        <td class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></td>
-                        <?php 
-                          }
-                        ?>
-                        <th class="text-center" width="6%"><font color="red">รวม</font></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php 
-                      
-                        while($value = $objq_product->fetch_assoc()){
-                          $id_product = $value['id_product'];
-                      ?>
-                      <tr>
-                      <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
-                      <?php 
-                          $total_num = 0;
-                          $member = "SELECT * FROM member 
-                                    WHERE status = 'employee' AND NOT id_member = 28 AND NOT id_member = 32";
-                          $objq_member2 = mysqli_query($conn,$member);
-                          while($value_member = $objq_member2->fetch_assoc()){
-                            
-                            $id_member = $value_member['id_member'];
-                            $sql_draw = "SELECT SUM(num_draw) FROM draw_history WHERE id_product = $id_product 
-                                        AND id_member = $id_member AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
-                            $objq_draw = mysqli_query($conn,$sql_draw);
-                            $objr_draw = mysqli_fetch_array($objq_draw);
-
-                            if(isset($objr_draw['SUM(num_draw)'])){
-                              $num_draw = $objr_draw['SUM(num_draw)'];
-                              
-                            }else{
-                              $num_draw = "-";
-                            }
-                      ?>
-                        <td class="text-center" ><?php echo $num_draw; ?></td>
-                      <?php 
-                        $total_num = $total_num + $objr_draw['SUM(num_draw)'];
-                          }
-                      ?>
-                        <td class="text-center" ><?php echo $total_num; ?></td>
-                      </tr>
-                      <?php
-                        }
-                      ?>
-                    </tbody>
-                  </table>
-                  <br>
-                  <br>
                   <div class="text-center">
                     <font size="5"><B>ประวัติการเบิกสินค้า
                      <font color="red">
@@ -214,8 +141,6 @@
                       ?>
                     </tbody>
                   </table>
-                  <!-- ------------------------------//ยอดขายรวม---------------------------- -->
-                  
                 </div>
               </div>
             </div>

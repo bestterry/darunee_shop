@@ -203,9 +203,19 @@
                           <div class="col-xs-12 col-md-12">
                             <div class="row">
                               <div class="form-group">
-                                <label class="col-sm-3 col-md-3 col-3 control-label">ชื่อทีมยก</label>
+                                <label class="col-sm-3 col-md-3 col-3 control-label">สต๊อก</label>
                                 <div class="col-sm-6 col-md-6 col-6">
-                                  <input class="form-control" name="note" type="text" value="">
+                                  <input class="form-control" name="note" list="note" type="text" value="">
+                                  <datalist id="note">
+                                    <option value="จุน">
+                                    <option value="พาน">
+                                    <option value="แม่จัน">
+                                    <option value="ลำปาง">
+                                    <option value="เวียงป่าเป้า">
+                                    <option value="ดอกคำใต้">
+                                    <option value="หน่วยรถ">
+                                    <option value="ลูกค้า">
+                                  </datalist>
                                 </div>
                                 <div class="col-sm-3 col-md-3 col-3"></div>
                               </div>
@@ -235,7 +245,7 @@
                     <th class="text-center" width="8%"> <font color="red">กส</font> </th>
                     <th class="text-center" width="8%"> <font color="red">ค่ายก</font> </th>
                     <th class="text-center" width="8%"> <font color="red">ค่ารถ</font> </th>
-                    <th class="text-center" width="24%"> <font color="red">ชื่อทีมยก</font> </th>
+                    <th class="text-center" width="24%"> <font color="red">สต๊อก</font> </th>
                     <th class="text-center" width="16%"> <font color="red">วันที่</font> </th>
                   </tr>
                   </thead>

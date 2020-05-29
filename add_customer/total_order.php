@@ -137,7 +137,7 @@ folder instead of downloading all of them to reduce the load. -->
   <body>
       <div class="ex1">
       <div class="box-header with-border">
-        <a type="button" href="order.php" class="btn button2"><< เมนูหลัก</a>
+        <a type="button" href="list_order.php" class="btn button2"><< กลับ</a>
         <a type="button" href="../pdf_file/total_order.php" class="btn btn-success"> PDF </a>
       </div>
         <div>

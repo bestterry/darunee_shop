@@ -1,7 +1,7 @@
 <?php
   require('config_database/config.php');
 
-  $sql_store = "SELECT * FROM store";
+  $sql_store = "SELECT * FROM store WHERE district_id = 0";
   $objq_store = mysqli_query($conn,$sql_store);
   foreach ($objq_store as $value_store){
     $id_store = $value_store['id_store'];

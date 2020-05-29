@@ -7,9 +7,11 @@
           $sql_update = "UPDATE addorder SET status = 'success' WHERE id_addorder = $id_addorder";
           mysqli_query($conn,$sql_update);
     
-  if($status = 1){
+  if($status == 1){
+    echo "1";
     header('location:../sent_order.php');
   }else{
+    echo "2";
     header('location:../list_order.php');
   }
     

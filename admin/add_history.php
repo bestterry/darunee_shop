@@ -93,7 +93,7 @@ function Datetime($strDate)
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#today" data-toggle="tab">ยอดรับวันนี้</a></li>
                 <li><a href="#checkday" data-toggle="tab">รายวัน</a></li>
-                <li><a href="#bytime" data-toggle="tab">ช่วงเวลา</a></li>
+                <!-- <li><a href="#bytime" data-toggle="tab">ช่วงเวลา</a></li> -->
                 <div align="right">
                   <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> รับสินค้า </a>
                   <a href="admin.php" class="btn button2"><< เมนูหลัก </a>
@@ -104,68 +104,12 @@ function Datetime($strDate)
                 <!-- tab-pane -->
                 <div class="active tab-pane" id="today">
                   <div class="box box-default">
-                    <div class="text-center box-header with-border">
-                      <B><font size="5">  ยอดรับสินค้า(วันนี้) </font></B> 
-                    </div>
+                    
                     <!-- /.box-header -->
                     <div class="box-body">
                       <div class="row">
                         <div class="col-md-12">
                           <div class="box-body">
-                            <table class="table table-striped">
-                              <thead>
-                                <tr>
-                                  <th class="text-center" width="10%"><font color="red">สินค้า_หน่วย</font></th>
-                                  <?php 
-                                    while($value = $objq_member->fetch_assoc()){
-                                  ?>
-                                  <td class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></td>
-                                  <?php 
-                                    }
-                                  ?>
-                                  <th class="text-center" width="6%"><font color="red">รวม</font></th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <?php 
-                                  
-                                  while($value = $objq_product2->fetch_assoc()){
-                                    $id_product = $value['id_product'];
-                                ?>
-                                <tr>
-                                <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
-                                <?php 
-                                    $total_num = 0;
-                                    $member = "SELECT * FROM member 
-                                              WHERE status = 'employee' AND NOT id_member = 28 AND NOT id_member = 32";
-                                    $objq_member2 = mysqli_query($conn,$member);
-                                    while($value_member = $objq_member2->fetch_assoc()){
-                                      $id_member = $value_member['id_member'];
-                                      $sql_add = "SELECT SUM(num_add) FROM add_history WHERE id_product = $id_product 
-                                                  AND id_member = $id_member AND DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
-                                      $objq_add = mysqli_query($conn,$sql_add);
-                                      $objr_add = mysqli_fetch_array($objq_add);
-
-                                      if(isset($objr_add['SUM(num_add)'])){
-                                        $num_add = $objr_add['SUM(num_add)'];
-                                        
-                                      }else{
-                                        $num_add = "-";
-                                      }
-                                ?>
-                                  <td class="text-center" ><?php echo $num_add; ?></td>
-                                <?php 
-                                  $total_num = $total_num + $objr_add['SUM(num_add)'];
-                                    }
-                                ?>
-                                  <td class="text-center" ><?php echo $total_num; ?></td>
-                                </tr>
-                                <?php
-                                  }
-                                ?>
-                              </tbody>
-                            </table>
-                            <br>
                             <div class="text-center">
                               <font size="5"> <B>ประวัติการรับสินค้า <font color="red"> <?php echo DateThai($day); ?></font></B></font>
                             </div>
@@ -179,7 +123,7 @@ function Datetime($strDate)
                                   <td class="text-center" width="10%"> <font color="red">ผู้ส่ง</font> </td>
                                   <td class="text-center" width="10%"> <font color="red">รับเข้า</font> </td>
                                   <td class="text-center" width="35%"> <font color="red">หมายเหตุ</font> </td>
-                                  <td class="text-center" width="5%"> <font color="red">หมายเหตุ</font> </td>
+                                  <td class="text-center" width="5%"> <font color="red">เวลา</font> </td>
                                 </tr>
                               </thead>
                               <tbody>
