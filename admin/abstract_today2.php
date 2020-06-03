@@ -79,14 +79,14 @@ $day = $_POST['day'];
                 <div class="box-header text-center with-border">
                   <div align="right">
                     <!-- <a href="../pdf_file/admin_saleday_history.php?day=<?php echo $day;?>" class="btn btn-success" target="_blank"><i class="fa fa-print"> พิมพ์ </i></a> -->
-                    <a href="abstract_today.php" class="btn button2 pull-left"> << ย้อนกลับ </a>
+                    <a href="admin.php" class="btn button2 pull-left"> << เมนูหลัก </a>
                   </div>
-                  <div align="center"><font size="5" color="blue"><B>สรุปรายวัน</B></font> &nbsp; <font size="5" color="red"><B><?php echo DateThai3($day); ?></B></font></div>
+                  <div align="center"><font size="5" color="blue"><B>เบิกรับขาย </B></font> &nbsp; <font size="5" color="red"><B><?php echo DateThai3($day); ?></B></font></div>
                   
                 </div>
                 <div class="box-body">
                   <div class="row">
-                    <div align="center"><font size="5"><B>จำนวนสินค้าเบิก</B></font></div>
+                    <div align="center"><font size="5"><B>จำนวนสินค้า (เบิกออก)</B></font></div>
                     <div class="col-12 col-sm-12 col-md-12 col-xl-12 ">
                       <table class="table table-striped ">
                         <thead>
@@ -143,7 +143,7 @@ $day = $_POST['day'];
                       </table>
                     </div>
                     <br>
-                    <div align="center"><font size="5"><B>จำนวนสินค้ารับเข้า</B></font></div>
+                    <div align="center"><font size="5"><B>จำนวนสินค้า (รับเข้า)</B></font></div>
                     <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                       <table class="table table-striped">
                         <thead>
@@ -200,7 +200,7 @@ $day = $_POST['day'];
                       </table>
                     </div>
                     <br>
-                    <div align="center"><font size="5"><B>จำนวนสินค้าขาย</B></font></div>
+                    <div align="center"><font size="5"><B>จำนวนสินค้า (ขาย)</B></font></div>
                     <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                       <table class="table table-striped">
                         <thead>

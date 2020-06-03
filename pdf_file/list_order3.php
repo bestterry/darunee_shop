@@ -7,17 +7,18 @@ class PDF extends FPDF
   // Page header
     function Header()
     {
+        $strDate = date('d-m-Y');
         // Arial bold 15
         $this->AddFont('cordia','','cordia.php');
         $this->SetFont('cordia','',20);
         
         //Date
         $this->SetTextColor(255,0,0); 
-        $this->Text(80, 9,iconv('UTF-8','cp874',''),1,0,'C');
+        $this->Text(95, 9,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
         
         // Title
         $this->SetTextColor(0,0,0);
-        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'') , 0 , 1,'L' ); 
+        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'ORDER ค้างส่ง') , 0 , 1,'L' ); 
         $this->Ln(2);
     }
     // Page footer
@@ -68,14 +69,11 @@ $pdf=new PDF('P','mm','A4');
 
 
                   $id_addorder = $value['id_addorder'];
-                  $pdf->SetFont('cordia','',24);
-                  $pdf->SetTextColor(255,0,0); 
-                  $pdf->Text(15, 9,iconv('UTF-8','cp874','อ.'.$value['amphur_name']),1,0,'C');
-                  $pdf->Text(165, 9,iconv('UTF-8','cp874','จ.'.$value['province_name']),1,0,'C');
-                  $pdf->SetTextColor(255,0,0); 
-                  $pdf->Text(95, 9,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
-                  $pdf->SetTextColor(0,0,0); 
-                  $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'__________________________________________________________________________________') , 0 , 1,'L' );
+                  $pdf->SetFont('cordia','',20);
+                  $pdf->SetTextColor(0,0,0);  
+                  $pdf->Text(150, 9,iconv('UTF-8','cp874','อ.'.$value['amphur_name'].'  จ.'.$value['province_name']),1,0,'C');
+                  $pdf->SetFont('cordia','',16);
+                  $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'_______________________________________________________________________________________________________') , 0 , 1,'L' );
                   $pdf->Ln(4); 
 
                   $pdf->SetFont('cordia','',16);
@@ -101,7 +99,7 @@ $pdf=new PDF('P','mm','A4');
                   $pdf->Cell(20,7, iconv( 'UTF-8','cp874' ,'[ '. $total_money .' ]'),0,0,'R');
                   ;
                   
-                  $pdf->SetXY($x + 100, $y);
+                  $pdf->SetXY($x + 85, $y);
                 
                   //ที่อยู่ลูกค้า 
                   $pdf->MultiCell( 140  , 7 , iconv( 'UTF-8','cp874' ,$value['id_addorder'].' '.$value['name_customer']. '    '.$request_ans .'    '.$test.'

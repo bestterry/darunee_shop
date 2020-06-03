@@ -117,7 +117,7 @@
                       <th class="text-center" width="8%"> <font color="red">กส</font> </th>
                       <th class="text-center" width="8%"> <font color="red">ค่ายก</font> </th>
                       <th class="text-center" width="8%"> <font color="red">ค่ารถ</font> </th>
-                      <th class="text-center" width="25%"> <font color="red">ชื่อทีมยก</font> </th>
+                      <th class="text-center" width="25%"> <font color="red">สต๊อก</font> </th>
                       <th class="text-center" width="5%"> <font color="red">เวลา</font> </th>
                       <th class="text-center" width="5%"> <font color="red">แก้ไข</font> </th>
                      </tr>

@@ -120,6 +120,7 @@ $pdf=new PDF('P','mm','A4');
             $pdf->Cell(20,8,iconv('UTF-8','cp874',$value['name_zone']),1,0,'C');
             $pdf->Cell(50,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
             $pdf->Ln(8);
-            $i++; }                
+            $i++; 
+          }                
     $pdf->Output();
 ?>

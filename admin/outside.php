@@ -155,7 +155,7 @@
                                           }
                                       ?>
                                     </select>
-                                    <td><input type="date" name="date_buy" value="" class="form-control"></td>
+                                    <td><input type="date" name="date_buy" value="" class="form-control text-center"></td>
                                   </td>
                                 </tr>
                             </tbody>

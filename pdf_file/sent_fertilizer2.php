@@ -80,7 +80,7 @@ $pdf=new PDF('P','mm','A4');
               $pdf->Cell(25,8,iconv('UTF-8','cp874',''),0,0,'C');
               $pdf->Cell(50,8,iconv('UTF-8','cp874',$name),1,0,'C');
               $pdf->Cell(50,8,iconv('UTF-8','cp874',$money),1,0,'C');
-              $pdf->Cell(50,8,iconv('UTF-8','cp874',$num_ferti*1.5),1,0,'C');
+              $pdf->Cell(50,8,iconv('UTF-8','cp874',ceil($num_ferti*1.5)),1,0,'C');
               $pdf->Ln(8);
             }
 

@@ -165,8 +165,8 @@
                           <th class="text-center" width="10%"><font color="red">บ/หน่วย</font></th>
                           <th class="text-center" width="8%"><font color="red">เงินขาย</font></th>
                           <th class="text-center" width="30%"><font color="red">รายละเอียด</font></th>
-                          <th class="text-center" width="8%"><font color="red">เวลา</font></th>
                           <th class="text-center" width="15%"><font color="red">ร้าน</font></th>
+                          <th class="text-center" width="8%"><font color="red">เวลา</font></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -196,10 +196,10 @@
                             <?php echo $value['note']; ?>
                           </td>
                           <td class="text-center">
-                            <?php echo DateThai2($value['datetime']); ?>
+                            <?php echo $value['name_zone']; ?>
                           </td>
                           <td class="text-center">
-                            <?php echo $value['name_zone']; ?>
+                            <?php echo DateThai2($value['datetime']); ?>
                           </td>
                         </tr>
                         <?php

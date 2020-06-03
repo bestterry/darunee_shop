@@ -45,7 +45,7 @@ class PDF extends FPDF
             $this->Cell(17,10,iconv('UTF-8','cp874','ลำพูน'),1,0,'C');
             $this->Cell(17,10,iconv('UTF-8','cp874','ขายส่ง'),1,0,'C');
             $this->Cell(17,10,iconv('UTF-8','cp874','แม่จัน'),1,0,'C');
-            $this->Cell(17,10,iconv('UTF-8','cp874','ทีมจร'),1,0,'C');
+            $this->Cell(17,10,iconv('UTF-8','cp874','แจ้ห่ม'),1,0,'C');
             $this->Cell(18,10,iconv('UTF-8','cp874','รถ'),1,0,'C');
             $this->Cell(23,10,iconv('UTF-8','cp874','ทั้งหมด'),1,0,'C');
             $this->Ln(10);
@@ -171,8 +171,8 @@ $pdf=new PDF('L','mm','A4');
               }
               // -----------------------//แม่จัน----------------------------------
 
-              // -----------------------ฝาง----------------------------------
-              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 9";
+              // -----------------------จห----------------------------------
+              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 11";
               $objq_num = mysqli_query($conn,$SQL_num);
               $objr_num = mysqli_fetch_array($objq_num);
               if(!isset($objr_num['num'])){
@@ -180,7 +180,7 @@ $pdf=new PDF('L','mm','A4');
               }else{
                 $pdf->Cell(17,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
               }
-              // -----------------------//ฝาง----------------------------------
+              // -----------------------//จห----------------------------------
 
               //-------------------------รวมรถ----------------------------------
               $SQL_num_car = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";

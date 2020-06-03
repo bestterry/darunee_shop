@@ -209,7 +209,7 @@
                                         <font size="5"><label>  ตั้งแต่ :</label></font>
                                         </div>
                                         <div class="col-sm-8">
-                                            <input class="form-control" type="date" name="aday">
+                                            <input class="form-control text-center" type="date" name="aday">
                                         </div>
                                     </div>
                                     <div class="col-md-6 text-center"> 
@@ -217,7 +217,7 @@
                                             <font size="5"><label>  ถึง :</label></font>
                                         </div>
                                         <div class="col-sm-8">
-                                            <input class="form-control" type="date" name="bday">
+                                            <input class="form-control text-center" type="date" name="bday">
                                         </div>
                                     </div>
                                   </div>

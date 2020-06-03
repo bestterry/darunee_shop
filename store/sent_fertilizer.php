@@ -213,6 +213,7 @@
                                     <option value="ลำปาง">
                                     <option value="เวียงป่าเป้า">
                                     <option value="ดอกคำใต้">
+                                    <option value="แจ้ห่ม">
                                     <option value="หน่วยรถ">
                                     <option value="ลูกค้า">
                                   </datalist>

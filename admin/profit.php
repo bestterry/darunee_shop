@@ -174,7 +174,7 @@
                               <div class="row">
                                 <div class="col-xs-4 col-md-4 text-right"></div>
                                 <div class="col-xs-4 col-md-4">
-                                  <input type="date" class="form-control" name="day" id="datePicker">
+                                  <input type="date" class="form-control text-center" name="day" id="datePicker" >
                                 </div>
                                 <div class="col-xs-4 col-md-4">
                                 </div>
@@ -205,13 +205,13 @@
                             <div class="col-md-6">
                               <div class="form-group text-center">
                                 <label> <font size="5">ตั้งเเต่</font></label>
-                                <input type="date"  class="form-control"  name="aday">
+                                <input type="date"  class="form-control text-center"  name="aday">
                               </div>
                             </div>
                             <div class="col-md-6">
                               <div class="form-group text-center">
                                 <label><font size="5">ถึง</font></label></label>
-                                <input type="date" class="form-control" name="bday">
+                                <input type="date" class="form-control text-center" name="bday">
                               </div>
                             </div>
                           </div>

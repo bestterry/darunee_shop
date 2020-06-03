@@ -268,7 +268,7 @@ folder instead of downloading all of them to reduce the load. -->
                     $sql_acc = "SELECT * FROM acc_market INNER JOIN tbl_districts ON acc_market.district_id = tbl_districts.district_code
                                 INNER JOIN tbl_amphures  ON acc_market.amphur_id = tbl_amphures.amphur_id
                                 INNER JOIN tbl_provinces ON acc_market.province_id = tbl_provinces.province_id 
-                                ORDER BY acc_market.id_acc_market DESC";
+                                ORDER BY acc_market.date_accDESC";
                     $objq_acc = mysqli_query($mysqli,$sql_acc);
                     while($value = $objq_acc->fetch_assoc()){
                   ?>

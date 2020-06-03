@@ -86,10 +86,9 @@
                     <tr>
                       <th class="text-center" width="5%">ส่ง</th>
                       <th class="text-center" width="5%">ที่</th>
-                      <th class="text-center" width="70%">ที่อยู่ลูกค้า</th>
+                      <th class="text-center" width="70\5%">ที่อยู่ลูกค้า</th>
                       <th class="text-center" width="5%">ทวง</th>
-                      <th class="text-center" width="5%">เบิก</th>
-                      <th class="text-center" width="5%">วัน</th>
+                      <th class="text-center" width="5%">เบิก</th>\
                       <th class="text-center" width="5%">ข้อมูล</th>
                     </tr>
                   </thead>
@@ -130,8 +129,6 @@
                       ?>
                       <td class="text-center" ><a class="btn btn-success btn-xs">Y</a></td>
                       <?php }?>
-                      <!-- <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs" >แก้</a></td> -->
-                      <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
                       <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
                       
                     </tr>

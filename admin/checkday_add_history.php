@@ -94,7 +94,7 @@ $day = $_POST['day'];
                           <td class="text-center" width="10%"> <font color="red">ผู้ส่ง</font> </td>
                           <td class="text-center" width="10%"> <font color="red">รับเข้า</font> </td>
                           <td class="text-center" width="35%"> <font color="red">หมายเหตุ</font> </td>
-                          <td class="text-center" width="5%"> <font color="red">หมายเหตุ</font> </td>
+                          <td class="text-center" width="5%"> <font color="red">เวลา</font> </td>
                         </tr>
                       </thead>
                       <tbody>

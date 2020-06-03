@@ -74,7 +74,7 @@
             <div class="col-md-12">
               <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                  <li class="active"><a href="#today" data-toggle="tab">ค่าส่งปุ๋ยวันนี้</a></li>
+                  <li class="active"><a href="#today" data-toggle="tab">วันนี้</a></li>
                   <li><a href="#checkday" data-toggle="tab">รายวัน</a></li>
                   <li><a href="#bytime" data-toggle="tab">ช่วงเวลา</a></li>
                   <a href="admin.php" class="btn button2 pull-right"><< เมนูหลัก</a>
@@ -123,7 +123,7 @@
                                 <th class="text-center" width="8%"> <font color="red">กส</font> </th>
                                 <th class="text-center" width="8%"> <font color="red">ค่ายก</font> </th>
                                 <th class="text-center" width="8%"> <font color="red">ค่ารถ</font> </th>
-                                <th class="text-center" width="25%"> <font color="red">ชื่อทีมยก</font> </th>
+                                <th class="text-center" width="25%"> <font color="red">สต๊อก</font> </th>
                                 <th class="text-center" width="5%"> <font color="red">เวลา</font> </th>
                                 <th class="text-center" width="5%"> <font color="red">แก้ไข</font> </th>
                               </tr>
@@ -201,7 +201,7 @@
                               
                               </div>
                             </div>
-                        
+                      
                         </div>
                       </div>
                     </div>
@@ -214,7 +214,7 @@
                                 <div class="form-group">
                                   <label class="col-sm-4 control-label text-right"></label>
                                   <div class="col-sm-4">
-                                    <input class="form-control" type="date" name="day" id="datePicker">
+                                    <input class="form-control text-center" type="date" name="day" id="datePicker">
                                   </div>
                                   <div class="col-sm-4"></div>
                                 </div>
@@ -249,13 +249,13 @@
                                     <div class="col-md-6 col-6 col-lg-6 col-xs-6">
                                       <div class="form-group text-center">
                                         <label> <font size="5">ตั้งเเต่</font></label>
-                                        <input type="date"  class="form-control"  name="aday">
+                                        <input type="date"  class="form-control text-center"  name="aday">
                                       </div>
                                     </div>
                                     <div class="col-md-6 col-6 col-lg-6 col-xs-6">
                                       <div class="form-group text-center">
                                         <label><font size="5">ถึง</font></label></label>
-                                        <input type="date" class="form-control" name="bday">
+                                        <input type="date" class="form-control text-center" name="bday">
                                       </div>
                                     </div>
                                   </div>

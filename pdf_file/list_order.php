@@ -22,11 +22,11 @@ class PDF extends FPDF
         
         //Date
         $this->SetTextColor(255,0,0); 
-        $this->Text(80, 9,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
+        $this->Text(95, 9,iconv('UTF-8','cp874',DateThai($strDate)),1,0,'C');
         
         // Title
         $this->SetTextColor(0,0,0);
-        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'ORDER') , 0 , 1,'L' ); 
+        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'ORDER ค้างส่งทั้งหมด') , 0 , 1,'L' ); 
         $this->Ln(2);
     }
     // Page footer
@@ -47,7 +47,7 @@ $pdf=new PDF('P','mm','A4');
             $pdf->AliasNbPages();
             $pdf->SetMargins(10, 5 ,3);
             $pdf->AddFont('cordia','','cordia.php');
-            $pdf->SetFont('cordia','',16);
+            
             //วนลูปหาอำเภอที่มีใน addorder
             
             while($value_pv = $objq_province -> fetch_assoc())
@@ -80,10 +80,12 @@ $pdf=new PDF('P','mm','A4');
                   }
                   
                   $id_addorder = $value['id_addorder'];
-                  $pdf->Text(150, 9,iconv('UTF-8','cp874','จ.'.$value['province_name']),1,0,'C');
-                  $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'_______________________________________________________________________________________________') , 0 , 1,'L' );
+                  $pdf->SetFont('cordia','',20);
+                  $pdf->Text(170, 9,iconv('UTF-8','cp874','จ.'.$value['province_name']),1,0,'C');
+                  $pdf->SetFont('cordia','',16);
+                  $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'______________________________________________________________________________________________________') , 0 , 1,'L' );
                   $pdf->Ln(4); 
-                  
+
                   $x = $pdf->GetX();
                   $y = $pdf->GetY();
                   //รายการสินค้า
@@ -96,7 +98,9 @@ $pdf=new PDF('P','mm','A4');
                     $money = $list['money'];
                     //$pdf->MultiCell( 100  , 7 , iconv( 'UTF-8','cp874' ,$list['name_product'].'_'.$list['unit'].'  '.$list['num'].'  '.$list['unit'].'  '.$list['money'].' '.'บ.'));
                     $pdf->Cell(20,7, iconv( 'UTF-8','cp874' ,$list['name_product'].'_'.$list['unit']),0,0,'R');
+                    $pdf->SetTextColor(255,0,0); 
                     $pdf->Cell(15,7, iconv( 'UTF-8','cp874' ,$list['num']),0,0,'R');
+                    $pdf->SetTextColor(0,0,0); 
                     $pdf->Cell(16,7, iconv( 'UTF-8','cp874' ,$list['price']),0,0,'R');
                     $pdf->Cell(20,7, iconv( 'UTF-8','cp874',$list['money']),0,0,'R');
                     $pdf->Ln(7);
@@ -106,7 +110,7 @@ $pdf=new PDF('P','mm','A4');
                   $pdf->Cell(20,7, iconv( 'UTF-8','cp874' ,'[ '. $total_money .' ]'),0,0,'R');
                   
                   
-                  $pdf->SetXY($x + 100, $y);
+                  $pdf->SetXY($x + 85, $y);
                 
                   //ที่อยู่ลูกค้า 
                   $pdf->MultiCell( 140  , 7 , iconv( 'UTF-8','cp874' ,$value['id_addorder'].' '.$value['name_customer']. '   '.$request_ans .'    '.$test.'

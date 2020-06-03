@@ -85,7 +85,7 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#today" data-toggle="tab">รายการขายวันนี้</a></li>
+                <li class="active"><a href="#today" data-toggle="tab">วันนี้</a></li>
                 <li><a href="#lastday" data-toggle="tab">รายวัน</a></li>
 
                 <div align="right">
@@ -185,8 +185,8 @@
                                   <th class="text-center" width="10%"><font color="red">บ/หน่วย</font></th>
                                   <th class="text-center" width="8%"><font color="red">เงินขาย</font></th>
                                   <th class="text-center" width="30%"><font color="red">รายละเอียด</font></th>
-                                  <th class="text-center" width="8%"><font color="red">เวลา</font></th>
                                   <th class="text-center" width="10%"><font color="red">ร้าน</font></th>
+                                  <th class="text-center" width="8%"><font color="red">เวลา</font></th>
                                   <th class="text-center" width="5%"><font color="red">แก้</font></th>
                                 </tr>
                               </thead>
@@ -217,10 +217,10 @@
                                     <?php echo $value['note']; ?>
                                   </td>
                                   <td class="text-center">
-                                    <?php echo DateThai2($value['datetime']); ?>
+                                    <?php echo $value['name_zone']; ?>
                                   </td>
                                   <td class="text-center">
-                                    <?php echo $value['name_zone']; ?>
+                                    <?php echo DateThai2($value['datetime']); ?>
                                   </td>
                                   <td class="text-center" >
                                     <a href="edit_sale_shop.php?id_price_history=<?php echo $value['id_price_history']; ?>" > <i class="fa fa-pencil"></i> </a>
@@ -352,7 +352,7 @@
                               <div class="form-group">
                                 <label class="col-sm-4 control-label text-right"></label>
                                 <div class="col-sm-4">
-                                  <input class="form-control" type="date" name="day" id="datePicker">
+                                  <input class="form-control text-center" type="date" name="day" id="datePicker">
                                 </div>
                                 <div class="col-sm-4"></div>
                               </div>

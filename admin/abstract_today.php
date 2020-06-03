@@ -96,10 +96,14 @@
 
                  <!-- tab-pane -->
                  <div class="active tab-pane" id="today">
+                 <div class="box-header text-center with-border">
+                  <div align="center"><font size="5" color="blue"><B>เบิกรับขาย (วันนี้)</B></font></div>
+                  
+                </div>
                   <div class="box box-default">
                     <div class="box-body">
                       <div class="row">
-                        <div align="center"><font size="5"><B>จำนวนสินค้าเบิก</B></font></div>
+                        <div align="center"><font size="5"><B>จำนวนสินค้า (เบิกออก)</B></font></div>
                         <div class="col-12 col-sm-12 col-md-12 col-xl-12 ">
                           <table class="table table-striped ">
                             <thead>
@@ -156,7 +160,7 @@
                           </table>
                         </div>
                         <br>
-                        <div align="center"><font size="5"><B>จำนวนสินค้ารับเข้า</B></font></div>
+                        <div align="center"><font size="5"><B>จำนวนสินค้า (รับเข้า)</B></font></div>
                         <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                           <table class="table table-striped">
                             <thead>
@@ -213,7 +217,7 @@
                           </table>
                         </div>
                         <br>
-                        <div align="center"><font size="5"><B>จำนวนสินค้าขาย</B></font></div>
+                        <div align="center"><font size="5"><B>จำนวนสินค้า (ขาย)</B></font></div>
                         <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                           <table class="table table-striped">
                             <thead>
@@ -292,7 +296,7 @@
                               <div class="form-group">
                                 <label class="col-sm-4 control-label text-right"></label>
                                 <div class="col-sm-4">
-                                  <input class="form-control" type="date" name="day" id="datePicker">
+                                  <input class="form-control text-center" type="date" name="day" id="datePicker">
                                 </div>
                                 <div class="col-sm-4"></div>
                               </div>
