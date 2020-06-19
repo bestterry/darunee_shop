@@ -7,8 +7,7 @@
       <div class="box-body no-padding">
         <ul class="nav nav-pills nav-stacked">
           <!-- ขายสินค้า -->
-          <li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-minus-square"></i> ขายสินค้า </a>
-          </li>
+          <li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-minus-square"></i> ขายสินค้า </a></li>
           <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog modal-lg">
               <form action="sale_product.php" method="post">
@@ -360,9 +359,21 @@
           <li><a href="reserve_money.php" ><i class="fa fa-user-circle-o"></i> สำรองจ่าย </a></li>
           <!-- /สำรองจ่าย. -->
 
-            <!-- สำรองจ่าย. -->
-            <li><a href="sent_fertilizer.php" ><i class="fa fa-user-circle-o"></i> ค่าปุ๋ย </a></li>
+          <!-- สำรองจ่าย. -->
+          <li><a href="sent_fertilizer.php" ><i class="fa fa-user-circle-o"></i> ค่าปุ๋ย </a></li>
           <!-- /สำรองจ่าย. -->
+
+          <!-- ค่าส่งปุ๋ย -->
+          <li><a href="map.php" ><i class="fa fa-map"></i> แผนที่ </a></li>
+          <!-- /ค่าส่งปุ๋ย -->
+
+          <!-- จัดการเพลง -->
+          <li><a href="radio_list.php" ><i class="fa fa-play-circle-o"></i> เวลาเช่าวิทยุ </a></li>
+          <!--/จัดการเพลง -->
+
+          <!-- จัดการเพลง -->
+          <li><a href="song_list.php" ><i class="fa fa-music"></i> จัดการเพลง </a></li>
+          <!--/จัดการเพลง -->
 
         </ul>
       </div>

@@ -76,7 +76,7 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#profit_today" data-toggle="tab">ยอดจำหน่ายวันนี้</a></li>
+                <li class="active"><a href="#profit_today" data-toggle="tab">วันนี้</a></li>
                 <li><a href="#profit_back" data-toggle="tab">รายวัน</a></li>
                 <li><a href="#profit_duration" data-toggle="tab">ช่วงเวลา</a></li>
                 <div align="right">
@@ -89,7 +89,7 @@
               <div class="active tab-pane" id="profit_today">
                   <div class="box box-default">
                     <div class="box-header with-border text-center">
-                      <B><font size="5">ยอดจำหน่ายวันนี้</font></B>
+                      <B><font size="5">ยอดจำหน่าย (วันนี้)</font></B>
                     </div>
                     <div class="box-body">
                       <div class="row">
@@ -164,7 +164,7 @@
                 <div class="tab-pane" id="profit_back">
                   <div class="box box-default">
                     <div class="box-header with-border text-center">
-                      <B><font size="5">ยอดจำหน่ายรายวัน</font></B>
+                      <B><font size="5">ยอดจำหน่าย (รายวัน)</font></B>
                     </div>
                     <form action="profit_back.php" method="post">
                       <div class="box-body">
@@ -195,7 +195,7 @@
                 <div class="tab-pane" id="profit_duration">
                   <div class="box box-default">
                     <div class="box-header with-border text-center">
-                      <B><font size="5">ยอดจำหน่ายตามช่วงเวลา</font></B>
+                      <B><font size="5">ยอดจำหน่าย (ช่วงเวลา)</font></B>
                     </div>
                     <!-- /.box-header -->
                     <form action="profit_duration.php" method="post">

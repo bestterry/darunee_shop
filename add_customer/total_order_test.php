@@ -151,7 +151,7 @@ folder instead of downloading all of them to reduce the load. -->
               <th class="text-center" width="14%">สินค้า_หน่วย</th>
               <th class="text-center" width="14%">พะเยา</th>
               <th class="text-center" width="14%">เชียงราย</th>
-              <th class="text-center" width="14%">ลำปาง</th>
+              <th class="text-center" width="14%">เกาะคา</th>
               <th class="text-center" width="14%">ลำพูน</th>
               <th class="text-center" width="14%">เชียงใหม่</th>
               <th class="text-center" width="14%">รวม</th>
@@ -352,13 +352,13 @@ folder instead of downloading all of them to reduce the load. -->
         </table>
         <!-- //ค้างส่งเขตเชียงราย -->
 
-        <!-- ค้างส่งลำปาง -->
+        <!-- ค้างส่งเกาะคา  -->
         <br>
         <br>
         <div>
           <B>
             <font size="4">
-              <?php echo 'ค้างส่ง : ';?> เขต ลำปาง
+              <?php echo 'ค้างส่ง : ';?> เขต เกาะคา
             </font>
           </B>
         </div>
@@ -425,7 +425,7 @@ folder instead of downloading all of them to reduce the load. -->
                 
           </tbody>
         </table>
-        <!-- //ค้างส่งลำปาง -->
+        <!-- //ค้างส่งเกาะคา -->
 
         <!-- ค้างส่งลำพูน -->
         <br>

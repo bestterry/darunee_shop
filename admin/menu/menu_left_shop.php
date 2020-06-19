@@ -178,11 +178,11 @@
                 <!-- /สต๊อกรถ -->
 
                 <!-- ยอดขาย -->
-                <li><a href="sale_history.php" ><i class="fa fa-money"></i>รายการขาย</a></li>
+                <li><a href="sale_history.php" ><i class="fa fa-money"></i>รายการขาย (เงินขาย)</a></li>
                 <!-- /ยอดขาย -->
 
                 <!-- ยอดขาย -->
-                <li><a href="profit.php" ><i class="fa fa-money"></i>ยอดจำหน่าย</a></li>
+                <li><a href="profit.php" ><i class="fa fa-money"></i>ยอดจำหน่าย (กำไร)</a></li>
                 <!-- /ยอดขาย -->
 
                 <!-- สรุปข้อมูล -->
@@ -247,18 +247,23 @@
                 <!-- ค่าส่งปุ๋ย -->
                 <li><a href="sent_fertilizer.php" ><i class="fa fa-money"></i>ค่าส่งปุ๋ย </a></li>
                 <!-- /ค่าส่งปุ๋ย -->
+                
+                <!-- แผนที่ -->
+                <li><a href="map.php" ><i class="fa fa-map"></i> แผนที่ </a></li>
+                <!-- /แผนที่ -->
 
+                <!-- จัดการเพลง -->
+                <li><a href="song_list.php" ><i class="fa fa-music"></i> จัดการเพลง </a></li>
+                <!--/จัดการเพลง -->
+
+                <!-- จัดการเพลง -->
+                <li><a href="radio_list.php" ><i class="fa fa-play-circle-o"></i> เวลาเช่าวิทยุ </a></li>
+                <!--/จัดการเพลง -->
+                
                 <!--จัดการข้อมูลสินค้า-พนักงาน -->
                 <li><a href="add_data.php" ><i class="fa fa-cog"></i> จัดการข้อมูล </a></li>
                 <!--/จัดการข้อมูลสินค้า-พนักงาน -->
-
-                <!-- สำรองจ่าย. -->
-                <!-- <li><a href="reserve_money.php" ><i class="fa fa-user-circle-o"></i> สำรองจ่าย </a></li> -->
-                <!-- /สำรองจ่าย. -->
-
-                <!-- สถานที่ทำงาน -->
-                <!-- <li><a href="working.php"><i class="fa fa-users"></i> ตารางปฏิบัติงาน </a></li> -->
-                <!-- /สถานที่ทำงาน -->
+                
                 <?php
                     }
                 ?>

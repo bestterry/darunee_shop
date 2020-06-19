@@ -78,7 +78,7 @@
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-              <li class="active"><a href="#today" data-toggle="tab">ยอดเบิกวันนี้</a></li>
+              <li class="active"><a href="#today" data-toggle="tab">วันนี้</a></li>
                 <li><a href="#checkday" data-toggle="tab">รายวัน</a></li>
                 <!-- <li><a href="#bytime" data-toggle="tab">ช่วงเวลา</a></li> -->
                 <li><a href="#change" data-toggle="tab">ระหว่างรถ</a></li>
@@ -100,7 +100,7 @@
                         <div class="col-md-12">
                           <div class="box-body">
                               <div class="text-center">
-                                <font size="5"><B>ประวัติการเบิกสินค้า
+                                <font size="5"><B>ประวัติ (เบิกสินค้า)
                                 <font color="red">
                                   <?php 
                                     echo DateThai($strDate);
@@ -109,7 +109,7 @@
                                   </B>
                                 </font>
                               </div>
-                              <table class="table table-striped">
+                              <table class="table">
                                 <thead>
                                   <tr>
                                     <th class="text-center" width="5%"> <font color="red">ที่</font> </th>

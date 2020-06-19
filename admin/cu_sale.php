@@ -109,37 +109,55 @@
                           $price_sole = "SELECT SUM(num) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 11";
                           $objq_sole = mysqli_query($conn,$price_sole);
                           $objr_sole = mysqli_fetch_array($objq_sole);
+                          $priceS_sole = "SELECT SUM(num) FROM price_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 11";
+                          $objqS_sole = mysqli_query($conn,$priceS_sole);
+                          $objrS_sole = mysqli_fetch_array($objqS_sole);
 
                           $price_deer = "SELECT SUM(num) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 34";
                           $objq_deer = mysqli_query($conn,$price_deer);
                           $objr_deer = mysqli_fetch_array($objq_deer);
+                          $priceS_deer = "SELECT SUM(num) FROM price_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 34";
+                          $objqS_deer = mysqli_query($conn,$priceS_deer);
+                          $objrS_deer = mysqli_fetch_array($objqS_deer);
 
                           $price_hd = "SELECT SUM(num) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 3";
                           $objq_hd = mysqli_query($conn,$price_hd);
                           $objr_hd = mysqli_fetch_array($objq_hd);
+                          $priceS_hd = "SELECT SUM(num) FROM price_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 3";
+                          $objqS_hd = mysqli_query($conn,$priceS_hd);
+                          $objrS_hd = mysqli_fetch_array($objqS_hd);
 
                           $price_shd = "SELECT SUM(num) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 1";
                           $objq_shd = mysqli_query($conn,$price_shd);
                           $objr_shd = mysqli_fetch_array($objq_shd);
+                          $priceS_shd = "SELECT SUM(num) FROM price_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 1";
+                          $objqS_shd = mysqli_query($conn,$priceS_shd);
+                          $objrS_shd = mysqli_fetch_array($objqS_shd);
 
                           $price_vh = "SELECT SUM(num) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 5";
                           $objq_vh = mysqli_query($conn,$price_vh);
                           $objr_vh = mysqli_fetch_array($objq_vh);
+                          $priceS_vh = "SELECT SUM(num) FROM price_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 5";
+                          $objqS_vh = mysqli_query($conn,$priceS_vh);
+                          $objrS_vh = mysqli_fetch_array($objqS_vh);
 
                           $price_fish = "SELECT SUM(num) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 32";
                           $objq_fish = mysqli_query($conn,$price_fish);
                           $objr_fish = mysqli_fetch_array($objq_fish);
+                          $priceS_fish = "SELECT SUM(num) FROM price_history WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$newformat' AND id_product = 32";
+                          $objqS_fish = mysqli_query($conn,$priceS_fish);
+                          $objrS_fish = mysqli_fetch_array($objqS_fish);
                     ?>
                     <tr>
                       <td class="text-center"><?php echo DateThai3($date); ?></td>
                       <td class="text-center"><?php echo $all_money;?></td>
                       <td class="text-center"><?php echo $total_money;?></td>
-                      <td class="text-center"><?php echo $objr_sole['SUM(num)'];?></td>
-                      <td class="text-center"><?php echo $objr_deer['SUM(num)'];?></td>
-                      <td class="text-center"><?php echo $objr_hd['SUM(num)'];?></td>
-                      <td class="text-center"><?php echo $objr_shd['SUM(num)'];?></td>
-                      <td class="text-center"><?php echo $objr_vh['SUM(num)'];?></td>
-                      <td class="text-center"><?php echo $objr_fish['SUM(num)'];?></td>
+                      <td class="text-center"><?php echo $objr_sole['SUM(num)']+$objrS_sole['SUM(num)'];?></td>
+                      <td class="text-center"><?php echo $objr_deer['SUM(num)']+$objrS_deer['SUM(num)'];?></td>
+                      <td class="text-center"><?php echo $objr_hd['SUM(num)']+$objrS_hd['SUM(num)'];?></td>
+                      <td class="text-center"><?php echo $objr_shd['SUM(num)']+$objrS_shd['SUM(num)'];?></td>
+                      <td class="text-center"><?php echo $objr_vh['SUM(num)']+$objrS_vh['SUM(num)'];?></td>
+                      <td class="text-center"><?php echo $objr_fish['SUM(num)']+$objrS_fish['SUM(num)'];?></td>
                     </tr>
                     <?php $i++;}?>
                   </tbody>

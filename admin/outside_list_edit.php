@@ -136,7 +136,11 @@ folder instead of downloading all of them to reduce the load. -->
                                   <option value="32"  <?php if($id_product == 32){ echo "selected='selected'";} ?>>น้ำปลาร้าต้มสุก เด็มเด็ม (ขวดเหลี่ยม)</option>
                                   <option value="34"  <?php if($id_product == 34){ echo "selected='selected'";} ?>>ปุ๋ยอินทรีย์กวางเหรียญทอง (50กก.)</option>
                                   <option value="36"  <?php if($id_product == 36){ echo "selected='selected'";} ?>>มหาเทพฮอร์โมน</option>
-                                  <option value="35"  <?php if($id_product == 35){ echo "selected='selected'";} ?>>ชำระเงิน</option>
+                                  <option value="37"  <?php if($id_product == 37){ echo "selected='selected'";} ?>>ฮัวน่า (Huana)</option>
+                                  <option value="39"  <?php if($id_product == 39){ echo "selected='selected'";} ?>>กาแฟเซิ่นถี่</option>
+                                  <option value="45"  <?php if($id_product == 45){ echo "selected='selected'";} ?>>BGM</option>
+                                  <option value="46"  <?php if($id_product == 46){ echo "selected='selected'";} ?>>อินทรา</option>
+                                  <option value="47"  <?php if($id_product == 47){ echo "selected='selected'";} ?>>DLC</option>
                                 </select>
                             </th>
                             <th width="25%" class="text-right"><font size="4">จำนวน&nbsp;&nbsp;:</font></th>

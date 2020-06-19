@@ -91,7 +91,7 @@ function Datetime($strDate)
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#today" data-toggle="tab">ยอดรับวันนี้</a></li>
+                <li class="active"><a href="#today" data-toggle="tab">วันนี้</a></li>
                 <li><a href="#checkday" data-toggle="tab">รายวัน</a></li>
                 <!-- <li><a href="#bytime" data-toggle="tab">ช่วงเวลา</a></li> -->
                 <div align="right">
@@ -111,10 +111,10 @@ function Datetime($strDate)
                         <div class="col-md-12">
                           <div class="box-body">
                             <div class="text-center">
-                              <font size="5"> <B>ประวัติการรับสินค้า <font color="red"> <?php echo DateThai($day); ?></font></B></font>
+                              <font size="5"> <B>ประวัติ (รับสินค้า) <font color="red"> <?php echo DateThai($day); ?></font></B></font>
                             </div>
                             <!-- ------------------------------//ยอดขายรวม---------------------------- -->
-                            <table class="table table-striped ">
+                            <table class="table">
                               <thead>
                                 <tr>
                                   <td class="text-center" width="5%"> <font color="red">ลำดับ</font> </td>
@@ -179,7 +179,7 @@ function Datetime($strDate)
                 <div class="tab-pane" id="checkday">
                   <div class="box box-default">
                     <div class="text-center box-header with-border">
-                      <B><font size="5">  ยอดรับสินค้ารายวัน </font></B> 
+                      <B><font size="5">ยอดรับสินค้า (รายวัน)</font></B> 
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">

@@ -94,7 +94,7 @@
                     <th class="text-center" width="5%">พาน</th>
                     <th class="text-center" width="5%">ดคต.</th>
                     <th class="text-center" width="5%">วปป.</th>
-                    <th class="text-center" width="5%">ลำปาง</th>
+                    <th class="text-center" width="5%">เกาะคา</th>
                     <th class="text-center" width="5%">ลำพูน</th>
                     <th class="text-center" width="5%">ขายส่ง</th>
                     <th class="text-center" width="5%">แม่จัน</th>

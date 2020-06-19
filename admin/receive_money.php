@@ -74,7 +74,7 @@
                   <th width="30%" > 
                     <a type="button" href="admin.php" class="btn button2 "><< เมนูหลัก</a>
                   </th>
-                  <td width="40%" class="text-center"><font size="5"><B align="center"> เงินขายรายวัน </B></font></td>
+                  <td width="40%" class="text-center"><font size="5"><B align="center">เงินขาย (รายวัน)</B></font></td>
                   <td width="30%"> <a type="button" href="../pdf_file/receive_money.php" class="btn btn-warning pull-right">PDF</a> </td>
                 </tr>
               </table>
@@ -222,7 +222,7 @@
                 <br>
                 <div class="box-header text-center with-border">
                   <font size="5">
-                    <B align="center">เงินขายค้างรับ</B>
+                    <B align="center">เงินขาย (ค้างรับ)</B>
                   </font>
                 </div>
                 <table class="table table-bordered table-striped">

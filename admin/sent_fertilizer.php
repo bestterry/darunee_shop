@@ -95,7 +95,7 @@
                               <div class="col-md-6 col-sm-6 col-6">
                                 <p align="center">
                                   <font size="5">
-                                    <B>ค่าส่งปุ๋ยวันนี้</B>
+                                    <B>ค่าส่งปุ๋ย (วันนี้)</B>
                                   </font>
                                 </p>
                               </div>
@@ -112,7 +112,7 @@
                       <div class="box-body">
                         <div class="col-md-12">
                           <div class="row">
-                            <table class="table table-striped" id="example2">
+                            <table class="table" id="example2">
                               <thead>
                               <tr>
                                 <th class="text-center" width="5%"> <font color="red">ที่</font> </th>
@@ -191,7 +191,7 @@
                             <div class="col-md-6 col-sm-6 col-6">
                               <p align="center">
                                 <font size="5">
-                                  <B>ค่าส่งปุ๋ยรายวัน</B>
+                                  <B>ค่าส่งปุ๋ย (รายวัน)</B>
                                 </font>
                               </p>
                             </div>
@@ -236,7 +236,7 @@
                   <div class="tab-pane" id="bytime">
                     <div class="box box-default">
                       <div class="text-center box-header with-border">
-                        <B><font size="5"> ค่าส่งปุ๋ยตามช่วงเวลา </font></B> 
+                        <B><font size="5"> ค่าส่งปุ๋ย (ช่วงเวลา) </font></B> 
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body">

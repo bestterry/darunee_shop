@@ -53,14 +53,14 @@
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
   <!-- Google Font -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <style>
-      .button2 {
-        background-color: #b35900;
-        color : white;
-        } /* Back & continue */
-    </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?=Sarabun">
+  
+  <style>
+    .button2 {
+      background-color: #b35900;
+      color : white;
+      } /* Back & continue */
+  </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -99,7 +99,7 @@
                   <div class="box box-default">
                     <div class="box-header text-center with-border">
                         <font size="5" color="blue">
-                          <B> รายการขายวันนี้ </B>
+                          <B> รายการขาย (วันนี้) </B>
                         </font>
                     </div>
                     <!-- /.box-header -->
@@ -340,7 +340,7 @@
                   <div class="box box-default">
                   <div class="box-header text-center with-border">
                       <font size="5">
-                        <B> รายการขายรายวัน </B>
+                        <B> รายการขาย (รายวัน) </B>
                       </font>
                     </div>
                     <!-- /.box-header -->

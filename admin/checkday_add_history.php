@@ -81,11 +81,11 @@ $day = $_POST['day'];
                   <!-- ------------------------------ยอดขายรวม---------------------------- -->
                   <div class="box-header with-border">
                     <p align="center">
-                      <font size="5"> <B>ประวัติการรับสินค้า <font color="red"> <?php echo DateThai($day); ?></font></B></font>
+                      <font size="5"> <B>ประวัติ (รับเข้าสินค้า) <font color="red"> <?php echo DateThai($day); ?></font></B></font>
                     </p>
                   </div>
                   <div class="box-body">
-                    <table class="table table-striped ">
+                    <table class="table">
                       <thead>
                         <tr>
                           <td class="text-center" width="5%"> <font color="red">ลำดับ</font> </td>

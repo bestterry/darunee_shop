@@ -106,7 +106,7 @@
                 </div>
 
                 <div class="box-body with-border">
-                  <table class="table table-striped" id="example2">
+                  <table class="table" id="example2">
                     <thead>
                      <tr>
                       <th class="text-center" width="5%"> <font color="red">ที่</font> </th>

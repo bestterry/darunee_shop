@@ -71,13 +71,13 @@ $pdf=new PDF('P','mm','A4');
             $objq = mysqli_query($conn,$date);
             while($value = $objq ->fetch_assoc()){ 
               $id_product = $value['id_product'];
-              $sql_num = "SELECT SUM(num),SUM(money) FROM price_history WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = $id_product AND status = 'sale'";
+              $sql_num = "SELECT SUM(num),SUM(money) FROM price_history WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = $id_product";
               $objq_num = mysqli_query($conn,$sql_num);
               $objr_num = mysqli_fetch_array($objq_num);
               $num = $objr_num['SUM(num)'];
               $num_money = $objr_num['SUM(money)'];
 
-              $sql_num_car = "SELECT SUM(num),SUM(money) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = $id_product AND status = 'sale'";
+              $sql_num_car = "SELECT SUM(num),SUM(money) FROM sale_car_history WHERE DATE_FORMAT(datetime,'%d-%m-%Y')='$strDate' AND id_product = $id_product";
               $objq_num_car = mysqli_query($conn,$sql_num_car);
               $objr_num_car = mysqli_fetch_array($objq_num_car);
               $num_car = $objr_num_car['SUM(num)'];

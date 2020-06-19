@@ -50,6 +50,10 @@
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
   <style>
+    thead {
+      color : red;
+    }
+
     .button2 {
       background-color: #b35900;
       color : white;
@@ -83,7 +87,7 @@
                   </div>
                   <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
                     <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-warning" style="color:black;">OR วันนี้</a>
-                    <a type="button"  href="../pdf_file/list_order2.php" class="btn btn-warning" style="color:black;">ค้างส่งทั้งหมด</a>
+                    <!-- <a type="button"  href="../pdf_file/list_order2.php" class="btn btn-warning" style="color:black;">ค้างส่งทั้งหมด</a> -->
                     <a type="button"  href="#" data-toggle="modal" data-target="#myModal" class="btn btn-warning" style="color:black;">ค้างส่ง(อ)</a>
                     <a type="button" href="#" data-toggle="modal" data-target="#myModal2" class="btn btn-warning" style="color:black;">ส่งแล้ว(อ)</a>
                     <a type="button" href="total_order.php" class="btn btn-success" style="color:black;">จำนวนค้างส่ง</a>
@@ -95,7 +99,7 @@
                 <form action="../pdf_file/pick_order.php" method="post" autocomplete="off"> 
                   <div class="box-body no-padding">
                     <div class="mailbox-read-message">
-                      <table id="example1" class="table table-bordered table-striped">
+                      <table id="example1" class="table">
                         <thead>
                           <tr>
                             <th class="text-center" width="5%">#</th>

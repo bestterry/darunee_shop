@@ -79,7 +79,7 @@
                 </div>
                 <div class="box-body with-border">
                   <div class="text-center">
-                    <font size="5"><B>ประวัติการเบิกสินค้า
+                    <font size="5"><B>ประวัติ (เบิกสินค้า)
                      <font color="red">
                       <?php 
                         $strDate = date('d-m-Y'); 
@@ -89,7 +89,7 @@
                       </B>
                     </font>
                   </div>
-                  <table class="table table-striped">
+                  <table class="table">
                     <thead>
                       <tr>
                         <th class="text-center" width="5%"> <font color="red">ที่</font> </th>

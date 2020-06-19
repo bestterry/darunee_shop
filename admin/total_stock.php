@@ -53,6 +53,12 @@
   <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <style>
+    thead {
+      color: rgb(255, 0, 0);
+    }
+  </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -86,16 +92,16 @@
         <!-- /.box-header -->
         <div class="box-body no-padding">
           <div class="mailbox-read-message">
-            <table class="table table-striped table-bordered">
+            <table class="table">
               <thead>
-                <tr class="info">
+                <tr>
                   <th class="text-center" width="2%">ที่</th>
                   <th class="text-center" width="15%">สินค้า_หน่วย</th>
                   <th class="text-center" width="5%">จุน</th>
                   <th class="text-center" width="5%">พาน</th>
                   <th class="text-center" width="5%">ดคต.</th>
                   <th class="text-center" width="5%">วปป.</th>
-                  <th class="text-center" width="5%">ลำปาง</th>
+                  <th class="text-center" width="5%">เกาะคา</th>
                   <th class="text-center" width="5%">ลำพูน</th>
                   <th class="text-center" width="5%">ขายส่ง</th>
                   <th class="text-center" width="5%">แม่จัน</th>
@@ -339,10 +345,9 @@
           
         <div class="box-body no-padding">
           <div class="mailbox-read-message">
-            <table class="table table-striped table-bordered">
-
+            <table class="table">
               <thead>
-                <tr class="info">
+                <tr>
                   <th class="text-center" width="3%">ที่</th>
                   <th class="text-center" width="15%">สินค้า_หน่วย</th>
 
@@ -433,13 +438,13 @@
 
         <div class="box-body no-padding">
           <div class="mailbox-read-message">
-            <table class="table table-striped table-bordered">
+            <table class="table">
               <thead>
-                <tr class="info">
+                <tr>
                 <th class="text-center" width="3%">ที่</th>
                   <th class="text-center" width="20%">สินค้า_หน่วย</th>
                   <th class="text-center" width="11%">เชียงใหม่</th>
-                  <th class="text-center" width="11%">ลำปาง</th>
+                  <th class="text-center" width="11%">เกาะคา</th>
                   <th class="text-center" width="11%">พะเยา</th>
                   <th class="text-center" width="11%">เชียงราย</th>
                   <th class="text-center" width="11%">ลำพูน</th>
