@@ -1,10 +1,7 @@
 <?php
   require "../config_database/config.php";
+  $id_artist = $_GET['id_artist'];
   $id_song = $_GET['id_song'];
-  $id_age = $_GET['id_age'];
-  $id_sexartist = $_GET['id_sexartist'];
-  $id_tune = $_GET['id_tune'];
-
   $sql_song = "SELECT * FROM song_list
                 INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
                 INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
@@ -144,7 +141,7 @@
                 <div class="box-header with-border">
                   <div class="col-12">
                     <div class="col-4 col-sm-4 col-xl-4 col-md-4">
-                      <a type="button" href="song_list.php?id_age=<?php echo $id_age?>&&id_sexartist=<?php echo $id_sexartist?>&&id_tune=<?php echo $id_tune;?>" class="btn button2"><< กลับ</a>
+                      <a type="button" href="song_list2.php?id_artist=<?php echo $id_artist; ?>" class="btn button2"><< กลับ</a>
                     </div>
                     <div class="col-4 col-sm-4 col-xl-4 col-md-4">
                       <p align="center">
@@ -158,7 +155,7 @@
                   </div>
                 </div>
 
-                <form action="algorithm\edit_song.php?id_age=<?php echo $id_age?>&&id_sexartist=<?php echo $id_sexartist?>&&id_tune=<?php echo $id_tune;?>" class="form-horizontal" method="post" autocomplete="off" name="form1">
+                <form action="algorithm\edit_song2.php?id_artist=<?php echo $id_artist; ?>" class="form-horizontal" method="post" autocomplete="off" name="form1">
                   <div class="box-body no-padding">
                     <div class="mailbox-read-message">
                       
@@ -198,7 +195,7 @@
                               <label class="col-sm-4 control-label">ยุค :</label>
                               <div class="col-sm-4">
                                 <select name="id_age"  class="form-control" >
-                                  <option value="<?php echo $id_age; ?>">-- เลือกยุค --</option>
+                                  <option value="<?php echo $objr_song['id_age']; ?>">-- เลือกยุค --</option>
                                   <?php 
                                     $sql_age = "SELECT id_age,name_age FROM song_age";
                                     $objq_age = mysqli_query($conn,$sql_age);
@@ -217,7 +214,7 @@
                               <label class="col-sm-4 control-label">ทำนอง :</label>
                               <div class="col-sm-4">
                                 <select name="id_tune"  class="form-control" >
-                                  <option value="<?php echo $id_tune; ?>">-- เลือกทำนอง --</option>
+                                  <option value="<?php echo $objr_song['id_tune']; ?>">-- เลือกทำนอง --</option>
                                   <?php 
                                     $sql_tune = "SELECT id_tune,name_tune FROM song_tune";
                                     $objq_tune = mysqli_query($conn,$sql_tune);

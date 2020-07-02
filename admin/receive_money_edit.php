@@ -51,40 +51,100 @@
 <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="../plugins/iCheck/all.css">
-
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        <style>
-          #customers {
-            
-            width: 100%;
-          }
+<style>
+  #customers {
+    
+    width: 100%;
+  }
 
-          #customers td, #customers th {
-            border: 1px solid #ddd;
-            padding: 8px;
-          }
+  #customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
 
-          #customers tr:nth-child(even){background-color: #f2f2f2;}
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
 
 
-          #customers th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: center;
-            background-color: #99CCFF;
-          
-          }
-          select {
-            text-align: center;
-            text-align-last: center;
-          }
-          option {
-            text-align: center;
-            text-align-last: center;
-          }
-        </style>
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #99CCFF;
+  
+  }
+  select {
+    text-align: center;
+    text-align-last: center;
+  }
+  option {
+    text-align: center;
+    text-align-last: center;
+  }
+</style>
+<style>
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+</style>
 </head>
 <body class=" hold-transition skin-blue layout-top-nav ">
 <div class="wrapper">
@@ -107,55 +167,106 @@
             <!-- add_receive_money  -->
             <form action="algorithm/receive_money_edit.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
               <div class="mailbox-read-message">
-                <table class="table table-bordered" id="dynamic_field">
-                  <tr>
-                    <th width="20%" class="text-right" ><font size="4">ชื่อ &nbsp;&nbsp;:</font></th>
-                    <td width="30%" >
-                      <input type="text" class="form-control text-center" value=" <?php echo $objr_receive['name'];?>"  style="background-color: #e6f7ff;" readonly/>
-                      <input type="hidden" name="id_receive_money" value="<?php echo $id_receive_money;?>">
-                    </td>
-                    <th width="20%" class="text-right" ><font size="4">เงินขาย &nbsp;&nbsp;:</font></th>
-                    <td width="30%"><input type="number" name="money" class="form-control text-center" value="<?php echo $objr_receive['money']; ?>"></td>
-                  </tr>
-                  <tr>
-                    <th width="20%" class="text-right"><font size="4" valign="middle">งาน &nbsp;&nbsp;:</font></th>
-                    <td width="30%" >
-                      <select name="id_practice"  class="form-control" style="width: 100%;">
-                        <option value="1"  <?php if($id_practice == 1){ echo "selected='selected'";} ?>>ส่ง</option>
-                        <option value="2"  <?php if($id_practice == 2){ echo "selected='selected'";} ?>>ขน</option>
-                        <option value="3"  <?php if($id_practice == 3){ echo "selected='selected'";} ?>>เยี่ยม</option>
-                        <option value="4"  <?php if($id_practice == 4){ echo "selected='selected'";} ?>>ร้าน</option>
-                        <option value="5"  <?php if($id_practice == 5){ echo "selected='selected'";} ?>>อื่นๆ</option>
-                        <option value="6"  <?php if($id_practice == 6){ echo "selected='selected'";} ?>>ลา</option>
-                        <option value="7"  <?php if($id_practice == 7){ echo "selected='selected'";} ?>>หยุด</option>
-                        <option value="9"  <?php if($id_practice == 9){ echo "selected='selected'";} ?>>เช็ค</option>
-                        <option value="10"  <?php if($id_practice == 10){ echo "selected='selected'";} ?>>เก็บเงิน</option>
-                        <option value="11"  <?php if($id_practice == 11){ echo "selected='selected'";} ?>>ขายส่ง</option>
-                      </select>
-                    </td>
-                    <th width="20%" class="text-right" ><font size="4">รับ &nbsp;&nbsp;:</font></th>
-                    <td width="30%">
-                      <select name="id_category"  class="form-control" style="width: 100%;">
-                        <option value="1"  <?php if($id_category == 1){ echo "selected='selected'";} ?>>สด</option>
-                        <option value="2"  <?php if($id_category == 2){ echo "selected='selected'";} ?>>เช็ค</option>
-                        <option value="3"  <?php if($id_category == 3){ echo "selected='selected'";} ?>>สกต.</option>
-                        <option value="4"  <?php if($id_category == 4){ echo "selected='selected'";} ?>>เชื่อ</option>
-                        <option value="5"  <?php if($id_category == 5){ echo "selected='selected'";} ?>>ฝากขาย</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th width="20%" class="text-right" ><font size="4">พื้นที่ &nbsp;&nbsp;:</font></th>
-                    <td width="30%" ><input type="text" name="area" value="<?php echo $objr_receive['area']; ?>" class="form-control text-center"></td>
-                    <th width="20%" class="text-right"><font size="4">วันรับ &nbsp;&nbsp;:</font></th>
-                    <td width="30%" ><input type="date" name="date" class="form-control text-center" value="<?php echo $objr_receive['date']; ?>"></td>
-                  </tr>
-                  <tr>
-                    <th width="20%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
-                    <td colspan="3" ><input type="text" name="note" value="<?php echo $objr_receive['note']; ?>" class="form-control text-center"></td>
-                  </tr>
-                </table>
-                  
+                <div class="col-12 col-md-12 col-xs-12">
+                  <div class="col-1 col-md-1 col-xs-1"></div>
+                  <div class="col-10 col-md-10 col-xs-10">
+                    <div class="row">
+                      <div class="col-sm-6 col-md-6 col-xs-6">
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">ชื่อ :</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control text-center" value=" <?php echo $objr_receive['name'];?>"  style="background-color: #e6f7ff;" readonly/>
+                            <input type="hidden" name="id_receive_money" value="<?php echo $id_receive_money;?>">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">งาน :</label>
+                          <div class="col-sm-8">
+                            <select name="id_practice"  class="form-control" style="width: 100%;">
+                              <option value="1"  <?php if($id_practice == 1){ echo "selected='selected'";} ?>>ส่ง</option>
+                              <option value="2"  <?php if($id_practice == 2){ echo "selected='selected'";} ?>>ขน</option>
+                              <option value="3"  <?php if($id_practice == 3){ echo "selected='selected'";} ?>>เยี่ยม</option>
+                              <option value="4"  <?php if($id_practice == 4){ echo "selected='selected'";} ?>>ร้าน</option>
+                              <option value="5"  <?php if($id_practice == 5){ echo "selected='selected'";} ?>>อื่นๆ</option>
+                              <option value="6"  <?php if($id_practice == 6){ echo "selected='selected'";} ?>>ลา</option>
+                              <option value="7"  <?php if($id_practice == 7){ echo "selected='selected'";} ?>>หยุด</option>
+                              <option value="9"  <?php if($id_practice == 9){ echo "selected='selected'";} ?>>เช็ค</option>
+                              <option value="10"  <?php if($id_practice == 10){ echo "selected='selected'";} ?>>เก็บเงิน</option>
+                              <option value="11"  <?php if($id_practice == 11){ echo "selected='selected'";} ?>>ขายส่ง</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">พื้นที่ :</label>
+                          <div class="col-sm-8">
+                            <input type="text" name="area" value="<?php echo $objr_receive['area']; ?>" class="form-control text-center">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">สนง (รับ) :</label>
+                          <div class="col-sm-8">
+                            <label class="switch">
+                              <input type="checkbox" name="status_office" <?php if($objr_receive['status_office'] == 'Y'){ echo "checked";}else{} ?>>
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">หัวหน้า (รับ) :</label>
+                          <div class="col-sm-8">
+                            <label class="switch">
+                              <input type="checkbox" name="status_boss" <?php if($objr_receive['status_boss'] == 'Y'){ echo "checked";}else{} ?>>
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-sm-6 col-md-6 col-xs-6">
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">เงินขาย :</label>
+                          <div class="col-sm-8">
+                            <input type="number" name="money" class="form-control text-center" value="<?php echo $objr_receive['money']; ?>">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">รับ :</label>
+                          <div class="col-sm-8">
+                            <select name="id_category"  class="form-control" style="width: 100%;">
+                              <option value="1"  <?php if($id_category == 1){ echo "selected='selected'";} ?>>สด</option>
+                              <option value="2"  <?php if($id_category == 2){ echo "selected='selected'";} ?>>เช็ค</option>
+                              <option value="3"  <?php if($id_category == 3){ echo "selected='selected'";} ?>>สกต.</option>
+                              <option value="4"  <?php if($id_category == 4){ echo "selected='selected'";} ?>>เชื่อ</option>
+                              <option value="5"  <?php if($id_category == 5){ echo "selected='selected'";} ?>>ฝากขาย</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">วันรับ :</label>
+                          <div class="col-sm-8">
+                            <input type="date" name="date" class="form-control text-center" value="<?php echo $objr_receive['date']; ?>">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">หมายเหตุ :</label>
+                          <div class="col-sm-8">
+                            <input type="text" name="note" value="<?php echo $objr_receive['note']; ?>" class="form-control text-center">
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-1 col-md-1 col-xs-1"></div>
+                </div>
                 <div class="box-footer">
                   <a type="block" href="receive_money.php" class="btn btn-danger pull-left"><< กลับ</a> 
                   <button type="submit" type="submit" class="btn btn-success pull-right"> <i class="fa fa-save"></i> บันทึก </button>

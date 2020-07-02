@@ -253,7 +253,7 @@
                 <!-- /แผนที่ -->
 
                 <!-- จัดการเพลง -->
-                <li><a href="song_list.php" ><i class="fa fa-music"></i> จัดการเพลง </a></li>
+                <li><a href="song_search.php" ><i class="fa fa-music"></i> จัดการเพลง </a></li>
                 <!--/จัดการเพลง -->
 
                 <!-- จัดการเพลง -->

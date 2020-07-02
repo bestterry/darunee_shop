@@ -70,11 +70,13 @@
                 <div class="box-header with-border">
                   <div class="col-12">
                     <div class="col-2 col-sm-2 col-xl-2 col-md-2">
-                      <a type="button" href="song_search.php" class="btn button2"><< กลับ</a>
+                      <a type="button" href="radio_list.php" class="btn button2"><< กลับ</a>
                     </div>
-                    <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
-                      <a type="button" href="algorithm/reset_song.php?id_age=<?php echo $_GET['id_age']; ?>&&id_tune=<?php echo $_GET['id_tune']; ?>&&id_sexartist=<?php echo $_GET['id_sexartist'];?>" 
-                      class="btn btn-success" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>ล้างข้อมูล</a>
+                    <div class="col-8 col-sm-8 col-xl-8 col-md-8 text-center">
+                      <font size="5"><B>ข้อมูลผังเช่าวิทยุ</B></font>
+                    </div>
+                    <div class="col-2 col-sm-2 col-xl-2 col-md-2 text-right">
+                    <a type="button"href="#" data-toggle="modal" data-target="#myModal2" class="btn btn-success" style="color:black;">เพิ่มผังเช่าวิทยุ</a>
                     </div>
                   </div>
                 </div>
@@ -85,58 +87,23 @@
                       <table id="example2" class="table">
                         <thead>
                           <tr>
-                            <th class="text-center" width="6%">สถานะ</th>
-                            <th class="text-center" width="23%">นักร้อง</th>
-                            <th class="text-center" width="23%">ชื่อเพลง</th>
-                            <th class="text-center" width="17%">ยุค</th>
-                            <th class="text-center" width="17%">ทำนอง</th>
-                            <th class="text-center" width="5%">แก้ไข</th>
+                            <th class="text-center" width="90%">ข้อมูล</th>
+                            <th class="text-center" width="10%">ลบ</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <?php 
-                            $id_age = $_GET['id_age' ];
-                            $id_tune = $_GET['id_tune'];
-                            $id_sexartist = $_GET['id_sexartist'];
-
-                            $sql_song = " SELECT * FROM song_list
-                                          INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
-                                          INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
-                                          INNER JOIN song_age ON song_list.id_age = song_age.id_age
-                                          INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist
-                                          WHERE song_list.id_age = $id_age AND song_list.id_tune = $id_tune AND song_artist.id_sexartist = $id_sexartist";
-                            $objq_song = mysqli_query($conn,$sql_song);
-                            while($value =  $objq_song->fetch_assoc()){
-                          ?>
-                          <tr> 
-                          <?php
-                            if($value['status']=='N'){
-                          ?>
-                         
-                            <td class="text-center">
-                              <!-- <a href="algorithm/edit_StatusSong.php?id_song=<?php echo $value['id_song']; ?>&&status=N&&id_age=<?php echo $id_age?>&&id_sexartist=<?php echo $id_sexartist?>&&id_tune=<?php echo $id_tune;?>" class="btn  btn-danger btn-xs" >N</a> -->
-                            </td>
-                          <?php
-                            }else{
-                          ?>
-                           <td class="text-center"><font>เปิด</font></td>
-                            <!-- <td class="text-center"> -->
-                              <!-- <a href="algorithm/edit_StatusSong.php?id_song=<?php echo $value['id_song']; ?>&&id_age=<?php echo $id_age?>&&id_sexartist=<?php echo $id_sexartist?>&&id_tune=<?php echo $id_tune;?>" class="btn  btn-success btn-xs" >Y</a> -->
-                            <!-- </td> -->
-                          <?php 
-                            }
-                          ?>
-                            <td class="text-center"><?php echo $value['name_artist'];?></td>
-                            <td class="text-center"><?php echo $value['name_song']; ?></td>
-                            <td class="text-center"><?php echo $value['name_age']; ?></td>
-                            <td class="text-center"><?php echo $value['name_tune']; ?></td>
-                            <td class="text-center">
-                              <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&id_age=<?php echo $id_age?>&&id_sexartist=<?php echo $id_sexartist?>&&id_tune=<?php echo $id_tune;?>" class="btn  btn-success btn-xs" >แก้</a>
-                            </td>   
+                        <?php 
+                          $sql_chart = "SELECT id_chart,name_chart FROM radio_chart";
+                          $objq_chart = mysqli_query($conn,$sql_chart);
+                          while($value = $objq_chart->fetch_assoc()){
+                        ?>
+                          <tr>
+                            <td class="text-center"><?php echo $value['name_chart']; ?></td>
+                            <td class="text-center"><a href="algorithm/delete_chartradio.php?id_chart=<?php echo $value['id_chart']; ?>&&name_chart=<?php echo $value['name_chart'];?>" class="btn  btn-danger btn-xs" >ลบ</a> </td>   
                           </tr>
-                          <?php 
-                            }
-                          ?>
+                        <?php 
+                          }
+                        ?>
                         </tbody>
                       </table>
                     </div>
@@ -145,6 +112,42 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="myModal2" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <form action="algorithm/add_radiochart.php" method="post" enctype="multipart/form-data">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                    <font size="5"><B> เพิ่มผังเช่าวิทยุ </B></font>
+                </div>
+                <div class="modal-body">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+                    <div class="col-8 col-sm-8 col-xl-8 col-md-8">
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr>
+                            <th class="text-center" width="30%"><font size="4">รูปผังเช่าวิทยุ</font></th>
+                            <th class="text-center" width="70%"> 
+                              <input name="upload" type="file" class="form-control" style="width: 100%;">
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table> 
+                    </div>
+                    <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+                    
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit"  class="btn btn-success pull-right" OnClick="return confirm('ต้องการบันทึกรายการเพลงหรือไม่ ?')";>บันทึก</button>
+                  <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< กลับ</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </section>
@@ -180,7 +183,7 @@
         $('#example2').DataTable({
           'paging'      : false,
           'lengthChange': true,
-          'searching'   : true,
+          'searching'   : false,
           'ordering'    : false,
           'info'        : true,
           'autoWidth'   : false

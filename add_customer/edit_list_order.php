@@ -219,6 +219,26 @@
                           </div>
                         </div>
 
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">เบิก :</label>
+                          <div class="col-sm-8">
+                            <label class="switch">
+                              <input type="checkbox" name="id_wd" <?php if($objr_addorder['id_wd']!=0){ echo "checked"; }else{} ?>>
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">ส่ง :</label>
+                          <div class="col-sm-8">
+                            <label class="switch">
+                              <input type="checkbox" name="status" <?php if($objr_addorder['status']=="success"){ echo "checked"; }else{} ?>>
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+                        </div>
+
                       </div>
                       <div class="col-md-7">
                         <div class="table-responsive">

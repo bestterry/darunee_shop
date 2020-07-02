@@ -50,7 +50,7 @@ $pdf=new PDF('P','mm','A4');
               $pdf->Text(87, 19,iconv('UTF-8','cp874',''),1,0,'C');
               //สร้างตาราง
               $pdf->SetTextColor(0,0,0);
-              $pdf->Cell(38,8,iconv('UTF-8','cp874','ศิลปิน'),1,0,'C');
+              $pdf->Cell(38,8,iconv('UTF-8','cp874','นักร้อง'),1,0,'C');
               $pdf->Cell(38,8,iconv('UTF-8','cp874','ชื่อเพลง'),1,0,'C');
               $pdf->Cell(28,8,iconv('UTF-8','cp874','ยุค'),1,0,'C');
               $pdf->Cell(28,8,iconv('UTF-8','cp874','ทำนอง'),1,0,'C');

@@ -97,48 +97,42 @@
                     </div>
                     <div class="col-4 col-sm-4 col-xl-4 col-md-4">
                       <div class="text-center">
-                        <font size="4"><B>เวลาเช่าวิทยุ <?php echo 'จ.'.$objr['province_name']; ?></B></font>
+                        <font size="5"><B>เวลาเช่าวิทยุ <?php echo 'จ.'.$objr['province_name']; ?></B></font>
+                        <br>
+                        <br>
+                        <font size="4" color="red"><B> <?php echo $objr['time']; ?></B></font>
                       </div>
                     </div>
                     <div class="col-4 col-sm-4 col-xl-4 col-md-4"></div>
                     </div>
                   </div>
-                  <br>
-                  <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-                    <div class="row">
-                      <div class="text-center">
-                        <font size="4" color="red"><B> <?php echo $objr['time']; ?></B></font>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <div class="box-body">
-                  <div class="col-12">
-                    <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
-                    <div class="col-6 col-sm-6 col-md-6 col-xl-6">
-                      <div class="row">
-                        <table class="table">
-                          <tbody>
-                            <?php #endregion
-                              while ($value = $objq->fetch_assoc()) {
-                            ?>
-                            <tr>
-                              <td class="text-right" width="50%">
-                                <font size="4"><?php echo $value['wave']; ?>&nbsp;&nbsp;MHz</font>
-                              </td>
-                              <td class="text-left" width="50%">
-                                <font size="4"><?php echo $value['amphur_name']; ?></font>&nbsp;&nbsp;<font size="4" color="red"><?php echo $value['note']; ?></font>
-                              </td>
-                              
-                            </tr>
-                            <?php
-                              }
-                            ?>
-                          </tbody>
-                        </table>
-                      </div>
+                  <div class="col-12 col-sm-12 col-md-12 col-xl-12">
+                    <div class="row">
+                      <table class="table">
+                        <tbody>
+                          <?php #endregion
+                            while ($value = $objq->fetch_assoc()) {
+                          ?>
+                          <tr>
+                            <td class="text-right" width="50%">
+                              <font size="4"><?php echo $value['wave']; ?>&nbsp;&nbsp;MHz&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                            </td>
+                            <td class="text-left" width="50%">
+                              &nbsp;&nbsp;&nbsp;&nbsp;<font size="4"><?php echo $value['amphur_name']; ?></font>
+                              &nbsp;&nbsp;<font size="4"><?php echo $value['name_hire']; ?></font>
+                              &nbsp;&nbsp;<font size="4"><?php echo $value['tel_hire']; ?></font>
+                              &nbsp;&nbsp;<font size="4" color="red"><?php echo $value['note']; ?></font>
+                            </td>
+                            
+                          </tr>
+                          <?php
+                            }
+                          ?>
+                        </tbody>
+                      </table>
                     </div>
-                    <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
                   </div>
                 </div>
               </div>
@@ -153,46 +147,40 @@
                     <div class="col-4 col-sm-4 col-xl-4 col-md-4">
                       <div class="text-center">
                         <font size="4"><B>เวลาเช่าวิทยุ <?php echo 'จ.'.$objr['province_name']; ?></B></font>
+                        <br>
+                        <br>
+                        <font size="4" color="red"><B> <?php echo $objr['time']; ?></B></font>
                       </div>
                     </div>
                     <div class="col-4 col-sm-4 col-xl-4 col-md-4"></div>
                     </div>
                   </div>
-                  <br>
-                  <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-                    <div class="row">
-                      <div class="text-center">
-                        <font size="4" color="red"><B> <?php echo $objr['time']; ?></B></font>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <div class="box-body">
-                  <div class="col-12">
-                    <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
-                    <div class="col-6 col-sm-6 col-md-6 col-xl-6">
-                      <div class="row">
-                        <table class="table">
-                          <tbody>
-                            <?php #endregion
-                              while ($value = $objq->fetch_assoc()) {
-                            ?>
-                            <tr>
-                              <td class="text-right" width="50%">
-                                <font size="4"><?php echo $value['wave'];?>&nbsp;&nbsp;MHz</font>
-                              </td>
-                              <td class="text-left" width="50%">
-                                <font size="4"><?php echo $value['amphur_name']; ?></font>&nbsp;&nbsp;<font size="4" color="red"><?php echo $value['note']; ?>
-                              </td>
-                            </tr>
-                            <?php
-                              }
-                            ?>
-                          </tbody>
-                        </table>
-                      </div>
+                  <div class="col-12 col-sm-12 col-md-12 col-xl-12">
+                    <div class="row">
+                      <table class="table">
+                        <tbody>
+                          <?php #endregion
+                            while ($value = $objq->fetch_assoc()) {
+                          ?>
+                          <tr>
+                            <td class="text-right" width="50%">
+                              <font size="4"><?php echo $value['wave'];?>&nbsp;&nbsp;MHz</font>
+                            </td>
+                            <td class="text-left" width="50%">
+                              <font size="4"><?php echo $value['amphur_name']; ?></font>
+                              &nbsp;&nbsp;<font size="4"><?php echo $value['name_hire']; ?></font>
+                              &nbsp;&nbsp;<font size="4"><?php echo $value['tel_hire']; ?></font>
+                              &nbsp;&nbsp;<font size="4" color="red"><?php echo $value['note']; ?>
+                            </td>
+                          </tr>
+                          <?php
+                            }
+                          ?>
+                        </tbody>
+                      </table>
                     </div>
-                    <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
                   </div>
                 </div>
               </div>

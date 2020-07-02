@@ -53,7 +53,7 @@ $pdf=new PDF('P','mm','A4');
                                   WHERE addorder.status = 'pending' AND DATE_FORMAT(addorder.datetime,'%Y-%m-%d') = '$strDate' 
                                   ORDER BY id_addorder DESC";
                 $objq_addorder = mysqli_query($conn,$sql_addorder);
-               
+                if(mysqli_num_rows($objq_addorder) > 0){
                 while($value = $objq_addorder->fetch_assoc ())
                 { 
                   $request = $value['request'];
@@ -73,7 +73,7 @@ $pdf=new PDF('P','mm','A4');
                     $test = "[ เบิก : ". $objr_member['name'] ." ]";
                   }
                   
-                  
+                  $row[] = $value['id_addorder'];
                   $id_addorder = $value['id_addorder'];
                   $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'_______________________________________________________________________________________________________') , 0 , 1,'L' );
                   $pdf->Ln(4); 
@@ -110,6 +110,34 @@ $pdf=new PDF('P','mm','A4');
 '.DateThai($value['datetime']).' '.$value['name_member']  .' '. DateTime($value['datetime']).' '.$value['tel']  .'
 # '.$value['note'] ) );
                 }  
+
+                $pdf->AddPage();
+                $pdf->Cell(15,9, iconv( 'UTF-8','cp874',''),0,0,'C');
+                $pdf->Cell(80,9, iconv( 'UTF-8','cp874' ,'สินค้า_หน่วย'),1,0,'C');
+                $pdf->Cell(80,9, iconv( 'UTF-8','cp874','จำนวน'),1,0,'C');
+                $pdf->Ln(9);
+            
+                $sql_product = "SELECT * FROM product";
+                $objq_product = mysqli_query($conn,$sql_product);
+                while($value = $objq_product->fetch_assoc()){
+                    $id_product = $value['id_product'];
+                    $id_addorder = '('.$sumstr = implode(",",$row).')';
+                    $sql_listorder = "SELECT SUM(num) FROM listorder WHERE id_product = $id_product AND id_addorder IN $id_addorder";
+                    $objq_listorder = mysqli_query($conn,$sql_listorder);
+                    $objr_listorder = mysqli_fetch_array($objq_listorder);
+                    if(isset($objr_listorder['SUM(num)'])){
+                      $pdf->Cell(15,9, iconv( 'UTF-8','cp874',''),0,0,'C');
+                      $pdf->Cell(80,9, iconv( 'UTF-8','cp874' ,$value['name_product'].'_'.$value['unit']),1,0,'C');
+                      $pdf->Cell(80,9, iconv( 'UTF-8','cp874',$objr_listorder['SUM(num)']),1,0,'C');
+                      $pdf->Ln(9);
+            
+                    }else{
+                      continue;
+                    }
+                }
+              }else{
+                  
+              }
               
 // --------------------------------------------------------------------------------------                     
     $pdf->Output();

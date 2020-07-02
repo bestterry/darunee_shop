@@ -2,15 +2,15 @@
   require "../../config_database/config.php";
   require "../../session.php"; 
 
-  $artist = $_POST['artist'];
+  $id_artist = $_POST['id_artist'];
   $name_song = $_POST['name_song'];
-  $age = $_POST['age'];
-  $tune = $_POST['tune'];
+  $id_age = $_POST['id_age'];
+  $id_tune = $_POST['id_tune'];
 
-  $insert_song = "INSERT INTO song_list (artist, name_song, age, tune, id_member, status, datetime) 
-                   VALUE ('$artist','$name_song','$age','$tune', 0, 'N', '-')";
+  $insert_song = "INSERT INTO song_list (id_artist, name_song, id_age, id_tune, id_member, status, datetime) 
+                   VALUE ($id_artist,'$name_song',$id_age,$id_tune, 0, 'N', '-')";
       if ($conn->query($insert_song) === TRUE) {
-        header('location:../store.php');
+        header('location:../song_list2.php?id_artist='.$id_artist);
     } else {
         echo "Error: " . $insert_song . "<br>" . $conn->error;
     }

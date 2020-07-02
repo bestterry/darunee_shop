@@ -73,8 +73,6 @@
                       <a type="button" href="song_search.php" class="btn button2"><< กลับ</a>
                     </div>
                     <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
-                      <a type="button" href="algorithm/reset_song.php?id_age=<?php echo $_GET['id_age']; ?>&&id_tune=<?php echo $_GET['id_tune']; ?>&&id_sexartist=<?php echo $_GET['id_sexartist'];?>" 
-                      class="btn btn-success" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>ล้างข้อมูล</a>
                     </div>
                   </div>
                 </div>
@@ -88,23 +86,17 @@
                             <th class="text-center" width="6%">สถานะ</th>
                             <th class="text-center" width="23%">นักร้อง</th>
                             <th class="text-center" width="23%">ชื่อเพลง</th>
-                            <th class="text-center" width="17%">ยุค</th>
-                            <th class="text-center" width="17%">ทำนอง</th>
-                            <th class="text-center" width="5%">แก้ไข</th>
+                            <th class="text-center" width="20%">ยุค</th>
+                            <th class="text-center" width="19%">ทำนอง</th>
                           </tr>
                         </thead>
                         <tbody>
                           <?php 
-                            $id_age = $_GET['id_age' ];
-                            $id_tune = $_GET['id_tune'];
-                            $id_sexartist = $_GET['id_sexartist'];
-
                             $sql_song = " SELECT * FROM song_list
                                           INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
                                           INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
                                           INNER JOIN song_age ON song_list.id_age = song_age.id_age
-                                          INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist
-                                          WHERE song_list.id_age = $id_age AND song_list.id_tune = $id_tune AND song_artist.id_sexartist = $id_sexartist";
+                                          INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist";
                             $objq_song = mysqli_query($conn,$sql_song);
                             while($value =  $objq_song->fetch_assoc()){
                           ?>
@@ -129,10 +121,7 @@
                             <td class="text-center"><?php echo $value['name_artist'];?></td>
                             <td class="text-center"><?php echo $value['name_song']; ?></td>
                             <td class="text-center"><?php echo $value['name_age']; ?></td>
-                            <td class="text-center"><?php echo $value['name_tune']; ?></td>
-                            <td class="text-center">
-                              <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&id_age=<?php echo $id_age?>&&id_sexartist=<?php echo $id_sexartist?>&&id_tune=<?php echo $id_tune;?>" class="btn  btn-success btn-xs" >แก้</a>
-                            </td>   
+                            <td class="text-center"><?php echo $value['name_tune']; ?></td> 
                           </tr>
                           <?php 
                             }

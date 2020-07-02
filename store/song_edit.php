@@ -94,7 +94,7 @@
                           <thead>
                             <tr>
                               <th class="text-center" width="6%">ID</th>
-                              <th class="text-center" width="25">ศิลปิน</th>
+                              <th class="text-center" width="25">นักร้อง</th>
                               <th class="text-center" width="25%">ชื่อเพลง</th>
                               <th class="text-center" width="22%">ยุค</th>
                               <th class="text-center" width="22%">ทำนอง</th>

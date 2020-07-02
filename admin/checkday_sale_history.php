@@ -220,7 +220,7 @@
 
                   <!-- ------------------------------//รถรวม---------------------------- -->
                     <?php 
-                      $sql_member = "SELECT * FROM member ";
+                      $sql_member = "SELECT * FROM member WHERE status ='employee'";
                       $objq_member = mysqli_query($conn,$sql_member);
                       while($value_member = $objq_member -> fetch_assoc()){
                         $id_member = $value_member['id_member'];

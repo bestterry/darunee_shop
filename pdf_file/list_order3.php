@@ -111,6 +111,7 @@ $pdf=new PDF('P','mm','A4');
                 }  
   
                   $pdf->AddPage();
+                  $pdf->SetFont('cordia','',16);
                   $pdf->Cell(15,9, iconv( 'UTF-8','cp874',''),0,0,'C');
                   $pdf->Cell(80,9, iconv( 'UTF-8','cp874' ,'สินค้า_หน่วย'),1,0,'C');
                   $pdf->Cell(80,9, iconv( 'UTF-8','cp874','จำนวน'),1,0,'C');

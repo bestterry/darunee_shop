@@ -54,6 +54,66 @@
         background-color: #b35900;
         color : white;
         } /* Back & continue */
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+
+      input:checked + .slider {
+        background-color: #2196F3;
+      }
+
+      input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
+      }
   </style>
 </head>
 
@@ -111,13 +171,8 @@
                         <?php 
                           $status_boss = $value['status_boss'];
                             if( $status_boss == 'Y'){
-                        ?>
-                        <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=N&&statusb=boss" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังไม่ได้รับหรือไม่ ?')";>.รับ</a>
-                        <?php
+                              echo "รับ";
                             }else{
-                        ?>
-                        <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=Y&&statusb=boss" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นรับแล้วหรือไม่ ?')";>รับ.</a>
-                        <?php
                               echo "";
                             } 
                         ?>
@@ -125,17 +180,12 @@
                       <td class="text-center" ><?php echo $value['name_practice']; ?></td>
                       <td class="text-center" >
                         <?php 
-                            $status = $value['status_office'];
-                              if( $status == 'Y'){
-                          ?>
-                          <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=N&&statusb=office" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังไม่ได้รับหรือไม่ ?')";>.สนง</a>
-                          <?php
-                              }else{
-                          ?>
-                          <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=Y&&statusb=office" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นรับแล้วหรือไม่ ?')";>สนง.</a>
-                          <?php
-                                echo "";
-                              } 
+                          $status_office = $value['status_office'];
+                            if( $status_office == 'Y'){
+                              echo "สนง.";
+                            }else{
+                              echo "";
+                            } 
                         ?>
                       </td>
                       <td class="text-center" ><?php echo $value['money']; ?></td>

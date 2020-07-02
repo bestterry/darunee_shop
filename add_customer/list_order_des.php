@@ -106,29 +106,6 @@
       <nav class="navbar navbar-static-top">
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
-            <!-- User Account: style can be found in dropdown.less -->
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../dist/img/user.png" class="user-image" alt="User Image">
-                <span class="hidden-xs"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="dist/img/user.png" class="img-circle" alt="User Image">
-
-                  <p>
-                    <small>สาขา : </small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-right">
-                   
-                  </div>
-                </li>
-              </ul>
-            </li>
           </ul>
         </div>
       </nav>
@@ -141,16 +118,21 @@
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
-              
-              <div class=" text-center ">
-                <font size="5">
-                  <B align="center"> ข้อมูลสั่งสินค้า <font color="red"> </font></B>
-                </font>
+              <div class="col-12">
+                <div class="col-4 col-sm-4 col-md-4 col-xl-4">
+                  <div class="text-left">
+                    <a type="button" href="list_order.php" class="btn btn-danger"><< กลับ</a> 
+                  </div>
+                </div>
+                <div class="col-4 col-sm-4 col-md-4 col-xl-4">
+                  <div class=" text-center">
+                    <font size="5">
+                      <B align="center"> ข้อมูลสั่งสินค้า <font color="red"> </font></B>
+                    </font>
+                  </div>
+                </div>
+                <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
               </div>
-              <div>
-                <a type="button" href="list_order.php" class="btn btn-danger"><< กลับ</a> 
-              </div>
-             
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">

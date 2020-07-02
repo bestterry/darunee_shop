@@ -51,7 +51,9 @@
       <!-- Main content -->
       <section class="content">
         <?php 
-            $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_zone = $id_zone";
+            $list_product = "SELECT * FROM product 
+                             INNER JOIN num_product ON product.id_product = num_product.id_product 
+                             WHERE num_product.id_zone = $id_zone AND product.status_stock = 1";
             $query_product = mysqli_query($conn,$list_product);
             $query_product1 = mysqli_query($conn,$list_product);
             $query_product2 = mysqli_query($conn,$list_product);

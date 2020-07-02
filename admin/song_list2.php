@@ -1,5 +1,13 @@
 <?php
   require "../config_database/config.php";
+  $id_artist = $_GET['id_artist' ];
+  $sql_song = " SELECT * FROM song_list
+                INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
+                INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
+                INNER JOIN song_age ON song_list.id_age = song_age.id_age
+                INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist
+                WHERE song_artist.id_artist = $id_artist";
+  $objq_song = mysqli_query($conn,$sql_song);
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,8 +81,9 @@
                       <a type="button" href="song_search.php" class="btn button2"><< กลับ</a>
                     </div>
                     <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
-                      <a type="button" href="algorithm/reset_song.php?id_age=<?php echo $_GET['id_age']; ?>&&id_tune=<?php echo $_GET['id_tune']; ?>&&id_sexartist=<?php echo $_GET['id_sexartist'];?>" 
-                      class="btn btn-success" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>ล้างข้อมูล</a>
+                      <!-- <a type="button" href="../pdf_file/song_listY.php" class="btn btn-warning" style="color:black;">รายงาน</a> -->
+                      <a type="button" href="algorithm/reset_song2.php?id_artist=<?php echo $id_artist; ?>" class="btn btn-success" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>ล้างข้อมูล</a>
+                      <a type="button"href="#" data-toggle="modal" data-target="#myModal2" class="btn btn-success" style="color:black;">เพิ่มเพลง</a>
                     </div>
                   </div>
                 </div>
@@ -95,17 +104,6 @@
                         </thead>
                         <tbody>
                           <?php 
-                            $id_age = $_GET['id_age' ];
-                            $id_tune = $_GET['id_tune'];
-                            $id_sexartist = $_GET['id_sexartist'];
-
-                            $sql_song = " SELECT * FROM song_list
-                                          INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
-                                          INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
-                                          INNER JOIN song_age ON song_list.id_age = song_age.id_age
-                                          INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist
-                                          WHERE song_list.id_age = $id_age AND song_list.id_tune = $id_tune AND song_artist.id_sexartist = $id_sexartist";
-                            $objq_song = mysqli_query($conn,$sql_song);
                             while($value =  $objq_song->fetch_assoc()){
                           ?>
                           <tr> 
@@ -131,7 +129,7 @@
                             <td class="text-center"><?php echo $value['name_age']; ?></td>
                             <td class="text-center"><?php echo $value['name_tune']; ?></td>
                             <td class="text-center">
-                              <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&id_age=<?php echo $id_age?>&&id_sexartist=<?php echo $id_sexartist?>&&id_tune=<?php echo $id_tune;?>" class="btn  btn-success btn-xs" >แก้</a>
+                              <a href="song_edit2.php?id_song=<?php echo $value['id_song']; ?>&&id_artist=<?php echo $id_artist; ?>" class="btn  btn-success btn-xs" >แก้</a>
                             </td>   
                           </tr>
                           <?php 
@@ -144,6 +142,76 @@
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <form action="algorithm/add_song.php" method="post">
+                <div class="modal-content">
+                  <div class="modal-header text-center">
+                      <font size="5"><B> เพิ่มเพลง </B></font>
+                  </div>
+                  <div class="modal-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="col-3 col-sm-3 col-xl-3 col-md-3"></div>
+                      <div class="col-6 col-sm-6 col-xl-6 col-md-6">
+                        <table class="table table-bordered">
+                          <tbody>
+                            <tr>
+                              <th class="text-center" width="30%"><font size="4">ชื่อเพลง</font></th>
+                              <th class="text-center" width="70%"> 
+                                <input type="text" name="name_song" class="form-control" style="width: 100%;">
+                                <input type="hidden" name="id_artist" class="form-control" value="<?php echo $id_artist; ?>">
+                              </th>
+                            </tr>
+                            <tr>  
+                              <th class="text-center" width="30%"><font size="4">ยุค</font></th>
+                              <th class="text-center" width="70%"> 
+                                <select name="id_age" class=" form-control" style="width: 100%;">
+                                  <option value="">-- เลือกยุคเพลง --</option>
+                                  <?php 
+                                    $sql_age = "SELECT id_age,name_age FROM song_age";
+                                    $objq_age = mysqli_query($conn,$sql_age);
+                                    while($value_age = $objq_age->fetch_assoc()){
+                                  ?>
+                                  <option value="<?php echo $value_age['id_age'];?>"><?php echo $value_age['name_age'];?></option>
+                                  <?php    
+                                    }
+                                  ?>
+                                </select>
+                              </th>
+                            </tr>
+                            <tr>
+                              <th class="text-center" width="30%"><font size="4">ทำนอง</font></th>
+                              <th class="text-center" width="70%"> 
+                              <select name="id_tune" class=" form-control" style="width: 100%;">
+                                  <option value="">-- เลือกทำนอง --</option>
+                                  <?php 
+                                    $sql_tune = "SELECT id_tune,name_tune FROM song_tune";
+                                    $objq_tune = mysqli_query($conn,$sql_tune);
+                                    while($value_tune = $objq_tune->fetch_assoc()){
+                                  ?>
+                                  <option value="<?php echo $value_tune['id_tune'];?>"><?php echo $value_tune['name_tune'];?></option>
+                                  <?php    
+                                    }
+                                  ?>
+                                </select>
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table> 
+                      </div>
+                      <div class="col-3 col-sm-3 col-xl-3 col-md-3"></div>
+                      
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit"  class="btn btn-success pull-right" OnClick="return confirm('ต้องการบันทึกรายการเพลงหรือไม่ ?')";>บันทึก</button>
+                    <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< กลับ</button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>

@@ -89,7 +89,7 @@
                             <tr>
                               <th class="text-center" width="5%">#</th>
                               <th class="text-center" width="4%">id</th>
-                              <th class="text-center" width="23%">ศิลปิน</th>
+                              <th class="text-center" width="23%">นักร้อง</th>
                               <th class="text-center" width="23%">ชื่อเพลง</th>
                               <th class="text-center" width="20%">ยุค</th>
                               <th class="text-center" width="20%">ทำนอง</th>
@@ -142,7 +142,7 @@
                             </th>
                           </tr>
                           <tr>
-                            <th class="text-center" width="30%"><font size="4">ศิลปิน</font></th>
+                            <th class="text-center" width="30%"><font size="4">นักร้อง</font></th>
                             <th class="text-center" width="70%"> 
                               <input name="artist" class="form-control" style="width: 100%;">
                             </th>

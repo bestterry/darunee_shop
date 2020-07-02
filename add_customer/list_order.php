@@ -88,7 +88,7 @@
                   <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
                     <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-warning" style="color:black;">OR วันนี้</a>
                     <!-- <a type="button"  href="../pdf_file/list_order2.php" class="btn btn-warning" style="color:black;">ค้างส่งทั้งหมด</a> -->
-                    <a type="button"  href="#" data-toggle="modal" data-target="#myModal" class="btn btn-warning" style="color:black;">ค้างส่ง(อ)</a>
+                    <a type="button"  href="#" data-toggle="modal" data-target="#myModal" class="btn btn-danger" style="color:black;">ค้างส่ง(อ)</a>
                     <a type="button" href="#" data-toggle="modal" data-target="#myModal2" class="btn btn-warning" style="color:black;">ส่งแล้ว(อ)</a>
                     <a type="button" href="total_order.php" class="btn btn-success" style="color:black;">จำนวนค้างส่ง</a>
                     <a type="button" href="add_order.php" class="btn btn-success" style="color:black;">เพิ่ม OR</a>
@@ -103,11 +103,10 @@
                         <thead>
                           <tr>
                             <th class="text-center" width="5%">#</th>
-                            <th class="text-center" width="70%">ข้อมูล ORDER ค้างส่ง</th>
-                            <th class="text-center" width="4%">#</th>
+                            <th class="text-center" width="74%">ข้อมูล ORDER ค้างส่ง</th>
                             <th class="text-center" width="4%">ทวง</th>
                             <th class="text-center" width="4%">เบิก</th>
-                            <th class="text-center" width="4%">#</th>
+                            <th class="text-center" width="4%">แก้</th>
                             <th class="text-center" width="4%">#</th>
                             <th class="text-center" width="4%">#</th>
                           </tr>
@@ -123,30 +122,24 @@
                             while($value = $objq_addorder->fetch_assoc()){
                               $request = $value['request'];
                               $id_wd = $value['id_wd'];
+                              if(empty($id_wd)){
+                                $name_member = '';
+                               
+                              }else{
+                                $sql_member = "SELECT name_sub FROM member WHERE id_member = $id_wd";
+                                $objq_member = mysqli_query($mysqli,$sql_member);
+                                $objr_member = mysqli_fetch_array($objq_member);
+                                $name_member = $objr_member['name_sub'];
+                                
+                              }
                           ?>
                           <tr>
-                            <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=2" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>             
+                            <td></td>
+                            <!-- <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=2" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>              -->
                             <td ><?php echo $value['id_addorder'].' '.$value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
-                            <td class="text-center" ><input type="checkbox" name="id_addorder[]" value="<?php echo $value['id_addorder']; ?>"></td>
-                            <?php
-                              if($request == "N") {
-                            ?>
-                            <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-danger btn-xs">N</a></td>
-                            
-                            <?php
-                              }else{
-                            ?>
-                            <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="btn btn-success btn-xs">Y</a></td>
-                            <?php 
-                              }
-                              if(empty($id_wd)) {
-                            ?>
-                            <td class="text-center"><a href="algorithm/update_id_wd.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=N" class="btn btn-danger btn-xs">N</a></td>
-                            <?php
-                              }else{
-                            ?>
-                            <td class="text-center" ><a href="algorithm/update_id_wd.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=Y" class="btn btn-success btn-xs">Y</a></td>
-                            <?php }?>
+                            <!-- <td class="text-center" ><input type="checkbox" name="id_addorder[]" value="<?php echo $value['id_addorder']; ?>"></td> -->
+                            <td class="text-center"><?php if($request=='Y'){echo "ทวง";}else{}?></td>                         
+                            <td class="text-center"><?php echo $name_member; ?></td>
                             <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="fa fa-pencil" ></a></td>
                             <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
                             <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
@@ -158,7 +151,7 @@
                       </table>
                     </div>
                   </div>
-                  <div class="box-footer" align="center"> <button type="submit" class="btn btn-success"> ตกลง </button> </div>
+                  <!-- <div class="box-footer" align="center"> <button type="submit" class="btn btn-success"> ตกลง </button> </div> -->
                 </form>
               </div>
             </div>

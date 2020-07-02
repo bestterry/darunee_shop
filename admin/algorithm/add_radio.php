@@ -11,7 +11,7 @@
   $insert_song = "INSERT INTO radio (id_radio_time, wave, province_id, amphur_id, note) 
                    VALUE ($id_radio_time,'$wave',$province_id,$amphur_id, '$note')";
       if ($conn->query($insert_song) === TRUE) {
-        header('location:../radio_list.php');
+        header('location:../radio_list2.php');
     } else {
         echo "Error: " . $insert_song . "<br>" . $conn->error;
     }
