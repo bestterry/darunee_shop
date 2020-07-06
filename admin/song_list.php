@@ -1,5 +1,27 @@
 <?php
   require "../config_database/config.php";
+  $id_age = $_GET['id_age'];
+  $id_tune = $_GET['id_tune'];
+
+  if(empty($_GET['id_sexartist'])){
+    $sql_song = "SELECT * FROM song_list
+    INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
+    INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
+    INNER JOIN song_age ON song_list.id_age = song_age.id_age
+    INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist
+    WHERE song_list.id_age = $id_age AND song_list.id_tune = $id_tune";
+  }else{
+    $id_sexartist = $_GET['id_sexartist'];
+    $sql_song = "SELECT * FROM song_list
+    INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
+    INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
+    INNER JOIN song_age ON song_list.id_age = song_age.id_age
+    INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist
+    WHERE song_list.id_age = $id_age AND song_list.id_tune = $id_tune AND song_artist.id_sexartist = $id_sexartist";
+  }
+  $objq_song = mysqli_query($conn,$sql_song);
+  $objq_song2 = mysqli_query($conn,$sql_song);
+  $objr_song = mysqli_fetch_array($objq_song2);
 ?>
 <!DOCTYPE html>
 <html>
@@ -74,7 +96,7 @@
                     </div>
                     <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
                       <a type="button" href="algorithm/reset_song.php?id_age=<?php echo $_GET['id_age']; ?>&&id_tune=<?php echo $_GET['id_tune']; ?>&&id_sexartist=<?php echo $_GET['id_sexartist'];?>" 
-                      class="btn btn-success" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>ล้างข้อมูล</a>
+                      class="btn btn-success" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>รีเซตสถานะ</a>
                     </div>
                   </div>
                 </div>
@@ -82,47 +104,45 @@
                   <div class="mailbox-read-message">
                     <div class="col-1 col-sm-1 col-lg-1 col-md-1 col-xl-1"></div>
                     <div class="col-10 col-sm-10 col-lg-10 col-md-10 col-xl-10">
+                      <div class="text-center">
+                        <font size="5" >
+                          <B>
+                            <?php 
+                              if(empty($_GET['id_sexartist'])){
+                                echo 'ยุค : '.$objr_song['name_age'].'&nbsp;&nbsp;&nbsp;&nbsp;'.'ทำนอง : '.$objr_song['name_tune'];
+                              }else{
+                                echo 'ยุค : '.$objr_song['name_age'].'&nbsp;&nbsp;&nbsp;&nbsp;'.'นักร้อง : '.$objr_song['name_sexartist'].'&nbsp;&nbsp;&nbsp;&nbsp;'.'ทำนอง : '.$objr_song['name_tune'];
+                              }  
+                            ?>
+                          </B>
+                        </font>
+                      </div>
                       <table id="example2" class="table">
                         <thead>
                           <tr>
-                            <th class="text-center" width="6%">สถานะ</th>
-                            <th class="text-center" width="23%">นักร้อง</th>
-                            <th class="text-center" width="23%">ชื่อเพลง</th>
-                            <th class="text-center" width="17%">ยุค</th>
-                            <th class="text-center" width="17%">ทำนอง</th>
+                            <th class="text-center" width="5%">สถานะ</th>
+                            <th class="text-center" width="21%">นักร้อง</th>
+                            <th class="text-center" width="21%">ชื่อเพลง</th>
+                            <th class="text-center" width="12%">ยุค</th>
+                            <th class="text-center" width="12%">ทำนอง</th>
+                            <th class="text-center" width="12%">ต้นฉบับ</th>
+                            <th class="text-center" width="12%">เกรด</th>
                             <th class="text-center" width="5%">แก้ไข</th>
                           </tr>
                         </thead>
                         <tbody>
                           <?php 
-                            $id_age = $_GET['id_age' ];
-                            $id_tune = $_GET['id_tune'];
-                            $id_sexartist = $_GET['id_sexartist'];
-
-                            $sql_song = " SELECT * FROM song_list
-                                          INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
-                                          INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
-                                          INNER JOIN song_age ON song_list.id_age = song_age.id_age
-                                          INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist
-                                          WHERE song_list.id_age = $id_age AND song_list.id_tune = $id_tune AND song_artist.id_sexartist = $id_sexartist";
-                            $objq_song = mysqli_query($conn,$sql_song);
                             while($value =  $objq_song->fetch_assoc()){
                           ?>
                           <tr> 
                           <?php
                             if($value['status']=='N'){
                           ?>
-                         
-                            <td class="text-center">
-                              <!-- <a href="algorithm/edit_StatusSong.php?id_song=<?php echo $value['id_song']; ?>&&status=N&&id_age=<?php echo $id_age?>&&id_sexartist=<?php echo $id_sexartist?>&&id_tune=<?php echo $id_tune;?>" class="btn  btn-danger btn-xs" >N</a> -->
-                            </td>
+                            <td class="text-center"></td>
                           <?php
                             }else{
                           ?>
                            <td class="text-center"><font>เปิด</font></td>
-                            <!-- <td class="text-center"> -->
-                              <!-- <a href="algorithm/edit_StatusSong.php?id_song=<?php echo $value['id_song']; ?>&&id_age=<?php echo $id_age?>&&id_sexartist=<?php echo $id_sexartist?>&&id_tune=<?php echo $id_tune;?>" class="btn  btn-success btn-xs" >Y</a> -->
-                            <!-- </td> -->
                           <?php 
                             }
                           ?>
@@ -130,8 +150,10 @@
                             <td class="text-center"><?php echo $value['name_song']; ?></td>
                             <td class="text-center"><?php echo $value['name_age']; ?></td>
                             <td class="text-center"><?php echo $value['name_tune']; ?></td>
+                            <td class="text-center"><?php if($value['script']=='N'){echo " ";}else{echo "Y";} ?></td>
+                            <td class="text-center"><?php echo $value['melodic']; ?></td> 
                             <td class="text-center">
-                              <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&id_age=<?php echo $id_age?>&&id_sexartist=<?php echo $id_sexartist?>&&id_tune=<?php echo $id_tune;?>" class="btn  btn-success btn-xs" >แก้</a>
+                              <a href="song_edit2.php?id_song=<?php echo $value['id_song']; ?>&&id_artist=<?php echo $value['id_artist'];?>" class="btn  btn-success btn-xs" >แก้</a>
                             </td>   
                           </tr>
                           <?php 

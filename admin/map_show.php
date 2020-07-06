@@ -76,31 +76,31 @@
         <div class="box box-primary">
           
           <div class="box-body">
-          <div align="center">
-          <?php 
-              if(isset($objr['name_map'])){
-          ?>
-          <img src="../images/map/<?php echo $objr['name_map']; ?>" width="730" height="900">
-          <div>
-            <B align="center"> 
-              <font size="5"> <?php echo $objr['name_map']; ?> </font>
-            </B>
-          </div>
-          
-          <?php
-              }else{
-          ?>
-          <div class="container">
-            <div class="alert alert-danger alert-dismissible">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <h4><i class="icon fa fa-ban"></i> ไม่มีข้อมูลรูปภาพ!</h4>
+            <div align="center">
+            <?php 
+                if(isset($objr['name_map'])){
+            ?>
+            <img src="../images/map/<?php echo $objr['name_map']; ?>" width="730" height="900">
+            <div>
+              <B align="center"> 
+                <font size="5"> <?php echo $objr['name_map']; ?> </font>
+              </B>
             </div>
-          </div>
-          <?php
-              }
-          ?>
             
-          </div>
+            <?php
+                }else{
+            ?>
+            <div class="container">
+              <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i> ไม่มีข้อมูลรูปภาพ!</h4>
+              </div>
+            </div>
+            <?php
+                }
+            ?>
+              
+            </div>
           </div>
 
           <div class="box-footer">

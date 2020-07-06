@@ -78,16 +78,26 @@
                 </div>
                 <div class="box-body no-padding">
                   <div class="mailbox-read-message">
+                    <div class="text-center">
+                      <font size="5" >
+                        <B>
+                          เพลงคัด ทั้งหมด
+                        </B>
+                      </font>
+                    </div>
                     <div class="col-1 col-sm-1 col-lg-1 col-md-1 col-xl-1"></div>
                     <div class="col-10 col-sm-10 col-lg-10 col-md-10 col-xl-10">
                       <table id="example2" class="table">
                         <thead>
                           <tr>
-                            <th class="text-center" width="6%">สถานะ</th>
-                            <th class="text-center" width="23%">นักร้อง</th>
-                            <th class="text-center" width="23%">ชื่อเพลง</th>
-                            <th class="text-center" width="20%">ยุค</th>
-                            <th class="text-center" width="19%">ทำนอง</th>
+                            <th class="text-center" width="5%">สถานะ</th>
+                            <th class="text-center" width="21%">นักร้อง</th>
+                            <th class="text-center" width="21%">ชื่อเพลง</th>
+                            <th class="text-center" width="12%">ยุค</th>
+                            <th class="text-center" width="12%">ทำนอง</th>
+                            <th class="text-center" width="12%">ต้นฉบับ</th>
+                            <th class="text-center" width="12%">เกรด</th>
+                            <th class="text-center" width="5%">แก้</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -104,17 +114,11 @@
                           <?php
                             if($value['status']=='N'){
                           ?>
-                         
-                            <td class="text-center">
-                              <!-- <a href="algorithm/edit_StatusSong.php?id_song=<?php echo $value['id_song']; ?>&&status=N&&id_age=<?php echo $id_age?>&&id_sexartist=<?php echo $id_sexartist?>&&id_tune=<?php echo $id_tune;?>" class="btn  btn-danger btn-xs" >N</a> -->
-                            </td>
+                            <td class="text-center"> </td>
                           <?php
                             }else{
                           ?>
                            <td class="text-center"><font>เปิด</font></td>
-                            <!-- <td class="text-center"> -->
-                              <!-- <a href="algorithm/edit_StatusSong.php?id_song=<?php echo $value['id_song']; ?>&&id_age=<?php echo $id_age?>&&id_sexartist=<?php echo $id_sexartist?>&&id_tune=<?php echo $id_tune;?>" class="btn  btn-success btn-xs" >Y</a> -->
-                            <!-- </td> -->
                           <?php 
                             }
                           ?>
@@ -122,6 +126,11 @@
                             <td class="text-center"><?php echo $value['name_song']; ?></td>
                             <td class="text-center"><?php echo $value['name_age']; ?></td>
                             <td class="text-center"><?php echo $value['name_tune']; ?></td> 
+                            <td class="text-center"><?php if($value['script']=='N'){echo " ";}else{echo "Y";} ?></td>
+                            <td class="text-center"><?php echo $value['melodic']; ?></td> 
+                            <td class="text-center">
+                              <a href="song_edit3.php?id_song=<?php echo $value['id_song'];?>" class="btn  btn-success btn-xs" >แก้</a>
+                            </td>
                           </tr>
                           <?php 
                             }

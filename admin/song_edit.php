@@ -149,7 +149,7 @@
                     <div class="col-4 col-sm-4 col-xl-4 col-md-4">
                       <p align="center">
                         <font size="5">
-                          <B>แก้ไขเพลง</B>
+                          <B>แก้ไขข้อมูลเพลง</B>
                         </font>
                       </p>
                     </div>
@@ -233,7 +233,32 @@
                             </div>
 
                             <div class="form-group">
-                              <label class="col-sm-4 control-label">สถานะ (เปิดแล้ว) :</label>
+                              <label class="col-sm-4 control-label">เกรด :</label>
+                              <div class="col-sm-4">
+                                <select name="melodic"  class="form-control" >
+                                  <option value="<?php echo $objr_song['melodic']; ?>">-- เลือกความเพราะ --</option>
+                                  <option value="A">A</option>
+                                  <option value="B">B</option>
+                                  <option value="C">C</option>
+                                </select>
+                              </div>
+                              <div class="col-sm-4">
+                                <input class="form-control" value="<?php echo $objr_song['melodic'];?>" disabled/>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-sm-4 control-label">ต้นฉบับ :</label>
+                              <div class="col-sm-8">
+                                <label class="switch">
+                                  <input type="checkbox" name="script" <?php if($objr_song['script']=="Y"){ echo "checked"; }else{} ?>>
+                                  <span class="slider round"></span>
+                                </label>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-sm-4 control-label">เปิดแล้ว :</label>
                               <div class="col-sm-8">
                                 <label class="switch">
                                   <input type="checkbox" name="status" <?php if($objr_song['status']=="Y"){ echo "checked"; }else{} ?>>

@@ -8,6 +8,9 @@
                 INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist
                 WHERE song_artist.id_artist = $id_artist";
   $objq_song = mysqli_query($conn,$sql_song);
+  $objq_song2 = mysqli_query($conn,$sql_song);
+  $objr_song2 = mysqli_fetch_array($objq_song2);
+  
 ?>
 <!DOCTYPE html>
 <html>
@@ -82,23 +85,36 @@
                     </div>
                     <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
                       <!-- <a type="button" href="../pdf_file/song_listY.php" class="btn btn-warning" style="color:black;">รายงาน</a> -->
-                      <a type="button" href="algorithm/reset_song2.php?id_artist=<?php echo $id_artist; ?>" class="btn btn-success" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>ล้างข้อมูล</a>
+                      <a type="button" href="algorithm/reset_song2.php?id_artist=<?php echo $id_artist; ?>" class="btn btn-success" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>รีเซตสถานะ</a>
                       <a type="button"href="#" data-toggle="modal" data-target="#myModal2" class="btn btn-success" style="color:black;">เพิ่มเพลง</a>
                     </div>
                   </div>
                 </div>
                 <div class="box-body no-padding">
                   <div class="mailbox-read-message">
+                    <div class="text-center">
+                      <font size="5" >
+                        <B>
+                          <?php 
+                              echo 'ยุค : '.$objr_song2['name_age'].'&nbsp;&nbsp;&nbsp;&nbsp;'.'นักร้อง : '.$objr_song2['name_sexartist'].'&nbsp;&nbsp;&nbsp;&nbsp;'.'ชื่อนักร้อง : '.$objr_song2['name_artist'];
+                             
+                          ?>
+                        </B>
+                      </font>
+                    </div>
                     <div class="col-1 col-sm-1 col-lg-1 col-md-1 col-xl-1"></div>
                     <div class="col-10 col-sm-10 col-lg-10 col-md-10 col-xl-10">
                       <table id="example2" class="table">
                         <thead>
                           <tr>
-                            <th class="text-center" width="6%">สถานะ</th>
-                            <th class="text-center" width="23%">นักร้อง</th>
-                            <th class="text-center" width="23%">ชื่อเพลง</th>
-                            <th class="text-center" width="17%">ยุค</th>
-                            <th class="text-center" width="17%">ทำนอง</th>
+                            <th class="text-center" width="5%">สถานะ</th>
+                            <th class="text-center" width="6%">ฟัง</th>
+                            <th class="text-center" width="18%">นักร้อง</th>
+                            <th class="text-center" width="18%">ชื่อเพลง</th>
+                            <th class="text-center" width="12%">ยุค</th>
+                            <th class="text-center" width="12%">ทำนอง</th>
+                            <th class="text-center" width="12%">ต้นฉบับ</th>
+                            <th class="text-center" width="12%">เกรด</th>
                             <th class="text-center" width="5%">แก้ไข</th>
                           </tr>
                         </thead>
@@ -124,10 +140,19 @@
                           <?php 
                             }
                           ?>
+                            <td class="text-center">
+                            <?php
+                             if(!empty($value['ad_song'])){
+                            ?>
+                              <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&id_artist=<?php echo $id_artist; ?>" class="btn  btn-success btn-xs" >ฟัง</a>
+                             <?php }else{}?>
+                            </td>
                             <td class="text-center"><?php echo $value['name_artist'];?></td>
                             <td class="text-center"><?php echo $value['name_song']; ?></td>
                             <td class="text-center"><?php echo $value['name_age']; ?></td>
                             <td class="text-center"><?php echo $value['name_tune']; ?></td>
+                            <td class="text-center"><?php if($value['script']=='N'){echo " ";}else{echo "Y";} ?></td>
+                            <td class="text-center"><?php echo $value['melodic']; ?></td> 
                             <td class="text-center">
                               <a href="song_edit2.php?id_song=<?php echo $value['id_song']; ?>&&id_artist=<?php echo $id_artist; ?>" class="btn  btn-success btn-xs" >แก้</a>
                             </td>   
@@ -196,6 +221,27 @@
                                   <?php    
                                     }
                                   ?>
+                                </select>
+                              </th>
+                            </tr>
+                            <tr>
+                              <th class="text-center" width="30%"><font size="4">ต้นฉบับ</font></th>
+                              <th class="text-center" width="70%"> 
+                              <select name="script" class=" form-control" style="width: 100%;">
+                                  <option value="">-- เลือกต้นฉบับ --</option>
+                                  <option value="Y">ใช่</option>
+                                  <option value="N">ไม่ใช่</option>
+                                </select>
+                              </th>
+                            </tr>
+                            <tr>
+                              <th class="text-center" width="30%"><font size="4">เกรด</font></th>
+                              <th class="text-center" width="70%"> 
+                              <select name="melodic" class=" form-control" style="width: 100%;">
+                                  <option value="">-- เลือกความเกรด --</option>
+                                  <option value="A">A</option>
+                                  <option value="B">B</option>
+                                  <option value="C">C</option>
                                 </select>
                               </th>
                             </tr>

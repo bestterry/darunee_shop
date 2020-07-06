@@ -148,40 +148,21 @@ $mysqli = connect();
             <div  class="box box-body">
               <div class="row" align="center">
                 <div id="myCarousel" class="carousel slide" data-interval="false">
-                  <!-- Indicators -->
-                  <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                  </ol>
 
-                  
-
-                  <!-- Wrapper for slides -->
                   <div class="carousel-inner">
-                    <div class="item">
-                      <img src="../images/radio2/พะเยา.jpg" alt="พะเยา" width="1300" height="1200">
+                  <?php 
+                    $sql_chart = "SELECT id_chart,name_chart FROM radio_chart";
+                    $objq_chart = mysqli_query($mysqli,$sql_chart);
+                    $i = 1;
+                    while($value = $objq_chart->fetch_assoc()){
+                  ?>
+                    <div class="item <?php if($i == 1){ echo "active";}else{}?>">
+                      <img src="../images/radio_chart/<?php echo $value['name_chart'];?>" alt="พะเยา" width="1300" height="1200">
                     </div>
-
-                    <div class="item active">
-                      <img src="../images/radio2/ลำปาง.jpg" alt="ลำปาง" width="1300" height="1200">
-                    </div>
-
-                    <div class="item">
-                      <img src="../images/radio2/เชียงราย.jpg" alt="เชียงราย" width="1300" height="1200">
-                    </div>
-
-                    <div class="item">
-                      <img src="../images/radio2/เชียงใหม่.jpg" alt="เชียงใหม่" width="1300" height="1200">
-                    </div>
-
-                    <div class="item">
-                      <img src="../images/radio2/ลำพูน.jpg" alt="ลำพูน" width="1300" height="1200">
-                    </div>
-
-                    <div class="item">
-                      <img src="../images/radio2/แพร่.jpg" alt="แพร่" width="1300" height="1200">
-                    </div>
+                  <?php
+                      $i++;
+                    }
+                  ?>
                   </div>
 
                   <!-- Left and right controls -->
@@ -199,75 +180,6 @@ $mysqli = connect();
           </div>
         </div>
       </section>
-
-      <div class="modal fade" id="myModal2" role="dialog">
-        <div class="modal-dialog modal-lg">
-          <form action="algorithm/add_radio.php" method="post">
-            <div class="modal-content">
-              <div class="modal-header text-center">
-                  <font size="5"><B> เพิ่มเวลาเช่าวิทยุ </B></font>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <table class="table table-bordered">
-                    <tbody>
-                      <tr>
-                        <th class="text-center" width="30%"><font size="4">จังหวัด</font></th>
-                        <th class="text-center" width="70%"> 
-                          <select name="province_name" data-where="2" class="form-control ajax_address select2" >
-                            <option value="">-- เลือกจังหวัด --</option>
-                          </select>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th class="text-center" width="30%"><font size="4">อำเภอ</font></th>
-                        <th class="text-center" width="70%"> 
-                          <select name="amphur_name" data-where="3" class="ajax_address form-control select2" >
-                            <option value="">-- เลือกอำเภอ --</option>
-                          </select>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th class="text-center" width="30%"><font size="4">MHz</font></th>
-                        <th class="text-center" width="70%"> 
-                          <input name="wave" class="form-control" style="width: 100%;">
-                        </th>
-                      </tr>
-                      <tr>
-                        <th class="text-center" width="30%"><font size="4">ช่วงเวลา</font></th>
-                        <th class="text-center" width="70%"> 
-                          <select name="id_radio_time" class=" form-control" style="width: 100%;">
-                            <option value="">-- เลือกเวลา --</option>
-                            <?php 
-                              $sql_time = "SELECT id_radio_time,time FROM radio_time";
-                              $objq_time = mysqli_query($mysqli,$sql_time);
-                              while($value_time = $objq_time->fetch_assoc()){
-                            ?>
-                            <option value="<?php echo $value_time['id_radio_time'];?>"><?php echo $value_time['time'];?></option>
-                            <?php    
-                              }
-                            ?>
-                          </select>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th class="text-center" width="30%"><font size="4">หมายเหตุ</font></th>
-                        <th class="text-center" width="70%"> 
-                          <input name="note" class="form-control" style="width: 100%;">
-                        </th>
-                      </tr>
-                    </tbody>
-                  </table> 
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit"  class="btn btn-success pull-right" OnClick="return confirm('ต้องการบันทึกหรือไม่ ?')";>บันทึก</button>
-                <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< กลับ</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
     </div>
       <!-- jQuery 3 -->
       <script src="../bower_components/jquery/dist/jquery.min.js">

@@ -76,7 +76,7 @@
                   <div class="col-4 col-sm-4 col-xl-4 col-md-4">
                     <p align="center">
                       <font size="5">
-                        <B>แก้ไขเพลง</B>
+                        <B>แก้ไขข้อมูลเพลง</B>
                       </font>
                     </p>
                   </div>

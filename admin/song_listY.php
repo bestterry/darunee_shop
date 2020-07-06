@@ -87,7 +87,7 @@
                   </div>
                   <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
                     <a type="button" href="../pdf_file/song_listY.php" class="btn btn-warning" style="color:black;">รายงาน</a>
-                    <a type="button" href="algorithm/reset_song.php" class="btn btn-success" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>ล้างข้อมูล</a>
+                    <a type="button" href="algorithm/reset_song.php" class="btn btn-success" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>รีเซตสถานะ</a>
                   </div>
                 </div>
                   

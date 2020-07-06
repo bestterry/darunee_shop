@@ -51,37 +51,37 @@
 <body class=" hold-transition skin-blue layout-top-nav ">
   
   <div class="wrapper">
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
 
-      <!-- Main content -->
       <section class="content">
         <div class="row">
-          <!-- form start -->
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#check" data-toggle="tab">ค้นหารูปภาพ</a></li>
-                <li><a href="#checkday" data-toggle="tab">เพิ่มรูปภาพ</a></li>
-                <div align="right">
-                  <a href="admin.php" class="btn button2"><< เมนูหลัก </a>
-                </div>
+                <li class="active"><a href="#check" data-toggle="tab">ค้นหาแผนที่</a></li>
+                <li><a href="#addimage" data-toggle="tab">เพิ่มแผนที่</a></li>
               </ul>
               <div class="tab-content">
 
-                <!-- tab-pane -->
                 <div class="active tab-pane" id="check">
                   <form action="map_show.php" method="post" class="form-horizontal">
                     <div class="box box-default">
-                      <!-- /.box-header -->
-                      <div class="box-header text-center">
-                        <B><font size="5">ค้นหา</font></B> 
+                      <div class="box-header">
+                        <div class="col-12">
+                          <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4">
+                            <a href="admin.php" class="btn button2"><< เมนูหลัก </a>
+                          </div>
+                          <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4 text-center">
+                            <B><font size="5">ค้นหารูปแผนที่</font></B> 
+                          </div>
+                          <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4 text-right">
+                            <a href="map_edit.php" class="btn btn-success">จัดการแผนที่ </a>
+                          </div>
+                        </div>
                       </div>
                       <div class="box-body">
-                        <!-- ------------------------------//ยอดขายรวม---------------------------- -->
                         <div class="row">
                           <div class="col-md-12">
                             <div class="form-group">
@@ -109,23 +109,20 @@
                             </div>
                           </div>
                         </div>
-                        <!-- ------------------------------//ยอดขายรวม---------------------------- -->
                       </div>
                       <div class="box-footer text-center">
-                          <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> ตกลง </button>
+                          <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> ค้นหา </button>
                       </div>
                     </div>
                   </form>
                 </div>
-                <!-- /.tab-pane -->
 
-                <!-- tab-pane -->
-                <div class="tab-pane" id="checkday">
+                <div class="tab-pane" id="addimage">
                   <form action="map_upload.php" method="post" class="form-horizontal" enctype="multipart/form-data">
                     <div class="box box-default">
                       <!-- /.box-header -->
                       <div class="box-header text-center">
-                        <B><font size="5">เพิ่มรูปภาพ</font></B> 
+                        <B><font size="5">เพิ่มแผนที่</font></B> 
                       </div>
                       <div class="box-body">
                         <!-- ------------------------------//ยอดขายรวม---------------------------- -->
@@ -167,24 +164,20 @@
                         <!-- ------------------------------//ยอดขายรวม---------------------------- -->
                       </div>
                       <div class="box-footer text-center">
-                          <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> ตกลง </button>
+                          <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> เพิ่ม </button>
                       </div>
                     </div>
                   </form>
                 </div>
-                <!-- /.tab-pane -->
+
               </div>
-              <!-- /.tab-content -->
             </div>
-            <!-- /.nav-tabs-custom -->
           </div>
 
 
         </div>
       </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 
     <?php require("../menu/footer.html"); ?>
 
@@ -207,6 +200,18 @@
   <script src="../dist/js/demo.js"></script>
   <script src="../plugins/iCheck/icheck.min.js"></script>
   <script type="text/javascript">
+    $(function () {
+        $('#example1').DataTable()
+        $('#example2').DataTable({
+          'paging'      : false,
+          'lengthChange': true,
+          'searching'   : false,
+          'ordering'    : false,
+          'info'        : true,
+          'autoWidth'   : false
+        }
+        )
+      });
     $(function() {
 
       // เมื่อโหลดขึ้นมาครั้งแรก ให้ ajax ไปดึงข้อมูลจังหวัดทั้งหมดมาแสดงใน

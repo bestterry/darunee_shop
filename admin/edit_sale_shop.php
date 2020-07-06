@@ -94,13 +94,12 @@
                               <th class="text-center" width="10%"> <font color="red">ผู้ขาย</font> </th>
                               <th class="text-center" width="10%"> <font color="red">เวลา</font> </th>
                             </tr>
-                            <?php #endregion
-                                $id_price = $_GET['id_price_history'];
-                                $data = "SELECT * FROM price_history 
-                                          INNER JOIN product ON price_history.id_product = product.id_product 
-                                          INNER JOIN zone ON price_history.id_zone = zone.id_zone
-                                          WHERE price_history.id_price_history = $id_price";  
-                                        
+                            <?php 
+                                $id_price_history = $_GET['id_price_history'];
+                                $data ="SELECT * FROM price_history 
+                                        INNER JOIN product ON price_history.id_product = product.id_product 
+                                        INNER JOIN zone ON price_history.id_zone = zone.id_zone
+                                        WHERE price_history.id_price_history = $id_price_history";  
                                 $objq = mysqli_query($conn,$data);
                                 $objr = mysqli_fetch_array($objq);
                             ?>

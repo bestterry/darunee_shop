@@ -87,9 +87,13 @@
                     
                     <div class="col-6 col-sm-6 col-xl-6 col-md-6 text-right">
                       <a type="button" href="song_listAll.php" class="btn btn-success" style="color:black;">เพลงทั้งหมด</a>
+                      <a type="button"href="#" data-toggle="modal" data-target="#add_song" class="btn btn-success" style="color:black;">เพิ่มเพลง</a>
+                      <a type="button"href="#" data-toggle="modal" data-target="#add_artist" class="btn btn-success" style="color:black;">เพิ่มนักร้อง</a>
                       <a type="button" href="song_artist.php" class="btn btn-success" style="color:black;">จัดการนักร้อง</a>
+                      <a type="button" href="algorithm/reset_song3.php" 
+                      class="btn btn-danger" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>รีเซตสถานะ</a>
                       <!-- <a type="button" href="../pdf_file/song_listY.php" class="btn btn-warning" style="color:black;">รายงาน</a> -->
-                      <!-- <a type="button" href="algorithm/reset_song.php" class="btn btn-success" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>ล้างข้อมูล</a> -->
+                      <!-- <a type="button" href="algorithm/reset_song.php" class="btn btn-success" style="color:black;" OnClick="return confirm('คุณต้องการที่จะเปลี่ยนรายการเพลงเป็นยังไม่ได้เปิดหรือไม่ ?')";>รีเซตสถานะ</a> -->
                     </div>
                   </div>
                 </div>
@@ -113,7 +117,7 @@
                                   </div>
                                   <br>
                                   <div class="form-group">
-                                    <label class="col-sm-4 control-label"><font size="4">ยุคเพลง</font></label>
+                                    <label class="col-sm-4 control-label"><font size="4">ยุค</font></label>
                                     <div class="col-sm-8">
                                       <select name="id_age" class=" form-control" style="width: 50%;">
                                         <option value="">-- เลือกยุคเพลง --</option>
@@ -129,7 +133,7 @@
                                   </div>
 
                                   <div class="form-group">
-                                    <label class="col-sm-4 control-label"><font size="4">นักร้องชาย / หญิง</font></label>
+                                    <label class="col-sm-4 control-label"><font size="4">ชาย / หญิง</font></label>
                                     <div class="col-sm-8">
                                       <select name="id_sexartist" class=" form-control" style="width: 50%;">
                                         <option value="">-- เลือกเพศนักร้อง --</option>
@@ -145,7 +149,7 @@
                                   </div>
 
                                   <div class="form-group">
-                                    <label class="col-sm-4 control-label"><font size="4">ทำนองเพลง</font></label>
+                                    <label class="col-sm-4 control-label"><font size="4">ทำนอง</font></label>
                                     <div class="col-sm-8">
                                       <select name="id_tune" class=" form-control" style="width: 50%;">
                                         <option value="">-- เลือกทำนองเพลง --</option>
@@ -168,7 +172,7 @@
                           </div>
                         </div>
                         <div align="center" class="box-footer">
-                          <button type="submit" class="btn btn-success">ค้นหาเพลง</button>
+                          <button type="submit" class="btn btn-success">ตกลง</button>
                         </div>
                       </form>
                     </div>
@@ -186,7 +190,7 @@
                                   </div>
                                   <br>
                                   <div class="form-group">
-                                    <label class="col-sm-4 control-label"><font size="4">ยุคนักร้อง</font></label>
+                                    <label class="col-sm-4 control-label"><font size="4">ยุค</font></label>
                                     <div class="col-sm-8">
                                       <select name="id_ageartist" id="id_ageartist" class=" form-control" style="width: 50%;">
                                         <option value="">-- เลือกยุคนักร้อง --</option>
@@ -202,7 +206,7 @@
                                   </div>
 
                                   <div class="form-group">
-                                    <label class="col-sm-4 control-label"><font size="4">นักร้องชาย / หญิง</font></label>
+                                    <label class="col-sm-4 control-label"><font size="4">ชาย / หญิง</font></label>
                                     <div class="col-sm-8">
                                       <select name="id_sexartist" onchange="sSelect(this.value)" class="form-control" style="width: 50%;">
                                         <option value="">-- เลือกเพศนักร้อง --</option>
@@ -218,7 +222,7 @@
                                   </div>
 
                                   <div class="form-group">
-                                    <label class="col-sm-4 control-label"><font size="4">ชื่อนักร้อง</font></label>
+                                    <label class="col-sm-4 control-label"><font size="4">นักร้อง</font></label>
                                     <div class="col-sm-8">
                                       <select name="id_artist" id="id_artist" class=" form-control" style="width: 50%;"></select>
                                     </div>
@@ -230,7 +234,7 @@
                           </div>
                         </div>
                         <div align="center" class="box-footer">
-                          <button type="submit" class="btn btn-success">ค้นหาเพลง</button>
+                          <button type="submit" class="btn btn-success">ตกลง</button>
                         </div>
                       </form>
                     </div>
@@ -240,9 +244,119 @@
               </div>
             </div>
           </div>
-          <div class="modal fade" id="myModal2" role="dialog">
+
+          <div class="modal fade" id="add_song" role="dialog">
             <div class="modal-dialog modal-lg">
-              <form action="algorithm/add_song.php" method="post">
+              <form action="algorithm/add_song2.php" method="post">
+                <div class="modal-content">
+                  <div class="modal-header text-center">
+                      <font size="5"><B> เพิ่มเพลง </B></font>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="col-3 col-sm-3 col-xl-3 col-md-3"></div>
+                        <div class="col-6 col-sm-6 col-xl-6 col-md-6">
+                          <table class="table table-bordered">
+                            <tbody>
+                              <tr>
+                                <th class="text-center" width="30%"><font size="4">ชื่อเพลง</font></th>
+                                <th class="text-center" width="70%"> 
+                                  <input type="text" name="name_song" class="form-control" style="width: 100%;">
+                                </th>
+                              </tr>
+                              <tr>  
+                                <th class="text-center" width="30%"><font size="4">นักร้อง</font></th>
+                                <th class="text-center" width="70%"> 
+                                  <select name="id_artist" class=" form-control" style="width: 100%;">
+                                    <option value="">-- เลือกศิลปิน --</option>
+                                    <?php 
+                                      $sql_artist = "SELECT id_artist,name_artist FROM song_artist";
+                                      $objq_artist = mysqli_query($conn,$sql_artist);
+                                      while($value_artist = $objq_artist->fetch_assoc()){
+                                    ?>
+                                    <option value="<?php echo $value_artist['id_artist'];?>"><?php echo $value_artist['name_artist'];?></option>
+                                    <?php    
+                                      }
+                                    ?>
+                                  </select>
+                                </th>
+                              </tr>
+                              <tr>  
+                                <th class="text-center" width="30%"><font size="4">ยุค</font></th>
+                                <th class="text-center" width="70%"> 
+                                  <select name="id_age" class=" form-control" style="width: 100%;">
+                                    <option value="">-- เลือกยุคเพลง --</option>
+                                    <?php 
+                                      $sql_age = "SELECT id_age,name_age FROM song_age";
+                                      $objq_age = mysqli_query($conn,$sql_age);
+                                      while($value_age = $objq_age->fetch_assoc()){
+                                    ?>
+                                    <option value="<?php echo $value_age['id_age'];?>"><?php echo $value_age['name_age'];?></option>
+                                    <?php    
+                                      }
+                                    ?>
+                                  </select>
+                                </th>
+                              </tr>
+                              <tr>
+                                <th class="text-center" width="30%"><font size="4">ทำนอง</font></th>
+                                <th class="text-center" width="70%"> 
+                                <select name="id_tune" class=" form-control" style="width: 100%;">
+                                    <option value="">-- เลือกทำนอง --</option>
+                                    <?php 
+                                      $sql_tune = "SELECT id_tune,name_tune FROM song_tune";
+                                      $objq_tune = mysqli_query($conn,$sql_tune);
+                                      while($value_tune = $objq_tune->fetch_assoc()){
+                                    ?>
+                                    <option value="<?php echo $value_tune['id_tune'];?>"><?php echo $value_tune['name_tune'];?></option>
+                                    <?php    
+                                      }
+                                    ?>
+                                  </select>
+                                </th>
+                              </tr>
+                              <tr>
+                                <th class="text-center" width="30%"><font size="4">ต้นฉบับ</font></th>
+                                <th class="text-center" width="70%"> 
+                                <select name="script" class=" form-control" style="width: 100%;">
+                                    <option value="">-- เลือกต้นฉบับ --</option>
+                                    <option value="Y">ใช่</option>
+                                    <option value="N">ไม่ใช่</option>
+                                  </select>
+                                </th>
+                              </tr>
+                              <tr>
+                                <th class="text-center" width="30%"><font size="4">เกรด</font></th>
+                                <th class="text-center" width="70%"> 
+                                <select name="melodic" class=" form-control" style="width: 100%;">
+                                    <option value="">-- เลือกเกรด --</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                  </select>
+                                </th>
+                              </tr>
+                            </tbody>
+                          </table> 
+                        </div>
+                        <div class="col-3 col-sm-3 col-xl-3 col-md-3"></div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit"  class="btn btn-success pull-right" OnClick="return confirm('ต้องการบันทึกรายการเพลงหรือไม่ ?')";>บันทึก</button>
+                    <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< กลับ</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="modal fade" id="add_artist" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <form action="algorithm/add_artist2.php" method="post">
                 <div class="modal-content">
                   <div class="modal-header text-center">
                       <font size="5"><B> เพิ่มนักร้อง </B></font>
