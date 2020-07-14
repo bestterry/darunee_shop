@@ -2,9 +2,7 @@
   require "../config_database/config.php";
   require "../session.php"; 
   $strDate = date('d-m-Y');
-  
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -65,15 +63,15 @@
       <!-- Main content -->
       <section class="content">
         <?php 
-      $list_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_member = $id_member";
-      $query_product = mysqli_query($conn,$list_product);
-      $query_product2 = mysqli_query($conn,$list_product);
-      require 'menu/menu_left_shop.php'; 
+          $list_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_member = $id_member";
+          $query_product = mysqli_query($conn,$list_product);
+          $query_product2 = mysqli_query($conn,$list_product);
+          require 'menu/menu_left_shop.php'; 
 
-      $list_product = "SELECT * FROM product";
-      $query_product = mysqli_query($conn,$list_product);
-      $query_product2 = mysqli_query($conn,$list_product);
-    ?>
+          $list_product = "SELECT * FROM product";
+          $query_product = mysqli_query($conn,$list_product);
+          $query_product2 = mysqli_query($conn,$list_product);
+        ?>
         <div class="col-md-6">
         </div>
     </div>

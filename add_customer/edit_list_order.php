@@ -140,7 +140,6 @@
                   <form action="algorithm/edit_list_order.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                     <div class="row">
                       <div class="col-md-5">
-
                         <div class="form-group">
                           <label class="col-sm-4 control-label">จังหวัด :</label>
                           <div class="col-sm-4">
@@ -205,7 +204,7 @@
                           <label class="col-sm-4 control-label">หมายเหตุ :</label>
 
                           <div class="col-sm-8">
-                            <input type="text" name="note" class="form-control"  maxlength="25" value="<?php echo $objr_addorder['note'];?>">
+                            <input type="text" name="note" class="form-control" value="<?php echo $objr_addorder['note'];?>">
                           </div>
                         </div>
 
@@ -298,8 +297,9 @@
                       <!-- /.row -->
                     </div>
                 </div>
-                <div align="center" class="box-footer">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";>  บันทึก ORDER </button>
+                <div class="box-footer text-center">
+                  <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";>  บันทึก ORDER </button>
+                  <a type="button" class="btn btn-info" href="list_order_des.php?id_addorder=<?php echo $id_addorder; ?>">ดูข้อมูล ORDER</a>
                 </div>
               </div>
               </form>

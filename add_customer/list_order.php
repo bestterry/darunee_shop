@@ -91,6 +91,7 @@
                     <a type="button"  href="#" data-toggle="modal" data-target="#myModal" class="btn btn-danger" style="color:black;">ค้างส่ง(อ)</a>
                     <a type="button" href="#" data-toggle="modal" data-target="#myModal2" class="btn btn-warning" style="color:black;">ส่งแล้ว(อ)</a>
                     <a type="button" href="total_order.php" class="btn btn-success" style="color:black;">จำนวนค้างส่ง</a>
+                    <a type="button"  href="#" data-toggle="modal" data-target="#mymodal3" class="btn btn-success" style="color:black;">ค้นหาค้างส่ง</a>
                     <a type="button" href="add_order.php" class="btn btn-success" style="color:black;">เพิ่ม OR</a>
                   </div>
                 </div>
@@ -99,16 +100,14 @@
                 <form action="../pdf_file/pick_order.php" method="post" autocomplete="off"> 
                   <div class="box-body no-padding">
                     <div class="mailbox-read-message">
-                      <table id="example1" class="table">
+                      <table id="example2" class="table">
                         <thead>
                           <tr>
-                            <th class="text-center" width="5%">#</th>
-                            <th class="text-center" width="74%">ข้อมูล ORDER ค้างส่ง</th>
-                            <th class="text-center" width="4%">ทวง</th>
-                            <th class="text-center" width="4%">เบิก</th>
                             <th class="text-center" width="4%">แก้</th>
                             <th class="text-center" width="4%">#</th>
-                            <th class="text-center" width="4%">#</th>
+                            <th class="text-center" width="83%">ข้อมูล ORDER ค้างส่ง</th>
+                            <th class="text-center" width="4%">ทวง</th>
+                            <th class="text-center" width="4%">เบิก</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -134,15 +133,13 @@
                               }
                           ?>
                           <tr>
-                            <td></td>
+                            <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="fa fa-pencil" ></a></td>
+                            <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
                             <!-- <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=2" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>              -->
                             <td ><?php echo $value['id_addorder'].' '.$value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
                             <!-- <td class="text-center" ><input type="checkbox" name="id_addorder[]" value="<?php echo $value['id_addorder']; ?>"></td> -->
                             <td class="text-center"><?php if($request=='Y'){echo "ทวง";}else{}?></td>                         
                             <td class="text-center"><?php echo $name_member; ?></td>
-                            <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="fa fa-pencil" ></a></td>
-                            <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
-                            <td class="text-center" ><a href="list_order_des.php?id_addorder=<?php echo $value['id_addorder']; ?>"><i class="fa fa-search-plus"></i></a></td>
                           </tr>
                           <?php 
                             }
@@ -250,6 +247,39 @@
                 </form>
             </div>
           </div>
+          <div class="modal fade" id="mymodal3" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <form action="total_order3.php" method="post">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <font size="5"><B> ค้นหาจำนวนค้างส่ง </B></font>
+                        </div>
+                        <div class="modal-body col-md-12 table-responsive mailbox-messages">
+                          <div class="table-responsive mailbox-messages">
+
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                    <th class="text-center" width="30%"><font size="5">จังหวัด</font></th>
+                                    <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                                        <select name="province_name" data-where="2" class="form-control ajax_address select2" style="width: 100%;">
+                                            <option value="">-- เลือกจังหวัด --</option>
+                                        </select>
+                                    </th>
+                                    </tr>
+                                </tbody>
+                            </table> 
+                            <br>  
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit"  class="btn button2 pull-right">ต่อไป >></button>
+                          <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< กลับ</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -283,11 +313,11 @@
         $('#example1').DataTable()
         $('#example2').DataTable({
           'paging'      : true,
-          'lengthChange': false,
-          'searching'   : false,
+          'lengthChange': true,
+          'searching'   : true,
           'ordering'    : true,
           'info'        : true,
-          'autoWidth'   : false
+          'autoWidth'   : false,
         }
         )
       });

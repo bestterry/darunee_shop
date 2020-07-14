@@ -1,6 +1,5 @@
 <?php 
  require "../../config_database/config.php"; 
- require "../../config_database/session.php"; 
 
  $id_artist = $_GET['id_artist'];
  $id_song = $_POST['id_song'];
@@ -26,7 +25,15 @@
             script='$script', melodic='$melodic'
             WHERE id_song = $id_song";
       if ($conn->query($sql) === TRUE) {
-        header('location:../song_listAll.php');
+
+        if ($id_age == 1) {
+          header('location:../song_old.php');
+        }if ($id_age == 2) {
+          header('location:../song_middle.php');
+        }if ($id_age == 3) {
+          header('location:../song_new.php');
+        }
+        
       } else {
           echo "Error updating record: " . $conn->error;
       }

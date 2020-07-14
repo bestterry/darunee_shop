@@ -1,16 +1,15 @@
 <?php 
-require "../../config_database/config.php";
-require "../../session.php";
-$id_addorder = $_POST['id_addorder'];
-$name_customer = $_POST['name_customer'];
-$village = $_POST['village'];
-$tel = $_POST['tel'];
-$note = $_POST['note']; 
-$id_product2 = $_POST['id_product2'][0];
-$province_id = $_POST['province_name'];
-$amphur_id = $_POST['amphur_name'];
-$district_code = $_POST['district_name'];
+  require "../../config_database/config.php";
 
+  $id_addorder = $_POST['id_addorder'];
+  $name_customer = $_POST['name_customer'];
+  $village = $_POST['village'];
+  $tel = $_POST['tel'];
+  $note = $_POST['note']; 
+  $id_product2 = $_POST['id_product2'][0];
+  $province_id = $_POST['province_name'];
+  $amphur_id = $_POST['amphur_name'];
+  $district_code = $_POST['district_name'];
 
   if (empty($_POST['request'])) {
     $request = "N";
@@ -18,34 +17,24 @@ $district_code = $_POST['district_name'];
     $request = "Y";
   }
 
-  if (empty($_POST['id_wd'])) {
-    $id_wd = 0;
-  }else{
-    $id_wd  =  $id_member;
-  }
 
   if (empty($_POST['status'])) {
-    echo $status = "pending";
+     $status = "pending";
   }else{
-    echo $status = "success";
+     $status = "success";
   }
 
-if(empty($province_id)){
-   //update addorder
-   $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', note = '$note', request = '$request',
-                     id_wd = $id_wd, status = '$status' 
-                     WHERE id_addorder = $id_addorder";
-   mysqli_query($conn,$sql_Uaddorder);
- //-update addorder
-}else{
-   //update addorder
-   $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', 
-                     province_id = '$province_id', amphur_id = '$amphur_id', district_code = '$district_code', note = '$note', request = '$request' 
-                     id_wd = $id_wd, status = '$status'
-                     WHERE id_addorder = $id_addorder";
-   mysqli_query($conn,$sql_Uaddorder);
- //-update addorder
-} 
+  if(empty($province_id)){
+    $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', 
+                      note = '$note', request = '$request', status = '$status'
+                      WHERE id_addorder = $id_addorder";
+    mysqli_query($conn,$sql_Uaddorder);
+  }else{
+    $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', 
+                      province_id = $province_id, amphur_id = $amphur_id, district_code = $district_code, note = '$note', request = '$request', status = '$status'
+                      WHERE id_addorder = $id_addorder";
+    mysqli_query($conn,$sql_Uaddorder);
+  }
 
   //update listorder
   for ($i=0; $i < count($_POST['id_listorder']); $i++) { 
@@ -74,5 +63,11 @@ if(empty($province_id)){
   }
   //-addorder
 
+  if (empty($_POST['id_wd'])) {
+    $update_wd = "UPDATE addorder SET id_wd = 0 WHERE id_addorder = $id_addorder";
+    mysqli_query($conn,$update_wd);
+  }else{
+    echo '2';
+  }
   header('location:../list_order_des.php?id_addorder='.$id_addorder);
 ?>

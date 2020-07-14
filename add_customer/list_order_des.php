@@ -101,7 +101,6 @@
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
-  <div>
     <header class="main-header">
       <nav class="navbar navbar-static-top">
         <div class="navbar-custom-menu">
@@ -110,18 +109,15 @@
         </div>
       </nav>
     </header>
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Main content -->
       <section class="content">
-
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
               <div class="col-12">
                 <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                   <div class="text-left">
-                    <a type="button" href="list_order.php" class="btn btn-danger"><< กลับ</a> 
+                    <a type="button" href="edit_list_order.php?id_addorder=<?php echo $_GET['id_addorder'];?>" class="btn btn-danger"><< กลับ</a> 
                   </div>
                 </div>
                 <div class="col-4 col-sm-4 col-md-4 col-xl-4">
@@ -174,6 +170,18 @@
                               ?>
                             </th>
                           </tr>
+                          <tr>
+                            <th width="100%" class="text-right">
+                              <?php 
+                                $request = $objr_addorder['request'];
+                                if ($request == 'Y') {
+                                  echo 'ทวง';
+                                }else{
+                                  echo '';
+                                }
+                              ?>
+                            </th>
+                          </tr>
                         </table>
                       </div>
                     </div>
@@ -213,17 +221,16 @@
                         </table>
                       </div>
                     </div>
-
                   </div>
               </div>
-              <div align="left" class="box-footer">
+              <div class="box-footer">
               
               </div> 
             </div> 
           </form> 
         </div> 
-      </div> 
-    </section> <!-- jQuery 3 -->
+      </section>
+    </div>
     <script src="../bower_components/jquery/dist/jquery.min.js">
     </script>
     <!-- Bootstrap 3.3.7 -->

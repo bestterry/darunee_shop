@@ -1,6 +1,7 @@
 <?php
   require "../config_database/config.php";
   $id_song = $_GET['id_song'];
+
   $sql_song = "SELECT * FROM song_list
                 INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
                 INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
@@ -105,16 +106,12 @@
       .slider.round:before {
         border-radius: 50%;
       }
-    </style>
-  <style>
-    thead {
-      color : red;
-    }
 
-    .button2 {
-      background-color: #b35900;
-      color : white;
-      } /* Back & continue */
+
+      .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
   </style>
 
 </head>
@@ -138,7 +135,21 @@
               <div class="box-header with-border">
                 <div class="col-12">
                   <div class="col-4 col-sm-4 col-xl-4 col-md-4">
-                    <a type="button" href="song_listAll.php" class="btn button2"><< กลับ</a>
+                    <?php 
+                      if($_GET['id_age']==1){
+                    ?>
+                      <a type="button" href="old.php" class="btn button2"><< กลับ</a>
+                    <?php 
+                      }
+                      if($_GET['id_age']==2){
+                    ?>
+                    <a type="button" href="song_middle.php" class="btn button2"><< กลับ</a>
+                    <?php 
+                      }
+                      if($_GET['id_age']==3){
+                    ?>
+                    <a type="button" href="song_middle.php" class="btn button2"><< กลับ</a>
+                    <?php } ?>
                   </div>
                   <div class="col-4 col-sm-4 col-xl-4 col-md-4">
                     <p align="center">
@@ -152,7 +163,7 @@
                 </div>
               </div>
 
-              <form action="algorithm\edit_song3.php" class="form-horizontal" method="post" autocomplete="off" name="form1">
+              <form action="algorithm\edit_song.php" class="form-horizontal" method="post" autocomplete="off" name="form1">
                 <div class="box-body no-padding">
                   <div class="mailbox-read-message">
                     <div class="row">
@@ -298,20 +309,6 @@
     <script src="../dist/js/demo.js">
     </script>
     <script src="../plugins/iCheck/icheck.min.js">
-    </script>
-    <script>
-      $(function () {
-        $('#example1').DataTable()
-        $('#example2').DataTable({
-          'paging'      : false,
-          'lengthChange': false,
-          'searching'   : true,
-          'ordering'    : true,
-          'info'        : true,
-          'autoWidth'   : false
-        }
-        )
-      });
     </script>
   </body>
 

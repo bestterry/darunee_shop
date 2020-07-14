@@ -46,11 +46,9 @@
       color : white;
       } /* Back & continue */
   </style>
-
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
-  <div>
     <header class="main-header">
       <nav class="navbar navbar-static-top">
         <div class="navbar-custom-menu">
@@ -65,81 +63,76 @@
       <section class="content">
         <div class="row">
           <div class="col-md-12">
-              <div class="box box-primary">
-                <!-- /.box-header -->
-                <div class="box-header with-border">
-                  <div class="col-12">
-                    <div class="col-2 col-sm-2 col-xl-2 col-md-2">
-                      <a type="button" href="song_search.php" class="btn button2"><< กลับ</a>
-                    </div>
-                    <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
-                    </div>
+            <div class="box box-primary">
+              <!-- /.box-header -->
+              <div class="box-header with-border">
+                <div class="col-12">
+                  <div class="col-2 col-sm-2 col-xl-2 col-md-2">
+                    <a type="button" href="song_search.php" class="btn button2"><< กลับ</a>
+                  </div>
+                  <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
                   </div>
                 </div>
-                <div class="box-body no-padding">
-                  <div class="mailbox-read-message">
-                    <div class="text-center">
-                      <font size="5" >
-                        <B>
-                          เพลงคัด ทั้งหมด
-                        </B>
-                      </font>
-                    </div>
-                    <div class="col-1 col-sm-1 col-lg-1 col-md-1 col-xl-1"></div>
-                    <div class="col-10 col-sm-10 col-lg-10 col-md-10 col-xl-10">
-                      <table id="example2" class="table">
-                        <thead>
-                          <tr>
-                            <th class="text-center" width="5%">สถานะ</th>
-                            <th class="text-center" width="21%">นักร้อง</th>
-                            <th class="text-center" width="21%">ชื่อเพลง</th>
-                            <th class="text-center" width="12%">ยุค</th>
-                            <th class="text-center" width="12%">ทำนอง</th>
-                            <th class="text-center" width="12%">ต้นฉบับ</th>
-                            <th class="text-center" width="12%">เกรด</th>
-                            <th class="text-center" width="5%">แก้</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php 
-                            $sql_song = " SELECT * FROM song_list
-                                          INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
-                                          INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
-                                          INNER JOIN song_age ON song_list.id_age = song_age.id_age
-                                          INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist";
-                            $objq_song = mysqli_query($conn,$sql_song);
-                            while($value =  $objq_song->fetch_assoc()){
-                          ?>
-                          <tr> 
-                          <?php
-                            if($value['status']=='N'){
-                          ?>
-                            <td class="text-center"> </td>
-                          <?php
-                            }else{
-                          ?>
-                           <td class="text-center"><font>เปิด</font></td>
-                          <?php 
-                            }
-                          ?>
-                            <td class="text-center"><?php echo $value['name_artist'];?></td>
-                            <td class="text-center"><?php echo $value['name_song']; ?></td>
-                            <td class="text-center"><?php echo $value['name_age']; ?></td>
-                            <td class="text-center"><?php echo $value['name_tune']; ?></td> 
-                            <td class="text-center"><?php if($value['script']=='N'){echo " ";}else{echo "Y";} ?></td>
-                            <td class="text-center"><?php echo $value['melodic']; ?></td> 
-                            <td class="text-center">
-                              <a href="song_edit3.php?id_song=<?php echo $value['id_song'];?>" class="btn  btn-success btn-xs" >แก้</a>
-                            </td>
-                          </tr>
-                          <?php 
-                            }
-                          ?>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="col-1 col-sm-1 col-lg-1 col-md-1 col-xl-1"></div>
+              </div>
+              <div class="box-body no-padding">
+                <div class="mailbox-read-message">
+                  <div class="text-center">
+                    <font size="5" ><B>เพลงคัด ทั้งหมด</B></font>
                   </div>
+                  <div class="col-1 col-sm-1 col-lg-1 col-md-1 col-xl-1"></div>
+                  <div class="col-10 col-sm-10 col-lg-10 col-md-10 col-xl-10">
+                    <table id="example2" class="table">
+                      <thead>
+                        <tr>
+                          <th class="text-center" width="5%">สถานะ</th>
+                          <th class="text-center" width="21%">นักร้อง</th>
+                          <th class="text-center" width="21%">ชื่อเพลง</th>
+                          <th class="text-center" width="12%">ยุค</th>
+                          <th class="text-center" width="12%">ทำนอง</th>
+                          <th class="text-center" width="12%">ต้นฉบับ</th>
+                          <th class="text-center" width="12%">เกรด</th>
+                          <th class="text-center" width="5%">แก้</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php 
+                          $sql_song = "SELECT * FROM song_list
+                                       INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
+                                       INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
+                                       INNER JOIN song_age ON song_list.id_age = song_age.id_age
+                                       INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist";
+                          $objq_song = mysqli_query($conn,$sql_song);
+                          while($value =  $objq_song->fetch_assoc()){
+                        ?>
+                        <tr> 
+                        <?php
+                          if($value['status']=='N'){
+                        ?>
+                          <td class="text-center"> </td>
+                        <?php
+                          }else{
+                        ?>
+                          <td class="text-center"><font>เปิด</font></td>
+                        <?php 
+                          }
+                        ?>
+                          <td class="text-center"><?php echo $value['name_artist'];?></td>
+                          <td class="text-center"><?php echo $value['name_song']; ?></td>
+                          <td class="text-center"><?php echo $value['name_age']; ?></td>
+                          <td class="text-center"><?php echo $value['name_tune']; ?></td> 
+                          <td class="text-center"><?php if($value['script']=='N'){echo " ";}else{echo "Y";} ?></td>
+                          <td class="text-center"><?php echo $value['melodic']; ?></td> 
+                          <td class="text-center">
+                            <a href="song_edit3.php?id_song=<?php echo $value['id_song'];?>" class="btn  btn-success btn-xs" >แก้</a>
+                          </td>
+                        </tr>
+                        <?php 
+                          }
+                        ?>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-1 col-sm-1 col-lg-1 col-md-1 col-xl-1"></div>
                 </div>
               </div>
             </div>

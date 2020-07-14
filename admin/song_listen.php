@@ -4,9 +4,8 @@
     $sql_song = "SELECT ad_song FROM song_list WHERE id_song = $id_song";
     $objq_song = mysqli_query($conn,$sql_song);
     $objr_song = mysqli_fetch_array($objq_song);
+    $name_song = $objr_song['ad_song'];
   ?>
-
-
 <!DOCTYPE html>
 <html>
 
@@ -79,7 +78,7 @@
                         <a type="button" href="song_list2.php?id_artist=<?php echo $_GET['id_artist'];?>" class="btn button2"><< กลับ</a>
                       </div>
                       <div class="col-8 col-sm-8 col-xl-8 col-md-8">
-                        <p align="center"><font size="5"><B><?php echo $objr_song['ad_song']; ?></B></font></p>
+                        <p align="center"><font size="5"><B><?php echo $name_song; ?></B></font></p>
                       </div>
                       <div class="col-2 col-sm-2 col-xl-2 col-md-2">
                        
@@ -90,10 +89,12 @@
                     <div class="mailbox-read-message">
                       <div class="col-1 col-sm-1 col-lg-1 col-md-1 col-xl-1"></div>
                       <div class="col-10 col-sm-10 col-lg-10 col-md-10 col-xl-10 text-center">
-                        <audio controls>
-                          <source src="../song/<?php echo $objr_song['ad_song']; ?>">
-                        Your browser does not support the audio element.
-                        </audio>
+
+                        <audio controls="autoplay">
+                          <source src="../song/<?php echo $name_song;?>" type="audio/ogg" />
+                          <source src="../song/<?php echo $name_song;?>" type="audio/mpeg" />
+                            Your browser does not support the audio element.
+                        </audio> 
                       </div>
                       <div class="col-1 col-sm-1 col-lg-1 col-md-1 col-xl-1"></div>
                     </div>

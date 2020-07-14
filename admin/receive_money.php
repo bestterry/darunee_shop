@@ -147,10 +147,10 @@
                   <thead>
                     <tr>
                       <th class="text-center" width="5%">#</th>
+                      <th class="text-center" width="5%">#</th>
+                      <th class="text-center" width="5%">#</th>
                       <th class="text-center" width="7%">ชื่อ</th>
-                      <th class="text-center" width="5%">#</th>
                       <th class="text-center" width="7%">งาน</th>
-                      <th class="text-center" width="5%">#</th>
                       <th class="text-center" width="7%">เงิน</th>
                       <th class="text-center" width="7%">#</th>
                       <th class="text-center" width="12%">วันขาย</th>
@@ -165,8 +165,7 @@
                       while($value = $objq_receive2 -> fetch_assoc()){
                     ?>
                     <tr>
-                      <td class="text-center" > <a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูล <?php echo $value['name']; ?> หรือไม่ ?')";>ลบ</a></td>
-                      <td class="text-center" ><?php echo $value['name']; ?></td>
+                      <td class="text-center" ><a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="fa fa-pencil"></a></td>
                       <td class="text-center" >
                         <?php 
                           $status_boss = $value['status_boss'];
@@ -177,7 +176,6 @@
                             } 
                         ?>
                       </td>
-                      <td class="text-center" ><?php echo $value['name_practice']; ?></td>
                       <td class="text-center" >
                         <?php 
                           $status_office = $value['status_office'];
@@ -188,13 +186,15 @@
                             } 
                         ?>
                       </td>
+                      <td class="text-center" ><?php echo $value['name']; ?></td>
+                      <td class="text-center" ><?php echo $value['name_practice']; ?></td>
                       <td class="text-center" ><?php echo $value['money']; ?></td>
                       <td class="text-center" ><?php echo $value['name_category']; ?></td>
                       <td class="text-center" ><?php echo $value['date_buy']; ?></td>
                       <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
                       <!-- <td class="text-center" ><?php echo $value['area']; ?></td> -->
                       <td class="text-center" ><?php echo $value['note']; ?></td>
-                      <td class="text-center" ><a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="fa fa-pencil"></a></td>
+                      <td class="text-center" ><a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูล <?php echo $value['name']; ?> หรือไม่ ?')";>ลบ</a></td>
                     </tr>
                       <?php }?>
                   </tbody>
