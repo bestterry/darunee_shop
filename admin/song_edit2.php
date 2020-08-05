@@ -158,136 +158,143 @@
                 <form action="algorithm\edit_song2.php?id_artist=<?php echo $id_artist; ?>" class="form-horizontal" method="post" autocomplete="off" name="form1" enctype="multipart/form-data">
                   <div class="box-body no-padding">
                     <div class="mailbox-read-message">
-                      
-                        <div class="row">
-                          <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
-                          
-                          <div class="col-5 col-sm-5 col-md-5 col-xl-5">
+                      <div class="row">
+                        <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
+                        
+                        <div class="col-5 col-sm-5 col-md-5 col-xl-5">
 
-                            <div class="form-group">
-                              <label class="col-sm-4 control-label">นักร้อง :</label>
-                              <div class="col-sm-4">
-                                <select name="id_artist"  class="form-control" >
-                                  <option value="<?php echo $objr_song['id_artist']; ?>">-- เลือกนักร้อง --</option>
-                                  <?php 
-                                    $sql_artist = "SELECT id_artist,name_artist FROM song_artist";
-                                    $objq_artist = mysqli_query($conn,$sql_artist);
-                                    while($value = $objq_artist->fetch_assoc()){ 
-                                  ?>
-                                    <option value="<?php echo $value['id_artist'];?>"><?php echo $value['name_artist'];?></option>
-                                  <?php } ?>
-                                </select>
-                              </div>
-                              <div class="col-sm-4">
-                                <input class="form-control" value="<?php echo $objr_song['name_artist'];?>" disabled/>
-                              </div>
+                          <div class="form-group">
+                            <label class="col-sm-4 control-label">นักร้อง :</label>
+                            <div class="col-sm-4">
+                              <select name="id_artist"  class="form-control" >
+                                <option value="<?php echo $objr_song['id_artist']; ?>">-- เลือกนักร้อง --</option>
+                                <?php 
+                                  $sql_artist = "SELECT id_artist,name_artist FROM song_artist";
+                                  $objq_artist = mysqli_query($conn,$sql_artist);
+                                  while($value = $objq_artist->fetch_assoc()){ 
+                                ?>
+                                  <option value="<?php echo $value['id_artist'];?>"><?php echo $value['name_artist'];?></option>
+                                <?php } ?>
+                              </select>
                             </div>
-
-                            <div class="form-group">
-                              <label class="col-sm-4 control-label">ชื่อเพลง :</label>
-                              <div class="col-sm-8">
-                                <input type="text" name="name_song" class="form-control" value="<?php echo $objr_song['name_song']; ?>">
-                                <input type="hidden" name="id_song" class="form-control" value="<?php echo $id_song; ?>">
-                              </div>
+                            <div class="col-sm-4">
+                              <input class="form-control" value="<?php echo $objr_song['name_artist'];?>" disabled/>
                             </div>
-
-                            <div class="form-group">
-                              <label class="col-sm-4 control-label">ไฟล์เพลง :</label>
-                              <div class="col-sm-8">
-                              <?php
-                                if(empty($objr_song['ad_song'])){
-                              ?>
-                                <input type="file" name="ad_song" class="form-control" value="">
-                              <?php
-                                }else{
-                              ?>
-                                <input type="text" name="ad_song" class="form-control" value="<?php echo $objr_song['ad_song']; ?>">
-                              <?php
-                                }
-                              ?>
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <label class="col-sm-4 control-label">ยุค :</label>
-                              <div class="col-sm-4">
-                                <select name="id_age"  class="form-control" >
-                                  <option value="<?php echo $objr_song['id_age']; ?>">-- เลือกยุค --</option>
-                                  <?php 
-                                    $sql_age = "SELECT id_age,name_age FROM song_age";
-                                    $objq_age = mysqli_query($conn,$sql_age);
-                                    while($value = $objq_age->fetch_assoc()){ 
-                                  ?>
-                                    <option value="<?php echo $value['id_age'];?>"><?php echo $value['name_age'];?></option>
-                                  <?php } ?>
-                                </select>
-                              </div>
-                              <div class="col-sm-4">
-                                <input class="form-control" value="<?php echo $objr_song['name_age'];?>" disabled/>
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <label class="col-sm-4 control-label">ทำนอง :</label>
-                              <div class="col-sm-4">
-                                <select name="id_tune"  class="form-control" >
-                                  <option value="<?php echo $objr_song['id_tune']; ?>">-- เลือกทำนอง --</option>
-                                  <?php 
-                                    $sql_tune = "SELECT id_tune,name_tune FROM song_tune";
-                                    $objq_tune = mysqli_query($conn,$sql_tune);
-                                    while($value = $objq_tune->fetch_assoc()){ 
-                                  ?>
-                                    <option value="<?php echo $value['id_tune'];?>"><?php echo $value['name_tune'];?></option>
-                                  <?php } ?>
-                                </select>
-                              </div>
-                              <div class="col-sm-4">
-                                <input class="form-control" value="<?php echo $objr_song['name_tune'];?>" disabled/>
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <label class="col-sm-4 control-label">เกรด :</label>
-                              <div class="col-sm-4">
-                                <select name="melodic"  class="form-control" >
-                                  <option value="<?php echo $objr_song['melodic']; ?>">-- เลือกความเพราะ --</option>
-                                  <option value="A">A</option>
-                                  <option value="B">B</option>
-                                  <option value="C">C</option>
-                                </select>
-                              </div>
-                              <div class="col-sm-4">
-                                <input class="form-control" value="<?php echo $objr_song['melodic'];?>" disabled/>
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <label class="col-sm-4 control-label">ต้นฉบับ :</label>
-                              <div class="col-sm-8">
-                                <label class="switch">
-                                  <input type="checkbox" name="script" <?php if($objr_song['script']=="Y"){ echo "checked"; }else{} ?>>
-                                  <span class="slider round"></span>
-                                </label>
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <label class="col-sm-4 control-label">เปิดแล้ว :</label>
-                              <div class="col-sm-8">
-                                <label class="switch">
-                                  <input type="checkbox" name="status" <?php if($objr_song['status']=="Y"){ echo "checked"; }else{} ?>>
-                                  <span class="slider round"></span>
-                                </label>
-                              </div>
-                            </div>
-
                           </div>
-                          <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
-                          <!-- /.row -->
+
+                          <div class="form-group">
+                            <label class="col-sm-4 control-label">ชื่อเพลง :</label>
+                            <div class="col-sm-8">
+                              <input type="text" name="name_song" class="form-control" value="<?php echo $objr_song['name_song']; ?>">
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="col-sm-4 control-label">ไฟล์เพลง :</label>
+                            <div class="col-sm-8">
+                            <?php
+                              if(empty($objr_song['ad_song'])){
+                            ?>
+                              <input type="file" name="ad_song" class="form-control" value="">
+                            <?php
+                              }else{
+                            ?>
+                              <input type="text" name="ad_song" class="form-control" value="<?php echo $objr_song['ad_song']; ?>">
+                            <?php
+                              }
+                            ?>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="col-sm-4 control-label">ยุค :</label>
+                            <div class="col-sm-4">
+                              <select name="id_age"  class="form-control" >
+                                <option value="<?php echo $objr_song['id_age']; ?>">-- เลือกยุค --</option>
+                                <?php 
+                                  $sql_age = "SELECT id_age,name_age FROM song_age";
+                                  $objq_age = mysqli_query($conn,$sql_age);
+                                  while($value = $objq_age->fetch_assoc()){ 
+                                ?>
+                                  <option value="<?php echo $value['id_age'];?>"><?php echo $value['name_age'];?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
+                            <div class="col-sm-4">
+                              <input class="form-control" value="<?php echo $objr_song['name_age'];?>" disabled/>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="col-sm-4 control-label">ทำนอง :</label>
+                            <div class="col-sm-4">
+                              <select name="id_tune"  class="form-control" >
+                                <option value="<?php echo $objr_song['id_tune']; ?>">-- เลือกทำนอง --</option>
+                                <?php 
+                                  $sql_tune = "SELECT id_tune,name_tune FROM song_tune";
+                                  $objq_tune = mysqli_query($conn,$sql_tune);
+                                  while($value = $objq_tune->fetch_assoc()){ 
+                                ?>
+                                  <option value="<?php echo $value['id_tune'];?>"><?php echo $value['name_tune'];?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
+                            <div class="col-sm-4">
+                              <input class="form-control" value="<?php echo $objr_song['name_tune'];?>" disabled/>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="col-sm-4 control-label">เกรด :</label>
+                            <div class="col-sm-4">
+                              <select name="melodic"  class="form-control" >
+                                <option value="<?php echo $objr_song['melodic']; ?>">-- เลือกความเพราะ --</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-4">
+                              <input class="form-control" value="<?php echo $objr_song['melodic'];?>" disabled/>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="col-sm-4 control-label">ต้นฉบับ :</label>
+                            <div class="col-sm-8">
+                              <label class="switch">
+                                <input type="checkbox" name="script" <?php if($objr_song['script']=="Y"){ echo "checked"; }else{} ?>>
+                                <span class="slider round"></span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="col-sm-4 control-label">เปิดแล้ว :</label>
+                            <div class="col-sm-8">
+                              <label class="switch">
+                                <input type="checkbox" name="status" <?php if($objr_song['status']=="Y"){ echo "checked"; }else{} ?>>
+                                <span class="slider round"></span>
+                              </label>
+                            </div>
+                          </div>
+
                         </div>
+                        <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
+                      </div>
                     </div>
-                    <div class="box-footer text-center">
-                      <button type="submit" class="btn btn-success"> บันทึก </button>
+                    <div class="box-footer">
+                      <div class="col-12">
+                        <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
+                        <div class="col-6 col-sm-6 col-md-6 col-xl-6 text-center">
+                          <button type="submit" class="btn btn-success"> บันทึก </button>
+                          &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                          <a href="algorithm/delete_song.php?id_song=<?php echo $id_song;?>&&id_artist=<?php echo $id_artist; ?>" class="btn btn-danger" onClick="return confirm('คุณต้องการที่จะลบเพลงนี้หรือไม่ ?')";>ลบ</a>
+                        </div>
+                        <div class="col-3 col-sm-3 col-md-3 col-xl-3 text-right">
+                          
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </form>

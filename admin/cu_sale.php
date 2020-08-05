@@ -42,8 +42,13 @@
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <style>
+    .button2 {
+      background-color: #b35900;
+      color : white;
+      } /* Back & continue */
+    </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -58,11 +63,11 @@
         <div class="row">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
-              <div align="right">
-                <a href="admin.php" class="btn btn-success"><< เมนูหลัก</a>
+              <div align="left">
+                <a href="admin.php" class="btn button2"><< เมนูหลัก</a>
               </div>
               <font size="5">
-                <B> เงินขายสะสม <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
+                <B> ยอดสะสม <font color="red"><?php echo DateThai($aday);?></font> ถึง <font color="red"><?php echo DateThai($bday);?></font></B>
               </font>
             </div>
             <div class="box-body">

@@ -91,7 +91,7 @@
           </div>
 
           <div class="box-footer">
-            <a href="map_edit.php" class="btn btn-danger pull-left"> << กลับ </a>
+            <a href="map.php" class="btn btn-danger pull-left"> << กลับ </a>
           </div>
         </div>
         

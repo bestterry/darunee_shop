@@ -69,5 +69,5 @@
   }else{
     echo '2';
   }
-  header('location:../list_order_des.php?id_addorder='.$id_addorder);
+  header('location:../list_order.php');
 ?>

@@ -7,7 +7,7 @@
   $sql = "DELETE FROM map WHERE id_map = $id_map";
 
   if ($conn->query($sql) === TRUE) {
-      header('location:../map_edit.php');
+      header('location:../map.php');
   } else {
       echo "Error deleting record: " . $conn->error;
   }

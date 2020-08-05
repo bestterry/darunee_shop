@@ -46,7 +46,8 @@ $pdf=new PDF('P','mm','A4');
                                 INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code 
                                 INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
                                 INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
-                                WHERE addorder.status = 'pending' AND addorder.amphur_id = $id_amphur";
+                                WHERE addorder.status = 'pending' AND addorder.amphur_id = $id_amphur
+                                ORDER BY tbl_districts.district_code ASC";
                 $objq_addorder = mysqli_query($conn,$sql_addorder);
                 if(mysqli_num_rows($objq_addorder) > 0){
                   while($value = $objq_addorder->fetch_assoc ())

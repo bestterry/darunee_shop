@@ -125,12 +125,20 @@
         <div class="col-md-12">
             <div class="box box-primary">
               <div class="box-header with-border">
-              <div>
+              <?php
+               if ($_GET['status']=='pending') {
+              ?>
                 <a type="button" href="list_order.php" class="btn btn-danger pull-left"> << กลับ</a>
-              </div>
+              <?php
+               }else{
+              ?>
+                <a type="button" href="order_success.php" class="btn btn-danger pull-left"> << กลับ</a>
+              <?php
+               } 
+              ?>
               <div class="text-center">
-              <font size="4">
-                  <B align="center">เเก้ไข ORDER <font color="red"> </font></B>
+                <font size="4">
+                  <B align="center">เเก้ไข ORDER</B>
                 </font>
               </div>
               </div>
@@ -300,6 +308,7 @@
                 <div class="box-footer text-center">
                   <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";>  บันทึก ORDER </button>
                   <a type="button" class="btn btn-info" href="list_order_des.php?id_addorder=<?php echo $id_addorder; ?>">ดูข้อมูล ORDER</a>
+                  <a type="button" class="btn btn-danger" href="algorithm/delete_order.php?id_addorder=<?php echo $id_addorder; ?>">ลบ ORDER</a>
                 </div>
               </div>
               </form>

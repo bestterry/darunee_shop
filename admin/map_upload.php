@@ -1,25 +1,29 @@
 <?php
 require "../config_database/config.php";
 require "../session.php";
-  if($_POST){
+
+  $amphur_name = $_POST['amphur_name'];
+  $province_name = $_POST['province_name'];
+
+  if (empty($amphur_name)) {
+    $amphur_id = 0;
+  }else {
+    $amphur_id = $amphur_name;
+  }
+
+  if (empty($province_name)) {
+    $province_id = 0;
+  }else{
+    $province_id = $province_name;
+  }
+
+  $sql_map = "SELECT * FROM map WHERE amphur_id = $amphur_id AND province_id = $province_id";
+  $objq_map = mysqli_query($conn,$sql_map);
+  $objr_query = mysqli_fetch_array($objq_map);
+
+  if (empty($objr_query['id_map'])) {
+    if($_POST){
       if(isset($_FILES['upload'])){
-          $amphur_name = $_POST['amphur_name'];
-          $province_name = $_POST['province_name'];
-
-
-
-          if (empty($amphur_name)) {
-            $amphur_id = 0;
-          }else {
-            $amphur_id = $amphur_name;
-          }
-
-          if (empty($province_name)) {
-            $province_id = 0;
-          }else{
-            $province_id = $province_name;
-          }
-
           $name_file =  $_FILES['upload']['name'];
           $tmp_name =  $_FILES['upload']['tmp_name'];
           $locate_img ="../images/map/";
@@ -28,8 +32,13 @@ require "../session.php";
           $sql = "INSERT INTO map (amphur_id, province_id, name_map)
                   VALUES ($amphur_id,  $province_id, '$name_file')";
           mysqli_query($conn,$sql);
-      }
+        }
+      $status = 1;  
+    }
+  }else{
+      $status = 2;
   }
+
 ?>
 
 <!DOCTYPE html>
@@ -73,57 +82,59 @@ require "../session.php";
 
   <body class=" hold-transition skin-blue layout-top-nav ">
     <div class="wrapper">
-
       <header class="main-header">
         <?php require('menu/header_logout.php'); ?>
       </header>
-
-      <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
         <section class="content-header">
         </section>
-
-        <!-- Main content -->
         <section class="content">
           <div class="box box-primary">
-            <div class="box-header text-center with-border">
-              <B align="center"> 
-                <font size="5"> รูปภาพ </font>
-              </B>
-            </div>
-            
-            <div class="box-body">
-            
-            <div align="center">
-              <div class="container">
-                <div class="alert alert-success alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <h4><i class="icon fa fa-check-circle"></i>บันทึกข้อมูลสำเร็จ</h4>
-                </div>
-              </div>
-              <img src="../images/map/<?php echo "$name_file"?>" width="730" height="900">  
-              <div>
+              <div class="box-header text-center with-border">
                 <B align="center"> 
-                  <font size="5"> <?php echo $name_file; ?> </font>
+                  <font size="5"> รูปภาพ </font>
                 </B>
               </div>
-            </div>
-            </div>
-
-            <div class="box-footer">
-              <a href="map.php" class="btn btn-danger pull-left"> << เมนูหลัก </a>
-            </div>
+              <div class="box-body">
+                <?php 
+                  if($status == 1){
+                ?>
+                <div align="center">
+                  <div class="container">
+                    <div class="alert alert-success alert-dismissible">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <h4><i class="icon fa fa-check-circle"></i>บันทึกข้อมูลสำเร็จ</h4>
+                    </div>
+                  </div>
+                  <img src="../images/map/<?php echo "$name_file"?>" width="730" height="900">  
+                  <div>
+                    <B align="center"> 
+                      <font size="5"> <?php echo $name_file; ?> </font>
+                    </B>
+                  </div>
+                </div>
+                <?php 
+                  }else{
+                ?>
+                <div align="center">
+                  <div class="container">
+                    <div class="alert alert-danger alert-dismissible">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <h4><i class="icon fa fa-check-circle"></i>มีข้อมูลแล้ว บันทึกไม่สำเร็จ</h4>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+                  }
+                ?>
+              </div>
+              <div class="box-footer">
+                <a href="map.php" class="btn btn-danger pull-left"> << กลับ </a>
+              </div>
           </div>
-          
+        </section>
       </div>
-    </div>
-    </section>
-    <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <?php require("../menu/footer.html"); ?>
+      <?php require("../menu/footer.html"); ?>
     </div>
     <!-- jQuery 3 -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>

@@ -92,8 +92,7 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th class="text-center" width="5%"> <font color="red">ที่</font> </th>
-                        <th class="text-center" width="25%"> <font color="red">สินค้า_หน่วย</font> </th>
+                        <th class="text-center" width="30%"> <font color="red">สินค้า_หน่วย</font> </th>
                         <th class="text-center" width="8%"> <font color="red">จำนวน</font> </th>
                         <th class="text-center" width="10%"> <font color="red">ผู้เบิก</font> </th>
                         <th class="text-center" width="10%"> <font color="red">เบิกจาก</font></th>
@@ -102,20 +101,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <?php #endregion
-                      $i = 1;
-                      $date = "SELECT * FROM draw_history 
-                                INNER JOIN product ON draw_history.id_product = product.id_product 
-                                INNER JOIN member ON draw_history.id_member = member.id_member
-                                INNER JOIN zone ON draw_history.id_zone = zone.id_zone
-                                WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
-                      $objq = mysqli_query($conn, $date);
-                      while ($value = $objq->fetch_assoc()) {
-                        ?>
+                      <?php
+                        $date = "SELECT * FROM draw_history 
+                                  INNER JOIN product ON draw_history.id_product = product.id_product 
+                                  INNER JOIN member ON draw_history.id_member = member.id_member
+                                  INNER JOIN zone ON draw_history.id_zone = zone.id_zone
+                                  WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
+                        $objq = mysqli_query($conn, $date);
+                        while ($value = $objq->fetch_assoc()) {
+                      ?>
                         <tr>
-                          <td class="text-center">
-                            <?php echo $i; ?>
-                          </td>
                           <td class="text-center">
                             <?php echo $value['name_product'] . '_' . $value['unit']; ?>
                           </td>
@@ -135,9 +130,8 @@
                             <?php echo DateThai2($value['datetime']); ?>
                           </td>
                         </tr>
-                        <?php
-                        $i++;
-                      }
+                      <?php
+                        }
                       ?>
                     </tbody>
                   </table>

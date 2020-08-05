@@ -2,7 +2,7 @@
     <?php require('../font/font_style.php'); ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>แก้ไข ORDER</title>
+    <title>จัดการเพลง</title>
     <!-- Tell the browser to be responsive to screen width -->
     <link rel="icon" type="image/png" href="../images/favicon.ico" />
     <!-- Bootstrap 3.3.7 -->
@@ -33,5 +33,31 @@
         background-color: #b35900;
         color : white;
         } /* Back & continue */
+        .topnav {
+          background-color: while;
+          overflow: hidden;
+        }
+
+        /* Style the links inside the navigation bar */
+        .topnav a {
+          float: left;
+          color: black;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          font-size: 15px;
+        }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+          background-color: #ddd;
+          color: black;
+        }
+
+        /* Add a color to the active/current link */
+        .topnav a.active {
+          background-color: #3c8dbc;
+          color: white;
+        }
     </style>
   </head>

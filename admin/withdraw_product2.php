@@ -83,83 +83,80 @@
           <section class="content">
             <div class="col-md-12">
               <div class="box box-primary">
-                <div class="box-header text-center with-border">
-                  <font size="5">
-                    <B align="center">เบิกสินค้าจาก : <?php echo $objr_zone['name_zone'];?>&nbsp;&nbsp;
-                    </B>
-                  </font>
-                </div>
-                <div class="text-center with-border">
-                  <font size="4">
-                    <B > ผู้เบิก : 
-                            <?php 
-                                echo $_POST['name']; 
-                            ?>   
-                    </B>
-                  </font>
-                </div>
-
-                <!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <div class="mailbox-read-message">
-                    <form action="algorithm/withdraw_product.php" method="post" autocomplete="off">
-                      <table class="table table-bordered">
-                        <tbody>
-                          <tr>
-                            <th class="text-center" width="33%"><font color="red">สินค้า_หน่วย</font>
-                            </th>
-                            <th class="text-center" width="33%"><font color="red">จำนวนที่มี</font>
-                            </th>
-                            <th class="text-center" width="33%"><font color="red">จำนวนรับเข้า</font>
-                            </th> 
-                          </tr> 
-                      <?php
-                        for ($i=0; $i < count($_POST['id_num_product']); $i++) { 
-                       
-                          $id_num_product = $_POST['id_num_product'][$i];
-                          $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_numproduct = $id_num_product";
-                          $objq_listproduct = mysqli_query($conn,$list_product);
-                          $list = mysqli_fetch_array($objq_listproduct);
-                      ?> <tr>
-                            <td class="text-center">
-                              <input type="hidden" name="id_numproduct[]" value="<?php echo $list['id_numproduct']; ?>">
-                              <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
-                              <?php echo $list['name_product'].'_'.$list['unit']; ?>
-                            </td>
-                            <td class="text-center">
-                              <?php echo $list['num'];?>
-                              <input type="hidden" name="num_befor[]" value="<?php echo $list['num']; ?>">
-                            </td>
-                            <td class="text-center"><input class="text-center" type="text" name="num_after[]"></td>
-                          </tr>
-                      <?php 
-                        }
-                      ?>
-                        </tbody>
-                      </table>
-                      <div class="col-md-12">
-                        <table class="table table-bordered">
-                          <tbody>
-                            <tr>
-                              <th class="text-center">หมายเหตุ : <input size="50" class="text-center" type="text" name="note" value="<?php echo '-'; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="col-md-6">
-                        <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
-                        <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
-                      </div>
+                <form action="algorithm/withdraw_product.php" method="post" autocomplete="off">
+                  <div class="box-header text-center with-border">
+                    <font size="5">
+                      <B align="center">เบิกสินค้าจาก : <?php echo $objr_zone['name_zone'];?></B>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <B> ผู้เบิก : <?php echo $_POST['name']; ?></B>
+                    </font>
                   </div>
-                </div>
-                <!-- /.box-body -->
-                <!-- /.box-footer -->
-                <div class="box-footer text-center">
-                  <a type="block" href="admin.php" class="btn button2 pull-left"><< เมนูหลัก</a> 
-                  <button type="submit" class="btn btn-success center" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"> เบิกสินค้าออก </i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
+                  <div class="box-body no-padding">
+                    <div class="col-12">
+                      <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+                      <div class="col-8 col-sm-8 col-xl-8 col-md-8">
+                        <div class="mailbox-read-message">
+                          
+                          <table class="table table-bordered">
+                            <tbody>
+                              <tr>
+                                <th class="text-center" width="33%"><font color="red">สินค้า_หน่วย</font>
+                                </th>
+                                <th class="text-center" width="33%"><font color="red">จำนวนที่มี</font>
+                                </th>
+                                <th class="text-center" width="33%"><font color="red">จำนวนรับเข้า</font>
+                                </th> 
+                              </tr> 
+                              <?php
+                                for ($i=0; $i < count($_POST['id_num_product']); $i++) { 
+                              
+                                  $id_num_product = $_POST['id_num_product'][$i];
+                                  $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_numproduct = $id_num_product";
+                                  $objq_listproduct = mysqli_query($conn,$list_product);
+                                  $list = mysqli_fetch_array($objq_listproduct);
+                              ?> 
+                              <tr>
+                                <td class="text-center">
+                                  <input type="hidden" name="id_numproduct[]" value="<?php echo $list['id_numproduct']; ?>">
+                                  <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
+                                  <?php echo $list['name_product'].'_'.$list['unit']; ?>
+                                </td>
+                                <td class="text-center">
+                                  <?php echo $list['num'];?>
+                                  <input type="hidden" name="num_befor[]" value="<?php echo $list['num']; ?>">
+                                </td>
+                                <td class="text-center">
+                                  <input class="text-center form-control" type="text" name="num_after[]" placeholder="0">
+                                </td>
+                              </tr>
+                              <?php 
+                                }
+                              ?>
+                            </tbody>
+                          </table>
+                          <div class="col-md-12">
+                            <table class="table table-bordered">
+                              <tbody>
+                                <tr>
+                                  <th class="text-center">หมายเหตุ : <input size="50" class="text-center" type="text" name="note" value="<?php echo '-'; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="col-md-6">
+                            <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
+                            <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+                    </div>
+                  </div>
+                  <div class="box-footer text-center">
+                    <a type="block" href="withdraw_history.php" class="btn button2 pull-left"><< กลับ</a> 
+                    <button type="submit" class="btn btn-success center" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";>เบิกสินค้าออก</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
                 </form>
-                <!-- /.box-footer -->
               </div>
               <!-- /. box -->
             </div>

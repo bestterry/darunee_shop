@@ -143,7 +143,7 @@
                   if ($id_member == 30) {
                 ?>
                  <!-- boss -->
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example2" class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th class="text-center" width="5%">#</th>
@@ -156,8 +156,8 @@
                       <th class="text-center" width="12%">วันขาย</th>
                       <th class="text-center" width="12%">วันรับเงิน</th>
                       <!-- <th class="text-center" width="12%">พื้นที่</th> -->
-                      <th class="text-center" width="28%">หมายเหตุ</th>
-                      <th class="text-center" width="5%">#</th>
+                      <th class="text-center" width="23%">หมายเหตุ</th>
+                      <!-- <th class="text-center" width="5%">#</th> -->
                     </tr>
                   </thead>
                   <tbody>
@@ -165,24 +165,24 @@
                       while($value = $objq_receive2 -> fetch_assoc()){
                     ?>
                     <tr>
-                      <td class="text-center" ><a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="fa fa-pencil"></a></td>
                       <td class="text-center" >
                         <?php 
                           $status_boss = $value['status_boss'];
                             if( $status_boss == 'Y'){
                               echo "รับ";
                             }else{
-                              echo "";
+                              echo "A";
                             } 
                         ?>
                       </td>
+                      <td class="text-center" ><a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="fa fa-pencil"></a></td>
                       <td class="text-center" >
                         <?php 
                           $status_office = $value['status_office'];
                             if( $status_office == 'Y'){
                               echo "สนง.";
                             }else{
-                              echo "";
+                              echo "B";
                             } 
                         ?>
                       </td>
@@ -194,7 +194,7 @@
                       <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
                       <!-- <td class="text-center" ><?php echo $value['area']; ?></td> -->
                       <td class="text-center" ><?php echo $value['note']; ?></td>
-                      <td class="text-center" ><a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูล <?php echo $value['name']; ?> หรือไม่ ?')";>ลบ</a></td>
+                      <!-- <td class="text-center" ><a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูล <?php echo $value['name']; ?> หรือไม่ ?')";>ลบ</a></td> -->
                     </tr>
                       <?php }?>
                   </tbody>
@@ -204,7 +204,7 @@
                     }else{
                   ?>
                   <!-- สนง -->
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="example3" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th class="text-center" width="5%">รับ</th>
@@ -428,13 +428,20 @@
       $('#example1').DataTable()
       $('#example2').DataTable({
         'paging'      : true,
-        'lengthChange': false,
-        'searching'   : false,
-        'ordering'    : true,
+        'lengthChange': true,
+        'searching'   : true,
+        'ordering'    : false,
         'info'        : true,
         'autoWidth'   : false
-      }
-                              )
+      })
+      $('#example3').DataTable({
+        'paging'      : true,
+        'lengthChange': true,
+        'searching'   : true,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : true
+      })
     }
     )
     $(function () {
@@ -488,19 +495,6 @@
     }
     );
     </script>
-    <script>
-    $(function () {
-      $('#example1').DataTable()
-      $('#example2').DataTable({
-        'paging'      : true,
-        'lengthChange': false,
-        'searching'   : false,
-        'ordering'    : true,
-        'info'        : true,
-        'autoWidth'   : false
-      })
-    })
-  </script>
 </body>
 
 </html>

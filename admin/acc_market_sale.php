@@ -1,5 +1,5 @@
 <?php
-include("db_connect.php");
+require 'db_connect.php';
 require 'menu/date.php';
 $mysqli = connect();
  
@@ -25,7 +25,7 @@ $mysqli = connect();
   <!-- DataTables -->
   <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
-folder instead of downloading all of them to reduce the load. -->
+
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="../bower_components/morris.js/morris.css">
@@ -268,7 +268,7 @@ folder instead of downloading all of them to reduce the load. -->
                     $sql_acc = "SELECT * FROM acc_market INNER JOIN tbl_districts ON acc_market.district_id = tbl_districts.district_code
                                 INNER JOIN tbl_amphures  ON acc_market.amphur_id = tbl_amphures.amphur_id
                                 INNER JOIN tbl_provinces ON acc_market.province_id = tbl_provinces.province_id 
-                                ORDER BY acc_market.date_accDESC";
+                                ORDER BY acc_market.date_acc DESC";
                     $objq_acc = mysqli_query($mysqli,$sql_acc);
                     while($value = $objq_acc->fetch_assoc()){
                   ?>
@@ -368,35 +368,31 @@ folder instead of downloading all of them to reduce the load. -->
           });
 
         });
-      </script>
-
-      <script>
-      $(document).ready(function(){
-        var i=1;
-        $('#add').click(function(){
-          i++;
-          $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option> <option value="15">ปุ๋ยเคมีกวางฯ</option><option value="11">สารปรับปรุงดินโซเล่</option><option value="34">ปุ๋ยอินทรีย์กวางฯ</option></select></td><td class="text-center"><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="text" name="price[]" placeholder="ราคา/น." class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger"><i class="fa fa-minus"></i></button></td></tr>');
-        });
-        
-        $(document).on('click', '.btn_remove', function(){
-          var button_id = $(this).attr("id"); 
-          $('#row'+button_id+'').remove();
-        });
-        
-        $('#submit').click(function(){		
-          $.ajax({
-            success:function(data)
-            {
-              alert(data);
-              $('#add_name')[0].reset();
-            }
+      
+        $(document).ready(function(){
+          var i=1;
+          $('#add').click(function(){
+            i++;
+            $('#dynamic_field').append('<tr id="row'+i+'"><td><select name="id_product[]" class="form-control select2" style="width: 100%;"> <option value="">-- เลือกสินค้า --</option> <option value="15">ปุ๋ยเคมีกวางฯ</option><option value="11">สารปรับปรุงดินโซเล่</option><option value="34">ปุ๋ยอินทรีย์กวางฯ</option></select></td><td class="text-center"><input type="text" name="num[]" placeholder="จำนวน" class="form-control text-center" /></td><td><input type="text" name="price[]" placeholder="ราคา/น." class="form-control text-center" /></td><td class="text-center"><button type="button" name="remove" id="'+i+'" class="btn btn-danger"><i class="fa fa-minus"></i></button></td></tr>');
           });
+          
+          $(document).on('click', '.btn_remove', function(){
+            var button_id = $(this).attr("id"); 
+            $('#row'+button_id+'').remove();
+          });
+          
+          $('#submit').click(function(){		
+            $.ajax({
+              success:function(data)
+              {
+                alert(data);
+                $('#add_name')[0].reset();
+              }
+            });
+          });
+          
         });
-        
-      });
-      </script>
 
-        <script>
         $(function () {
           $('#example1').DataTable()
           $('#example2').DataTable({

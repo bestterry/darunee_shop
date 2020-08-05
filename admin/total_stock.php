@@ -6,6 +6,7 @@
   $list_product = "SELECT * FROM product WHERE status_stock = 1";
   $query_product = mysqli_query($conn,$list_product);
   $query_product2 = mysqli_query($conn,$list_product);
+  $query_product3 = mysqli_query($conn,$list_product);
 ?>
 
 <!DOCTYPE html>
@@ -43,13 +44,6 @@
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
   <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -58,6 +52,10 @@
     thead {
       color: rgb(255, 0, 0);
     }
+    .button2 {
+      background-color: #b35900;
+      color : white;
+      }
   </style>
 </head>
 
@@ -79,15 +77,24 @@
 
       <div class="box box-primary">
         <div class="box-header text-center with-border">
-          <B align="center"> 
-            <font size="5"> สต๊อกร้าน </font>
-            <font size="5" color="red">  
-              <?php 
-                  $strDate = date('d-m-Y');
-                  echo DateThai($strDate);
-              ?>
-            </font>
-          </B>
+          <div class="col-12">
+            <div class="col-4 col-sm-4 col-xl-4 col-md-4"> </div>
+            <div class="col-4 col-sm-4 col-xl-4 col-md-4">
+              <B align="center"> 
+                <font size="5"> สต๊อกร้าน </font>
+                <font size="5" color="red">  
+                  <?php 
+                      $strDate = date('d-m-Y');
+                      echo DateThai($strDate);
+                  ?>
+                </font>
+              </B>
+            </div>
+            <div class="col-4 col-sm-4 col-xl-4 col-md-4 text-right">
+              <a href="#" data-toggle="modal" data-target="#add_product" class="btn btn-success"> รับสินค้า </a>
+              <a href="#" data-toggle="modal" data-target="#withdraw_product" class="btn btn-success"> เบิกสินค้า </a>
+            </div>
+          </div>
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
@@ -95,32 +102,30 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th class="text-center" width="2%">ที่</th>
-                  <th class="text-center" width="15%">สินค้า_หน่วย</th>
+                  <th class="text-center" width="10%">สินค้า_หน่วย</th>
                   <th class="text-center" width="5%">จุน</th>
-                  <th class="text-center" width="5%">พาน</th>
-                  <th class="text-center" width="5%">ดคต.</th>
+                  <th class="text-center" width="5%">พาน1</th>
+                  <th class="text-center" width="5%">พาน2</th>
+                  <th class="text-center" width="5%">ดคต1</th>
+                  <th class="text-center" width="5%">ดคต2</th>
                   <th class="text-center" width="5%">วปป.</th>
                   <th class="text-center" width="5%">เกาะคา</th>
                   <th class="text-center" width="5%">ลำพูน</th>
                   <th class="text-center" width="5%">ขายส่ง</th>
                   <th class="text-center" width="5%">แม่จัน</th>
                   <th class="text-center" width="5%">จห</th>
+                  <th class="text-center" width="5%">แพร่</th>
                   <th class="text-center" width="5%">รถ</th>
-                  <th class="text-center" width="8%">ทั้งหมด</th>
+                  <th class="text-center" width="5%">ทั้งหมด</th>
                 </tr>
               </thead>
               <tbody>
                 <?php 
                   $i=1;
-                  $a = 1;
                     while($product = $query_product ->fetch_assoc()){
                       
                   ?>
                 <tr>
-                  <td class="text-center">
-                    <?php echo $a; ?>
-                  </td>
                   <td class="text-center" >
                     <?php echo $product['name_product'].'_'.$product['unit']; ?>
                   </td>
@@ -158,6 +163,23 @@
                     
                     ?>
                   <!-- -------------------------------//พาน------------------------------------ -->
+                  <!-- -------------------------------พาน2------------------------------------ -->
+                  <?php 
+                      $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 13";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                    ?>
+                  <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//พาน2------------------------------------ -->
                   <!-- -------------------------------ดคต.------------------------------------ -->
                   <?php 
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 2";
@@ -174,7 +196,24 @@
                       } 
                     
                     ?>
-                  <!-- -------------------------------//ดคต.------------------------------------ -->
+                  <!-- -------------------------------//ดคต2.------------------------------------ -->
+                  <!-- -------------------------------ดคต.------------------------------------ -->
+                  <?php 
+                      $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 12";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//ดคต2.------------------------------------ -->
                     <!-- -------------------------------วปป..------------------------------------ -->
                     <?php 
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 1";
@@ -260,7 +299,7 @@
                     
                     ?>
                   <!-- -------------------------------//แม่จัน.------------------------------------ -->
-                    <!-- -------------------------------จห.------------------------------------ -->
+                  <!-- -------------------------------จห.------------------------------------ -->
                     <?php 
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 11";
                       $objq_num = mysqli_query($conn,$SQL_num);
@@ -278,6 +317,23 @@
                     ?>
                   <!-- -------------------------------//จห.------------------------------------ -->
 
+                  <!-- -------------------------------แพร่.------------------------------------ -->
+                  <?php 
+                      $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 14";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                    ?>
+                  <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//แพร่.------------------------------------ -->
 
                   <!-- -------------------------------รวมรถ------------------------------------ -->
                   <?php 
@@ -319,7 +375,7 @@
                   <!-- -------------------------------//รวมทั้งหมด------------------------------------ -->
 
                 </tr>
-                <?php $i++; $a++; } ?>
+                <?php $i++; } ?>
               </tbody>
             </table>
           </div>
@@ -348,13 +404,12 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th class="text-center" width="3%">ที่</th>
-                  <th class="text-center" width="15%">สินค้า_หน่วย</th>
+                  <th class="text-center" width="10%">สินค้า_หน่วย</th>
 
                   <?php 
-                    $sql_member = "SELECT id_member,name_sub FROM member WHERE status_car = 1";
+                    $sql_member = "SELECT id_member,name_sub FROM member WHERE status_car = 1 
+                                   AND NOT id_member = 3 AND NOT id_member = 8  AND NOT id_member = 45  AND NOT id_member = 46";
                     $objq_member = mysqli_query($conn,$sql_member);
-                    $objq_member2 = mysqli_query($conn,$sql_member);
                     while($value = $objq_member -> fetch_assoc()){
                   ?>
                   <th class="text-center" width="4%"><?php echo $value['name_sub'];?></th>
@@ -366,14 +421,11 @@
 
               <tbody>
                 <?php
-                $a = 1;
+                
                 while ($product = $query_product2->fetch_assoc()) {
 
                   ?>
                   <tr>
-                    <td class="text-center">
-                      <?php echo $a; ?>
-                    </td>
                     <td class="text-center">
                       <?php echo $product['name_product'].'_'.$product['unit']; ?>
                     </td>
@@ -409,8 +461,76 @@
                     
                     <!-- -------------------------------//รวมทั้งหมด------------------------------------ -->
                   </tr>
-                  <?php $a++;
-                } ?>
+                  <?php 
+                    } 
+                  ?>
+              </tbody>
+
+            </table>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="text-center" width="20%">สินค้า_หน่วย</th>
+
+                  <?php 
+                    $sql_miss = "SELECT id_member,name_sub FROM member WHERE status_car = 1 AND id_member = 3 OR id_member = 8 OR id_member = 45 OR id_member = 46";
+                    $objr_miss = mysqli_query($conn,$sql_miss);
+                    
+                    while($value = $objr_miss -> fetch_assoc()){
+                  ?>
+                  <th class="text-center" width="15%"><?php echo $value['name_sub'];?></th>
+                  <?php }?>
+                
+                  <th class="text-center" width="20%">ทั้งหมด</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <?php
+                
+                while ($product = $query_product3->fetch_assoc()) {
+
+                  ?>
+                  <tr>
+                    <td class="text-center">
+                      <?php echo $product['name_product'].'_'.$product['unit']; ?>
+                    </td>
+                    <!-- -------------------------------รถ------------------------------------ -->
+                    <?php
+                    $total_num = 0;
+                    
+                    $objr_miss2 = mysqli_query($conn,$sql_miss);
+                    while($value2 = $objr_miss2 -> fetch_assoc()){
+                      $id_member = $value2['id_member'];
+                      $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $id_member";
+                      $objq_num = mysqli_query($conn, $SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0)){
+                    ?>
+                  <td class="text-center">-</td>
+                      <?php
+                    } else {
+                      $num_pd = $objr_num['num'];
+                      ?>
+                        <td class="text-center"><?php echo $num_pd; ?></td>
+                      <?php
+                        $total_num = $total_num + $num_pd;
+                    }
+                    
+                  }
+                  ?>
+                    <!-- -------------------------------//รถ------------------------------------ -->
+
+                    <!-- -------------------------------รวมทั้งหมด------------------------------------ -->
+                      
+                      <td class="text-center"><?php echo $total_num; ?></td>
+                    
+                    <!-- -------------------------------//รวมทั้งหมด------------------------------------ -->
+                  </tr>
+                  <?php 
+                    } 
+                  ?>
               </tbody>
 
             </table>
@@ -426,7 +546,7 @@
       <div class="box box-primary">
         <div class="box-header text-center with-border">
           <B align="center"> 
-            <font size="5"> ค้างส่ง </font>
+            <font size="5"> จำนวน ORDER ค้างส่ง </font>
             <font size="5" color="red">  
               <?php 
                   $strDate = date('d-m-Y');
@@ -441,7 +561,6 @@
             <table class="table">
               <thead>
                 <tr>
-                <th class="text-center" width="3%">ที่</th>
                   <th class="text-center" width="20%">สินค้า_หน่วย</th>
                   <th class="text-center" width="11%">เชียงใหม่</th>
                   <th class="text-center" width="11%">เกาะคา</th>
@@ -454,14 +573,12 @@
               </thead>
               <tbody>
                 <?php 
-                 $i = 1;
                   $sql_pd = "SELECT * FROM product WHERE status_stock = 1";
                   $objq_pd = mysqli_query($conn,$sql_pd);
                   while ($value_pd = $objq_pd->fetch_assoc()) {
                   $id_product = $value_pd['id_product'];
                 ?>
                       <tr>
-                        <td class="text-center"><?php echo $i; ?></td>
                         <td class="text-center"><?php echo $value_pd['name_product'].'_'.$value_pd['unit']; ?></td>
                         <?php 
                           $total_num = 0;
@@ -485,8 +602,8 @@
                           ?>
                         </td>
                           <?php 
-                          $total_num = $total_num + $num;
-                          } $i++;
+                            $total_num = $total_num + $num;
+                            }
                           ?>
                         <td class="text-center" ><?php echo $total_num; ?></td>
                       </tr>
@@ -508,6 +625,147 @@
 
   <?php require("../menu/footer.html"); ?>
   </div>
+
+    <div class="modal fade" id="add_product" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <form action="add_product.php?status=stock" method="post">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <font size="5"><B> รับสินค้า </B></font>
+            </div>
+            <div class="modal-body col-md-12 table-responsive mailbox-messages">
+              <div class="col-12">
+                <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+                <div class="col-8 col-sm-8 col-xl-8 col-md-8">
+                  <div class="table-responsive mailbox-messages">
+                    <table class="table table-bordered">
+                      <tbody>
+                          <tr>
+                          <th class="text-center" width="30%"><font size="3">รับเข้า STOCK</font></th>
+                          <th class="text-center" width="70%"> 
+                          <select name ="id_zone" class="form-control text-center select2" style="width: 100%;">
+                              <?php #endregion
+                              $sql_member = "SELECT * FROM zone ";
+                              $objq_member = mysqli_query($conn,$sql_member);
+                              while($member = $objq_member -> fetch_assoc()){
+                                  if ($member['id_zone']==8) {
+                                      
+                                  }else{
+                              ?>
+                                  <option value="<?php echo $member['id_zone']; ?>"><?php echo $member['name_zone']; ?></option>
+                              <?php 
+                                  }
+                              } 
+                              ?>
+                          </select>
+                          </th>
+                          </tr>
+                      </tbody>
+                    </table> 
+                    <br> 
+                    <table class="table table-bordered ">
+                      <tbody>
+                      <tr>
+                        <th class="text-center" width="30%"><font size="3">ผู้ส่งของ</font></th>
+                        <th class="text-center" width="70%"> 
+                          <select name ="id_member" class="form-control text-center select2" style="width: 100%;">
+                              <?php #endregion
+                              $sql_member = "SELECT * FROM member WHERE status = 'employee'";
+                              $objq_member = mysqli_query($conn,$sql_member);
+                              while($member = $objq_member -> fetch_assoc()){
+                              ?>
+                                  <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?></option>
+                              <?php } ?>
+                          </select>
+                        </th>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn button2 pull-right">ถัดไป >></button>
+              <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< ย้อนกลับ </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade" id="withdraw_product" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <form action="withdraw_product.php?status=stock" method="post">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <font size="5"><B align = "center"> เบิกสินค้า </B></font>
+            </div>
+            <div class="modal-body col-md-12 table-responsive mailbox-messages">
+              <div class="col-12">
+                <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+                <div class="col-8 col-sm-8 col-xl-8 col-md-8">
+                    <div class="table-responsive mailbox-messages">
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr>
+                          <th class="text-center" width="30%"><font size="3">เบิกจาก STOCK</font></th>
+                          <th class="text-center" width="70%"> 
+                            <select name ="id_zone" class="form-control text-center select2" style="width: 100%;">
+                                <?php #endregion
+                                $sql_member = "SELECT * FROM zone ";
+                                $objq_member = mysqli_query($conn,$sql_member);
+                                while($member = $objq_member -> fetch_assoc()){
+                                    if ($member['id_zone']==8) {
+                                        
+                                    }else{
+                                ?>
+                                    <option value="<?php echo $member['id_zone']; ?>"><?php echo $member['name_zone']; ?></option>
+                                <?php
+                                    }   
+                                } 
+                                ?>
+                            </select>
+                          </th>
+                          </tr>
+                        </tbody>
+                      </table> 
+                      <br> 
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr>
+                          <th class="text-center" width="30%"><font size="3">ผู้ขอเบิก</font></th>
+                          <th class="text-center" width="70%"> 
+                          <select name ="id_member" class="form-control text-center select2" style="width: 100%;">
+                              <?php #endregion
+                              $sql_member = "SELECT * FROM member WHERE status = 'employee'";
+                              $objq_member = mysqli_query($conn,$sql_member);
+                              while($member = $objq_member -> fetch_assoc()){
+                                  
+                              ?>
+                                  <option value="<?php echo $member['id_member']; ?>"><?php echo $member['name']; ?></option>
+                              <?php
+                                } 
+                              ?>
+                          </select>
+                          </th>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+                <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit"  class="btn button2 pull-right">ถัดไป >></button>
+              <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< ย้อนกลับ</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
 
   <!-- jQuery 3 -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>

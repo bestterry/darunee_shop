@@ -32,7 +32,7 @@
                 <?php 
                   if($_GET['id_age']==1){
                 ?>
-                  <a type="button" href="old.php" class="btn button2"><< กลับ</a>
+                  <a type="button" href="song_old.php" class="btn button2"><< กลับ</a>
                 <?php 
                   }
                   if($_GET['id_age']==2){
@@ -43,6 +43,11 @@
                   if($_GET['id_age']==3){
                 ?>
                 <a type="button" href="song_middle.php" class="btn button2"><< กลับ</a>
+                <?php 
+                  }
+                  if($_GET['id_age']=='all'){
+                ?>
+                <a type="button" href="all_song.php" class="btn button2"><< กลับ</a>
                 <?php } ?>
                 </div>
                 <div class="col-8 col-sm-8 col-xl-8 col-md-8">
@@ -66,9 +71,8 @@
                 </div>
                 <div class="col-1 col-sm-1 col-lg-1 col-md-1 col-xl-1"></div>
               </div>
-              <div class="box-footer text-center">
-                
-              </div>
+            </div>
+            <div class="box-footer text-center">
             </div>
           </div>
         </div>

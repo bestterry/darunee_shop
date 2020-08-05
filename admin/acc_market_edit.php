@@ -124,6 +124,14 @@ folder instead of downloading all of them to reduce the load. -->
                          </div>
                       </div>
 
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">วันที่ขาย :</label>
+
+                        <div class="col-sm-8">
+                          <input type="date" name="date_acc" class="form-control" value="<?php echo $objr_acc['date_acc'];?>">
+                         </div>
+                      </div>
+
 
                     </div>
                     <div class="col-md-7">

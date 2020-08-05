@@ -85,117 +85,121 @@
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center">รับสินค้าเข้า : <?php echo $objr_zone['name_zone'];?></B>
+                <B align="center">รับสินค้าเข้า : <?php echo $objr_zone['name_zone'];?></B>&nbsp;&nbsp;&nbsp;&nbsp;
+                <B > ผู้ส่ง : <?php echo $_POST['name']; ?> </B>
               </font>
             </div>
-            <div class="text-center with-border">
-              <font size="4">
-                <B > ผู้ส่ง : 
-                        <?php 
-                            echo $_POST['name']; 
-                        ?>   
-                </B>
-              </font>
-
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-                <form action="algorithm/add_product.php" method="post" autocomplete="off">
-                  <table class="table table-bordered">
+            <form action="algorithm/add_product.php" method="post" autocomplete="off">
+              <div class="box-body no-padding">
+                <div class="col-12">
+                  <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+                  <div class="col-8 col-sm-8 col-xl-8 col-md-8">
+                    <div class="mailbox-read-message">
+                      <table class="table table-bordered">
+                              <tbody>
+                          <?php 
+                              $id_member = $_POST['id_member'];
+                              if($id_member == 19){
+                            ?>
+                          <tr class="info">
+                            <th class="text-center" width="5%">ลำดับ
+                            </th>
+                            <th class="text-center" width="35%">ชื่อสินค้า
+                            </th>
+                            <th class="text-center" width="20%">หน่วยนับ
+                            </th>
+                            <th class="text-center" width="20%">จำนวนสินค้ารับเข้า
+                            </th>
+                          </tr>
+                          <?php
+                        for ($i=0; $i < count($_POST['id_product']); $i++) { 
+                          
+                              $id_product = $_POST['id_product'][$i];
+                              $list_product = "SELECT * FROM product  WHERE id_product = $id_product";
+                              $objq_listproduct = mysqli_query($conn,$list_product);
+                              $list = mysqli_fetch_array($objq_listproduct);
+                          ?>
+                          <tr>
+                            <td class="text-center">
+                              <?php echo $i+1; ?>
+                              <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
+                            </td>
+                            <td>
+                              <?php echo $list['name_product']; ?>
+                            </td>
+                            <td class="text-center">
+                              <?php echo $list['unit'];?>
+                            </td>
+                            <td class="text-center">
+                              <input class="text-center" type="text" name="num_after[]" placeholder="0">
+                            </td>
+                          </tr>
+                          <?php 
+                            }
+                              }
+                          
+                              else{
+                            ?>
+                          <tr>
+                            <th class="text-center" width="33%"> <font color="red">สินค้า_หน่วย</font>
+                            </th>
+                            <th class="text-center" width="33%"> <font color="red">จำนวนที่มี</font>
+                            </th>
+                            <th class="text-center" width="33%"> <font color="red">จำนวนรับเข้า</font>
+                            </th </tr> <?php
+                        for ($i=0; $i < count($_POST['id_numpd_car']); $i++) { 
+                          
+                              $numpd_car = $_POST['id_numpd_car'][$i];
+                              $list_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_numPD_car = $numpd_car";
+                              $objq_listproduct = mysqli_query($conn,$list_product);
+                              $list = mysqli_fetch_array($objq_listproduct);
+                          ?> <tr>
+                            <td class="text-center">
+                              <input type="hidden" name="id_numpd_car[]" value="<?php echo $list['id_numPD_car']; ?>">
+                              <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
+                              <?php echo $list['name_product'].'_'.$list['unit']; ?>
+                            </td>
+                            <td class="text-center">
+                              <?php echo $list['num'];?>
+                              <input type="hidden" name="num_befor[]" value="<?php echo $list['num']; ?>">
+                            </td>
+                            <td class="text-center">
+                              <input class="text-center form-control" type="text" name="num_after[]" placeholder="0">
+                            </td>
+                          </tr>
+                          <?php 
+                            }
+                              }
+                          ?>
+                        </tbody>
+                      </table>
+                      <div class="col-md-12">
+                        <table class="table table-bordered">
                           <tbody>
-                      <?php 
-                          $id_member = $_POST['id_member'];
-                          if($id_member == 19){
-                        ?>
-                      <tr class="info">
-                        <th class="text-center" width="5%">ลำดับ
-                        </th>
-                        <th class="text-center" width="35%">ชื่อสินค้า
-                        </th>
-                        <th class="text-center" width="20%">หน่วยนับ
-                        </th>
-                        <th class="text-center" width="20%">จำนวนสินค้ารับเข้า
-                        </th>
-                      </tr>
-                      <?php
-                     for ($i=0; $i < count($_POST['id_product']); $i++) { 
-                       
-                          $id_product = $_POST['id_product'][$i];
-                          $list_product = "SELECT * FROM product  WHERE id_product = $id_product";
-                          $objq_listproduct = mysqli_query($conn,$list_product);
-                          $list = mysqli_fetch_array($objq_listproduct);
-                      ?>
-                      <tr>
-                        <td class="text-center">
-                          <?php echo $i+1; ?>
-                          <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
-                        </td>
-                        <td>
-                          <?php echo $list['name_product']; ?>
-                        </td>
-                        <td class="text-center">
-                          <?php echo $list['unit'];?>
-                        </td>
-                        <td class="text-center"><input class="text-center" type="text" name="num_after[]"></td>
-                      </tr>
-                      <?php 
-                        }
-                          }
-                      
-                          else{
-                        ?>
-                      <tr>
-                        <th class="text-center" width="33%"> <font color="red">สินค้า_หน่วย</font>
-                        </th>
-                        <th class="text-center" width="33%"> <font color="red">จำนวนที่มี</font>
-                        </th>
-                        <th class="text-center" width="33%"> <font color="red">จำนวนรับเข้า</font>
-                        </th </tr> <?php
-                     for ($i=0; $i < count($_POST['id_numpd_car']); $i++) { 
-                       
-                          $numpd_car = $_POST['id_numpd_car'][$i];
-                          $list_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_numPD_car = $numpd_car";
-                          $objq_listproduct = mysqli_query($conn,$list_product);
-                          $list = mysqli_fetch_array($objq_listproduct);
-                      ?> <tr>
-                        <td class="text-center">
-                          <input type="hidden" name="id_numpd_car[]" value="<?php echo $list['id_numPD_car']; ?>">
-                          <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
-                          <?php echo $list['name_product'].'_'.$list['unit']; ?>
-                        </td>
-                        <td class="text-center">
-                          <?php echo $list['num'];?>
-                          <input type="hidden" name="num_befor[]" value="<?php echo $list['num']; ?>">
-                        </td>
-                        <td class="text-center"><input class="text-center" type="text" name="num_after[]"></td>
-                      </tr>
-                      <?php 
-                        }
-                          }
-                      ?>
-                    </tbody>
-                  </table>
-                  <div class="col-md-12">
-                    <table class="table table-bordered">
-                      <tbody>
-                        <tr>
-                          <th class="text-center">หมายเหตุ : <input size="50" class="text-center" type="text" name="note" value="-">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <input type="hidden" name="id_zone"   value="<?php echo $_POST['id_zone']; ?>">
-                    <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
+                            <tr>
+                              <th class="text-center">หมายเหตุ : <input size="50" class="text-center" type="text" name="note" value="-">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <input type="hidden" name="id_zone"   value="<?php echo $_POST['id_zone']; ?>">
+                        <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
+                      </div>
+                    </div>                  
                   </div>
+                  <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
               </div>
-            </div>
-            <!-- /.box-body -->
-            <!-- /.box-footer -->
-            <div class="box-footer">
-              <a type="block" href="admin.php" class="btn button2 pull-left"><< เมนูหลัก</a> 
-              <button type="submit" class="btn btn-success center" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"> รับสินค้าเข้า</i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </div>
+              <div class="box-footer">
+                <div class="col-12">
+                  <div class="col-4 col-sm-4 col-xl-4 col-md-4">
+                    <a type="block" href="add_history.php" class="btn button2"><< กลับ</a> 
+                  </div>
+                  <div class="col-4 col-sm-4 col-xl-4 col-md-4 text-center">
+                    <button type="submit" class="btn btn-success center" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";> รับสินค้าเข้า</button>
+                  </div>
+                  <div class="col-4 col-sm-4 col-xl-4 col-md-4"></div>
+                </div>
+              </div>
             </form>
-            <!-- /.box-footer -->
           </div>
           <!-- /. box -->
         </div>

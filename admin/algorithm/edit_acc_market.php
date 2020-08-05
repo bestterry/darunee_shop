@@ -6,9 +6,10 @@
   $village = $_POST['village'];
   $tel = $_POST['tel'];
   $note = $_POST['note'];
+  $date_acc = $_POST['date_acc'];
 
   //edit address
-  $sql_update = "UPDATE acc_market SET name_customer='$name_customer', village='$village', note = '$note', tel='$tel' WHERE id_acc_market = $id_acc_market";
+  $sql_update = "UPDATE acc_market SET name_customer='$name_customer', village='$village', note = '$note', tel='$tel',date_acc ='$date_acc' WHERE id_acc_market = $id_acc_market";                      
   $objq_update = mysqli_query($conn,$sql_update);
   //edit address
 

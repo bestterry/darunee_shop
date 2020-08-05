@@ -62,6 +62,7 @@
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#check" data-toggle="tab">ค้นหาแผนที่</a></li>
                 <li><a href="#addimage" data-toggle="tab">เพิ่มแผนที่</a></li>
+                <li><a href="#setting" data-toggle="tab">ตั้งค่า</a></li>
               </ul>
               <div class="tab-content">
 
@@ -77,7 +78,7 @@
                             <B><font size="5">ค้นหารูปแผนที่</font></B> 
                           </div>
                           <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4 text-right">
-                            <a href="map_edit.php" class="btn btn-success">จัดการแผนที่ </a>
+                            <!-- <a href="map_edit.php" class="btn btn-success">จัดการแผนที่ </a> -->
                           </div>
                         </div>
                       </div>
@@ -125,7 +126,6 @@
                         <B><font size="5">เพิ่มแผนที่</font></B> 
                       </div>
                       <div class="box-body">
-                        <!-- ------------------------------//ยอดขายรวม---------------------------- -->
                         <div class="row">
                           <div class="col-md-12">
                             <div class="form-group">
@@ -161,13 +161,57 @@
                             </div>
                           </div>
                         </div>
-                        <!-- ------------------------------//ยอดขายรวม---------------------------- -->
                       </div>
                       <div class="box-footer text-center">
                           <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> เพิ่ม </button>
                       </div>
                     </div>
                   </form>
+                </div>
+
+                <div class="tab-pane" id="setting">
+                  <div class="box box-default">
+                    <!-- /.box-header -->
+                    <div class="box-header text-center">
+                      <B><font size="5">ตั้งค่า</font></B> 
+                    </div>
+                    <div class="box-body">
+                      <div class="row">
+                      <div class="col-md-12">
+                          <div class="col-2 col-sm-2 col-lg-2 col-md-2 col-xl-2"></div>
+                          <div class="col-8 col-sm-8 col-lg-8 col-md-8 col-xl-8">
+                            <table id="example2" class="table">
+                              <thead>
+                                <tr>
+                                  <th class="text-center" width="85%">ข้อมูล</th>
+                                  <th class="text-center" width="5%">ดู</th>
+                                  <th class="text-center" width="5%">ลบ</th>
+                                  <th class="text-center" width="5%">แก้</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              <?php 
+                                $sql_map = "SELECT id_map,name_map FROM map";
+                                $objq_map = mysqli_query($mysqli,$sql_map);
+                                while($value = $objq_map->fetch_assoc()){
+                              ?>
+                                <tr>
+                                  <td class="text-center"><?php echo $value['name_map']; ?></td>
+                                  <td class="text-center"><a href="map_show2.php?id_map=<?php echo $value['id_map']; ?>" class="btn btn-success btn-xs">ดู</a></td>
+                                  <td class="text-center"><a href="algorithm/delete_map.php?id_map=<?php echo $value['id_map']; ?>&&name_map=<?php echo $value['name_map'];?>" class="btn  btn-danger btn-xs" >ลบ</a> </td>  
+                                  <td class="text-center"><a href="edit_map.php?id_map=<?php echo $value['id_map']; ?>&&name_map=<?php echo $value['name_map'];?>" class="btn btn-success btn-xs" >แก้</a> </td> 
+                                </tr>
+                              <?php 
+                                }
+                              ?>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="col-2 col-sm-2 col-lg-2 col-md-2 col-xl-2"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
               </div>
@@ -203,12 +247,12 @@
     $(function () {
         $('#example1').DataTable()
         $('#example2').DataTable({
-          'paging'      : false,
+          'paging'      : true,
           'lengthChange': true,
-          'searching'   : false,
-          'ordering'    : false,
+          'searching'   : true,
+          'ordering'    : true,
           'info'        : true,
-          'autoWidth'   : false
+          'autoWidth'   : true
         }
         )
       });

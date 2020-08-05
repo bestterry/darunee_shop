@@ -161,7 +161,7 @@
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
-                <B align="center"> แก้ไขเงินขายรายวัน </B>
+                <B align="center"> แก้ไขข้อมูล (เงินขายรายวัน) </B>
               </font>
             </div>
             <!-- add_receive_money  -->
@@ -173,7 +173,7 @@
                     <div class="row">
                       <div class="col-sm-6 col-md-6 col-xs-6">
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">ชื่อ :</label>
+                          <label class="col-sm-4 control-label">ชื่อ </label>
                           <div class="col-sm-8">
                             <input type="text" class="form-control text-center" value=" <?php echo $objr_receive['name'];?>"  style="background-color: #e6f7ff;" readonly/>
                             <input type="hidden" name="id_receive_money" value="<?php echo $id_receive_money;?>">
@@ -181,7 +181,7 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">งาน :</label>
+                          <label class="col-sm-4 control-label">งาน </label>
                           <div class="col-sm-8">
                             <select name="id_practice"  class="form-control" style="width: 100%;">
                               <option value="1"  <?php if($id_practice == 1){ echo "selected='selected'";} ?>>ส่ง</option>
@@ -199,14 +199,14 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">พื้นที่ :</label>
+                          <label class="col-sm-4 control-label">หมายเหตุ </label>
                           <div class="col-sm-8">
-                            <input type="text" name="area" value="<?php echo $objr_receive['area']; ?>" class="form-control text-center">
+                            <input type="text" name="area" value="<?php echo $objr_receive['note']; ?>" class="form-control text-center">
                           </div>
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">สนง (รับ) :</label>
+                          <label class="col-sm-4 control-label">สนง (รับ) </label>
                           <div class="col-sm-8">
                             <label class="switch">
                               <input type="checkbox" name="status_office" <?php if($objr_receive['status_office'] == 'Y'){ echo "checked";}else{} ?>>
@@ -216,7 +216,7 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">หัวหน้า (รับ) :</label>
+                          <label class="col-sm-4 control-label">รับเงิน </label>
                           <div class="col-sm-8">
                             <label class="switch">
                               <input type="checkbox" name="status_boss" <?php if($objr_receive['status_boss'] == 'Y'){ echo "checked";}else{} ?>>
@@ -229,14 +229,14 @@
                       <div class="col-sm-6 col-md-6 col-xs-6">
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">เงินขาย :</label>
+                          <label class="col-sm-4 control-label">เงินขาย </label>
                           <div class="col-sm-8">
                             <input type="number" name="money" class="form-control text-center" value="<?php echo $objr_receive['money']; ?>">
                           </div>
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">รับ :</label>
+                          <label class="col-sm-4 control-label">รับ </label>
                           <div class="col-sm-8">
                             <select name="id_category"  class="form-control" style="width: 100%;">
                               <option value="1"  <?php if($id_category == 1){ echo "selected='selected'";} ?>>สด</option>
@@ -249,16 +249,16 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">วันรับ :</label>
+                          <label class="col-sm-4 control-label">วันรับ </label>
                           <div class="col-sm-8">
                             <input type="date" name="date" class="form-control text-center" value="<?php echo $objr_receive['date']; ?>">
                           </div>
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">หมายเหตุ :</label>
+                          <label class="col-sm-4 control-label"></label>
                           <div class="col-sm-8">
-                            <input type="text" name="note" value="<?php echo $objr_receive['note']; ?>" class="form-control text-center">
+                            
                           </div>
                         </div>
 
@@ -268,10 +268,19 @@
                   <div class="col-1 col-md-1 col-xs-1"></div>
                 </div>
                 <div class="box-footer">
-                  <a type="block" href="receive_money.php" class="btn btn-danger pull-left"><< กลับ</a> 
-                  <button type="submit" type="submit" class="btn btn-success pull-right"> <i class="fa fa-save"></i> บันทึก </button>
+                  <div class="col-12 col-md-12 col-xs-12">
+                    <div class="col-4 col-md-4 col-xs-4">
+                      <a type="block" href="receive_money.php" class="btn btn-danger pull-left"><< กลับ</a> 
+                    </div>
+                    <div class="col-4 col-md-4 col-xs-4 text-center">
+                      <button type="submit" type="submit" class="btn btn-success "><i class="fa fa-save"></i> บันทึก </button>
+                    </div>
+                    <div class="col-4 col-md-4 col-xs-4 text-right">
+                      <a href="algorithm/delete_receive_money.php?id_receive_money=<?php echo $objr_receive['id_receive_money']; ?>" class="btn btn-danger" 
+                         onClick="return confirm('คุณต้องการที่จะลบข้อมูล <?php echo $objr_receive['name']; ?> หรือไม่ ?')";>ลบ</a>
+                    </div>
+                  </div>
                 </div>
-
             </form>
           </div>
         </div>

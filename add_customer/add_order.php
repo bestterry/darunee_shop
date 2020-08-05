@@ -103,7 +103,7 @@ $mysqli = connect();
                     <div class="col-md-5">
                      
                         <div class="form-group">
-                        <label class="col-sm-4 control-label">จังหวัด :</label>
+                        <label class="col-sm-4 control-label">จังหวัด </label>
                         <div class="col-sm-8">
                           <select name="province_name" data-where="2" class="form-control ajax_address select2" >
                             <option value="">-- เลือกจังหวัด --</option>
@@ -112,7 +112,7 @@ $mysqli = connect();
                       </div>
                       <!-- /.form-group -->
                       <div class="form-group">
-                        <label  class="col-sm-4 control-label">อำเภอ :</label>
+                        <label  class="col-sm-4 control-label">อำเภอ </label>
                         <div class="col-sm-8">
                           <select name="amphur_name" data-where="3" class="ajax_address form-control select2" >
                             <option value="">-- เลือกอำเภอ --</option>
@@ -121,7 +121,7 @@ $mysqli = connect();
                       </div>
                       <!-- /.form-group -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label">ตำบล :</label>
+                        <label class="col-sm-4 control-label">ตำบล </label>
                         <div class="col-sm-8">
                           <select name="district_name" data-where="4" class="ajax_address form-control select2" style="width: 100%;">
                             <option value="">-- เลือกตำบล --</option>
@@ -131,7 +131,7 @@ $mysqli = connect();
 
                       <!-- /.form-group -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label">บ้าน(ม) :</label>
+                        <label class="col-sm-4 control-label">บ้าน(ม) </label>
 
                         <div class="col-sm-8">
                           <input type="text" name="village" class="form-control" placeholder="หมู่บ้าน">
@@ -139,21 +139,21 @@ $mysqli = connect();
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-4 control-label">ลูกค้า :</label>
+                        <label class="col-sm-4 control-label">ลูกค้า </label>
                         <div class="col-sm-8">
                           <input type="text" name="name_customer" class="form-control" placeholder="ชื่อลูกค้า">
                         </div>
                       </div>
 
                       <div class="form-group">
-                          <label class="col-sm-4 control-label">โทร :</label>
+                          <label class="col-sm-4 control-label">โทร </label>
                           <div class="col-sm-8">
                             <input class="form-control" name="tel" placeholder="เบอร์โทรศัพท์">
                           </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-4 control-label">หมายเหตุ :</label>
+                        <label class="col-sm-4 control-label">หมายเหตุ </label>
 
                         <div class="col-sm-8">
                           <input type="text" name="note" class="form-control" value="-">

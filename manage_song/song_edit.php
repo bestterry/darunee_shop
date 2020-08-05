@@ -5,7 +5,6 @@
   $sql_song = "SELECT * FROM song_list
                 INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
                 INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
-                INNER JOIN song_age ON song_list.id_age = song_age.id_age
                 INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist
                 WHERE song_list.id_song = $id_song";
   $objq_song = mysqli_query($conn,$sql_song);
@@ -136,17 +135,17 @@
                 <div class="col-12">
                   <div class="col-4 col-sm-4 col-xl-4 col-md-4">
                     <?php 
-                      if($_GET['id_age']==1){
+                      if($_GET['id_ageartist']==1){
                     ?>
-                      <a type="button" href="old.php" class="btn button2"><< กลับ</a>
+                      <a type="button" href="song_old.php" class="btn button2"><< กลับ</a>
                     <?php 
                       }
-                      if($_GET['id_age']==2){
+                      if($_GET['id_ageartist']==2){
                     ?>
                     <a type="button" href="song_middle.php" class="btn button2"><< กลับ</a>
                     <?php 
                       }
-                      if($_GET['id_age']==3){
+                      if($_GET['id_ageartist']==3){
                     ?>
                     <a type="button" href="song_middle.php" class="btn button2"><< กลับ</a>
                     <?php } ?>
@@ -154,7 +153,7 @@
                   <div class="col-4 col-sm-4 col-xl-4 col-md-4">
                     <p align="center">
                       <font size="5">
-                        <B>แก้ไขข้อมูลเพลง</B>
+                        <B>แก้ไขข้อมูล (เพลง)</B>
                       </font>
                     </p>
                   </div>
@@ -171,7 +170,7 @@
                       
                       <div class="col-5 col-sm-5 col-md-5 col-xl-5">
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">นักร้อง :</label>
+                          <label class="col-sm-4 control-label">นักร้อง </label>
                           <div class="col-sm-4">
                             <select name="id_artist"  class="form-control" >
                               <option value="<?php echo $objr_song['id_artist']; ?>">-- เลือกนักร้อง --</option>
@@ -190,34 +189,16 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">ชื่อเพลง :</label>
+                          <label class="col-sm-4 control-label">ชื่อเพลง </label>
                           <div class="col-sm-8">
                             <input type="text" name="name_song" class="form-control" value="<?php echo $objr_song['name_song']; ?>">
                             <input type="hidden" name="id_song" class="form-control" value="<?php echo $id_song; ?>">
+                            <input type="hidden" name="id_ageartist" class="form-control" value="<?php echo $id_ageartist; ?>">
                           </div>
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">ยุค :</label>
-                          <div class="col-sm-4">
-                            <select name="id_age"  class="form-control" >
-                              <option value="<?php echo $objr_song['id_age']; ?>">-- เลือกยุค --</option>
-                              <?php 
-                                $sql_age = "SELECT id_age,name_age FROM song_age";
-                                $objq_age = mysqli_query($conn,$sql_age);
-                                while($value = $objq_age->fetch_assoc()){ 
-                              ?>
-                                <option value="<?php echo $value['id_age'];?>"><?php echo $value['name_age'];?></option>
-                              <?php } ?>
-                            </select>
-                          </div>
-                          <div class="col-sm-4">
-                            <input class="form-control" value="<?php echo $objr_song['name_age'];?>" disabled/>
-                          </div>
-                        </div>
-
-                        <div class="form-group">
-                          <label class="col-sm-4 control-label">ทำนอง :</label>
+                          <label class="col-sm-4 control-label">ทำนอง </label>
                           <div class="col-sm-4">
                             <select name="id_tune"  class="form-control" >
                               <option value="<?php echo $objr_song['id_tune']; ?>">-- เลือกทำนอง --</option>
@@ -236,13 +217,14 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">เกรด :</label>
+                          <label class="col-sm-4 control-label">เกรด </label>
                           <div class="col-sm-4">
                             <select name="melodic"  class="form-control" >
                               <option value="<?php echo $objr_song['melodic']; ?>">-- เลือกความเพราะ --</option>
                               <option value="A">A</option>
                               <option value="B">B</option>
                               <option value="C">C</option>
+                              <option value="D">D</option>
                             </select>
                           </div>
                           <div class="col-sm-4">
@@ -251,7 +233,7 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">ต้นฉบับ :</label>
+                          <label class="col-sm-4 control-label">ต้นฉบับ </label>
                           <div class="col-sm-8">
                             <label class="switch">
                               <input type="checkbox" name="script" <?php if($objr_song['script']=="Y"){ echo "checked"; }else{} ?>>
@@ -261,7 +243,7 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">เปิดแล้ว :</label>
+                          <label class="col-sm-4 control-label">เปิดแล้ว </label>
                           <div class="col-sm-8">
                             <label class="switch">
                               <input type="checkbox" name="status" <?php if($objr_song['status']=="Y"){ echo "checked"; }else{} ?>>
@@ -276,7 +258,8 @@
                     </div>
                   </div>
                   <div class="box-footer text-center">
-                    <button type="submit" class="btn btn-success"> บันทึก </button>
+                    <button type="submit" class="btn btn-success"> บันทึก </button>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                    <a href="algorithm/delete_song.php?id_song=<?php echo $id_song;?>" class="btn  btn-danger" OnClick="return confirm('ต้องการลบรายการเพลงหรือไม่ ?')";>ลบ</a>
                   </div>
                 </div>
               </form>

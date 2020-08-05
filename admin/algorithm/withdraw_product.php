@@ -48,5 +48,5 @@
     }
       //-----------------------------//manage numpd_car----------------------------------------
  }
-  header('location:../withdraw_history.php');
+  header('location:../total_stock.php');
 ?>

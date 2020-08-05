@@ -252,6 +252,10 @@
             <li><a href="map.php" ><i class="fa fa-map"></i> แผนที่ </a></li>
             <!-- /แผนที่ -->
 
+            <!-- จัดการเพลงหลัก -->
+            <li><a href="../manage_song/artist.php" ><i class="fa fa-music"></i> จัดการเพลงหลัก </a></li>
+            <!--/จัดการเพลงหลัก -->
+
             <!-- จัดการเพลง -->
             <li><a href="song_search.php" ><i class="fa fa-music"></i> จัดการเพลง </a></li>
             <!--/จัดการเพลง -->

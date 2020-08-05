@@ -81,21 +81,21 @@
               <div class="box box-primary">
                 <!-- /.box-header -->
                 <div class="box-header with-border">
-                <div class="col-12">
-                  <div class="col-2 col-sm-2 col-xl-2 col-md-2">
-                    <a type="button" href="../admin/admin.php" class="btn button2"><< เมนูหลัก</a>
+                  <div class="col-12">
+                    <div class="col-2 col-sm-2 col-xl-2 col-md-2">
+                      <a type="button" href="../admin/admin.php" class="btn button2"><< เมนูหลัก</a>
+                    </div>
+                    <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
+                      <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-warning" style="color:black;">OR วันนี้</a>
+                      <!-- <a type="button"  href="../pdf_file/list_order2.php" class="btn btn-warning" style="color:black;">ค้างส่งทั้งหมด</a> -->
+                      <a type="button"  href="#" data-toggle="modal" data-target="#myModal" class="btn btn-warning" style="color:black;">ค้างส่ง(อ)</a>
+                      <a type="button" href="#" data-toggle="modal" data-target="#myModal2" class="btn btn-warning" style="color:black;">ส่งแล้ว(อ)</a>
+                      <a type="button" href="order_success.php" class="btn btn-danger" style="color:black;">OR วันนี้(ส่ง)</a>
+                      <a type="button" href="total_order.php" class="btn btn-danger" style="color:black;">ค้างส่งรวม</a>
+                      <a type="button"  href="#" data-toggle="modal" data-target="#mymodal3" class="btn btn-danger" style="color:black;">ค้างส่ง(จ)</a>
+                      <a type="button" href="add_order.php" class="btn btn-danger" style="color:black;">เพิ่ม OR</a>
+                    </div>
                   </div>
-                  <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
-                    <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-warning" style="color:black;">OR วันนี้</a>
-                    <!-- <a type="button"  href="../pdf_file/list_order2.php" class="btn btn-warning" style="color:black;">ค้างส่งทั้งหมด</a> -->
-                    <a type="button"  href="#" data-toggle="modal" data-target="#myModal" class="btn btn-danger" style="color:black;">ค้างส่ง(อ)</a>
-                    <a type="button" href="#" data-toggle="modal" data-target="#myModal2" class="btn btn-warning" style="color:black;">ส่งแล้ว(อ)</a>
-                    <a type="button" href="total_order.php" class="btn btn-success" style="color:black;">จำนวนค้างส่ง</a>
-                    <a type="button"  href="#" data-toggle="modal" data-target="#mymodal3" class="btn btn-success" style="color:black;">ค้นหาค้างส่ง</a>
-                    <a type="button" href="add_order.php" class="btn btn-success" style="color:black;">เพิ่ม OR</a>
-                  </div>
-                </div>
-                  
                 </div>
                 <form action="../pdf_file/pick_order.php" method="post" autocomplete="off"> 
                   <div class="box-body no-padding">
@@ -133,7 +133,7 @@
                               }
                           ?>
                           <tr>
-                            <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>" class="fa fa-pencil" ></a></td>
+                            <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=pending" class="fa fa-pencil" ></a></td>
                             <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
                             <!-- <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=2" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>              -->
                             <td ><?php echo $value['id_addorder'].' '.$value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
@@ -158,7 +158,7 @@
                 <form action="../pdf_file/list_order3.php" method="post">
                     <div class="modal-content">
                         <div class="modal-header text-center">
-                            <font size="5"><B> ค้นหา (รายอำเภอ) </B></font>
+                            <font size="5"><B> รายการ ORDER (อำเภอ) </B></font>
                         </div>
                         <div class="modal-body col-md-12 table-responsive mailbox-messages">
                           <div class="table-responsive mailbox-messages">
@@ -204,7 +204,7 @@
                 <form action="../pdf_file/list_order4.php" method="post">
                     <div class="modal-content">
                         <div class="modal-header text-center">
-                            <font size="5"><B> ค้นหา (รายอำเภอ ส่งแล้ว) </B></font>
+                            <font size="5"><B> รายการ ORDER ส่งแล้ว (อำเภอ) </B></font>
                         </div>
                         <div class="modal-body col-md-12 table-responsive mailbox-messages">
                           <div class="table-responsive mailbox-messages">
@@ -252,7 +252,7 @@
                 <form action="total_order3.php" method="post">
                     <div class="modal-content">
                         <div class="modal-header text-center">
-                            <font size="5"><B> ค้นหาจำนวนค้างส่ง </B></font>
+                            <font size="5"><B> จำนวน ORDER ค้างส่ง </B></font>
                         </div>
                         <div class="modal-body col-md-12 table-responsive mailbox-messages">
                           <div class="table-responsive mailbox-messages">
