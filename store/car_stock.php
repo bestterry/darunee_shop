@@ -153,7 +153,7 @@ require "menu/date.php";
             </div>
           </div>
           <div class="box-footer">
-            <a href="store.php" class="btn btn-success pull-left"> <<== กลับสู่หน้าหลัก </a>
+            <a href="store.php" class="btn btn-danger pull-left"> << เมนูหลัก </a>
             <a href="../pdf_file/admin_car_stock.php" class="btn btn-success pull-right"><i class="fa fa-print"> พิมพ์ </i></a>
           </div>
         </div>

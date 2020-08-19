@@ -131,12 +131,7 @@
                                   $total_numsoft1 = 0;
                                   $total_numsoft2 = 0;
                                     $sql_idmember = "SELECT * FROM member 
-                                                    WHERE status = 'employee' 
-                                                    AND NOT id_member = 3
-                                                    AND NOT id_member = 8
-                                                    AND NOT id_member = 19
-                                                    AND NOT id_member = 28 
-                                                    AND NOT id_member = 32";
+                                                    WHERE status = 'employee' AND status_car = 1";
                                     $objq_member = mysqli_query($conn,$sql_idmember);
                                     while($value = $objq_member->fetch_assoc()){
                                       $id_member = $value['id_member'];
@@ -192,14 +187,14 @@
                               </thead>
                               <tbody>
                                 <?php
-                                                  $total_money = 0;
-                                                  $date = " SELECT * FROM price_history 
-                                                            INNER JOIN product ON product.id_product = price_history.id_product
-                                                            INNER JOIN zone ON price_history.id_zone = zone.id_zone 
-                                                            WHERE DATE_FORMAT(price_history.datetime,'%Y-%m-%d')='$day'";
-                                                  $objq = mysqli_query($conn,$date);
-                                                  while($value = $objq ->fetch_assoc()){ 
-                                              ?>
+                                    $total_money = 0;
+                                    $date = " SELECT * FROM price_history 
+                                              INNER JOIN product ON product.id_product = price_history.id_product
+                                              INNER JOIN zone ON price_history.id_zone = zone.id_zone 
+                                              WHERE DATE_FORMAT(price_history.datetime,'%Y-%m-%d')='$day'";
+                                    $objq = mysqli_query($conn,$date);
+                                    while($value = $objq ->fetch_assoc()){ 
+                                ?>
                                 <tr>
                                   <td class="text-center">
                                     <?php echo $value['name_product'].'_'.$value['unit']; ?>
@@ -267,11 +262,12 @@
                             <table class="table">
                               <thead>
                                 <tr>
-                                  <th class="text-center" width="20%"><font color="red">สินค้า_หน่วย</font></th>
+                                  <th class="text-center" width="17%"><font color="red">สินค้า_หน่วย</font></th>
                                   <th class="text-center" width="8%"><font color="red">จำนวน</font></th>
                                   <th class="text-center" width="10%"><font color="red">บ/หน่วย</font></th>
                                   <th class="text-center" width="10%"><font color="red">เงินขาย</font></th>
-                                  <th class="text-center" width="36%"><font color="red">รายละเอียด</font></th>
+                                  <th class="text-center" width="18%"><font color="red">ลูกค้า</font></th>
+                                  <th class="text-center" width="21%"><font color="red">รายละเอียด</font></th>
                                   <th class="text-center" width="8%"><font color="red">เวลา</font></th>
                                   <th class="text-center" width="8%"><font color="red">#</font></th>
                                 </tr>
@@ -297,6 +293,9 @@
                                   </td>
                                   <td class="text-center">
                                     <?php echo $product['money']; ?>
+                                  </td>
+                                  <td class="text-center">
+                                    <?php echo $product['customer']; ?>
                                   </td>
                                   <td class="text-center">
                                     <?php echo $product['note']; ?>

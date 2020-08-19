@@ -135,45 +135,51 @@ folder instead of downloading all of them to reduce the load. -->
                      <div class="col-md-12">
                       <div>
                         <table class="table table-bordered" id="dynamic_field">
-                          <tr>
+                        <tr>
                             <td width="25%" class="text-right">ID &nbsp;&nbsp;:</td>
                             <td width="25%" ><?php echo $objr_order["id_order_list"];?></td>
-                            <td width="25%" class="text-right" >ค่าขนส่ง &nbsp;&nbsp;:</td>
-                            <td width="25%"><?php echo $objr_order['portage'];?></td>
+                            <td width="25%" class="text-right" >บาท/ตัน &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['price_portage'];?></td>
                           </tr>
                           <tr>
                             <td width="25%" class="text-right">ใบสั่งที่ &nbsp;&nbsp;:</td>
                             <td width="25%" ><?php echo $objr_order["list_order"];?></td>
-                            <td width="25%" class="text-right" >ประเภทรถ &nbsp;&nbsp;:</td>
-                            <td width="25%"><?php echo $objr_order['catagory_car'];?></td>
+                            <td width="25%" class="text-right" >ค่าขนส่ง &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['portage'];?></td>
                           </tr>
                           <tr>
                             <td width="25%" class="text-right" >วันที่สั่ง &nbsp;&nbsp;:</td>
                             <td width="25%" ><?php echo DateThai($objr_order['date_order']); ?></td>
-                            <td width="25%" class="text-right">ทะเบียนรถ &nbsp;&nbsp;:</td>
-                            <td width="25%" ><?php echo $objr_order['licent_plate'];?></td>
+                            <td width="25%" class="text-right" >ประเภทรถ &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['catagory_car'];?></td>
                           </tr>
                           <tr>
                             <td width="25%" class="text-right" > สินค้า &nbsp;&nbsp;:</td>
                             <td width="25%" ><?php echo $objr_order['full_name'];?></td>
-                            <td width="25%" class="text-right">พนักงานขับรถ &nbsp;&nbsp;:</td>
-                            <td width="25%"> <?php echo $objr_order['name_sent'];?></td>
+                            <td width="25%" class="text-right">ทะเบียนรถ &nbsp;&nbsp;:</td>
+                            <td width="25%" ><?php echo $objr_order['licent_plate'];?></td>
                           </tr>
                           <tr>
                             <td width="25%" class="text-right" >จำนวนสินค้า &nbsp;&nbsp;:</td>
                             <td width="25%" ><?php echo $objr_order['num_product'].' '.$objr_order['unit'];?></td>
-                            <td width="25%" class="text-right" >เบอร์โทร พขร. &nbsp;&nbsp;:</td>
-                            <td width="25%"><?php echo $objr_order['tel_sent'];?></td>
+                            <td width="25%" class="text-right">พนักงานขับรถ &nbsp;&nbsp;:</td>
+                            <td width="25%"> <?php echo $objr_order['name_sent'];?></td>
                           </tr>
                           <tr>
                             <td width="25%" class="text-right" >ราคาต่อหน่วย &nbsp;&nbsp;:</td>
                             <td width="25%"><?php echo $objr_order['price'];?></td>
-                            <td width="25%" class="text-right">วันที่เข้ารับ &nbsp;&nbsp;:</td>
-                            <td width="25%"><?php echo DateThai($objr_order['date_getorder']);?></td>
+                            <td width="25%" class="text-right" >เบอร์โทร พขร. &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo $objr_order['tel_sent'];?></td>
                           </tr>
                           <tr>
                             <td width="25%" class="text-right" >ราคาสินค้า &nbsp;&nbsp;:</td>
                             <td width="25%"><?php echo $objr_order['money'];?></td>
+                            <td width="25%" class="text-right">วันที่เข้ารับ &nbsp;&nbsp;:</td>
+                            <td width="25%"><?php echo DateThai($objr_order['date_getorder']);?></td>
+                          </tr>
+                          <tr>
+                            <td width="25%" class="text-right" ></td>
+                            <td width="25%"></td>
                             <td width="25%" class="text-right">วันที่รถมาถึง &nbsp;&nbsp;:</td>
                             <td width="25%"><?php echo DateThai($objr_order['date_receive']);?></td>
                           </tr>

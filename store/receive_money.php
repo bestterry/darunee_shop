@@ -86,6 +86,12 @@
         document.form1.date.focus();		
         return false;
       }	
+      if(document.form1.customer.value == "")
+      {
+        alert('กรุณาระบุลูกค้า');
+        document.form1.customer.focus();		
+        return false;
+      }	
       document.form1.submit();
     }
   </script>
@@ -192,8 +198,10 @@
                     <td width="30%" ><input type="date" name="date" class="form-control"></td>
                   </tr>
                   <tr>
+                    <th width="20%" class="text-right"><font size="4">ลูกค้า &nbsp;&nbsp;:</font></th>
+                    <td width="30%" ><input type="text" name="customer" class="form-control"></td>
                     <th width="20%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
-                    <td colspan="3" ><input type="text" name="note" value="-" class="form-control"></td>
+                    <td width="30%"><input type="text" name="note" value="-" class="form-control"></td>
                   </tr>
                   <tr>
                     <th width="20%" class="text-right" ><font size="4" color="red">Note &nbsp;&nbsp;:</font></th>
@@ -208,11 +216,12 @@
                   <tr>
                     <th class="text-center" width="9%">ชื่อ</th>
                     <th class="text-center" width="9%">งาน</th>
-                    <th class="text-center" width="23%">พื้นที่</th>
+                    <th class="text-center" width="12%">พื้นที่</th>
                     <th class="text-center" width="10%">เงินขาย</th>
                     <th class="text-center" width="10%">รับ</th>
                     <th class="text-center" width="10%">วันรับ</th>
-                    <th class="text-center" width="19%">หมายเหตุ</th>
+                    <th class="text-center" width="15%">ชื่อลูกค้า</th>
+                    <th class="text-center" width="15%">หมายเหตุ</th>
                     <th class="text-center" width="7%">รับแล้ว</th>
                   </tr>
                   <?php
@@ -225,6 +234,7 @@
                     <td class="text-center" ><?php echo $value['money']; ?></td>
                     <td class="text-center" ><?php echo $value['name_category']; ?></td>
                     <td class="text-center" ><?php echo Datethai($value['date']); ?></td>
+                    <td class="text-center" ><?php echo $value['customer']; ?></td>
                     <td class="text-center" ><?php echo $value['note']; ?></td>
                     <td class="text-center" >
                       <?php 

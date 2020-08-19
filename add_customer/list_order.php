@@ -87,6 +87,7 @@
                     </div>
                     <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
                       <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-warning" style="color:black;">OR วันนี้</a>
+                      <a type="button"  href="#" data-toggle="modal" data-target="#employee" class="btn btn-warning" style="color:black;">OR เบิก</a>
                       <!-- <a type="button"  href="../pdf_file/list_order2.php" class="btn btn-warning" style="color:black;">ค้างส่งทั้งหมด</a> -->
                       <a type="button"  href="#" data-toggle="modal" data-target="#myModal" class="btn btn-warning" style="color:black;">ค้างส่ง(อ)</a>
                       <a type="button" href="#" data-toggle="modal" data-target="#myModal2" class="btn btn-warning" style="color:black;">ส่งแล้ว(อ)</a>
@@ -103,11 +104,11 @@
                       <table id="example2" class="table">
                         <thead>
                           <tr>
-                            <th class="text-center" width="4%">แก้</th>
-                            <th class="text-center" width="4%">#</th>
                             <th class="text-center" width="83%">ข้อมูล ORDER ค้างส่ง</th>
                             <th class="text-center" width="4%">ทวง</th>
                             <th class="text-center" width="4%">เบิก</th>
+                            <th class="text-center" width="4%">#</th>
+                            <th class="text-center" width="4%">แก้</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -133,13 +134,13 @@
                               }
                           ?>
                           <tr>
-                            <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=pending" class="fa fa-pencil" ></a></td>
-                            <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
                             <!-- <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=2" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>              -->
                             <td ><?php echo $value['id_addorder'].' '.$value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
                             <!-- <td class="text-center" ><input type="checkbox" name="id_addorder[]" value="<?php echo $value['id_addorder']; ?>"></td> -->
                             <td class="text-center"><?php if($request=='Y'){echo "ทวง";}else{}?></td>                         
                             <td class="text-center"><?php echo $name_member; ?></td>
+                            <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
+                            <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=pending" class="btn btn-default btn-xs">>></a></td>
                           </tr>
                           <?php 
                             }
@@ -148,7 +149,6 @@
                       </table>
                     </div>
                   </div>
-                  <!-- <div class="box-footer" align="center"> <button type="submit" class="btn btn-success"> ตกลง </button> </div> -->
                 </form>
               </div>
             </div>
@@ -280,6 +280,47 @@
                 </form>
             </div>
           </div>
+          <div class="modal fade" id="employee" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <form action="../pdf_file/list_order_withdraw.php" method="post">
+                <div class="modal-content">
+                  <div class="modal-header text-center">
+                    <font size="5"><B>ORDER เบิก</B></font>
+                  </div>
+                  <div class="modal-body col-md-12 table-responsive mailbox-messages">
+                    <div class="table-responsive mailbox-messages">
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr>
+                            <th class="text-center" width="30%"><font size="4">หน่วยรถ</font></th>
+                            <th class="text-center" width="70%"> 
+                              <select name="id_member" class="form-control" style="width: 100%;">
+                                <option value="">-- เลือกหน่วยรถ --</option>
+                                <?php 
+                                  $sql_carmember = "SELECT id_member,name FROM member WHERE status ='employee' AND status_car=1";
+                                  $objq_carmember = mysqli_query($mysqli,$sql_carmember);
+                                  while($value_carmember = $objq_carmember->fetch_assoc()){
+                                ?>
+                                <option value="<?php echo $value_carmember['id_member'];?>"><?php echo $value_carmember['name'];?></option>
+                                <?php
+                                  }
+                                ?>
+                              </select>
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table> 
+                      <br> 
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit"  class="btn button2 pull-right">ต่อไป >></button>
+                    <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< กลับ</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -315,7 +356,7 @@
           'paging'      : true,
           'lengthChange': true,
           'searching'   : true,
-          'ordering'    : true,
+          'order'    : [],
           'info'        : true,
           'autoWidth'   : false,
         }

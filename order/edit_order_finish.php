@@ -8,6 +8,7 @@
   $date_receive = $_POST['date_receive'];
   $date_order = $_POST['date_order'];
   $portage = $_POST['portage'];
+  $price_portage = $_POST['price_portage'];
   $num_product = $_POST['num_product'];
   $name_store = $_POST['name_store'];
   $note = $_POST['note'];
@@ -32,7 +33,7 @@
                                                tel_sent = '$tel_sent', licent_plate = '$licent_plate', name_author = '$name_author', price = $price, money = $money,
                                                name_to = '$name_to', tel_to = '$tel_to', catagory_car = '$catagory_car',
                                                date_receive = '$date_receive', date_getorder = '$date_getorder' , date_order = '$date_order', portage = '$portage', name_store = '$name_store',
-                                               invoice = '$invoice'
+                                               invoice = '$invoice', price_portage = $price_portage
                           WHERE id_order_list = $id_order_list ";  
 
       }else{
@@ -40,7 +41,7 @@
                                  tel_sent = '$tel_sent', licent_plate = '$licent_plate', name_author = '$name_author', price = $price, money = $money,
                                  name_to = '$name_to', tel_to = '$tel_to', catagory_car = '$catagory_car',id_product = '$id_product',
                                  date_receive = '$date_receive', date_getorder = '$date_getorder' , date_order = '$date_order', portage = '$portage', name_store = '$name_store',
-                                 invoice = '$invoice'
+                                 invoice = '$invoice', price_portage = $price_portage
                                  WHERE id_order_list = $id_order_list ";  
       }
   }else{
@@ -50,14 +51,14 @@
                                                 note = '$note', name_sent = '$name_sent',tel_sent = '$tel_sent', licent_plate = '$licent_plate', price = $price, money = $money,
                                                 name_author = '$name_author', name_to = '$name_to', tel_to = '$tel_to',date_receive = '$date_receive', 
                                                 date_getorder = '$date_getorder', date_order = '$date_order', portage = '$portage', name_store = '$name_store', amphur_id = $amphur_id, 
-                                                province_id = $province_id ,invoice = '$invoice'
+                                                province_id = $province_id ,invoice = '$invoice', price_portage = $price_portage
                           WHERE id_order_list = $id_order_list ";  
    }else{
             $sql_order_list = " UPDATE order_list SET list_order = '$list_order', catagory_car = '$catagory_car', num_product = '$num_product',
                                                 note = '$note', name_sent = '$name_sent',tel_sent = '$tel_sent', licent_plate = '$licent_plate', price = $price, money = $money,
                                                 name_author = '$name_author', name_to = '$name_to', tel_to = '$tel_to',date_receive = '$date_receive', 
                                                 date_getorder = '$date_getorder', date_order = '$date_order', portage = '$portage', name_store = '$name_store', amphur_id = $amphur_id, 
-                                                province_id = $province_id ,invoice = '$invoice',id_product = '$id_product'
+                                                province_id = $province_id ,invoice = '$invoice',id_product = '$id_product', price_portage = $price_portage
                            WHERE id_order_list = $id_order_list ";  
    }    
 

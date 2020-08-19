@@ -151,7 +151,8 @@
                       while($value_pv = $objq_pv -> fetch_assoc()){
                         $id_province = $value_pv['province_id'];
                         $sql_num = "SELECT SUM(num) FROM listorder INNER JOIN addorder ON listorder.id_addorder = addorder.id_addorder 
-                                    WHERE listorder.id_product = $id_product AND addorder.province_id = $id_province AND addorder.status = 'pending'";
+                                    WHERE listorder.id_product = $id_product AND addorder.province_id = $id_province AND addorder.status = 'pending'
+                                    AND addorder.status_num = 'Y'";
                         $objq_num = mysqli_query($mysqli,$sql_num);
                         $objr_num = mysqli_fetch_array($objq_num);
                         $num = $objr_num['SUM(num)'];

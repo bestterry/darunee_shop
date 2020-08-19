@@ -39,34 +39,24 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-      <style>
-          #customers {
-            width: 100%;
-          }
-          #customers td, #customers th {
-            border: 1px solid #ddd;
-            padding: 8px;
-          }
-          #customers tr:nth-child(even){background-color: #f2f2f2;}
-          #customers th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: center;
-            background-color: #99CCFF;
-          }
-          select {
-            text-align: center;
-            text-align-last: center;
-          }
-          option {
-            text-align: center;
-            text-align-last: center;
-          }
-          input {
-            text-align: center;
-            text-align-last: center;
-          }
-        </style>
+  <script language="javascript">
+    function fncSubmit()
+    {
+      if(document.sale_product.customer.value == "")
+      {
+        alert('กรุณาระบุชื่อลูกค้า');
+        document.sale_product.customer.focus();
+        return false;
+      }	
+      if(document.sale_product.note.value == "")
+      {
+        alert('กรุณาระบุหมายเหตุ');
+        document.sale_product.note.focus();		
+        return false;
+      }
+      document.sale_product.submit();
+    }
+  </script>
 </head>
 <body class=" hold-transition skin-blue layout-top-nav ">
 <div class="wrapper">
@@ -90,15 +80,15 @@
             <!-- /.box-header -->
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <form action="sale_product_finish.php" method="post" autocomplete="off">
+                  <form action="sale_product_finish.php" method="post" autocomplete="off" name="sale_product" onSubmit="JavaScript:return fncSubmit();">
                     <table class="table table-bordered">
                         <tbody>
                           <tr bgcolor="#99CCFF">
-                            <th class="text-center" width="5%" >ลำดับ</th>
-                            <th class="text-center" >สินค้า_หน่วย</th>
-                            <th class="text-center" width="20%">จำนวน</th>
-                            <th class="text-center" width="20%">บ/หน่วย</th>
-                            <th class="text-center" width="20%">เงินขาย(บ)</th>
+                            <th class="text-center">สินค้า_หน่วย</th>
+                            <th class="text-center" width="17%">คงเหลือ</th>
+                            <th class="text-center" width="17%">จำนวน</th>
+                            <th class="text-center" width="17%">บ/หน่วย</th>
+                            <th class="text-center" width="17%">เงินขาย(บ)</th>
                           </tr>
                           <?php
                             for($i=0;$i<count($_POST["id_numPD"]);$i++)
@@ -113,19 +103,19 @@
                                   $objr_listproduct = mysqli_fetch_array($objq_listproduct);
                           ?>
                           <tr>
-                            <td class="text-center"><?php echo $i+1; ?></td>
-                            <td>
+                            <td class="text-center">
                               <?php echo $objr_listproduct['name_product'].'_'.$objr_listproduct['unit']; ?>
                               <input class = "hidden" type="text" name="name_product[]" value="<?php echo $objr_listproduct['name_product']; ?>">
                               <input class = "hidden" type="text" name="id_product[]" value="<?php echo $objr_listproduct['id_product']; ?>">
                               <input class = "hidden" type="text" name="unit[]" value="<?php echo $objr_listproduct['unit']; ?>">
                             </td>
+                            <td class="text-center"> <?php echo $objr_listproduct['num']; ?></td>
                             <td class="text-center" >
                               <input class = "hidden" type="text" name="id_numPD[]" value="<?php echo $id_numPD; ?>">
-                              <input class="form-control" type="number" name="num_product[]"   placeholder="<?php echo $objr_listproduct['unit'];?>">
+                              <input class="form-control text-center" type="number" name="num_product[]"   placeholder="<?php echo $objr_listproduct['unit'];?>">
                             </td>
                             <td class="text-center">
-                              <input class="form-control" type="text" name="price_product[]" value="0">
+                              <input class="form-control text-center" type="number" step="0.01" name="price_product[]" value="0">
                             </td>
                             <td></td>
                           </tr>
@@ -139,8 +129,10 @@
                       <table class="table table-bordered">
                         <tbody>
                         <tr bgcolor="#99CCFF">
-                        <th class="text-center">หมายเหตุ : </th>
-                        <th class="text-center"> <input class="text-center form-control" type="text" name="note" size="50"></th>
+                          <th class="text-center" width="15%">ลูกค้า : </th>
+                          <th class="text-center" width="35%"> <input class="text-center form-control" type="text" name="customer" value="" placeholder="กรุณาระบุชื่อลูกค้า"></th>
+                          <th class="text-center" width="15%">รายละเอียด : </th>
+                          <th class="text-center" width="35%"> <input class="text-center form-control" type="text" value="" name="note"></th>
                         </tr>
                         </tbody>
                       </table>
@@ -149,8 +141,8 @@
                 <!-- /.mailbox-read-message -->
             </div>
             <div class="box-footer">
-            <a type="block" href="store.php" class="btn btn-success"><<= กลับหน้าหลัก </i></a>
-            <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-calculator"> บันทึก </i></button>
+            <a type="block" href="store.php" class="btn btn-danger"><< เมนูหลัก </i></a>
+            <button type="submit" class="btn btn-success pull-right" name="add" id="add" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-calculator"> บันทึก </i></button>
             </div>
             <!-- /.box-footer -->
             </form>

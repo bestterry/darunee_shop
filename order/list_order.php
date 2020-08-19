@@ -78,7 +78,7 @@
   </style>
 </head>
 
-<body class=" hold-transition skin-blue layout-top-nav">
+  <body class=" hold-transition skin-blue layout-top-nav">
     <header class="main-header">
       <nav class="navbar navbar-static-top">
         <div class="navbar-custom-menu">
@@ -115,7 +115,7 @@
                 ?>
                 <div class="col-sm-12 text-left">
                     <font size="3" color="red">
-                      <B>[ ยอดหนี้ค้างจ่าย : <?php echo $objr_invoice['SUM(money)'];?> ]</B>
+                      <B> ยอดหนี้ค้างจ่าย  <?php echo $objr_invoice['SUM(money)'];?> </B>
                     </font>
                 </div>
                 <?php 
@@ -129,20 +129,20 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                  <table id="example1" class="table table-bordered">
+                  <table id="example2" class="table table-bordered">
                     <thead>
                       <tr>
-                        <th class="text-center" width="7%"><font color="red">#</font></th>
                         <th class="text-center" width="6%"><font color="red">ID</font></th>
                         <th class="text-center" width="13%"><font color="red">วันสั่ง</font></th>
                         <th class="text-center" width="10%"><font color="red">ใบสั่ง</font></th>
                         <th class="text-center" width="13%"><font color="red">สินค้า</font></th>
                         <th class="text-center" width="6%"><font color="red">U</font></th>
-                        <th class="text-center" width="5%"><font color="red">#</font></th>
+                        <th class="text-center" width="5%"><font color="red">N</font></th>
                         <th class="text-center" width="10%"><font color="red">เงินซื้อ</font></th>
                         <th class="text-center" width="12%"><font color="red">มาถึง</font></th>
                         <th class="text-center" width="10%"><font color="red">อำเภอ</font></th>
                         <th class="text-center" width="8%"><font color="red">จ่าย</font></th>
+                        <th class="text-center" width="7%"><font color="red">#</font></th>
                         <!-- <th class="text-center" width="10%">จังหวัด</th> -->
                       </tr>
                     </thead>
@@ -151,7 +151,6 @@
                         while($value = $objq_addorder->fetch_assoc()){
                     ?>
                       <tr>
-                        <td class="text-center"><a href="data_order.php?id_order_list=<?php echo $value['id_order_list']; ?>" class="btn btn-success btn-xs">ข้อมูล</a></td>
                         <td class="text-center"><?php echo $value['id_order_list'];?></td>
                         <td class="text-center" ><?php echo DateThai($value['date_order']);?></td>
                         <td class="text-center"><?php echo $value['list_order'];?></td>
@@ -162,6 +161,7 @@
                         <td class="text-center" ><?php echo DateThai($value['date_receive']) ;?></td>
                         <td class="text-center"><?php echo $value['amphur_name'];?></td>
                         <td class="text-center"><?php echo $value['invoice'];?></td>
+                        <td class="text-center"><a href="data_order.php?id_order_list=<?php echo $value['id_order_list']; ?>" class="btn btn-default btn-xs">>></a></td>
                         <!-- <td class="text-center"><?php //echo $value['province_name'];?></td> -->
                       </tr>
                     <?php 
@@ -247,79 +247,15 @@
         $('#example1').DataTable()
         $('#example2').DataTable({
           'paging'      : true,
-          'lengthChange': false,
+          'lengthChange': true,
           'searching'   : true,
-          'ordering'    : false,
-          'info'        : true,
-          'autoWidth'   : false
-        }
-                                )
-      }
-      )
-      $(function () {
-        //Enable iCheck plugin for checkboxes
-        //iCheck for checkbox and radio inputs
-        $('.mailbox-read-message input[type="checkbox"]').iCheck({
-          checkboxClass: 'icheckbox_flat-blue',
-          radioClass: 'iradio_flat-blue'
-        }
-                                               );
-        //iCheck for checkbox and radio inputs
-      $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-        checkboxClass: 'icheckbox_minimal-blue',
-        radioClass   : 'iradio_minimal-blue'
-      })
-        //Enable check and uncheck all functionality
-        $(".checkbox-toggle").click(function () {
-          var clicks = $(this).data('clicks');
-          if (clicks) {
-            //Uncheck all checkboxes
-            $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-            $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-          }
-          else {
-            //Check all checkboxes
-            $(".mailbox-messages input[type='checkbox']").iCheck("check");
-            $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-          }
-          $(this).data("clicks", !clicks);
-        }
-                         );
-        //Handle starring for glyphicon and font awesome
-        $(".mailbox-star").click(function (e) {
-          e.preventDefault();
-          //detect type
-          var $this = $(this).find("a > i");
-          var glyph = $this.hasClass("glyphicon");
-          var fa = $this.hasClass("fa");
-          //Switch states
-          if (glyph) {
-            $this.toggleClass("glyphicon-star");
-            $this.toggleClass("glyphicon-star-empty");
-          }
-          if (fa) {
-            $this.toggleClass("fa-star");
-            $this.toggleClass("fa-star-o");
-          }
-        }
-                                );
-                                
-      }
-      );
-      </script>
-      <script>
-      $(function () {
-        $('#example1').DataTable()
-        $('#example2').DataTable({
-          'paging'      : true,
-          'lengthChange': false,
-          'searching'   : false,
-          'ordering'    : true,
+          'order'    : [],
           'info'        : true,
           'autoWidth'   : false
         })
-      })
+        }
+      );
     </script>
-</body>
+  </body>
 
 </html>

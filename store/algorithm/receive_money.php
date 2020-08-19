@@ -23,10 +23,11 @@
     $money = $_POST['money'];
     $id_category = $_POST['id_category'];
     $date = $_POST['date'];
+    $customer = $_POST['customer'];
     $note = $_POST['note'];
 
-    $sql = "INSERT INTO rc_receive_money (id_member, id_practice, area, money, id_category, date_buy, date, status_office, status_boss, note)
-                                  VALUES ($id_member, $id_practice, '$area', $money, $id_category, '$th_date', '$date', 'N', 'N', '$note')";
+    $sql = "INSERT INTO rc_receive_money (id_member, id_practice, area, money, id_category, date_buy, date, status_office, status_boss, customer, note)
+                                  VALUES ($id_member, $id_practice, '$area', $money, $id_category, '$th_date', '$date', 'N', 'N', '$customer', '$note')";
              mysqli_query($conn,$sql);
 
             

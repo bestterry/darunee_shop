@@ -47,8 +47,9 @@ class PDF extends FPDF
             $this->Cell(15,10,iconv('UTF-8','cp874','ขายส่ง'),1,0,'C');
             $this->Cell(15,10,iconv('UTF-8','cp874','แม่จัน'),1,0,'C');
             $this->Cell(15,10,iconv('UTF-8','cp874','แจ้ห่ม'),1,0,'C');
+            $this->Cell(15,10,iconv('UTF-8','cp874','แพร่'),1,0,'C');
             $this->Cell(15,10,iconv('UTF-8','cp874','รถ'),1,0,'C');
-            $this->Cell(23,10,iconv('UTF-8','cp874','ทั้งหมด'),1,0,'C');
+            $this->Cell(20,10,iconv('UTF-8','cp874','ทั้งหมด'),1,0,'C');
             $this->Ln(10);
     }
 
@@ -204,6 +205,17 @@ $pdf=new PDF('L','mm','A4');
               }
               // -----------------------//จห----------------------------------
 
+              // -----------------------แพร่----------------------------------
+              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 14";
+              $objq_num = mysqli_query($conn,$SQL_num);
+              $objr_num = mysqli_fetch_array($objq_num);
+              if(!isset($objr_num['num'])){
+                $pdf->Cell(15,8,iconv('UTF-8','cp874',''),1,0,'C');
+              }else{
+                $pdf->Cell(15,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
+              }
+              // -----------------------//แพร่----------------------------------
+
               //-------------------------รวมรถ----------------------------------
               $SQL_num_car = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";
               $objq_num_car = mysqli_query($conn,$SQL_num_car);
@@ -223,9 +235,9 @@ $pdf=new PDF('L','mm','A4');
               $total_num = $objr_num['SUM(num)'];
               $total_numstore = $total_numcar+$total_num;
               if(!isset($total_num)){
-                $pdf->Cell(23,8,iconv('UTF-8','cp874',''),1,0,'C');
+                $pdf->Cell(20,8,iconv('UTF-8','cp874',''),1,0,'C');
               }else{
-                $pdf->Cell(23,8,iconv('UTF-8','cp874',$total_numstore),1,0,'C');
+                $pdf->Cell(20,8,iconv('UTF-8','cp874',$total_numstore),1,0,'C');
               }
             // $pdf->Cell(20,8,iconv('UTF-8','cp874','รวมรถ'),1,0,'C');
             // $pdf->Cell(25,8,iconv('UTF-8','cp874','รวมทั้งหมด'),1,0,'C');

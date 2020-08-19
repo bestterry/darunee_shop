@@ -123,7 +123,17 @@
                     <div class="box box-default">
                       <!-- /.box-header -->
                       <div class="box-header text-center">
-                        <B><font size="5">เพิ่มแผนที่</font></B> 
+                        <div class="col-12">
+                          <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4">
+                            <a href="admin.php" class="btn button2"><< เมนูหลัก </a>
+                          </div>
+                          <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4 text-center">
+                            <B><font size="5">เพิ่มแผนที่</font></B> 
+                          </div>
+                          <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4 text-right">
+                           
+                          </div>
+                        </div>
                       </div>
                       <div class="box-body">
                         <div class="row">
@@ -173,7 +183,17 @@
                   <div class="box box-default">
                     <!-- /.box-header -->
                     <div class="box-header text-center">
-                      <B><font size="5">ตั้งค่า</font></B> 
+                      <div class="col-12">
+                        <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4">
+                          <a href="admin.php" class="btn button2"><< เมนูหลัก </a>
+                        </div>
+                        <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4 text-center">
+                          <B><font size="5">ตั้งค่า</font></B> 
+                        </div>
+                        <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4 text-right">
+                          <!-- <a href="map_edit.php" class="btn btn-success">จัดการแผนที่ </a> -->
+                        </div>
+                      </div>
                     </div>
                     <div class="box-body">
                       <div class="row">
@@ -183,23 +203,40 @@
                             <table id="example2" class="table">
                               <thead>
                                 <tr>
-                                  <th class="text-center" width="85%">ข้อมูล</th>
-                                  <th class="text-center" width="5%">ดู</th>
-                                  <th class="text-center" width="5%">ลบ</th>
-                                  <th class="text-center" width="5%">แก้</th>
+                                  <th class="text-center" width="25%">รูป</th>
+                                  <th class="text-center" width="25%">อำเภอ</th>
+                                  <th class="text-center" width="25%">จังหวัด</th>
+                                  <th class="text-center" width="8%">ดู</th>
+                                  <th class="text-center" width="8%">ลบ</th>
+                                  <th class="text-center" width="8%">แก้</th>
                                 </tr>
                               </thead>
                               <tbody>
                               <?php 
-                                $sql_map = "SELECT id_map,name_map FROM map";
+                                $sql_map = "SELECT * FROM map 
+                                            INNER JOIN tbl_provinces ON map.province_id = tbl_provinces.province_id ";
                                 $objq_map = mysqli_query($mysqli,$sql_map);
                                 while($value = $objq_map->fetch_assoc()){
+                                  $amphur_id = $value['amphur_id'];
+                                  if ($amphur_id == 0) {
+                                    $amphur_name = "-";
+                                  }else {
+                                    $sql_amphur = "SELECT amphur_name FROM tbl_amphures WHERE amphur_id = $amphur_id";
+                                    $objq_amphur = mysqli_query($mysqli,$sql_amphur);
+                                    $objr_amphur = mysqli_fetch_array($objq_amphur);
+                                    $amphur_name = $objr_amphur['amphur_name'];
+                                  }
                               ?>
                                 <tr>
                                   <td class="text-center"><?php echo $value['name_map']; ?></td>
+                                  <td class="text-center"><?php echo $amphur_name; ?></td>
+                                  <td class="text-center"><?php echo $value['province_name']; ?></td>
                                   <td class="text-center"><a href="map_show2.php?id_map=<?php echo $value['id_map']; ?>" class="btn btn-success btn-xs">ดู</a></td>
                                   <td class="text-center"><a href="algorithm/delete_map.php?id_map=<?php echo $value['id_map']; ?>&&name_map=<?php echo $value['name_map'];?>" class="btn  btn-danger btn-xs" >ลบ</a> </td>  
-                                  <td class="text-center"><a href="edit_map.php?id_map=<?php echo $value['id_map']; ?>&&name_map=<?php echo $value['name_map'];?>" class="btn btn-success btn-xs" >แก้</a> </td> 
+                                  <td class="text-center">
+                                    <a href="edit_map.php?id_map=<?php echo $value['id_map'];?>&&province=<?php echo $value['province_name'];?>&&amphur=<?php echo $amphur_name;?>&&name_map=<?php echo $value['name_map'];?>" 
+                                    class="btn btn-success btn-xs" >แก้</a> 
+                                  </td> 
                                 </tr>
                               <?php 
                                 }
@@ -252,7 +289,7 @@
           'searching'   : true,
           'ordering'    : true,
           'info'        : true,
-          'autoWidth'   : true
+          'autoWidth'   : false
         }
         )
       });

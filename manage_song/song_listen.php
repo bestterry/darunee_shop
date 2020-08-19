@@ -30,25 +30,47 @@
               <div class="col-12">
                 <div class="col-2 col-sm-2 col-xl-2 col-md-2">
                 <?php 
-                  if($_GET['id_age']==1){
+                  if($_GET['status']=='old'){
                 ?>
                   <a type="button" href="song_old.php" class="btn button2"><< กลับ</a>
                 <?php 
                   }
-                  if($_GET['id_age']==2){
+                  if($_GET['status']=='middle'){
                 ?>
-                <a type="button" href="song_middle.php" class="btn button2"><< กลับ</a>
+                  <a type="button" href="song_middle.php" class="btn button2"><< กลับ</a>
                 <?php 
                   }
-                  if($_GET['id_age']==3){
+                  if($_GET['status']=='new'){
                 ?>
-                <a type="button" href="song_middle.php" class="btn button2"><< กลับ</a>
+                  <a type="button" href="song_new.php" class="btn button2"><< กลับ</a>
                 <?php 
                   }
-                  if($_GET['id_age']=='all'){
+                  if($_GET['status']=='a'){
                 ?>
-                <a type="button" href="all_song.php" class="btn button2"><< กลับ</a>
-                <?php } ?>
+                  <a type="button" href="gradea.php" class="btn button2"><< กลับ</a>
+                <?php 
+                  }
+                  if($_GET['status']=='b'){
+                ?>
+                  <a type="button" href="gradeb.php" class="btn button2"><< กลับ</a>
+                <?php 
+                  }
+                  if($_GET['status']=='c'){
+                ?>
+                  <a type="button" href="gradec.php" class="btn button2"><< กลับ</a>
+                <?php 
+                  } 
+                  if($_GET['status']=='d'){
+                ?>
+                  <a type="button" href="graded.php" class="btn button2"><< กลับ</a>
+                <?php 
+                  }
+                  if($_GET['status']=='setting'){ 
+                ?>
+                  <a type="button" href="song_setting.php" class="btn button2"><< กลับ</a>
+                <?php 
+                  }
+                ?> 
                 </div>
                 <div class="col-8 col-sm-8 col-xl-8 col-md-8">
                   <p align="center"><font size="5"><B><?php echo $name_song; ?></B></font></p>

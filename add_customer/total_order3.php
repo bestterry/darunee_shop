@@ -161,7 +161,8 @@
                         $sql_numpd = "SELECT SUM(num) FROM listorder 
                                       INNER JOIN addorder ON listorder.id_addorder = addorder.id_addorder
                                       INNER JOIN product ON listorder.id_product = product.id_product
-                                      WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'";
+                                      WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'
+                                      AND addorder.status_num = 'Y'";
                         $objq_numpd = mysqli_query($mysqli,$sql_numpd);
                         $objr_numpd = mysqli_fetch_array($objq_numpd);
                         $numpd = $objr_numpd['SUM(num)'];
@@ -245,7 +246,8 @@
                           $sql_numpd = "SELECT SUM(num) FROM listorder 
                                         INNER JOIN addorder ON listorder.id_addorder = addorder.id_addorder
                                         INNER JOIN product ON listorder.id_product = product.id_product
-                                        WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'";
+                                        WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'
+                                        AND addorder.status_num = 'Y'";
                           $objq_numpd = mysqli_query($mysqli,$sql_numpd);
                           $objr_numpd = mysqli_fetch_array($objq_numpd);
                           $numpd = $objr_numpd['SUM(num)'];
@@ -328,7 +330,8 @@
                           $sql_numpd = "SELECT SUM(num) FROM listorder 
                                         INNER JOIN addorder ON listorder.id_addorder = addorder.id_addorder
                                         INNER JOIN product ON listorder.id_product = product.id_product
-                                        WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'";
+                                        WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'
+                                        AND addorder.status_num = 'Y'";
                           $objq_numpd = mysqli_query($mysqli,$sql_numpd);
                           $objr_numpd = mysqli_fetch_array($objq_numpd);
                           $numpd = $objr_numpd['SUM(num)'];
@@ -411,7 +414,8 @@
                           $sql_numpd = "SELECT SUM(num) FROM listorder 
                                         INNER JOIN addorder ON listorder.id_addorder = addorder.id_addorder
                                         INNER JOIN product ON listorder.id_product = product.id_product
-                                        WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'";
+                                        WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'
+                                        AND addorder.status_num = 'Y'";
                           $objq_numpd = mysqli_query($mysqli,$sql_numpd);
                           $objr_numpd = mysqli_fetch_array($objq_numpd);
                           $numpd = $objr_numpd['SUM(num)'];
@@ -492,7 +496,8 @@
                           $sql_numpd = "SELECT SUM(num) FROM listorder 
                                         INNER JOIN addorder ON listorder.id_addorder = addorder.id_addorder
                                         INNER JOIN product ON listorder.id_product = product.id_product
-                                        WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'";
+                                        WHERE addorder.amphur_id = $amphur_id AND listorder.id_product = $id_product AND addorder.status = 'pending'
+                                        AND addorder.status_num = 'Y'";
                           $objq_numpd = mysqli_query($mysqli,$sql_numpd);
                           $objr_numpd = mysqli_fetch_array($objq_numpd);
                           $numpd = $objr_numpd['SUM(num)'];

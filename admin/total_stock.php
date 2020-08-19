@@ -7,6 +7,7 @@
   $query_product = mysqli_query($conn,$list_product);
   $query_product2 = mysqli_query($conn,$list_product);
   $query_product3 = mysqli_query($conn,$list_product);
+  $query_product4 = mysqli_query($conn,$list_product);
 ?>
 
 <!DOCTYPE html>
@@ -369,6 +370,271 @@
                       }else{
                     ?>
                   <td class="text-center"><?php echo $total_numstore; ?></td>
+                  <?php 
+                      } 
+                    ?>
+                  <!-- -------------------------------//รวมทั้งหมด------------------------------------ -->
+
+                </tr>
+                <?php $i++; } ?>
+              </tbody>
+            </table>
+            <br>
+            <div class="text-center">
+              <B> 
+                <font size="5"> สต๊อกสินค้าชำรุด </font>
+              </B>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="text-center" width="10%">สินค้า_หน่วย</th>
+                  <th class="text-center" width="5%">จุน</th>
+                  <th class="text-center" width="5%">พาน1</th>
+                  <th class="text-center" width="5%">พาน2</th>
+                  <th class="text-center" width="5%">ดคต1</th>
+                  <th class="text-center" width="5%">ดคต2</th>
+                  <th class="text-center" width="5%">วปป.</th>
+                  <th class="text-center" width="5%">เกาะคา</th>
+                  <th class="text-center" width="5%">ลำพูน</th>
+                  <th class="text-center" width="5%">ขายส่ง</th>
+                  <th class="text-center" width="5%">แม่จัน</th>
+                  <th class="text-center" width="5%">จห</th>
+                  <th class="text-center" width="5%">แพร่</th>
+                  <th class="text-center" width="5%">ทั้งหมด</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php 
+                  $i=1;
+                    while($product = $query_product4 ->fetch_assoc()){
+                      
+                  ?>
+                <tr>
+                  <td class="text-center" >
+                    <?php echo $product['name_product'].'_'.$product['unit']; ?>
+                  </td>
+                  <!-- -------------------------------จุน------------------------------------ -->
+                  <?php 
+                      $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 3";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                    ?>
+                  <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//จุน------------------------------------ -->
+                  <!-- -------------------------------พาน------------------------------------ -->
+                  <?php 
+                      $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 4";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                    ?>
+                  <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//พาน------------------------------------ -->
+                  <!-- -------------------------------พาน2------------------------------------ -->
+                  <?php 
+                      $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 13";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                    ?>
+                  <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//พาน2------------------------------------ -->
+                  <!-- -------------------------------ดคต.------------------------------------ -->
+                  <?php 
+                      $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 2";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//ดคต2.------------------------------------ -->
+                  <!-- -------------------------------ดคต.------------------------------------ -->
+                  <?php 
+                      $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 12";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//ดคต2.------------------------------------ -->
+                    <!-- -------------------------------วปป..------------------------------------ -->
+                    <?php 
+                      $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 1";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//วปป.------------------------------------ -->
+                    <!-- -------------------------------ลป.------------------------------------ -->
+                    <?php 
+                      $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 6";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//ลป.------------------------------------ -->
+                    <!-- -------------------------------ลพ.------------------------------------ -->
+                                        <?php 
+                      $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 10";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//ลพ.------------------------------------ -->
+                    <!-- -------------------------------ขายส่ง.------------------------------------ -->
+                    <?php 
+                      $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 7";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//ขายส่ง.------------------------------------ -->
+                    <!-- -------------------------------แม่จัน.------------------------------------ -->
+                    <?php 
+                      $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 5";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                      <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//แม่จัน.------------------------------------ -->
+                  <!-- -------------------------------จห.------------------------------------ -->
+                    <?php 
+                      $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 11";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                    ?>
+                  <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//จห.------------------------------------ -->
+
+                  <!-- -------------------------------แพร่.------------------------------------ -->
+                  <?php 
+                      $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 14";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                    ?>
+                  <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//แพร่.------------------------------------ -->
+
+                  <!-- -------------------------------รวมทั้งหมด------------------------------------ -->
+                  <?php 
+                      $SQL_num = "SELECT SUM(num) FROM num_productwaste WHERE id_product = $product[id_product]";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+
+                      $total_num = $objr_num['SUM(num)'];
+                      
+                      if($total_num == 0 ){
+                        ?>
+                      <td class="text-center">0</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center"><?php echo $total_num; ?></td>
                   <?php 
                       } 
                     ?>

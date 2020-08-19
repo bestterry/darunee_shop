@@ -55,10 +55,10 @@
       <section class="content-header">
       </section>
       <section class="content">
-        <form action="map_upload.php" method="post" class="form-horizontal" enctype="multipart/form-data">
+        <form action="algorithm/edit_map.php" method="post" class="form-horizontal" enctype="multipart/form-data">
           <div class="box box-default">
             <div class="box-header text-center">
-              <B><font size="5">เพิ่มแผนที่</font></B> 
+              <B><font size="5">แก้ไขรูปแผนที่</font></B> 
             </div>
             <div class="box-body">
               <div class="row">
@@ -67,23 +67,25 @@
                     <div class="col-sm-4"></div>
                     <div class="col-sm-4">
                       <div class="form-group">
-                        <label class="col-sm-4 control-label">จังหวัด :</label>
-                        <div class="col-sm-8">
-                          <input type="text" class=" form-control" style="width: 100%;">
+                        <label class="col-sm-2 control-label">จังหวัด </label>
+                        <div class="col-sm-10">
+                          <input type="text" class=" form-control" style="width: 100%;" value="<?php echo $_GET['province'];?>" disabled>
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label  class="col-sm-4 control-label">อำเภอ :</label>
-                        <div class="col-sm-8">
-                          <input type="text" class=" form-control" style="width: 100%;">
+                        <label  class="col-sm-2 control-label">อำเภอ </label>
+                        <div class="col-sm-10">
+                          <input type="text" class=" form-control" value="<?php echo $_GET['amphur'];?>" style="width: 100%;" disabled>
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-4 control-label">รูปภาพ :</label>
-                        <div class="col-sm-8">
+                        <label class="col-sm-2 control-label">รูปภาพ </label>
+                        <div class="col-sm-10">
                           <input name="upload" type="file" class=" form-control" style="width: 100%;">
+                          <input name="name_map" type="hidden" class=" form-control" style="width: 100%;" value="<?php echo $_GET['name_map'];?>">
+                          <input name="id_map" type="hidden" class=" form-control" style="width: 100%;" value="<?php echo $_GET['id_map'];?>">
                         </div>
                       </div>
                     </div>
@@ -93,7 +95,7 @@
               </div>
             </div>
             <div class="box-footer text-center">
-                <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> เพิ่ม </button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> บันทึก </button>
             </div>
           </div>
         </form>

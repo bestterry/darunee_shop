@@ -3,13 +3,14 @@
   require "../session.php"; 
   require "menu/date.php";
   $strDate = date('d-m-Y');
+  $id_category = $_GET['id_category'];
   $receive_money = "SELECT * FROM rc_receive_money 
                     INNER JOIN rc_practice ON rc_receive_money.id_practice = rc_practice.id_practice
                     INNER JOIN rc_category ON rc_receive_money.id_category = rc_category.id_category
                     INNER JOIN member ON rc_receive_money.id_member = member.id_member
+                    WHERE rc_receive_money.id_category = $id_category
                     GROUP BY rc_receive_money.id_receive_money DESC";
   $objq_receive = mysqli_query($conn,$receive_money);
-  $objq_receive2 = mysqli_query($conn,$receive_money);
 ?>
 
 <!DOCTYPE html>
@@ -72,25 +73,15 @@
               <table class="table table-bordered" id="dynamic_field">
                 <tr>
                   <th width="30%" > 
-                    <a type="button" href="admin.php" class="btn button2 "><< เมนูหลัก</a>
+                    <a type="button" href="receive_money.php" class="btn button2 "><< กลับ</a>
                   </th>
                   <td width="40%" class="text-center"><font size="5"><B align="center">เงินขาย (รายวัน)</B></font></td>
-                  <td width="30%" class="text-right"> 
-                  <?php 
-                    if ($id_member == 30) {
-                  ?>
-                    <a type="button"  href="#" data-toggle="modal" data-target="#list_category" class="btn btn-warning ">ประเภทเงิน</a> 
-                  <?php
-                    }
-                  ?>   
-                    <a type="button" href="../pdf_file/receive_money.php" class="btn btn-warning ">PDF</a> 
+                  <td width="30%"> 
+                    <a type="button" href="../pdf_file/receive_money.php" class="btn btn-warning pull-right">PDF</a> 
                   </td>
                 </tr>
               </table>
               <div class="mailbox-read-message">
-                <?php 
-                  if ($id_member == 30) {
-                ?>
                  <!-- boss -->
                 <table id="example2" class="table table-bordered table-striped">
                   <thead>
@@ -110,7 +101,7 @@
                   </thead>
                   <tbody>
                     <?php
-                      while($value = $objq_receive2 -> fetch_assoc()){
+                      while($value = $objq_receive -> fetch_assoc()){
                     ?>
                     <tr>
                       <td class="text-center" >
@@ -141,84 +132,13 @@
                       <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
                       <td class="text-center" ><?php echo $value['customer']; ?></td>
                       <td class="text-center" ><?php echo $value['note']; ?></td>
-                      <td class="text-center" ><a href="receive_money_edit.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" >>></a></td>
-                     
+                      <td class="text-center" ><a href="receive_money_edit2.php?id_receive_money=<?php echo $value['id_receive_money']; ?>" >>></a></td>
                     </tr>
                       <?php }?>
                   </tbody>
                 </table>
                   <!-- //-boss -->
-                  <?php    
-                    }else{
-                  ?>
-                  <!-- สนง -->
-                  <table id="example3" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th class="text-center" width="5%">รับ</th>
-                        <th class="text-center" width="8%">ชื่อ</th>
-                        <th class="text-center" width="8%">งาน</th>
-                        <th class="text-center" width="8%">เงินขาย</th>
-                        <th class="text-center" width="8%">การรับ</th>
-                        <th class="text-center" width="10%">วันขาย</th>
-                        <th class="text-center" width="10%">วันรับ</th>
-                        <th class="text-center" width="14%">ชื่อลูกค้า</th>
-                        <th class="text-center" width="22%">หมายเหตุ</th>
-                        <th class="text-center" width="7%">สนง</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                        while($value = $objq_receive -> fetch_assoc()){
-                      ?>
-                      <tr>
-                        <td class="text-center" >
-                          <?php 
-                            $status = $value['status_boss'];
-                              if( $status == 'Y'){
-                          ?>
-                            <span class="label label-success pull-center"> Y </span>
-                          <?php
-                              }else{
-                          ?>
-                            <span class="label label-danger pull-center"> N </span>
-                          <?php
-                                echo "";
-                              } 
-                          ?>
-                        </td>
-                        <td class="text-center" ><?php echo $value['name']; ?></td>
-                        <td class="text-center" ><?php echo $value['name_practice']; ?></td>
-                        <td class="text-center" ><?php echo $value['money']; ?></td>
-                        <td class="text-center" ><?php echo $value['name_category']; ?></td>
-                        <td class="text-center" ><?php echo $value['date_buy']; ?></td>
-                        <td class="text-center" ><?php echo Datethai3($value['date']); ?></td>
-                        <td class="text-center" ><?php echo $value['customer']; ?></td>
-                        <td class="text-center" ><?php echo $value['note']; ?></td>
-                        <td class="text-center" >
-                          <?php 
-                            $status = $value['status_office'];
-                              if( $status == 'Y'){
-                          ?>
-                          <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=N&&statusb=office" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นยังไม่ได้รับหรือไม่ ?')";>Y</a>
-                          <?php
-                              }else{
-                          ?>
-                          <a href="algorithm/receive_money.php?id_receive_money=<?php echo $value['id_receive_money']; ?>&&status=Y&&statusb=office" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นรับแล้วหรือไม่ ?')";>N</a>
-                          <?php
-                                echo "";
-                              } 
-                          ?>
-                        </td>
-                      </tr>
-                        <?php }?>
-                    </tbody>
-                  </table>
-                  <!-- //สนง -->
-                  <?php     
-                        }
-                  ?>
-                <br>
+                  
                 <br>
                 <div class="box-header text-center with-border">
                   <font size="5">
@@ -351,47 +271,6 @@
             </div>
           </div>
         </div>
-        <div class="modal fade" id="list_category" role="dialog">
-          <div class="modal-dialog modal-lg">
-            <form action="receive_moneylist.php" method="get">
-              <div class="modal-content">
-                <div class="modal-header text-center">
-                  <font size="5"><B>ประเภทเงิน</B></font>
-                </div>
-                <div class="modal-body col-md-12 table-responsive mailbox-messages">
-                  <div class="table-responsive mailbox-messages">
-                    <table class="table table-bordered">
-                      <tbody>
-                        <tr>
-                          <th class="text-center" width="30%"><font size="4">ประเภทเงิน</font></th>
-                          <th class="text-center" width="70%"> 
-                            <select name="id_category" class="form-control" style="width: 100%;">
-                              <option value="">-- เลือกประเภทเงิน --</option>
-                              <?php 
-                                $sql_category = "SELECT id_category,name_category FROM rc_category";
-                                $objq_category = mysqli_query($conn,$sql_category);
-                                while($value_category = $objq_category->fetch_assoc()){
-                              ?>
-                              <option value="<?php echo $value_category['id_category'];?>"><?php echo $value_category['name_category'];?></option>
-                              <?php
-                                }
-                              ?>
-                            </select>
-                          </th>
-                        </tr>
-                      </tbody>
-                    </table> 
-                    <br> 
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit"  class="btn button2 pull-right">ต่อไป >></button>
-                  <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< กลับ</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
       </section>
     <!-- /.content -->
     </div>
@@ -418,74 +297,24 @@
     $(function () {
       $('#example1').DataTable()
       $('#example2').DataTable({
-        'paging'      : true,
-        'lengthChange': true,
-        'searching'   : true,
-        'ordering'    : false,
-        'info'        : true,
-        'autoWidth'   : false
-      })
-      $('#example3').DataTable({
-        'paging'      : true,
-        'lengthChange': true,
-        'searching'   : true,
-        'ordering'    : true,
-        'info'        : true,
-        'autoWidth'   : true
-      })
-    }
-    )
-    $(function () {
-      //Enable iCheck plugin for checkboxes
-      //iCheck for checkbox and radio inputs
-      $('.mailbox-read-message input[type="checkbox"]').iCheck({
-        checkboxClass: 'icheckbox_flat-blue',
-        radioClass: 'iradio_flat-blue'
+          'paging'      : true,
+          'lengthChange': true,
+          'searching'   : true,
+          'ordering'    : false,
+          'info'        : true,
+          'autoWidth'   : false
+        })
+        $('#example3').DataTable({
+          'paging'      : true,
+          'lengthChange': true,
+          'searching'   : true,
+          'ordering'    : true,
+          'info'        : true,
+          'autoWidth'   : true
+        })
       }
-                                              );
-      //iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass   : 'iradio_minimal-blue'
-    })
-      //Enable check and uncheck all functionality
-      $(".checkbox-toggle").click(function () {
-        var clicks = $(this).data('clicks');
-        if (clicks) {
-          //Uncheck all checkboxes
-          $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-          $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-        }
-        else {
-          //Check all checkboxes
-          $(".mailbox-messages input[type='checkbox']").iCheck("check");
-          $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-        }
-        $(this).data("clicks", !clicks);
-      }
-                        );
-      //Handle starring for glyphicon and font awesome
-      $(".mailbox-star").click(function (e) {
-        e.preventDefault();
-        //detect type
-        var $this = $(this).find("a > i");
-        var glyph = $this.hasClass("glyphicon");
-        var fa = $this.hasClass("fa");
-        //Switch states
-        if (glyph) {
-          $this.toggleClass("glyphicon-star");
-          $this.toggleClass("glyphicon-star-empty");
-        }
-        if (fa) {
-          $this.toggleClass("fa-star");
-          $this.toggleClass("fa-star-o");
-        }
-      }
-                              );
-                              
-    }
     );
-    </script>
+  </script>
 </body>
 
 </html>

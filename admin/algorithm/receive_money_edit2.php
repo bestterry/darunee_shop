@@ -28,5 +28,5 @@
                        WHERE id_receive_money = $id_receive_money";
       mysqli_query($conn,$update_money);
 
-      header('location:../receive_money.php');
+      header('location:../receive_moneylist.php?id_category='.$id_category);
 ?>

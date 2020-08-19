@@ -17,9 +17,15 @@
       //-----------------------------/insert draw_history----------------------------------
 
       //-----------------------------update num_product------------------------------------
-      $total_num = $num_befor - $num_after;
-      $update_num_product = "UPDATE num_product SET num = $total_num WHERE id_numproduct = $id_numproduct";
-      mysqli_query($conn,$update_num_product);
+      $total_num = $num_befor-$num_after;
+      if($total_num == 0){
+        $delete_list = "DELETE FROM num_product WHERE id_numproduct = $id_numproduct";
+        mysqli_query($conn,$delete_list);
+      }else {
+        $update_list = "UPDATE num_product SET num = $total_num WHERE id_numproduct = $id_numproduct";
+        mysqli_query($conn,$update_list);
+      }
+      
       //-----------------------------//update num_product------------------------------------
 
       //-----------------------------manage numpd_car----------------------------------------

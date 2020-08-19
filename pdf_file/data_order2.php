@@ -24,6 +24,7 @@ require('../config_database/config.php');
       $price = $objr_order['price'];
       $money = $objr_order['money'];
       $portage = $objr_order['portage'];
+      $price_portage = $objr_order['price_portage'];
 class PDF extends FPDF
   {
   }
@@ -61,6 +62,9 @@ $pdf=new PDF('P','mm','A4');
               $pdf->Ln(5);
               $pdf->Cell(85,7, iconv( 'UTF-8','cp874' ,'เงินซื้อ :'),0,0,'R');
               $pdf->Cell(0,7, iconv( 'UTF-8','cp874' ,$money) , 0 , 1,'L');
+              $pdf->Ln(5);
+              $pdf->Cell(85,7, iconv( 'UTF-8','cp874' ,'บาท/ตัน :'),0,0,'R');
+              $pdf->Cell(0,7, iconv( 'UTF-8','cp874' ,$price_portage) , 0 , 1,'L');
               $pdf->Ln(5);
               $pdf->Cell(85,7, iconv( 'UTF-8','cp874' ,'ค่าขนส่ง :'),0,0,'R');
               $pdf->Cell(0,7, iconv( 'UTF-8','cp874' ,$portage) , 0 , 1,'L');

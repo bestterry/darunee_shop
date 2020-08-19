@@ -23,14 +23,15 @@
     $name_to = $_POST['name_to'];
     $tel_to = $_POST['tel_to'];
    // $slip_number = $_POST['slip_number'];
+   $price_portage = $_POST['price_portage'];
     $portage = $_POST['portage'];
     $note = $_POST['note'];
     $invoice = $_POST['invoice'];
 
     
 
-     $sql = "INSERT INTO order_list (id_order_list, list_order, id_product, num_product,price, money, date_receive, date_getorder, date_order, portage,name_sent, tel_sent, catagory_car, licent_plate, name_author, name_store, amphur_id, province_id, name_to, tel_to, note, invoice)
-                         VALUES ($id_order_list, '$list_order', $id_product, $num_product, $price_num, $money, '$date_receive', '$date_getorder', '$date_order', '$portage', '$name_sent', '$tel_sent', '$catagory_car','$licent_plate', '$name_author', '$name_store', $amphur_id, $province_id, '$name_to', '$tel_to', '$note', '$invoice')";
+     $sql = "INSERT INTO order_list (id_order_list, list_order, id_product, num_product,price, money, date_receive, date_getorder, date_order, price_portage, portage,name_sent, tel_sent, catagory_car, licent_plate, name_author, name_store, amphur_id, province_id, name_to, tel_to, note, invoice)
+                         VALUES ($id_order_list, '$list_order', $id_product, $num_product, $price_num, $money, '$date_receive', '$date_getorder', '$date_order', $price_portage, $portage, '$name_sent', '$tel_sent', '$catagory_car','$licent_plate', '$name_author', '$name_store', $amphur_id, $province_id, '$name_to', '$tel_to', '$note', '$invoice')";
      mysqli_query($conn,$sql);
 
   

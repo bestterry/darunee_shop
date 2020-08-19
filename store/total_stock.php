@@ -95,7 +95,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th class="text-center" width="10%">สินค้า_หน่วย</th>
+                <th class="text-center" width="10%">สินค้า_หน่วย</th>
                   <th class="text-center" width="5%">จุน</th>
                   <th class="text-center" width="5%">พาน1</th>
                   <th class="text-center" width="5%">พาน2</th>
@@ -107,6 +107,7 @@
                   <th class="text-center" width="5%">ขายส่ง</th>
                   <th class="text-center" width="5%">แม่จัน</th>
                   <th class="text-center" width="5%">จห</th>
+                  <th class="text-center" width="5%">แพร่</th>
                   <th class="text-center" width="5%">รถ</th>
                   <th class="text-center" width="5%">ทั้งหมด</th>
                 </tr>
@@ -291,7 +292,8 @@
                     
                     ?>
                   <!-- -------------------------------//แม่จัน.------------------------------------ -->
-                    <!-- -------------------------------จห.------------------------------------ -->
+
+                  <!-- -------------------------------จห.------------------------------------ -->
                     <?php 
                       $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 11";
                       $objq_num = mysqli_query($conn,$SQL_num);
@@ -309,6 +311,23 @@
                     ?>
                   <!-- -------------------------------//จห.------------------------------------ -->
 
+                  <!-- -------------------------------แพร่.------------------------------------ -->
+                  <?php 
+                      $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 14";
+                      $objq_num = mysqli_query($conn,$SQL_num);
+                      $objr_num = mysqli_fetch_array($objq_num);
+                      if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                    ?>
+                  <td class="text-center">-</td>
+                  <?php
+                      }else{
+                    ?>
+                  <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                  <?php 
+                      } 
+                    
+                    ?>
+                  <!-- -------------------------------//แพร่.------------------------------------ -->
 
                   <!-- -------------------------------รวมรถ------------------------------------ -->
                   <?php 

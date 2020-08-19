@@ -89,7 +89,7 @@
                                       <?php
                                         if(!empty($value['ad_song'])){
                                       ?>
-                                      <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&id_age=<?php echo $value['id_age']; ?>" class="btn  btn-success btn-xs" target="_blank">ฟัง</a>
+                                      <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&id_age=<?php echo $value['id_age'];?>&&status=b" class="btn  btn-success btn-xs">ฟัง</a>
                                       <?php }else{}?>
                                     </td>
                                     <td class="text-center"><?php echo $value['name_artist'];?></td>
@@ -156,7 +156,7 @@
                                       <?php
                                         if(!empty($value['ad_song'])){
                                       ?>
-                                      <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&id_age=<?php echo $value['id_age']; ?>" class="btn  btn-success btn-xs" target="_blank">ฟัง</a>
+                                      <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&id_age=<?php echo $value['id_age'];?>&&status=b" class="btn btn-success btn-xs">ฟัง</a>
                                       <?php }else{}?>
                                     </td>
                                     <td class="text-center"><?php echo $value['name_artist'];?></td>
@@ -222,7 +222,7 @@
                                       <?php
                                         if(!empty($value['ad_song'])){
                                       ?>
-                                      <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&id_age=<?php echo $value['id_age']; ?>" class="btn  btn-success btn-xs" target="_blank">ฟัง</a>
+                                      <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&id_age=<?php echo $value['id_age'];?>&&status=b" class="btn btn-success btn-xs">ฟัง</a>
                                       <?php }else{}?>
                                     </td>
                                     <td class="text-center"><?php echo $value['name_artist'];?></td>

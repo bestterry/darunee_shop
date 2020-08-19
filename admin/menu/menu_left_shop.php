@@ -160,6 +160,9 @@
             <li><a href="withdraw_history.php"><i class="fa fa-cloud-upload"></i> เบิกออก </a></li>
             <!--/ข้อมูลการเบิก -->
 
+            <!--ข้อมูลการเบิก -->
+            <li><a href="withdraw_productwaste.php"><i class="fa fa-cloud-upload"></i> เบิกออก(ชำรุด) </a></li>
+            <!--/ข้อมูลการเบิก -->
 
             <!-- สต๊อกรวม -->
             <li><a href="total_stock.php" ><i class="fa fa-home"></i> STOCK </a></li>
@@ -257,7 +260,7 @@
             <!--/จัดการเพลงหลัก -->
 
             <!-- จัดการเพลง -->
-            <li><a href="song_search.php" ><i class="fa fa-music"></i> จัดการเพลง </a></li>
+            <!-- <li><a href="song_search.php" ><i class="fa fa-music"></i> จัดการเพลง </a></li> -->
             <!--/จัดการเพลง -->
 
             <!-- จัดการเพลง -->

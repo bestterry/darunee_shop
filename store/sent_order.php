@@ -70,14 +70,13 @@
           <div class="box box-primary">
             <!-- /.box-header -->
           <div class="box-header with-border">
-            <a type="button" href="store.php" class="btn btn-danger "><= เมนูหลัก</a>
+            <a type="button" href="store.php" class="btn btn-danger "><< เมนูหลัก</a>
             <a type="button" href="../pdf_file/list_order.php" class="btn btn-success ">พิมพ์จังหวัด</a>
             <a type="button" href="../pdf_file/list_order2.php" class="btn btn-success ">พิมพ์อำเภอ</a>
             <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-success ">ORDER วันนี้</a>
             <a type="button" href="add_order.php" class="btn btn-warning ">เพิ่ม ORDER</a>
-
             <br>
-            <div class="col-md-12 text-center"><font size="4"><B>ORDER ค้างส่ง</B></font></div>
+            <div class="col-md-12 text-center"><font size="5"><B>ORDER ค้างส่ง</B></font></div>
           </div>
             <div class="box-body no-padding">
                 <div class="mailbox-read-message">
@@ -86,9 +85,9 @@
                     <tr>
                       <th class="text-center" width="5%">ส่ง</th>
                       <th class="text-center" width="5%">ที่</th>
-                      <th class="text-center" width="70\5%">ที่อยู่ลูกค้า</th>
+                      <th class="text-center" width="75%">ที่อยู่ลูกค้า</th>
                       <th class="text-center" width="5%">ทวง</th>
-                      <th class="text-center" width="5%">เบิก</th>\
+                      <th class="text-center" width="5%">เบิก</th>
                       <th class="text-center" width="5%">ข้อมูล</th>
                     </tr>
                   </thead>

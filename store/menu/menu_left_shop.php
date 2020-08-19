@@ -17,19 +17,20 @@
                   </div>
                   <div class="modal-body table-responsive mailbox-messages">
                     <div class="table-responsive mailbox-messages">
-                      <table class="table table-hover table-striped table-bordered">
+                      <table class="table table-striped table-bordered">
+                        <thead>
+                          <tr bgcolor="#99CCFF">
+                            <th class="text-center" width="30%">เลือกสินค้า</th>
+                            <th class="text-center" width="40%">สินค้า_หน่วย</th>
+                            <th class="text-center" width="30%">คงเหลือ</th>
+                          </tr>
+                        </thead>
                         <tbody>
                           <tr>
-                            <th class="text-center" width="20%">เลือกสินค้า</th>
-                            <th class="text-center" width="35%">สินค้า_หน่วย</th>
-                            <th class="text-center" width="15%">คงเหลือ</th>
-                          <tr>
                             <?php while($product = $query_product2 ->fetch_assoc()){ ?>
-                            <td class="text-center" width="15%">
-                              <input type="checkbox" name="id_numPD[]" value="<?php echo $product['id_numPD_car']; ?>">
-                            </td>
-                            <td width="35%"><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
-                            <td class="text-center" width="15%"><?php echo $product['num']; ?></td>
+                            <td class="text-center"><input type="checkbox" name="id_numPD[]" value="<?php echo $product['id_numPD_car']; ?>"></td>
+                            <td><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
+                            <td class="text-center"><?php echo $product['num']; ?></td>
                           </tr>
                           <?php }?>
                         </tbody>
@@ -37,9 +38,8 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close">
-                        ปิดหน้าต่างนี้</i></button>
-                    <button type="submit" class="btn btn-success pull-right">ถัดไป ==>></button>
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ยกเลิก</i></button>
+                    <button type="submit" class="btn btn-success pull-right">ถัดไป >></button>
                   </div>
                 </div>
               </form>
@@ -65,12 +65,14 @@
                   <div class="modal-body table-responsive mailbox-messages">
                     <div class="table-responsive mailbox-messages">
                       <table class="table table-hover table-striped table-bordered">
-                        <tbody>
+                        <thead>
                           <tr class="info">
                             <th class="text-center" width="20%">เลือกสินค้า</th>
                             <th class="text-center" width="35%">สินค้า_หน่วย</th>
                             <th class="text-center" width="15%">คงเหลือ</th>
                           <tr>
+                        </thead>
+                        <tbody>
                             <?php 
                               while($product = $query_product1 ->fetch_assoc()){ 
                             ?>
@@ -86,9 +88,8 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close">
-                        ปิดหน้าต่างนี้</i></button>
-                    <button type="submit" class="btn btn-success pull-right">ถัดไป ==>></button>
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ยกเลิก</i></button>
+                    <button type="submit" class="btn btn-success pull-right">ถัดไป >></button>
                   </div>
                 </div>
               </form>
@@ -206,8 +207,8 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close">
-                        ปิดหน้าต่างนี้</i></button>
-                    <button type="submit" class="btn btn-success pull-right">ถัดไป ==>></button>
+                        ยกเลิก</i></button>
+                    <button type="submit" class="btn btn-success pull-right">ถัดไป >></button>
                   </div>
                 </div>
               </form>
@@ -216,7 +217,7 @@
           <!-- /แยกสินค้า -->
 
           <!-- สถานที่ทำงาน -->
-          <li><a href="#" data-toggle="modal" data-target="#working"><i class="fa fa-users"></i> ข้อมูลทำงาน </a></li>
+         <!-- <li><a href="#" data-toggle="modal" data-target="#working"><i class="fa fa-users"></i> ข้อมูลทำงาน </a></li>
           <div class="modal fade" id="working" role="dialog">
             <div class="modal-dialog modal-lg">
               <form action="working.php" method="post">
@@ -269,16 +270,15 @@
                             </tbody>
                           </table> 
                         </div>
-                        <!-- /.form-group -->
                     </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close">ปิดหน้าต่างนี้</i></button>
-                    <button type="submit" class="btn btn-success pull-right">ถัดไป ==>></button>
+                    <button type="submit" class="btn btn-success pull-right">ถัดไป >></button>
                   </div>
                 </div>
               </form>
             </div>
-          </div>
+          </div> -->
           <!-- /สถานที่ทำงาน -->
 
           <!-- /สต๊อกรถ -->
@@ -338,8 +338,8 @@
                             </div>
                           </div>
                           <div class="modal-footer">
-                            <button type="submit"  class="btn btn-success pull-right">ถัดไป ==>></button>
-                            <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ปิดหน้าต่างนี้</i></button>
+                            <button type="submit"  class="btn btn-success pull-right">ถัดไป >></button>
+                            <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ยกเลิก</i></button>
                           </div>
                       </div>
                   </form>
@@ -356,7 +356,7 @@
           <!-- /เงินขายรายวัน -->
 
           <!-- สำรองจ่าย. -->
-          <li><a href="reserve_money.php" ><i class="fa fa-user-circle-o"></i> สำรองจ่าย </a></li>
+          <!-- <li><a href="reserve_money.php" ><i class="fa fa-user-circle-o"></i> สำรองจ่าย </a></li> -->
           <!-- /สำรองจ่าย. -->
 
           <!-- สำรองจ่าย. -->
@@ -372,7 +372,7 @@
           <!--/จัดการเพลง -->
 
           <!-- จัดการเพลง -->
-          <li><a href="song_list.php" ><i class="fa fa-music"></i> จัดการเพลง </a></li>
+          <!-- <li><a href="song_list.php" ><i class="fa fa-music"></i> จัดการเพลง </a></li> -->
           <!--/จัดการเพลง -->
 
         </ul>

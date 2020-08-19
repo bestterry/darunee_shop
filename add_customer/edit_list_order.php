@@ -246,6 +246,16 @@
                           </div>
                         </div>
 
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">นับค้างส่ง :</label>
+                          <div class="col-sm-8">
+                            <label class="switch">
+                              <input type="checkbox" name="status_num" <?php if($objr_addorder['status_num']=='Y'){ echo "checked"; }else{} ?>>
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+                        </div>
+
                       </div>
                       <div class="col-md-7">
                         <div class="table-responsive">

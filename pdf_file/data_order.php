@@ -72,7 +72,7 @@ $pdf=new PDF('P','mm','A4');
               $pdf->Text(55, 119,iconv('UTF-8','cp874',$objr_order['name_store'].'     '.'อ.'.$objr_amphur['amphur_name'].'   จ.'.$objr_amphur['province_name']),1,0,'C');
               $pdf->Text(75, 127,iconv('UTF-8','cp874',$objr_order['name_to']),1,0,'C');
               $pdf->Text(132, 127,iconv('UTF-8','cp874',$objr_order['tel_to']),1,0,'L');
-              $pdf->Text(60, 147,iconv('UTF-8','cp874',$objr_order['name_sent']),1,0,'L');
+              $pdf->Text(60, 147,iconv('UTF-8','cp874',$objr_order['name_sent']),1,0,'C');
               $pdf->Text(132, 147,iconv('UTF-8','cp874',$objr_order['tel_sent']),1,0,'C');
               $pdf->Text(70, 155,iconv('UTF-8','cp874',$objr_order['catagory_car']),1,0,'C');
               

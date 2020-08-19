@@ -145,7 +145,7 @@
                     </p>
                   </div>
                   <div class="col-4 col-sm-4 col-xl-4 col-md-4 text-right">
-                    <a href="song_listen.php?id_song=<?php echo $id_song;?>&&id_age=setting" class="btn  btn-success" target="_blank">ฟัง</a>
+                    <a href="song_listen.php?id_song=<?php echo $id_song;?>&&id_age=setting&&status=setting" class="btn  btn-success">ฟัง</a>
                   </div>
                 </div>
               </div>

@@ -165,7 +165,7 @@
               </font>
             </div>
             <!-- add_receive_money  -->
-            <form action="algorithm/receive_money_edit.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
+            <form action="algorithm/receive_money_edit2.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
               <div class="mailbox-read-message">
                 <div class="col-12 col-md-12 col-xs-12">
                   <div class="col-1 col-md-1 col-xs-1"></div>
@@ -278,7 +278,7 @@
                 <div class="box-footer">
                   <div class="col-12 col-md-12 col-xs-12">
                     <div class="col-4 col-md-4 col-xs-4">
-                      <a type="block" href="receive_money.php" class="btn btn-danger pull-left"><< กลับ</a> 
+                      <a type="block" href="receive_moneylist.php?id_category=<?php echo $objr_receive['id_category']; ?>" class="btn btn-danger pull-left"><< กลับ</a> 
                     </div>
                     <div class="col-4 col-md-4 col-xs-4 text-center">
                       <button type="submit" type="submit" class="btn btn-success "><i class="fa fa-save"></i> บันทึก </button>

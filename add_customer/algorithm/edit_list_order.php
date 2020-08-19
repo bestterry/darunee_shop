@@ -24,14 +24,21 @@
      $status = "success";
   }
 
+  if (empty($_POST['status_num'])) {
+    $status_num = "N";
+  }else{
+    $status_num = "Y";
+  }
+
   if(empty($province_id)){
     $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', 
-                      note = '$note', request = '$request', status = '$status'
+                      note = '$note', request = '$request', status = '$status', status_num = '$status_num'
                       WHERE id_addorder = $id_addorder";
     mysqli_query($conn,$sql_Uaddorder);
   }else{
     $sql_Uaddorder = "UPDATE addorder SET name_customer = '$name_customer', tel = '$tel', village = '$village', 
-                      province_id = $province_id, amphur_id = $amphur_id, district_code = $district_code, note = '$note', request = '$request', status = '$status'
+                      province_id = $province_id, amphur_id = $amphur_id, district_code = $district_code, note = '$note',
+                       request = '$request', status = '$status', status_num = '$status_num'
                       WHERE id_addorder = $id_addorder";
     mysqli_query($conn,$sql_Uaddorder);
   }
