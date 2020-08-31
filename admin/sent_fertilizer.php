@@ -115,14 +115,13 @@
                             <table class="table" id="example2">
                               <thead>
                               <tr>
-                                <th class="text-center" width="5%"> <font color="red">ที่</font> </th>
                                 <th class="text-center" width="10%"> <font color="red">ชื่อ</font> </th>
-                                <th class="text-center" width="10%"> <font color="red">ยก</font> </th>
-                                <th class="text-center" width="8%"> <font color="red">รถ</font> </th>
-                                <th class="text-center" width="8%"> <font color="red">คน</font> </th>
-                                <th class="text-center" width="8%"> <font color="red">กส</font> </th>
-                                <th class="text-center" width="8%"> <font color="red">ค่ายก</font> </th>
-                                <th class="text-center" width="8%"> <font color="red">ค่ารถ</font> </th>
+                                <th class="text-center" width="10%"> <font color="red">งาน</font> </th>
+                                <th class="text-center" width="9%"> <font color="red">รถ</font> </th>
+                                <th class="text-center" width="9%"> <font color="red">คน</font> </th>
+                                <th class="text-center" width="9%"> <font color="red">กส</font> </th>
+                                <th class="text-center" width="9%"> <font color="red">ค่ายก</font> </th>
+                                <th class="text-center" width="9%"> <font color="red">ค่ารถ</font> </th>
                                 <th class="text-center" width="25%"> <font color="red">สต๊อก</font> </th>
                                 <th class="text-center" width="5%"> <font color="red">เวลา</font> </th>
                                 <th class="text-center" width="5%"> <font color="red">แก้ไข</font> </th>
@@ -130,12 +129,12 @@
                               </thead>
                               <tbody>
                               <?php 
-                                $i = 1;
                                 $day = date('Y-m-d');
                                 $sql_ferti = "SELECT * FROM sent_ferti
                                               INNER JOIN type_lift ON sent_ferti.id_type_lift = type_lift.id
                                               INNER JOIN member ON sent_ferti.id_member = member.id_member 
-                                              WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day'";
+                                              WHERE DATE_FORMAT(datetime,'%Y-%m-%d')='$day'
+                                              ORDER BY sent_ferti.id_sent_ferti";
                                 $objq_ferti = mysqli_query($conn,$sql_ferti);
                                 while($value = $objq_ferti->fetch_assoc()){
                                   $id_car = $value['id_car'];
@@ -152,7 +151,6 @@
                                   }
                               ?>
                               <tr>
-                                <td class="text-center"><?php echo $i; ?></td>
                                 <td class="text-center"><?php echo $value['name'];?></td>
                                 <td class="text-center"><?php echo $value['name_type_lift'];?></td>
                                 <td class="text-center"><?php echo $objr['name'];?></td>
@@ -163,11 +161,10 @@
                                 <td class="text-center"><?php echo $value['note'];?></td>
                                 <td class="text-center"><?php echo Datethai2($value['datetime']);?></td>
                                 <td class="text-center"> 
-                                  <a href="sent_fertilizer_edit.php?id_sent_ferti=<?php echo $value['id_sent_ferti']; ?>&&day=<?php echo $day; ?>" > <i class="fa fa-pencil"></i> </a>
+                                  <a href="sent_fertilizer_edit.php?id_sent_ferti=<?php echo $value['id_sent_ferti']; ?>&&day=<?php echo $day; ?>" > >> </a>
                                 </td>
                               </tr>
                               <?php
-                                $i++;
                                 }
                               ?>
                               </tbody>
@@ -317,7 +314,7 @@
             'paging': false,
             'lengthChange': false,
             'searching': true,
-            'ordering': true,
+            'ordering': false,
             'info': true,
             'autoWidth': false
           })

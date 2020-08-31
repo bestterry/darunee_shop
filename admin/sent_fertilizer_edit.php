@@ -93,7 +93,7 @@
                       <div class="col-md-6 col-sm-6 col-6">
                         <p align="center">
                           <font size="5">
-                            <B>ค่าส่งปุ๋ย วันที่</B>
+                            <B>ข้อมูล ค่ายกปุ๋ย</B>
                           </font>
                         </p>
                       </div>
@@ -112,12 +112,12 @@
                   
                     <div class="row">
                       <div class="col-md-3 col-sm-3"></div>
-                      <div class="col-md-6 col-sm-6">
+                      <div class="col-md-4 col-sm-4">
                         
                         <div class="row">
                           <div class="form-group">
-                            <label class="col-sm-3 col-md-3 col-6 control-label">ชื่อ</label>
-                            <div class="col-sm-9 col-md-9 col-6">
+                            <label class="col-sm-6 col-md-6 col-6 control-label">ชื่อทีมงาน</label>
+                            <div class="col-sm-6 col-md-6 col-6">
                               <input class="form-control" type="text" value="<?php echo $objr_ferti['name'];?>" disabled>
                               <input name="id" type="hidden" value="<?php echo $id; ?>">
                             </div>
@@ -126,8 +126,8 @@
 
                         <div class="row">
                           <div class="form-group">
-                            <label class="col-sm-3 col-md-3 col-6 control-label">รถ</label>
-                            <div class="col-sm-9 col-md-9 col-6">
+                            <label class="col-sm-6 col-md-6 col-6 control-label">ใช้รถ</label>
+                            <div class="col-sm-6 col-md-6 col-6">
                               <select name="id_car" class="form-control" style="width: 100%;">
                                 <option value="<?php echo $objr_ferti['id_car'];?>"  selected='selected'><?php echo $objr_member['name'];?></option>
                                 <?php 
@@ -144,8 +144,8 @@
 
                         <div class="row">
                           <div class="form-group">
-                            <label class="col-sm-3 col-md-3 col-6 control-label">งาน</label>
-                            <div class="col-sm-9 col-md-9 col-6">
+                            <label class="col-sm-6 col-md-6 col-6 control-label">งานปฏิบัติ</label>
+                            <div class="col-sm-6 col-md-6 col-6">
                               <select name="id_type_lift" class="form-control" style="width: 100%;">
                                 <option value="1"  <?php if($id_type_lift == 1){ echo "selected='selected'";} ?>>ยกขึ้น</option>
                                 <option value="2"  <?php if($id_type_lift == 2){ echo "selected='selected'";} ?>>ยกลง</option>
@@ -156,8 +156,8 @@
 
                         <div class="row">
                           <div class="form-group">
-                            <label class="col-sm-3 col-md-3 col-6 control-label">คน</label>
-                            <div class="col-sm-9 col-md-9 col-6">
+                            <label class="col-sm-6 col-md-6 col-6 control-label">จำนวนคน</label>
+                            <div class="col-sm-6 col-md-6 col-6">
                               <input class="form-control" name="num_cus" id="num_cus" onKeyUp="calcfunc()" type="text" value="<?php echo $objr_ferti['num_cus'];?>">
                             </div>
                           </div>
@@ -165,8 +165,8 @@
 
                         <div class="row">
                           <div class="form-group">
-                            <label class="col-sm-3 col-md-3 col-6 control-label"> กส.</label>
-                            <div class="col-sm-9 col-md-9 col-6">
+                            <label class="col-sm-6 col-md-6 col-6 control-label">จำนวน กส</label>
+                            <div class="col-sm-6 col-md-6 col-6">
                               <input class="form-control" name="num_ferti" id="num_ferti" onKeyUp="calcfunc()" type="text" value="<?php echo $objr_ferti['num_ferti'];?>">
                             </div>
                           </div>
@@ -174,8 +174,8 @@
 
                         <div class="row">
                           <div class="form-group">
-                            <label class="col-sm-3 col-md-3 col-6 control-label">ค่ายก</label>
-                            <div class="col-sm-9 col-md-9 col-6">
+                            <label class="col-sm-6 col-md-6 col-6 control-label">ค่ายก(บ)</label>
+                            <div class="col-sm-6 col-md-6 col-6">
                               <input class="form-control" name="money" type="text" id="money" value="<?php echo $objr_ferti['money'];?>">
                             </div>
                           </div>
@@ -183,22 +183,22 @@
 
                         <div class="row">
                           <div class="form-group">
-                            <label class="col-sm-3 col-md-3 col-6 control-label">รายการ</label>
-                            <div class="col-sm-9 col-md-9 col-6">
+                            <label class="col-sm-6 col-md-6 col-6 control-label">สต๊อก</label>
+                            <div class="col-sm-6 col-md-6 col-6">
                               <input class="form-control" name="note" type="text" value="<?php echo $objr_ferti['note'];?>">
                             </div>
                           </div>
                         </div>
                        
                       </div>
-                      <div class="col-md-3 col-sm-3"></div>
+                      <div class="col-md-5 col-sm-5"></div>
                     </div>
                   
                   </div>
                   <div class="box-footer with-border">
                     <div align="center" >
                       <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะเปลี่ยนแปลงข้อมูลหรือไม่ ?')";><i class="fa fa-check-square-o"></i> บันทึก </button>
-                      <a type="button" href="algorithm/delete_sent_ferti.php?id_sent_ferti=<?php echo $id; ?>" class="btn btn-danger" onClick="return confirm('คุณต้องการที่จะลบข้อมูลหรือไม่?')";> ลบ </a>
+                      <a type="button" href="algorithm/delete_sent_ferti.php?id_sent_ferti=<?php echo $id; ?>" class="btn btn-danger" onClick="return confirm('คุณต้องการที่จะลบข้อมูลหรือไม่?')";> ลบข้อมูล </a>
                     </div>
                   </div>
                 </form>

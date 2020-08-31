@@ -29,11 +29,11 @@
             <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
               <div class="topnav">
                 <a class="active" href="artist.php"> ค้นหา </a>
-                <a href="song_old.php"> เก่า </a>
-                <a href="song_middle.php"></i> กลาง </a>
-                <a href="song_new.php"> ใหม่ </a>
                 <a href="song_setting.php"> เพลง </a>
                 <a href="artist_setting.php"> นักร้อง </a>
+                <a href="song_old.php"> เก่า </a>
+                <a href="song_middle.php"></i> กลาง </a>
+                <a href="song_new.php"> ใหม่ </a>\
                 <a href="gradea.php"> A </a>
                 <a href="gradeb.php"> B </a>
                 <a href="gradec.php"> C </a>
@@ -65,7 +65,7 @@
                           <div class="form-group">
                             <label class="col-sm-4 control-label"><font size="4">ยุค</font></label>
                             <div class="col-sm-8">
-                              <select name="id_ageartist" id="id_ageartist" class=" form-control" style="width: 50%;">
+                              <select name="id_ageartist" onchange="sSelect2(this.value)" id="id_ageartist" class=" form-control" style="width: 50%;">
                                 <option value="">-- เลือกยุคนักร้อง --</option>
                                 <?php 
                                   while($value = $objq_ageartist->fetch_assoc()){
@@ -81,8 +81,8 @@
                           <div class="form-group">
                             <label class="col-sm-4 control-label"><font size="4">ชาย / หญิง</font></label>
                             <div class="col-sm-8">
-                              <select name="id_sexartist" onchange="sSelect(this.value)" class="form-control" style="width: 50%;">
-                                <option value="">-- เลือกเพศนักร้อง --</option>
+                              <select name="id_sexartist" onchange="sSelect(this.value)" id="id_ageartist" class="form-control" style="width: 50%;">
+                                <option id="test" value="">-- เลือกเพศนักร้อง --</option>
                                 <?php 
                                   while($value = $objq_sexartist->fetch_assoc()){
                                 ?>
@@ -141,19 +141,30 @@
     </script>
     <script>
       function sSelect(value){
-      var id_ageartist = $('#id_ageartist'). val()
+        var id_ageartist = $('#id_ageartist').val()
             $.ajax({
-                      type:"POST",
-                      url:"algorithm/select_artist.php",
-                      data:{value:value,id_ageartist:id_ageartist},
-                      success:function(data){
-                        $("#id_artist").html(data);
-                        console.log(data);
-                      }
-                  });
-  
-              return false;
-              }
+                type:"POST",
+                url:"algorithm/select_artist.php",
+                data:{value:value,id_ageartist:id_ageartist},
+                success:function(data){
+                  $("#id_artist").html(data);
+                }
+            });
+        return false;
+      };
+
+      function sSelect2(value){
+        document.getElementById("test").selected = "true";
+            $.ajax({
+                type:"POST",
+                url:"algorithm/select_artist2.php",
+                data:{value:value},
+                success:function(data){
+                  $("#id_artist").html(data);
+                }
+            });
+        return false;
+      }
     </script>
   </body>
 

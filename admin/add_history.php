@@ -306,7 +306,7 @@ function Datetime($strDate)
                           <th class="text-center" width="70%"> 
                             <select name ="id_member" class="form-control text-center select2" style="width: 100%;">
                                 <?php #endregion
-                                $sql_member = "SELECT * FROM member WHERE status = 'employee'";
+                                $sql_member = "SELECT * FROM member WHERE status = 'employee' AND NOT id_member = 3";
                                 $objq_member = mysqli_query($conn,$sql_member);
                                 while($member = $objq_member -> fetch_assoc()){
                                 ?>

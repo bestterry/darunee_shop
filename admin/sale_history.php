@@ -179,8 +179,8 @@
                                   <th class="text-center" width="8%"><font color="red">จำนวน</font></th>
                                   <th class="text-center" width="10%"><font color="red">บ/หน่วย</font></th>
                                   <th class="text-center" width="8%"><font color="red">เงินขาย</font></th>
-                                  <th class="text-center" width="30%"><font color="red">รายละเอียด</font></th>
                                   <th class="text-center" width="10%"><font color="red">ร้าน</font></th>
+                                  <th class="text-center" width="30%"><font color="red">รายละเอียด</font></th>
                                   <th class="text-center" width="8%"><font color="red">เวลา</font></th>
                                   <th class="text-center" width="5%"><font color="red">แก้</font></th>
                                 </tr>
@@ -196,30 +196,14 @@
                                     while($value = $objq ->fetch_assoc()){ 
                                 ?>
                                 <tr>
-                                  <td class="text-center">
-                                    <?php echo $value['name_product'].'_'.$value['unit']; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <?php echo $value['num'];?>
-                                  </td>
-                                  <td class="text-center">
-                                    <?php echo $value['price']; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <?php echo $value['money']; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <?php echo $value['note']; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <?php echo $value['name_zone']; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <?php echo DateThai2($value['datetime']); ?>
-                                  </td>
-                                  <td class="text-center" >
-                                    <a href="edit_sale_shop.php?id_price_history=<?php echo $value['id_price_history']; ?>" > <i class="fa fa-pencil"></i> </a>
-                                  </td>
+                                  <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit']; ?></td>
+                                  <td class="text-center"><?php echo $value['num'];?> </td>
+                                  <td class="text-center"><?php echo $value['price']; ?></td>
+                                  <td class="text-center"><?php echo $value['money']; ?></td>
+                                  <td class="text-center"><?php echo $value['name_zone']; ?></td>
+                                  <td class="text-center"><?php echo $value['note']; ?></td>
+                                  <td class="text-center"><?php echo DateThai2($value['datetime']); ?> </td>
+                                  <td class="text-center" ><a href="edit_sale_shop.php?id_price_history=<?php echo $value['id_price_history']; ?>" >>></a> </td>
                                 </tr>
                                 <?php
                                                       $total_money = $total_money + $value['money'];
@@ -304,7 +288,7 @@
                                     <?php echo DateThai2($product['datetime']); ?>
                                   </td>
                                   <td class="text-center" >
-                                    <a href="edit_sale_car.php?id_sale_history=<?php echo $product['id_sale_history']; ?>" > <i class="fa fa-pencil"></i> </a>
+                                    <a href="edit_sale_car.php?id_sale_history=<?php echo $product['id_sale_history']; ?>" > >> </a>
                                   </td>
                                 </tr>
                                 <?php 

@@ -67,14 +67,12 @@
                     <font size="5"><B>
                       <?php 
                         if($status == 'normal'){
-                          echo 'ย้ายสินค้าปกติเป็นสินค้าชำรุด';
+                          echo 'แยกสินค้าชำรุด'.' : '.$_POST['name'];
                         }else{
-                          echo 'ย้ายสินค้าชำรุดเป็นสินค้าปกติ';
+                          echo 'แยกสินค้าชำรุด'.' : '.$_POST['name'];
                         }
                       ?>
                     </B></font>
-                    <br>
-                    <font size="5"><B align="center"> สต๊อก : <?php echo $_POST['name'];?></B></font>
                   </div>
                   <div class="box-body no-padding">
                     <div class="col-12">
@@ -86,7 +84,7 @@
                                 <tr>
                                   <th class="text-center" width="33%"><font color="red">สินค้า_หน่วย</font></th>
                                   <th class="text-center" width="33%"><font color="red">จำนวนที่มี</font> </th>
-                                  <th class="text-center" width="33%"><font color="red">จำนวนย้าย</font></th>
+                                  <th class="text-center" width="33%"><font color="red">จำนวนชำรุด</font></th>
                                 </tr>
                                 <?php
                                   for($i=0;$i<count($_POST['id_numproduct']);$i++){

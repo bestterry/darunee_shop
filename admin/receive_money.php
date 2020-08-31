@@ -95,17 +95,17 @@
                 <table id="example2" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th class="text-center" width="6%">#</th>
-                      <th class="text-center" width="6%">#</th>
+                      <th class="text-center" width="6%">รับ</th>
+                      <th class="text-center" width="6%">สนง</th>
                       <th class="text-center" width="8%">ชื่อ</th>
                       <th class="text-center" width="8%">งาน</th>
                       <th class="text-center" width="8%">เงิน</th>
-                      <th class="text-center" width="8%">#</th>
+                      <th class="text-center" width="8%">ขาย</th>
                       <th class="text-center" width="9%">วันขาย</th>
                       <th class="text-center" width="9%">วันรับเงิน</th>
                       <th class="text-center" width="15%">ชื่อลูกค้า</th>
                       <th class="text-center" width="18%">หมายเหตุ</th>
-                      <th class="text-center" width="5%">#</th>
+                      <th class="text-center" width="5%">แก้</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -271,7 +271,7 @@
 
                     ?>
                     <tr>
-                      <td class="text-center" >สนง.</td>
+                      <td class="text-center" >สนง.รับ</td>
                     <?php 
                       $sql_category = "SELECT id_category FROM rc_category";
                       $objq_category1 = mysqli_query($conn,$sql_category);
@@ -429,7 +429,7 @@
         'paging'      : true,
         'lengthChange': true,
         'searching'   : true,
-        'ordering'    : true,
+        'order'  : [],
         'info'        : true,
         'autoWidth'   : true
       })

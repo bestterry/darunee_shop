@@ -77,8 +77,19 @@
           <div class="col-md-12">
             <div class="box box-primary">
               <div class="text-center box-header with-border">
-                <font size="5">
-                  <B align="center"> จัดการสินค้าชำรุด </font></B>
+                <div class="col-12">
+                  <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
+                  <div class="col-4 col-sm-4 col-md-4 col-xl-4">
+                    <div class="text-center">
+                      <font size="5">
+                        <B align="center"> จัดการสินค้าชำรุด <font color="red"></font></B>
+                      </font>
+                    </div>
+                  </div>
+                  <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right">
+                    <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> สินค้าหาย </a>
+                  </div>
+                </div>
               </div>
               <form action="withdraw_productwaste2.php" method="post">
                 <div class="box-body col-md-12 table-responsive mailbox-messages">
@@ -89,8 +100,8 @@
                         <table class="table table-bordered">
                           <tbody>
                             <tr>
-                              <th class="text-center" width="30%"><font size="3">เบิกจาก STOCK</font></th>
-                              <th class="text-center" width="70%"> 
+                              <th class="text-center" width="40%"><font size="4">เบิกจาก STOCK</font></th>
+                              <th class="text-center" width="60%"> 
                                 <select name ="id_zone" class="form-control text-center select2" style="width: 100%;">
                                     <?php #endregion
                                       $sql_member = "SELECT * FROM zone ";
@@ -115,8 +126,8 @@
                         <table class="table table-bordered">
                           <tbody>
                             <tr>
-                              <th class="text-center" width="30%"><font size="3">สถานะสินค้า</font></th>
-                              <th class="text-center" width="70%"> 
+                              <th class="text-center" width="40%"><font size="4">สถานะสินค้า</font></th>
+                              <th class="text-center" width="60%"> 
                                 <select name ="status" class="form-control text-center select2" style="width: 100%;">
                                   <option value="normal">ปกติ</option>
                                   <option value="waste">ชำรุด</option>
@@ -140,12 +151,51 @@
           </div>
         </div>
       </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-
     <?php require("../menu/footer.html"); ?>
-
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <form action="withdraw_productmiss.php" method="post">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <font size="5"><B> สินค้าหาย </B></font>
+            </div>
+            <div class="modal-body col-md-12 table-responsive mailbox-messages">
+              <div class="col-12">
+                <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+                <div class="col-8 col-sm-8 col-xl-8 col-md-8">
+                  <div class="table-responsive mailbox-messages">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <th class="text-center" width="30%"><font size="4">สต๊อก</font></th>
+                          <th class="text-center" width="70%"> 
+                            <select name="id_zone"  class="form-control" >
+                              <option value="">-- เลือกสต๊อก --</option>
+                              <?php 
+                                  $objq_member2 = mysqli_query($conn,$sql_member);
+                                  while($value = $objq_member2->fetch_assoc()){ ?>
+                                  <option value="<?php echo $value['id_zone'];?>"><?php echo $value['name_zone'];?></option>
+                              <?php } ?>
+                            </select>
+                          </th>
+                        </tr>
+                      </tbody>
+                    </table> 
+                    <br> 
+                  </div>
+                </div>
+                <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn button2 pull-right">ถัดไป >></button>
+              <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< ย้อนกลับ </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>                
   </div>
 
   <!-- jQuery 3 -->

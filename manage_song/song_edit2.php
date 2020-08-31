@@ -255,6 +255,23 @@
                           </div>
                         </div>
 
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">แก้ไข </label>
+                          <div class="col-sm-8">
+                            <label class="switch">
+                              <input type="checkbox" name="edit" <?php if($objr_song['edit']=="Y"){ echo "checked"; }else{} ?>>
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">หมายเหตุ </label>
+                          <div class="col-sm-8">
+                            <input type="text" name="note" class="form-control" value="<?php echo $objr_song['note']; ?>">
+                          </div>
+                        </div>
+
                       </div>
                       <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
                       <!-- /.row -->

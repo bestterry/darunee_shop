@@ -142,7 +142,7 @@
                         <th class="text-center" width="12%"><font color="red">มาถึง</font></th>
                         <th class="text-center" width="10%"><font color="red">อำเภอ</font></th>
                         <th class="text-center" width="8%"><font color="red">จ่าย</font></th>
-                        <th class="text-center" width="7%"><font color="red">#</font></th>
+                        <th class="text-center" width="7%"><font color="red">ข้อมูล</font></th>
                         <!-- <th class="text-center" width="10%">จังหวัด</th> -->
                       </tr>
                     </thead>
@@ -161,7 +161,7 @@
                         <td class="text-center" ><?php echo DateThai($value['date_receive']) ;?></td>
                         <td class="text-center"><?php echo $value['amphur_name'];?></td>
                         <td class="text-center"><?php echo $value['invoice'];?></td>
-                        <td class="text-center"><a href="data_order.php?id_order_list=<?php echo $value['id_order_list']; ?>" class="btn btn-default btn-xs">>></a></td>
+                        <td class="text-center"><a href="data_order.php?id_order_list=<?php echo $value['id_order_list']; ?>">>></a></td>
                         <!-- <td class="text-center"><?php //echo $value['province_name'];?></td> -->
                       </tr>
                     <?php 

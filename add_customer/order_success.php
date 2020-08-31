@@ -112,11 +112,11 @@
                       <table id="example2" class="table">
                         <thead>
                           <tr>
-                            <th class="text-center" width="4%">แก้</th>
-                            <th class="text-center" width="4%">#</th>
-                            <th class="text-center" width="83%">ข้อมูล ORDER ส่งแล้ว</th>
-                            <th class="text-center" width="4%">ทวง</th>
-                            <th class="text-center" width="4%">เบิก</th>
+                            <th class="text-center" width="80%">ข้อมูล ORDER ส่งแล้ว</th>
+                            <th class="text-center" width="5%">ทวง</th>
+                            <th class="text-center" width="5%">เบิก</th>
+                            <th class="text-center" width="5%">วันที่</th>
+                            <th class="text-center" width="5%">แก้</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -143,13 +143,11 @@
                               }
                           ?>
                           <tr>
-                            <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=success" class="fa fa-pencil" ></a></td>
-                            <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
-                            <!-- <td class="text-center"><a href="algorithm/sent_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=2" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นส่งแล้วหรือไม่ ?')";>ส่ง</a></td>              -->
-                            <td ><?php echo $value['id_addorder'].' '.$value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
-                            <!-- <td class="text-center" ><input type="checkbox" name="id_addorder[]" value="<?php echo $value['id_addorder']; ?>"></td> -->
+                           <td><?php echo $value['id_addorder'].'&nbsp; &nbsp;&nbsp;  '.$value['name_customer'].'   บ.'.$value['village'].' '.'ต.'.$value['district_name'].' '.'อ.'.$value['amphur_name'].' '.'จ.'.$value['province_name'].'  '.$value['tel'];?></td>
                             <td class="text-center"><?php if($request=='Y'){echo "ทวง";}else{}?></td>                         
                             <td class="text-center"><?php echo $name_member; ?></td>
+                            <td class="text-center" ><?php echo DateThai($value['datetime']);?></td>
+                            <td class="text-center" ><a href="edit_list_order.php?id_addorder=<?php echo $value['id_addorder']; ?>&&status=success"> >> </a></td>
                           </tr>
                           <?php 
                             }
@@ -158,7 +156,6 @@
                       </table>
                     </div>
                   </div>
-                  <!-- <div class="box-footer" align="center"> <button type="submit" class="btn btn-success"> ตกลง </button> </div> -->
                 </form>
               </div>
             </div>
@@ -198,7 +195,7 @@
           'paging'      : true,
           'lengthChange': true,
           'searching'   : true,
-          'ordering'    : true,
+          'ordering'    : false,
           'info'        : true,
           'autoWidth'   : false,
         }

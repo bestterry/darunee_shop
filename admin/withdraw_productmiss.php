@@ -2,21 +2,14 @@
     require "../config_database/config.php"; 
     require "../session.php";
 
-    $status = $_POST['status'];
     $id_zone = $_POST['id_zone'];
     $sql_zone = "SELECT name_zone FROM zone  WHERE id_zone = $id_zone";
     $objq_zone = mysqli_query($conn,$sql_zone);
     $objr_zone = mysqli_fetch_array($objq_zone);
 
-    if ($status == 'normal') {
-      $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_zone = $id_zone";
-      $objq_listproduct = mysqli_query($conn,$list_product);
-    }else {
-      $list_product = "SELECT * FROM product INNER JOIN num_productwaste ON product.id_product = num_productwaste.id_product WHERE num_productwaste.id_zone = $id_zone";
-      $objq_listproduct = mysqli_query($conn,$list_product);
-    }
-    
- ?>
+    $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_zone = $id_zone";
+    $objq_listproduct = mysqli_query($conn,$list_product);
+?>
 
 <!DOCTYPE html>
 <html>
@@ -75,15 +68,11 @@
           <div class="row">
             <div class="col-12 col-sm-12 col-xl-12 col-md-12">
               <div class="box box-primary">
-                <form action="withdraw_productwaste3.php" method="post">
+                <form action="withdraw_productmiss2.php" method="post">
                   <div class="box-header text-center with-border">
-                    <font size="5"><B>
-                      <?php 
-                        if($status == 'normal'){
-                          echo 'แยกสินค้าชำรุด'.' : '.$objr_zone['name_zone'];
-                        }else{
-                          echo 'แยกสินค้าชำรุด'.' : '.$objr_zone['name_zone'];
-                        }
+                    <font size="5"><B>เบิกออกของหาย 
+                      <?php  
+                          echo 'สต๊อก'.' : '.$objr_zone['name_zone'];
                       ?>
                     </B></font>
                   </div>
@@ -104,18 +93,7 @@
                                   ?>
                                   <tr>
                                     <td class="text-center">
-                                    <?php 
-                                      if($status == 'normal'){
-                                    ?>
                                      <input type="checkbox" name="id_numproduct[]" value="<?php echo $list['id_numproduct']; ?>">
-                                    <?php
-                                      }else{
-                                    ?>
-                                    <input type="checkbox" name="id_numproduct[]" value="<?php echo $list['id_numproductwaste']; ?>">
-                                    <?php
-                                      }
-                                    ?>
-                                   
                                     </td>
                                     <td class="text-center"><?php echo $list['name_product'].'_'.$list['unit']; ?> </td>
                                     <td class="text-center"><?php echo $list['num'];?></td>
@@ -126,8 +104,7 @@
                                 </tbody>
                               </table>
                                 <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
-                                <input type="hidden" name="name" value="<?php echo $objr_zone['name_zone']; ?>">
-                                <input type="hidden" name="status" value="<?php echo $status; ?>">
+                                <input type="hidden" name="name_zone" value="<?php echo $objr_zone['name_zone']; ?>">
                           </div>
                           </div>
                         </div>

@@ -152,8 +152,8 @@
                           <tr>
                             <th width="20%" class="text-right"><font size="4" valign="middle">ID &nbsp;&nbsp;:</font></th>
                             <td width="30%" ><input type="text" name="id_order_list" class="form-control" value="<?php echo $id_order_list; ?>" disabled></td>
-                            <th width="25%" class="text-right" ><font size="4">บาท/ตัน &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="number" name="price_portage" onKeyUp="calcfunc()" class="form-control" value="<?php echo $objr_order['price_portage']; ?>"></td>
+                            <th width="25%" class="text-right" ><font size="4">บาทต่อตัน &nbsp;&nbsp;:</font></th>
+                            <td width="25%"><input type="number" step="0.01" name="price_portage" onKeyUp="calcfunc()" class="form-control" value="<?php echo $objr_order['price_portage']; ?>"></td>
                           </tr>
                           <tr>
                             <th width="20%" class="text-right"><font size="4" valign="middle">ใบสั่งที่ &nbsp;&nbsp;:</font></th>
@@ -162,7 +162,7 @@
                             <input type="hidden" name="id_order_list" class="form-control" value="<?php echo $id_order_list; ?>">
                             </td>
                             <th width="25%" class="text-right" ><font size="4">ค่าขนส่ง &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="number" name="portage" onKeyUp="calcfunc()" class="form-control" value="<?php echo $Vportage; ?>"></td>
+                            <td width="25%"><input type="money" step="0.01" name="portage" class="form-control" value="<?php echo $Vportage; ?>"></td>
                           </tr>
                           <tr>
                             <th width="20%" class="text-right" ><font size="4">วันที่สั่ง &nbsp;&nbsp;:</font></th>

@@ -7,7 +7,8 @@
   $objr_reserve = mysqli_fetch_array($objq_reserve);
   $reserve_money = $objr_reserve['money'];
 
-  $sql_history = "SELECT money,date,note FROM reserve_history WHERE id_list = 1 ORDER BY id_reserve_history DESC ";
+  $sql_history = "SELECT * FROM reserve_history INNER JOIN reserve_list ON reserve_history.id_list = reserve_list.id_list
+                  WHERE reserve_history.status = 2 ORDER BY reserve_history.id_reserve_history DESC ";
   $objq_history = mysqli_query($conn,$sql_history);
 ?>
 
@@ -95,8 +96,8 @@
             <div class="row">
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
-                  <a class="active" href="reserve_money.php"> รับเงินสำรองจ่าย </a>
-                  <a href="reserve_office.php"> โอนเงินจ่าย </a>
+                  <a href="reserve_money.php"> รับเงินสำรองจ่าย </a>
+                  <a class="active" href="reserve_office.php"> โอนเงินจ่าย </a>
                   <a href="song_middle.php"></i> โอนหน่วยรถ </a>
                 </div>
               </div>
@@ -114,7 +115,7 @@
                       <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                         <div class="text-center">
                           <font size="5">
-                            <B align="center"> รับเงินสำรองจ่าย <font color="red"> </font></B>
+                            <B align="center"> โอนเงินจ่าย <font color="red"> </font></B>
                           </font>
                         </div>
                       </div>
@@ -122,7 +123,6 @@
                         <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> เพิ่มเงิน </a>
                       </div>
                     </div>
-
                   </div>
                   <div class="box-body no-padding">
                     <div class="mailbox-read-message">
@@ -138,9 +138,10 @@
                               <table id="example1" class="table">
                                 <thead>
                                   <tr>
-                                    <th class="text-center" width="33%">วันที่</th>
-                                    <th class="text-center" width="33%">จำนวนเงิน</th>
-                                    <th class="text-center" width="33%">หมายเหตุ</th>
+                                    <th class="text-center" width="25%">วันที่</th>
+                                    <th class="text-center" width="25%">รายการ</th>
+                                    <th class="text-center" width="25%">จำนวนเงิน</th>
+                                    <th class="text-center" width="25%">หมายเหตุ</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -149,6 +150,7 @@
                                 ?>
                                   <tr>
                                     <td class="text-center"><?php echo Datethai($value['date']); ?></td> 
+                                    <td class="text-center"><?php echo $value['name_list']; ?></td>
                                     <td class="text-center"><?php echo $value['money']; ?></td>
                                     <td class="text-center"><?php echo $value['note']; ?></td>
                                   </tr>
@@ -169,52 +171,82 @@
       </div>
       <?php require("../menu/footer.html"); ?>
       <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog modal-lg">
-        <form action="algorithm/reserve_money.php" method="post">
-          <div class="modal-content">
-            <div class="modal-header text-center">
-                <font size="5"><B> รับเงินสำรองจ่าย </B></font>
-            </div>
-            <div class="modal-body col-md-12 table-responsive mailbox-messages">
-              <div class="col-12">
-                <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
-                <div class="col-8 col-sm-8 col-xl-8 col-md-8">
-                  <div class="table-responsive mailbox-messages">
-                    <table class="table table-bordered">
-                      <tbody>
-                        <tr>
-                          <th class="text-center" width="30%"><font size="3">จำนวนเงิน</font></th>
-                          <th class="text-center" width="70%"> 
-                            <input type="number" name="money" class="form-control text-center">
-                            <input type="hidden" name="money_befor" value="<?php echo $reserve_money; ?>">
-                          </th>
-                        </tr>
-                      </tbody>
-                    </table> 
-                    <br> 
-                    <table class="table table-bordered ">
-                      <tbody>
-                        <tr>
-                          <th class="text-center" width="30%"><font size="3">หมายเหตุ</font></th>
-                          <th class="text-center" width="70%"> 
-                            <input type="text" name="note" value='-' class="form-control text-center">
-                          </th>
-                        </tr>
-                      </tbody>
-                    </table>
+        <div class="modal-dialog modal-lg">
+          <form action="algorithm/reserve_office.php" method="post">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                  <font size="5"><B> โอนเงินจ่าย </B></font>
+              </div>
+              <div class="modal-body col-md-12 table-responsive mailbox-messages">
+                <div class="col-12">
+                  <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+                  <div class="col-8 col-sm-8 col-xl-8 col-md-8">
+                    <div class="table-responsive mailbox-messages">
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr>
+                            <th class="text-center" width="30%"><font size="3">รายการ</font></th>
+                            <th class="text-center" width="70%"> 
+                              <select name="id_list"  class="form-control" >
+                                <option value="">-- เลือกรายการ --</option>
+                                <?php 
+                                  $sql_list = "SELECT * FROM reserve_list WHERE status = 2";
+                                  $objq_list = mysqli_query($conn,$sql_list);
+                                    while($value = $objq_list->fetch_assoc()){ ?>
+                                    <option value="<?php echo $value['id_list'];?>"><?php echo $value['name_list'];?></option>
+                                <?php } ?>
+                              </select>
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table> 
+                      <br> 
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr>
+                            <th class="text-center" width="30%"><font size="3">จำนวนเงิน</font></th>
+                            <th class="text-center" width="70%"> 
+                              <input type="number" name="money" class="form-control text-center">
+                              <input type="hidden" name="money_befor" value="<?php echo $reserve_money; ?>">
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table> 
+                      <br> 
+                      <table class="table table-bordered ">
+                        <tbody>
+                          <tr>
+                            <th class="text-center" width="30%"><font size="3">หมายเหตุ</font></th>
+                            <th class="text-center" width="70%"> 
+                              <input type="text" name="note" value='-' class="form-control text-center">
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr>
+                            <th class="text-center" width="30%"><font size="3">วันที่</font></th>
+                            <th class="text-center" width="70%"> 
+                              <input type="date" name="date" id="datePicker" class="form-control text-center">
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table> 
+                      <br> 
+                    </div>
                   </div>
+                  <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
                 </div>
-                <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn button2 pull-right">ถัดไป >></button>
+                <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< ย้อนกลับ </button>
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn button2 pull-right">ถัดไป >></button>
-              <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< ย้อนกลับ </button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
 
     <!-- jQuery 3 -->
@@ -244,6 +276,17 @@
             'autoWidth'   : false
             });
        });
+      $(document).ready( function() {
+          var now = new Date();
+      
+          var day = ("0" + now.getDate()).slice(-2);
+          var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+          var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+
+        $('#datePicker').val(today);
+      });
     </script>
   </body>
 

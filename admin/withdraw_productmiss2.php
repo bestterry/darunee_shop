@@ -1,22 +1,7 @@
 <?php 
     require "../config_database/config.php"; 
     require "../session.php";
-
-    $status = $_POST['status'];
-    $id_zone = $_POST['id_zone'];
-    $sql_zone = "SELECT name_zone FROM zone  WHERE id_zone = $id_zone";
-    $objq_zone = mysqli_query($conn,$sql_zone);
-    $objr_zone = mysqli_fetch_array($objq_zone);
-
-    if ($status == 'normal') {
-      $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_zone = $id_zone";
-      $objq_listproduct = mysqli_query($conn,$list_product);
-    }else {
-      $list_product = "SELECT * FROM product INNER JOIN num_productwaste ON product.id_product = num_productwaste.id_product WHERE num_productwaste.id_zone = $id_zone";
-      $objq_listproduct = mysqli_query($conn,$list_product);
-    }
-    
- ?>
+?>
 
 <!DOCTYPE html>
 <html>
@@ -53,6 +38,7 @@
     <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="../plugins/iCheck/all.css">
+
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style>
@@ -75,15 +61,11 @@
           <div class="row">
             <div class="col-12 col-sm-12 col-xl-12 col-md-12">
               <div class="box box-primary">
-                <form action="withdraw_productwaste3.php" method="post">
+                <form action="algorithm/withdraw_productmiss.php" method="post">
                   <div class="box-header text-center with-border">
                     <font size="5"><B>
                       <?php 
-                        if($status == 'normal'){
-                          echo 'แยกสินค้าชำรุด'.' : '.$objr_zone['name_zone'];
-                        }else{
-                          echo 'แยกสินค้าชำรุด'.' : '.$objr_zone['name_zone'];
-                        }
+                        echo 'สต๊อก'.' : '.$_POST['name_zone'];
                       ?>
                     </B></font>
                   </div>
@@ -92,53 +74,47 @@
                       <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
                       <div class="col-8 col-sm-8 col-xl-8 col-md-8">
                           <div class="mailbox-read-message">
-                              <table class="table table-bordered">
-                                <tbody>
-                                  <tr>
-                                    <th class="text-center" width="33%"><font color="red">เลือก</font></th>
-                                    <th class="text-center" width="33%"><font color="red">สินค้า_หน่วย</font></th>
-                                    <th class="text-center" width="33%"><font color="red">จำนวนที่มี</font> </th>
-                                  </tr>
-                                  <?php
-                                    while($list = $objq_listproduct->fetch_assoc()){
-                                  ?>
-                                  <tr>
-                                    <td class="text-center">
-                                    <?php 
-                                      if($status == 'normal'){
-                                    ?>
-                                     <input type="checkbox" name="id_numproduct[]" value="<?php echo $list['id_numproduct']; ?>">
-                                    <?php
-                                      }else{
-                                    ?>
-                                    <input type="checkbox" name="id_numproduct[]" value="<?php echo $list['id_numproductwaste']; ?>">
-                                    <?php
-                                      }
-                                    ?>
+                            <table class="table table-bordered">
+                              <tbody>
+                                <tr>
+                                  <th class="text-center" width="33%"><font color="red">สินค้า_หน่วย</font></th>
+                                  <th class="text-center" width="33%"><font color="red">จำนวนที่มี</font> </th>
+                                  <th class="text-center" width="33%"><font color="red">จำนวนชำรุด</font></th>
+                                </tr>
+                                <?php
+                                  for($i=0;$i<count($_POST['id_numproduct']);$i++){
+                                      $id_numproduct = $_POST['id_numproduct'][$i];
+                                      $list_product = "SELECT * FROM num_product INNER JOIN product ON product.id_product = num_product.id_product 
+                                                       WHERE num_product.id_numproduct = $id_numproduct";
+                                      $objq_listproduct = mysqli_query($conn,$list_product);
+                                      $objr_listproduct = mysqli_fetch_array($objq_listproduct);
                                    
-                                    </td>
-                                    <td class="text-center"><?php echo $list['name_product'].'_'.$list['unit']; ?> </td>
-                                    <td class="text-center"><?php echo $list['num'];?></td>
-                                  </tr>
-                                  <?php 
-                                    }
-                                  ?>
-                                </tbody>
-                              </table>
-                                <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
-                                <input type="hidden" name="name" value="<?php echo $objr_zone['name_zone']; ?>">
-                                <input type="hidden" name="status" value="<?php echo $status; ?>">
-                          </div>
+                                ?>
+                                <tr>
+                                  <td class="text-center"><?php echo $objr_listproduct['name_product'].'_'.$objr_listproduct['unit']; ?></td>
+                                  <td class="text-center"><?php echo $objr_listproduct['num']; ?></td>
+                                  <td class="text-center">
+                                    <input class="text-center form-control" type="text" name="num_after[]" placeholder="0">
+                                    <input type="hidden" name="num_befor[]" value="<?php echo $objr_listproduct['num'];?>">
+                                    <input type="hidden" name="id_numproduct[]" value="<?php echo $id_numproduct; ?>">
+                                    <input type="hidden" name="id_product[]" value="<?php echo $objr_listproduct['id_product']; ?>">
+                                  </td>
+                                </tr>
+                                <?php 
+                                  }
+                                ?>
+                              </tbody>
+                            </table>
+                            <input type="hidden" name="id_zone" value="<?php echo $_POST['id_zone']; ?>">
                           </div>
                         </div>
                       <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
                     </div>
-                    <div class="box-footer">
-                      <a type="block" href="withdraw_productwaste.php" class="btn button2 pull-left"><< กลับ</a> 
-                      <button type="submit" class="btn button2 pull-right">ถัดไป >> </button>
-                    </div>
                   </div>
-                  
+                  <div class="box-footer">
+                    <a type="block" href="withdraw_productwaste.php" class="btn button2 pull-left"><< กลับ</a> 
+                    <button type="submit" class="btn btn-success pull-right">บันทึก </button>
+                  </div>
                 </form>
               </div>
             </div>

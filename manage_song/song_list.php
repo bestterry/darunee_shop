@@ -34,11 +34,11 @@
             <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
               <div class="topnav">
                 <a class="active" href="artist.php"> ค้นหา </a>
+                <a href="song_setting.php"> เพลง </a>
+                <a href="artist_setting.php"> นักร้อง </a>
                 <a href="song_old.php"> เก่า </a>
                 <a href="song_middle.php"></i> กลาง </a>
                 <a href="song_new.php"> ใหม่ </a>
-                <a href="song_setting.php"> เพลง </a>
-                <a href="artist_setting.php"> นักร้อง </a>
                 <a href="gradea.php"> A </a>
                 <a href="gradeb.php"> B </a>
                 <a href="gradec.php"> C </a>
@@ -75,13 +75,15 @@
                   <table id="example2" class="table">
                     <thead>
                       <tr>
-                        <th class="text-center" width="10%">#</th>
-                        <th class="text-center" width="30%">ชื่อเพลง</th>
-                        <th class="text-center" width="15%">ทำนอง</th>
-                        <th class="text-center" width="10%">เกรด</th>
-                        <th class="text-center" width="15%">ต้นฉบับ</th>
-                        <th class="text-center" width="10%">#</th>
-                        <th class="text-center" width="10%">เปิด</th>
+                        <th class="text-center" width="8%">#</th>
+                        <th class="text-center" width="18%">ชื่อเพลง</th>
+                        <th class="text-center" width="7%">ทำนอง</th>
+                        <th class="text-center" width="7%">เกรด</th>
+                        <th class="text-center" width="9%">ต้นฉบับ</th>
+                        <th class="text-center" width="8%">เปิด</th>
+                        <th class="text-center" width="8%">#</th>
+                        <th class="text-center" width="7%">แก้ไข</th>
+                        <th class="text-center" width="28%">หมายเหตุ</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -100,9 +102,6 @@
                         <td class="text-center"><?php echo $value['name_tune']; ?></td>
                         <td class="text-center"><?php echo $value['melodic']; ?></td>
                         <td class="text-center"><?php if($value['script']=='N'){echo "-";}else{echo "ต้นฉบับ";} ?></td>
-                        <td class="text-center">
-                          <a href="song_edit2.php?id_song=<?php echo $value['id_song']; ?>&&id_artist=<?php echo $id_artist; ?>" class="btn  btn-success btn-xs" >แก้</a>
-                        </td>  
                         <?php
                         if($value['status']=='N'){
                         ?>
@@ -114,6 +113,21 @@
                         <?php
                           }
                         ?>
+                        <td class="text-center">
+                          <a href="song_edit2.php?id_song=<?php echo $value['id_song']; ?>&&id_artist=<?php echo $id_artist; ?>" class="btn  btn-success btn-xs" >แก้</a>
+                        </td> 
+                        <?php
+                        if($value['edit']=='N'){
+                        ?>
+                        <td class="text-center">-</td>
+                        <?php
+                          }else{
+                        ?>
+                        <td class="text-center"><font>แก้ไข</font></td>
+                        <?php
+                          }
+                        ?> 
+                        <td class="text-center"><?php echo $value['note']; ?></td>
                       </tr>
                       <?php 
                         }
