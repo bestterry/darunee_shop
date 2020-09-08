@@ -82,18 +82,18 @@
                 <!-- /.box-header -->
                 <div class="box-header with-border">
                   <div class="col-12">
-                    <div class="col-2 col-sm-2 col-xl-2 col-md-2">
+                    <div class="col-1 col-sm-1 col-xl-1 col-md-1">
                       <a type="button" href="../admin/admin.php" class="btn button2"><< เมนูหลัก</a>
                     </div>
-                    <div class="col-10 col-sm-10 col-xl-10 col-md-10 text-right">
+                    <div class="col-11 col-sm-11 col-xl-11 col-md-11 text-right">
                       <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-warning" style="color:black;">OR วันนี้</a>
-                      <a type="button"  href="#" data-toggle="modal" data-target="#employee" class="btn btn-warning" style="color:black;">OR เบิก</a>
-                      <!-- <a type="button"  href="../pdf_file/list_order2.php" class="btn btn-warning" style="color:black;">ค้างส่งทั้งหมด</a> -->
-                      <a type="button"  href="#" data-toggle="modal" data-target="#myModal" class="btn btn-warning" style="color:black;">ค้างส่ง(อ)</a>
+                      <a type="button" href="#" data-toggle="modal" data-target="#employee" class="btn btn-warning" style="color:black;">OR เบิก</a>
+                      <a type="button" href="../pdf_file/list_order2.php" class="btn btn-warning" style="color:black;">OR ทั้งหมด</a>
+                      <a type="button" href="#" data-toggle="modal" data-target="#myModal" class="btn btn-warning" style="color:black;">ค้างส่ง(อ)</a>
                       <a type="button" href="#" data-toggle="modal" data-target="#myModal2" class="btn btn-warning" style="color:black;">ส่งแล้ว(อ)</a>
                       <a type="button" href="order_success.php" class="btn btn-danger" style="color:black;">OR วันนี้(ส่ง)</a>
                       <a type="button" href="total_order.php" class="btn btn-danger" style="color:black;">ค้างส่งรวม</a>
-                      <a type="button"  href="#" data-toggle="modal" data-target="#mymodal3" class="btn btn-danger" style="color:black;">ค้างส่ง(จ)</a>
+                      <a type="button" href="#" data-toggle="modal" data-target="#mymodal3" class="btn btn-danger" style="color:black;">ค้างส่ง(จ)</a>
                       <a type="button" href="add_order.php" class="btn btn-danger" style="color:black;">เพิ่ม OR</a>
                     </div>
                   </div>

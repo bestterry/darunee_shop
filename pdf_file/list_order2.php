@@ -40,21 +40,13 @@ $pdf=new PDF('P','mm','A4');
             $pdf->SetMargins(10, 5 ,3);
             $pdf->AddFont('cordia','','cordia.php');
             $pdf->SetFont('cordia','',20);
-            //วนลูปหาอำเภอที่มีใน addorder
-            $sql_provinces = "SELECT tbl_amphures.amphur_id FROM tbl_amphures
-                             INNER JOIN addorder ON tbl_amphures.amphur_id = addorder.amphur_id
-                             WHERE addorder.status = 'pending'
-                             GROUP BY tbl_amphures.amphur_id";
-            $objq_province = mysqli_query($conn,$sql_provinces);
-            while($value_ap = $objq_province -> fetch_assoc())
-            { 
+           
                 $pdf->AddPage();
-                $id_amphur = $value_ap['amphur_id'];
                 $sql_addorder = "SELECT * FROM addorder 
                                 INNER JOIN tbl_districts ON addorder.district_code = tbl_districts.district_code 
                                 INNER JOIN tbl_amphures ON addorder.amphur_id = tbl_amphures.amphur_id
                                 INNER JOIN tbl_provinces ON addorder.province_id = tbl_provinces.province_id
-                                WHERE addorder.status = 'pending' AND addorder.amphur_id = $id_amphur";
+                                WHERE addorder.status = 'pending'";
                 $objq_addorder = mysqli_query($conn,$sql_addorder);
                 while($value = $objq_addorder->fetch_assoc ())
                 { 
@@ -78,9 +70,8 @@ $pdf=new PDF('P','mm','A4');
                   $id_addorder = $value['id_addorder'];
                   $pdf->SetFont('cordia','',20);
                   $pdf->SetTextColor(0,0,0);  
-                  $pdf->Text(150, 9,iconv('UTF-8','cp874','อ.'.$value['amphur_name'].'  จ.'.$value['province_name']),1,0,'C');
                   $pdf->SetFont('cordia','',16);
-                  $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'_______________________________________________________________________________________________') , 0 , 1,'L' );
+                  $pdf->Cell(0,5, iconv( 'UTF-8','cp874' ,'_______________________________________________________________________________________________________') , 0 , 1,'L' );
                   $pdf->Ln(4); 
                   
                   $x = $pdf->GetX();
@@ -116,7 +107,7 @@ $pdf=new PDF('P','mm','A4');
 '.DateThai($value['datetime']).' '.$value['name_member']  .' '. DateTime($value['datetime']).' '.$value['tel']  .'
 # '.$value['note'] ) );
                 }  
-            }        
+                    
 // --------------------------------------------------------------------------------------                     
     $pdf->Output();
 ?>

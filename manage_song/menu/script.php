@@ -49,5 +49,13 @@
             'info'        : true,
             'autoWidth'   : false
             });
+            $('#example4').DataTable({
+            'paging'      : true,
+            'lengthChange': true,
+            'searching'   : true,
+            'ordering'    : false,
+            'info'        : true,
+            'autoWidth'   : false
+            });
        });
       </script>

@@ -207,18 +207,18 @@
                       </thead>
                       <tbody>
                         <?php 
-                          $aday = date("Y-m-d");
-                          $bday = date("Y-m-d", strtotime("-30 day", strtotime($aday)));
-                          while(strtotime($bday) <= strtotime($aday)) { 
+                          $aday = $_POST['aday'];
+                          $bday = $_POST['bday'];
+                          while(strtotime($bday) >= strtotime($aday)) { 
                         ?>
                         <tr>
-                          <td class="text-center"><?php echo Datethai($aday);?></td> 
+                          <td class="text-center"><?php echo Datethai($bday);?></td> 
                           <?php
                               $objq_reservelist2 = mysqli_query($conn,$sql_resevelist);
                               while($value_reservelist  = $objq_reservelist2->fetch_assoc()){
                                 $id_list = $value_reservelist['id_list'];
                                 $sql_history = "SELECT SUM(money) FROM reserve_history 
-                                                WHERE id_list = $id_list AND DATE_FORMAT(date,'%Y-%m-%d')='$aday'";
+                                                WHERE id_list = $id_list AND DATE_FORMAT(date,'%Y-%m-%d')='$bday'";
                               $objq_history = mysqli_query($conn,$sql_history);
                               while($value_history = $objq_history->fetch_assoc()){
                           ?>
@@ -229,7 +229,7 @@
                           ?>
                         </tr>
                         <?php 
-                            $aday = date ("Y-m-d", strtotime("-1 day", strtotime($aday)));
+                            $bday = date ("Y-m-d", strtotime("-1 day", strtotime($bday)));
                           }
                         ?>
                       </tbody>

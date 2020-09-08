@@ -70,7 +70,12 @@
                   <a type="button" href="song_setting.php" class="btn button2"><< กลับ</a>
                 <?php 
                   }
-                ?> 
+                  if($_GET['status']=='setting2'){ 
+                ?>
+                  <a type="button" href="song_setting2.php" class="btn button2"><< กลับ</a>
+                <?php 
+                  }
+                ?>
                 </div>
                 <div class="col-8 col-sm-8 col-xl-8 col-md-8">
                   <p align="center"><font size="5"><B><?php echo $name_song; ?></B></font></p>

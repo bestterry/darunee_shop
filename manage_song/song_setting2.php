@@ -1,15 +1,12 @@
 <?php
     require "../config_database/config.php";
-    $id_artist = $_GET['id_artist' ];
     $sql_song = " SELECT * FROM song_list
                   INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
                   INNER JOIN song_ageartist ON song_ageartist.id_ageartist = song_artist.id_ageartist
                   INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
                   INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist
-                  WHERE song_artist.id_artist = $id_artist";
+                  WHERE song_list.edit = 'Y'";
     $objq_song = mysqli_query($conn,$sql_song);
-    $objq_song2 = mysqli_query($conn,$sql_song);
-    $objr_song2 = mysqli_fetch_array($objq_song2);
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,7 +30,7 @@
           <div class="row">
             <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
               <div class="topnav">
-                <a class="active" href="artist.php"> ค้นหา </a>
+                <a href="artist.php"> ค้นหา </a>
                 <a href="song_old.php"> เก่า </a>
                 <a href="song_middle.php"></i> กลาง </a>
                 <a href="song_new.php"> ใหม่ </a>
@@ -43,7 +40,7 @@
                 <a href="graded.php"> D </a>
                 <a href="song_setting.php"> เพลง </a>
                 <a href="artist_setting.php"> นักร้อง </a>
-                <a href="song_setting2.php"> แก้ไข </a>
+                <a class="active" href="song_setting2.php"> แก้ไข </a>
               </div>
             </div>
             <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -57,16 +54,9 @@
               <div class="box-header with-border">
                 <div class="col-12">
                   <div class="col-2 col-sm-2 col-xl-2 col-md-2">
-                    <a type="button" href="artist.php" class="btn button2"><< กลับ</a>
                   </div>
                   <div class="col-8 col-sm-8 col-xl-8 col-md-8 text-center">
-                      <font size="5">
-                        <B>  
-                          <?php 
-                            echo $objr_song2['name_artist'] .' ('.$objr_song2['name_ageartist'].')';       
-                          ?>
-                        </B>
-                      </font>
+                    <font size="5"><B>แก้ไข</B></font>
                   </div>
                   <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
                 </div>
@@ -77,16 +67,14 @@
                     <thead>
                       <tr>
                         <th class="text-center" width="8%">#</th>
-                        <th class="text-center" width="18%">ชื่อเพลง</th>
-                        <th class="text-center" width="6%">ทำนอง</th>
-                        <th class="text-center" width="6%">เกรด</th>
-                        <th class="text-center" width="8%">ต้นฉบับ</th>
-                        <th class="text-center" width="7%">เปิด</th>
-                        <th class="text-center" width="7%">#</th>
-                        <th class="text-center" width="5%">ตรวจ</th>
-                        <th class="text-center" width="7%">แก้ไข</th>
-                        <th class="text-center" width="28%">หมายเหตุ</th>
-                        
+                        <th class="text-center" width="15%">นักร้อง</th>
+                        <th class="text-center" width="14%">ชื่อเพลง</th>
+                        <th class="text-center" width="7%">ทำนอง</th>
+                        <th class="text-center" width="7%">เกรด</th>
+                        <th class="text-center" width="9%">ต้นฉบับ</th>
+                        <th class="text-center" width="8%">#</th>
+                        <th class="text-center" width="8%">แก้ไข</th>
+                        <th class="text-center" width="24%">หมายเหตุ</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -98,38 +86,18 @@
                           <?php
                             if(!empty($value['ad_song'])){
                           ?>
-                          <a href="song_listen2.php?id_song=<?php echo $value['id_song'];?>&&id_artist=<?php echo $id_artist;?>" class="btn  btn-success btn-xs" >ฟัง</a>
+                          <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&status=setting2" class="btn  btn-success btn-xs" >ฟัง</a>
                           <?php }else{}?>
                         </td>
+                        <td class="text-center"><?php echo $value['name_artist']; ?></td>
                         <td class="text-center"><?php echo $value['name_song']; ?></td>
                         <td class="text-center"><?php echo $value['name_tune']; ?></td>
                         <td class="text-center"><?php echo $value['melodic']; ?></td>
                         <td class="text-center"><?php if($value['script']=='N'){echo "-";}else{echo "ต้นฉบับ";} ?></td>
-                        <?php
-                        if($value['status']=='N'){
-                        ?>
-                        <td class="text-center">-</td>
-                        <?php
-                          }else{
-                        ?>
-                        <td class="text-center"><font>เปิด</font></td>
-                        <?php
-                          }
-                        ?>
+                        
                         <td class="text-center">
-                          <a href="song_edit2.php?id_song=<?php echo $value['id_song']; ?>&&id_artist=<?php echo $id_artist; ?>" class="btn  btn-success btn-xs" >แก้</a>
+                          <a href="song_edit5.php?id_song=<?php echo $value['id_song']; ?>" class="btn btn-success btn-xs">แก้</a>
                         </td> 
-                        <?php
-                        if($value['check_edit']=='N'){
-                        ?>
-                        <td class="text-center">-</td>
-                        <?php
-                          }else{
-                        ?>
-                        <td class="text-center"><font>ตรวจ</font></td>
-                        <?php
-                          }
-                        ?> 
                         <?php
                         if($value['edit']=='N'){
                         ?>

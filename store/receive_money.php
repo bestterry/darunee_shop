@@ -15,7 +15,8 @@
                     INNER JOIN rc_practice ON rc_receive_money.id_practice = rc_practice.id_practice
                     INNER JOIN rc_category ON rc_receive_money.id_category = rc_category.id_category
                     INNER JOIN member ON rc_receive_money.id_member = member.id_member
-                    WHERE rc_receive_money.id_member = $id_member GROUP BY rc_receive_money.id_receive_money DESC";
+                    WHERE rc_receive_money.id_member = $id_member GROUP BY rc_receive_money.id_receive_money DESC
+                    LIMIT 100";
   $objq_receive = mysqli_query($mysqli,$receive_money);
 ?>
 

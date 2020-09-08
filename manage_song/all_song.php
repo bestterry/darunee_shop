@@ -33,6 +33,7 @@
                 <a href="gradeb.php"> B </a>
                 <a href="gradec.php"> C </a>
                 <a href="graded.php"> D </a>
+                <a href="song_setting2.php"> แก้ไข </a>
               </div>
             </div>
             <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">

@@ -134,7 +134,7 @@
               <div class="box-header with-border">
                 <div class="col-12">
                   <div class="col-4 col-sm-4 col-xl-4 col-md-4">
-                      <a type="button" href="song_list.php?id_artist=<?php echo $_GET['id_artist']; ?>" class="btn button2"><< กลับ</a>
+                      <a type="button" href="song_setting2.php" class="btn button2"><< กลับ</a>
                   </div>
                   <div class="col-4 col-sm-4 col-xl-4 col-md-4">
                     <p align="center">
@@ -148,7 +148,7 @@
                 </div>
               </div>
 
-              <form action="algorithm\edit_song2.php" class="form-horizontal" method="post" autocomplete="off" name="form1" enctype="multipart/form-data">
+              <form action="algorithm\edit_song5.php" class="form-horizontal" method="post" autocomplete="off" name="form1" enctype="multipart/form-data">
                 <div class="box-body no-padding">
                   <div class="mailbox-read-message">
                     <div class="row">
@@ -158,7 +158,7 @@
                         <div class="form-group">
                           <label class="col-sm-4 control-label">นักร้อง </label>
                           <div class="col-sm-4">
-                            <select name="id_artist"  class="form-control" >
+                            <select name="id_artist" class="form-control" >
                               <option value="<?php echo $objr_song['id_artist']; ?>">-- เลือกนักร้อง --</option>
                               <?php 
                                 $sql_artist = "SELECT id_artist,name_artist FROM song_artist";
@@ -179,7 +179,6 @@
                           <div class="col-sm-8">
                             <input type="text" name="name_song" class="form-control" value="<?php echo $objr_song['name_song']; ?>">
                             <input type="hidden" name="id_song" class="form-control" value="<?php echo $id_song; ?>">
-                            <input type="hidden" name="id_artist" class="form-control" value="<?php echo $_GET['id_artist']; ?>">
                           </div>
                         </div>
 
@@ -260,16 +259,6 @@
                           <div class="col-sm-8">
                             <label class="switch">
                               <input type="checkbox" name="edit" <?php if($objr_song['edit']=="Y"){ echo "checked"; }else{} ?>>
-                              <span class="slider round"></span>
-                            </label>
-                          </div>
-                        </div>
-
-                        <div class="form-group">
-                          <label class="col-sm-4 control-label">ตรวจ</label>
-                          <div class="col-sm-8">
-                            <label class="switch">
-                              <input type="checkbox" name="check_edit" <?php if($objr_song['check_edit']=="Y"){ echo "checked"; }else{} ?>>
                               <span class="slider round"></span>
                             </label>
                           </div>

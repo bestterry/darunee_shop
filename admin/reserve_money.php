@@ -7,7 +7,9 @@
   $objr_reserve = mysqli_fetch_array($objq_reserve);
   $reserve_money = $objr_reserve['money'];
 
-  $sql_history = "SELECT money,date,note FROM reserve_history WHERE id_list = 1 ORDER BY id_reserve_history DESC ";
+  $sql_history = "SELECT money,date,note FROM reserve_history 
+                  WHERE id_list = 1 ORDER BY id_reserve_history DESC 
+                  LIMIT 1000";
   $objq_history = mysqli_query($conn,$sql_history);
 ?>
 
@@ -97,7 +99,8 @@
                 <div class="topnav">
                   <a class="active" href="reserve_money.php"> รับเงินสำรองจ่าย </a>
                   <a href="reserve_office.php"> โอนเงินจ่าย </a>
-                  <a href="song_middle.php"></i> โอนหน่วยรถ </a>
+                  <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
+                  <a href="reserve_datacar.php"></i> ข้อมูลหน่วยรถ </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -106,65 +109,62 @@
             </div>
           </div>
           <div class="row">
-              <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-                <div class="box box-primary">
-                  <div class="box-header with-border">
-                    <div class="col-12">
-                      <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
-                      <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-                        <div class="text-center">
-                          <font size="5">
-                            <B align="center"> รับเงินสำรองจ่าย <font color="red"> </font></B>
-                          </font>
-                        </div>
-                      </div>
-                      <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right">
-                        <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> เพิ่มเงิน </a>
+            <div class="col-12 col-sm-12 col-md-12 col-xl-12">
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <div class="col-12">
+                    <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
+                    <div class="col-4 col-sm-4 col-md-4 col-xl-4">
+                      <div class="text-center">
+                        <font size="5">
+                          <B align="center"> รับเงินสำรองจ่าย <font color="red"> </font></B>
+                        </font>
                       </div>
                     </div>
-
+                    <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right">
+                      <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> เพิ่มเงิน </a>
+                    </div>
                   </div>
-                  <div class="box-body no-padding">
-                    <div class="mailbox-read-message">
-                      <div class="box-body">
-                        <div class="mailbox-read-message">
-                          <div class="col-12">
-                            <div class="col-sm-12 text-left">
-                                <font size="3" color="red">
-                                  <B> สำรองจ่ายคงเหลือ : <?php echo $reserve_money;?> </B>
-                                </font>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-                              <table id="example1" class="table">
-                                <thead>
-                                  <tr>
-                                    <th class="text-center" width="33%">วันที่</th>
-                                    <th class="text-center" width="33%">จำนวนเงิน</th>
-                                    <th class="text-center" width="33%">หมายเหตุ</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                <?php 
-                                  while($value = $objq_history -> fetch_assoc()){
-                                ?>
-                                  <tr>
-                                    <td class="text-center"><?php echo Datethai($value['date']); ?></td> 
-                                    <td class="text-center"><?php echo $value['money']; ?></td>
-                                    <td class="text-center"><?php echo $value['note']; ?></td>
-                                  </tr>
-                                <?php 
-                                  }
-                                ?>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
+
+                </div>
+                <div class="box-body no-padding">
+                  <div class="mailbox-read-message">
+                    <div class="col-12">
+                      <div class="col-sm-12 text-left">
+                          <font size="3" color="red">
+                            <B> สำรองจ่ายคงเหลือ : <?php echo $reserve_money;?> </B>
+                          </font>
                       </div>
+                      <div class="col-12 col-sm-12 col-md-12 col-xl-12">
+                        <table id="example1" class="table">
+                          <thead>
+                            <tr>
+                              <th class="text-center" width="33%">วันที่</th>
+                              <th class="text-center" width="33%">จำนวนเงิน</th>
+                              <th class="text-center" width="33%">หมายเหตุ</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <?php 
+                            while($value = $objq_history -> fetch_assoc()){
+                          ?>
+                            <tr>
+                              <td class="text-center"><?php echo Datethai($value['date']); ?></td> 
+                              <td class="text-center"><?php echo $value['money']; ?></td>
+                              <td class="text-center"><?php echo $value['note']; ?></td>
+                            </tr>
+                          <?php 
+                            }
+                          ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
         </section>
       </div>
       <?php require("../menu/footer.html"); ?>
