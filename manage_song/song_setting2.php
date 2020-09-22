@@ -5,7 +5,8 @@
                   INNER JOIN song_ageartist ON song_ageartist.id_ageartist = song_artist.id_ageartist
                   INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
                   INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist
-                  WHERE song_list.edit = 'Y'";
+                  WHERE song_list.edit = 'Y'
+                  ORDER BY song_list.id_song ASC";
     $objq_song = mysqli_query($conn,$sql_song);
 ?>
 <!DOCTYPE html>
@@ -34,10 +35,6 @@
                 <a href="song_old.php"> เก่า </a>
                 <a href="song_middle.php"></i> กลาง </a>
                 <a href="song_new.php"> ใหม่ </a>
-                <a href="gradea.php"> A </a>
-                <a href="gradeb.php"> B </a>
-                <a href="gradec.php"> C </a>
-                <a href="graded.php"> D </a>
                 <a href="song_setting.php"> เพลง </a>
                 <a href="artist_setting.php"> นักร้อง </a>
                 <a class="active" href="song_setting2.php"> แก้ไข </a>
@@ -58,7 +55,9 @@
                   <div class="col-8 col-sm-8 col-xl-8 col-md-8 text-center">
                     <font size="5"><B>แก้ไข</B></font>
                   </div>
-                  <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+                  <div class="col-2 col-sm-2 col-xl-2 col-md-2 text-right">
+                    <a class="btn btn-success" href="algorithm/update_status.php" onClick="return confirm('คุณต้องการที่เปลี่ยนสถานะเพลงเปิดแล้วหรือไม่?')";> เปลี่ยนสถานะเปิด </a>
+                  </div>
                 </div>
               </div>
               <div class="box-body no-padding">
@@ -105,7 +104,7 @@
                         <?php
                           }else{
                         ?>
-                        <td class="text-center"><font>แก้ไข</font></td>
+                        <td class="text-center"><font>>></font></td>
                         <?php
                           }
                         ?> 

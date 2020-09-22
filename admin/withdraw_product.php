@@ -113,7 +113,9 @@
                                 </tr>
                                 <?php
                                 $i=1;
-                                $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_zone = '$_POST[id_zone]'";
+                                $list_product = "SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product 
+                                                 WHERE num_product.id_zone = '$_POST[id_zone]'
+                                                 ORDER BY product.id_product ASC";
                                 $objq_listproduct = mysqli_query($conn,$list_product);
                                     while($list = $objq_listproduct->fetch_assoc()){
                                 ?>

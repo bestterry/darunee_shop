@@ -1,7 +1,14 @@
 <?php
-require "../config_database/config.php";
-require "../session.php";
-require "menu/date.php";
+  require "../config_database/config.php";
+  require "../session.php";
+  require "menu/date.php";
+
+  $list_product = "SELECT * FROM product WHERE status_stock = 1 ";
+  $query_product = mysqli_query($conn,$list_product);
+
+  $sql_member = "SELECT id_member,name_sub FROM member WHERE status_car = 1 
+                 AND NOT id_member = 3 AND NOT id_member = 8  AND NOT id_member = 45  AND NOT id_member = 46";
+  $objq_member = mysqli_query($conn,$sql_member);
 ?>
 
 <!DOCTYPE html>
@@ -49,22 +56,13 @@ require "menu/date.php";
     <header class="main-header">
       <?php require('menu/header_logout.php'); ?>
     </header>
-
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
 
-      <!-- Main content -->
       <section class="content">
-        <?php
-        $list_product = "SELECT * FROM product";
-        $query_product = mysqli_query($conn, $list_product);
-        $query_product2 = mysqli_query($conn, $list_product);
-        ?>
         <div class="box box-primary">
-        <div class="box-header text-center with-border">
+          <div class="box-header text-center with-border">
             <B align="center"> 
               <font size="5"> สินค้าคงเหลือบนรถ </font>
               <font size="5" color="red">  
@@ -75,81 +73,55 @@ require "menu/date.php";
               </font>
             </B>
           </div>
-          
-          <!-- /.box-header -->
           <div class="box-body no-padding">
             <div class="mailbox-read-message">
-              <table class="table table-striped table-bordered">
-              <tbody>
-                  <tr class="info">
-                    <th class="text-center" width="3%">ที่</th>
-                    <th class="text-center" width="18%">สินค้า_หน่วย</th>
-
-                  <?php 
-                    $sql_member = "SELECT name_sub FROM member WHERE id_member BETWEEN 4 AND 18";
-                    $objq_member = mysqli_query($conn,$sql_member);
-                    while($value = $objq_member -> fetch_assoc()){
-                  ?>
-                    <th class="text-center" width="5%"><?php echo $value['name_sub'];?></th>
-                  <?php }?>
-                  
-                    <th class="text-center" width="8%">รวม</th>
-                  </tr>
-                  <?php
-                  $a = 1;
-                  while ($product = $query_product->fetch_assoc()) {
-
+              <div style="overflow-x:auto;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="text-center" width="8%">สินค้า_หน่วย</th>
+                      <?php 
+                        while($value = $objq_member -> fetch_assoc()){
+                      ?>
+                      <th class="text-center" width="4%"><?php echo $value['name_sub'];?></th>
+                      <?php 
+                        }
+                      ?>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      while ($product = $query_product->fetch_assoc()) {
                     ?>
                     <tr>
-                      <td class="text-center">
-                        <?php echo $a; ?>
-                      </td>
-                      <td class="text-center">
-                        <?php echo $product['name_product'].'_'.$product['unit']; ?>
-                      </td>
+                      <td class="text-center"><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
                       <!-- -------------------------------รถ------------------------------------ -->
                       <?php
-                      for ($i = 4; $i <= 18; $i++) {
-
-                        $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $i";
-                        $objq_num = mysqli_query($conn, $SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if (!isset($objr_num['num'])) {
-                          ?>
-                          <td></td>
-                        <?php
-                      } else {
-                        ?>
-                          <td class="text-center"><?php echo $objr_num['num']; ?></td>
-                        <?php
-                      }
-                    }
-                    ?>
-                      <!-- -------------------------------//รถ------------------------------------ -->
-
-                      <!-- -------------------------------รวมทั้งหมด------------------------------------ -->
-                      <?php
-                      $SQL_num = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";
-                      $objq_num = mysqli_query($conn, $SQL_num);
-                      $objr_num = mysqli_fetch_array($objq_num);
-
-
-                      if (!isset($objr_num['SUM(num)'])) {
-                        ?>
-                        <td></td>
-                      <?php
-                    } else {
+                        $objq_member2 = mysqli_query($conn,$sql_member);
+                        while($value2 = $objq_member2 -> fetch_assoc()){
+                          $id_member = $value2['id_member'];
+                          $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $id_member";
+                          $objq_num = mysqli_query($conn, $SQL_num);
+                          $objr_num = mysqli_fetch_array($objq_num);
+                          if((!isset($objr_num['num'])) || ($objr_num['num'] == 0)){
                       ?>
-                        <td class="text-center"><?php echo $objr_num['SUM(num)']; ?></td>
+                        <td class="text-center">-</td>
                       <?php
-                    }
-                    ?>
-                      <!-- -------------------------------//รวมทั้งหมด------------------------------------ -->
+                        } else {
+                          $num_pd = $objr_num['num'];
+                      ?>
+                        <td class="text-center"><?php echo $num_pd; ?></td>
+                      <?php
+                          }
+                        }
+                      ?>
                     </tr>
-                    <?php $a++;
-                  } ?>
-                </tbody>
-              </table>
+                    <?php 
+                      } 
+                    ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
           <div class="box-footer">
@@ -157,14 +129,10 @@ require "menu/date.php";
             <a href="../pdf_file/admin_car_stock.php" class="btn btn-success pull-right"><i class="fa fa-print"> พิมพ์ </i></a>
           </div>
         </div>
+      </section>
     </div>
-  </div>
-  </section>
-  <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
 
-  <?php require("../menu/footer.html"); ?>
+    <?php require("../menu/footer.html"); ?>
   </div>
   <!-- jQuery 3 -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -193,45 +161,6 @@ require "menu/date.php";
         'info': true,
         'autoWidth': false
       })
-    })
-    $(function() {
-      //Enable iCheck plugin for checkboxes
-      //iCheck for checkbox and radio inputs
-      $('.mailbox-messages input[type="checkbox"]').iCheck({
-        checkboxClass: 'icheckbox_flat-blue',
-        radioClass: 'iradio_flat-blue'
-      });
-      //Enable check and uncheck all functionality
-      $(".checkbox-toggle").click(function() {
-        var clicks = $(this).data('clicks');
-        if (clicks) {
-          //Uncheck all checkboxes
-          $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-          $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-        } else {
-          //Check all checkboxes
-          $(".mailbox-messages input[type='checkbox']").iCheck("check");
-          $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-        }
-        $(this).data("clicks", !clicks);
-      });
-      //Handle starring for glyphicon and font awesome
-      $(".mailbox-star").click(function(e) {
-        e.preventDefault();
-        //detect type
-        var $this = $(this).find("a > i");
-        var glyph = $this.hasClass("glyphicon");
-        var fa = $this.hasClass("fa");
-        //Switch states
-        if (glyph) {
-          $this.toggleClass("glyphicon-star");
-          $this.toggleClass("glyphicon-star-empty");
-        }
-        if (fa) {
-          $this.toggleClass("fa-star");
-          $this.toggleClass("fa-star-o");
-        }
-      });
     });
   </script>
 </body>

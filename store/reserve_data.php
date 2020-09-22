@@ -87,17 +87,25 @@
         </div>
         <div class="box-body no-padding">
           <div class="mailbox-read-message">
+            <br>
+            <div class="col-sm-12 text-left">
+              <font size="3" color="red">
+                <B> สำรองจ่ายคงเหลือ : <?php echo $money;?> </B>
+              </font>
+            </div>
+            <br>
+            <br>
             <div class="col-12">
               <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                 <table id="example1" class="table">
                   <thead>
                     <tr>
-                      <th class="text-center" width="20%">วันที่</th>
-                      <th class="text-center" width="16%">ค่าเช่ารถ</th>
-                      <th class="text-center" width="16%">ค่าน้ำมัน</th>
-                      <th class="text-center" width="16%">ค่าเบี้ยเลี้ยง</th>
-                      <th class="text-center" width="16%">ค่าที่พัก</th>
-                      <th class="text-center" width="16%">ค่าใช้จ่ายอื่นๆ</th>
+                      <th class="text-center" width="16%">วันที่</th>
+                      <th class="text-center" width="16%">น้ำมัน</th>
+                      <th class="text-center" width="16%">เบี้ยเลี้ยง</th>
+                      <th class="text-center" width="16%">ที่พัก</th>
+                      <th class="text-center" width="16%">จ่ายอื่น</th>
+                      <th class="text-center" width="16%">รวมเงิน</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -109,20 +117,25 @@
                     <tr>
                       <td class="text-center"><?php echo Datethai($aday);?></td> 
                       <?php
-                          $sql_resevelist = "SELECT id_list FROM reserve_list WHERE status = 4";
-                          $objq_reservelist = mysqli_query($conn,$sql_resevelist);
-                          while($value_reservelist = $objq_reservelist->fetch_assoc()){
-                            $id_list = $value_reservelist['id_list'];
-                            $sql_history = "SELECT SUM(money) FROM reserve_history 
-                                            WHERE id_list = $id_list AND id_member = $id_member AND DATE_FORMAT(date,'%Y-%m-%d')='$aday'";
-                          $objq_history = mysqli_query($conn,$sql_history);
-                          while($value_history = $objq_history->fetch_assoc()){
+                        $total_sum = 0;
+                        $sql_resevelist = "SELECT id_list FROM reserve_list WHERE status = 4";
+                        $objq_reservelist = mysqli_query($conn,$sql_resevelist);
+                        while($value_reservelist = $objq_reservelist->fetch_assoc()){
+                          
+                          $id_list = $value_reservelist['id_list'];
+                          $sql_history = "SELECT SUM(money) FROM reserve_history 
+                                          WHERE id_list = $id_list AND id_member = $id_member AND DATE_FORMAT(date,'%Y-%m-%d')='$aday'";
+                        $objq_history = mysqli_query($conn,$sql_history);
+                        while($value_history = $objq_history->fetch_assoc()){
+                          $money = $value_history['SUM(money)'];
                       ?>
-                      <td class="text-center"><?php echo $value_history['SUM(money)'];?></td>
+                      <td class="text-center"><?php echo $money;?></td>
                       <?php 
+                        $total_sum = $total_sum + $money;
                           }
-                          }
+                        }
                       ?>
+                      <th class="text-center" width="16%"><?php echo $total_sum; ?></th>
                     </tr>
                     <?php 
                         $aday = date ("Y-m-d", strtotime("-1 day", strtotime($aday)));
@@ -135,7 +148,7 @@
           </div>
         </div>
         <div class="box-footer text-right">
-          <a class="btn btn-success" href="../pdf_file/reserve_list.php"></i> PDF </a>
+          <a class="btn btn-success" href="../pdf_file/reserve_usemoney.php?id_member=<?php echo $id_member; ?>"></i> PDF </a>
         </div>
       </div>
     </section>
@@ -217,22 +230,14 @@
     <script src="../plugins/iCheck/icheck.min.js"></script>
     <script>
        $(function () {
-          $('#example1').DataTable({
-            'paging'      : true,
-            'lengthChange': false,
-            'searching'   : true,
-            'ordering'    : false,
-            'info'        : true,
-            'autoWidth'   : false
-            });
-            $('#example2').DataTable({
-            'paging'      : true,
-            'lengthChange': false,
-            'searching'   : true,
-            'ordering'    : false,
-            'info'        : true,
-            'autoWidth'   : false
-            });
+        $('#example1').DataTable({
+          'paging'      : true,
+          'lengthChange': true,
+          'searching'   : true,
+          'ordering'    : false,
+          'info'        : true,
+          'autoWidth'   : false
+          });
        });
       $(document).ready( function() {
           var now = new Date();

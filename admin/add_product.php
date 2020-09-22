@@ -138,7 +138,9 @@
                             <th class="text-center" width="33%"><font color="red">จำนวนที่มี</font></th>
                           </tr>
                             <?php  
-                              $list_product2 = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_member = '$id_member'";
+                              $list_product2 = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product 
+                                                WHERE numpd_car.id_member = '$id_member'
+                                                ORDER BY product.id_product ASC";
                               $objq_listproduct2 = mysqli_query($conn,$list_product2);
                                   while($list = $objq_listproduct2->fetch_assoc()){
                             ?>

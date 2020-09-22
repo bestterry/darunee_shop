@@ -26,7 +26,7 @@
       <script>
        $(function () {
           $('#example1').DataTable({
-            'paging'      : true,
+            'paging'      : false,
             'lengthChange': true,
             'searching'   : true,
             'ordering'    : false,
@@ -34,7 +34,7 @@
             'autoWidth'   : false
             });
             $('#example2').DataTable({
-            'paging'      : true,
+            'paging'      : false,
             'lengthChange': true,
             'searching'   : true,
             'ordering'    : false,
@@ -42,7 +42,7 @@
             'autoWidth'   : false
             });
             $('#example3').DataTable({
-            'paging'      : true,
+            'paging'      : false,
             'lengthChange': true,
             'searching'   : true,
             'ordering'    : false,
@@ -50,7 +50,7 @@
             'autoWidth'   : false
             });
             $('#example4').DataTable({
-            'paging'      : true,
+            'paging'      : false,
             'lengthChange': true,
             'searching'   : true,
             'ordering'    : false,

@@ -233,13 +233,13 @@ folder instead of downloading all of them to reduce the load. -->
                             <th width="25%" class="text-right" ><font size="4">ID &nbsp;&nbsp;:</font></th>
                             <td width="25%" ><input type="text" name="id_order_list" class="form-control" value="<?php echo $n_id; ?>"  style="background-color: #e6f7ff;" readonly/></td>
                             <th width="25%" class="text-right" ><font size="4">บาท/ตัน &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="number" name="price_portage" onKeyUp="calcfunc()" class="form-control" placeholder="ค่าขนส่ง" value="0"></td>
+                            <td width="25%"><input type="number" step="0.01" name="price_portage" onKeyUp="calcfunc()" class="form-control" placeholder="ค่าขนส่ง" value="0"></td>
                           </tr>
                           <tr>
                             <th width="25%" class="text-right"><font size="4" valign="middle">ใบสั่งที่ &nbsp;&nbsp;:</font></th>
                             <td width="25%" > <input type="text" name="list_order" class="form-control" placeholder="ใบสั่งที่" style="background-color: #e6f7ff;"></td>
                             <th width="25%" class="text-right" ><font size="4">ค่าขนส่ง &nbsp;&nbsp;:</font></th>
-                            <td width="25%"><input type="number" name="portage" class="form-control" placeholder="ค่าขนส่ง" value="0"></td>
+                            <td width="25%"><input type="number" step="0.01" name="portage" class="form-control"  placeholder="ค่าขนส่ง" value="0"></td>
                           </tr>
 
                           <tr>
@@ -279,14 +279,14 @@ folder instead of downloading all of them to reduce the load. -->
 
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">จำนวนสินค้า &nbsp;&nbsp;:</font></th>
-                            <td width="25%" ><input type="number" name="num_product" onKeyUp="calcfunc()" class="form-control" style="background-color: #e6f7ff;" value=""></td>
+                            <td width="25%" ><input type="number" step="0.01" name="num_product" onKeyUp="calcfunc()" class="form-control" style="background-color: #e6f7ff;" value=""></td>
                             <th width="25%" class="text-right"><font size="4">พนักงานขับรถ &nbsp;&nbsp;:</font></th>
                             <td width="25%"> <input type="text" name="name_sent" class="form-control" placeholder="ชื่อ พขร." value="-" style="background-color: #e6f7ff;"></td>
                           </tr>
 
                           <tr>
                             <th width="25%" class="text-right" ><font size="4">ราคาต่อหน่วย &nbsp;&nbsp;:</font></th>
-                            <td width="25%" ><input type="number" name="price_num" class="form-control" id="price_num" onKeyUp="calcfunc()" style="background-color: #e6f7ff;" value="0"></td>
+                            <td width="25%" ><input type="number" step="0.01" name="price_num" class="form-control" id="price_num" onKeyUp="calcfunc()" style="background-color: #e6f7ff;" value="0"></td>
                             <th width="25%" class="text-right" ><font size="4">เบอร์โทร พขร. &nbsp;&nbsp;:</font></th>
                             <td width="25%"><input type="text" name="tel_sent" class="form-control" placeholder="เบอร์ พขร." value="-" style="background-color: #e6f7ff;"></td>
                           </tr>
@@ -433,29 +433,24 @@ folder instead of downloading all of them to reduce the load. -->
       </script>
 
       <script type="text/javascript">		
-        function sSelect(value){
-          // index = document.getElementById('id_product').selectedIndex;					
-          // elected_text = document.getElementById('id_product').options[index].text;			
-          // document.getElementById('input_text').value = document.getElementById('id_product').value;
-          $.ajax({
-                    type:"POST",
-                    url:"select_product.php",
-                    data:{value:value},
-                    success:function(data){
-                       $("#price_num").val(data);
-                    }
-                });
- 
-            return false;
-	        	}
-
-            function calcfunc() {
-              var val1 = parseFloat(document.form1.price_num.value);
-              var val2 = parseFloat(document.form1.num_product.value);
-              var val3 = parseFloat(document.form1.price_portage.value);
-              document.form1.money.value=val1*val2;
-              document.form1.portage.value=((val2*50)/1000)*val3;
+        function sSelect(value){  $.ajax({
+            type:"POST",
+            url:"select_product.php",
+            data:{value:value},
+            success:function(data){
+                $("#price_num").val(data);
             }
+          });
+          return false;
+        };
+
+          function calcfunc() {
+            var val1 = parseFloat(document.form1.price_num.value);
+            var val2 = parseFloat(document.form1.num_product.value);
+            var val3 = parseFloat(document.form1.price_portage.value);
+            document.form1.money.value=val1*val2;
+            document.form1.portage.value=((val2*50)/1000)*val3;
+          }
       </script> 
 </body>
 

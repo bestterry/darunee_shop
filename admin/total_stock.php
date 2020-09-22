@@ -3,7 +3,7 @@
   require "../session.php"; 
   require "menu/date.php";
 
-  $list_product = "SELECT * FROM product WHERE status_stock = 1";
+  $list_product = "SELECT * FROM product WHERE status_stock = 1 ";
   $query_product = mysqli_query($conn,$list_product);
   $query_product2 = mysqli_query($conn,$list_product);
   $query_product3 = mysqli_query($conn,$list_product);
@@ -435,7 +435,6 @@
                 <a href="../pdf_file/admin_car_stock.php" class="btn btn-success pull-right"> PDF(สต๊อกรถ) </a>
               </div>
               <br>
-
               <div class="text-center">
                 <B> 
                   <font size="5"> สต๊อกสินค้าชำรุด </font>
@@ -725,7 +724,7 @@
                     <div class="table-responsive mailbox-messages">
                       <table class="table table-bordered">
                         <tbody>
-                            <tr>
+                          <tr>
                             <th class="text-center" width="30%"><font size="3">รับเข้า STOCK</font></th>
                             <th class="text-center" width="70%"> 
                             <select name ="id_zone" class="form-control text-center select2" style="width: 100%;">
@@ -744,7 +743,7 @@
                                 ?>
                             </select>
                             </th>
-                            </tr>
+                          </tr>
                         </tbody>
                       </table> 
                       <br> 

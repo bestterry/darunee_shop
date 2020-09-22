@@ -8,9 +8,12 @@
   $reserve_money = $objr_reserve['money'];
 
   $sql_history = "SELECT * FROM reserve_history INNER JOIN reserve_list ON reserve_history.id_list = reserve_list.id_list
-                  WHERE reserve_history.status = 2 ORDER BY reserve_history.id_reserve_history DESC 
-                  LIMIT 1000";
+                  WHERE (reserve_history.status = 2 OR reserve_history.status = 3) 
+                  ORDER BY reserve_history.id_reserve_history DESC 
+                  LIMIT 300";
   $objq_history = mysqli_query($conn,$sql_history);
+
+  $sql_resevelist = "SELECT id_list,name_list FROM reserve_list WHERE status = 2 OR status = 3";
 ?>
 
 <!DOCTYPE html>
@@ -97,10 +100,11 @@
             <div class="row">
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
-                  <a href="reserve_money.php"> รับเงินสำรองจ่าย </a>
-                  <a class="active" href="reserve_office.php"> โอนเงินจ่าย </a>
+                  <a class="active" href="reserve_office.php"> โอนจ่าย </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_datacar.php"></i> ข้อมูลหน่วยรถ </a>
+                  <a href="reserve_datacar.php"></i> หน่วยรถ </a>
+                  <a href="reserve_carvalue.php"> ข้อมูลใช้เงินหน่วยรถ </a>
+                  <a href="reserve_money.php"> รับสำรองจ่าย </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -117,7 +121,7 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> โอนเงินจ่าย สนง.<font color="red"> </font></B>
+                          <B align="center"> โอนจ่าย สนง.<font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
@@ -136,14 +140,16 @@
                       </div>
                       <br>
                       <br>
+
                       <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                         <table id="example1" class="table">
                           <thead>
                             <tr>
-                              <th class="text-center" width="25%">วันที่</th>
+                              <th class="text-center" width="20%">วันที่</th>
                               <th class="text-center" width="25%">รายการ</th>
-                              <th class="text-center" width="25%">จำนวนเงิน</th>
+                              <th class="text-center" width="20%">จำนวนเงิน</th>
                               <th class="text-center" width="25%">หมายเหตุ</th>
+                              <th class="text-center" width="10%">ลบ</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -155,6 +161,9 @@
                               <td class="text-center"><?php echo $value['name_list']; ?></td>
                               <td class="text-center"><?php echo $value['money']; ?></td>
                               <td class="text-center"><?php echo $value['note']; ?></td>
+                              <td class="text-center">
+                                <a href="algorithm/delete_reserve.php?id=<?php echo $value['id_reserve_history'];?>&&money=<?php echo $value['money'];?>&&money_total=<?php echo $reserve_money;?>" class="btn btn-danger btn-xs">ลบ</a>
+                              </td>
                             </tr>
                           <?php 
                             }
@@ -163,6 +172,10 @@
                         </table>
                       </div>
                     </div>
+                  </div>
+                </div>
+                <div class="box-footer text-right">
+                  <a href="#" data-toggle="modal" data-target="#check_list" class="btn btn-success">PDF</a>
                 </div>
               </div>
             </div>
@@ -179,12 +192,12 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> โอนเงินจ่าย สนง.<font color="red"> </font></B>
+                          <B align="center"> โอนจ่ายรายวัน สนง.<font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right"> 
-                      <a href="#" data-toggle="modal" data-target="#check_back" class="btn btn-success"> เลือกวันที่ </a>
+                      
                     </div>
                   </div>
                 </div>
@@ -193,61 +206,90 @@
                     <table id="example2" class="table">
                       <thead>
                         <tr>
-                          <th class="text-center" width="14%">วันที่</th>
+                          <th class="text-center" width="10%">วันที่</th>
                           <?php
-                            $sql_resevelist = "SELECT id_list,name_list FROM reserve_list WHERE status = 2";
                             $objq_reservelist = mysqli_query($conn,$sql_resevelist);
                               while($value_reservename = $objq_reservelist->fetch_assoc()){
                           ?>
-                          <th class="text-center" width="14%"><?php echo $value_reservename['name_list'];?></th>
+                          <th class="text-center" width="10%"><?php echo $value_reservename['name_list'];?></th>
                           <?php 
                               }
                           ?>
+                          <th class="text-center" width="10%">รวมเงิน</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php 
+                          $total_money = 0;
                           $aday = date("Y-m-d");
-                          $bday = date("Y-m-d", strtotime("-30 day", strtotime($aday)));
+                          $bday = date("Y-m-d", strtotime("-10 day", strtotime($aday)));
                           while(strtotime($bday) <= strtotime($aday)) { 
                         ?>
                         <tr>
                           <td class="text-center"><?php echo Datethai($aday);?></td> 
                           <?php
-                              $objq_reservelist2 = mysqli_query($conn,$sql_resevelist);
-                              while($value_reservelist  = $objq_reservelist2->fetch_assoc()){
-                                $id_list = $value_reservelist['id_list'];
-                                $sql_history = "SELECT SUM(money) FROM reserve_history 
-                                                WHERE id_list = $id_list AND DATE_FORMAT(date,'%Y-%m-%d')='$aday'";
-                              $objq_history = mysqli_query($conn,$sql_history);
-                              while($value_history = $objq_history->fetch_assoc()){
+                            $sum_money = 0;
+                            $objq_reservelist2 = mysqli_query($conn,$sql_resevelist);
+                            while($value_reservelist  = $objq_reservelist2->fetch_assoc()){
+                              $id_list = $value_reservelist['id_list'];
+                              $sql_history = "SELECT SUM(money) FROM reserve_history 
+                                              WHERE id_list = $id_list AND DATE_FORMAT(date,'%Y-%m-%d')='$aday'";
+                            $objq_history = mysqli_query($conn,$sql_history);
+                            while($value_history = $objq_history->fetch_assoc()){
                           ?>
-                          <td class="text-center"><?php echo $value_history['SUM(money)'];?></td>
+                            <td class="text-center"><?php echo $value_history['SUM(money)'];?></td>
                           <?php 
+                              $sum_money = $sum_money + $value_history['SUM(money)'];
                               }
-                              }
+                            }
+                            $total_money = $total_money + $sum_money;
                           ?>
+                          <td class="text-center"><?php echo $sum_money;?></td>
                         </tr>
                         <?php 
                             $aday = date ("Y-m-d", strtotime("-1 day", strtotime($aday)));
                           }
                         ?>
+                        <tr>
+                          <th class="text-center">รวมเงิน</th>
+                          <?php
+                            $aday = date("Y-m-d");
+                            $bday = date("Y-m-d", strtotime("-10 day", strtotime($aday)));
+                            $objq_reservelist3 = mysqli_query($conn,$sql_resevelist);
+                              while($value_list = $objq_reservelist3->fetch_assoc()){
+                                $id_list = $value_list['id_list'];
+                                $sql_history = "SELECT SUM(money) FROM reserve_history 
+                                                WHERE id_list = $id_list AND (date between '$bday 00:00:00' and '$aday 23:59:59')";
+                                $objq_history = mysqli_query($conn,$sql_history);
+                                $objr_history = mysqli_fetch_array($objq_history);
+                          ?>
+                          <th class="text-center"><?php echo $objr_history['SUM(money)'];?></th>
+                          <?php 
+                              }
+                          ?>
+                          <th class="text-center"><?php echo $total_money;?></th>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
+                </div>
+                <div class="box-footer text-right">
+                  <a href="#" data-toggle="modal" data-target="#check_list2" class="btn btn-success">PDF</a>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
       </div>
       <?php require("../menu/footer.html"); ?>
+      
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
           <form action="algorithm/reserve_office.php" method="post">
             <div class="modal-content">
               <div class="modal-header text-center">
-                  <font size="5"><B> โอนเงินจ่าย </B></font>
+                  <font size="5"><B> โอนจ่าย </B></font>
               </div>
               <div class="modal-body col-md-12 table-responsive mailbox-messages">
                 <div class="col-12">
@@ -320,7 +362,7 @@
           </form>
         </div>
       </div>
-
+      
       <div class="modal fade" id="check_back" role="dialog">
         <div class="modal-dialog modal-lg">
           <form action="reserve_office2.php" method="post">
@@ -376,6 +418,119 @@
           </form>
         </div>
       </div>
+
+      <div class="modal fade" id="check_list" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <form action="../pdf_file/reserve_officelist.php" method="post">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                  <font size="5"><B> เลือกวันที่ </B></font>
+              </div>
+              <div class="modal-body col-md-12 table-responsive mailbox-messages">
+                <div class="col-12">
+                    <div class="table-responsive mailbox-messages">
+                      <div class="col-12">
+                        <div class="col-md-6 text-center">
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-8">
+                              <B><font size="5">ตั้งแต่</font></B>
+                          </div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                        <div class="col-md-6 text-center"> 
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-8">
+                            <B><font size="5">ถึง</font></B>
+                          </div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="col-md-6 text-center">
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-8">
+                            <input class="form-control text-center" type="date" name="aday">
+                          </div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                        <div class="col-md-6 text-center"> 
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-8">
+                            <input class="form-control text-center" type="date" name="bday">
+                          </div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <br>
+              <br>
+              <div class="modal-footer text-center">
+                <button type="button" class="btn pull-left button2" data-dismiss="modal"><< ย้อนกลับ </button>
+                <button type="submit" class="btn pull-right button2">ต่อไป >></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal fade" id="check_list2" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <form action="../pdf_file/reserve_office.php" method="post">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                  <font size="5"><B> เลือกวันที่ </B></font>
+              </div>
+              <div class="modal-body col-md-12 table-responsive mailbox-messages">
+                <div class="col-12">
+                    <div class="table-responsive mailbox-messages">
+                      <div class="col-12">
+                        <div class="col-md-6 text-center">
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-8">
+                              <B><font size="5">ตั้งแต่</font></B>
+                          </div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                        <div class="col-md-6 text-center"> 
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-8">
+                            <B><font size="5">ถึง</font></B>
+                          </div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="col-md-6 text-center">
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-8">
+                            <input class="form-control text-center" type="date" name="aday">
+                          </div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                        <div class="col-md-6 text-center"> 
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-8">
+                            <input class="form-control text-center" type="date" name="bday">
+                          </div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <br>
+              <br>
+              <div class="modal-footer text-center">
+                <button type="button" class="btn pull-left button2" data-dismiss="modal"><< ย้อนกลับ </button>
+                <button type="submit" class="btn pull-right button2">ต่อไป >></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
     </div>
 
     <!-- jQuery 3 -->
@@ -405,7 +560,7 @@
             'autoWidth'   : false
           });
           $('#example2').DataTable({
-            'paging'      : true,
+            'paging'      : false,
             'lengthChange': true,
             'searching'   : true,
             'ordering'    : false,

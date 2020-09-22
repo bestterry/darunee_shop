@@ -98,10 +98,11 @@
             <div class="row">
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
-                  <a href="reserve_money.php"> รับเงินสำรองจ่าย </a>
-                  <a href="reserve_office.php"> โอนเงินจ่าย </a>
+                  <a href="reserve_office.php"> โอนจ่าย </a>
                   <a class="active" href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_datacar.php"></i> ข้อมูลหน่วยรถ </a>
+                  <a href="reserve_datacar.php"></i> หน่วยรถ </a>
+                  <a href="reserve_carvalue.php"> ข้อมูลใช้เงินหน่วยรถ </a>
+                  <a href="reserve_money.php"> รับสำรองจ่าย </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -118,7 +119,7 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center">โอนเงินจ่าย หน่วยรถ<font color="red"> </font></B>
+                          <B align="center">โอนจ่าย หน่วยรถ<font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
@@ -135,14 +136,16 @@
                           <B> สำรองจ่ายคงเหลือ : <?php echo $reserve_money;?> </B>
                         </font>
                       </div>
+                      <br>
+                      <br>
                       <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                         <table id="example1" class="table">
                           <thead>
                             <tr>
-                              <th class="text-center" width="25%">วันที่</th>
-                              <th class="text-center" width="25%">หน่วยรถ</th>
-                              <th class="text-center" width="25%">จำนวนเงิน</th>
-                              <th class="text-center" width="25%">หมายเหตุ</th>
+                              <th class="text-center" width="27%">วันที่</th>
+                              <th class="text-center" width="32%">หน่วยรถ</th>
+                              <th class="text-center" width="32%">จำนวนเงิน</th>
+                              <th class="text-center" width="9%">ลบ</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -153,7 +156,9 @@
                               <td class="text-center"><?php echo Datethai($value['date']); ?></td> 
                               <td class="text-center"><?php echo $value['name']; ?></td>
                               <td class="text-center"><?php echo $value['money']; ?></td>
-                              <td class="text-center"><?php echo $value['note']; ?></td>
+                              <td class="text-center">
+                                <a href="algorithm/delete_reservecar.php?id_member=<?php echo $value['id_member_receive'];?>&&id=<?php echo $value['id_reserve_history']; ?>&&money=<?php echo $value['money'];?>&&money_total=<?php echo $reserve_money;?>" class="btn btn-danger btn-xs">ลบ</a>
+                              </td>
                             </tr>
                           <?php 
                             }
@@ -174,7 +179,7 @@
           <form action="algorithm/reserve_car.php" method="post">
             <div class="modal-content">
               <div class="modal-header text-center">
-                  <font size="5"><B> โอนเงินจ่าย </B></font>
+                  <font size="5"><B> โอนเงินหน่วยรถ </B></font>
               </div>
               <div class="modal-body col-md-12 table-responsive mailbox-messages">
                 <div class="col-12">
@@ -211,17 +216,6 @@
                           </tr>
                         </tbody>
                       </table> 
-                      <br> 
-                      <table class="table table-bordered ">
-                        <tbody>
-                          <tr>
-                            <th class="text-center" width="30%"><font size="3">หมายเหตุ</font></th>
-                            <th class="text-center" width="70%"> 
-                              <input type="text" name="note" value='-' class="form-control text-center">
-                            </th>
-                          </tr>
-                        </tbody>
-                      </table>
                       <br>
                       <table class="table table-bordered">
                         <tbody>
@@ -240,7 +234,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn button2 pull-right">ถัดไป >></button>
+                <button type="submit" class="btn btn-success pull-right">บันทึก</button>
                 <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< ย้อนกลับ </button>
               </div>
             </div>
@@ -269,7 +263,7 @@
        $(function () {
           $('#example1').DataTable({
             'paging'      : true,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching'   : true,
             'ordering'    : false,
             'info'        : true,

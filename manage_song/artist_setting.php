@@ -27,10 +27,6 @@
                 <a href="song_old.php"> เก่า </a>
                 <a href="song_middle.php"></i> กลาง </a>
                 <a href="song_new.php" > ใหม่ </a>
-                <a href="gradea.php"> A </a>
-                <a href="gradeb.php"> B </a>
-                <a href="gradec.php"> C </a>
-                <a href="graded.php"> D </a>
                 <a href="song_setting.php"> เพลง </a>
                 <a class="active" href="artist_setting.php"> นักร้อง </a>
                 <a href="song_setting2.php"> แก้ไข </a>
@@ -87,7 +83,7 @@
                             <td class="text-center"><?php echo $value['name_sexartist']; ?></td>   
                             <td class="text-center"><?php echo $value['name_ageartist']; ?></td>
                             <td class="text-center">
-                              <a href="edit_artist.php?id_artist=<?php echo $value['id_artist']; ?>" class="btn btn-success btn-xs" >แก้</a>
+                              <a href="edit_artist.php?id_artist=<?php echo $value['id_artist']; ?>" class="btn btn-success btn-xs" >>></a>
                             </td>
                             <td class="text-center">
                               <a href="algorithm/delete_artist.php?id_artist=<?php echo $value['id_artist']; ?>" class="btn btn-danger btn-xs" >ลบ</a>

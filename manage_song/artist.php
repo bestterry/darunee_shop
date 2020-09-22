@@ -32,10 +32,6 @@
                 <a href="song_old.php"> เก่า </a>
                 <a href="song_middle.php"></i> กลาง </a>
                 <a href="song_new.php"> ใหม่ </a>
-                <a href="gradea.php"> A </a>
-                <a href="gradeb.php"> B </a>
-                <a href="gradec.php"> C </a>
-                <a href="graded.php"> D </a>
                 <a href="song_setting.php"> เพลง </a>
                 <a href="artist_setting.php"> นักร้อง </a>
                 <a href="song_setting2.php"> แก้ไข </a>

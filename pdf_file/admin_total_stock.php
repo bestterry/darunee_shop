@@ -76,7 +76,7 @@ $pdf=new PDF('L','mm','A4');
             
             $pdf->SetFont('angsana','',16);
            
-          $list_product = "SELECT * FROM product";
+          $list_product = "SELECT * FROM product WHERE status_stock = 1";
           $query_product = mysqli_query($conn,$list_product);
           $query_product2 = mysqli_query($conn,$list_product);
           $a=1;

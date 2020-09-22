@@ -3,6 +3,11 @@
   require "../session.php";
   require "menu/date.php";
 
+  $sql_reserve = "SELECT money FROM reserve_money WHERE id_member = 33";
+  $objq_reserve = mysqli_query($conn,$sql_reserve);
+  $objr_reserve = mysqli_fetch_array($objq_reserve);
+  $reserve_money = $objr_reserve['money'];
+
   $sql_member = "SELECT id_member,name FROM member WHERE status_car = 1";
   $objq_member = mysqli_query($conn,$sql_member);
 ?>
@@ -91,10 +96,11 @@
             <div class="row">
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
-                  <a href="reserve_money.php"> รับเงินสำรองจ่าย </a>
-                  <a href="reserve_office.php"> โอนเงินจ่าย </a>
+                  <a href="reserve_office.php"> โอนจ่าย </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a class="active" href="reserve_datacar.php"></i> ข้อมูลหน่วยรถ </a>
+                  <a class="active" href="reserve_datacar.php"></i> หน่วยรถ </a>
+                  <a href="reserve_carvalue.php"> ข้อมูลใช้เงินหน่วยรถ </a>
+                  <a href="reserve_money.php"> รับสำรองจ่าย </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -103,65 +109,72 @@
             </div>
           </div>
           <div class="row">
-              <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-                <div class="box box-primary">
-                  <div class="box-header with-border">
-                    <div class="col-12">
-                      <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
-                      <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-                        <div class="text-center">
-                          <font size="5">
-                            <B align="center"> ข้อมูลสำรองจ่ายหน่วยรถ <font color="red"> </font></B>
-                          </font>
-                        </div>
-                      </div>
-                      <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right"></div>
-                    </div>
-                  </div>
-                  <div class="box-body no-padding">
-                    <div class="mailbox-read-message">
-                      <div class="col-12">
-                        <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-                          <table id="example1" class="table">
-                            <thead>
-                              <tr>
-                                <th class="text-center" width="33%">หน่วยรถ</th>
-                                <th class="text-center" width="33%">สรจ.คงเหลือ</th>
-                                <th class="text-center" width="33%">ข้อมูลใช้เงิน</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            <?php 
-                            $mnoey = 0;
-                              while($value = $objq_member -> fetch_assoc()){
-                                $id_member = $value['id_member'];
-                                $sql_reserve = "SELECT money FROM reserve_money WHERE id_member = $id_member";
-                                $objq_reserve = mysqli_query($conn,$sql_reserve);
-                                if ($objq_reserve->num_rows > 0) {
-                                  $objr_reserve = mysqli_fetch_array($objq_reserve);
-                                  $money = $objr_reserve['money'];
-                                }else {
-                                  $money = 0;
-                                }
-                            ?>
-                              <tr>
-                                <td class="text-center"><?php echo ($value['name']); ?></td> 
-                                <td class="text-center"><?php echo $money; ?></td>
-                                <td class="text-center"><a href="reserve_datacar2.php?id_member=<?php echo $id_member;?>">>></a></td>
-                              </tr>
-                            <?php 
-                              }
-                            ?>
-                            </tbody>
-                          </table>
-                        </div>
+            <div class="col-12 col-sm-12 col-md-12 col-xl-12">
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <div class="col-12">
+                    <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
+                    <div class="col-4 col-sm-4 col-md-4 col-xl-4">
+                      <div class="text-center">
+                        <font size="5">
+                          <B align="center"> ข้อมูลสำรองจ่ายหน่วยรถ </B>
+                        </font>
                       </div>
                     </div>
+                    <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right"></div>
                   </div>
-                  <div class="box-footer"></div>
                 </div>
+                <div class="box-body no-padding">
+                  <div class="mailbox-read-message">
+                    <div class="col-sm-12 text-left">
+                      <font size="3" color="red">
+                        <B> สำรองจ่ายคงเหลือ : <?php echo $reserve_money;?> </B>
+                      </font>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-12">
+                      <div class="col-12 col-sm-12 col-md-12 col-xl-12">
+                        <table id="example1" class="table">
+                          <thead>
+                            <tr>
+                              <th class="text-center" width="33%">หน่วยรถ</th>
+                              <th class="text-center" width="33%">สรจ.คงเหลือ</th>
+                              <th class="text-center" width="33%">ข้อมูลใช้เงิน</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <?php 
+                          $mnoey = 0;
+                            while($value = $objq_member -> fetch_assoc()){
+                              $id_member = $value['id_member'];
+                              $sql_reserve = "SELECT money FROM reserve_money WHERE id_member = $id_member";
+                              $objq_reserve = mysqli_query($conn,$sql_reserve);
+                              if ($objq_reserve->num_rows > 0) {
+                                $objr_reserve = mysqli_fetch_array($objq_reserve);
+                                $money = $objr_reserve['money'];
+                              }else {
+                                $money = 0;
+                              }
+                          ?>
+                            <tr>
+                              <td class="text-center"><?php echo ($value['name']); ?></td> 
+                              <td class="text-center"><?php echo $money; ?></td>
+                              <td class="text-center"><a href="reserve_datacar2.php?id_member=<?php echo $id_member;?>">>></a></td>
+                            </tr>
+                          <?php 
+                            }
+                          ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box-footer"></div>
               </div>
             </div>
+          </div>
         </section>
       </div>
       <?php require("../menu/footer.html"); ?>

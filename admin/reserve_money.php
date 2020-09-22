@@ -7,7 +7,7 @@
   $objr_reserve = mysqli_fetch_array($objq_reserve);
   $reserve_money = $objr_reserve['money'];
 
-  $sql_history = "SELECT money,date,note FROM reserve_history 
+  $sql_history = "SELECT id_reserve_history,money,date,note FROM reserve_history 
                   WHERE id_list = 1 ORDER BY id_reserve_history DESC 
                   LIMIT 1000";
   $objq_history = mysqli_query($conn,$sql_history);
@@ -97,10 +97,11 @@
             <div class="row">
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
-                  <a class="active" href="reserve_money.php"> รับเงินสำรองจ่าย </a>
-                  <a href="reserve_office.php"> โอนเงินจ่าย </a>
+                  <a href="reserve_office.php"> โอนจ่าย </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_datacar.php"></i> ข้อมูลหน่วยรถ </a>
+                  <a href="reserve_datacar.php"></i> หน่วยรถ </a>
+                  <a href="reserve_carvalue.php"> ข้อมูลใช้เงินหน่วยรถ </a>
+                  <a class="active" href="reserve_money.php"> รับสำรองจ่าย </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -117,12 +118,21 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> รับเงินสำรองจ่าย <font color="red"> </font></B>
+                          <B align="center"> รับสำรองจ่าย <font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right">
-                      <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> เพิ่มเงิน </a>
+                    <?php 
+                      if($id_member == 30){
+                    ?>
+                      <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> เพิ่มเงินสำรองจ่าย </a>
+
+                    <?php 
+                      }else{
+                        
+                      }
+                    ?>
                     </div>
                   </div>
 
@@ -139,9 +149,10 @@
                         <table id="example1" class="table">
                           <thead>
                             <tr>
-                              <th class="text-center" width="33%">วันที่</th>
-                              <th class="text-center" width="33%">จำนวนเงิน</th>
+                              <th class="text-center" width="31%">วันที่</th>
+                              <th class="text-center" width="30%">จำนวนเงิน</th>
                               <th class="text-center" width="33%">หมายเหตุ</th>
+                              <th class="text-center" width="5%">ลบ</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -152,6 +163,9 @@
                               <td class="text-center"><?php echo Datethai($value['date']); ?></td> 
                               <td class="text-center"><?php echo $value['money']; ?></td>
                               <td class="text-center"><?php echo $value['note']; ?></td>
+                              <td class="text-center">
+                                <a href="algorithm/delete_reserveoffice.php?id=<?php echo $value['id_reserve_history']; ?>&&money=<?php echo $value['money'];?>&&money_total=<?php echo $reserve_money;?>" class="btn btn-danger btn-xs">ลบ</a>
+                              </td>
                             </tr>
                           <?php 
                             }
@@ -173,7 +187,7 @@
         <form action="algorithm/reserve_money.php" method="post">
           <div class="modal-content">
             <div class="modal-header text-center">
-                <font size="5"><B> รับเงินสำรองจ่าย </B></font>
+                <font size="5"><B> เพิ่มเงินสำรองจ่าย </B></font>
             </div>
             <div class="modal-body col-md-12 table-responsive mailbox-messages">
               <div class="col-12">
@@ -202,13 +216,24 @@
                         </tr>
                       </tbody>
                     </table>
+                    <br> 
+                    <table class="table table-bordered ">
+                      <tbody>
+                        <tr>
+                          <th class="text-center" width="30%"><font size="3">วันที่</font></th>
+                          <th class="text-center" width="70%"> 
+                            <input type="date" name="date" id="datePicker" class="form-control text-center">
+                          </th>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
                 <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn button2 pull-right">ถัดไป >></button>
+              <button type="submit" class="btn btn-success pull-right">บันทึก</button>
               <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< ย้อนกลับ </button>
             </div>
           </div>
@@ -244,6 +269,17 @@
             'autoWidth'   : false
             });
        });
+       $(document).ready( function() {
+          var now = new Date();
+      
+          var day = ("0" + now.getDate()).slice(-2);
+          var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+          var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+
+        $('#datePicker').val(today);
+      });
     </script>
   </body>
 

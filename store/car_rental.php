@@ -4,14 +4,6 @@
   require "menu/date.php";
   $strDate = date('d-m-Y');
 
-  $reserve_money = "SELECT money FROM reserve_money WHERE id_member = $id_member";
-  $objq_money = mysqli_query($conn,$reserve_money);
-  $objr_money = mysqli_fetch_array($objq_money);
-  $money = $objr_money['money'];
-
-  $reserve_reserve = "SELECT * FROM reserve_list WHERE status = 4";
-  $objq_reservelist = mysqli_query($conn,$reserve_reserve);
-
 ?>
 
 <!DOCTYPE html>
@@ -54,10 +46,10 @@
           document.form1.date.focus();
           return false;
         }	
-        if(document.form1.id_list.value == "")
+        if(document.form1.id_practice.value == "")
         {
           alert('กรุณาเลือกรายการ')
-          document.form1.id_list.focus();
+          document.form1.id_practice.focus();
           return false;
         }	
         if(document.form1.money.value == "")
@@ -77,32 +69,14 @@
     </script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style>
-      #customers {
-        width: 100%;
-      }
-      #customers td, #customers th {
-        border: 1px solid #ddd;
-        padding: 8px;
-      }
-      #customers tr:nth-child(even){background-color: #f2f2f2;}
-      #customers th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: center;
-        background-color: #99CCFF;
-      }
-      select {
-        text-align: center;
-        text-align-last: center;
-      }
-      option {
-        text-align: center;
-        text-align-last: center;
-      }
-      input {
-        text-align: center;
-        text-align-last: center;
-      }
+    .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+        .topnav {
+          background-color: while;
+          overflow: hidden;
+        }
     </style>
   </head>
   <body class=" hold-transition skin-blue layout-top-nav ">
@@ -115,21 +89,19 @@
       <div class="content-wrapper">
         <section class="content">
           <div class="box box-primary">
-            <form action="algorithm/reserve_money.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
+            <form action="algorithm/add_car_rental.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
               <div class="box-header with-border">
                 <div class="col-12">
                   <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                     <a type="block" href="store.php" class="btn btn-danger pull-left"><< เมนูหลัก</a> 
                   </div>
-                  <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-                    <div class="text-center">
-                      <font size="5">
-                        <B align="center"> เงินสำรองจ่าย </B>
-                      </font>
-                    </div>
+                  <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center">
+                    <font size="5">
+                      <B> ค่าเช่ารถ </B>
+                    </font>
                   </div>
                   <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right">
-                    <a type="block" href="reserve_data.php" class="btn btn-success pull-right">ข้อมูลจ่าย</a> 
+                  <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> ข้อมูลค่าเช่ารถ </a>
                   </div>
                 </div>
               </div>
@@ -138,7 +110,6 @@
                 <div class="mailbox-read-message">
                   <div class="col-sm-12 text-left">
                     <font size="3" color="red">
-                      <B> สำรองจ่ายคงเหลือ : <?php echo $money;?> </B>
                     </font>
                   </div>
                   <br>
@@ -146,29 +117,32 @@
                   <table class="table">
                     <tr>
                       <th width="20%" class="text-right"><font size="4">ชื่อ &nbsp;&nbsp;:</font></th>
-                      <td width="30%"><input type="text" class="form-control" value="<?php echo $username; ?>"  style="background-color: #e6f7ff;" readonly/></td>
+                      <td width="30%">
+                        <input type="text" class="form-control" value="<?php echo $username; ?>"  style="background-color: #e6f7ff;" readonly/>
+                        <input type="hidden" class="form-control" value="<?php echo $id_member; ?>" name="id_member">
+                      </td>
                       <th width="20%" class="text-right" ><font size="4">วันที่ &nbsp;&nbsp;:</font></th>
                       <td width="30%"><input type="date" id="datePicker" name="date" class="form-control text-center"></td>
                     </tr>
                     <tr>
-                      <th width="20%" class="text-right"><font size="4" valign="middle">รายการ &nbsp;&nbsp;:</font></th>
+                      <th width="20%" class="text-right"><font size="4" valign="middle">ปฏิบัติงาน &nbsp;&nbsp;:</font></th>
                       <td width="30%" >
-                        <select name="id_list" class="form-control" style="width: 100%;">
+                        <select name="id_practice" id="id_practice" class="form-control" style="width: 100%;" onchange="sSelect(this.value)">
                             <option value="">-- รายการ --</option>
                             <?php 
-                              while ($value = $objq_reservelist -> fetch_assoc() ) {
+                              $rc_practice = "SELECT * FROM rc_practice";
+                              $objq_practice = mysqli_query($conn,$rc_practice);
+                                while ($value = $objq_practice -> fetch_assoc() ) {
                             ?>
-                            <option value="<?php echo $value['id_list']; ?>"><?php echo $value['name_list']; ?></option>
+                            <option value="<?php echo $value['id_practice']; ?>"><?php echo $value['name_practice']; ?></option>
                             <?php
                               }
                             ?>
                         </select>
                       </td>
-                      <th width="20%" class="text-right"><font size="4">จำนวนเงิน &nbsp;&nbsp;:</font></th>
+                      <th width="20%" class="text-right"><font size="4">ค่าเช่ารถ &nbsp;&nbsp;:</font></th>
                       <td width="30%">
-                        <input type="number" name="money" class="form-control text-center">
-                        <input type="hidden" name="money_befor" value="<?php echo $money; ?>">
-                        <input type="hidden" name="id_member" value="<?php echo $id_member; ?>">
+                        <input type="number" name="money" id="car_rental" class="form-control text-center">
                       </td>
                     </tr>
                     <tr>
@@ -185,67 +159,106 @@
           </div>
 
           <div class="box box-primary">
-              <div class="box-body no-padding">
-                <div class="mailbox-read-message">
-                  <div class="col-sm-12 text-center">
-                    <font size="5" color="red">
-                      <B> ประวัติใช้สำรองจ่าย : <?php echo $username; ?></B>
-                    </font>
-                  </div>
-                  <table class="table" id="example2">
-                    <thead>
-                      <tr>
-                        <th class="text-center" width="20%">วันที่</th>
-                        <th class="text-center" width="20%">รายการ</th>
-                        <th class="text-center" width="20%">จำนวนเงิน</th>
-                        <th class="text-center" width="20%">คงเหลือ</th>
-                        <th class="text-center" width="20%">หมายเหตุ</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php 
-                        $sql_rs_history = "SELECT * FROM reserve_history 
-                                            INNER JOIN reserve_list ON reserve_history.id_list = reserve_list.id_list
-                                            WHERE reserve_history.id_member_receive = $id_member
-                                            GROUP BY reserve_history.id_reserve_history DESC
-                                            LIMIT 1000";
-                        $objq_rs_history = mysqli_query($conn,$sql_rs_history);
-                        while($value = $objq_rs_history->fetch_assoc()){
-                      ?>
-                        <?php 
-                          if ($value['status']==3) {
-                        ?>
-                        <tr>
-                          <td class="text-center"><font color="red"><?php echo Datethai($value['date']); ?></font></td>
-                          <td class="text-center"><font color="red"><?php echo $value['name_list']; ?></font></td>
-                          <td class="text-center"><font color="red"><?php echo $value['money']; ?></font></td>
-                          <td class="text-center"><font color="red"><?php echo $value['transfer']; ?></font></td>
-                          <td class="text-center"><font color="red"><?php echo $value['note']; ?></font></td>
-                        </tr>
-                        <?php
-                          }else{
-                        ?>
-                        <tr>
-                          <td class="text-center"><?php echo Datethai($value['date']); ?></td>
-                          <td class="text-center"><?php echo $value['name_list']; ?></td>
-                          <td class="text-center"><?php echo $value['money']; ?></td>
-                          <td class="text-center"><?php echo $value['transfer']; ?></td>
-                          <td class="text-center"><?php echo $value['note']; ?></td>
-                        </tr>
-                      <?php
-                          }
-                        }
-                      ?>
-                    </tbody>
-                  </table>
+            <div class="box-body no-padding">
+              <div class="mailbox-read-message">
+                <div class="col-sm-12 text-center">
+                  <font size="5" color="red">
+                    <B> ประวัติใช้รถ : <?php echo $username; ?></B>
+                  </font>
                 </div>
+                <table class="table" id="example2">
+                  <thead>
+                    <tr>
+                      <th class="text-center" width="25%">วันที่</th>
+                      <th class="text-center" width="25%">ปฏิบัติงาน</th>
+                      <th class="text-center" width="25%">ค่าเช่ารถ</th>
+                      <th class="text-center" width="25%">หมายเหตุ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                      $sql_rs_history = "SELECT * FROM car_rental 
+                                          INNER JOIN rc_practice ON car_rental.id_practice = rc_practice.id_practice
+                                          WHERE car_rental.id_member = $id_member
+                                          GROUP BY car_rental.id_carrental DESC
+                                          LIMIT 1000";
+                      $objq_rs_history = mysqli_query($conn,$sql_rs_history);
+                      while($value = $objq_rs_history->fetch_assoc()){ 
+                    ?>
+                      <tr>
+                        <td class="text-center"><?php echo Datethai($value['date']); ?></td>
+                        <td class="text-center"><?php echo $value['name_practice']; ?></td>
+                        <td class="text-center"><?php echo $value['money']; ?></td>
+                        <td class="text-center"><?php echo $value['note']; ?></td>
+                      </tr>
+                      <?php
+                      ?>
+                    <?php
+                      }
+                    ?>
+                  </tbody>
+                </table>
               </div>
+            </div>
           </div>
 
         </section>
       </div>
 
       <?php require("../menu/footer.html"); ?>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <form action="data_carrental.php" method="post">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <font size="5"><B> ข้อมูลค่าเช่ารถ </B></font>
+            </div>
+            <div class="modal-body col-md-12 table-responsive mailbox-messages">
+              <div class="col-12">
+                <div class="table-responsive mailbox-messages">
+                  <div class="col-12">
+                    <div class="col-md-6 text-center">
+                      <div class="col-sm-2"></div>
+                      <div class="col-sm-8">
+                          <B><font size="5">ตั้งแต่</font></B>
+                      </div>
+                      <div class="col-sm-2"></div>
+                    </div>
+                    <div class="col-md-6 text-center"> 
+                      <div class="col-sm-2"></div>
+                      <div class="col-sm-8">
+                        <B><font size="5">ถึง</font></B>
+                      </div>
+                      <div class="col-sm-2"></div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="col-md-6 text-center">
+                      <div class="col-sm-2"></div>
+                      <div class="col-sm-8">
+                        <input class="form-control text-center" type="date" name="aday">
+                      </div>
+                      <div class="col-sm-2"></div>
+                    </div>
+                    <div class="col-md-6 text-center"> 
+                      <div class="col-sm-2"></div>
+                      <div class="col-sm-8">
+                        <input class="form-control text-center" type="date" name="bday">
+                      </div>
+                      <div class="col-sm-2"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success pull-right">ต่อไป</button>
+              <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< ย้อนกลับ </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- jQuery 3 -->
@@ -294,6 +307,18 @@
 
         $('#datePicker').val(today);
       });
+
+      function sSelect(value){  $.ajax({
+          type:"POST",
+          url:"algorithm/select_carrental.php",
+          data:{value:value},
+          success:function(data){
+              $("#car_rental").val(data);
+          }
+        });
+        return false;
+      };
+
     </script>
   </body>
 </html>

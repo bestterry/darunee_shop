@@ -107,6 +107,7 @@
                                 </th> 
                               </tr> 
                               <?php
+                              
                                 for ($i=0; $i < count($_POST['id_num_product']); $i++) { 
                               
                                   $id_num_product = $_POST['id_num_product'][$i];

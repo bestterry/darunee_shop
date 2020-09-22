@@ -2,16 +2,8 @@
   require "../config_database/config.php";
   require "../session.php";
   require "menu/date.php";
-  $strDate = date('d-m-Y');
-
-  $reserve_money = "SELECT money FROM reserve_money WHERE id_member = $id_member";
-  $objq_money = mysqli_query($conn,$reserve_money);
-  $objr_money = mysqli_fetch_array($objq_money);
-  $money = $objr_money['money'];
-
-  $reserve_reserve = "SELECT * FROM reserve_list WHERE status = 4";
-  $objq_reservelist = mysqli_query($conn,$reserve_reserve);
-
+  $aday = $_POST['aday'];
+  $bday = $_POST['bday'];
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +40,16 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <style>
+   .button2 {
+        background-color: #b35900;
+        color : white;
+        } /* Back & continue */
+        .topnav {
+          background-color: while;
+          overflow: hidden;
+        }
+  </style>
 </head>
 <body class=" hold-transition skin-blue layout-top-nav ">
  <div class="wrapper">
@@ -60,17 +62,23 @@
       <div class="box box-primary">
         <div class="box-header with-border">
           <div class="col-12">
-            <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-              <a type="block" href="reserve_data.php" class="btn btn-danger pull-left"><< กลับ</a> 
+            <div class="col-2 col-sm-2 col-md-2 col-xl-2">
+              <a type="block" href="car_rental.php" class="btn btn-danger pull-left"><< กลับ</a> 
             </div>
-            <div class="col-4 col-sm-4 col-md-4 col-xl-4">
+            <div class="col-8 col-sm-8 col-md-8 col-xl-8">
               <div class="text-center">
                 <font size="5">
-                  <B align="center"> ข้อมูลใช้เงินรายวัน <font color="red"> </font></B>
+                  <B align="center"> ข้อมูลปฏิบัติงานและค่าเช่ารถ : <?php echo $username; ?></B>
+                </font>
+              </div>
+              <div class="text-center">
+                <font size="5">
+                  <B align="center"> วันที่ <font color="red"> <?php echo Datethai($aday);?> </font>  ถึง  <font color="red"> <?php echo Datethai($bday);?> </font></B>
                 </font>
               </div>
             </div>
-            <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right"></div>
+            <div class="col-2 col-sm-2 col-md-2 col-xl-2 text-right">
+            </div>
           </div>
         </div>
         <div class="box-body no-padding">
@@ -78,57 +86,48 @@
             <br>
             <div class="col-sm-12 text-left">
               <font size="3" color="red">
-                <B> สำรองจ่ายคงเหลือ : <?php echo $money;?> </B>
               </font>
             </div>
             <br>
             <br>
             <div class="col-12">
               <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-                <table id="example1" class="table">
+                <table class="table" id="example2">
                   <thead>
                     <tr>
-                      <th class="text-center" width="16%">วันที่</th>
-                      <th class="text-center" width="16%">น้ำมัน</th>
-                      <th class="text-center" width="16%">เบี้ยเลี้ยง</th>
-                      <th class="text-center" width="16%">ที่พัก</th>
-                      <th class="text-center" width="16%">จ่ายอื่น</th>
-                      <th class="text-center" width="16%">รวมเงิน</th>
-
+                      <th class="text-center" width="25%">วันที่</th>
+                      <th class="text-center" width="25%">ปฏิบัติงาน</th>
+                      <th class="text-center" width="25%">จำนวนเงิน</th>
+                      <th class="text-center" width="25%">หมายเหตุ</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php 
-                      $aday = $_POST['aday'];
-                      $bday = $_POST['bday'];
-                      while(strtotime($bday) >= strtotime($aday)) { 
+                      $total_money = 0;
+                      $sql_rs_history = "SELECT * FROM car_rental 
+                                          INNER JOIN rc_practice ON car_rental.id_practice = rc_practice.id_practice
+                                          WHERE car_rental.id_member = $id_member AND (car_rental.date BETWEEN '$aday' AND '$bday')
+                                          GROUP BY car_rental.id_carrental DESC";
+                      $objq_rs_history = mysqli_query($conn,$sql_rs_history);
+                      while($value = $objq_rs_history->fetch_assoc()){ 
+                        $money = $value['money'];
                     ?>
-                    <tr>
-                      <td class="text-center"><?php echo Datethai($bday);?></td> 
-                      <?php
-                          $total_money = 0;
-                          $sql_resevelist = "SELECT id_list FROM reserve_list WHERE status = 4";
-                          $objq_reservelist = mysqli_query($conn,$sql_resevelist);
-                          while($value_reservelist = $objq_reservelist->fetch_assoc()){
-                            $id_list = $value_reservelist['id_list'];
-                            $sql_history = "SELECT SUM(money) FROM reserve_history 
-                                            WHERE id_list = $id_list AND id_member = $id_member AND DATE_FORMAT(date,'%Y-%m-%d')='$bday'";
-                          $objq_history = mysqli_query($conn,$sql_history);
-                          while($value_history = $objq_history->fetch_assoc()){
-                            $money = $value_history['SUM(money)'];
-                      ?>
-                      <td class="text-center"><?php echo $money;?></td>
-                      <?php 
+                      <tr>
+                        <td class="text-center"><?php echo Datethai($value['date']); ?></td>
+                        <td class="text-center"><?php echo $value['name_practice']; ?></td>
+                        <td class="text-center"><?php echo $money; ?></td>
+                        <td class="text-center"><?php echo $value['note']; ?></td>
+                      </tr>
+                    <?php
                         $total_money = $total_money + $money;
-                          }
-                        }
-                      ?>
-                       <td class="text-center"><?php echo $total_money;?></td>
-                    </tr>
-                    <?php 
-                        $bday = date ("Y-m-d", strtotime("-1 day", strtotime($bday)));
                       }
                     ?>
+                      <tr>
+                        <th class="text-center"></th>
+                        <th class="text-center">รวมเงิน</th>
+                        <th class="text-center"><?php echo $total_money; ?></th>
+                        <th class="text-center"></th>
+                      </tr>
                   </tbody>
                 </table>
               </div>
@@ -136,7 +135,6 @@
           </div>
         </div>
         <div class="box-footer text-right">
-          <a class="btn btn-success" href="../pdf_file/reserve_usemoney2.php?id_member=<?php echo $id_member; ?>&aday=<?php echo $_POST['aday'];?>&bday=<?php echo $_POST['bday'];?>"></i> PDF </a>
         </div>
       </div>
     </section>
@@ -163,14 +161,14 @@
     <script src="../plugins/iCheck/icheck.min.js"></script>
     <script>
        $(function () {
-          $('#example1').DataTable({
-            'paging'      : true,
-            'lengthChange': true,
-            'searching'   : true,
-            'ordering'    : false,
-            'info'        : true,
-            'autoWidth'   : false
-            });
+        $('#example1').DataTable({
+          'paging'      : true,
+          'lengthChange': true,
+          'searching'   : true,
+          'ordering'    : false,
+          'info'        : true,
+          'autoWidth'   : false
+          });
        });
       $(document).ready( function() {
           var now = new Date();

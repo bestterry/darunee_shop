@@ -37,10 +37,6 @@
                 <a href="song_old.php"> เก่า </a>
                 <a href="song_middle.php"></i> กลาง </a>
                 <a href="song_new.php"> ใหม่ </a>
-                <a href="gradea.php"> A </a>
-                <a href="gradeb.php"> B </a>
-                <a href="gradec.php"> C </a>
-                <a href="graded.php"> D </a>
                 <a href="song_setting.php"> เพลง </a>
                 <a href="artist_setting.php"> นักร้อง </a>
                 <a href="song_setting2.php"> แก้ไข </a>
@@ -98,7 +94,7 @@
                           <?php
                             if(!empty($value['ad_song'])){
                           ?>
-                          <a href="song_listen2.php?id_song=<?php echo $value['id_song'];?>&&id_artist=<?php echo $id_artist;?>" class="btn  btn-success btn-xs" >ฟัง</a>
+                          <input type="button" name="ฟัง" value="ฟัง" id="<?php echo $value["id_song"]; ?>" class="btn btn-success btn-xs view_data" />
                           <?php }else{}?>
                         </td>
                         <td class="text-center"><?php echo $value['name_song']; ?></td>
@@ -117,7 +113,7 @@
                           }
                         ?>
                         <td class="text-center">
-                          <a href="song_edit2.php?id_song=<?php echo $value['id_song']; ?>&&id_artist=<?php echo $id_artist; ?>" class="btn  btn-success btn-xs" >แก้</a>
+                          <a href="song_edit2.php?id_song=<?php echo $value['id_song']; ?>&&id_artist=<?php echo $id_artist; ?>" class="btn  btn-success btn-xs" >>></a>
                         </td> 
                         <?php
                         if($value['check_edit']=='N'){
@@ -182,3 +178,35 @@
   </body>
 
 </html>
+
+<div id="dataModal" class="modal fade">  
+      <div class="modal-dialog">  
+           <div class="modal-content">  
+                <div class="modal-header">  
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                     <h4 class="modal-title"></h4>  
+                </div>  
+                <div class="modal-body" id="listen_music">  
+                </div>  
+                <div class="modal-footer">  
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>  
+                </div>  
+           </div>  
+      </div>  
+ </div>  
+ <script>  
+ $(document).ready(function(){  
+      $('.view_data').click(function(){  
+           var id_song = $(this).attr("id");  
+           $.ajax({  
+                url:"select_song.php",  
+                method:"post",  
+                data:{id_song:id_song},  
+                success:function(data){  
+                     $('#listen_music').html(data);  
+                     $('#dataModal').modal("show");  
+                }  
+           });  
+      });  
+ });  
+ </script>

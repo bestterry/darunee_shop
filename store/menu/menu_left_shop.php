@@ -228,9 +228,13 @@
           <li><a href="sent_order.php" ><i class="fa fa-shopping-cart"></i> ORDER หน่วยรถ </a></li>
           <!-- /รายการรวมสต๊อกค้างส่ง -->
 
-          <!-- /สต๊อกรถ -->
-          <li><a href="total_order.php"><i class="fa fa-dropbox"></i> ORDER ค้างส่งรวม </a></li>
-          <!-- /สต๊อกรถ -->
+          <!-- /ORDER ค้างส่งจังหวัด -->
+          <li><a href="order_province.php"><i class="fa fa-dropbox"></i> ORDER ค้างส่งจังหวัด </a></li>
+          <!-- /ORDER ค้างส่งจังหวัด -->
+
+          <!-- /ORDER ค้างส่งจังหวัด -->
+          <li><a href="order_amphur.php"><i class="fa fa-dropbox"></i> ORDER ค้างส่งอำเภอ </a></li>
+          <!-- /ORDER ค้างส่งจังหวัด -->
 
          <!-- ค้นหา ORDER -->
          <li><a href="#" data-toggle="modal" data-target="#seachorder"><i class="fa fa-archive"></i> ค้นหา ORDER </a></li>
@@ -286,33 +290,29 @@
           <li><a href="receive_money.php" ><i class="fa fa-money"></i> เงินขายรายวัน </a></li>
           <!-- /เงินขายรายวัน -->
 
-          <!-- เงินขายรายวัน -->
+          <!-- สำรองจ่าย -->
+          <li><a href="reserve_money.php" ><i class="fa fa-money"></i> สำรองจ่าย </a></li>
+          <!--/สำรองจ่าย -->
+
+          <!-- ค่าเช่ารถ -->
+          <li><a href="car_rental.php" ><i class="fa fa-car"></i> ค่าเช่ารถ </a></li>
+          <!--/ค่าเช่ารถ -->
+
+          <!-- เยี่ยมร้าน -->
           <li><a href="visit_shop.php" ><i class="fa fa-user"></i>เยี่ยมร้าน</a></li>
-          <!-- /เงินขายรายวัน -->
+          <!-- /เยี่ยมร้าน -->
 
-          <!-- สำรองจ่าย. -->
-          <!-- <li><a href="reserve_money.php" ><i class="fa fa-user-circle-o"></i> สำรองจ่าย </a></li> -->
-          <!-- /สำรองจ่าย. -->
-
-          <!-- สำรองจ่าย. -->
+          <!-- ค่าปุ๋ย. -->
           <li><a href="sent_fertilizer.php" ><i class="fa fa-user-circle-o"></i> ค่าปุ๋ย </a></li>
-          <!-- /สำรองจ่าย. -->
+          <!-- /ค่าปุ๋ย. -->
 
-          <!-- ค่าส่งปุ๋ย -->
+          <!-- แผนที่ -->
           <li><a href="map.php" ><i class="fa fa-map"></i> แผนที่ </a></li>
-          <!-- /ค่าส่งปุ๋ย -->
+          <!-- /แผนที่ -->
 
-          <!-- จัดการเพลง -->
+          <!-- เวลาเช่าวิทยุ -->
           <li><a href="radio_list.php" ><i class="fa fa-play-circle-o"></i> เวลาเช่าวิทยุ </a></li>
-          <!--/จัดการเพลง -->
-
-          <!-- จัดการเพลง -->
-          <li><a href="reserve_money.php" ><i class="fa fa-play-circle-o"></i> สำรองจ่าย </a></li>
-          <!--/จัดการเพลง -->
-
-          <!-- จัดการเพลง -->
-          <!-- <li><a href="song_list.php" ><i class="fa fa-music"></i> จัดการเพลง </a></li> -->
-          <!--/จัดการเพลง -->
+          <!--/เวลาเช่าวิทยุ -->
 
         </ul>
       </div>

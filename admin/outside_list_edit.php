@@ -141,6 +141,8 @@ folder instead of downloading all of them to reduce the load. -->
                                   <option value="45"  <?php if($id_product == 45){ echo "selected='selected'";} ?>>BGM</option>
                                   <option value="46"  <?php if($id_product == 46){ echo "selected='selected'";} ?>>อินทรา</option>
                                   <option value="47"  <?php if($id_product == 47){ echo "selected='selected'";} ?>>DLC</option>
+                                  <option value="57"  <?php if($id_product == 57){ echo "selected='selected'";} ?>>สบู่วีฮาร่า (กลูต้า)</option>
+                                  <option value="60"  <?php if($id_product == 60){ echo "selected='selected'";} ?>>ฮอมคอฟฟี่</option>
                                 </select>
                             </th>
                             <th width="25%" class="text-right"><font size="4">จำนวน&nbsp;&nbsp;:</font></th>

@@ -133,7 +133,7 @@
         <!--/จัดการเพลง -->
 
         <!-- จัดการเพลง -->
-        <li><a href="reserve_money.php"><i class="fa fa-money"></i> สำรองจ่าย </a></li>
+        <li><a href="reserve_office.php"><i class="fa fa-money"></i> สำรองจ่าย </a></li>
         <!--/จัดการเพลง -->
         
         <!--จัดการข้อมูลสินค้า-พนักงาน -->

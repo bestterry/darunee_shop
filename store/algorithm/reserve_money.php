@@ -12,8 +12,8 @@
   mysqli_query($conn,$update_reserve);
 
    //-------------------------INSERT outside_buy_htr---------------------------------------
-   $insert_reserve = "INSERT INTO reserve_history (money, id_list, id_member, id_member_receive, status, note, date)
-   VALUE ($money, $id_list, $id_member, $id_member, 4, '$note', '$date')";  
+   $insert_reserve = "INSERT INTO reserve_history (money, transfer, id_list, id_member, id_member_receive, status, note, date)
+   VALUE ($money, $total_money, $id_list, $id_member, $id_member, 4, '$note', '$date')";  
     mysqli_query($conn,$insert_reserve);
     //-------------------------/INSERT outside_buy_htr---------------------------------------
 
