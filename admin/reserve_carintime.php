@@ -98,9 +98,9 @@
                 <div class="topnav">
                   <a href="reserve_office.php"> โอนจ่าย </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_datacar.php"></i> หน่วยรถ </a>
-                  <a class="active" href="reserve_carvalue.php"> ข้อมูลใช้เงินหน่วยรถ </a>
-                  <a href="reserve_money.php"> รับสำรองจ่าย </a>
+                  <a class="active" href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a href="car_rental.php"> ค่าเช่ารถ </a>
+                  <a href="reserve_money.php"> รับเงิน </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -113,117 +113,108 @@
               <div class="box box-primary">
                 <div class="nav-tabs-custom">
                   <ul class="nav nav-tabs">
-                    <li><a href="#today" data-toggle="tab">วันนี้</a></li>
-                    <li><a href="#befor" data-toggle="tab">ย้อนหลัง</a></li>
+                    <li><a href="#befor" data-toggle="tab">รายวัน</a></li>
                     <li class="active"><a href="#intime" data-toggle="tab">ช่วงเวลา</a></li>
                   </ul> 
                   <div class="tab-content">
 
-                    <div class="tab-pane" id="today">
-                      <div class="box-body">
-                        <div class="mailbox-read-message">
-                          <div align="center">
-                            <font size="5">
-                              <B align="center">วันนี้ <font color="red">วันที่ <?php echo Datethai($date);?></font></B>
-                            </font>
-                          </div>
-                          <div class="col-12">
-                            <table id="example1" class="table">
-                              <thead>
-                                <tr>
-                                  <th class="text-center" width="14%">หน่วยรถ</th>
-                                  <th class="text-center" width="14%">เช่ารถ</th>
-                                  <th class="text-center" width="14%">น้ำมัน</th>
-                                  <th class="text-center" width="14%">เบี้ยเลี้ยง</th>
-                                  <th class="text-center" width="14%">ที่พัก</th>
-                                  <th class="text-center" width="14%">จ่ายอื่น</th>
-                                  <th class="text-center" width="14%">รวม</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              <?php 
-                                while($value = $objq_member -> fetch_assoc()){
-                                  $id_member = $value['id_member'];
-                              ?>
-                                <tr>
-                                  <td class="text-center"><?php echo ($value['name']); ?></td> 
-                                  <?php
-                                    $sum_money = 0;
-                                    $sql_resevelist = "SELECT id_list FROM reserve_list WHERE status = 4";
-                                    $objq_reservelist = mysqli_query($conn,$sql_resevelist);
-                                    while($value_reservelist = $objq_reservelist->fetch_assoc()){
-                                      $id_list = $value_reservelist['id_list'];
-                                      $sql_history = "SELECT SUM(money) FROM reserve_history 
-                                                      WHERE id_list = $id_list AND id_member = $id_member AND DATE_FORMAT(date,'%Y-%m-%d')='$date'";
-                                      $objq_history = mysqli_query($conn,$sql_history);
-                                      while($value_history = $objq_history->fetch_assoc()){
-                                  ?>
-                                  <td class="text-center"><?php echo $value_history['SUM(money)'];?></td>
-                                  <?php 
-                                      $sum_money = $sum_money + $value_history['SUM(money)'];
-                                      }
-                                    }
-                                  ?>
-                                  <td class="text-center"><?php echo $sum_money;?></td>
-                                </tr>
-                              <?php 
-                                }
-                              ?>
-                                <tr>
-                                  <th class="text-center">รวม</th>
-                                  <?php 
-                                  $total_money = 0;
-                                  $sum_money = 0;
-                                  $sql_resevelist = "SELECT id_list,name_list FROM reserve_list WHERE status = 4";
-                                  $objq_reservelist = mysqli_query($conn,$sql_resevelist);
-                                  while($value_reservelist = $objq_reservelist->fetch_assoc()){
-                                    $id_list = $value_reservelist['id_list'];
-                                    $sql_history2 = "SELECT SUM(money) FROM reserve_history 
-                                                    WHERE id_list = $id_list AND DATE_FORMAT(date,'%Y-%m-%d')='$date'";
-                                    $objq_sum = mysqli_query($conn,$sql_history2);
-                                    $objr_sum = mysqli_fetch_array($objq_sum);
-                                    $sum_money = $objr_sum['SUM(money)'];
-                                  ?>
-                                  <th class="text-center"><?php echo $sum_money;?></th>
-                                  <?php 
-                                    $total_money = $total_money + $sum_money;
-                                  }
-                                  ?>
-                                  <th class="text-center"><?php echo $total_money; ?></th>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
                     <div class="tab-pane" id="befor">
                       <div class="box-body">
                         <div class="mailbox-read-message">
-                          <div align="center">
-                            <font size="5">
-                              <B align="center">ย้อนหลัง</B>
-                            </font>
-                          </div>
                           <div class="col-12">
+                            <div align="center">
+                              <font size="5">
+                                <B align="center">ข้อมูลใช้เงินหน่วยรถ</B>
+                              </font>
+                            </div>
+                            <br>
                             <form action="reserve_carbefor.php" method="post">
                               <div class="box-body">
                                 <div class="col-12">
                                   <div class="table-responsive mailbox-messages">
                                     <div class="col-12">
-                                      <div class="col-md-4 text-center"></div>
-                                      <div class="col-md-4 text-center"> 
-                                        <input class="form-control text-center" type="date" name="day">
-                                      </div> 
-                                      <div class="col-md-4 text-center"></div>
+                                      <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center"></div>
+                                      <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center"> 
+                                        <input class="form-control text-center" type="date" name="day" value="<?php echo $date; ?>">
+                                      </div>
+                                      <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center"></div>
                                     </div>
                                   </div>
                                 </div>
+                                <br>
+                                <div class="col-12 text-center">
+                                  <button type="submit" class="btn btn-success">ตกลง</button>
+                                </div>
                               </div>
                               <div class="box-footer text-center">
-                                <button type="submit" class="btn button2">ต่อไป >></button>
+                                <div class="col-12">
+                                  <table id="example1" class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center" width="16%">หน่วยรถ</th>
+                                        <th class="text-center" width="16%">น้ำมัน</th>
+                                        <th class="text-center" width="16%">เบี้ยเลี้ยง</th>
+                                        <th class="text-center" width="16%">ที่พัก</th>
+                                        <th class="text-center" width="16%">จ่ายอื่น</th>
+                                        <th class="text-center" width="16%">รวมเงิน</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php 
+                                      while($value = $objq_member -> fetch_assoc()){
+                                        $id_member = $value['id_member'];
+                                    ?>
+                                      <tr>
+                                        <td class="text-center"><?php echo ($value['name']); ?></td> 
+                                        <?php
+                                          $sum_money = 0;
+                                          $sql_resevelist = "SELECT id_list FROM reserve_list WHERE status = 4";
+                                          $objq_reservelist = mysqli_query($conn,$sql_resevelist);
+                                          while($value_reservelist = $objq_reservelist->fetch_assoc()){
+                                            $id_list = $value_reservelist['id_list'];
+                                            $sql_history = "SELECT SUM(money) FROM reserve_history 
+                                                            WHERE id_list = $id_list AND id_member = $id_member AND DATE_FORMAT(date,'%Y-%m-%d')='$date'";
+                                            $objq_history = mysqli_query($conn,$sql_history);
+                                            while($value_history = $objq_history->fetch_assoc()){
+                                        ?>
+                                        <td class="text-center"><?php echo $value_history['SUM(money)'];?></td>
+                                        <?php 
+                                            $sum_money = $sum_money + $value_history['SUM(money)'];
+                                            }
+                                          }
+                                        ?>
+                                        <td class="text-center"><?php echo $sum_money;?></td>
+                                      </tr>
+                                    <?php 
+                                      }
+                                    ?>
+                                      <tr>
+                                        <th class="text-center">รวมเงิน</th>
+                                        <?php 
+                                        $total_money = 0;
+                                        $sum_money = 0;
+                                        $sql_resevelist = "SELECT id_list,name_list FROM reserve_list WHERE status = 4";
+                                        $objq_reservelist = mysqli_query($conn,$sql_resevelist);
+                                        while($value_reservelist = $objq_reservelist->fetch_assoc()){
+                                          $id_list = $value_reservelist['id_list'];
+                                          $sql_history2 = "SELECT SUM(money) FROM reserve_history 
+                                                          WHERE id_list = $id_list AND DATE_FORMAT(date,'%Y-%m-%d')='$date'";
+                                          $objq_sum = mysqli_query($conn,$sql_history2);
+                                          $objr_sum = mysqli_fetch_array($objq_sum);
+                                          $sum_money = $objr_sum['SUM(money)'];
+                                        ?>
+                                        <th class="text-center"><?php echo $sum_money;?></th>
+                                        <?php 
+                                          $total_money = $total_money + $sum_money;
+                                        }
+                                        ?>
+                                        <th class="text-center"><?php echo $total_money; ?></th>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
+                              
                             </form>
                           </div>
                         </div>
@@ -233,11 +224,17 @@
                     <div class="tab-pane active" id="intime">
                       <div class="box-body">
                         <div class="mailbox-read-message">
-                          <div align="center">
+                        <div align="center">
                             <font size="5">
-                              <B align="center">ตั้งแต่ <font color="red">วันที่ <?php echo Datethai($aday);?></font>  ถึง  <font color="red"><?php echo Datethai($bday);?></font></B>
+                              <B align="center">ข้อมูลใช้เงินหน่วยรถ</B>
                             </font>
                           </div>
+                          <div align="center">
+                            <font size="5">
+                              <B align="center"><font color="red"> <?php echo Datethai($aday);?></font>  ถึง  <font color="red"><?php echo Datethai($bday);?></font></B>
+                            </font>
+                          </div>
+                          <br>
                           <div class="col-12">
                             <table id="example1" class="table">
                               <thead>
@@ -247,7 +244,7 @@
                                   <th class="text-center" width="16%">เบี้ยเลี้ยง</th>
                                   <th class="text-center" width="16%">ที่พัก</th>
                                   <th class="text-center" width="16%">จ่ายอื่น</th>
-                                  <th class="text-center" width="16%">รวม</th>
+                                  <th class="text-center" width="16%">รวมเงิน</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -281,7 +278,7 @@
                                 }
                               ?>
                                 <tr>
-                                  <th class="text-center">รวม</th>
+                                  <th class="text-center">รวมเงิน</th>
                                   <?php 
                                   $total_money = 0;
                                   $sum_money = 0;
@@ -335,18 +332,6 @@
     <!-- AdminLTE for demo purposes -->
     <script src="../dist/js/demo.js"></script>
     <script src="../plugins/iCheck/icheck.min.js"></script>
-    <script>
-       $(function () {
-          $('#example1').DataTable({
-            'paging'      : false,
-            'lengthChange': false,
-            'searching'   : true,
-            'ordering'    : false,
-            'info'        : true,
-            'autoWidth'   : false
-            });
-       });
-    </script>
   </body>
 
 </html>

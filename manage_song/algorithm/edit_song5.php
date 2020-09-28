@@ -25,13 +25,19 @@
    $edit = 'N';
 }
 
+if(isset($_POST['check_edit'])){
+   $check_edit = 'Y';
+}else {
+   $check_edit = 'N';
+}
+
  if(isset($_FILES['ad_song'])){
    $name_file =  $_FILES['ad_song']['name'];
    $tmp_name =  $_FILES['ad_song']['tmp_name'];
    $locate_img ="../../song/";
    move_uploaded_file($tmp_name,$locate_img.$name_file);
    $sql = "UPDATE song_list SET id_artist=$id_artist, name_song = '$name_song', id_tune = $id_tune, status = '$status',
-            script='$script', melodic='$melodic', ad_song = '$name_file', edit = '$edit', note = '$note'
+            script='$script', melodic='$melodic', ad_song = '$name_file', edit = '$edit', note = '$note', check_edit = '$check_edit'
             WHERE id_song = $id_song";
    if ($conn->query($sql) === TRUE) {
    header('location:../song_setting2.php');
@@ -40,7 +46,7 @@
    }
 }else{
    $sql = "UPDATE song_list SET id_artist=$id_artist, name_song = '$name_song', id_tune = $id_tune, status = '$status',
-            script='$script', melodic='$melodic', edit = '$edit', note = '$note'
+            script='$script', melodic='$melodic', edit = '$edit', note = '$note', check_edit = '$check_edit'
             WHERE id_song = $id_song";
    if ($conn->query($sql) === TRUE) {
    header('location:../song_setting2.php');

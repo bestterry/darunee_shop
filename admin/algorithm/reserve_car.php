@@ -27,8 +27,8 @@
       $total_money2 = $result_money + $money;
       $update_reserve2 = "UPDATE reserve_money SET money = $total_money2 WHERE id_member = $id_member";
       mysqli_query($conn,$update_reserve2);
-      $insert_reserve = "INSERT INTO reserve_history (money, transfer,id_list, id_member, id_member_receive, status, note,  date)
-                         VALUE ($money, $total_money2, 2, 33, $id_member, 3, '$note', '$date')";  
+      $insert_reserve = "INSERT INTO reserve_history (money, transfer, transfer_office, id_list, id_member, id_member_receive, status, note,  date)
+                         VALUE ($money, $total_money2, $total_money, 2, 33, $id_member, 3, '$note', '$date')";  
       mysqli_query($conn,$insert_reserve);
 
     }else{
@@ -36,8 +36,8 @@
       $insert_reserve2 = "INSERT INTO reserve_money (money, id_member) VALUE($money, $id_member)";
       mysqli_query($conn,$insert_reserve2);
 
-      $insert_reserve = "INSERT INTO reserve_history (money, transfer,id_list, id_member, id_member_receive, status, note,  date)
-                         VALUE ($money, $money, 2, 33, $id_member, 3, '$note', '$date')";  
+      $insert_reserve = "INSERT INTO reserve_history (money, transfer, transfer_office, id_list, id_member, id_member_receive, status, note,  date)
+                         VALUE ($money, $money, $total_money, 2, 33, $id_member, 3, '$note', '$date')";  
       mysqli_query($conn,$insert_reserve);
       
     }

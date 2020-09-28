@@ -11,11 +11,16 @@
   mysqli_query($conn,$update_reserve);
 
    //-------------------------INSERT outside_buy_htr---------------------------------------
-   $insert_reserve = "INSERT INTO reserve_history (money, id_list, id_member, status, note, date)
-   VALUE ($money, 1, 30, 1, '$note', '$date')";  
-    mysqli_query($conn,$insert_reserve);
+   $insert_reserve = "INSERT INTO reserve_history (money, id_list, transfer_office, id_member, status, note, date)
+   VALUE ($money, 1, $total_money, 30, 1, '$note', '$date')";  
+    
+    if ($conn->multi_query($insert_reserve) === TRUE) {
+      header('location:../reserve_money.php');
+    } else {
+      echo "Error: " . $insert_reserve . "<br>" . $conn->error;
+    }
     //-------------------------/INSERT outside_buy_htr---------------------------------------
 
-  header('location:../reserve_money.php');
+  
   
 ?>

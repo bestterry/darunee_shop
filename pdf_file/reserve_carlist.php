@@ -19,19 +19,21 @@
         $bday = $_POST['bday'];
         // Arial bold 15
         $this->AddFont('angsana','','angsa.php');
-        $this->SetFont('angsana','',16);
+        $this->SetFont('angsana','',18);
         //Date
         $this->SetTextColor(0,0,0); 
         // Title
         $this->SetTextColor(0,0,0);
-        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'ข้อมูลใช้เงินสำรองจ่าย : '.$name_member.'  '.DateThai($aday).' ถึง '.DateThai($bday)), 0 , 1,'L' );
+        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'ประวัติใช้เงิน : '.$name_member), 0 , 1,'C' );
+        $this->Ln(3);
+        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,DateThai($aday).' ถึง '.DateThai($bday)), 0 , 1,'C' );
         $this->Ln(3);
         $this->SetFont('angsana','',16);
-        $this->Cell(35,8,iconv('UTF-8','cp874','วันที่'),1,0,'C');
-        $this->Cell(35,8,iconv('UTF-8','cp874','รายการ'),1,0,'C');
-        $this->Cell(35,8,iconv('UTF-8','cp874','จำนวนเงิน'),1,0,'C');
-        $this->Cell(35,8,iconv('UTF-8','cp874','คงเหลือ'),1,0,'C');
-        $this->Cell(50,8,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
+        $this->Cell(30,8,iconv('UTF-8','cp874','วันที่'),1,0,'C');
+        $this->Cell(30,8,iconv('UTF-8','cp874','รายการ'),1,0,'C');
+        $this->Cell(30,8,iconv('UTF-8','cp874','จำนวนเงิน'),1,0,'C');
+        $this->Cell(30,8,iconv('UTF-8','cp874','คงเหลือ'),1,0,'C');
+        $this->Cell(60,8,iconv('UTF-8','cp874','หมายเหตุ'),1,0,'C');
         $this->Ln(8);
       }
     }
@@ -40,7 +42,7 @@
   $pdf=new PDF('P','mm','A4');
       // ตั้งค่าขอบกระดาษทุกด้าน 20 มิลลิเมตร
       $pdf->AliasNbPages();
-      $pdf->SetMargins(10,5,10);
+      $pdf->SetMargins(15,10,15);
       $pdf->AddFont('angsana','','angsa.php');
       //สร้างหน้าเอกสาร
       $pdf->AddPage();
@@ -54,11 +56,11 @@
                       LIMIT 1000";
       $objq_history = mysqli_query($conn,$sql_history);
       while($value = $objq_history -> fetch_assoc()){
-        $pdf->Cell(35,8,iconv('UTF-8','cp874',Datethai($value['date'])),1,0,'C');
-        $pdf->Cell(35,8,iconv('UTF-8','cp874',$value['name_list']),1,0,'C');
-        $pdf->Cell(35,8,iconv('UTF-8','cp874',$value['money']),1,0,'C');
-        $pdf->Cell(35,8,iconv('UTF-8','cp874',$value['transfer']),1,0,'C');
-        $pdf->Cell(50,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
+        $pdf->Cell(30,8,iconv('UTF-8','cp874',Datethai($value['date'])),1,0,'C');
+        $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['name_list']),1,0,'C');
+        $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['money']),1,0,'C');
+        $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['transfer']),1,0,'C');
+        $pdf->Cell(60,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
         $pdf->Ln(8);
       }
      

@@ -102,10 +102,10 @@
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
                   <a href="reserve_office.php"> โอนจ่าย </a>
-                  <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a class="active" href="reserve_datacar.php"></i> หน่วยรถ </a>
-                  <a href="reserve_carvalue.php"> ข้อมูลใช้เงินหน่วยรถ </a>
-                  <a href="reserve_money.php"> รับสำรองจ่าย </a>
+                  <a class="active" href="reserve_car.php"></i> โอนหน่วยรถ </a>
+                  <a href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a href="car_rental.php"> ค่าเช่ารถ </a>
+                  <a href="reserve_money.php"> รับเงิน </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -120,12 +120,12 @@
                 <div class="box-header with-border">
                   <div class="col-12">
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-                    <a class="btn button2" href="reserve_datacar.php"></i><< กลับ </a>
+                    <a class="btn button2" href="reserve_car.php"></i><< กลับ </a>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> ข้อมูลใช้เงินหน่วยรถ : <?php echo $name_member;?> <font color="red"> </font></B>
+                          <B align="center"> ข้อมูลใช้เงิน : <?php echo $name_member;?> <font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
@@ -137,7 +137,7 @@
                   <div class="mailbox-read-message">
                     <div class="col-sm-12 text-left">
                       <font size="3" color="red">
-                        <B> สำรองจ่ายคงเหลือ : <?php echo $reserve_money;?> </B>
+                        <B> เงินคงเหลือ : <?php echo $reserve_money;?> </B>
                       </font>
                     </div>
                     <br>
@@ -208,7 +208,7 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> ประวัติใช้เงินหน่วยรถ : <?php echo $name_member;?> <font color="red"> </font></B>
+                          <B align="center"> ประวัติใช้เงิน : <?php echo $name_member;?> <font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
@@ -222,11 +222,11 @@
                         <table class="table" id="example2">
                           <thead>
                             <tr>
-                              <th class="text-center" width="19%">วันที่</th>
-                              <th class="text-center" width="19%">รายการ</th>
-                              <th class="text-center" width="19%">จำนวนเงิน</th>
-                              <th class="text-center" width="19%">คงเหลือ</th>
-                              <th class="text-center" width="19%">หมายเหตุ</th>
+                              <th class="text-center" width="12%">วันที่</th>
+                              <th class="text-center" width="12%">รายการ</th>
+                              <th class="text-center" width="12%">จำนวนเงิน</th>
+                              <th class="text-center" width="12%">คงเหลือ</th>
+                              <th class="text-center" width="47%">หมายเหตุ</th>
                               <th class="text-center" width="5%">ลบ</th>
                             </tr>
                           </thead>

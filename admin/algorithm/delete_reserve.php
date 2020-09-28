@@ -4,6 +4,11 @@
   $money = $_GET['money'];
   $money_total = $_GET['money_total'];
   $value_money = $money + $money_total;
+  $date = date("Y-m-d");
+
+  $insert_reserve = "INSERT INTO reserve_history (money, transfer_office, id_list, id_member, status, note,  date)
+                         VALUE ($money ,$value_money, 18, 33, 2, 'รับเข้าจากลบรายการ', '$date')";  
+      mysqli_query($conn,$insert_reserve);
 
   $sql = "DELETE FROM reserve_history WHERE id_reserve_history = $id";
    if ($conn->query($sql) === TRUE) {

@@ -12,16 +12,17 @@
       {
           // Date
           require('../config_database/config.php'); 
-          $strDate = date('d-m-Y');
-          // Arial bold 15
-          $this->AddFont('angsana','','angsa.php');
-          $this->SetFont('angsana','',16);
-          //Date
-          $this->SetTextColor(0,0,0); 
-          // Title
+          $aday = $_POST['aday'];
+          $bday = $_POST['bday'];
           $this->SetTextColor(0,0,0);
-          $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'ข้อมูลใช้เงินสำรองจ่าย สนง'), 0 , 1,'L' );
+          $this->AddFont('angsana','','angsa.php');
+          $this->SetFont('angsana','',22);
+          $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'โอนจ่ายรวมรายวัน'), 0 , 1,'C' );
           $this->Ln(3);
+          $this->SetFont('angsana','',18);
+          $this->Cell(0,5, iconv( 'UTF-8','cp874' ,DateThai($aday).'  ถึง  '.DateThai($bday)), 0 , 1,'C' );
+          $this->Ln(3);
+          
           $this->SetFont('angsana','',16);
           $this->Cell(27,8,iconv('UTF-8','cp874','วันที่'),1,0,'C');
           $sql_resevelist = "SELECT id_list,name_list FROM reserve_list WHERE (status = 2 OR status = 3)";
@@ -38,7 +39,7 @@
   $pdf=new PDF('L','mm','A4');
       // ตั้งค่าขอบกระดาษทุกด้าน 20 มิลลิเมตร
       $pdf->AliasNbPages();
-      $pdf->SetMargins(10,5,10);
+      $pdf->SetMargins(13,13,10);
       $pdf->AddFont('angsana','','angsa.php');
       //สร้างหน้าเอกสาร
       $pdf->AddPage();

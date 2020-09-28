@@ -8,7 +8,7 @@
   $reserve_money = $objr_reserve['money'];
 
   $sql_history = "SELECT * FROM reserve_history INNER JOIN reserve_list ON reserve_history.id_list = reserve_list.id_list
-                  WHERE (reserve_history.status = 2 OR reserve_history.status = 3) 
+                  WHERE (reserve_history.status = 2 OR reserve_history.status = 3 OR reserve_history.status = 5 OR reserve_history.status = 1) 
                   ORDER BY reserve_history.id_reserve_history DESC 
                   LIMIT 300";
   $objq_history = mysqli_query($conn,$sql_history);
@@ -102,9 +102,9 @@
                 <div class="topnav">
                   <a class="active" href="reserve_office.php"> โอนจ่าย </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_datacar.php"></i> หน่วยรถ </a>
-                  <a href="reserve_carvalue.php"> ข้อมูลใช้เงินหน่วยรถ </a>
-                  <a href="reserve_money.php"> รับสำรองจ่าย </a>
+                  <a href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a href="car_rental.php"> ค่าเช่ารถ </a>
+                  <a href="reserve_money.php"> รับเงิน </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -121,7 +121,7 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> โอนจ่าย สนง.<font color="red"> </font></B>
+                          <B align="center"> รายการโอนจ่าย<font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
@@ -135,7 +135,7 @@
                     <div class="col-12">
                       <div class="col-sm-12 text-left">
                           <font size="3" color="red">
-                            <B> สำรองจ่ายคงเหลือ : <?php echo $reserve_money;?> </B>
+                            <B> เงินคงเหลือ : <?php echo $reserve_money;?> </B>
                           </font>
                       </div>
                       <br>
@@ -145,11 +145,12 @@
                         <table id="example1" class="table">
                           <thead>
                             <tr>
-                              <th class="text-center" width="20%">วันที่</th>
-                              <th class="text-center" width="25%">รายการ</th>
-                              <th class="text-center" width="20%">จำนวนเงิน</th>
-                              <th class="text-center" width="25%">หมายเหตุ</th>
-                              <th class="text-center" width="10%">ลบ</th>
+                              <th class="text-center" width="12%">วันที่</th>
+                              <th class="text-center" width="12%">รายการ</th>
+                              <th class="text-center" width="12%">จำนวนเงิน</th>
+                              <th class="text-center" width="12%">คงเหลือ</th>
+                              <th class="text-center" width="44%">รายละเอียด</th>
+                              <th class="text-center" width="8%">ลบ</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -160,9 +161,18 @@
                               <td class="text-center"><?php echo Datethai($value['date']); ?></td> 
                               <td class="text-center"><?php echo $value['name_list']; ?></td>
                               <td class="text-center"><?php echo $value['money']; ?></td>
+                              <td class="text-center"><?php echo $value['transfer_office']; ?></td>
                               <td class="text-center"><?php echo $value['note']; ?></td>
                               <td class="text-center">
-                                <a href="algorithm/delete_reserve.php?id=<?php echo $value['id_reserve_history'];?>&&money=<?php echo $value['money'];?>&&money_total=<?php echo $reserve_money;?>" class="btn btn-danger btn-xs">ลบ</a>
+                                <?php 
+                                  if ($value['status']==1||$value['status']==5) {
+                                    
+                                  }else{
+                                ?>
+                                  <a href="algorithm/delete_reserve.php?id=<?php echo $value['id_reserve_history'];?>&&money=<?php echo $value['money'];?>&&money_total=<?php echo $reserve_money;?>" class="btn btn-danger btn-xs">ลบ</a>
+                                <?php 
+                                  }
+                                ?>
                               </td>
                             </tr>
                           <?php 
@@ -192,7 +202,7 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> โอนจ่ายรายวัน สนง.<font color="red"> </font></B>
+                          <B align="center"> โอนจ่ายรวมรายวัน<font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
@@ -250,25 +260,6 @@
                             $aday = date ("Y-m-d", strtotime("-1 day", strtotime($aday)));
                           }
                         ?>
-                        <tr>
-                          <th class="text-center">รวมเงิน</th>
-                          <?php
-                            $aday = date("Y-m-d");
-                            $bday = date("Y-m-d", strtotime("-10 day", strtotime($aday)));
-                            $objq_reservelist3 = mysqli_query($conn,$sql_resevelist);
-                              while($value_list = $objq_reservelist3->fetch_assoc()){
-                                $id_list = $value_list['id_list'];
-                                $sql_history = "SELECT SUM(money) FROM reserve_history 
-                                                WHERE id_list = $id_list AND (date between '$bday 00:00:00' and '$aday 23:59:59')";
-                                $objq_history = mysqli_query($conn,$sql_history);
-                                $objr_history = mysqli_fetch_array($objq_history);
-                          ?>
-                          <th class="text-center"><?php echo $objr_history['SUM(money)'];?></th>
-                          <?php 
-                              }
-                          ?>
-                          <th class="text-center"><?php echo $total_money;?></th>
-                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -368,7 +359,7 @@
           <form action="reserve_office2.php" method="post">
             <div class="modal-content">
               <div class="modal-header text-center">
-                  <font size="5"><B> เลือกวันที่ </B></font>
+                  <font size="5"><B> รายการโอนจ่าย </B></font>
               </div>
               <div class="modal-body col-md-12 table-responsive mailbox-messages">
                 <div class="col-12">
@@ -424,7 +415,7 @@
           <form action="../pdf_file/reserve_officelist.php" method="post">
             <div class="modal-content">
               <div class="modal-header text-center">
-                  <font size="5"><B> เลือกวันที่ </B></font>
+                  <font size="5"><B> รายการโอนจ่าย </B></font>
               </div>
               <div class="modal-body col-md-12 table-responsive mailbox-messages">
                 <div class="col-12">
@@ -480,7 +471,7 @@
           <form action="../pdf_file/reserve_office.php" method="post">
             <div class="modal-content">
               <div class="modal-header text-center">
-                  <font size="5"><B> เลือกวันที่ </B></font>
+                  <font size="5"><B> โอนจ่ายรวมรายวัน </B></font>
               </div>
               <div class="modal-body col-md-12 table-responsive mailbox-messages">
                 <div class="col-12">
@@ -553,14 +544,6 @@
        $(function () {
           $('#example1').DataTable({
             'paging'      : true,
-            'lengthChange': true,
-            'searching'   : true,
-            'ordering'    : false,
-            'info'        : true,
-            'autoWidth'   : false
-          });
-          $('#example2').DataTable({
-            'paging'      : false,
             'lengthChange': true,
             'searching'   : true,
             'ordering'    : false,

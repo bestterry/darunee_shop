@@ -10,8 +10,12 @@
   $sql_history = "SELECT * FROM reserve_history
                   INNER JOIN member ON reserve_history.id_member_receive = member.id_member
                   WHERE reserve_history.status = 3 ORDER BY reserve_history.id_reserve_history DESC 
-                  LIMIT 1000";
+                  LIMIT 20";
   $objq_history = mysqli_query($conn,$sql_history);
+
+  $sql_member = "SELECT id_member,name FROM member WHERE status_car = 1";
+  $objq_member = mysqli_query($conn,$sql_member);
+
 ?>
 
 <!DOCTYPE html>
@@ -100,9 +104,9 @@
                 <div class="topnav">
                   <a href="reserve_office.php"> โอนจ่าย </a>
                   <a class="active" href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_datacar.php"></i> หน่วยรถ </a>
-                  <a href="reserve_carvalue.php"> ข้อมูลใช้เงินหน่วยรถ </a>
-                  <a href="reserve_money.php"> รับสำรองจ่าย </a>
+                  <a href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a href="car_rental.php"> ค่าเช่ารถ </a>
+                  <a href="reserve_money.php"> รับเงิน </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -133,38 +137,84 @@
                     <div class="col-12">
                       <div class="col-sm-12 text-left">
                         <font size="3" color="red">
-                          <B> สำรองจ่ายคงเหลือ : <?php echo $reserve_money;?> </B>
+                          <B> เงินคงเหลือ : <?php echo $reserve_money;?> </B>
                         </font>
                       </div>
                       <br>
                       <br>
-                      <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-                        <table id="example1" class="table">
-                          <thead>
-                            <tr>
-                              <th class="text-center" width="27%">วันที่</th>
-                              <th class="text-center" width="32%">หน่วยรถ</th>
-                              <th class="text-center" width="32%">จำนวนเงิน</th>
-                              <th class="text-center" width="9%">ลบ</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                          <?php 
-                            while($value = $objq_history -> fetch_assoc()){
-                          ?>
-                            <tr>
-                              <td class="text-center"><?php echo Datethai($value['date']); ?></td> 
-                              <td class="text-center"><?php echo $value['name']; ?></td>
-                              <td class="text-center"><?php echo $value['money']; ?></td>
-                              <td class="text-center">
-                                <a href="algorithm/delete_reservecar.php?id_member=<?php echo $value['id_member_receive'];?>&&id=<?php echo $value['id_reserve_history']; ?>&&money=<?php echo $value['money'];?>&&money_total=<?php echo $reserve_money;?>" class="btn btn-danger btn-xs">ลบ</a>
-                              </td>
-                            </tr>
-                          <?php 
-                            }
-                          ?>
-                          </tbody>
-                        </table>
+                      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                        <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th class="text-center" width="33%">หน่วยรถ</th>
+                                <th class="text-center" width="33%">เงินคงเหลือ</th>
+                                <th class="text-center" width="33%">ข้อมูลใช้เงิน</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <?php 
+                            $mnoey = 0;
+                              while($value = $objq_member -> fetch_assoc()){
+                                $id_member = $value['id_member'];
+                                $sql_reserve = "SELECT money FROM reserve_money WHERE id_member = $id_member";
+                                $objq_reserve = mysqli_query($conn,$sql_reserve);
+                                if ($objq_reserve->num_rows > 0) {
+                                  $objr_reserve = mysqli_fetch_array($objq_reserve);
+                                  $money = $objr_reserve['money'];
+                                }else {
+                                  $money = 0;
+                                }
+                            ?>
+                              <tr>
+                                <td class="text-center"><?php echo ($value['name']); ?></td> 
+                                <td class="text-center"><?php echo $money; ?></td>
+                                <td class="text-center"><a href="reserve_datacar2.php?id_member=<?php echo $id_member;?>">>></a></td>
+                              </tr>
+                            <?php 
+                              }
+                            ?>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                      </div>
+                      
+                      <div class="col-12 col-xs-12 col-sm-412col-md-12 col-lg-12">
+                        <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                        <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                          <br>
+                          <br>
+                          <br>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th class="text-center" width="27%">วันที่</th>
+                                <th class="text-center" width="32%">หน่วยรถ</th>
+                                <th class="text-center" width="32%">เงินโอน</th>
+                                <th class="text-center" width="9%">ลบ</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <?php 
+                              while($value = $objq_history -> fetch_assoc()){
+                            ?>
+                              <tr>
+                                <td class="text-center"><?php echo Datethai($value['date']); ?></td> 
+                                <td class="text-center"><?php echo $value['name']; ?></td>
+                                <td class="text-center"><?php echo $value['money']; ?></td>
+                                <td class="text-center">
+                                  <a href="algorithm/delete_reservecar.php?id_member=<?php echo $value['id_member_receive'];?>&&id=<?php echo $value['id_reserve_history']; ?>&&money=<?php echo $value['money'];?>&&money_total=<?php echo $reserve_money;?>" class="btn btn-danger btn-xs">ลบ</a>
+                                </td>
+                              </tr>
+                            <?php 
+                              }
+                            ?>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
                       </div>
                     </div>
                 </div>
@@ -176,7 +226,7 @@
       <?php require("../menu/footer.html"); ?>
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
-          <form action="algorithm/reserve_car.php" method="post">
+          <form action="algorithm/reserve_car.php"  method="post">
             <div class="modal-content">
               <div class="modal-header text-center">
                   <font size="5"><B> โอนเงินหน่วยรถ </B></font>
@@ -196,7 +246,8 @@
                                 <?php 
                                   $sql_member = "SELECT * FROM member WHERE status_car = 1";
                                   $objq_member = mysqli_query($conn,$sql_member);
-                                    while($value = $objq_member->fetch_assoc()){ ?>
+                                    while($value = $objq_member->fetch_assoc()){ 
+                                ?>
                                     <option value="<?php echo $value['id_member'];?>"><?php echo $value['name'];?></option>
                                 <?php } ?>
                               </select>
@@ -260,16 +311,7 @@
     <script src="../dist/js/demo.js"></script>
     <script src="../plugins/iCheck/icheck.min.js"></script>
     <script>
-       $(function () {
-          $('#example1').DataTable({
-            'paging'      : true,
-            'lengthChange': true,
-            'searching'   : true,
-            'ordering'    : false,
-            'info'        : true,
-            'autoWidth'   : false
-            });
-       });
+       
       $(document).ready( function() {
           var now = new Date();
       

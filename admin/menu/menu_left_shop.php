@@ -112,6 +112,10 @@
         <li><a href="acc_market_sale.php" ><i class="fa fa-money"></i>เงินขาย (สกต.) </a></li>
         <!-- /สกต. -->
 
+        <!-- สำรองจ่าย -->
+        <li><a href="reserve_office.php"><i class="fa fa-money"></i> สำรองจ่าย </a></li>
+        <!--/สำรองจ่าย -->
+
         <!-- นอกเขต. -->
         <li><a href="store.php" ><i class="fa fa-user-circle-o"></i> ระเบียนร้านค้า </a></li>
         <!-- /นอกเขต. -->
@@ -133,7 +137,11 @@
         <!--/จัดการเพลง -->
 
         <!-- จัดการเพลง -->
-        <li><a href="reserve_office.php"><i class="fa fa-money"></i> สำรองจ่าย </a></li>
+        <!-- <li><a href="car_rental.php"><i class="fa fa-car"></i> เช่ารถ </a></li> -->
+        <!--/จัดการเพลง -->
+
+        <!-- จัดการเพลง -->
+        <li><a href="../manage_interview/interview.php"><i class="fa fa-car"></i> จัดการสัมภาษณ์ </a></li>
         <!--/จัดการเพลง -->
         
         <!--จัดการข้อมูลสินค้า-พนักงาน -->

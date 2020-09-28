@@ -99,9 +99,9 @@
                 <div class="topnav">
                   <a href="reserve_office.php"> โอนจ่าย </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_datacar.php"></i> หน่วยรถ </a>
-                  <a href="reserve_carvalue.php"> ข้อมูลใช้เงินหน่วยรถ </a>
-                  <a class="active" href="reserve_money.php"> รับสำรองจ่าย </a>
+                  <a href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a href="car_rental.php"> ค่าเช่ารถ </a>
+                  <a class="active" href="reserve_money.php"> รับเงิน </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -118,7 +118,7 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> รับสำรองจ่าย <font color="red"> </font></B>
+                          <B align="center"> รับเงินสำรองจ่าย <font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
@@ -126,7 +126,7 @@
                     <?php 
                       if($id_member == 30){
                     ?>
-                      <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> เพิ่มเงินสำรองจ่าย </a>
+                      <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> เพิ่มเงิน </a>
 
                     <?php 
                       }else{
@@ -142,7 +142,7 @@
                     <div class="col-12">
                       <div class="col-sm-12 text-left">
                           <font size="3" color="red">
-                            <B> สำรองจ่ายคงเหลือ : <?php echo $reserve_money;?> </B>
+                            <B> เงินคงเหลือ : <?php echo $reserve_money;?> </B>
                           </font>
                       </div>
                       <div class="col-12 col-sm-12 col-md-12 col-xl-12">

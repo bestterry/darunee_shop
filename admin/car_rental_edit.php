@@ -3,13 +3,20 @@
   require "../session.php";
   require "menu/date.php";
 
-  $sql_reserve = "SELECT money FROM reserve_money WHERE id_member = 33";
-  $objq_reserve = mysqli_query($conn,$sql_reserve);
-  $objr_reserve = mysqli_fetch_array($objq_reserve);
-  $reserve_money = $objr_reserve['money'];
-
-  $sql_member = "SELECT id_member,name FROM member WHERE status_car = 1";
-  $objq_member = mysqli_query($conn,$sql_member);
+  $id_carrental = $_GET['id'];
+  
+  $query = "SELECT * FROM car_rental 
+            INNER JOIN rc_practice ON rc_practice.id_practice = car_rental.id_practice 
+            INNER JOIN member ON member.id_member = car_rental.id_member
+            WHERE id_carrental = $id_carrental";  
+  $result = mysqli_query($conn, $query);
+  $objr = mysqli_fetch_array($result);
+  $name_member = $objr['name'];
+  $money = $objr['money'];
+  $name_practice = $objr['id_practice'];
+  $note = $objr['note'];
+  $date = $objr['date'];
+  $id_practice = $objr['id_practice'];
 ?>
 
 <!DOCTYPE html>
@@ -97,10 +104,11 @@
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
                   <a href="reserve_office.php"> โอนจ่าย </a>
-                  <a class="active" href="reserve_datacar.php"></i> หน่วยรถ </a>
+                  <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
+                  <a href="reserve_datacar.php"></i> หน่วยรถ </a>
                   <a href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
-                  <a href="car_rental.php"> ค่าเช่ารถ </a>
-                  <a href="reserve_money.php"> รับเงิน </a>
+                  <a class="active" href="car_rental.php"> ค่าเช่ารถ </a>
+                  <a href="reserve_money.php"> รับสำรองจ่าย </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -111,67 +119,70 @@
           <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-xl-12">
               <div class="box box-primary">
-                <div class="box-header with-border">
-                  <div class="col-12">
-                    <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
+                <form action="algorithm/car_rental.php?status=<?php echo $_GET['status']; ?>" method="post" class="form-horizontal">
+                  <div class="box-header">
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-                      <div class="text-center">
-                        <font size="5">
-                          <B align="center"> ข้อมูลสำรองจ่ายหน่วยรถ </B>
-                        </font>
-                      </div>
+                      <a type="button" href="car_rental.php" class="btn button2" ><< กลับ</a>  
                     </div>
-                    <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right"></div>
-                  </div>
-                </div>
-                <div class="box-body no-padding">
-                  <div class="mailbox-read-message">
-                    <div class="col-sm-12 text-left">
-                      <font size="3" color="red">
-                        <B> เงินคงเหลือ : <?php echo $reserve_money;?> </B>
+                    <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center">
+                      <font size="5">
+                        <B align="center">แก้ไขค่าเช่ารถ</B>
                       </font>
                     </div>
-                    <br>
-                    <br>
-                    <div class="col-12">
-                      <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-                        <table id="example1" class="table">
-                          <thead>
-                            <tr>
-                              <th class="text-center" width="33%">หน่วยรถ</th>
-                              <th class="text-center" width="33%">สรจ.คงเหลือ</th>
-                              <th class="text-center" width="33%">ข้อมูลใช้เงิน</th>
-                            </tr>
-                          </thead>
-                          <tbody>
+                    <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
+                  </div>
+                  <div class="box-body">  
+                    <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
+                    <div class="col-6 col-sm-6 col-md-6 col-xl-6">
+                      <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">ชื่อ</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="name" value="<?php echo $name_member ?>" readonly/>
+                          <input type="hidden" class="form-control" id="name" name="id_carrental" value="<?php echo $id_carrental?>">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="rc_practice" class="col-sm-2 control-label">ปฏิบัติงาน</label>
+                        <div class="col-sm-10">
+                          <select name="id_practice" class="form-control">
                           <?php 
-                          $mnoey = 0;
-                            while($value = $objq_member -> fetch_assoc()){
-                              $id_member = $value['id_member'];
-                              $sql_reserve = "SELECT money FROM reserve_money WHERE id_member = $id_member";
-                              $objq_reserve = mysqli_query($conn,$sql_reserve);
-                              if ($objq_reserve->num_rows > 0) {
-                                $objr_reserve = mysqli_fetch_array($objq_reserve);
-                                $money = $objr_reserve['money'];
-                              }else {
-                                $money = 0;
-                              }
+                            $sql_practice = "SELECT * FROM rc_practice";
+                            $objq_practice = mysqli_query($conn,$sql_practice);
+                            while($value = $objq_practice->fetch_assoc()){ 
                           ?>
-                            <tr>
-                              <td class="text-center"><?php echo ($value['name']); ?></td> 
-                              <td class="text-center"><?php echo $money; ?></td>
-                              <td class="text-center"><a href="reserve_datacar2.php?id_member=<?php echo $id_member;?>">>></a></td>
-                            </tr>
-                          <?php 
+                          <option value="<?php echo $value['id_practice']; ?>" <?php if($id_practice==$value['id_practice']){ echo "selected";}else{}?>>
+                          <?php echo $value['name_practice']; ?></option>
+                          <?php
                             }
                           ?>
-                          </tbody>
-                        </table>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="car_rental" class="col-sm-2 control-label">ค่าเช่ารถ</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" name="money" id="car_rental" value="<?php echo $money; ?>">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="car_rental" class="col-sm-2 control-label">วันที่</label>
+                        <div class="col-sm-10">
+                          <input type="date" class="form-control" name="date" id="car_rental" value="<?php echo $date; ?>">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="note" class="col-sm-2 control-label">หมายเหตุ</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" name="note" id="note" value="<?php echo $note; ?>">
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div class="box-footer"></div>
+                    <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
+                  </div>  
+                  <div class="box-footer text-center">  
+                    <button type="submit" class="btn btn-success" data-dismiss="modal">บันทึก</button>  
+                  </div> 
+                </form> 
               </div>
             </div>
           </div>
@@ -179,6 +190,7 @@
       </div>
       <?php require("../menu/footer.html"); ?>
     </div>
+
 
     <!-- jQuery 3 -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -196,6 +208,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="../dist/js/demo.js"></script>
     <script src="../plugins/iCheck/icheck.min.js"></script>
+
     <script>
        $(function () {
           $('#example1').DataTable({
