@@ -239,7 +239,7 @@
                       <table class="table table-bordered">
                         <tbody>
                           <tr>
-                            <th class="text-center" width="30%"><font size="3">หน่วยรถ</font></th>
+                            <th class="text-center" width="30%"><font size="4">หน่วยรถ</font></th>
                             <th class="text-center" width="70%"> 
                               <select name="id_member"  class="form-control" >
                                 <option value="">-- เลือกหน่วยรถ --</option>
@@ -259,9 +259,9 @@
                       <table class="table table-bordered">
                         <tbody>
                           <tr>
-                            <th class="text-center" width="30%"><font size="3">จำนวนเงิน</font></th>
+                            <th class="text-center" width="30%"><font size="4">จำนวนเงิน</font></th>
                             <th class="text-center" width="70%"> 
-                              <input type="number" name="money" class="form-control text-center">
+                              <input type="number" name="money" value="5000" class="form-control text-center">
                               <input type="hidden" name="money_befor" value="<?php echo $reserve_money; ?>">
                             </th>
                           </tr>
@@ -271,7 +271,7 @@
                       <table class="table table-bordered">
                         <tbody>
                           <tr>
-                            <th class="text-center" width="30%"><font size="3">วันที่</font></th>
+                            <th class="text-center" width="30%"><font size="4">วันที่</font></th>
                             <th class="text-center" width="70%"> 
                               <input type="date" name="date" id="datePicker" class="form-control text-center">
                             </th>

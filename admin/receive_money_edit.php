@@ -256,6 +256,13 @@
                         </div>
 
                         <div class="form-group">
+                          <label class="col-sm-4 control-label">วันขาย </label>
+                          <div class="col-sm-8">
+                            <input type="text" name="date_buy" class="form-control text-center" value="<?php echo $objr_receive['date_buy']; ?>">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
                           <label class="col-sm-4 control-label">วันรับ </label>
                           <div class="col-sm-8">
                             <input type="date" name="date" class="form-control text-center" value="<?php echo $objr_receive['date']; ?>">

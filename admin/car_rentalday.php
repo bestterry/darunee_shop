@@ -146,10 +146,11 @@
                               <table id="example1" class="table">
                                 <thead>
                                   <tr>
-                                    <th class="text-center" width="20%">หน่วยรถ</th>
-                                    <th class="text-center" width="20%">ปฏิบัติงาน</th>
-                                    <th class="text-center" width="20%">ค่าเช่ารถ</th>
-                                    <th class="text-center" width="35%">หมายเหตุ</th>
+                                    <th class="text-center" width="13%">หน่วยรถ</th>
+                                    <th class="text-center" width="13%">ปฏิบัติงาน</th>
+                                    <th class="text-center" width="13%">รถ</th>
+                                    <th class="text-center" width="13%">ค่าเช่ารถ</th>
+                                    <th class="text-center" width="43%">หมายเหตุ</th>
                                     <th class="text-center" width="5%">แก้ไข</th>
                                   </tr>
                                 </thead>
@@ -168,8 +169,13 @@
                                         $objq_carrental = mysqli_query($conn,$sql_carrental);
                                         if ($objq_carrental->num_rows > 0 ) {
                                         $objr_carental = mysqli_fetch_array($objq_carrental);
+                                        $member_car = $objr_carental['member_car'];
+                                        $sql_member = "SELECT name FROM member WHERE id_member = $member_car";
+                                        $objq_car = mysqli_query($conn,$sql_member);
+                                        $objr_member = mysqli_fetch_array($objq_car);
                                       ?>
                                       <td class="text-center"><?php echo $objr_carental['name_practice'];?></td>
+                                      <td class="text-center"><?php echo $objr_member['name'];?></td>
                                       <td class="text-center"><?php echo $objr_carental['money'];?></td>
                                       <td class="text-center"><?php echo $objr_carental['note'];?></td>
                                       <td class="text-center">
@@ -193,6 +199,9 @@
                               </table>
                             </div>
                           </div>
+                        </div>
+                        <div class="box-footer text-right">
+                          <a href="../pdf_file/car_rental.php?date=<?php echo $date; ?>" class="btn btn-success">PDF</a>  
                         </div>
                       </div>
 

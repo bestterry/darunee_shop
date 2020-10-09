@@ -67,12 +67,10 @@
       ?>
     </header>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Main content -->
       <section class="content">
         <div class="row">
-          <!-- form start -->
+
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
@@ -231,12 +229,9 @@
             <!-- /.nav-tabs-custom -->
           </div>
 
-
         </div>
       </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 
     <?php require("../menu/footer.html"); ?>
   </div>

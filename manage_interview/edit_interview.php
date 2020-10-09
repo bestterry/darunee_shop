@@ -1,6 +1,13 @@
 <?php
   include("menu/db_connect.php");
   $mysqli = connect();
+  $id_interview = $_GET['id_interview'];
+  $interview = "SELECT * FROM interview 
+                INNER JOIN tbl_amphures ON tbl_amphures.amphur_id = interview.amphures_id
+                INNER JOIN tbl_provinces ON tbl_provinces.province_id = interview.provinces_id
+                WHERE interview.id_interview = $id_interview";
+  $objq_interview = mysqli_query($mysqli,$interview);
+  $objr_interview = mysqli_fetch_array($objq_interview);
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,8 +33,8 @@
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
                   <a href="interview.php"> ค้นหา </a>
-                  <a href="data_interview.php"> สัมภาษณ์ทั้งหมด </a>
-                  <a class="active" href="add_interview.php"> เพิ่มสัมภาษณ์ </a>
+                  <a class="active" href="data_interview.php"> สัมภาษณ์ทั้งหมด </a>
+                  <a href="add_interview.php"> เพิ่มสัมภาษณ์ </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -43,12 +50,12 @@
                   <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2">
                   </div>
                   <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 text-center">
-                    <font size="5"><B> เพิ่ม สัมภาษณ์</B></font>
+                    <font size="5"><B> แก้ไข สัมภาษณ์</B></font>
                   </div>
                   <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
                 </div>
               </div>
-              <form action="algorithm/add_interview.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
+              <form action="algorithm/edit_interview.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
                 <div class="box-body no-padding">
                   <div class="mailbox-read-message">
                     <div class="row">
@@ -59,34 +66,44 @@
                           <div class="form-group">
                             <label class="col-sm-4 control-label">ชื่อไฟล์ </label>
                             <div class="col-sm-8">
-                              <input type="text" name="name_file" class="form-control" placeholder="ชื่อไฟล์">
+                              <input type="text" name="name_file" class="form-control" value="<?php echo $objr_interview['name_file']; ?>">
+                              <input type="hidden" name="id_interview" class="form-control" value="<?php echo $id_interview; ?>">
+                              <input type="hidden" name="id" class="form-control" value="<?php echo $objr_interview['id']; ?>">
                             </div>
                           </div>
 
                           <div class="form-group">
                             <label class="col-sm-4 control-label">ชื่อ </label>
                             <div class="col-sm-8">
-                              <input type="text" name="name" class="form-control" placeholder="ชื่อลูกค้า">
+                              <input type="text" name="name" class="form-control" placeholder="ชื่อลูกค้า" value="<?php echo $objr_interview['name']; ?>">
                             </div>
                           </div>
                         </div>
 
                         <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                           <div class="form-group">
-                            <label class="col-sm-4 control-label">จังหวัด </label>
-                            <div class="col-sm-8">
-                              <select name="province_name" data-where="2" class="form-control ajax_address select2" >
-                                <option value="">-- เลือกจังหวัด --</option>
+                            <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">จังหวัด </label>
+                            <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                              <select name="province_id" data-where="2" class="form-control ajax_address select2" >
+                                <option value="<?php echo $objr_interview['province_id'];?>"></option>
                               </select>
+                            </div>
+                            <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                              <input type="text" class="form-control" value="<?php echo $objr_interview['province_name']; ?>" disabled>
+                              <input type="hidden" name="province_id1" class="form-control" value="<?php echo $objr_interview['province_id']; ?>">
                             </div>
                           </div>
 
                           <div class="form-group">
-                            <label  class="col-sm-4 control-label">อำเภอ </label>
-                            <div class="col-sm-8">
-                              <select name="amphur_name" data-where="3" class="ajax_address form-control select2" >
+                            <label  class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">อำเภอ </label>
+                            <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                              <select name="amphur_id" data-where="3" class="ajax_address form-control select2" >
                                 <option value="">-- เลือกอำเภอ --</option>
                               </select>
+                            </div>
+                            <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                              <input type="text" class="form-control" value="<?php echo $objr_interview['amphur_name']; ?>" disabled>
+                              <input type="hidden" name="amphur_id1" class="form-control" value="<?php echo $objr_interview['amphur_id']; ?>">
                             </div>
                           </div>
                         </div>
@@ -95,7 +112,7 @@
                           <div class="form-group">
                             <label class="col-sm-2 control-label">หมายเหตุ </label>
                             <div class="col-sm-10">
-                              <textarea type="text" name="note" class="form-control" value="-"></textarea>
+                              <input type="text" name="note" class="form-control" value="<?php echo $objr_interview['note']; ?>">
                             </div>
                           </div>
                         </div>
@@ -107,14 +124,31 @@
                               <div class="table-responsive">
                                 <table class="table table-bordered" id="product">
                                   <tr>
-                                    <th class="text-center" width="90%"><font color="red" >สินค้า </font></th>
-                                    <th class="text-center" width="10%"><font color="red" >#</font></th>
+                                    <th class="text-center" width="90%"><font color="red"> สินค้า </font></th>
+                                    <th class="text-center" width="10%"><font color="red">#</font></th>
                                   </tr>
                                   <tr>
+                                    <?php 
+                                      $sql_iv_product = "SELECT * FROM interview_product 
+                                                      INNER JOIN product ON interview_product.id_product = product.id_product
+                                                      WHERE interview_product.id = $objr_interview[id]";
+                                      $objq_iv_product = mysqli_query($mysqli,$sql_iv_product);
+                                      while($value_product = $objq_iv_product -> fetch_assoc()){
+                                    ?>
+                                    <tr>
+                                      <td class="text-center"><?php echo $value_product['name_product']; ?></td>
+                                      <td class="text-center">
+                                       <a href="algorithm/delete_product.php?id_iv_product=<?php echo $value_product['id_iv_product']; ?>&&id_interview=<?php echo $id_interview;?>" 
+                                          class="btn btn-danger"><i class="fa fa-minus"></i></a>
+                                      </td>
+                                    </tr>
+                                    <?php 
+                                      }
+                                    ?>
                                     <td class="text-center">
                                       <select name="id_product[]" class="form-control text-center" style="width: 100%;">
                                         <option class="text-center" value="">-- เลือกสินค้า --</option>
-                                      <?php 
+                                        <?php 
                                           $product = "SELECT * FROM product WHERE status_order = 1";
                                           $objq_product = mysqli_query($mysqli,$product);
                                           while($value = $objq_product->fetch_array()){
@@ -144,10 +178,27 @@
                                     <th class="text-center" width="10%"><font color="red" >#</font></th>
                                   </tr>
                                   <tr>
+                                    <?php 
+                                     $sql_plance = "SELECT * FROM interview_plance
+                                                    INNER JOIN plance ON interview_plance.id_plance = plance.id_plance
+                                                    WHERE interview_plance.id = $objr_interview[id]";
+                                      $objq_plance = mysqli_query($mysqli,$sql_plance);
+                                      while($value_plance = $objq_plance -> fetch_assoc()){
+                                    ?>
+                                      <tr>
+                                        <td class="text-center"><?php echo $value_plance['name_plance']; ?></td>
+                                        <td class="text-center">
+                                          <a href="algorithm/delete_plance.php?id_iv_plance=<?php echo $value_plance['id_iv_plance'];?>&&id_interview=<?php echo $id_interview;?>" 
+                                             class="btn btn-danger"><i class="fa fa-minus"></i></a>
+                                        </td>
+                                      </tr>
+                                    <?php 
+                                      }
+                                    ?>
                                     <td class="text-center">
                                       <select name="id_plance[]" class="form-control text-center" style="width: 100%;">
                                         <option class="text-center" value="">-- เลือกใช้ --</option>
-                                      <?php 
+                                        <?php 
                                           $plance = "SELECT * FROM plance";
                                           $objq_plance = mysqli_query($mysqli,$plance);
                                           while($value = $objq_plance->fetch_array()){
@@ -217,7 +268,7 @@
             $.post("menu/getAddress.php", {
               IDTbl: 1
             }, function(data) {
-              $("select[name=province_name]").html(data);
+              $("select[name=province_id]").html(data);
             });
             // สร้างตัวแปร สำหรับเก็บค่าข้อความให้เลือกรายการ เช่น เลือกจังหวัด
             // เราจะเก็บค่านี้ไว้ใช้กรณีมีการรีเซ็ต หรือเปลี่ยนแปลงรายการใหม่

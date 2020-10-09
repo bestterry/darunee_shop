@@ -24,7 +24,7 @@
         $this->SetTextColor(0,0,0); 
         // Title
         $this->SetTextColor(0,0,0);
-        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'ประวัติใช้เงิน : '.$name_member), 0 , 1,'C' );
+        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'รายการโอนจ่าย : '.$name_member), 0 , 1,'C' );
         $this->Ln(3);
         $this->Cell(0,5, iconv( 'UTF-8','cp874' ,DateThai($aday).' ถึง '.DateThai($bday)), 0 , 1,'C' );
         $this->Ln(3);

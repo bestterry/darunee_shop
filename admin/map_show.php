@@ -80,13 +80,7 @@
             <?php 
                 if(isset($objr['name_map'])){
             ?>
-            <img src="../images/map/<?php echo $objr['name_map']; ?>" width="730" height="900">
-            <div>
-              <B align="center"> 
-                <font size="5"> <?php echo $objr['name_map']; ?> </font>
-              </B>
-            </div>
-            
+            <img src="../images/map/<?php echo $objr['name_map']; ?>" width="900" height="1200">
             <?php
                 }else{
             ?>
@@ -104,7 +98,17 @@
           </div>
 
           <div class="box-footer">
-            <a href="map.php" class="btn btn-danger pull-left"> << กลับ </a>
+            <div class="col-12 col-sm-12 col-xl-12 col-md-12">
+              <div class="col-4 col-sm-4 col-xl-4 col-md-4 text-left">
+                <a href="map.php" class="btn btn-danger"> << กลับ </a>
+              </div>
+              <div class="col-4 col-sm-4 col-xl-4 col-md-4 text-center">
+                <B align="center"> 
+                  <font size="5"> <?php echo $objr['name_map']; ?> </font>
+                </B>
+              </div>
+              <div class="col-4 col-sm-4 col-xl-4 col-md-4"></div>
+            </div>
           </div>
         </div>
         

@@ -3,6 +3,7 @@
   require "../session.php";
   require "menu/date.php";
   $strDate = date('d-m-Y');
+  $strDate2 = date('Y-m-d');
 
 ?>
 
@@ -69,7 +70,7 @@
     </script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style>
-    .button2 {
+      .button2 {
         background-color: #b35900;
         color : white;
         } /* Back & continue */
@@ -108,18 +109,12 @@
               <br>
               <div class="box-body no-padding">
                 <div class="mailbox-read-message">
-                  <div class="col-sm-12 text-left">
-                    <font size="3" color="red">
-                    </font>
-                  </div>
-                  <br>
-                  <br>
                   <table class="table">
                     <tr>
                       <th width="20%" class="text-right"><font size="4">ชื่อ &nbsp;&nbsp;:</font></th>
                       <td width="30%">
                         <input type="text" class="form-control" value="<?php echo $username; ?>"  style="background-color: #e6f7ff;" readonly/>
-                        <input type="hidden" class="form-control" value="<?php echo $id_member; ?>" name="id_member">
+                        <input type="hidden" class="form-control" value="<?php echo $id_member; ?>" id="id_member1" name="id_member1">
                       </td>
                       <th width="20%" class="text-right" ><font size="4">วันที่ &nbsp;&nbsp;:</font></th>
                       <td width="30%"><input type="date" id="datePicker" name="date" class="form-control text-center"></td>
@@ -127,7 +122,7 @@
                     <tr>
                       <th width="20%" class="text-right"><font size="4" valign="middle">ปฏิบัติงาน &nbsp;&nbsp;:</font></th>
                       <td width="30%" >
-                        <select name="id_practice" id="id_practice" class="form-control" style="width: 100%;" onchange="sSelect(this.value)">
+                        <select name="id_practice" id="id_practice" class="form-control" style="width: 100%;">
                             <option value="">-- รายการ --</option>
                             <?php 
                               $rc_practice = "SELECT * FROM rc_practice";
@@ -140,20 +135,47 @@
                             ?>
                         </select>
                       </td>
-                      <th width="20%" class="text-right"><font size="4">ค่าเช่ารถ &nbsp;&nbsp;:</font></th>
+                      <th width="20%" class="text-right"><font size="4">รถ &nbsp;&nbsp;:</font></th>
                       <td width="30%">
-                        <input type="number" name="money" id="car_rental" class="form-control text-center">
+                        <select name="member_car" id="id_member2" onchange="sSelect(this.value)" class="form-control" style="width: 100%;">
+                          <option value="54">-- กรุณาเลือกหน่วยรถ --</option>
+                          <?php 
+                           $sql_car = "SELECT id_member,name FROM member WHERE status_car = 1 OR id_member = 53";
+                           $objq_car = mysqli_query($conn,$sql_car);
+                              while ($value = $objq_car -> fetch_assoc() ) {
+                          ?>
+                          <option value="<?php echo $value['id_member']; ?>"><?php echo $value['name']; ?></option>
+                          <?php
+                            }
+                          ?>
+                        </select>
                       </td>
                     </tr>
                     <tr>
+                      <th width="20%" class="text-right"><font size="4">ค่าเช่ารถ &nbsp;&nbsp;:</font></th>
+                      <td width="30%">
+                        <input type="number" name="money" id="car_rental" value="0" class="form-control text-center">
+                      </td>
                       <th width="20%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
-                      <td colspan="3" ><input type="text" name="note" value="-" class="form-control"></td>
+                      <td colspan="30%" ><input type="text" name="note" value="-" class="form-control"></td>
                     </tr>
                   </table>
                 </div>
               </div>
               <div class="box-footer text-center">
-                <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> บันทึกข้อมูล </button>
+                <?php 
+                  $sql_checkday = "SELECT id_carrental FROM car_rental WHERE id_member = $id_member AND date = '$strDate2'";
+                  $objq_checkday = mysqli_query($conn,$sql_checkday);
+                  if ($objq_checkday->num_rows > 0) {
+                ?>
+
+                <?php
+                  }else{
+                ?>
+                <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> บันทึก </button>
+                <?php
+                  }
+                ?>
               </div>
             </form>
           </div>
@@ -169,25 +191,31 @@
                 <table class="table" id="example2">
                   <thead>
                     <tr>
-                      <th class="text-center" width="25%">วันที่</th>
-                      <th class="text-center" width="25%">ปฏิบัติงาน</th>
-                      <th class="text-center" width="25%">ค่าเช่ารถ</th>
-                      <th class="text-center" width="25%">หมายเหตุ</th>
+                      <th class="text-center" width="20%">วันที่</th>
+                      <th class="text-center" width="15%">ปฏิบัติงาน</th>
+                      <th class="text-center" width="15%">รถ</th>
+                      <th class="text-center" width="15%">ค่าเช่ารถ</th>
+                      <th class="text-center" width="35%">หมายเหตุ</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php 
                       $sql_rs_history = "SELECT * FROM car_rental 
-                                          INNER JOIN rc_practice ON car_rental.id_practice = rc_practice.id_practice
-                                          WHERE car_rental.id_member = $id_member
-                                          GROUP BY car_rental.id_carrental DESC
-                                          LIMIT 1000";
+                                         INNER JOIN rc_practice ON car_rental.id_practice = rc_practice.id_practice
+                                         WHERE car_rental.id_member = $id_member
+                                         GROUP BY car_rental.id_carrental DESC
+                                         LIMIT 1000";
                       $objq_rs_history = mysqli_query($conn,$sql_rs_history);
                       while($value = $objq_rs_history->fetch_assoc()){ 
+                        $member_car = $value['member_car'];
+                        $sql_member = "SELECT name FROM member WHERE id_member = $member_car";
+                        $objq_member = mysqli_query($conn,$sql_member);
+                        $objr_member = mysqli_fetch_array($objq_member);
                     ?>
                       <tr>
                         <td class="text-center"><?php echo Datethai($value['date']); ?></td>
                         <td class="text-center"><?php echo $value['name_practice']; ?></td>
+                        <td class="text-center"><?php echo $objr_member['name']; ?></td>
                         <td class="text-center"><?php echo $value['money']; ?></td>
                         <td class="text-center"><?php echo $value['note']; ?></td>
                       </tr>
@@ -214,39 +242,39 @@
             <div class="modal-header text-center">
                 <font size="5"><B> ข้อมูลค่าเช่ารถ </B></font>
             </div>
-            <div class="modal-body col-md-12 table-responsive mailbox-messages">
-              <div class="col-12">
+            <div class="modal-body table-responsive mailbox-messages">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="table-responsive mailbox-messages">
-                  <div class="col-12">
-                    <div class="col-md-6 text-center">
-                      <div class="col-sm-2"></div>
-                      <div class="col-sm-8">
-                          <B><font size="5">ตั้งแต่</font></B>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"> 
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+                      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                        <B><font size="5">ตั้งแต่</font></B>
                       </div>
-                      <div class="col-sm-2"></div>
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
                     </div>
-                    <div class="col-md-6 text-center"> 
-                      <div class="col-sm-2"></div>
-                      <div class="col-sm-8">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"> 
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+                      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                         <B><font size="5">ถึง</font></B>
                       </div>
-                      <div class="col-sm-2"></div>
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
                     </div>
                   </div>
-                  <div class="col-12">
-                    <div class="col-md-6 text-center">
-                      <div class="col-sm-2"></div>
-                      <div class="col-sm-8">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+                      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                         <input class="form-control text-center" type="date" name="aday">
                       </div>
-                      <div class="col-sm-2"></div>
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
                     </div>
-                    <div class="col-md-6 text-center"> 
-                      <div class="col-sm-2"></div>
-                      <div class="col-sm-8">
+                    <div class="ol-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"> 
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+                      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                         <input class="form-control text-center" type="date" name="bday">
                       </div>
-                      <div class="col-sm-2"></div>
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
                     </div>
                   </div>
                 </div>
@@ -298,22 +326,22 @@
       });
       $(document).ready( function() {
           var now = new Date();
-      
           var day = ("0" + now.getDate()).slice(-2);
           var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
           var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-
-
         $('#datePicker').val(today);
       });
 
-      function sSelect(value){  $.ajax({
+      function sSelect(value){  
+        var id_member1 = document.getElementById("id_member1").value;
+        var id_practice = $('#id_practice').val();
+        $.ajax({
           type:"POST",
           url:"algorithm/select_carrental.php",
-          data:{value:value},
+          data:{value:value,id_member1:id_member1,id_practice:id_practice},
           success:function(data){
-              $("#car_rental").val(data);
+            $("#car_rental").val(data);
+            console.log(data);
           }
         });
         return false;

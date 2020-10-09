@@ -149,9 +149,9 @@
                         <table id="example1" class="table">
                           <thead>
                             <tr>
-                              <th class="text-center" width="31%">วันที่</th>
-                              <th class="text-center" width="30%">จำนวนเงิน</th>
-                              <th class="text-center" width="33%">หมายเหตุ</th>
+                              <th class="text-center" width="15%">วันที่</th>
+                              <th class="text-center" width="15%">จำนวนเงิน</th>
+                              <th class="text-center" width="65%">หมายเหตุ</th>
                               <th class="text-center" width="5%">ลบ</th>
                             </tr>
                           </thead>

@@ -78,7 +78,7 @@
                           <div class="form-group">
                             <label class="col-sm-4 control-label"><font size="4">ชาย / หญิง</font></label>
                             <div class="col-sm-8">
-                              <select name="id_sexartist" onchange="sSelect(this.value)" id="id_ageartist" class="form-control" style="width: 50%;">
+                              <select name="id_sexartist" onchange="sSelect(this.value)" class="form-control" style="width: 50%;">
                                 <option id="test" value="">-- เลือกเพศนักร้อง --</option>
                                 <?php 
                                   while($value = $objq_sexartist->fetch_assoc()){

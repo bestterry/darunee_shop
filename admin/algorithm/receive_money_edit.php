@@ -10,6 +10,7 @@
     $customer = $_POST['customer'];
     $note = $_POST['note'];
     $date = $_POST['date'];
+    $date_buy = $_POST['date_buy'];
 
     if (empty($_POST['status_office'])) {
       echo $status_office = "N";
@@ -24,7 +25,7 @@
     }
 
       $update_money = "UPDATE rc_receive_money SET id_practice = '$id_practice',  money = '$money', id_category = '$id_category', 
-                             customer = '$customer', note = '$note', date = '$date', status_office = '$status_office', status_boss = '$status_boss'
+                             customer = '$customer', note = '$note', date = '$date', date_buy = '$date_buy',status_office = '$status_office', status_boss = '$status_boss'
                        WHERE id_receive_money = $id_receive_money";
       mysqli_query($conn,$update_money);
 

@@ -27,4 +27,6 @@
     mysqli_query($conn,$add_interviewpl);
   }
 
+  header('location:../data_interview.php');
+
 ?>

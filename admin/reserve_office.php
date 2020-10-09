@@ -165,7 +165,7 @@
                               <td class="text-center"><?php echo $value['note']; ?></td>
                               <td class="text-center">
                                 <?php 
-                                  if ($value['status']==1||$value['status']==5) {
+                                  if ($value['status']==1||$value['status']==5||$id_member!=30) {
                                     
                                   }else{
                                 ?>
@@ -202,7 +202,7 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> โอนจ่ายรวมรายวัน<font color="red"> </font></B>
+                          <B align="center"> โอนจ่ายรายวัน<font color="red"> </font></B>
                         </font>
                       </div>
                     </div>

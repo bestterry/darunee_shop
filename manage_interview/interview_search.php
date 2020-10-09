@@ -1,10 +1,9 @@
 <?php
   include("menu/db_connect.php");
   $mysqli = connect();
-  $interview = "SELECT * FROM interview 
-                INNER JOIN tbl_amphures ON tbl_amphures.amphur_id = interview.amphures_id
-                INNER JOIN tbl_provinces ON tbl_provinces.province_id = interview.provinces_id";
-  $objq_interview = mysqli_query($mysqli,$interview);
+
+  require "menu/interview_search.php";
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,8 +28,8 @@
           <div class="row">
             <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
               <div class="topnav">
-                <a href="interview.php"> ค้นหา </a>
-                <a class="active" href="data_interview.php"> สัมภาษณ์ทั้งหมด </a>
+                <a class="active" href="interview.php"> ค้นหา </a>
+                <a href="data_interview.php"> สัมภาษณ์ทั้งหมด </a>
                 <a href="add_interview.php"> เพิ่มสัมภาษณ์ </a>
               </div>
             </div>
@@ -45,9 +44,10 @@
             <div class="box-header with-border">
               <div class="col-12">
                 <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                  <a class="btn button2 pull-left" href="interview.php"> << กลับ </a>
                 </div>
                 <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 text-center">
-                  <font size="5"><B> สัมภาษณ์ทั้งหมด </B></font>
+                  <font size="5"><B> ข้อมูลสัมภาษณ์ </B></font>
                 </div>
                 <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
               </div>
@@ -64,8 +64,7 @@
                           <th class="text-center" width="15%">พื้นที่</th>
                           <th class="text-center" width="15%">สินค้า</th>
                           <th class="text-center" width="15%">ใช้กับ</th>
-                          <th class="text-center" width="30%">หมายเหต</th>
-                          <th class="text-center" width="5%">แก้</th>
+                          <th class="text-center" width="35%">หมายเหต</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -73,37 +72,34 @@
                           while($value = $objq_interview->fetch_assoc()){
                             $id = $value['id'];
                         ?>
-                          <tr>
-                            <td class="text-center"><?php echo $value['name_file'];?></td>
-                            <td class="text-center"><?php echo $value['name'];?></td>
-                            <td class="text-center"><?php echo 'อ.'.$value['amphur_name'].' จ.'.$value['province_name']; ?></td>
-                            <td class="text-center">
-                            <?php 
-                              $sql_product = "SELECT * FROM interview_product 
-                                              INNER JOIN product ON interview_product.id_product = product.id_product
-                                              WHERE interview_product.id = $id";
-                              $objq_product = mysqli_query($mysqli,$sql_product);
-                              while($value_product = $objq_product -> fetch_assoc()){
-                                echo $value_product['name_product'].'<br>';
-                              }
-                            ?>
-                            </td>
-                            <td class="text-center">
-                            <?php 
-                              $sql_plance = "SELECT * FROM interview_plance
-                                              INNER JOIN plance ON interview_plance.id_plance = plance.id_plance
-                                              WHERE interview_plance.id = $id";
-                              $objq_plance = mysqli_query($mysqli,$sql_plance);
-                              while($value_plance = $objq_plance -> fetch_assoc()){
-                                echo $value_plance['name_plance'].'<br>';
-                              }
-                            ?>
-                            </td>
-                            <td class="text-center"><?php echo $value['note'];?></td>
-                            <td class="text-center">
-                              <a href="edit_interview.php?id_interview=<?php echo $value['id_interview']; ?>"> >> </a>
-                            </td>
-                          </tr>
+                        <tr>
+                          <td class="text-center"><?php echo $value['name_file'];?></td>
+                          <td class="text-center"><?php echo $value['name'];?></td>
+                          <td class="text-center"><?php echo 'อ.'.$value['amphur_name'].' จ.'.$value['province_name']; ?></td>
+                          <td class="text-center">
+                           <?php 
+                            $sql_product = "SELECT * FROM interview_product 
+                                            INNER JOIN product ON interview_product.id_product = product.id_product
+                                            WHERE interview_product.id = $id";
+                            $objq_product = mysqli_query($mysqli,$sql_product);
+                            while($value_product = $objq_product -> fetch_assoc()){
+                              echo $value_product['name_product'].'<br>';
+                            }
+                           ?>
+                          </td>
+                          <td class="text-center">
+                           <?php 
+                            $sql_plance = "SELECT * FROM interview_plance
+                                            INNER JOIN plance ON interview_plance.id_plance = plance.id_plance
+                                            WHERE interview_plance.id = $id";
+                            $objq_plance = mysqli_query($mysqli,$sql_plance);
+                            while($value_plance = $objq_plance -> fetch_assoc()){
+                              echo $value_plance['name_plance'].'<br>';
+                            }
+                           ?>
+                          </td>
+                          <td class="text-center"><?php echo $value['note'];?></td>
+                        </tr>
                         <?php }?>
                       </tbody>
                     </table>

@@ -5,7 +5,7 @@
 
   $date = date("Y-m-d");
 
-  $sql_member = "SELECT id_member,name FROM member WHERE status_car = 1";
+  $sql_member = "SELECT id_member,name FROM member WHERE status_reserve = 1";
   $objq_member = mysqli_query($conn,$sql_member);
 ?>
 

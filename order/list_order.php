@@ -95,14 +95,10 @@
         <div class="row">
           <div class="col-md-12">
             <div class="box box-primary">
-              <!-- /.box-header -->
               <div class="box-header with-border">
                 <div class="col-sm-12">
-                 
-                    <a type="button" href="../admin/admin.php" class="btn button2 pull-left"><< เมนูหลัก</a>
-                  
-                    <a type="button" href="add_order.php" class="btn btn-success pull-right"> <i class="fa fa-plus"></i> ใบสั่งใหม่</a>
-                
+                  <a type="button" href="../admin/admin.php" class="btn button2 pull-left"><< เมนูหลัก</a>
+                  <a type="button" href="add_order.php" class="btn btn-success pull-right"> <i class="fa fa-plus"></i> ใบสั่งใหม่</a>
                 </div>
 
                 <div class="col-sm-12 text-center">
@@ -124,11 +120,10 @@
                 ?>
               </div>
 
-              <div class="box">
-                <div class="box-header">
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
+              <div class="box-body">
+                <?php 
+                  if($status_user == 'boss'){
+                ?>
                   <table id="example2" class="table table-bordered">
                     <thead>
                       <tr>
@@ -169,11 +164,55 @@
                     ?>
                     </tbody>
                   </table>
-                  </div>
-                </div>
-                <div class="box-footer" align="center"> </div>
+                <?php 
+                  }else{
+                ?>
+                  <table id="example2" class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th class="text-center" width="5%"><font color="red">ID</font></th>
+                        <th class="text-center" width="10%"><font color="red">วันสั่ง</font></th>
+                        <th class="text-center" width="10%"><font color="red">ใบสั่ง</font></th>
+                        <th class="text-center" width="10%"><font color="red">สินค้า</font></th>
+                        <th class="text-center" width="5%"><font color="red">U</font></th>
+                        <th class="text-center" width="5%"><font color="red">N</font></th>
+                        <th class="text-center" width="10%"><font color="red">เงินซื้อ</font></th>
+                        <th class="text-center" width="10%"><font color="red">เข้า รง.</font></th>
+                        <th class="text-center" width="10%"><font color="red">มาถึง</font></th>
+                        <th class="text-center" width="10%"><font color="red">อำเภอ</font></th>
+                        <th class="text-center" width="5%"><font color="red">จ่าย</font></th>
+                        <th class="text-center" width="5%"><font color="red">สั่ง</font></th>
+                        <th class="text-center" width="5%"><font color="red">ข้อมูล</font></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php 
+                        while($value = $objq_addorder->fetch_assoc()){
+                    ?>
+                      <tr>
+                        <td class="text-center"><?php echo $value['id_order_list'];?></td>
+                        <td class="text-center" ><?php echo DateThai($value['date_order']);?></td>
+                        <td class="text-center"><?php echo $value['list_order'];?></td>
+                        <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit'];?></td>
+                        <td class="text-center" ><?php echo $value['price']; ?></td>
+                        <td class="text-center" ><?php echo $value['num_product']; ?></td>
+                        <td class="text-center" ><?php echo $value['money']; ?></td>
+                        <td class="text-center" ><?php echo DateThai($value['date_getorder']) ;?></td>
+                        <td class="text-center" ><?php echo DateThai($value['date_receive']) ;?></td>
+                        <td class="text-center"><?php echo $value['amphur_name'];?></td>
+                        <td class="text-center"><?php echo $value['invoice'];?></td>
+                        <td class="text-center"><?php echo $value['name_author'];?></td>
+                        <td class="text-center"><a href="data_order.php?id_order_list=<?php echo $value['id_order_list']; ?>">>></a></td>
+                      </tr>
+                    <?php 
+                      }
+                    ?>
+                    </tbody>
+                  </table>
+                <?php 
+                  }
+                ?>
               </div>
-            </form>
           </div>
         </div>
       </section>

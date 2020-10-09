@@ -17,6 +17,7 @@
   $note = $objr['note'];
   $date = $objr['date'];
   $id_practice = $objr['id_practice'];
+  $member_car = $objr['member_car'];
 ?>
 
 <!DOCTYPE html>
@@ -105,10 +106,9 @@
                 <div class="topnav">
                   <a href="reserve_office.php"> โอนจ่าย </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_datacar.php"></i> หน่วยรถ </a>
                   <a href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
                   <a class="active" href="car_rental.php"> ค่าเช่ารถ </a>
-                  <a href="reserve_money.php"> รับสำรองจ่าย </a>
+                  <a href="reserve_money.php"> รับเงิน </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -152,6 +152,23 @@
                           ?>
                           <option value="<?php echo $value['id_practice']; ?>" <?php if($id_practice==$value['id_practice']){ echo "selected";}else{}?>>
                           <?php echo $value['name_practice']; ?></option>
+                          <?php
+                            }
+                          ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="rc_practice" class="col-sm-2 control-label">รถ</label>
+                        <div class="col-sm-10">
+                          <select name="member_car" class="form-control">
+                          <?php 
+                            $sql_member = "SELECT id_member,name FROM member";
+                            $objq_member = mysqli_query($conn,$sql_member);
+                            while($value = $objq_member->fetch_assoc()){ 
+                          ?>
+                          <option value="<?php echo $value['id_member']; ?>" <?php if($member_car==$value['id_member']){ echo "selected";}else{}?>>
+                          <?php echo $value['name']; ?></option>
                           <?php
                             }
                           ?>

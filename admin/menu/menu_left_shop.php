@@ -116,20 +116,20 @@
         <li><a href="reserve_office.php"><i class="fa fa-money"></i> สำรองจ่าย </a></li>
         <!--/สำรองจ่าย -->
 
-        <!-- นอกเขต. -->
-        <li><a href="store.php" ><i class="fa fa-user-circle-o"></i> ระเบียนร้านค้า </a></li>
-        <!-- /นอกเขต. -->
-
         <!-- ค่าส่งปุ๋ย -->
         <li><a href="sent_fertilizer.php" ><i class="fa fa-money"></i>ค่าส่งปุ๋ย </a></li>
         <!-- /ค่าส่งปุ๋ย -->
+
+        <!-- นอกเขต. -->
+        <li><a href="store.php" ><i class="fa fa-user-circle-o"></i> ระเบียนร้านค้า </a></li>
+        <!-- /นอกเขต. -->
         
         <!-- แผนที่ -->
         <li><a href="map.php" ><i class="fa fa-map"></i> แผนที่ </a></li>
         <!-- /แผนที่ -->
 
         <!-- จัดการเพลงหลัก -->
-        <li><a href="../manage_song/artist.php" ><i class="fa fa-music"></i> จัดการเพลงหลัก </a></li>
+        <li><a href="../manage_song/artist.php" ><i class="fa fa-music"></i> จัดการเพลง </a></li>
         <!--/จัดการเพลงหลัก -->
 
         <!-- จัดการเพลง -->
@@ -143,6 +143,10 @@
         <!-- จัดการเพลง -->
         <li><a href="../manage_interview/interview.php"><i class="fa fa-car"></i> จัดการสัมภาษณ์ </a></li>
         <!--/จัดการเพลง -->
+
+        <!-- แนะนำสินค้า -->
+        <li><a href="present_product.php"><i class="fa fa-columns"></i> แนะนำสินค้า </a></li>
+        <!--/แนะนำสินค้า -->
         
         <!--จัดการข้อมูลสินค้า-พนักงาน -->
         <li><a href="add_data.php" ><i class="fa fa-cog"></i> จัดการข้อมูล </a></li>

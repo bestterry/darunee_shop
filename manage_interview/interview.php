@@ -50,7 +50,7 @@
                   </font>
                 </div>
               </div>
-              <form action="song_list.php" class="form-horizontal" method="get" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
+              <form action="interview_search.php" class="form-horizontal" method="post" autocomplete="off">
                 <div class="box-body">
                   <div class="mailbox-read-message">
                     <div class="col-12">
@@ -60,7 +60,7 @@
                           <div class="form-group">
                             <label class="col-sm-4 control-label"><font size="4">จังหวัด</font></label>
                             <div class="col-sm-8">
-                              <select name="province_name" data-where="2" class="form-control ajax_address select2" style="width: 50%;">
+                              <select name="province_name" data-where="2" value="" class="form-control ajax_address select2" style="width: 50%;">
                                 <option value="">-- เลือกจังหวัด --</option>
                               </select>
                             </div>
@@ -109,7 +109,7 @@
                   </div>
                 </div>
                 <div align="center" class="box-footer">
-                  <button type="submit" class="btn btn-success">ตกลง</button>
+                  <button type="submit" class="btn btn-success">ค้นหา</button>
                 </div>
               </form>
             </div>

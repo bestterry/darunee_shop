@@ -9,9 +9,7 @@
                 WHERE sent_ferti.id_member = $id_member ORDER BY sent_ferti.id_sent_ferti DESC";
   $objq_ferti = mysqli_query($conn,$sql_ferti);
 
-  $sql_car = "SELECT id_member,name FROM member WHERE 
-              status='employee' AND NOT id_member = 3 AND NOT id_member = 8 AND NOT id_member = 19
-              AND NOT id_member = 32 AND NOT id_member = 28";
+  $sql_car = "SELECT id_member,name FROM member WHERE status_car = 1 OR id_member = 53";
   $objq_car = mysqli_query($conn,$sql_car);
 ?>
 
@@ -236,7 +234,7 @@
               </div>
 
               <div class="box-footer with-border">
-                <table id="example1" class="table table-striped">
+                <table id="example2" class="table table-striped">
                   <thead>
                   <tr>
                     <th class="text-center" width="10%"> <font color="red">ชื่อ</font> </th>
@@ -320,11 +318,11 @@
         $('#example1').DataTable()
         $('#example2').DataTable({
           'paging': true,
-          'lengthChange': false,
-          'searching': false,
-          'ordering': true,
+          'lengthChange': true,
+          'searching': true,
+          'order': [],
           'info': true,
-          'autoWidth': false
+          'autoWidth': true
         })
       })
       $(function() {

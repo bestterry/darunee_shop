@@ -13,7 +13,6 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>โปรแกรมขายหน้าร้าน</title>
-  <!-- Tell the browser to be responsive to screen width -->
   <!-- Bootstrap 3.3.7 -->
   <link rel="icon" type="image/png" href="../images/favicon.ico" />
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -25,8 +24,7 @@
   <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-     folder instead of downloading all of them to reduce the load. -->
+
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="../bower_components/morris.js/morris.css">
@@ -65,7 +63,8 @@
         }
         document.form1.submit();
       }
-      </script>
+    </script>
+
   </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -113,8 +112,8 @@
                               $id_member = $_POST['id_member'];
                               if($id_member == 19 ){
                             ?>
-                            <th class="text-center" width="30%">เลือก </th>
-                            <th class="text-center" width="60%">สินค้า </th>
+                            <th class="text-center" width="50%"><font color="red">เลือก</font> </th>
+                            <th class="text-center" width="50%"><font color="red">สินค้า_หน่วย</font> </th>
                           </tr>
                             <?php
                               $list_product = "SELECT * FROM product";
@@ -125,7 +124,7 @@
                             <td class="text-center">
                               <input type="checkbox" name="id_product[]" value="<?php echo $list['id_product']; ?>">
                             </td>
-                            <td>
+                            <td class="text-center">
                               <?php echo $list['name_product'].' ('.$list['unit'].')'; ?>
                             </td>
                           </tr>

@@ -84,21 +84,16 @@
         <div class="box-body no-padding">
           <div class="mailbox-read-message">
             <br>
-            <div class="col-sm-12 text-left">
-              <font size="3" color="red">
-              </font>
-            </div>
-            <br>
-            <br>
             <div class="col-12">
               <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                 <table class="table" id="example2">
                   <thead>
                     <tr>
-                      <th class="text-center" width="25%">วันที่</th>
-                      <th class="text-center" width="25%">ปฏิบัติงาน</th>
-                      <th class="text-center" width="25%">จำนวนเงิน</th>
-                      <th class="text-center" width="25%">หมายเหตุ</th>
+                      <th class="text-center" width="20%">วันที่</th>
+                      <th class="text-center" width="15%">ปฏิบัติงาน</th>
+                      <th class="text-center" width="15%">รถ</th>
+                      <th class="text-center" width="15%">ค่าเช่ารถ</th>
+                      <th class="text-center" width="35%">หมายเหตุ</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -111,10 +106,15 @@
                       $objq_rs_history = mysqli_query($conn,$sql_rs_history);
                       while($value = $objq_rs_history->fetch_assoc()){ 
                         $money = $value['money'];
+                        $member_car = $value['member_car'];
+                        $sql_member = "SELECT name FROM member WHERE id_member = $member_car";
+                        $objq_member = mysqli_query($conn,$sql_member);
+                        $objr_member = mysqli_fetch_array($objq_member);
                     ?>
                       <tr>
                         <td class="text-center"><?php echo Datethai($value['date']); ?></td>
                         <td class="text-center"><?php echo $value['name_practice']; ?></td>
+                        <td class="text-center"><?php echo $objr_member['name']; ?></td>
                         <td class="text-center"><?php echo $money; ?></td>
                         <td class="text-center"><?php echo $value['note']; ?></td>
                       </tr>
@@ -123,6 +123,7 @@
                       }
                     ?>
                       <tr>
+                        <th class="text-center"></th>
                         <th class="text-center"></th>
                         <th class="text-center">รวมเงิน</th>
                         <th class="text-center"><?php echo $total_money; ?></th>
