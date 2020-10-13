@@ -96,9 +96,9 @@
             <div class="row">
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
-                  <a href="reserve_office.php"> โอนจ่าย </a>
+                  <a href="reserve_office.php"> โอนจ่ายสนง </a>
                   <a class="active" href="reserve_datacar.php"></i> หน่วยรถ </a>
-                  <a href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
                   <a href="car_rental.php"> ค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>

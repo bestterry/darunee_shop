@@ -1,11 +1,17 @@
 <?php 
   require "../../config_database/config.php";
-  print_r($_POST);
   $id_interview = $_POST['id_interview'];
   $id = $_POST['id'];
   $name_file = $_POST['name_file'];
   $name = $_POST['name'];
   $note = $_POST['note'];
+  echo $grade = $_POST['grade'];
+
+    if(isset($_POST['status'])){
+        $status = 'Y';
+    }else {
+        $status = 'N';
+    }
 
     if (empty($_POST['province_id'])) {
       $provinces_id = $_POST['province_id1'];
@@ -15,8 +21,9 @@
       $amphures_id = $_POST['amphur_id'];
     }
 
-    $sql_interview = "UPDATE interview SET name_file = '$name_file', name = '$name', note = '$note', provinces_id = $provinces_id, amphures_id = $amphures_id
-            WHERE id_interview = $id_interview";
+    $sql_interview = "UPDATE interview SET name_file = '$name_file', name = '$name', note = '$note', provinces_id = $provinces_id, amphures_id = $amphures_id, 
+                      grade = '$grade', status = '$status'
+                      WHERE id_interview = $id_interview";
     mysqli_query($conn,$sql_interview);
 
       if (empty($_POST['id_product'][0])) {

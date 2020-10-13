@@ -100,7 +100,7 @@
                   <a href="reserve_money.php"> รับเงินสำรองจ่าย </a>
                   <a class="active" href="reserve_office.php"> โอนเงินจ่าย </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_datacar.php"></i> ข้อมูลหน่วยรถ </a>
+                  <a href="reserve_datacar.php"></i> ใช้จ่ายหน่วยรถ </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">

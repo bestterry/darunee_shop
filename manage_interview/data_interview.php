@@ -2,8 +2,9 @@
   include("menu/db_connect.php");
   $mysqli = connect();
   $interview = "SELECT * FROM interview 
-                INNER JOIN tbl_amphures ON tbl_amphures.amphur_id = interview.amphures_id
-                INNER JOIN tbl_provinces ON tbl_provinces.province_id = interview.provinces_id";
+                INNER JOIN tbl2_amphures ON tbl2_amphures.amphur_id = interview.amphures_id
+                INNER JOIN tbl2_provinces ON tbl2_provinces.province_id = interview.provinces_id
+                ORDER BY CONVERT (interview.name_file USING tis620 ) ASC";
   $objq_interview = mysqli_query($mysqli,$interview);
 ?>
 <!DOCTYPE html>
@@ -56,15 +57,17 @@
               <div class="mailbox-read-message">
                 <div class="row">
                   <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <table id="example2" class="table">
+                    <table id="example1" class="table">
                       <thead>
                         <tr>
-                          <th class="text-center" width="10%">ชื่อไฟล์</th>
+                          <th class="text-center" width="7%">ชื่อไฟล์</th>
                           <th class="text-center" width="10%">ชื่อ</th>
-                          <th class="text-center" width="15%">พื้นที่</th>
-                          <th class="text-center" width="15%">สินค้า</th>
-                          <th class="text-center" width="15%">ใช้กับ</th>
-                          <th class="text-center" width="30%">หมายเหต</th>
+                          <th class="text-center" width="14%">พื้นที่</th>
+                          <th class="text-center" width="14%">สินค้า</th>
+                          <th class="text-center" width="14%">ใช้กับ</th>
+                          <th class="text-center" width="5%">เกรด</th>
+                          <th class="text-center" width="25%">หมายเหต</th>
+                          <th class="text-center" width="5%">#</th>
                           <th class="text-center" width="5%">แก้</th>
                         </tr>
                       </thead>
@@ -99,7 +102,19 @@
                               }
                             ?>
                             </td>
+                            <td class="text-center"><?php echo $value['grade'];?></td>
                             <td class="text-center"><?php echo $value['note'];?></td>
+                            <td class="text-center">
+                              <?php 
+                                if ($value['status']=='N') {
+                              ?>
+                                  <a href="algorithm/edit_status.php?id_interview=<?php echo $value['id_interview'];?>" class="btn btn-success btn-xs">เปิด</a>
+                              <?php
+                                }else {
+                                echo "เปิดเเล้ว";
+                                }
+                              ?>
+                            </td>
                             <td class="text-center">
                               <a href="edit_interview.php?id_interview=<?php echo $value['id_interview']; ?>"> >> </a>
                             </td>

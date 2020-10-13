@@ -172,6 +172,21 @@
                       </td>
                     </tr>
                     <tr>
+                      <th width="20%" class="text-right"><font size="4" valign="middle">รถ &nbsp;&nbsp;:</font></th>
+                      <td width="30%" >
+                        <select name="id_member_car" class="form-control" style="width: 100%;">
+                          <?php 
+                            $sql_car = "SELECT name,id_member FROM member WHERE status_reserve = 1 ";
+                            $objq_car = mysqli_query($conn,$sql_car);
+                            while ($value_car = $objq_car -> fetch_assoc() ) {
+                          ?>
+                            <option value="<?php echo $value_car['id_member']; ?>" <?php if($id_member==$value_car['id_member']){ echo "selected";}else{}?>>
+                            <?php echo $value_car['name']; ?></option>
+                          <?php
+                            }
+                          ?>
+                        </select>
+                      </td>
                       <th width="20%" class="text-right" ><font size="4">หมายเหตุ &nbsp;&nbsp;:</font></th>
                       <td colspan="3" ><input type="text" name="note" value="-" class="form-control"></td>
                     </tr>

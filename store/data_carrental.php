@@ -105,7 +105,13 @@
                                           GROUP BY car_rental.id_carrental DESC";
                       $objq_rs_history = mysqli_query($conn,$sql_rs_history);
                       while($value = $objq_rs_history->fetch_assoc()){ 
-                        $money = $value['money'];
+                        $member_car = $value['member_car'];
+                        if ($member_car == $id_member) {
+                          $money = $value['money'];
+                        }else {
+                          $money = 0;
+                        }
+                        
                         $member_car = $value['member_car'];
                         $sql_member = "SELECT name FROM member WHERE id_member = $member_car";
                         $objq_member = mysqli_query($conn,$sql_member);

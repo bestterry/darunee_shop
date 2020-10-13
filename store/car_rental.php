@@ -122,7 +122,7 @@
                     <tr>
                       <th width="20%" class="text-right"><font size="4" valign="middle">ปฏิบัติงาน &nbsp;&nbsp;:</font></th>
                       <td width="30%" >
-                        <select name="id_practice" id="id_practice" class="form-control" style="width: 100%;">
+                        <select name="id_practice" id="id_practice" onchange="sSelect(this.value)" class="form-control" style="width: 100%;">
                             <option value="">-- รายการ --</option>
                             <?php 
                               $rc_practice = "SELECT * FROM rc_practice";
@@ -137,10 +137,10 @@
                       </td>
                       <th width="20%" class="text-right"><font size="4">รถ &nbsp;&nbsp;:</font></th>
                       <td width="30%">
-                        <select name="member_car" id="id_member2" onchange="sSelect(this.value)" class="form-control" style="width: 100%;">
+                        <select name="member_car" class="form-control" style="width: 100%;">
                           <option value="54">-- กรุณาเลือกหน่วยรถ --</option>
                           <?php 
-                           $sql_car = "SELECT id_member,name FROM member WHERE status_car = 1 OR id_member = 53";
+                           $sql_car = "SELECT id_member,name FROM member WHERE status_reserve = 1";
                            $objq_car = mysqli_query($conn,$sql_car);
                               while ($value = $objq_car -> fetch_assoc() ) {
                           ?>
@@ -193,7 +193,7 @@
                     <tr>
                       <th class="text-center" width="20%">วันที่</th>
                       <th class="text-center" width="15%">ปฏิบัติงาน</th>
-                      <th class="text-center" width="15%">รถ</th>
+                      <th class="text-center" width="15%">ใช้รถ</th>
                       <th class="text-center" width="15%">ค่าเช่ารถ</th>
                       <th class="text-center" width="35%">หมายเหตุ</th>
                     </tr>
@@ -333,12 +333,10 @@
       });
 
       function sSelect(value){  
-        var id_member1 = document.getElementById("id_member1").value;
-        var id_practice = $('#id_practice').val();
         $.ajax({
           type:"POST",
           url:"algorithm/select_carrental.php",
-          data:{value:value,id_member1:id_member1,id_practice:id_practice},
+          data:{value:value},
           success:function(data){
             $("#car_rental").val(data);
             console.log(data);

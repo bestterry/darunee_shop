@@ -40,12 +40,15 @@
             <div class="box box-primary">
               <div class="box-header with-border">
                 <div class="col-12">
-                  <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                  <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
                   </div>
-                  <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 text-center">
-                    <font size="5"><B> เพิ่ม สัมภาษณ์</B></font>
+                  <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
+                    <font size="5"><B> เพิ่มสัมภาษณ์</B></font>
                   </div>
-                  <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+                  <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">
+                    <a type="button" href="algorithm/update_status.php"  class="btn btn-success" OnClick="return confirm('ต้องการเปลี่ยนสถานะเป็นไม่เปิดทั้งหมดหรือไม่ ?')";>เปลี่ยนสถานะ</a>
+                    <a type="button" href="#" data-toggle="modal" data-target="#my_modal" class="btn btn-success">เพิ่มใช้กับ</a>
+                  </div>
                 </div>
               </div>
               <form action="algorithm/add_interview.php" class="form-horizontal" method="post" autocomplete="off" name="form1" onSubmit="JavaScript:return fncSubmit();">
@@ -66,7 +69,26 @@
                           <div class="form-group">
                             <label class="col-sm-4 control-label">ชื่อ </label>
                             <div class="col-sm-8">
-                              <input type="text" name="name" class="form-control" placeholder="ชื่อลูกค้า">
+                              <input type="text" name="name" class="form-control" placeholder="ชื่อ">
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="col-sm-4 control-label">เกรด</label>
+                            <div class="col-sm-8">
+                              <select name="grade" class="form-control">
+                                <option value="A" selected> A </option>
+                                <option value="B"> B </option>
+                                <option value="C"> C </option>
+                                <option value="D"> D </option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="col-sm-4 control-label"> </label>
+                            <div class="col-sm-8">
+                              
                             </div>
                           </div>
                         </div>
@@ -75,7 +97,7 @@
                           <div class="form-group">
                             <label class="col-sm-4 control-label">จังหวัด </label>
                             <div class="col-sm-8">
-                              <select name="province_name" data-where="2" class="form-control ajax_address select2" >
+                              <select name="province_name" data-where="2" class="form-control ajax_address select2">
                                 <option value="">-- เลือกจังหวัด --</option>
                               </select>
                             </div>
@@ -84,7 +106,7 @@
                           <div class="form-group">
                             <label  class="col-sm-4 control-label">อำเภอ </label>
                             <div class="col-sm-8">
-                              <select name="amphur_name" data-where="3" class="ajax_address form-control select2" >
+                              <select name="amphur_name" data-where="3" class="ajax_address form-control select2">
                                 <option value="">-- เลือกอำเภอ --</option>
                               </select>
                             </div>
@@ -93,7 +115,7 @@
 
                         <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                           <div class="form-group">
-                            <label class="col-sm-2 control-label">หมายเหตุ </label>
+                            <label class="col-sm-2 control-label">หมายเหตุ</label>
                             <div class="col-sm-10">
                               <textarea type="text" name="note" class="form-control" value="-"></textarea>
                             </div>
@@ -181,6 +203,41 @@
             </div>
           </div>
         </section>
+          <div class="modal fade" id="my_modal" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <form action="algorithm/add_plance.php" method="post">
+                <div class="modal-content">
+                  <div class="modal-header text-center">
+                      <font size="5"><B> เพิ่มใช้กับ </B></font>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="col-3 col-sm-3 col-xl-3 col-md-3"></div>
+                        <div class="col-6 col-sm-6 col-xl-6 col-md-6">
+                          <table class="table table-bordered">
+                            <tbody>
+                              <tr>
+                                <th class="text-center" width="30%"><font size="4">ใช้กับ</font></th>
+                                <th class="text-center" width="70%"> 
+                                  <input name="name_plance" class="form-control" style="width: 100%;">
+                                </th>
+                              </tr>
+                            </tbody>
+                          </table> 
+                        </div>
+                        <div class="col-3 col-sm-3 col-xl-3 col-md-3"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit"  class="btn btn-success pull-right" OnClick="return confirm('ต้องการบันทึกใช้กับหรือพืชที่ใช้ หรือไม่ ?')";>บันทึก</button>
+                    <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< กลับ</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
       </div>
 
         <!-- jQuery 3 -->
@@ -311,8 +368,5 @@
             }); 
 
         </script>
-        
-
   </body>
-
 </html>

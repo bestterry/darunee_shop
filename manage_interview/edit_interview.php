@@ -3,8 +3,8 @@
   $mysqli = connect();
   $id_interview = $_GET['id_interview'];
   $interview = "SELECT * FROM interview 
-                INNER JOIN tbl_amphures ON tbl_amphures.amphur_id = interview.amphures_id
-                INNER JOIN tbl_provinces ON tbl_provinces.province_id = interview.provinces_id
+                INNER JOIN tbl2_amphures ON tbl2_amphures.amphur_id = interview.amphures_id
+                INNER JOIN tbl2_provinces ON tbl2_provinces.province_id = interview.provinces_id
                 WHERE interview.id_interview = $id_interview";
   $objq_interview = mysqli_query($mysqli,$interview);
   $objr_interview = mysqli_fetch_array($objq_interview);
@@ -48,6 +48,7 @@
               <div class="box-header with-border">
                 <div class="col-12">
                   <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <a class="btn button2 pull-left" href="data_interview.php"> << กลับ </a>
                   </div>
                   <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 text-center">
                     <font size="5"><B> แก้ไข สัมภาษณ์</B></font>
@@ -78,6 +79,18 @@
                               <input type="text" name="name" class="form-control" placeholder="ชื่อลูกค้า" value="<?php echo $objr_interview['name']; ?>">
                             </div>
                           </div>
+
+                          <div class="form-group">
+                            <label class="col-sm-4 control-label">grade </label>
+                            <div class="col-sm-8">
+                              <select name="grade" class="form-control text-center" style="width: 100%;">
+                                <option class="text-center" value="A" <?php if($objr_interview['grade']== 'A'){echo "selected";}?>> A </option>
+                                <option class="text-center" value="B" <?php if($objr_interview['grade']== 'B'){echo "selected";}?>> B </option>
+                                <option class="text-center" value="C" <?php if($objr_interview['grade']== 'C'){echo "selected";}?>> C </option>
+                                <option class="text-center" value="D" <?php if($objr_interview['grade']== 'D'){echo "selected";}?>> D </option>
+                              </select>
+                            </div>
+                          </div>
                         </div>
 
                         <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -106,7 +119,20 @@
                               <input type="hidden" name="amphur_id1" class="form-control" value="<?php echo $objr_interview['amphur_id']; ?>">
                             </div>
                           </div>
+
+                          <div class="form-group">
+                            <label class="col-sm-4 control-label">เปิดแล้ว </label>
+                            <div class="col-sm-8">
+                              <label class="switch">
+                                <input type="checkbox" name="status" <?php if($objr_interview['status']=="Y"){ echo "checked"; }else{} ?>>
+                                <span class="slider round"></span>
+                              </label>
+                            </div>
+                          </div>
+
                         </div>
+
+                        
 
                         <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                           <div class="form-group">
@@ -119,7 +145,7 @@
 
                         <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                           <div class="form-group">
-                            <label class="col-sm-4 control-label"> สินค้า </label>
+                            <label class="col-sm-4 control-label"> </label>
                             <div class="col-sm-8">
                               <div class="table-responsive">
                                 <table class="table table-bordered" id="product">
@@ -169,7 +195,7 @@
 
                         <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                           <div class="form-group">
-                            <label class="col-sm-4 control-label"> ใช้กับ </label>
+                            <label class="col-sm-4 control-label">  </label>
                             <div class="col-sm-8">
                               <div class="table-responsive">
                                 <table class="table table-bordered" id="plance">

@@ -6,10 +6,11 @@
   $province_id = $_POST['province_name'];
   $amphur_id = $_POST['amphur_name'];
   $note = $_POST['note'];
+  $grade = $_POST['grade'];
   $id = (rand(1,10000));
 
-  $add_interview = "INSERT INTO interview (name_file, name, amphures_id, provinces_id, note, id) 
-                    VALUE ('$name_file','$name',$amphur_id, $province_id, '$note', $id)";
+  $add_interview = "INSERT INTO interview (name_file, name, amphures_id, provinces_id, note, id, grade) 
+                    VALUE ('$name_file','$name',$amphur_id, $province_id, '$note', $id, '$grade')";
   mysqli_query($conn,$add_interview);
 
 

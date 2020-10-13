@@ -101,9 +101,9 @@
             <div class="row">
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
-                  <a href="reserve_office.php"> โอนจ่าย </a>
+                  <a href="reserve_office.php"> โอนจ่ายสนง </a>
                   <a class="active" href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
                   <a href="car_rental.php"> ค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>
@@ -119,27 +119,29 @@
               <div class="box box-primary">
                 <div class="box-header with-border">
                   <div class="col-12">
-                    <div class="col-4 col-sm-4 col-md-4 col-xl-4">
+                    <div class="col-3 col-sm-3 col-md-3 col-xl-3">
                     <a class="btn button2" href="reserve_car.php"></i><< กลับ</a>
                     </div>
-                    <div class="col-4 col-sm-4 col-md-4 col-xl-4">
+                    <div class="col-6 col-sm-6 col-md-6 col-xl-6">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> รายการโอนจ่าย : <?php echo $name_member;?> <font color="red"> </font></B>
+                          <B align="center">รายการใช้เงินหน่วยรถ : <?php echo $name_member;?> <font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
-                    <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right"></div>
+                    <div class="col-3 col-sm-3 col-md-3 col-xl-3 text-right"></div>
                   </div>
                 </div>
                 <div class="box-body no-padding">
                   <div class="mailbox-read-message">
-                  <div class="col-12 col-sm-12 col-xl-12 col-md-12 col-lg-12">
-                    <font size="3" color="red">
-                      <B> เงินคงเหลือ : <?php echo $reserve_money;?> </B>
-                    </font>
-                  </div>
-                  <br><br>
+                  
+                    <div class="col-12 col-sm-12 col-xl-12 col-md-12 col-lg-12">
+                      <font size="3" color="red">
+                        <B> เงินคงเหลือ  <?php echo $reserve_money;?> </B>
+                      </font>
+                    </div>
+                    <br><br>
+
                     <div class="col-12">
                       <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                         <table class="table" id="example2">
@@ -147,7 +149,7 @@
                             <tr>
                               <th class="text-center" width="12%">วันที่</th>
                               <th class="text-center" width="12%">รายการ</th>
-                              <th class="text-center" width="12%">จำนวนเงิน</th>
+                              <th class="text-center" width="12%">รับ-จ่าย</th>
                               <th class="text-center" width="12%">คงเหลือ</th>
                               <th class="text-center" width="47%">หมายเหตุ</th>
                               <th class="text-center" width="5%">ลบ</th>
@@ -225,7 +227,7 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> โอนจ่ายรายวัน : <?php echo $name_member;?> <font color="red"> </font></B>
+                          <B align="center"> รายการใช้เงินรายวัน : <?php echo $name_member;?> <font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
@@ -245,7 +247,7 @@
                               <th class="text-center" width="16%">เบี้ยเลี้ยง</th>
                               <th class="text-center" width="16%">ที่พัก</th>
                               <th class="text-center" width="16%">จ่ายอื่น</th>
-                              <th class="text-center" width="16%">รวม</th>
+                              <th class="text-center" width="16%">รวมเงิน</th>
                             </tr>
                           </thead>
                           <tbody>

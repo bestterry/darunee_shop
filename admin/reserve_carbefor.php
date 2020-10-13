@@ -5,7 +5,7 @@
 
   $date = $_POST['day'];
 
-  $sql_member = "SELECT id_member,name FROM member WHERE status_car = 1";
+  $sql_member = "SELECT id_member,name FROM member WHERE status_reserve = 1";
   $objq_member = mysqli_query($conn,$sql_member);
 ?>
 
@@ -93,9 +93,9 @@
             <div class="row">
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
-                  <a href="reserve_office.php"> โอนจ่าย </a>
+                  <a href="reserve_office.php"> โอนจ่ายสนง </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a class="active" href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a class="active" href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
                   <a href="car_rental.php"> ค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>
@@ -126,7 +126,7 @@
                                       <div class="col-12">
                                         <div align="center">
                                           <font size="5">
-                                            <B align="center">ข้อมูลใช้เงินหน่วยรถ</B>
+                                            <B align="center">ค่าใช้จ่ายหน่วยรถ</B>
                                           </font>
                                         </div>
                                         <br>
@@ -169,8 +169,13 @@
                                             $objq_reservelist = mysqli_query($conn,$sql_resevelist);
                                             while($value_reservelist = $objq_reservelist->fetch_assoc()){
                                               $id_list = $value_reservelist['id_list'];
-                                              $sql_history = "SELECT SUM(money) FROM reserve_history 
-                                                              WHERE id_list = $id_list AND id_member = $id_member AND DATE_FORMAT(date,'%Y-%m-%d')='$date'";
+                                              if ($id_list == 9) {
+                                                $sql_history = "SELECT SUM(money) FROM reserve_history 
+                                                                WHERE id_list = $id_list AND id_member_car = $id_member AND DATE_FORMAT(date,'%Y-%m-%d')='$date'";
+                                              }else{
+                                                $sql_history = "SELECT SUM(money) FROM reserve_history 
+                                                                WHERE id_list = $id_list AND id_member = $id_member AND DATE_FORMAT(date,'%Y-%m-%d')='$date'";
+                                              }
                                               $objq_history = mysqli_query($conn,$sql_history);
                                               while($value_history = $objq_history->fetch_assoc()){
                                           ?>
@@ -223,7 +228,7 @@
                           <div class="mailbox-read-message">
                             <div align="center">
                               <font size="5">
-                                <B align="center">ข้อมูลใช้เงินหน่วยรถ</B>
+                                <B align="center">ค่าใช้จ่ายหน่วยรถ</B>
                               </font>
                             </div>
                             <div class="col-12">

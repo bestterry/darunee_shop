@@ -11,6 +11,7 @@
   $sql_member = "SELECT id_member,name FROM member WHERE status_reserve = 1";
   $objq_member = mysqli_query($conn,$sql_member);
   $objq_member2 = mysqli_query($conn,$sql_member);
+  $objq_member3 = mysqli_query($conn,$sql_member);
 ?>
 
 <!DOCTYPE html>
@@ -97,9 +98,9 @@
             <div class="row">
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
-                  <a href="reserve_office.php"> โอนจ่าย </a>
+                  <a href="reserve_office.php"> โอนจ่ายสนง </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
                   <a class="active" href="car_rental.php"> ค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>
@@ -125,7 +126,7 @@
                             <div class="col-12">
                               <div align="center">
                                 <font size="5">
-                                  <B align="center">ค่าเช่ารถ</B>
+                                  <B align="center">ปฏิบัตงานและค่าเช่ารถ</B>
                                 </font>
                               </div>
                               <br>
@@ -146,14 +147,21 @@
                         </form>
                         <div class="box-body">
                           <div class="mailbox-read-message">
+
                             <div class="col-12">
+                              <div align="center">
+                                <font size="5">
+                                  <B align="center">ปฏิบัติงาน</B>
+                                </font>
+                              </div>
+                              <br>
                               <table id="example1" class="table">
                                 <thead>
                                   <tr>
-                                    <th class="text-center" width="20%">หน่วยรถ</th>
-                                    <th class="text-center" width="20%">ปฏิบัติงาน</th>
-                                    <th class="text-center" width="20%">ค่าเช่ารถ</th>
-                                    <th class="text-center" width="35%">หมายเหตุ</th>
+                                    <th class="text-center" width="15%">หน่วยรถ</th>
+                                    <th class="text-center" width="15%">ปฏิบัติงาน</th>
+                                    <th class="text-center" width="15%">ใช้รถ</th>
+                                    <th class="text-center" width="50%">หมายเหตุ</th>
                                     <th class="text-center" width="5%">แก้ไข</th>
                                   </tr>
                                 </thead>
@@ -172,9 +180,20 @@
                                         $objq_carrental = mysqli_query($conn,$sql_carrental);
                                         if ($objq_carrental->num_rows > 0 ) {
                                         $objr_carental = mysqli_fetch_array($objq_carrental);
+                                        $member_car = $objr_carental['member_car'];
+                                        
+                                        if ($member_car == $id_member) {
+                                          $car_rental = $objr_carental['money'];
+                                        }else {
+                                          $car_rental = 0;
+                                        }
+
+                                        $sql_member = "SELECT name FROM member WHERE id_member = $member_car";
+                                        $objq_car = mysqli_query($conn,$sql_member);
+                                        $objr_member = mysqli_fetch_array($objq_car);
                                       ?>
                                       <td class="text-center"><?php echo $objr_carental['name_practice'];?></td>
-                                      <td class="text-center"><?php echo $objr_carental['money'];?></td>
+                                      <td class="text-center"><?php echo $objr_member['name'];?></td>
                                       <td class="text-center"><?php echo $objr_carental['note'];?></td>
                                       <td class="text-center">
                                         <a type="button" href="car_rental_edit.php?id=<?php echo $objr_carental['id_carrental']; ?>&&status=today" class="btn btn-success btn-xs">แก้</a>
@@ -196,6 +215,56 @@
                                 </tbody>
                               </table>
                             </div>
+
+                            <div class="col-12">
+                              <div align="center">
+                                <font size="5">
+                                  <B align="center">ค่าเช่ารถ</B>
+                                </font>
+                              </div>
+                              <br>
+                              <table id="example2" class="table">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center" width="33%">หน่วยรถ</th>
+                                    <th class="text-center" width="33%">ปฏิบัติงาน</th>
+                                    <th class="text-center" width="33%">ค่าเช่ารถ</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <?php 
+                                    while($value = $objq_member2 -> fetch_assoc()){
+                                      $id_member = $value['id_member'];
+                                  ?>
+                                    <tr>
+                                      <td class="text-center"><?php echo ($value['name']); ?></td> 
+                                      <?php
+                                        $sum_money = 0;
+                                        $sql_carrental = "SELECT * FROM car_rental 
+                                                          INNER JOIN rc_practice ON rc_practice.id_practice = car_rental.id_practice 
+                                                          WHERE member_car = $id_member AND date = '$date'";
+                                        $objq_carrental = mysqli_query($conn,$sql_carrental);
+                                        if ($objq_carrental->num_rows > 0 ) {
+                                        $objr_carental = mysqli_fetch_array($objq_carrental);
+                                      ?>
+                                      <td class="text-center"><?php echo $objr_carental['name_practice'];?></td>
+                                      <td class="text-center"><?php echo $objr_carental['money'];?></td>
+                                       <?php 
+                                        }else{
+                                      ?>
+                                      <td class="text-center">-</td>
+                                      <td class="text-center">-</td>
+                                      <?php 
+                                        }
+                                      ?>
+                                    </tr>
+                                  <?php 
+                                    }
+                                  ?>
+                                </tbody>
+                              </table>
+                            </div>
+
                           </div>
                         </div>
                       </div>
@@ -267,20 +336,22 @@
                                     </thead>
                                     <tbody>
                                       <?php 
-                                        while($value = $objq_member2 -> fetch_assoc()){
+                                      $sum_money = 0;
+                                        while($value = $objq_member3 -> fetch_assoc()){
                                           $id_member = $value['id_member'];
                                       ?>
                                         <tr>
                                           <td class="text-right"><?php echo ($value['name']); ?></td> 
                                           <?php
-                                            $sum_money = 0;
-                                            $sql_carrental = "SELECT SUM(money) FROM car_rental WHERE id_member = $id_member 
+                                            $sql_carrental = "SELECT SUM(money) FROM car_rental WHERE member_car = $id_member 
                                                               AND(date BETWEEN '$aday' AND '$bday')";
                                             $objq_carrental = mysqli_query($conn,$sql_carrental);
                                             if ($objq_carrental->num_rows > 0 ) {
                                             $objr_carental = mysqli_fetch_array($objq_carrental);
+                                            $money = $objr_carental['SUM(money)'];
+                                            $sum_money = $sum_money + $money;
                                           ?>
-                                          <td class="text-left"><?php echo $objr_carental['SUM(money)'];?></td>
+                                          <td class="text-left"><?php echo $money;?></td>
                                           <?php 
                                             }else{
                                           ?>
@@ -292,6 +363,10 @@
                                       <?php 
                                         }
                                       ?>
+                                      <tr>
+                                        <th class="text-right">รวม</th>
+                                        <th class="text-left"><?php echo $sum_money; ?></th>
+                                      </tr>
                                     </tbody>
                                   </table>
                               </div>

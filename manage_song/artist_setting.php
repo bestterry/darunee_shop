@@ -53,7 +53,7 @@
                         </font>
                       </div>
                       <div class="col-2 col-sm-2 col-xl-2 col-md-2 text-right">
-                      <a type="button"href="#" data-toggle="modal" data-target="#add_artist" class="btn btn-success" style="color:black;">เพิ่มนักร้อง</a>
+                       <a type="button" href="#" data-toggle="modal" data-target="#add_artist" class="btn btn-success" style="color:black;">เพิ่มนักร้อง</a>
                       </div>
                     </div>
                   </div>

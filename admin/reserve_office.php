@@ -100,9 +100,9 @@
             <div class="row">
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
-                  <a class="active" href="reserve_office.php"> โอนจ่าย </a>
+                  <a class="active" href="reserve_office.php"> โอนจ่ายสนง </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
                   <a href="car_rental.php"> ค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>
@@ -121,7 +121,7 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> รายการโอนจ่าย<font color="red"> </font></B>
+                          <B align="center"> รายการโอนจ่าย (สนง)<font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
@@ -135,7 +135,7 @@
                     <div class="col-12">
                       <div class="col-sm-12 text-left">
                           <font size="3" color="red">
-                            <B> เงินคงเหลือ : <?php echo $reserve_money;?> </B>
+                            <B> เงินคงเหลือ  <?php echo $reserve_money;?> </B>
                           </font>
                       </div>
                       <br>
@@ -202,7 +202,7 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center"> โอนจ่ายรายวัน<font color="red"> </font></B>
+                          <B align="center"> โอนจ่ายรายวัน (สนง)</B>
                         </font>
                       </div>
                     </div>

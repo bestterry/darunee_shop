@@ -4,8 +4,8 @@
   
   $id_interview = $_GET['id_interview'];
   $interview = "SELECT * FROM interview 
-                INNER JOIN tbl_amphures ON tbl_amphures.amphur_id = interview.amphures_id
-                INNER JOIN tbl_provinces ON tbl_provinces.province_id = interview.provinces_id
+                INNER JOIN tbl2_amphures ON tbl2_amphures.amphur_id = interview.amphures_id
+                INNER JOIN tbl2_provinces ON tbl2_provinces.province_id = interview.provinces_id
                 WHERE interview.id_interview = $id_interview";
   $objq_interview = mysqli_query($mysqli,$interview);
   $value = mysqli_fetch_array($objq_interview);
@@ -69,91 +69,89 @@
             </div>
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="">
-                  <div class="row">
-                    <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                      <div class="text-center">
-                        <B><font size="4">ข้อมูล</font></B>
-                      </div>
-                      <br>
-                      <div class="table-responsive">
-                        <table class="table table-bordered">
-                          <tr>
-                            <th class="text-center" width="50%">ชื่อไฟล์</th>
-                            <td><?php echo $value['name_file'];?></td>
-                          </tr>
-                          <tr>
-                            <th class="text-center">ชื่อ</th>
-                            <td><?php echo $value['name'];?></td>
-                          </tr>
-                          <tr>
-                            <th class="text-center">พื้นที่</th>
-                            <td><?php echo 'อ.'.$value['amphur_name'].' จ.'.$value['province_name']; ?></td>
-                          </tr>
-                          <tr>
-                            <th class="text-center">หมายเหตุ</th>
-                            <td><?php echo $value['note'];?></td>
-                          </tr>
-                        </table>
-                      </div>
+                <div class="row">
+                  <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="text-center">
+                      <B><font size="4">ข้อมูล</font></B>
                     </div>
-
-                    <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                      <div class="text-center">
-                        <B><font size="4">สินค้า</font></B>
-                      </div>
-                      <br>
-                      <div class="table-responsive">
-                        <table class="table table-bordered">
-                          <tr>
-                            <th class="text-center" width="50%">ที่</th>
-                            <th class="text-center" width="50%">สินค้า</th>
-                          </tr>
-                          <?php 
-                            $i = 1;
-                            while($value_product = $objq_product->fetch_assoc()){
-                          ?>
-                            <tr>
-                              <td class="text-center"><?php echo $i; ?></td>
-                              <td class="text-center"><?php echo $value_product['name_product']; ?></td>
-                            </tr>
-                          <?php 
-                              $i++;
-                            }
-                          ?>
-                        </table>
-                      </div>
+                    <br>
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <tr>
+                          <th class="text-center" width="50%">ชื่อไฟล์</th>
+                          <td><?php echo $value['name_file'];?></td>
+                        </tr>
+                        <tr>
+                          <th class="text-center">ชื่อ</th>
+                          <td><?php echo $value['name'];?></td>
+                        </tr>
+                        <tr>
+                          <th class="text-center">พื้นที่</th>
+                          <td><?php echo 'อ.'.$value['amphur_name'].' จ.'.$value['province_name']; ?></td>
+                        </tr>
+                        <tr>
+                          <th class="text-center">หมายเหตุ</th>
+                          <td><?php echo $value['note'];?></td>
+                        </tr>
+                      </table>
                     </div>
-
-                    <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                      <div class="text-center">
-                        <B><font size="4">ใช้กับ</font></B>
-                      </div>
-                      <br>
-                      <div class="table-responsive">
-                        <table class="table table-bordered">
-                          <tr>
-                            <th class="text-center" width="50%">ที่</th>
-                            <th class="text-center" width="50%">ใช้กับ</th>
-                          </tr>
-                          <?php 
-                            $i = 1;
-                            while($value_plance = $objq_plance->fetch_assoc()){
-                          ?>
-                            <tr>
-                              <td class="text-center"><?php echo $i; ?></td>
-                              <td class="text-center"><?php echo $value_plance['name_plance']; ?></td>
-                            </tr>
-                          <?php 
-                              $i++;
-                            }
-                          ?>
-                        </table>
-                      </div>
-                    </div>
-
                   </div>
-                </form>
+
+                  <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="text-center">
+                      <B><font size="4">สินค้า</font></B>
+                    </div>
+                    <br>
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <tr>
+                          <th class="text-center" width="50%">ที่</th>
+                          <th class="text-center" width="50%">สินค้า</th>
+                        </tr>
+                        <?php 
+                          $i = 1;
+                          while($value_product = $objq_product->fetch_assoc()){
+                        ?>
+                          <tr>
+                            <td class="text-center"><?php echo $i; ?></td>
+                            <td class="text-center"><?php echo $value_product['name_product']; ?></td>
+                          </tr>
+                        <?php 
+                            $i++;
+                          }
+                        ?>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="text-center">
+                      <B><font size="4">ใช้กับ</font></B>
+                    </div>
+                    <br>
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <tr>
+                          <th class="text-center" width="50%">ที่</th>
+                          <th class="text-center" width="50%">ใช้กับ</th>
+                        </tr>
+                        <?php 
+                          $i = 1;
+                          while($value_plance = $objq_plance->fetch_assoc()){
+                        ?>
+                          <tr>
+                            <td class="text-center"><?php echo $i; ?></td>
+                            <td class="text-center"><?php echo $value_plance['name_plance']; ?></td>
+                          </tr>
+                        <?php 
+                            $i++;
+                          }
+                        ?>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </div>
 

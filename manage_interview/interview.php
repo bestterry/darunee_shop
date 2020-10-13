@@ -50,7 +50,7 @@
                   </font>
                 </div>
               </div>
-              <form action="interview_search.php" class="form-horizontal" method="post" autocomplete="off">
+              <form action="interview_search.php" class="form-horizontal" method="get" autocomplete="off">
                 <div class="box-body">
                   <div class="mailbox-read-message">
                     <div class="col-12">

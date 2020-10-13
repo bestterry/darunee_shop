@@ -26,12 +26,12 @@
       <script>
        $(function () {
           $('#example1').DataTable({
-            'paging'      : false,
+            'paging'      : true,
             'lengthChange': true,
             'searching'   : true,
             'ordering'    : false,
             'info'        : true,
-            'autoWidth'   : false
+            'autoWidth'   : true
             });
             $('#example2').DataTable({
             'paging'      : false,

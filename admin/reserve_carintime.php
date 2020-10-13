@@ -98,7 +98,7 @@
                 <div class="topnav">
                   <a href="reserve_office.php"> โอนจ่าย </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a class="active" href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a class="active" href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
                   <a href="car_rental.php"> ค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>
@@ -172,8 +172,13 @@
                                           $objq_reservelist = mysqli_query($conn,$sql_resevelist);
                                           while($value_reservelist = $objq_reservelist->fetch_assoc()){
                                             $id_list = $value_reservelist['id_list'];
-                                            $sql_history = "SELECT SUM(money) FROM reserve_history 
-                                                            WHERE id_list = $id_list AND id_member = $id_member AND DATE_FORMAT(date,'%Y-%m-%d')='$date'";
+                                            if ($id_list == 9) {
+                                              $sql_history = "SELECT SUM(money) FROM reserve_history 
+                                                              WHERE id_list = $id_list AND id_member_car = $id_member AND DATE_FORMAT(date,'%Y-%m-%d')='$date'";
+                                            }else{
+                                              $sql_history = "SELECT SUM(money) FROM reserve_history 
+                                                              WHERE id_list = $id_list AND id_member = $id_member AND DATE_FORMAT(date,'%Y-%m-%d')='$date'";
+                                            }
                                             $objq_history = mysqli_query($conn,$sql_history);
                                             while($value_history = $objq_history->fetch_assoc()){
                                         ?>
@@ -260,10 +265,18 @@
                                     $objq_reservelist = mysqli_query($conn,$sql_resevelist);
                                     while($value_reservelist = $objq_reservelist->fetch_assoc()){
                                       $id_list = $value_reservelist['id_list'];
-                                      $sql_history = "SELECT SUM(money) FROM reserve_history WHERE 
-                                                      id_list = $id_list AND id_member = $id_member
-                                                      AND (date BETWEEN '$aday 00:00:00' AND '$bday 23:59:59')";
-                                      $objq_history = mysqli_query($conn,$sql_history);
+                                      if ($id_list == 9) {
+                                        $sql_history = "SELECT SUM(money) FROM reserve_history WHERE 
+                                                        id_list = $id_list AND id_member_car = $id_member
+                                                        AND (date BETWEEN '$aday 00:00:00' AND '$bday 23:59:59')";
+                                        $objq_history = mysqli_query($conn,$sql_history);
+                                      }else{
+                                        $sql_history = "SELECT SUM(money) FROM reserve_history WHERE 
+                                                        id_list = $id_list AND id_member = $id_member
+                                                        AND (date BETWEEN '$aday 00:00:00' AND '$bday 23:59:59')";
+                                        $objq_history = mysqli_query($conn,$sql_history);
+                                      }
+                                      
                                       while($value_history = $objq_history->fetch_assoc()){
                                   ?>
                                   <td class="text-center"><?php echo $value_history['SUM(money)'];?></td>

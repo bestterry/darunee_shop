@@ -10,11 +10,11 @@ include("db_connect.php");
 $mysqli = connect();
 // array ชื่อตารางในฐานข้อมูลที่เราจะใช้
 $arr_tbl_name = array(
-    "0"=>"tbl_geography",
-    "1"=>"tbl_provinces",
-    "2"=>"tbl_amphures",
-    "3"=>"tbl_districts",
-    "4"=>"tbl_zipcodes",
+    "0"=>"tbl2_geography",
+    "1"=>"tbl2_provinces",
+    "2"=>"tbl2_amphures",
+    "3"=>"tbl2_districts",
+    "4"=>"tbl2_zipcodes",
 );
 // array คำนำหน้า สำหรับใช้เชื่อมฟิลด์ในตาราง
 $arr_data_prefix = array(

@@ -102,9 +102,9 @@
             <div class="row">
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
-                  <a href="reserve_office.php"> โอนจ่าย </a>
+                  <a href="reserve_office.php"> โอนจ่ายสนง </a>
                   <a class="active" href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
                   <a href="car_rental.php"> ค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>
@@ -114,111 +114,129 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-              <div class="box box-primary">
-                <div class="box-header with-border">
-                  <div class="col-12">
-                    <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
-                    <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-                      <div class="text-center">
-                        <font size="5">
-                          <B align="center">โอนจ่าย หน่วยรถ<font color="red"> </font></B>
-                        </font>
-                      </div>
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right">
-                      <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> ทำรายการ </a>
-                    </div>
+
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <div class="col-12">
+                <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
+                <div class="col-4 col-sm-4 col-md-4 col-xl-4">
+                  <div class="text-center">
+                    <font size="5">
+                      <B align="center">สร.หน่วยรถคงเหลือ<font color="red"> </font></B>
+                    </font>
                   </div>
                 </div>
-                <div class="box-body no-padding">
-                  <div class="mailbox-read-message">
-                    <div class="col-12">
-                      <div class="col-sm-12 text-left">
-                        <font size="3" color="red">
-                          <B> เงินคงเหลือ : <?php echo $reserve_money;?> </B>
-                        </font>
-                      </div>
-                      <br>
-                      <br>
-                      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-                        <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                          <table class="table">
-                            <thead>
-                              <tr>
-                                <th class="text-center" width="33%">หน่วยรถ</th>
-                                <th class="text-center" width="33%">เงินคงเหลือ</th>
-                                <th class="text-center" width="33%">ข้อมูลใช้เงิน</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            <?php 
-                            $mnoey = 0;
-                              while($value = $objq_member -> fetch_assoc()){
-                                $id_member = $value['id_member'];
-                                $sql_reserve = "SELECT money FROM reserve_money WHERE id_member = $id_member";
-                                $objq_reserve = mysqli_query($conn,$sql_reserve);
-                                if ($objq_reserve->num_rows > 0) {
-                                  $objr_reserve = mysqli_fetch_array($objq_reserve);
-                                  $money = $objr_reserve['money'];
-                                }else {
-                                  $money = 0;
-                                }
-                            ?>
-                              <tr>
-                                <td class="text-center"><?php echo ($value['name']); ?></td> 
-                                <td class="text-center"><?php echo $money; ?></td>
-                                <td class="text-center"><a href="reserve_datacar2.php?id_member=<?php echo $id_member;?>">>></a></td>
-                              </tr>
-                            <?php 
-                              }
-                            ?>
-                            </tbody>
-                          </table>
-                        </div>
-                        <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-                      </div>
-                      
-                      <div class="col-12 col-xs-12 col-sm-412col-md-12 col-lg-12">
-                        <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-                        <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                          <br>
-                          <br>
-                          <br>
-                          <table class="table">
-                            <thead>
-                              <tr>
-                                <th class="text-center" width="27%">วันที่</th>
-                                <th class="text-center" width="32%">หน่วยรถ</th>
-                                <th class="text-center" width="32%">เงินโอน</th>
-                                <th class="text-center" width="9%">ลบ</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            <?php 
-                              while($value = $objq_history -> fetch_assoc()){
-                            ?>
-                              <tr>
-                                <td class="text-center"><?php echo Datethai($value['date']); ?></td> 
-                                <td class="text-center"><?php echo $value['name']; ?></td>
-                                <td class="text-center"><?php echo $value['money']; ?></td>
-                                <td class="text-center">
-                                  <a href="algorithm/delete_reservecar.php?id_member=<?php echo $value['id_member_receive'];?>&&id=<?php echo $value['id_reserve_history']; ?>&&money=<?php echo $value['money'];?>&&money_total=<?php echo $reserve_money;?>" class="btn btn-danger btn-xs">ลบ</a>
-                                </td>
-                              </tr>
-                            <?php 
-                              }
-                            ?>
-                            </tbody>
-                          </table>
-                        </div>
-                        <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-                      </div>
-                    </div>
+                <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right">
+                  <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> ทำรายการ </a>
                 </div>
               </div>
+            </div>
+            <div class="box-body no-padding">
+              <div class="mailbox-read-message">
+                <div class="col-12">
+                  <div class="col-sm-12 text-left">
+                    <font size="3" color="red">
+                      <B> เงินคงเหลือ  <?php echo $reserve_money;?> </B>
+                    </font>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                    <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="text-center" width="33%">หน่วยรถ</th>
+                            <th class="text-center" width="33%">เงินคงเหลือ</th>
+                            <th class="text-center" width="33%">ข้อมูลใช้เงิน</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <?php 
+                        $mnoey = 0;
+                          while($value = $objq_member -> fetch_assoc()){
+                            $id_member = $value['id_member'];
+                            $sql_reserve = "SELECT money FROM reserve_money WHERE id_member = $id_member";
+                            $objq_reserve = mysqli_query($conn,$sql_reserve);
+                            if ($objq_reserve->num_rows > 0) {
+                              $objr_reserve = mysqli_fetch_array($objq_reserve);
+                              $money = $objr_reserve['money'];
+                            }else {
+                              $money = 0;
+                            }
+                        ?>
+                          <tr>
+                            <td class="text-center"><?php echo ($value['name']); ?></td> 
+                            <td class="text-center"><?php echo $money; ?></td>
+                            <td class="text-center"><a href="reserve_datacar2.php?id_member=<?php echo $id_member;?>">>></a></td>
+                          </tr>
+                        <?php 
+                          }
+                        ?>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="content">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <div class="col-12">
+                <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
+                <div class="col-4 col-sm-4 col-md-4 col-xl-4">
+                  <div class="text-center">
+                    <font size="5">
+                      <B align="center">โอน สร.หน่วยรถ<font color="red"> </font></B>
+                    </font>
+                  </div>
+                </div>
+                <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right"> </div>
+              </div>
+            </div>
+            <div class="box-body no-padding">
+              <div class="mailbox-read-message">
+                <div class="col-12">
+                  
+                  <div class="col-12 col-xs-12 col-sm-412col-md-12 col-lg-12">
+                    <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                    <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <table class="table" id="example1">
+                        <thead>
+                          <tr>
+                            <th class="text-center" width="27%">วันที่</th>
+                            <th class="text-center" width="32%">หน่วยรถ</th>
+                            <th class="text-center" width="32%">เงินโอน</th>
+                            <th class="text-center" width="9%">ลบ</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <?php 
+                          while($value = $objq_history -> fetch_assoc()){
+                        ?>
+                          <tr>
+                            <td class="text-center"><?php echo Datethai($value['date']); ?></td> 
+                            <td class="text-center"><?php echo $value['name']; ?></td>
+                            <td class="text-center"><?php echo $value['money']; ?></td>
+                            <td class="text-center">
+                              <a href="algorithm/delete_reservecar.php?id_member=<?php echo $value['id_member_receive'];?>&&id=<?php echo $value['id_reserve_history']; ?>&&money=<?php echo $value['money'];?>&&money_total=<?php echo $reserve_money;?>" class="btn btn-danger btn-xs">ลบ</a>
+                            </td>
+                          </tr>
+                        <?php 
+                          }
+                        ?>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                  </div>
+                </div>
             </div>
           </div>
         </section>
@@ -311,16 +329,20 @@
     <script src="../dist/js/demo.js"></script>
     <script src="../plugins/iCheck/icheck.min.js"></script>
     <script>
+      $('#example1').DataTable({
+        'paging'      : true,
+        'lengthChange': true,
+        'searching'   : true,
+        'ordering'    : false,
+        'info'        : true,
+        'autoWidth'   : false
+      });
        
       $(document).ready( function() {
           var now = new Date();
-      
           var day = ("0" + now.getDate()).slice(-2);
           var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
           var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-
-
         $('#datePicker').val(today);
       });
     </script>

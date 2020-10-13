@@ -104,9 +104,9 @@
             <div class="row">
               <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="topnav">
-                  <a href="reserve_office.php"> โอนจ่าย </a>
+                  <a href="reserve_office.php"> โอนจ่ายสนง </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_carvalue.php"> ข้อมูลหน่วยรถ </a>
+                  <a href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
                   <a class="active" href="car_rental.php"> ค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>
@@ -132,18 +132,43 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
                   </div>
                   <div class="box-body">  
-                    <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
-                    <div class="col-6 col-sm-6 col-md-6 col-xl-6">
+                    <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
+                    <div class="col-4 col-sm-4 col-md-4 col-xl-4">
+
                       <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">ชื่อ</label>
-                        <div class="col-sm-10">
+                        <label for="car_rental" class="col-4 col-sm-4 col-md-4 col-xl-4 control-label">วันที่</label>
+                        <div class="col-8 col-sm-8 col-md-8 col-xl-8">
+                          <input type="date" class="form-control" name="date" id="car_rental" value="<?php echo $date; ?>">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="name" class="col-4 col-sm-4 col-md-4 col-xl-4 control-label">ชื่อ</label>
+                        <div class="col-8 col-sm-8 col-md-8 col-xl-8">
                           <input type="text" class="form-control" id="name" value="<?php echo $name_member ?>" readonly/>
                           <input type="hidden" class="form-control" id="name" name="id_carrental" value="<?php echo $id_carrental?>">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="rc_practice" class="col-sm-2 control-label">ปฏิบัติงาน</label>
-                        <div class="col-sm-10">
+                        <label for="rc_practice" class="col-4 col-sm-4 col-md-4 col-xl-4 control-label">ใช้รถ</label>
+                        <div class="col-8 col-sm-8 col-md-8 col-xl-8">
+                          <select name="member_car" class="form-control">
+                          <?php 
+                            $sql_member = "SELECT id_member,name FROM member WHERE status_reserve = 1";
+                            $objq_member = mysqli_query($conn,$sql_member);
+                            while($value = $objq_member->fetch_assoc()){ 
+                          ?>
+                          <option value="<?php echo $value['id_member']; ?>" <?php if($member_car==$value['id_member']){ echo "selected";}else{}?>>
+                          <?php echo $value['name']; ?></option>
+                          <?php
+                            }
+                          ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="rc_practice" class="col-4 col-sm-4 col-md-4 col-xl-4 control-label">ปฏิบัติงาน</label>
+                        <div class="col-8 col-sm-8 col-md-8 col-xl-8">
                           <select name="id_practice" class="form-control">
                           <?php 
                             $sql_practice = "SELECT * FROM rc_practice";
@@ -159,42 +184,19 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="rc_practice" class="col-sm-2 control-label">รถ</label>
-                        <div class="col-sm-10">
-                          <select name="member_car" class="form-control">
-                          <?php 
-                            $sql_member = "SELECT id_member,name FROM member";
-                            $objq_member = mysqli_query($conn,$sql_member);
-                            while($value = $objq_member->fetch_assoc()){ 
-                          ?>
-                          <option value="<?php echo $value['id_member']; ?>" <?php if($member_car==$value['id_member']){ echo "selected";}else{}?>>
-                          <?php echo $value['name']; ?></option>
-                          <?php
-                            }
-                          ?>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="car_rental" class="col-sm-2 control-label">ค่าเช่ารถ</label>
-                        <div class="col-sm-10">
+                        <label for="car_rental" class="col-4 col-sm-4 col-md-4 col-xl-4 control-label">ค่าเช่ารถ</label>
+                        <div class="col-8 col-sm-8 col-md-8 col-xl-8">
                           <input type="text" class="form-control" name="money" id="car_rental" value="<?php echo $money; ?>">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="car_rental" class="col-sm-2 control-label">วันที่</label>
-                        <div class="col-sm-10">
-                          <input type="date" class="form-control" name="date" id="car_rental" value="<?php echo $date; ?>">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="note" class="col-sm-2 control-label">หมายเหตุ</label>
-                        <div class="col-sm-10">
+                        <label for="note" class="col-4 col-sm-4 col-md-4 col-xl-4 control-label">หมายเหตุ</label>
+                        <div class="col-8 col-sm-8 col-md-8 col-xl-8">
                           <input type="text" class="form-control" name="note" id="note" value="<?php echo $note; ?>">
                         </div>
                       </div>
                     </div>
-                    <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
+                    <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
                   </div>  
                   <div class="box-footer text-center">  
                     <button type="submit" class="btn btn-success" data-dismiss="modal">บันทึก</button>  

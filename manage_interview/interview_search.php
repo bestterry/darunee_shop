@@ -16,7 +16,6 @@
       <nav class="navbar navbar-static-top">
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
-            
           </ul>
         </div>
       </nav>
@@ -59,12 +58,14 @@
                     <table id="example2" class="table">
                       <thead>
                         <tr>
-                          <th class="text-center" width="10%">ชื่อไฟล์</th>
+                          <th class="text-center" width="9%">ชื่อไฟล์</th>
                           <th class="text-center" width="10%">ชื่อ</th>
                           <th class="text-center" width="15%">พื้นที่</th>
                           <th class="text-center" width="15%">สินค้า</th>
                           <th class="text-center" width="15%">ใช้กับ</th>
-                          <th class="text-center" width="35%">หมายเหต</th>
+                          <th class="text-center" width="5%">เกรด</th>
+                          <th class="text-center" width="25%">หมายเหต</th>
+                          <th class="text-center" width="5%">#</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -98,7 +99,20 @@
                             }
                            ?>
                           </td>
+                          <td class="text-center"><?php echo $value['grade'];?></td>
                           <td class="text-center"><?php echo $value['note'];?></td>
+                          <td class="text-center">
+                            <?php 
+                              if ($value['status']=='N') {
+                            ?>
+                              <a href="algorithm/edit_status.php?status=search&id_interview=<?php echo $value['id_interview'];?>&province_name=<?php echo $_GET['province_name'];?>&amphur_name=<?php echo $_GET['amphur_name']; ?>&id_product=<?php echo $_GET['id_product']; ?>&id_plance=<?php $_GET['id_plance']; ?>" 
+                              class="btn btn-success btn-xs">เปิด</a>
+                            <?php
+                              }else {
+                              echo "เปิดเเล้ว";
+                              }
+                            ?>
+                          </td>
                         </tr>
                         <?php }?>
                       </tbody>
