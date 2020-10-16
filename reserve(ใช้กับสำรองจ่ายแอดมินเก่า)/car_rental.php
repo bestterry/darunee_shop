@@ -3,11 +3,10 @@
   require "../session.php";
   require "menu/date.php";
 
-  $date = $_GET['day'];
+  $date = date("Y-m-d");
 
   $sql_member = "SELECT id_member,name FROM member WHERE status_reserve = 1";
   $objq_member = mysqli_query($conn,$sql_member);
-  $objq_member2 = mysqli_query($conn,$sql_member);
 ?>
 
 <!DOCTYPE html>
@@ -122,7 +121,7 @@
                             <div class="col-12">
                               <div align="center">
                                 <font size="5">
-                                  <B align="center">ปฏิบัตงานและค่าเช่ารถ</B>
+                                  <B align="center">ปฏิบัติงานและค่าเช่ารถ</B>
                                 </font>
                               </div>
                               <br>
@@ -143,21 +142,15 @@
                         </form>
                         <div class="box-body">
                           <div class="mailbox-read-message">
-
                             <div class="col-12">
-                              <div align="center">
-                                <font size="5">
-                                  <B align="center">ปฏิบัติงาน</B>
-                                </font>
-                              </div>
-                              <br>
                               <table id="example1" class="table">
                                 <thead>
                                   <tr>
-                                    <th class="text-center" width="15%">หน่วยรถ</th>
-                                    <th class="text-center" width="15%">ปฏิบัติงาน</th>
-                                    <th class="text-center" width="15%">ใช้รถ</th>
-                                    <th class="text-center" width="50%">หมายเหตุ</th>
+                                    <th class="text-center" width="13%">หน่วยรถ</th>
+                                    <th class="text-center" width="13%">ปฏิบัติงาน</th>
+                                    <th class="text-center" width="13%">ใช้รถ</th>
+                                    <th class="text-center" width="13%">ค่าเช่ารถ</th>
+                                    <th class="text-center" width="43%">หมายเหตุ</th>
                                     <th class="text-center" width="5%">แก้ไข</th>
                                   </tr>
                                 </thead>
@@ -177,19 +170,13 @@
                                         if ($objq_carrental->num_rows > 0 ) {
                                         $objr_carental = mysqli_fetch_array($objq_carrental);
                                         $member_car = $objr_carental['member_car'];
-                                        
-                                        if ($member_car == $id_member) {
-                                          $car_rental = $objr_carental['money'];
-                                        }else {
-                                          $car_rental = 0;
-                                        }
-
                                         $sql_member = "SELECT name FROM member WHERE id_member = $member_car";
                                         $objq_car = mysqli_query($conn,$sql_member);
                                         $objr_member = mysqli_fetch_array($objq_car);
                                       ?>
                                       <td class="text-center"><?php echo $objr_carental['name_practice'];?></td>
                                       <td class="text-center"><?php echo $objr_member['name'];?></td>
+                                      <td class="text-center"><?php echo $objr_carental['money'];?></td>
                                       <td class="text-center"><?php echo $objr_carental['note'];?></td>
                                       <td class="text-center">
                                         <a type="button" href="car_rental_edit.php?id=<?php echo $objr_carental['id_carrental']; ?>&&status=today" class="btn btn-success btn-xs">แก้</a>
@@ -201,54 +188,6 @@
                                       <td class="text-center">-</td>
                                       <td class="text-center">-</td>
                                       <td class="text-center">-</td>
-                                      <?php 
-                                        }
-                                      ?>
-                                    </tr>
-                                  <?php 
-                                    }
-                                  ?>
-                                </tbody>
-                              </table>
-                            </div>
-
-                            <div class="col-12">
-                              <div align="center">
-                                <font size="5">
-                                  <B align="center">ค่าเช่ารถ</B>
-                                </font>
-                              </div>
-                              <br>
-                              <table id="example2" class="table">
-                                <thead>
-                                  <tr>
-                                    <th class="text-center" width="33%">หน่วยรถ</th>
-                                    <th class="text-center" width="33%">ปฏิบัติงาน</th>
-                                    <th class="text-center" width="33%">ค่าเช่ารถ</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <?php 
-                                    while($value = $objq_member2 -> fetch_assoc()){
-                                      $id_member = $value['id_member'];
-                                  ?>
-                                    <tr>
-                                      <td class="text-center"><?php echo ($value['name']); ?></td> 
-                                      <?php
-                                        $sum_money = 0;
-                                        $sql_carrental = "SELECT * FROM car_rental 
-                                                          INNER JOIN rc_practice ON rc_practice.id_practice = car_rental.id_practice 
-                                                          WHERE member_car = $id_member AND date = '$date'";
-                                        $objq_carrental = mysqli_query($conn,$sql_carrental);
-                                        if ($objq_carrental->num_rows > 0 ) {
-                                        $objr_carental = mysqli_fetch_array($objq_carrental);
-                                      ?>
-                                      <td class="text-center"><?php echo $objr_carental['name_practice'];?></td>
-                                      <td class="text-center"><?php echo $objr_carental['money'];?></td>
-                                       <?php 
-                                        }else{
-                                      ?>
-                                      <td class="text-center">-</td>
                                       <td class="text-center">-</td>
                                       <?php 
                                         }
@@ -260,7 +199,6 @@
                                 </tbody>
                               </table>
                             </div>
-
                           </div>
                         </div>
                         <div class="box-footer text-right">
@@ -269,59 +207,55 @@
                       </div>
 
                       <div class="tab-pane" id="intime">
-                        <div class="box-body">
-                          <div class="mailbox-read-message">
-                            <div align="center">
-                              <font size="5">
-                                <B align="center">ค่าเช่ารถ</B>
-                              </font>
-                            </div>
-                            <div class="col-12">
-                              <form action="car_rental_intime.php" method="post">
-                                <div class="box-body">
+                        <div class="col-12">
+                          <form action="car_rental_intime.php" method="post">
+                            <div class="box-body">
+                              <div class="col-12">
+                                <div class="table-responsive mailbox-messages">
                                   <div class="col-12">
-                                    <div class="table-responsive mailbox-messages">
-                                      <div class="col-12">
-                                        <div class="col-6 col-sm-6 col-md-6 col-xl-6 text-center">
-                                          <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
-                                          <div class="col-8 col-sm-8 col-md-8 col-xl-8">
-                                              <B><font size="5">ตั้งแต่</font></B>
-                                          </div>
-                                          <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
-                                        </div>
-                                        <div class="col-6 col-sm-6 col-md-6 col-xl-6 text-center"> 
-                                          <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
-                                          <div class="col-8 col-sm-8 col-md-8 col-xl-8">
-                                            <B><font size="5">ถึง</font></B>
-                                          </div>
-                                          <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
-                                        </div>
+                                    <div class="text-center">
+                                      <font size="5">
+                                        <B align="center">ค่าเช่ารถ</B>
+                                      </font>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6 col-xl-6 text-center">
+                                      <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
+                                      <div class="col-8 col-sm-8 col-md-8 col-xl-8">
+                                          <B><font size="5">ตั้งแต่</font></B>
                                       </div>
-                                      <div class="col-12">
-                                        <div class="col-6 col-sm-6 col-md-6 col-xl-6 text-center">
-                                          <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
-                                          <div class="col-8 col-sm-8 col-md-8 col-xl-8">
-                                            <input class="form-control text-center" type="date" name="aday">
-                                          </div>
-                                          <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
-                                        </div>
-                                        <div class="col-6 col-sm-6 col-md-6 col-xl-6 text-center"> 
-                                          <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
-                                          <div class="col-8 col-sm-8 col-md-8 col-xl-8">
-                                            <input class="form-control text-center" type="date" name="bday">
-                                          </div>
-                                          <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
-                                        </div>
+                                      <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6 col-xl-6 text-center"> 
+                                      <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
+                                      <div class="col-8 col-sm-8 col-md-8 col-xl-8">
+                                        <B><font size="5">ถึง</font></B>
                                       </div>
+                                      <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12">
+                                    <div class="col-6 col-sm-6 col-md-6 col-xl-6 text-center">
+                                      <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
+                                      <div class="col-8 col-sm-8 col-md-8 col-xl-8">
+                                        <input class="form-control text-center" type="date" name="aday">
+                                      </div>
+                                      <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6 col-xl-6 text-center"> 
+                                      <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
+                                      <div class="col-8 col-sm-8 col-md-8 col-xl-8">
+                                        <input class="form-control text-center" type="date" name="bday">
+                                      </div>
+                                      <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="box-footer text-center">
-                                  <button type="submit" class="btn btn-success">ตกลง</button>
-                                </div>
-                              </form>
+                              </div>
                             </div>
-                          </div>
+                            <div class="box-footer text-center">
+                              <button type="submit" class="btn btn-success">ตกลง</button>
+                            </div>
+                          </form>
                         </div>
                       </div>
 
@@ -334,6 +268,7 @@
       </div>
       <?php require("../menu/footer.html"); ?>
     </div>
+
 
     <!-- jQuery 3 -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -351,6 +286,75 @@
     <!-- AdminLTE for demo purposes -->
     <script src="../dist/js/demo.js"></script>
     <script src="../plugins/iCheck/icheck.min.js"></script>
+
+    <div id="dataModal" class="modal fade">  
+      <div class="modal-dialog">  
+        <div class="modal-content">  
+          <div class="modal-header">  
+            <button type="button" class="close" data-dismiss="modal">&times;</button>  
+            <h3 class="modal-title text-center">แก้ไขค่าเช่ารถ</h3>  
+          </div>  
+          <form action="car_rentalday.php" method="post" class="form-horizontal">
+            <div class="modal-body" id="car_rental">  
+              <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">ชื่อ</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="name" value="'.$name_member.'" readonly/>
+                  <input type="hidden" class="form-control" id="name" value="'.$id_carrental.'" readonly/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="rc_practice" class="col-sm-2 control-label">ปฏิบัติงาน</label>
+                <div class="col-sm-10">
+                  <select name="id_practice" class="form-control">
+                   <option value="'.$id_practice.'">'.$name_practice.'</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="car_rental" class="col-sm-2 control-label">ค่าเช่ารถ</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="car_rental" value="'.$money.'">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="car_rental" class="col-sm-2 control-label">วันที่</label>
+                <div class="col-sm-10">
+                  <input type="date" class="form-control" id="car_rental" value="'.$date.'">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="note" class="col-sm-2 control-label">หมายเหตุ</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="note" value="'.$note.'">
+                </div>
+              </div>
+            </div>  
+            <div class="modal-footer">  
+              <button type="button" class="btn btn-success text-center" data-dismiss="modal">บันทึก</button>  
+              <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>  
+            </div> 
+          </form> 
+        </div>  
+      </div>  
+    </div>
+
+    <script>
+       $(document).ready(function(){  
+          $('.view_data').click(function(){  
+            var id_carrental = $(this).attr("id");   
+              $.ajax({  
+                url:"algorithm/select_carrental.php",  
+                method:"post",  
+                data:{id_carrental:id_carrental},  
+                success:function(data){  
+                  $('#car_rental').html(data);  
+                  $('#dataModal').modal("show");  
+                }  
+              });  
+            });  
+        }); 
+    </script>
   </body>
 
 </html>

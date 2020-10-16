@@ -126,7 +126,7 @@
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center">
                       <font size="5">
-                        <B align="center">แก้ไขค่าเช่ารถ</B>
+                        <B align="center">แก้ไขปฏิบัติงานและค่าเช่ารถ </B>
                       </font>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
@@ -154,7 +154,7 @@
                         <div class="col-8 col-sm-8 col-md-8 col-xl-8">
                           <select name="member_car" class="form-control">
                           <?php 
-                            $sql_member = "SELECT id_member,name FROM member WHERE status_reserve = 1 OR id_member = 53 OR id_member = 54";
+                            $sql_member = "SELECT id_member,name FROM member WHERE status_reserve = 1";
                             $objq_member = mysqli_query($conn,$sql_member);
                             while($value = $objq_member->fetch_assoc()){ 
                           ?>

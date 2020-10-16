@@ -1,14 +1,15 @@
-<div class="row">
- <div class="col-md-3">
+<?php
+  if($id_member == 30 || $id_member == 33){
+?>
+ <div class="col-3 col-xs-7 col-sm-7 col-md-4 col-xl-4">
   <div class="box box-solid">
     <div class="box-header with-border">
-     <font size="3"><B>เมนูหลัก</B></font>
+     <font size="3"><B>สินค้า</B></font>
     </div>
     <div class="box-body no-padding">
      <ul class="nav nav-pills nav-stacked" ata-widget="tree">
-      <?php
-        if($id_member == 30 || $id_member == 33){
-      ?>
+      
+
         <!--สั่งสินค้า -->
         <li><a href="../order/list_order.php" ><i class="fa fa-file-text-o"></i> สั่งซื้อ </a></li>
         <!--/สั่งสินค้า -->
@@ -28,14 +29,28 @@
         <!-- สต๊อกรวม -->
         <li><a href="total_stock.php" ><i class="fa fa-home"></i> STOCK </a></li>
         <!-- /สต๊อกรวม -->
+        
+       
+     </ul>
+    </div>
+  </div>
+ </div>
+
+ <div class="col-3 col-xs-7 col-sm-7 col-md-4 col-xl-4">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+     <font size="3"><B>สนง.</B></font>
+    </div>
+    <div class="box-body no-padding">
+     <ul class="nav nav-pills nav-stacked" ata-widget="tree">
+      
+        <!-- สำรองจ่าย -->
+        <li><a href="reserve_office.php"><i class="fa fa-money"></i> สำรองจ่าย </a></li>
+        <!--/สำรองจ่าย -->
 
         <!--ORDER ค้างส่ง -->
         <li><a href="../add_customer/list_order.php" ><i class="fa fa-columns"></i> ORDER </a></li>
         <!--/ORDER ค้างส่ง -->
-
-        <!-- นอกเขต. -->
-        <li><a href="outside.php" ><i class="fa fa-truck"></i> ขายนอกเขต </a></li>
-        <!-- /นอกเขต. -->
 
         <!-- ยอดขาย -->
         <li><a href="sale_history.php" ><i class="fa fa-money"></i>รายการขาย (เงินขาย)</a></li>
@@ -112,18 +127,38 @@
         <li><a href="acc_market_sale.php" ><i class="fa fa-money"></i>เงินขาย (สกต.) </a></li>
         <!-- /สกต. -->
 
-        <!-- สำรองจ่าย -->
-        <li><a href="reserve_office.php"><i class="fa fa-money"></i> สำรองจ่าย </a></li>
-        <!--/สำรองจ่าย -->
-
         <!-- ค่าส่งปุ๋ย -->
         <li><a href="sent_fertilizer.php" ><i class="fa fa-money"></i>ค่าส่งปุ๋ย </a></li>
         <!-- /ค่าส่งปุ๋ย -->
 
         <!-- นอกเขต. -->
+        <li><a href="outside.php" ><i class="fa fa-truck"></i> ขายนอกเขต </a></li>
+        <!-- /นอกเขต. -->
+
+        <!-- นอกเขต. -->
         <li><a href="store.php" ><i class="fa fa-user-circle-o"></i> ระเบียนร้านค้า </a></li>
         <!-- /นอกเขต. -->
         
+
+        <!-- จัดการเพลง -->
+        <li><a href="report_work.php"><i class="fa fa-user-circle"></i> ปฏิบัติงาน สนง. </a></li>
+        <!--/จัดการเพลง -->
+     </ul>
+    </div>
+  </div>
+ </div>
+
+ <div class="col-3 col-xs-7 col-sm-7 col-md-4 col-xl-4">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+     <font size="3"><B>อื่นๆ</B></font>
+    </div>
+    <div class="box-body no-padding">
+     <ul class="nav nav-pills nav-stacked" ata-widget="tree">
+      <?php
+        if($id_member == 30 || $id_member == 33){
+      ?>
+
         <!-- แผนที่ -->
         <li><a href="map.php" ><i class="fa fa-map"></i> แผนที่ </a></li>
         <!-- /แผนที่ -->
@@ -134,10 +169,6 @@
 
         <!-- จัดการเพลง -->
         <li><a href="radio_list.php" ><i class="fa fa-play-circle-o"></i> เวลาเช่าวิทยุ </a></li>
-        <!--/จัดการเพลง -->
-
-        <!-- จัดการเพลง -->
-        <!-- <li><a href="car_rental.php"><i class="fa fa-car"></i> เช่ารถ </a></li> -->
         <!--/จัดการเพลง -->
 
         <!-- จัดการเพลง -->
@@ -153,10 +184,54 @@
         <!--/จัดการข้อมูลสินค้า-พนักงาน -->
         
         <?php
-            }
+            }elseif($id_member == 100 || $id_member == 101){}
         ?>
      </ul>
     </div>
   </div>
  </div>
-</div>
+
+<?php
+    }elseif($id_member == 100 || $id_member == 101){
+?>
+
+  <div class="col-3 col-xs-8 col-sm-8 col-md-4 col-xl-4">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+      <font size="3"><B>เมนูหลัก</B></font>
+      </div>
+      <div class="box-body no-padding">
+      <ul class="nav nav-pills nav-stacked" ata-widget="tree">
+        
+        <!--ORDER ค้างส่ง -->
+        <li><a href="../add_customer/list_order.php" ><i class="fa fa-columns"></i> ORDER </a></li>
+          <!--/ORDER ค้างส่ง -->
+
+          <!-- นอกเขต. -->
+          <li><a href="store.php" ><i class="fa fa-user-circle-o"></i> ระเบียนร้านค้า </a></li>
+          <!-- /นอกเขต. -->
+          
+          <!-- แผนที่ -->
+          <li><a href="map.php" ><i class="fa fa-map"></i> แผนที่ </a></li>
+          <!-- /แผนที่ -->
+
+          <!-- จัดการเพลงหลัก -->
+          <li><a href="../manage_song/artist.php" ><i class="fa fa-music"></i> จัดการเพลง </a></li>
+          <!--/จัดการเพลงหลัก -->
+
+          <!-- จัดการเพลง -->
+          <li><a href="radio_list.php" ><i class="fa fa-play-circle-o"></i> เวลาเช่าวิทยุ </a></li>
+          <!--/จัดการเพลง -->
+
+          <!-- จัดการเพลง -->
+          <li><a href="../manage_interview/interview.php"><i class="fa fa-car"></i> จัดการสัมภาษณ์ </a></li>
+          <!--/จัดการเพลง -->
+        
+      </ul>
+      </div>
+    </div>
+  </div>
+        
+<?php 
+    }
+?>

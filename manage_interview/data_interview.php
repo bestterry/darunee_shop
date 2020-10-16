@@ -66,7 +66,7 @@
                           <th class="text-center" width="14%">สินค้า</th>
                           <th class="text-center" width="14%">ใช้กับ</th>
                           <th class="text-center" width="5%">เกรด</th>
-                          <th class="text-center" width="25%">หมายเหต</th>
+                          <th class="text-center" width="25%">หมายเหตุ</th>
                           <th class="text-center" width="5%">#</th>
                           <th class="text-center" width="5%">แก้</th>
                         </tr>
@@ -103,7 +103,7 @@
                             ?>
                             </td>
                             <td class="text-center"><?php echo $value['grade'];?></td>
-                            <td class="text-center"><?php echo $value['note'];?></td>
+                            <td class=""><?php echo $value['note'];?></td>
                             <td class="text-center">
                               <?php 
                                 if ($value['status']=='N') {

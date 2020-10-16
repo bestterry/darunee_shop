@@ -103,8 +103,8 @@ $mysqli = connect();
                           <option value="">-- เลือกจังหวัด --</option>
                         </select>
                       </div>
-                    </div>
-                    <!-- /.form-group -->
+                    </div> 
+                    
                     <div class="form-group">
                       <label  class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">อำเภอ </label>
                       <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 ">

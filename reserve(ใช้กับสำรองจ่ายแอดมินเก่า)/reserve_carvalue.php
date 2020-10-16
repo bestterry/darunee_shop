@@ -3,11 +3,10 @@
   require "../session.php";
   require "menu/date.php";
 
-  $date = $_GET['day'];
+  $date = date("Y-m-d");
 
   $sql_member = "SELECT id_member,name FROM member WHERE status_reserve = 1";
   $objq_member = mysqli_query($conn,$sql_member);
-  $objq_member2 = mysqli_query($conn,$sql_member);
 ?>
 
 <!DOCTYPE html>
@@ -96,8 +95,8 @@
                 <div class="topnav">
                   <a href="reserve_office.php"> โอนจ่ายสนง </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
-                  <a href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
-                  <a class="active" href="car_rental.php"> ปฏิบัติงานและค่าเช่ารถ </a>
+                  <a class="active" href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
+                  <a href="car_rental.php"> ปฏิบัติงานและค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>
               </div>
@@ -111,161 +110,108 @@
               <div class="box box-primary">
                   <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                      <li class="active"><a href="#today" data-toggle="tab">รายวัน</a></li>
+                      <li class="active"><a href="#befor" data-toggle="tab">รายวัน</a></li>
                       <li><a href="#intime" data-toggle="tab">ช่วงเวลา</a></li>
                     </ul> 
                     <div class="tab-content">
 
-                      <div class="tab-pane active" id="today">
-                        <form action="car_rentalday.php" method="get">
-                          <div class="box-body">
-                            <div class="col-12">
-                              <div align="center">
-                                <font size="5">
-                                  <B align="center">ปฏิบัตงานและค่าเช่ารถ</B>
-                                </font>
-                              </div>
-                              <br>
-                              <div class="table-responsive mailbox-messages">
-                                <div class="col-12">
-                                  <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center"></div>
-                                  <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center"> 
-                                    <input class="form-control text-center" type="date" value="<?php echo $date;?>" name="day">
+                      <div class="tab-pane active" id="befor">
+                          <form action="reserve_carbefor.php" method="post">
+                            <div class="box-body">
+                              <div class="col-12">
+                                <div align="center">
+                                  <font size="5">
+                                    <B align="center">ค่าใช้จ่ายหน่วยรถ</B>
+                                  </font>
+                                </div>
+                                <br>
+                                <div class="table-responsive mailbox-messages">
+                                  <div class="col-12">
+                                    <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center"></div>
+                                    <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center"> 
+                                      <input class="form-control text-center" type="date" name="day" value="<?php echo $date; ?>">
+                                    </div>
+                                    <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center"></div>
                                   </div>
-                                  <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center"></div>
                                 </div>
                               </div>
-                            </div>
-                          </div>
-                          <div class="box-footer text-center">
-                            <button type="submit" class="btn btn-success">ตกลง</button>
-                          </div>
-                        </form>
-                        <div class="box-body">
-                          <div class="mailbox-read-message">
-
-                            <div class="col-12">
-                              <div align="center">
-                                <font size="5">
-                                  <B align="center">ปฏิบัติงาน</B>
-                                </font>
-                              </div>
                               <br>
-                              <table id="example1" class="table">
-                                <thead>
-                                  <tr>
-                                    <th class="text-center" width="15%">หน่วยรถ</th>
-                                    <th class="text-center" width="15%">ปฏิบัติงาน</th>
-                                    <th class="text-center" width="15%">ใช้รถ</th>
-                                    <th class="text-center" width="50%">หมายเหตุ</th>
-                                    <th class="text-center" width="5%">แก้ไข</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
+                              <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-success">ตกลง</button>
+                              </div>
+                            </div>
+                            <div class="box-footer text-center">
+                              <div class="col-12">
+                                <table id="example1" class="table">
+                                  <thead>
+                                    <tr>
+                                      <th class="text-center" width="16%">หน่วยรถ</th>
+                                      <th class="text-center" width="16%">น้ำมัน</th>
+                                      <th class="text-center" width="16%">เบี้ยเลี้ยง</th>
+                                      <th class="text-center" width="16%">ที่พัก</th>
+                                      <th class="text-center" width="16%">จ่ายอื่น</th>
+                                      <th class="text-center" width="16%">รวมเงิน</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
                                   <?php 
                                     while($value = $objq_member -> fetch_assoc()){
                                       $id_member = $value['id_member'];
                                   ?>
                                     <tr>
-                                      <td class="text-center"><?php echo ($value['name']); ?></td> 
+                                      <td class="text-center"><?php echo ($value['name']); ?></td>  
                                       <?php
                                         $sum_money = 0;
-                                        $sql_carrental = "SELECT * FROM car_rental 
-                                                          INNER JOIN rc_practice ON rc_practice.id_practice = car_rental.id_practice 
-                                                          WHERE id_member = $id_member AND date = '$date'";
-                                        $objq_carrental = mysqli_query($conn,$sql_carrental);
-                                        if ($objq_carrental->num_rows > 0 ) {
-                                        $objr_carental = mysqli_fetch_array($objq_carrental);
-                                        $member_car = $objr_carental['member_car'];
-                                        
-                                        if ($member_car == $id_member) {
-                                          $car_rental = $objr_carental['money'];
-                                        }else {
-                                          $car_rental = 0;
-                                        }
-
-                                        $sql_member = "SELECT name FROM member WHERE id_member = $member_car";
-                                        $objq_car = mysqli_query($conn,$sql_member);
-                                        $objr_member = mysqli_fetch_array($objq_car);
-                                      ?>
-                                      <td class="text-center"><?php echo $objr_carental['name_practice'];?></td>
-                                      <td class="text-center"><?php echo $objr_member['name'];?></td>
-                                      <td class="text-center"><?php echo $objr_carental['note'];?></td>
-                                      <td class="text-center">
-                                        <a type="button" href="car_rental_edit.php?id=<?php echo $objr_carental['id_carrental']; ?>&&status=today" class="btn btn-success btn-xs">แก้</a>
-                                      </td>
-                                      <?php 
-                                        }else{
-                                      ?>
-                                      <td class="text-center">-</td>
-                                      <td class="text-center">-</td>
-                                      <td class="text-center">-</td>
-                                      <td class="text-center">-</td>
-                                      <?php 
+                                        $sql_resevelist = "SELECT id_list FROM reserve_list WHERE status = 4 ";
+                                        $objq_reservelist = mysqli_query($conn,$sql_resevelist);
+                                        while($value_reservelist = $objq_reservelist->fetch_assoc()){
+                                          $id_list = $value_reservelist['id_list'];
+                                          
+                                            $sql_history = "SELECT SUM(money) FROM reserve_history 
+                                            WHERE id_list = $id_list AND id_member = $id_member AND DATE_FORMAT(date,'%Y-%m-%d')='$date'";
+                                          
+                                          $objq_history = mysqli_query($conn,$sql_history);
+                                          while($value_history = $objq_history->fetch_assoc()){
+                                        ?>
+                                        <td class="text-center"><?php echo $value_history['SUM(money)'];?></td>
+                                        <?php 
+                                          $sum_money = $sum_money + $value_history['SUM(money)'];
+                                          }
                                         }
                                       ?>
+                                      <td class="text-center"><?php echo $sum_money;?></td>
                                     </tr>
                                   <?php 
                                     }
-                                  ?>
-                                </tbody>
-                              </table>
-                            </div>
-
-                            <div class="col-12">
-                              <div align="center">
-                                <font size="5">
-                                  <B align="center">ค่าเช่ารถ</B>
-                                </font>
-                              </div>
-                              <br>
-                              <table id="example2" class="table">
-                                <thead>
-                                  <tr>
-                                    <th class="text-center" width="33%">หน่วยรถ</th>
-                                    <th class="text-center" width="33%">ปฏิบัติงาน</th>
-                                    <th class="text-center" width="33%">ค่าเช่ารถ</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <?php 
-                                    while($value = $objq_member2 -> fetch_assoc()){
-                                      $id_member = $value['id_member'];
                                   ?>
                                     <tr>
-                                      <td class="text-center"><?php echo ($value['name']); ?></td> 
-                                      <?php
-                                        $sum_money = 0;
-                                        $sql_carrental = "SELECT * FROM car_rental 
-                                                          INNER JOIN rc_practice ON rc_practice.id_practice = car_rental.id_practice 
-                                                          WHERE member_car = $id_member AND date = '$date'";
-                                        $objq_carrental = mysqli_query($conn,$sql_carrental);
-                                        if ($objq_carrental->num_rows > 0 ) {
-                                        $objr_carental = mysqli_fetch_array($objq_carrental);
-                                      ?>
-                                      <td class="text-center"><?php echo $objr_carental['name_practice'];?></td>
-                                      <td class="text-center"><?php echo $objr_carental['money'];?></td>
-                                       <?php 
-                                        }else{
-                                      ?>
-                                      <td class="text-center">-</td>
-                                      <td class="text-center">-</td>
+                                      <th class="text-center">รวมเงิน</th>
                                       <?php 
-                                        }
+                                      $total_money = 0;
+                                      $sum_money = 0;
+                                      $sql_resevelist = "SELECT id_list,name_list FROM reserve_list WHERE status = 4";
+                                      $objq_reservelist = mysqli_query($conn,$sql_resevelist);
+                                      while($value_reservelist = $objq_reservelist->fetch_assoc()){
+                                        $id_list = $value_reservelist['id_list'];
+                                        $sql_history2 = "SELECT SUM(money) FROM reserve_history 
+                                                        WHERE id_list = $id_list AND DATE_FORMAT(date,'%Y-%m-%d')='$date'";
+                                        $objq_sum = mysqli_query($conn,$sql_history2);
+                                        $objr_sum = mysqli_fetch_array($objq_sum);
+                                        $sum_money = $objr_sum['SUM(money)'];
                                       ?>
+                                      <th class="text-center"><?php echo $sum_money;?></th>
+                                      <?php 
+                                        $total_money = $total_money + $sum_money;
+                                      }
+                                      ?>
+                                      <th class="text-center"><?php echo $total_money; ?></th>
                                     </tr>
-                                  <?php 
-                                    }
-                                  ?>
-                                </tbody>
-                              </table>
+                                  </tbody>
+                                </table>
+                              </div>
                             </div>
-
-                          </div>
-                        </div>
-                        <div class="box-footer text-right">
-                          <a href="../pdf_file/car_rental.php?date=<?php echo $date; ?>" class="btn btn-success">PDF</a>  
-                        </div>
+                            
+                          </form>
                       </div>
 
                       <div class="tab-pane" id="intime">
@@ -273,11 +219,11 @@
                           <div class="mailbox-read-message">
                             <div align="center">
                               <font size="5">
-                                <B align="center">ค่าเช่ารถ</B>
+                                <B align="center">ค่าใช้จ่ายหน่วยรถ</B>
                               </font>
                             </div>
                             <div class="col-12">
-                              <form action="car_rental_intime.php" method="post">
+                              <form action="reserve_carintime.php" method="post">
                                 <div class="box-body">
                                   <div class="col-12">
                                     <div class="table-responsive mailbox-messages">

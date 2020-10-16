@@ -101,7 +101,7 @@
                   <a href="reserve_office.php"> โอนจ่ายสนง </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
                   <a href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
-                  <a class="active" href="car_rental.php"> ค่าเช่ารถ </a>
+                  <a class="active" href="car_rental.php"> ปฏิบัติงานและค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>
               </div>
@@ -273,11 +273,6 @@
                         <div class="col-12">
                           <form action="car_rental_intime.php" method="post">
                             <div class="box-body">
-                              <div align="center">
-                                <font size="5">
-                                <B align="center">ค่าเช่ารถ</B>
-                                </font>
-                              </div>
                               <div class="table-responsive mailbox-messages">
                                 <div class="col-12">
                                   <div class="col-6 col-sm-6 col-md-6 col-xl-6 text-center">
@@ -312,18 +307,20 @@
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                            <div class="box-footer text-center">
-                              <button type="submit" class="btn btn-success">ตกลง</button>
+                              <br>
+                              <div class="text-center">
+                                <button type="submit" class="btn btn-success">ตกลง</button>
+                              </div>
                             </div>
                           </form>
+                          
                           <div class="box-body">
-                            <div class="col-12">
+                            <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-xl-12">
                               <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
                               <div class="col-6 col-sm-6 col-md-6 col-xl-6 text-center">
                                 <div align="center">
                                   <font size="5">
-                                  <B align="center"> <font color="red"><?php echo Datethai($aday);?></font> ถึง <font color="red"> <?php echo Datethai($bday);?></font></B>
+                                  <B align="center">ค่าเช่ารถ <font color="red"><?php echo Datethai($aday);?></font> ถึง <font color="red"> <?php echo Datethai($bday);?></font></B>
                                   </font>
                                 </div>
                                 <br>
@@ -372,9 +369,66 @@
                               </div>
                               <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
                             </div>
+
+                            <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-xl-12">
+                              <div align="center">
+                                <font size="5">
+                                <B align="center">สรุปปฏิบัติงาน <font color="red"><?php echo Datethai($aday);?></font> ถึง <font color="red"> <?php echo Datethai($bday);?></font></B>
+                                </font>
+                              </div>
+                              <br>
+                              <table class="table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center" width="7%"></th>
+                                    <?php 
+                                      $sql_practice = "SELECT id_practice,name_practice FROM rc_practice ";
+                                      $objq_practice = mysqli_query($conn,$sql_practice);
+                                      while($value_practice = $objq_practice->fetch_assoc()){
+                                    ?>
+                                    <th class="text-center" width="7%"><?php echo $value_practice['name_practice']; ?></th>
+                                    <?php    
+                                      }
+                                    ?>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <?php 
+                                    $sql_member = "SELECT id_member,name FROM member WHERE status_reserve = 1";
+                                    $objq_member = mysqli_query($conn,$sql_member);
+                                    while($value_member = $objq_member->fetch_assoc()){
+                                      $id_member = $value_member['id_member'];
+                                  ?>
+                                  <tr>
+                                    <th class="text-center" width="7%"><?php echo $value_member['name']; ?></th>
+                                    <?php 
+                                      $objq_practice2 = mysqli_query($conn,$sql_practice);
+                                      while($value_practice = $objq_practice2->fetch_assoc()){
+                                        $id_practice = $value_practice['id_practice'];
+                                        $sql_report_office = "SELECT COUNT(id_carrental) FROM car_rental WHERE id_member = $id_member 
+                                        AND id_practice = $id_practice  AND (date BETWEEN '$aday' AND '$bday')";
+                                        $objq_report_office = mysqli_query($conn,$sql_report_office);
+                                        $objr_report_office = mysqli_fetch_array($objq_report_office);
+
+                                        if ($objr_report_office['COUNT(id_carrental)']==0) {
+                                          $value = '';
+                                        }else {
+                                          $value = $objr_report_office['COUNT(id_carrental)'];
+                                        }
+                                    ?>
+                                    <td class="text-center"><?php echo $value; ?></td>
+                                    <?php 
+                                      }
+                                    ?>
+                                  </tr>
+                                  <?php    
+                                    }
+                                  ?>
+                                </tbody>
+                              </table>
+                            </div>
                           </div>
-                          <div class="box-footer text-center">
-                          </div>
+                         
                         </div>
                       </div>
 

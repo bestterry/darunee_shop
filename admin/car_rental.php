@@ -97,7 +97,7 @@
                   <a href="reserve_office.php"> โอนจ่ายสนง </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
                   <a href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
-                  <a class="active" href="car_rental.php"> ค่าเช่ารถ </a>
+                  <a class="active" href="car_rental.php"> ปฏิบัติงานและค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>
               </div>
