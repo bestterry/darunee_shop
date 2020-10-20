@@ -233,7 +233,7 @@
                           <label class="col-sm-4 control-label">เปิดแล้ว </label>
                           <div class="col-sm-8">
                             <label class="switch">
-                              <input type="checkbox" name="status" <?php if($objr_song['status']=="Y"){ echo "checked"; }else{} ?>>
+                              <input type="checkbox" name="id_member" <?php if($objr_song['id_member'] != 54){ echo "checked"; }else{} ?>>
                               <span class="slider round"></span>
                             </label>
                           </div>

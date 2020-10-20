@@ -119,7 +119,7 @@
                       <tr>
                         <th class="text-center" width="14%"></th>
                         <?php 
-                          $sql_practice = "SELECT id_practice,name_practice FROM rc_practice WHERE status_office ='Y'";
+                          $sql_practice = "SELECT id_practice,name_practice FROM rc_practice WHERE office_check ='Y'";
                           $objq_practice = mysqli_query($conn,$sql_practice);
                           while($value_practice = $objq_practice->fetch_assoc()){
                         ?>

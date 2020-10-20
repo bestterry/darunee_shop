@@ -3,9 +3,9 @@
 
  $id_song = $_GET['id_song'];
  $status = $_GET['status'];
+ $id_member = $_GET['id_member'];
 
-
-    $sql = "UPDATE song_list SET status = 'Y' WHERE id_song = $id_song";
+    $sql = "UPDATE song_list SET id_member = $id_member WHERE id_song = $id_song";
     mysqli_query($conn,$sql);
 
       if ($status == 'old') {
@@ -16,7 +16,5 @@
       }
       if ($status == 'new') {
         header('location:../song_new.php');
-      }
-      
-      
+      }    
 ?>

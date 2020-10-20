@@ -1,11 +1,13 @@
 <?php
     require "../config_database/config.php";
+    require "../session.php";
     $id_artist = $_GET['id_artist' ];
     $sql_song = " SELECT * FROM song_list
                   INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
                   INNER JOIN song_ageartist ON song_ageartist.id_ageartist = song_artist.id_ageartist
                   INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
                   INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist
+                  INNER JOIN member ON song_list.id_member = member.id_member
                   WHERE song_artist.id_artist = $id_artist";
     $objq_song = mysqli_query($conn,$sql_song);
     $objq_song2 = mysqli_query($conn,$sql_song);
@@ -101,17 +103,7 @@
                         <td class="text-center"><?php echo $value['name_tune']; ?></td>
                         <td class="text-center"><?php echo $value['melodic']; ?></td>
                         <td class="text-center"><?php if($value['script']=='N'){echo "-";}else{echo "ต้นฉบับ";} ?></td>
-                        <?php
-                        if($value['status']=='N'){
-                        ?>
-                        <td class="text-center">-</td>
-                        <?php
-                          }else{
-                        ?>
-                        <td class="text-center"><font>เปิด</font></td>
-                        <?php
-                          }
-                        ?>
+                        <td class="text-center"><font><?php echo $value['name']; ?></font></td>
                         <td class="text-center">
                           <a href="song_edit2.php?id_song=<?php echo $value['id_song']; ?>&&id_artist=<?php echo $id_artist; ?>" class="btn  btn-success btn-xs" >>></a>
                         </td> 

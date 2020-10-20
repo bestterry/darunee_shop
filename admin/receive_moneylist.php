@@ -86,12 +86,12 @@
                 <table id="example2" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th class="text-center" width="6%">#</th>
-                      <th class="text-center" width="6%">#</th>
+                      <th class="text-center" width="6%">รับ</th>
+                      <th class="text-center" width="6%">สนง</th>
                       <th class="text-center" width="8%">ชื่อ</th>
                       <th class="text-center" width="8%">งาน</th>
                       <th class="text-center" width="8%">เงิน</th>
-                      <th class="text-center" width="8%">#</th>
+                      <th class="text-center" width="8%">ขาย</th>
                       <th class="text-center" width="9%">วันขาย</th>
                       <th class="text-center" width="9%">วันรับเงิน</th>
                       <th class="text-center" width="15%">ชื่อลูกค้า</th>

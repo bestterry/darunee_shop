@@ -13,15 +13,16 @@
     $date_buy = $_POST['date_buy'];
 
     if (empty($_POST['status_office'])) {
-      echo $status_office = "N";
+       $status_office = "N";
     }else{
-      echo $status_office = "Y";
+       $status_office = "Y";
     }
 
     if (empty($_POST['status_boss'])) {
-      echo $status_boss = "N";
+       $status_boss = "N";
     }else{
-      echo $status_boss = "Y";
+       $status_boss = "Y";
+       $status_office = "Y";
     }
 
       $update_money = "UPDATE rc_receive_money SET id_practice = '$id_practice',  money = '$money', id_category = '$id_category', 

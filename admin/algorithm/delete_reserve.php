@@ -10,7 +10,7 @@
                          VALUE ($money ,$value_money, 18, 33, 2, 'รับเข้าจากลบรายการ', '$date')";  
       mysqli_query($conn,$insert_reserve);
 
-  $sql = "DELETE FROM reserve_history WHERE id_reserve_history = $id";
+  $sql = "UPDATE reserve_history SET status_cancen = 'N' WHERE id_reserve_history = $id";
    if ($conn->query($sql) === TRUE) {
       $update_reserve = "UPDATE reserve_money SET money = $value_money WHERE id_member = 33";
       mysqli_query($conn,$update_reserve);

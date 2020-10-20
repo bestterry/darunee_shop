@@ -1,5 +1,6 @@
 <?php
   require "../config_database/config.php";
+  require "../session.php";
   $id_artist = $_GET['id_artist'];
   $sql = "SELECT * FROM song_artist
           INNER JOIN song_sexartist ON song_artist.id_sexartist = song_sexartist.id_sexartist

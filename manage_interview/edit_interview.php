@@ -253,6 +253,9 @@
 
                 <div align="center" class="box-footer">
                   <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก</button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <a class="btn btn-danger" href="algorithm/delete_interview.php?id=<?php echo $objr_interview['id'];?>" 
+                  onClick="return confirm('คุณต้องการที่ลบข้อมูลนี้หรือไม่ ?')">ลบ</a>
                 </div>
               </form>
             </div>

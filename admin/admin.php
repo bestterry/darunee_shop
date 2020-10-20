@@ -58,9 +58,11 @@
       <div class="content-wrapper">
         <section class="content">
           <div class="row">
-            <?php 
-              require 'menu/menu_left_shop.php'; 
-            ?>
+            <div class="col-12">
+              <?php 
+                require 'menu/menu_left_shop.php'; 
+              ?>
+            </div>
           </div>
         </section>
       </div>

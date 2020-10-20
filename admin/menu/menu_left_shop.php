@@ -139,6 +139,9 @@
         <li><a href="store.php" ><i class="fa fa-user-circle-o"></i> ระเบียนร้านค้า </a></li>
         <!-- /นอกเขต. -->
         
+        <!-- โอนจ่าย -->
+        <li><a href="transfer.php" ><i class="fa fa-money"></i>โอนจ่าย</a></li>
+        <!-- /โอนจ่าย -->
 
         <!-- จัดการเพลง -->
         <li><a href="report_work.php"><i class="fa fa-user-circle"></i> ปฏิบัติงาน สนง. </a></li>
@@ -155,9 +158,6 @@
     </div>
     <div class="box-body no-padding">
      <ul class="nav nav-pills nav-stacked" ata-widget="tree">
-      <?php
-        if($id_member == 30 || $id_member == 33){
-      ?>
 
         <!-- แผนที่ -->
         <li><a href="map.php" ><i class="fa fa-map"></i> แผนที่ </a></li>
@@ -183,9 +183,6 @@
         <li><a href="add_data.php" ><i class="fa fa-cog"></i> จัดการข้อมูล </a></li>
         <!--/จัดการข้อมูลสินค้า-พนักงาน -->
         
-        <?php
-            }elseif($id_member == 100 || $id_member == 101){}
-        ?>
      </ul>
     </div>
   </div>

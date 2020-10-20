@@ -68,7 +68,7 @@
                           <th class="text-center" width="5%">เกรด</th>
                           <th class="text-center" width="25%">หมายเหตุ</th>
                           <th class="text-center" width="5%">#</th>
-                          <th class="text-center" width="5%">แก้</th>
+                          <th class="text-center" width="5%">#</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -116,7 +116,7 @@
                               ?>
                             </td>
                             <td class="text-center">
-                              <a href="edit_interview.php?id_interview=<?php echo $value['id_interview']; ?>"> >> </a>
+                              <a href="edit_interview.php?id_interview=<?php echo $value['id_interview']; ?>" class="btn btn-success btn-xs"> >> </a>
                             </td>
                           </tr>
                         <?php }?>

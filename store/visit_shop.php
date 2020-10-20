@@ -42,10 +42,7 @@
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
-
-  <!-- Google Font -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
@@ -54,212 +51,200 @@
     <?php require('menu/header_logout.php');?>
     </header>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-      </section>
-
-      <!-- Main content -->
       <section class="content">
         <div class="row">
-          <!-- form start -->
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#store2" data-toggle="tab">ค้นหารายตำบล</a></li>
                 <li><a href="#check" data-toggle="tab">ตรวจ</a></li>
-
                 <div align="right">
                   <a href="store.php" class="btn btn-danger"><< เมนูหลัก</a>
-                  </div> 
-                  </ul> 
-                   <div class="tab-content">
-
-                      <!-- ------------------------------ค้นหารายอำเภอ---------------------------- -->
-                      <div class="tab-pane active" id="store2">
-                        <div class="box box-default">
-                          <div class="box-header with-border"> </div>
-                          <!-- /.box-header -->
-                          <div class="box-body">
-                            <div class="row">
-                              <div class="container">
-                                <form action="visit_shop2.php" class="form-horizontal" method="get">
-                                  <div class="col-md-8">
-
-                                    <div class="form-group">
-                                      <label class="col-sm-2 control-label">จังหวัด :</label>
-                                      <div class="col-sm-10">
-                                        <select name="province_name" data-where="2"
-                                          class="form-control ajax_address select2">
-                                          <option value="">-- เลือกจังหวัด --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                      <label class="col-sm-2 control-label">อำเภอ :</label>
-                                      <div class="col-sm-10">
-                                        <select name="amphur_name" data-where="3"
-                                          class="ajax_address form-control select2">
-                                          <option value="">-- เลือกอำเภอ --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                      <label class="col-sm-2 control-label">ตำบล :</label>
-                                      <div class="col-sm-10">
-                                        <select name="district_name" data-where="4"
-                                          class="ajax_address form-control select2" style="width: 100%;">
-                                          <option value="">-- เลือกตำบล --</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <div align="center" class="box-footer">
-                                      <button type="submit" class="btn btn-success"><i class="fa fa-search"> ค้นหา </i></button>
-                                    </div>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- ------------------------------//ค้นหารายอำเภอ---------------------------- -->
-
-                      <!-- ------------------------------เพิ่มร้าน---------------------------- -->
-                      <div class="tab-pane" id="check">
-                        <div class="box box-default">
-                          <div class="box-body">
-                            <div class="row">
-                              <div class="container">
-                                <div class="box-header text-center with-border">
-                                    <B align="center"> 
-                                      <font size="4">  </font>
-                                    </B>
-                                  </div>
-                                  <table class="table table-striped table-bordered">
-                                    <tbody>
-                                      <tr class="info">
-                                        <th class="text-center" width="50%">จังหวัด</th>
-                                        <th class="text-center" width="25%">เยี่ยมแล้ว</th>
-                                        <th class="text-center" width="25%">ไม่ได้เยี่ยม</th>
-                                      </tr>
-                                      <?php 
-                                        while($value_pr2 = $objq_province2->fetch_array()){
-                                          $province_id = $value_pr2['province_id'];
-                                        //   //ร้านค้าเยี่ยมแล้ว//
-                                        $sql_a = "SELECT id_store FROM store WHERE status = 'Y' AND province_id = $province_id";
-                                        if ($result=mysqli_query($mysqli,$sql_a))
-                                          {
-                                          // Return the number of rows in result set
-                                          $rowcount1=mysqli_num_rows($result);
-                                          }else{
-                                            $rowcount1 = 0;
-                                          }
-                                          //ร้านค้าเยี่ยมแล้ว//
-
-                                          //ร้านค้ายังไม่ได้เยี่ยม//
-                                        $sql_b = "SELECT id_store FROM store WHERE status = 'N' AND province_id = $province_id";
-                                        if ($result2=mysqli_query($mysqli,$sql_b))
-                                          {
-                                          // Return the number of rows in result set
-                                          $rowcount2=mysqli_num_rows($result2);
-                                          }else{
-                                            $rowcount2 = 0;
-                                          }
-                                          //ร้านค้ายังไม่ได้เยี่ยม//
-                                      ?>
-                                      <tr>
-                                        <td class="text-center"><?php echo $value_pr2['province_name']; ?></td>
-                                        <td class="text-center"><?php echo $rowcount1; ?></td>
-                                        <td class="text-center"><?php echo $rowcount2; ?></td>
-                                      </tr>
-                                        <?php }?>
-                                    </tbody>
-                                  </table>
-                              <?php 
-                                while($value_pr = $objq_province->fetch_array()){
-                                  $province_id = $value_pr['province_id'];
-                              ?>
-
-
-                                <div class="box-header text-center with-border">
-                                  <B align="center"> 
-                                    <font size="4"> <?php echo $value_pr['province_name'];?> </font>
-                                  </B>
-                                </div>
-                                <table class="table table-striped table-bordered">
-                                  <tbody>
-                                    <tr class="info">
-                                      <th class="text-center" width="50%">อำเภอ</th>
-                                      <th class="text-center" width="25%">เยี่ยมแล้ว</th>
-                                      <th class="text-center" width="25%">ไม่ได้เยี่ยม</th>
-                                    </tr>
-                                    
-                                    <?php 
-                                      $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = $province_id";
-                                      $objq_amphur = mysqli_query($mysqli,$sql_amphur);
-                                      while($value_am = $objq_amphur->fetch_array()){
-                                        $amphur_id = $value_am['amphur_id'];
-
-                                        //ร้านค้าเยี่ยมแล้ว//
-                                        $sql_a = "SELECT id_store FROM store WHERE status = 'Y' AND amphur_id = $amphur_id";
-                                        if ($result=mysqli_query($mysqli,$sql_a))
-                                          {
-                                          // Return the number of rows in result set
-                                          $rowcount1=mysqli_num_rows($result);
-                                          }else{
-                                            $rowcount1 = 0;
-                                          }
-                                          //ร้านค้าเยี่ยมแล้ว//
-
-                                          //ร้านค้ายังไม่ได้เยี่ยม//
-                                        $sql_b = "SELECT id_store FROM store WHERE status = 'N' AND amphur_id = $amphur_id";
-                                        if ($result2=mysqli_query($mysqli,$sql_b))
-                                          {
-                                          // Return the number of rows in result set
-                                          $rowcount2=mysqli_num_rows($result2);
-                                          }else{
-                                            $rowcount2 = 0;
-                                          }
-                                          //ร้านค้ายังไม่ได้เยี่ยม//
-                                    ?>
-                                    <tr>
-                                      <td class="text-center"><?php echo $value_am['amphur_name']; ?></td>
-                                      <td class="text-center"><?php echo $rowcount1; ?></td>
-                                      <td class="text-center"><?php echo $rowcount2; ?></td>
-                                    </tr>
-                                      <?php } ?>
-                                  </tbody>
-                                </table>
-                              <?php  } ?>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- ------------------------------เพิ่มร้าน---------------------------- -->
                 </div>
+              </ul>
+                
+              <div class="tab-content">
+                <!-- ------------------------------ค้นหารายอำเภอ---------------------------- -->
+                <div class="tab-pane active" id="store2">
+                  <form action="visit_shop2.php" class="form-horizontal" method="get">
+                    <div class="box box-default">
+                      <div class="box-header with-border text-center">
+                        <font size="5"><B> ค้นหาระเบีนร้านค้า </B></font>
+                      </div>
+                      
+                      <div class="box-body">
+                        <div class="row">
+                            
+                          <div class="col-12">
+                            <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+                            <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                              <div class="form-group">
+                                <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">จังหวัด :</label>
+                                <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                  <select name="province_name" data-where="2"
+                                    class="form-control ajax_address select2">
+                                    <option value="">-- เลือกจังหวัด --</option>
+                                  </select>
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">อำเภอ :</label>
+                                <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                  <select name="amphur_name" data-where="3"
+                                    class="ajax_address form-control select2">
+                                    <option value="">-- เลือกอำเภอ --</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">ตำบล :</label>
+                                <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                  <select name="district_name" data-where="4"
+                                    class="ajax_address form-control select2" style="width: 100%;">
+                                    <option value="">-- เลือกตำบล --</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+                          </div>
+                            
+                        </div>
+                      </div>
+
+                      <div align="center" class="box-footer">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-search"> ค้นหา </i></button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <!-- ------------------------------//ค้นหารายอำเภอ---------------------------- -->
+
+                <!-- ------------------------------เพิ่มร้าน---------------------------- -->
+                <div class="tab-pane" id="check">
+                  <div class="box box-default">
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="container">
+                          <div class="box-header text-center with-border">
+                              <B align="center"> 
+                                <font size="4">  </font>
+                              </B>
+                            </div>
+                            <table class="table table-striped table-bordered">
+                              <tbody>
+                                <tr class="info">
+                                  <th class="text-center" width="50%">จังหวัด</th>
+                                  <th class="text-center" width="25%">เยี่ยมแล้ว</th>
+                                  <th class="text-center" width="25%">ไม่ได้เยี่ยม</th>
+                                </tr>
+                                <?php 
+                                  while($value_pr2 = $objq_province2->fetch_array()){
+                                    $province_id = $value_pr2['province_id'];
+                                  //   //ร้านค้าเยี่ยมแล้ว//
+                                  $sql_a = "SELECT id_store FROM store WHERE status = 'Y' AND province_id = $province_id";
+                                  if ($result=mysqli_query($mysqli,$sql_a))
+                                    {
+                                    // Return the number of rows in result set
+                                    $rowcount1=mysqli_num_rows($result);
+                                    }else{
+                                      $rowcount1 = 0;
+                                    }
+                                    //ร้านค้าเยี่ยมแล้ว//
+
+                                    //ร้านค้ายังไม่ได้เยี่ยม//
+                                  $sql_b = "SELECT id_store FROM store WHERE status = 'N' AND province_id = $province_id";
+                                  if ($result2=mysqli_query($mysqli,$sql_b))
+                                    {
+                                    // Return the number of rows in result set
+                                    $rowcount2=mysqli_num_rows($result2);
+                                    }else{
+                                      $rowcount2 = 0;
+                                    }
+                                    //ร้านค้ายังไม่ได้เยี่ยม//
+                                ?>
+                                <tr>
+                                  <td class="text-center"><?php echo $value_pr2['province_name']; ?></td>
+                                  <td class="text-center"><?php echo $rowcount1; ?></td>
+                                  <td class="text-center"><?php echo $rowcount2; ?></td>
+                                </tr>
+                                  <?php }?>
+                              </tbody>
+                            </table>
+                        <?php 
+                          while($value_pr = $objq_province->fetch_array()){
+                            $province_id = $value_pr['province_id'];
+                        ?>
+
+
+                          <div class="box-header text-center with-border">
+                            <B align="center"> 
+                              <font size="4"> <?php echo $value_pr['province_name'];?> </font>
+                            </B>
+                          </div>
+                          <table class="table table-striped table-bordered">
+                            <tbody>
+                              <tr class="info">
+                                <th class="text-center" width="50%">อำเภอ</th>
+                                <th class="text-center" width="25%">เยี่ยมแล้ว</th>
+                                <th class="text-center" width="25%">ไม่ได้เยี่ยม</th>
+                              </tr>
+                              
+                              <?php 
+                                $sql_amphur = "SELECT * FROM tbl_amphures WHERE province_id = $province_id";
+                                $objq_amphur = mysqli_query($mysqli,$sql_amphur);
+                                while($value_am = $objq_amphur->fetch_array()){
+                                  $amphur_id = $value_am['amphur_id'];
+
+                                  //ร้านค้าเยี่ยมแล้ว//
+                                  $sql_a = "SELECT id_store FROM store WHERE status = 'Y' AND amphur_id = $amphur_id";
+                                  if ($result=mysqli_query($mysqli,$sql_a))
+                                    {
+                                    // Return the number of rows in result set
+                                    $rowcount1=mysqli_num_rows($result);
+                                    }else{
+                                      $rowcount1 = 0;
+                                    }
+                                    //ร้านค้าเยี่ยมแล้ว//
+
+                                    //ร้านค้ายังไม่ได้เยี่ยม//
+                                  $sql_b = "SELECT id_store FROM store WHERE status = 'N' AND amphur_id = $amphur_id";
+                                  if ($result2=mysqli_query($mysqli,$sql_b))
+                                    {
+                                    // Return the number of rows in result set
+                                    $rowcount2=mysqli_num_rows($result2);
+                                    }else{
+                                      $rowcount2 = 0;
+                                    }
+                                    //ร้านค้ายังไม่ได้เยี่ยม//
+                              ?>
+                              <tr>
+                                <td class="text-center"><?php echo $value_am['amphur_name']; ?></td>
+                                <td class="text-center"><?php echo $rowcount1; ?></td>
+                                <td class="text-center"><?php echo $rowcount2; ?></td>
+                              </tr>
+                                <?php } ?>
+                            </tbody>
+                          </table>
+                        <?php  } ?>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ------------------------------เพิ่มร้าน---------------------------- -->
+              </div>
+              
             </div>
           </div>
         </div>
+      </section>
     </div>
-  </div>
-  <!-- /.tab-pane -->
-  </div>
-  <!-- /.tab-content -->
-  </div>
-  <!-- /.nav-tabs-custom -->
-  </div>
-  </div>
-  </section>
-  <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
 
-  <?php require("../menu/footer.html"); ?>
+    <?php require("../menu/footer.html"); ?>
   </div>
 
   <!-- jQuery 3 -->
@@ -278,58 +263,6 @@
   <!-- AdminLTE for demo purposes -->
   <script src="../dist/js/demo.js"></script>
   <script src="../plugins/iCheck/icheck.min.js"></script>
-  <script>
-  $(function() {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging': true,
-      'lengthChange': false,
-      'searching': false,
-      'ordering': true,
-      'info': true,
-      'autoWidth': false
-    })
-  })
-  $(function() {
-    //Enable iCheck plugin for checkboxes
-    //iCheck for checkbox and radio inputs
-    $('.mailbox-messages input[type="checkbox"]').iCheck({
-      checkboxClass: 'icheckbox_flat-blue',
-      radioClass: 'iradio_flat-blue'
-    });
-    //Enable check and uncheck all functionality
-    $(".checkbox-toggle").click(function() {
-      var clicks = $(this).data('clicks');
-      if (clicks) {
-        //Uncheck all checkboxes
-        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-      } else {
-        //Check all checkboxes
-        $(".mailbox-messages input[type='checkbox']").iCheck("check");
-        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-      }
-      $(this).data("clicks", !clicks);
-    });
-    //Handle starring for glyphicon and font awesome
-    $(".mailbox-star").click(function(e) {
-      e.preventDefault();
-      //detect type
-      var $this = $(this).find("a > i");
-      var glyph = $this.hasClass("glyphicon");
-      var fa = $this.hasClass("fa");
-      //Switch states
-      if (glyph) {
-        $this.toggleClass("glyphicon-star");
-        $this.toggleClass("glyphicon-star-empty");
-      }
-      if (fa) {
-        $this.toggleClass("fa-star");
-        $this.toggleClass("fa-star-o");
-      }
-    });
-  });
-  </script>
 
   <script type="text/javascript">
   $(function() {

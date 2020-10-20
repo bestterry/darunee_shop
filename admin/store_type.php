@@ -96,10 +96,11 @@
                     <thead>
                       <tr>
                         <th bgcolor="#99CCFF" class="text-center" width="10%">เยี่ยม</th>
-                        <th bgcolor="#99CCFF" class="text-center" width="65%">ข้อมูลร้านค้า</th>
+                        <th bgcolor="#99CCFF" class="text-center" width="60%">ข้อมูลร้านค้า</th>
                         <th bgcolor="#99CCFF" class="text-center" width="10%">ร้าน</th>
                         <th bgcolor="#99CCFF" class="text-center" width="10%">ขาย</th>
                         <th bgcolor="#99CCFF" class="text-center" width="5%">#</th>
+                        <th bgcolor="#99CCFF" class="text-center" width="5%">ที่ตั้ง</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -127,6 +128,17 @@
                         <td class="text-center"><?php echo $value['name_category'];?></td>
                         <td class="text-center"><?php echo $value['name_product_category'];?></td>
                         <td class="text-center"><a href="store_edit.php?id_store=<?php echo $value['id_store']; ?>" class="btn btn-success btn-xs">แก้</td>
+                        <td class="text-center">
+                          <?php 
+                            if ($value['latitude']==0) {
+                              echo '-';
+                            }else {
+                          ?>
+                            <a href="https://www.google.com/maps/search/?api=1&query=<?php echo $value['latitude'];?>,<?php echo $value['longtitude']; ?>" class="btn btn-default btn-xs" target="_blank"><i class="fa fa-map-marker"></i>
+                          <?php 
+                            }
+                          ?>
+                        </td>
                       </tr>
                       <?php }?>
                     </tbody>

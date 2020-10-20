@@ -172,14 +172,15 @@
                       <tr>
                         <th class="text-center" width="5%"><font color="red">ID</font></th>
                         <th class="text-center" width="10%"><font color="red">วันสั่ง</font></th>
-                        <th class="text-center" width="10%"><font color="red">ใบสั่ง</font></th>
-                        <th class="text-center" width="10%"><font color="red">สินค้า</font></th>
+                        <th class="text-center" width="8%"><font color="red">ใบสั่ง</font></th>
+                        <th class="text-center" width="8%"><font color="red">สินค้า</font></th>
                         <th class="text-center" width="5%"><font color="red">U</font></th>
                         <th class="text-center" width="5%"><font color="red">N</font></th>
-                        <th class="text-center" width="10%"><font color="red">เงินซื้อ</font></th>
-                        <th class="text-center" width="10%"><font color="red">เข้า รง.</font></th>
-                        <th class="text-center" width="10%"><font color="red">มาถึง</font></th>
-                        <th class="text-center" width="10%"><font color="red">อำเภอ</font></th>
+                        <th class="text-center" width="8%"><font color="red">เงินซื้อ</font></th>
+                        <th class="text-center" width="8%"><font color="red">เข้า รง.</font></th>
+                        <th class="text-center" width="8%"><font color="red">มาถึง</font></th>
+                        <th class="text-center" width="12%"><font color="red">ร้าน</font></th>
+                        <th class="text-center" width="8%"><font color="red">อำเภอ</font></th>
                         <th class="text-center" width="5%"><font color="red">จ่าย</font></th>
                         <th class="text-center" width="5%"><font color="red">สั่ง</font></th>
                         <th class="text-center" width="5%"><font color="red">ข้อมูล</font></th>
@@ -199,6 +200,7 @@
                         <td class="text-center" ><?php echo $value['money']; ?></td>
                         <td class="text-center" ><?php echo DateThai($value['date_getorder']) ;?></td>
                         <td class="text-center" ><?php echo DateThai($value['date_receive']) ;?></td>
+                        <td class="text-center"><?php echo $value['name_store'];?></td>
                         <td class="text-center"><?php echo $value['amphur_name'];?></td>
                         <td class="text-center"><?php echo $value['invoice'];?></td>
                         <td class="text-center"><?php echo $value['name_author'];?></td>

@@ -105,12 +105,12 @@
                   <a href="reserve_office.php"> โอนจ่ายสนง </a>
                   <a class="active" href="reserve_car.php"></i> โอนหน่วยรถ </a>
                   <a href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
-                  <a href="car_rental.php"> ค่าเช่ารถ </a>
+                  <a href="car_rental.php"> ปฏิบัติงานและค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>
               </div>
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                  <a class="btn button2 pull-right" href="../admin/admin.php"> << เมนูหลัก </a>
+                <a class="btn button2 pull-right" href="../admin/admin.php"> << เมนูหลัก </a>
               </div>
             </div>
           </div>
@@ -122,7 +122,7 @@
                 <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                   <div class="text-center">
                     <font size="5">
-                      <B align="center">สร.หน่วยรถคงเหลือ<font color="red"> </font></B>
+                      <B align="center">คงเหลือ สร.หน่วยรถ<font color="red"> </font></B>
                     </font>
                   </div>
                 </div>

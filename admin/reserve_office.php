@@ -9,6 +9,7 @@
 
   $sql_history = "SELECT * FROM reserve_history INNER JOIN reserve_list ON reserve_history.id_list = reserve_list.id_list
                   WHERE (reserve_history.status = 2 OR reserve_history.status = 3 OR reserve_history.status = 5 OR reserve_history.status = 1) 
+                  AND reserve_history.transfer_office != ''
                   ORDER BY reserve_history.id_reserve_history DESC 
                   LIMIT 300";
   $objq_history = mysqli_query($conn,$sql_history);
@@ -103,7 +104,7 @@
                   <a class="active" href="reserve_office.php"> โอนจ่ายสนง </a>
                   <a href="reserve_car.php"></i> โอนหน่วยรถ </a>
                   <a href="reserve_carvalue.php"> ใช้จ่ายหน่วยรถ </a>
-                  <a href="car_rental.php"> ค่าเช่ารถ </a>
+                  <a href="car_rental.php"> ปฏิบัติงานและค่าเช่ารถ </a>
                   <a href="reserve_money.php"> รับเงิน </a>
                 </div>
               </div>
@@ -156,6 +157,8 @@
                           <tbody>
                           <?php 
                             while($value = $objq_history -> fetch_assoc()){
+                              if ($value['status_cancen']=='Y') {
+                                
                           ?>
                             <tr>
                               <td class="text-center"><?php echo Datethai($value['date']); ?></td> 
@@ -176,7 +179,19 @@
                               </td>
                             </tr>
                           <?php 
+                            }else {
+                          ?>
+                            <tr>
+                              <td class="text-center"><font color="red"><?php echo Datethai($value['date']); ?></font> </td> 
+                              <td class="text-center"><font color="red"><?php echo $value['name_list']; ?></font> </td>
+                              <td class="text-center"><font color="red"><?php echo $value['money']; ?></font> </td>
+                              <td class="text-center"><font color="red"><?php echo $value['transfer_office']; ?></font> </td>
+                              <td class="text-center"><font color="red"><?php echo $value['note']; ?></font> </td>
+                              <td class="text-center"></td>
+                            </tr>
+                          <?php
                             }
+                          }
                           ?>
                           </tbody>
                         </table>

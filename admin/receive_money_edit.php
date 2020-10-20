@@ -243,7 +243,7 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">รับ </label>
+                          <label class="col-sm-4 control-label">ประเภทเงิน </label>
                           <div class="col-sm-8">
                             <select name="id_category"  class="form-control" style="width: 100%;">
                               <option value="1"  <?php if($id_category == 1){ echo "selected='selected'";} ?>>สด</option>
@@ -263,7 +263,7 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-4 control-label">วันรับ </label>
+                          <label class="col-sm-4 control-label">วันรับเงิน </label>
                           <div class="col-sm-8">
                             <input type="date" name="date" class="form-control text-center" value="<?php echo $objr_receive['date']; ?>">
                           </div>

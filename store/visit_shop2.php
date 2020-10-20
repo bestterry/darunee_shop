@@ -43,7 +43,7 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
-folder instead of downloading all of them to reduce the load. -->
+  folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="../bower_components/morris.js/morris.css">
@@ -58,128 +58,115 @@ folder instead of downloading all of them to reduce the load. -->
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
   <style>
-  #customers {
-    width: 100%;
-  }
+    #customers {
+      width: 100%;
+    }
 
-  #customers td,
-  #customers th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
+    #customers td,
+    #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
 
-  #customers tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
+    #customers tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
 
-  #customers th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    background-color: #99CCFF;
-  }
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: center;
+      background-color: #99CCFF;
+    }
   </style>
-
-  <script language="javascript">
-  //  function fncSum()
-  //     {
-  //       document.form1.money.value = parseFloat(document.form1.num_product.value) * parseFloat(document.form1.price.value);
-  //     }
-  </script>
 
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">
-  <div>
+  <div class="wrapper">
     <header class="main-header">
-    <?php require('menu/header_logout.php');?>
+      <?php require('menu/header_logout.php');?>
     </header>
-    <!-- Content Wrapper. Contains page content -->
+
     <div class="content-wrapper">
       <div class="row">
-        <!-- Main content -->
         <section class="content">
-          <div class="col-md-12">
-            <div class="box box-primary">
-              <div class="box-header with-border">
-                <table class="table table-bordered" >
-                  <tr>
-                    <th width="30%" >
-                      <a href="visit_shop.php" class="btn btn-danger"><< กลับ</a>
-                      <a href="visit_add.php?district_name=<?php echo $_GET['district_name']; ?>"  class="btn btn-warning"><i class="fa fa-plus-square"></i> เพิ่มร้านค้า </a>
-                      <a href="../pdf_file/visit_shop.php?district_name=<?php echo $_GET['district_name']; ?>"  class="btn btn-success"> PDF </a>
-                    </th>
-                    <td width="50%" class="text-center"><font size="5"><B align="center"><?php echo $district_name;?></B></font></td>
-                    <td width="20%"></td>
-                  </tr>
-                </table>
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <div class="col-12">
+                <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 text-left">
+                  <a href="visit_shop.php" class="btn btn-danger"><< กลับ</a>
+                </div>
+                <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
+                  <font size="5"><B><?php echo $district_name;?></B></font>
+                </div>
+                <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
               </div>
-              <!-- /.box-header -->
-              <div class="box-body no-padding">
-                <div class="mailbox-read-message">
-                <form action="outside_price.php" method="post">
-                  <div class="modal-content">
-                    <div class="modal-body col-md-12 table-responsive mailbox-messages">
-                      <div class="table-responsive">
-                        <div class="col-md-12">
-                        <table class="table table-striped">
-                            <thead>
-                              <tr>
-                               <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="40%">ข้อมูลร้านค้า</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="15%">เบอร์โทร</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="15%">ร้าน</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="15%">ขาย</th>
-                                <th bgcolor="#99CCFF" class="text-center" width="5%">แก้ไข</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            <?php 
-                             
-                              while($value = $objq_store->fetch_assoc()){
-                            ?>
-                              <tr>
-                                <td class="text-center">
-                                  <?php 
-                                    if($value['status'] == "N"){
-                                  ?>
-                                    <a href="algorithm/update_ststore.php?id_store=<?php echo $value['id_store']; ?>&&status=N&&district_code=<?php echo $district_code; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเยี่ยมร้าน [<?php echo $value['name_store'];?>] หรือไม่ ?')";>เยี่ยมร้าน</a>
-                                  <?php 
-                                    }else {
-                                  ?>
-                                     <a href="algorithm/update_ststore.php?id_store=<?php echo $value['id_store']; ?>&&status=Y&&district_code=<?php echo $district_code; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นไม่ได้เยี่ยมหรือไม่ ?')";>เยี่ยมร้าน</a>
-                                  <?php 
-                                   
-                                    }
-                                  ?>
+            </div>
+            <div class="box-body no-padding">
+              <div class="mailbox-read-message">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th bgcolor="#99CCFF" class="text-center" width="10%">สถานะ</th>
+                        <th bgcolor="#99CCFF" class="text-center" width="40%">ข้อมูลร้านค้า</th>
+                        <th bgcolor="#99CCFF" class="text-center" width="14%">เบอร์โทร</th>
+                        <th bgcolor="#99CCFF" class="text-center" width="13%">ร้าน</th>
+                        <th bgcolor="#99CCFF" class="text-center" width="13%">ขาย</th>
+                        <th bgcolor="#99CCFF" class="text-center" width="5%">พิกัด</th>
+                        <th bgcolor="#99CCFF" class="text-center" width="5%">แก้ไข</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php 
+                      while($value = $objq_store->fetch_assoc()){
+                    ?>
+                      <tr>
+                        <td class="text-center">
+                          <?php 
+                            if($value['status'] == "N"){
+                          ?>
+                            <a href="algorithm/update_ststore.php?id_store=<?php echo $value['id_store']; ?>&&status=N&&district_code=<?php echo $district_code; ?>" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเยี่ยมร้าน [<?php echo $value['name_store'];?>] หรือไม่ ?')";>เยี่ยมร้าน</a>
+                          <?php 
+                            }else {
+                          ?>
+                              <a href="algorithm/update_ststore.php?id_store=<?php echo $value['id_store']; ?>&&status=Y&&district_code=<?php echo $district_code; ?>" class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นไม่ได้เยี่ยมหรือไม่ ?')";>เยี่ยมร้าน</a>
+                          <?php 
+                            
+                            }
+                          ?>
 
-                                </td>
-                                <td><?php echo $value['name_store'].'  '.$value['address'].'  '.' ต.'.$value['district_name'].'  '.'อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
-                                <td class="text-center"><?php echo $value['tel'];?></td>
-                                <td class="text-center"><?php echo $value['name_category'];?></td>
-                                <td class="text-center"><?php echo $value['name_product_category'];?></td>
-                                <td class="text-center"><a href="visit_edit.php?id_store=<?php echo $value['id_store']; ?>" ><i class="fa fa-cog"></i></a></td>
-                              </tr>
-                              <?php }?>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
+                        </td>
+                        <td><?php echo $value['name_store'].'  '.$value['address'].'  '.' ต.'.$value['district_name'].'  '.'อ.'.$value['amphur_name'].' จ.'.$value['province_name'];?></td>
+                        <td class="text-center"><?php echo $value['tel'];?></td>
+                        <td class="text-center"><?php echo $value['name_category'];?></td>
+                        <td class="text-center"><?php echo $value['name_product_category'];?></td>
+                        <td class="text-center">
+                          <?php 
+                            if ($value['latitude']==0) {
+                              echo '-';
+                            }else {
+                          ?>
+                            <a href="https://www.google.com/maps/search/?api=1&query=<?php echo $value['latitude'];?>,<?php echo $value['longtitude']; ?>" class="btn btn-default btn-xs" target="_blank"><i class="fa fa-map-marker"></i>
+                          <?php 
+                            }
+                          ?>
+                        </td>
+                        <td class="text-center"><a href="visit_edit.php?id_store=<?php echo $value['id_store']; ?>" ><i class="fa fa-cog"></i></a></td>
+                      </tr>
+                      <?php }?>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
-          
+        </section>
       </div>
-      </form>
     </div>
   </div>
-  </section>
-  <!-- jQuery 3 -->
-  </div>
+
   <script src="../bower_components/jquery/dist/jquery.min.js">
   </script>
   <!-- Bootstrap 3.3.7 -->

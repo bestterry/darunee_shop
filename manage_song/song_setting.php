@@ -80,6 +80,7 @@
                                              INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
                                              INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
                                              INNER JOIN song_ageartist ON song_artist.id_ageartist = song_ageartist.id_ageartist
+                                             INNER JOIN member ON song_list.id_member = member.id_member
                                              ORDER BY CONVERT (song_list.name_song USING tis620 ) ASC";
                                 $objq_song = mysqli_query($conn,$sql_song);
                                 while($value =  $objq_song->fetch_assoc()){
@@ -95,13 +96,13 @@
                                   <a href="song_edit4.php?id_song=<?php echo $value['id_song'];?>&&id_age=<?php echo $value['id_age'];?>" class="btn  btn-success btn-xs" >>></a>
                                 </td> 
                                 <?php
-                                  if($value['status']=='N'){
+                                  if($value['id_member']==54){
                                 ?>
                                   <td class="text-center">-</td>
                                 <?php
                                   }else{
                                 ?>
-                                <td class="text-center"><font>เปิด</font></td>
+                                <td class="text-center"><font><?php echo $value['name']; ?></font></td>
                                 <?php 
                                   }
                                 ?> 
