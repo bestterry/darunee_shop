@@ -13,7 +13,7 @@
               <form action="sale_product.php" method="post">
                 <div class="modal-content">
                   <div class="modal-header text-center">
-                    <font size="5"><B> เลือกสินค้าที่ต้องการขาย </B></font>
+                    <font size="5"><B> ขายสินค้า </B></font>
                   </div>
                   <div class="modal-body table-responsive mailbox-messages">
                     <div class="table-responsive mailbox-messages">
@@ -108,99 +108,104 @@
                   </div>
                   <div class="modal-body table-responsive mailbox-messages">
                     <div class="table-responsive mailbox-messages">
-                      <table class="table table-hover table-striped">
-                        <tbody>
+                      <table class="table ">
+                        <thead>
                           <tr>
                             <th class="text-center" width="20%">เลือกสินค้า</th>
                             <th class="text-center" width="35%">สินค้า_หน่วย</th>
                             <th class="text-center" width="20%">จำนวนคงเหลือ</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php 
+                            $sr_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_member = $id_member";
+                            $sql_sr_product = mysqli_query($mysqli,$sr_product);
+                            while($product = $sql_sr_product ->fetch_assoc()){
+                                $id_product = $product['id_product'];
+                                if($id_product==1){ 
+                          ?>
                           <tr>
-                            <?php 
-                                                $sr_product = "SELECT * FROM product INNER JOIN numpd_car ON product.id_product = numpd_car.id_product WHERE numpd_car.id_member = $id_member";
-                                                $sql_sr_product = mysqli_query($mysqli,$sr_product);
-                                                while($product = $sql_sr_product ->fetch_assoc()){
-                                                    $id_product = $product['id_product'];
-                                                    if($id_product==1){ 
-                                            ?>
                             <td class="text-center" >
-                              <input type="radio" class="minimal" name="id_numPD"
-                                value="<?php echo $product['id_numPD_car']; ?>">
+                              <input type="checkbox" name="id_numPD" value="<?php echo $product['id_numPD_car']; ?>">
                             </td>
                             <td ><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
                             <td class="text-center" ><?php echo $product['num']; ?></td>
                           </tr>
                           <?php
-                                                    }else if($id_product==3) { 
-                                            ?>
+                            }else if($id_product==3) { 
+                          ?>
                           <tr>
                             <td class="text-center" >
-                              <input type="radio" class="minimal" name="id_numPD"
-                                value="<?php echo $product['id_numPD_car']; ?>">
+                              <input type="checkbox"  name="id_numPD" value="<?php echo $product['id_numPD_car']; ?>">
                             </td>
                             <td ><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
                             <td class="text-center" ><?php echo $product['num']; ?></td>
                           </tr>
                           <?php
-                                                    }else if($id_product==5) { 
-                                            ?>
+                            }else if($id_product==5) { 
+                          ?>
                           <tr>
                             <td class="text-center">
-                              <input type="radio" class="minimal" name="id_numPD"
-                                value="<?php echo $product['id_numPD_car']; ?>">
+                              <input type="checkbox" name="id_numPD" value="<?php echo $product['id_numPD_car']; ?>">
                             </td>
                             <td><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
                             <td class="text-center" ><?php echo $product['num']; ?></td>
                           </tr>
                           <?php
-                                                    }else if($id_product==9) { 
-                                            ?>
+                            }else if($id_product==9) { 
+                          ?>
                           <tr>
                             <td class="text-center" >
-                              <input type="radio" class="minimal" name="id_numPD"
-                                value="<?php echo $product['id_numPD_car']; ?>">
+                              <input type="checkbox" name="id_numPD" value="<?php echo $product['id_numPD_car']; ?>">
                             </td>
                             <td><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
                             <td class="text-center" ><?php echo $product['num']; ?></td>
                           </tr>
                           <?php
-                                                    }else if($id_product==32) { 
-                                            ?>
+                            }else if($id_product==32) { 
+                          ?>
                           <tr>
                             <td class="text-center" >
-                              <input type="radio" class="minimal" name="id_numPD"
-                                value="<?php echo $product['id_numPD_car']; ?>">
+                              <input type="checkbox" name="id_numPD" value="<?php echo $product['id_numPD_car']; ?>">
                             </td>
                             <td ><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
                             <td class="text-center" ><?php echo $product['num']; ?></td>
                           </tr>
                           <?php
-                                                    }else if($id_product==37) { 
-                                            ?>
+                            }else if($id_product==37) { 
+                          ?>
                           <tr>
                             <td class="text-center" >
-                              <input type="radio" class="minimal" name="id_numPD"
-                                value="<?php echo $product['id_numPD_car']; ?>">
+                              <input type="checkbox" name="id_numPD" value="<?php echo $product['id_numPD_car']; ?>">
                             </td>
                             <td ><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
                             <td class="text-center" ><?php echo $product['num']; ?></td>
                           </tr>
                           <?php
-                                                    }else if($id_product==39) { 
-                                            ?>
+                             }else if($id_product==39) { 
+                          ?>
                           <tr>
                             <td class="text-center" >
-                              <input type="radio" class="minimal" name="id_numPD"
-                                value="<?php echo $product['id_numPD_car']; ?>">
+                              <input type="checkbox" name="id_numPD" value="<?php echo $product['id_numPD_car']; ?>">
+                            </td>
+                            <td ><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
+                            <td class="text-center" ><?php echo $product['num']; ?></td>
+                          </tr>
+                          <?php
+                             }else if($id_product==57) { 
+                          ?>
+                          <tr>
+                            <td class="text-center" >
+                              <input type="checkbox" name="id_numPD" value="<?php echo $product['id_numPD_car']; ?>">
                             </td>
                             <td ><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
                             <td class="text-center" ><?php echo $product['num']; ?></td>
                           </tr>
                           <?php            
-                                                    }else{
-
-                                                    }
-                                                }
-                                            ?>
+                                  }else{
+                                }
+                              }
+                          ?>
                         </tbody>
                       </table>
                     </div>

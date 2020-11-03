@@ -3,14 +3,14 @@
   $id_interview = $_POST['id_interview'];
   $id = $_POST['id'];
   $name_file = $_POST['name_file'];
-  $name = $_POST['name'];
+  $name_customer = $_POST['name_customer'];
   $note = $_POST['note'];
-  echo $grade = $_POST['grade'];
+  $grade = $_POST['grade'];
 
-    if(isset($_POST['status'])){
-        $status = 'Y';
+    if(isset($_POST['id_member'])){
+        $id_member = $_POST['id_member'];
     }else {
-        $status = 'N';
+        $id_member = 54;
     }
 
     if (empty($_POST['province_id'])) {
@@ -21,8 +21,8 @@
       $amphures_id = $_POST['amphur_id'];
     }
 
-    $sql_interview = "UPDATE interview SET name_file = '$name_file', name = '$name', note = '$note', provinces_id = $provinces_id, amphures_id = $amphures_id, 
-                      grade = '$grade', status = '$status'
+    $sql_interview = "UPDATE interview SET name_file = '$name_file', name_customer = '$name_customer', note = '$note', provinces_id = $provinces_id, amphures_id = $amphures_id, 
+                      grade = '$grade', id_member = $id_member
                       WHERE id_interview = $id_interview";
     mysqli_query($conn,$sql_interview);
 
@@ -53,6 +53,6 @@
 
       }
 
-    header('location:../edit_interview.php?id_interview='.$id_interview);
+    header('location:../data_interview.php');
 
 ?>

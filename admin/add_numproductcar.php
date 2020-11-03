@@ -52,59 +52,40 @@
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav ">
-  <script language="javascript">
-  function fncSubmit() {
-    if (document.form1.add_num.value == "") {
-      alert('กรุณาระบุจำนวน');
-      document.form1.num.focus();
-      return false;
-    }
-    if (document.form1.name.value == "") {
-      alert('กรุณาระบุชื่อผู้รับเข้าสินค้า');
-      document.form1.name.focus();
-      return false;
-    }
-    document.form1.submit();
-  }
-  </script>
+  
   <div class="wrapper">
     <header class="main-header">
       <?php require('menu/header_logout.php');?>
     </header>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="height: 1000px;">
-      <!-- Content Header (Page header) -->
+    <div class="content-wrapper row">
       <section class="content-header">
       </section>
 
-      <!-- Main content -->
       <section class="content">
-
         <div class="col-md-2"></div>
         <div class="col-md-8">
-          <div class="box box-primary">
-            <div class="box-header text-center with-border">
-              <font size="5">
-                <B align="center"> เพิ่มสินค้าเข้ารถ </B>
-              </font>
-            </div>
+          <form action="add_numproductcar2.php" method="post">
+            <div class="box box-primary">
+              <div class="box-header text-center with-border">
+                <font size="5">
+                  <B align="center"> เพิ่มสินค้าเข้ารถ </B>
+                </font>
+              </div>
 
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-                <form action="add_numproductcar2.php" method="post">
-                <table class="table table-striped ">
-                  <tbody>
-                    <tr class="info" >
-                        <th class="text-center" width="5%">เลือก
-                        </th>
-                        <th class="text-center" width="30%">สินค้า_หน่วย
-                        </th>
+              <div class="box-body no-padding">
+                <div class="mailbox-read-message">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr class="info" >
+                        <th class="text-center" width="5%">เลือก</th>
+                        <th class="text-center" width="30%">สินค้า_หน่วย</th>
                       </tr>
+                    </thead>
+                    <tbody>
                       <?php
                       $i=1;
-                      $list_product = "SELECT * FROM product ";
+                      $list_product = "SELECT * FROM product WHERE status_stock = 1";
                       $objq_listproduct = mysqli_query($conn,$list_product);
                           while($list = $objq_listproduct->fetch_assoc()){
                       ?>
@@ -121,26 +102,22 @@
                       ?>
                     </tbody>
                   </table>
+                </div>
+              </div>
+
+              <div class="box-footer">
+                <input class="hidden "type="text" name="id_member" value="<?php echo $_POST['id_member']; ?>">
+                <a type="block" href="add_data.php" class="btn btn-danger pull-left"><< กลับ</a> 
+                <button type="submit" class="btn btn-success pull-right">ถัดไป >> </button>
               </div>
             </div>
-            <div class="box-footer">
-              <input class="hidden "type="text" name="id_member" value="<?php echo $_POST['id_member']; ?>">
-              <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
-              <button type="submit" class="btn btn-success pull-right">ต่อไป =>> </button>
-            </div>
-            </form>
-            <!-- /.box-footer -->
-          </div>
+          </form>
         </div>
+        <div class="col-md-2"></div>
+      </section>
     </div>
-  </div>
-  <!-- /. box -->
-  </div>
-  </section>
-  <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <?php require("../menu/footer.html"); ?>
+
+    <?php require("../menu/footer.html"); ?>
   </div>
   <!-- jQuery 3 -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -159,56 +136,56 @@
   <script src="../dist/js/demo.js"></script>
   <script src="../plugins/iCheck/icheck.min.js"></script>
   <script>
-  $(function() {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging': true,
-      'lengthChange': false,
-      'searching': false,
-      'ordering': true,
-      'info': true,
-      'autoWidth': false
+    $(function() {
+      $('#example1').DataTable()
+      $('#example2').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+      })
     })
-  })
-  $(function() {
-    //Enable iCheck plugin for checkboxes
-    //iCheck for checkbox and radio inputs
-    $('.mailbox-read-message input[type="checkbox"]').iCheck({
-      checkboxClass: 'icheckbox_flat-blue',
-      radioClass: 'iradio_flat-blue'
+    $(function() {
+      //Enable iCheck plugin for checkboxes
+      //iCheck for checkbox and radio inputs
+      $('.mailbox-read-message input[type="checkbox"]').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue'
+      });
+      //Enable check and uncheck all functionality
+      $(".checkbox-toggle").click(function() {
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+          //Uncheck all checkboxes
+          $(".mailbox-read-message input[type='checkbox']").iCheck("uncheck");
+          $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        } else {
+          //Check all checkboxes
+          $(".mailbox-read-message input[type='checkbox']").iCheck("check");
+          $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+      });
+      //Handle starring for glyphicon and font awesome
+      $(".mailbox-star").click(function(e) {
+        e.preventDefault();
+        //detect type
+        var $this = $(this).find("a > i");
+        var glyph = $this.hasClass("glyphicon");
+        var fa = $this.hasClass("fa");
+        //Switch states
+        if (glyph) {
+          $this.toggleClass("glyphicon-star");
+          $this.toggleClass("glyphicon-star-empty");
+        }
+        if (fa) {
+          $this.toggleClass("fa-star");
+          $this.toggleClass("fa-star-o");
+        }
+      });
     });
-    //Enable check and uncheck all functionality
-    $(".checkbox-toggle").click(function() {
-      var clicks = $(this).data('clicks');
-      if (clicks) {
-        //Uncheck all checkboxes
-        $(".mailbox-read-message input[type='checkbox']").iCheck("uncheck");
-        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-      } else {
-        //Check all checkboxes
-        $(".mailbox-read-message input[type='checkbox']").iCheck("check");
-        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-      }
-      $(this).data("clicks", !clicks);
-    });
-    //Handle starring for glyphicon and font awesome
-    $(".mailbox-star").click(function(e) {
-      e.preventDefault();
-      //detect type
-      var $this = $(this).find("a > i");
-      var glyph = $this.hasClass("glyphicon");
-      var fa = $this.hasClass("fa");
-      //Switch states
-      if (glyph) {
-        $this.toggleClass("glyphicon-star");
-        $this.toggleClass("glyphicon-star-empty");
-      }
-      if (fa) {
-        $this.toggleClass("fa-star");
-        $this.toggleClass("fa-star-o");
-      }
-    });
-  });
   </script>
 </body>
 

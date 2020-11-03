@@ -92,8 +92,9 @@
                       <a type="button" href="#" data-toggle="modal" data-target="#myModal" class="btn btn-warning" style="color:black;">ค้างส่ง(อ)</a>
                       <a type="button" href="#" data-toggle="modal" data-target="#myModal2" class="btn btn-warning" style="color:black;">ส่งแล้ว(อ)</a>
                       <a type="button" href="order_success.php" class="btn btn-danger" style="color:black;">OR วันนี้(ส่ง)</a>
-                      <a type="button" href="total_order.php" class="btn btn-danger" style="color:black;">ค้างส่งรวม</a>
-                      <a type="button" href="#" data-toggle="modal" data-target="#mymodal3" class="btn btn-danger" style="color:black;">ค้างส่ง(จ)</a>
+                      <a type="button" href="total_order2.php" class="btn btn-danger" style="color:black;">ค้างส่ง</a>
+                      <!-- <a type="button" href="total_order.php" class="btn btn-danger" style="color:black;">ค้างส่งรวม</a> -->
+                      <!-- <a type="button" href="#" data-toggle="modal" data-target="#mymodal3" class="btn btn-danger" style="color:black;">ค้างส่ง(จ)</a> -->
                       <a type="button" href="add_order.php" class="btn btn-danger" style="color:black;">เพิ่ม OR</a>
                     </div>
                   </div>

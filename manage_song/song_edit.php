@@ -9,6 +9,7 @@
                 WHERE song_list.id_song = $id_song";
   $objq_song = mysqli_query($conn,$sql_song);
   $objr_song = mysqli_fetch_array($objq_song);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -135,19 +136,19 @@
                 <div class="col-12">
                   <div class="col-4 col-sm-4 col-xl-4 col-md-4">
                     <?php 
-                      if($_GET['id_ageartist']==1){
+                      if($_GET['age']=='old'){
                     ?>
                       <a type="button" href="song_old.php" class="btn button2"><< กลับ</a>
                     <?php 
                       }
-                      if($_GET['id_ageartist']==2){
+                      if($_GET['age']=='middle'){
                     ?>
                     <a type="button" href="song_middle.php" class="btn button2"><< กลับ</a>
                     <?php 
                       }
-                      if($_GET['id_ageartist']==3){
+                      if($_GET['age']=='new'){
                     ?>
-                    <a type="button" href="song_middle.php" class="btn button2"><< กลับ</a>
+                    <a type="button" href="song_new.php" class="btn button2"><< กลับ</a>
                     <?php } ?>
                   </div>
                   <div class="col-4 col-sm-4 col-xl-4 col-md-4">
@@ -165,15 +166,17 @@
               <form action="algorithm\edit_song.php" class="form-horizontal" method="post" autocomplete="off" name="form1">
                 <div class="box-body no-padding">
                   <div class="mailbox-read-message">
+
                     <div class="row">
-                      <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
+                    
+                      <div class="col-3 col-sm-2 col-md-3 col-xl-3"></div>
                       
-                      <div class="col-5 col-sm-5 col-md-5 col-xl-5">
+                      <div class="col-5 col-sm-8 col-md-5 col-xl-5">
                         <div class="form-group">
                           <label class="col-sm-4 control-label">นักร้อง </label>
                           <div class="col-sm-4">
                             <select name="id_artist"  class="form-control" >
-                              <option value="<?php echo $objr_song['id_artist']; ?>">-- เลือกนักร้อง --</option>
+                              <option value="<?php echo $objr_song['id_artist'];?>">-- เลือกนักร้อง --</option>
                               <?php 
                                 $sql_artist = "SELECT id_artist,name_artist FROM song_artist";
                                 $objq_artist = mysqli_query($conn,$sql_artist);
@@ -193,7 +196,23 @@
                           <div class="col-sm-8">
                             <input type="text" name="name_song" class="form-control" value="<?php echo $objr_song['name_song']; ?>">
                             <input type="hidden" name="id_song" class="form-control" value="<?php echo $id_song; ?>">
-                            <input type="hidden" name="id_ageartist" class="form-control" value="<?php echo $id_ageartist; ?>">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">ไฟล์เพลง </label>
+                          <div class="col-sm-8">
+                          <?php
+                            if(empty($objr_song['ad_song'])){
+                          ?>
+                            <input type="file" name="ad_song" class="form-control" value="">
+                          <?php
+                            }else{
+                          ?>
+                            <input type="text" name="ad_song" class="form-control" value="<?php echo $objr_song['ad_song']; ?>">
+                          <?php
+                            }
+                          ?>
                           </div>
                         </div>
 
@@ -246,18 +265,50 @@
                           <label class="col-sm-4 control-label">เปิดแล้ว </label>
                           <div class="col-sm-8">
                             <label class="switch">
-                              <input type="checkbox" name="status" <?php if($objr_song['status']=="Y"){ echo "checked"; }else{} ?>>
+                              <input type="checkbox" name="id_member" name="id_member" value="<?php echo $objr_song['id_member'];?>"
+                              <?php if($objr_song['id_member'] != 54){ echo "checked"; }else{} ?>>
                               <span class="slider round"></span>
                             </label>
                           </div>
                         </div>
 
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">แก้ไข </label>
+                          <div class="col-sm-8">
+                            <label class="switch">
+                              <input type="checkbox" name="edit" <?php if($objr_song['edit']=="Y"){ echo "checked"; }else{} ?>>
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+                        </div>
+                        
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">ตรวจ</label>
+                          <div class="col-sm-8">
+                            <label class="switch">
+                              <input type="checkbox" name="check_edit" <?php if($objr_song['check_edit']=="Y"){ echo "checked"; }else{} ?>>
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">หมายเหตุ </label>
+                          <div class="col-sm-8">
+                            <input type="text" name="note" class="form-control" value="<?php echo $objr_song['note']; ?>">
+                          </div>
+                        </div>
+
                       </div>
-                      <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
-                      <!-- /.row -->
+
+                      <div class="col-3 col-sm-2 col-md-3 col-xl-3"></div>
+
                     </div>
+
                   </div>
                   <div class="box-footer text-center">
+                    <input type="hidden" name="age"  value="<?php echo $_GET['age']; ?>">
                     <button type="submit" class="btn btn-success"> บันทึก </button>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
                     <a href="algorithm/delete_song.php?id_song=<?php echo $id_song;?>" class="btn  btn-danger" OnClick="return confirm('ต้องการลบรายการเพลงหรือไม่ ?')";>ลบ</a>
                   </div>

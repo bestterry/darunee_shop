@@ -49,152 +49,139 @@
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class=" hold-transition skin-blue layout-top-nav ">
-  <div class="wrapper">
-    <header class="main-header">
-     <?php require "menu/main_header.php"; ?>
-    </header>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-      </section>
-      <!-- Main content -->
-      <section class="content">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+  <body class=" hold-transition skin-blue layout-top-nav ">
+    <div class="wrapper">
+      <header class="main-header">
+        <?php require "menu/main_header.php"; ?>
+      </header>
+      <div class="content-wrapper">
+        <section class="content-header">
+        </section>
+        <section class="content">
           <div class="box box-primary">
-            <div class="box-header text-center with-border">
-              <font size="5"><B> รายการขายสินค้า </font></B>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-                <form action="show_price.php" method="post" autocomplete="off">
-                  <table class="table table-bordered table-hover">
-                    <tbody>
-                      <tr bgcolor="#99CCFF">
-                        <th class="text-center" width="5%">ลำดับ</th>
-                        <th class="text-center">สินค้า_หน่วย</th>
-                        <th class="text-center" width="15%">จำนวน</th>
-                        <th class="text-center" width="15%">บ/หน่วย</th>
-                        <th class="text-center" width="15%">รวมเงิน(บ)</th>
-                      </tr>
-                      <?php //คำนวณสรายการสินค้า
-                      $note = $_POST['note'];
-                          $total_price_money = 0;
-                           for($i=0;$i<count($_POST['id_numproduct']);$i++){
-                            $id_numproduct = $_POST['id_numproduct'][$i];
-                            $num_product = $_POST['num_product'][$i];
-                            $price_product = $_POST['price_product'][$i];
-                            $total_price = $num_product*$price_product;
-
-                            $num_product_instore="SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_numproduct = $id_numproduct";
-                            $objq_num_product_instore = mysqli_query($conn,$num_product_instore);
-                            $objr_num_product_instore = mysqli_fetch_array($objq_num_product_instore);
-                            $total_num_product = $objr_num_product_instore['num']-$num_product;
-                            $name_product = $objr_num_product_instore['name_product'];
-                            $unit = $objr_num_product_instore['unit'];
-                            $id_product = $objr_num_product_instore['id_product'];
-                            if($total_num_product < 0){
-                              echo "สินค้ามีจำนวนไม่เพียงพอ";
-                            }else{
-                              //Update NUM product in database
-                              $update_num_product = "UPDATE num_product SET num = $total_num_product WHERE id_numproduct = $id_numproduct";
-                              $objq_update = mysqli_query($conn,$update_num_product);
-                              // //INsert history buy product
-                              if($price_product == 0){
-                                $status = "free";
-                              }else{
-                                $status = "sale";
-                              }
-                              $insert_history = "INSERT INTO price_history (num, price, money, id_product, status, id_zone, note)
-                                                  VALUES ($num_product, $price_product, $total_price, $id_product, '$status', $id_zone, '$note')";
-                                mysqli_query($conn,$insert_history);
-                              
-                          ?>
-                      <tr>
-                        <td class="text-center"><?php echo $i+1; ?></td>
-                        <td><?php echo $name_product.'_'.$objr_num_product_instore['unit']; ?></td>
-                        <td class="text-center"><?php echo $num_product; ?></td>
-                        <td class="text-center"><?php echo $price_product; ?> </td>
-                        <input class="hidden" type="text" name="name_product[]" value="<?php echo $name_product; ?>">
-                        <input class="hidden" type="text" name="unit[]" value="<?php echo $unit; ?>">
-                        <input class="hidden" type="text" name="num_product[]" value="<?php echo $num_product; ?>">
-                        <input class="hidden" type="text" name="price_product[]" value="<?php echo $price_product; ?>">
-                        <td class="text-center"><?php echo $total_price;?></td>
-                      </tr>
-                      <?php
-                            }
-                             $total_price_money = $total_price_money + $total_price;
-                           }
-                          ?>
-                      <tr>
-                        <td style="visibility:collapse;"></td>
-                        <td style="visibility:collapse;"></td>
-                        <td style="visibility:collapse;"></td>
-                        <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
-                        <th class="text-center" bgcolor="#EAF4FF"><?php echo $total_price_money; ?></th>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div class="col-md-6">
-                   <table class="table table-bordered ">
-                      <tbody>
-                        <tr bgcolor="#99CCFF">
-                          <th class="text-center" width="25%">หมายเหตุ</th>
-                          <th class="text-center" width="75%"> <?php echo $note; ?></th>
-                        </tr>
-                      </tbody>
-                    </table> 
-                  </div>
-                  <div class="col-md-6">
+            <form action="show_price.php" method="post" autocomplete="off">
+              <div class="box-header text-center with-border">
+                <font size="5"><B> รายการขายสินค้า </font></B>
+              </div>
+              <div class="box-body no-padding">
+                <div class="mailbox-read-message">
+                  <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                     <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th class="text-center">สินค้า_หน่วย</th>
+                          <th class="text-center" width="15%">จำนวน</th>
+                          <th class="text-center" width="15%">บ/หน่วย</th>
+                          <th class="text-center" width="15%">รวมเงิน(บ)</th>
+                        </tr>
+                      </thead>
                       <tbody>
-                        <tr bgcolor="#99CCFF">
-                          <th class="text-center">จำนวนเงินที่รับมา</th>
-                          <th class="text-center"> <input class="text-center" type="text" name="money_receive"
-                              placeholder="ระบุจำนวนเงิน"></th>
+                        <?php //คำนวณสรายการสินค้า
+                          $note = $_POST['note'];
+                            $total_price_money = 0;
+                            for($i=0;$i<count($_POST['id_numproduct']);$i++){
+                              $id_numproduct = $_POST['id_numproduct'][$i];
+                              $num_product = $_POST['num_product'][$i];
+                              $price_product = $_POST['price_product'][$i];
+                              $total_price = $num_product*$price_product;
+
+                              $num_product_instore="SELECT * FROM product INNER JOIN num_product ON product.id_product = num_product.id_product WHERE num_product.id_numproduct = $id_numproduct";
+                              $objq_num_product_instore = mysqli_query($conn,$num_product_instore);
+                              $objr_num_product_instore = mysqli_fetch_array($objq_num_product_instore);
+                              $total_num_product = $objr_num_product_instore['num']-$num_product;
+                              $name_product = $objr_num_product_instore['name_product'];
+                              $unit = $objr_num_product_instore['unit'];
+                              $id_product = $objr_num_product_instore['id_product'];
+                              if($total_num_product < 0){
+                                echo "สินค้ามีจำนวนไม่เพียงพอ";
+                              }else{
+                                //Update NUM product in database
+                                $update_num_product = "UPDATE num_product SET num = $total_num_product WHERE id_numproduct = $id_numproduct";
+                                $objq_update = mysqli_query($conn,$update_num_product);
+                                //INsert history buy product
+                                if($price_product == 0){
+                                  $status = "free";
+                                }else{
+                                  $status = "sale";
+                                }
+                                $insert_history = "INSERT INTO price_history (num, price, money, id_product, status, id_zone, note)
+                                                   VALUES ($num_product, $price_product, $total_price, $id_product, '$status', $id_zone, '$note')";
+                                mysqli_query($conn,$insert_history);
+                                
+                        ?>
+                        <tr>
+                          <td class="text-center"><?php echo $name_product.'_'.$objr_num_product_instore['unit']; ?></td>
+                          <td class="text-center"><?php echo $num_product; ?></td>
+                          <td class="text-center"><?php echo $price_product; ?> </td>
+                          <input class="hidden" type="text" name="name_product[]" value="<?php echo $name_product; ?>">
+                          <input class="hidden" type="text" name="unit[]" value="<?php echo $unit; ?>">
+                          <input class="hidden" type="text" name="num_product[]" value="<?php echo $num_product; ?>">
+                          <input class="hidden" type="text" name="price_product[]" value="<?php echo $price_product; ?>">
+                          <td class="text-center"><?php echo $total_price;?></td>
+                        </tr>
+                        <?php
+                              }
+                              $total_price_money = $total_price_money + $total_price;
+                            }
+                        ?>
+                        <tr>
+                          <td style="visibility:collapse;"></td>
+                          <td style="visibility:collapse;"></td>
+                          <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
+                          <th class="text-center" bgcolor="#EAF4FF"><?php echo $total_price_money; ?></th>
                         </tr>
                       </tbody>
                     </table>
+
+                    <div class="col-6 col-sm-6 col-md-6 col-xl-6">
+                      <table class="table table-bordered ">
+                        <tbody>
+                          <tr>
+                            <th class="text-center" width="25%">หมายเหตุ</th>
+                            <th width="75%"><input class="text-center form-control" type="text" value="<?php echo $note;?>" disabled></th>
+                          </tr>
+                        </tbody>
+                      </table> 
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-xl-6">
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr bgcolor="#99CCFF">
+                            <th class="text-center">จำนวนเงินที่รับมา</th>
+                            <th> <input class="text-center form-control" type="text" name="money_receive" placeholder="ระบุจำนวนเงิน" ></th>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
+                </div>
               </div>
-              <!-- /.mailbox-read-message -->
-            </div>
-            <!-- /.box-body -->
-            <!-- /.box-footer -->
-            <div align="center" class="box-footer">
-              <a type="block" href="../product.php" class="btn btn-success pull-left"> <<= กลับสู่หน้าหลัก</a> 
-              <button type="submit" class="btn btn-success pull-right"><i class="fa fa-calculator"> คำนวณเงิน </i></button>
-            </div>
+              <div align="center" class="box-footer">
+                <a type="block" href="../product.php" class="btn btn-danger pull-left"> << กลับ</a> 
+                <button type="submit" class="btn btn-success pull-right"><i class="fa fa-calculator"> คำนวณเงิน </i></button>
+              </div>
             </form>
-            <!-- /.box-footer -->
           </div>
-          <!-- /. box -->
-        </div>
-      </section>
-      <!-- /.content -->
+        </section>
+      </div>
+      <?php require("../menu/footer.html"); ?>
     </div>
-    <!-- /.content-wrapper -->
-    <?php require("../menu/footer.html"); ?>
-  </div>
-  <!-- jQuery 3 -->
-  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-  <!-- Bootstrap 3.3.7 -->
-  <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- DataTables -->
-  <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-  <!-- SlimScroll -->
-  <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-  <!-- FastClick -->
-  <script src="../bower_components/fastclick/lib/fastclick.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../dist/js/demo.js"></script>
-  <script src="../plugins/iCheck/icheck.min.js"></script>
-</body>
+    <!-- jQuery 3 -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="../bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../dist/js/demo.js"></script>
+    <script src="../plugins/iCheck/icheck.min.js"></script>
+  </body>
 
 </html>

@@ -40,38 +40,30 @@
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
   <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        <style>
-          #customers {
-            
-            width: 100%;
-          }
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <style>
+    #customers {
+      
+      width: 100%;
+    }
 
-          #customers td, #customers th {
-            border: 1px solid #ddd;
-            padding: 8px;
-          }
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
 
-          #customers tr:nth-child(even){background-color: #f2f2f2;}
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
 
 
-          #customers th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: center;
-            background-color: #99CCFF;
-          
-          }
-        </style>
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: center;
+      background-color: #99CCFF;
+    
+    }
+  </style>
 </head>
 <body class=" hold-transition skin-blue layout-top-nav ">
 <div class="wrapper">

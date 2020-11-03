@@ -36,10 +36,7 @@
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
-
-  <!-- Google Font -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style>
       .switch {
         position: relative;
@@ -109,16 +106,12 @@
       <?php require('menu/header_logout.php');?>
     </header>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
 
-      <!-- Main content -->
       <section class="content">
         <div class="row">
-          <!-- form start -->
           <div class="col-md-12">
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
@@ -135,150 +128,170 @@
               <div class="tab-content">
                 <!-- เพิ่มพนักงาน -->
                 <div class="active tab-pane" id="adduser">
-                  <div class="form-group">
-                    <form class="form-horizontal" action="algorithm/add_user.php" method="post" autocomplete="off">
-                      <div class="box box-default">
-                        <!-- /.box-header -->
-                        <div class="box-header with-border text-center">
-                          <font size="5"><B> เพิ่มพนักงาน</B> </font>
-                        </div>
-                        <div class="box-body with-border">
-                          <div class="row">
-                            <div class="col-md-3 col-sm-3"></div>
+                  <form class="form-horizontal" action="algorithm/add_user.php" method="post" autocomplete="off">
+                    <div class="box box-default">
+                      <div class="box-header with-border text-center">
+                        <font size="5"><B> เพิ่มพนักงาน</B> </font>
+                      </div>
+                      <div class="box-body with-border">
+                        <div class="row">
+                          <div class="col-md-3 col-sm-3 col-lg-3"></div>
 
-                            <div class="col-md-6 col-sm-6">
-                              <div class="row">
-                                <div class="form-group">
-                                  <label class="col-sm-3 col-md-3 col-6 control-label">ชื่อ</label>
-                                  <div class="col-sm-9 col-md-9 col-6">
-                                    <input class="form-control" type="text" name="name">
-                                  </div>
-                                </div>
-                              </div>
+                          <div class="col-sm-6 col-md-6 col-lg-6">
 
-                              <div class="row">
-                                <div class="form-group">
-                                  <label class="col-sm-3 col-md-3 col-6 control-label">ชื่อเล่น</label>
-                                  <div class="col-sm-9 col-md-9 col-6">
-                                    <input class="form-control" type="text" name="sub_name">
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="row">
-                                <div class="form-group">
-                                  <label class="col-sm-3 col-md-3 col-6 control-label">สถานะ</label>
-                                  <div class="col-sm-9 col-md-9 col-6">
-                                    <select name="status" class="form-control" style="width: 100%;">
-                                      <option value="admin">ผู้ดูแลระบบ</option>
-                                      <option value="sale">หน้าร้าน</option>
-                                      <option value="employee">พนักงานส่งของ</option>
-                                      <option value="boss">หัวหน้า</option>
-                                    </select>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="row">
-                                <div class="form-group">
-                                  <label class="col-sm-3 col-md-3 col-6 control-label">Username</label>
-                                  <div class="col-sm-9 col-md-9 col-6">
-                                    <input class="form-control" type="text" name="username">
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="row">
-                                <div class="form-group">
-                                  <label class="col-sm-3 col-md-3 col-6 control-label">Password</label>
-                                  <div class="col-sm-9 col-md-9 col-6">
-                                    <input class="form-control" type="text" name="password">
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="row">
-                                <div class="form-group">
-                                  <label class="col-sm-3 col-md-3 col-6 control-label">แสดงหน่วยรถ</label>
-                                  <div class="col-sm-9 col-md-9 col-6">
-                                    <label class="switch">
-                                      <input type="checkbox" name="status_car">
-                                      <span class="slider round"></span>
-                                    </label>
-                                  </div>
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-sm-3 col-md-3 col-6 control-label">ชื่อ-นามสกุล</label>
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-6">
+                                  <input class="form-control" type="text" name="full_name">
                                 </div>
                               </div>
                             </div>
 
-                            <div class="col-md-3 col-sm-3"></div>
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-sm-3 col-md-3 col-6 control-label">ชื่อ</label>
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-6">
+                                  <input class="form-control" type="text" name="name">
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-sm-3 col-md-3 col-6 control-label">ชื่อเล่น</label>
+                                <div class="col-sm-6 col-md-6 col-6">
+                                  <input class="form-control" type="text" name="sub_name">
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-sm-3 col-md-3 col-6 control-label">สถานะ</label>
+                                <div class="col-sm-6 col-md-6 col-6">
+                                  <select name="status" class="form-control" style="width: 100%;">
+                                    <option value="admin">ผู้ดูแลระบบ</option>
+                                    <option value="sale">หน้าร้าน</option>
+                                    <option value="employee">พนักงานส่งของ</option>
+                                    <option value="boss">หัวหน้า</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-sm-3 col-md-3 col-6 control-label">Username</label>
+                                <div class="col-sm-6 col-md-6 col-6">
+                                  <input class="form-control" type="text" name="username">
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-sm-3 col-md-3 col-6 control-label">Password</label>
+                                <div class="col-sm-6 col-md-6 col-6">
+                                  <input class="form-control" type="text" name="password">
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="form-group">
+                                <label class="col-sm-3 col-md-3 col-6 control-label">แสดงหน่วยรถ</label>
+                                <div class="col-sm-9 col-md-9 col-6">
+                                  <label class="switch">
+                                    <input type="checkbox" name="status_car">
+                                    <span class="slider round"></span>
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+
                           </div>
-                        </div>
-                        <div class="box-footer" align="center">
-                          <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก </button>
+
+                          <div class="col-md-3 col-sm-3 col-lg-3"></div>
                         </div>
                       </div>
-                    </form>
-                  </div>
+
+                      <div class="box-footer" align="center">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
                 <!-- /เพิ่มพนักงาน -->
 
                 <!-- เพิ่มสินค้า -->
                 <div class="tab-pane" id="addproduct">
                   <div class="box box-default">
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="container">
-                          <form action="algorithm/add_product2.php" method="post" autocomplete="off">
-                            <div class="box-header with-border">
-                              <font size="4">
-                                <B>
-                                  เพิ่มสินค้า
-                                  
-                                </B>
-                              </font>
-                            </div>
-
-                            <div class="col-md-12">
-                              <div class="form-group col-md-3">
-                                <label for="txtname">ชื่อสินค้าย่อ :</label>
-                                <input type="text" name="name_product" class="form-control" placeholder="ชื่อสินค้า">
-                              </div>
-                            </div>
-
-                            <div class="col-md-12">
-                              <div class="form-group col-md-3">
-                                <label for="txtname">ชื่อสินค้าเต็ม :</label>
-                                <input type="text" name="full_name" class="form-control" placeholder="ชื่อสินค้า">
-                              </div>
-                            </div>
-
-                            <div class="col-md-12">
-                              <div class="form-group col-md-4">
-                                <label for="unit">หน่วยนับ : </label>
-                                <input type="text" name="unit" class="form-control" placeholder="หน่วย">
-                              </div>
-                            </div>
-
-                            <div class="col-md-12">
-                              <div class="form-group col-md-2">
-                                <label for="inputPassword3">ราคาซื้อมา :</label>
-                                <input type="number" name="price_num" class="form-control" value="0">
-                              </div>
-                            </div>
-
-                            <div class="col-md-12">
-                              <div class="form-group col-md-2">
-                                <label for="inputPassword3">ราคาขาย :</label>
-                                <input type="number" name="price_outside" class="form-control" value="0">
-                              </div>
-                            </div>
-                            <div class="box-footer" align="center">
-                              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก </button>
-                            </div>
-                          </form>
+                    <div class="row">
+                      <form action="algorithm/add_product2.php" method="post" class="form-horizontal" autocomplete="off">
+                        <div class="box-header with-border text-center">
+                          <font size="5"><B> เพิ่มสินค้า </B></font>
                         </div>
-                      </div>
+
+                        <div class="box-body">
+                          <div class="row">
+                            <div class="col-md-3 col-sm-3 col-lg-3"></div>
+                            <div class="col-md-6 col-sm-6 col-lg-6">
+
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-6 control-label">ชื่อย่อ </label>
+                                  <div class="col-sm-6 col-md-6 col-6">
+                                    <input type="text" name="name_product" class="form-control">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-6 control-label">ชื่อเต็ม </label>
+                                  <div class="col-sm-6 col-md-6 col-6">
+                                    <input type="text" name="full_name" class="form-control">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-6 control-label">หน่วยนับ </label>
+                                  <div class="col-sm-6 col-md-6 col-6">
+                                    <input type="text" name="unit" class="form-control">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-6 control-label">ราคาซื้อมา </label>
+                                  <div class="col-sm-6 col-md-6 col-6">
+                                    <input type="number" name="price_num" class="form-control">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-6 control-label">ราคาขาย </label>
+                                  <div class="col-sm-6 col-md-6 col-6">
+                                    <input type="number" name="price_outside" class="form-control">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-lg-3"></div>
+                          </div>
+                        </div>
+
+                        <div class="box-footer" align="center">
+                          <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก </button>
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -287,41 +300,41 @@
                 <!-- แก้ไขสินค้าในรถ -->
                 <div class="tab-pane" id="settingproductcar">
                   <div class="box box-default">
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="container">
-                          <form action="edit_productcar.php" method="post" autocomplete="off">
-                            <div class="box-header with-border">
-                              <font size="4">
-                                <B>
-                                แก้ไขจำนวนสินค้าในรถ
-                                </B>
-                              </font>
-                            </div>
-                              <table  class="table table-bordered">
-                                <tbody>
-                                  <th width="20%">กรุณาเลือกบุคคล</th>
-                                  <th>
-                                    <select class="form-control select2" style="width: 50%;" name="id_membercar">
-                                      <option selected="selected">-</option>
-                                    <?php
-                                      $sql_member = "SELECT * FROM member WHERE status='employee'";
-                                      $objq_member = mysqli_query($conn,$sql_member);
-                                      while($value = $objq_member->fetch_assoc()){
-                                    ?>
-                                      <option name="id_member" value="<?php echo $value['id_member'];?>"><?php echo $value['name'];?></option>
-                                    <?php }?>  
-                                    </select>
-                                  </th>
-                                </tbody>
-                              </table>
-                              <div class="box-footer" align="center">
-                                <button type="submit" class="btn btn-success"><i class="fa fa-true"></i> ตกลง </button>
-                              </div>
-                          </form>
+                    <div class="row">
+                      <form action="edit_productcar.php" method="get" class="form-horizontal" autocomplete="off">
+                        <div class="box-header with-border text-center">
+                          <font size="5"><B>แก้ไขจำนวนสินค้าในรถ</B></font>
                         </div>
-                      </div>
+
+                        <div class="box-body">
+                          <div class="row">
+                            <div class="col-md-3 col-sm-3 col-lg-3"></div>
+                            <div class="col-md-6 col-sm-6 col-lg-6">
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-3 control-label">เลือกหน่วยรถ </label>
+                                  <div class="col-sm-6 col-md-6 col-6">
+                                    <select class="form-control select2" style="width: 100%;" name="id_membercar">
+                                      <?php
+                                        $sql_member = "SELECT * FROM member WHERE status='employee' AND status_car = 1";
+                                        $objq_member = mysqli_query($conn,$sql_member);
+                                        while($value = $objq_member->fetch_assoc()){
+                                      ?>
+                                        <option name="id_member" value="<?php echo $value['id_member'];?>"><?php echo $value['name'];?></option>
+                                      <?php }?>  
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3"></div>
+                          </div>
+                        </div>
+
+                        <div class="box-footer" align="center">
+                          <button type="submit" class="btn btn-success"><i class="fa fa-true"></i> ตกลง </button>
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -330,41 +343,42 @@
                 <!-- เพิ่มสินค้ารถ -->
                 <div class="tab-pane" id="addproductcar">
                   <div class="box box-default">
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="container">
-                          <form action="add_numproductcar.php" method="post" autocomplete="off">
-                            <div class="box-header with-border">
-                              <font size="4">
-                                <B>
-                                  เพิ่มสินค้าเข้ารถ
-                                </B>
-                              </font>
-                            </div>
-                              <table  class="table table-bordered">
-                                <tbody>
-                                  <th width="20%">กรุณาเลือกบุคคล</th>
-                                  <th>
-                                  <select class="form-control select2" style="width: 50%;" name="id_member">
-                                    <option selected="selected">-</option>
-                                  <?php
-                                    $sql_member = "SELECT * FROM member WHERE status='employee'";
-                                    $objq_member = mysqli_query($conn,$sql_member);
-                                    while($value = $objq_member->fetch_assoc()){
-                                  ?>
-                                    <option name="id_member" value="<?php echo $value['id_member'];?>"><?php echo $value['name'];?></option>
-                                  <?php }?>  
-                                  </select>
-                                  </th>
-                                </tbody>
-                              </table>
-                              <div class="box-footer" align="center">
-                                <button type="submit" class="btn btn-success"><i class="fa fa-true"></i> ตกลง </button>
-                              </div>
-                          </form>
+                    <div class="row">
+                      <form action="add_numproductcar.php" method="post" class="form-horizontal" autocomplete="off">
+                        <div class="box-header with-border text-center">
+                          <font size="5"><B>เพิ่มสินค้าเข้ารถ</B></font>
                         </div>
-                      </div>
+
+                        <div class="box-body">
+                          <div class="row">
+                            <div class="col-md-3 col-sm-3 col-lg-3"></div>
+                            <div class="col-md-6 col-sm-6 col-lg-6">
+                              <div class="row">
+                                <div class="form-group">
+                                  <label class="col-sm-3 col-md-3 col-3 control-label">เลือกหน่วยรถ </label>
+                                  <div class="col-sm-6 col-md-6 col-6">
+                                    <select class="form-control" style="width: 100%;" name="id_member">
+                                      <option selected="selected">-</option>
+                                      <?php
+                                        $sql_member = "SELECT * FROM member WHERE status='employee' AND status_car = 1";
+                                        $objq_member = mysqli_query($conn,$sql_member);
+                                        while($value = $objq_member->fetch_assoc()){
+                                      ?>
+                                        <option name="id_member" value="<?php echo $value['id_member'];?>"><?php echo $value['name'];?></option>
+                                      <?php }?>  
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3"></div>
+                          </div>
+                        </div>
+
+                        <div class="box-footer" align="center">
+                          <button type="submit" class="btn btn-success"><i class="fa fa-true"></i> ตกลง </button>
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -374,47 +388,43 @@
                 <div class="tab-pane" id="settingproduct">
                   <div class="box box-default">
                     <!-- /.box-header -->
+                    <div class="box-header with-border text-center">
+                      <font size="5"><B>แก้ไขข้อมูลสินค้า</B></font>
+                    </div>
                     <div class="box-body">
                       <div class="row">
                         <div class="container">
-                          <form action="algorithm/add_product2.php" method="post" autocomplete="off">
-                            <div class="box-header with-border text-center">
-                              <font size="4"><B>แก้ไขข้อมูลสินค้า</B></font>
-                            </div>
-                            <table class="table">
-                              <tbody>
-                                <tr >
-                                  <th class="text-center" width="25%"> <font color="red">ชื่อสินค้า</font> </th>
-                                  <th class="text-center" width="25%"> <font color="red">หน่วย</font> </th>
-                                  <th class="text-center" width="25%"> <font color="red">แก้ไข</font> </th>
-                                  <th class="text-center" width="25%"> <font color="red">ลบ</font> </th>
-                                </tr>
-                                <?php #endregion
-                                                  $total_money = 0;
-                                                  $date = "SELECT * FROM product";  
-                                                  $objq = mysqli_query($conn,$date);
-                                                  while($value = $objq ->fetch_assoc()){ 
-                                              ?>
-                                <tr>
-                                  <td class="text-center">
-                                    <?php echo $value['name_product']; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <?php echo $value['unit']; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <a href="edit_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="fa fa-pencil"></a>
-                                  </td>
-                                  <td class="text-center">
-                                    <a href="algorithm/delete_product.php?id_product=<?php echo $value['id_product']; ?>" type="button"><i class="fa fa-minus-square"></i></a>
-                                  </td>
-                                </tr>
-                                <?php
-                                  }
-                                ?>
-                              </tbody>
-                            </table>
-                          </form>
+                          <table class="table">
+                            <thead>
+                              <tr >
+                                <th class="text-center" width="50%"> <font color="red">สินค้า_หน่วย</font> </th>
+                                <th class="text-center" width="25%"> <font color="red">แก้ไข</font> </th>
+                                <th class="text-center" width="25%"> <font color="red">ลบ</font> </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php 
+                                  $total_money = 0;
+                                  $date = "SELECT * FROM product";  
+                                  $objq = mysqli_query($conn,$date);
+                                  while($value = $objq ->fetch_assoc()){ 
+                              ?>
+                              <tr>
+                                <td class="text-center">
+                                  <?php echo $value['name_product'].'_'. $value['unit']; ?>
+                                </td>
+                                <td class="text-center">
+                                  <a href="edit_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="btn btn-success btn-xs">>></a>
+                                </td>
+                                <td class="text-center">
+                                  <a href="algorithm/delete_product.php?id_product=<?php echo $value['id_product']; ?>" type="button" class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะลบข้อมูลหรือไม่ ?')";>ลบ</a>
+                                </td>
+                              </tr>
+                              <?php
+                                }
+                              ?>
+                            </tbody>
+                          </table>
                         </div>
                       </div>
                     </div>
@@ -422,8 +432,8 @@
                 </div>
                 <!-- /เเก้ไขสินค้า -->
 
-                 <!-- แก้ไขพนักงาน -->
-                 <div class="tab-pane" id="settingemployee">
+                <!-- แก้ไขพนักงาน -->
+                <div class="tab-pane" id="settingemployee">
                   <div class="box box-default">
                     <!-- /.box-header -->
                     <div class="box-header with-border text-center">
@@ -432,33 +442,34 @@
                     <div class="box-body">
                       <div class="row">
                         <div class="container">
-                          <form action="algorithm/add_product2.php" method="post" autocomplete="off">
-                           
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <th class="text-center" width="33%"> <font color="red">ชื่อพนักงาน</font> </th>
-                                  <th class="text-center" width="33%"> <font color="red">สถานะ</font> </th>
-                                  <th class="text-center" width="33%"> <font color="red">แก้ไข</font> </th>
-                                </tr>
-                                <?php #endregion
-                                    $sql_member = "SELECT * FROM member";  
-                                    $objq_member = mysqli_query($conn,$sql_member);
-                                    while($value = $objq_member ->fetch_assoc()){ 
-                                ?>
-                                <tr>
-                                  <td class="text-center"><?php echo $value['name']; ?></td>
-                                  <td class="text-center"> <?php echo $value['status']; ?></td>
-                                  <td class="text-center">
-                                    <a href="edit_employee.php?id_member=<?php echo $value['id_member']; ?>" type="button" class="fa fa-pencil"></a>
-                                  </td>
-                                </tr>
-                                <?php
-                                  }
-                                ?>
-                              </tbody>
-                            </table>
-                          </form>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th class="text-center" width="25%"> <font color="red">ชื่อพนักงาน</font> </th>
+                                <th class="text-center" width="25%"> <font color="red">สถานะ</font> </th>
+                                <th class="text-center" width="25%"> <font color="red">แสดงหน่วยรถ</font> </th>
+                                <th class="text-center" width="25%"> <font color="red">แก้ไข</font> </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php #endregion
+                                  $sql_member = "SELECT * FROM member";  
+                                  $objq_member = mysqli_query($conn,$sql_member);
+                                  while($value = $objq_member ->fetch_assoc()){ 
+                              ?>
+                              <tr>
+                                <td class="text-center"><?php echo $value['name']; ?></td>
+                                <td class="text-center"> <?php echo $value['status']; ?></td>
+                                <td class="text-center"> <?php echo $value['status_car']; ?></td>
+                                <td class="text-center">
+                                  <a href="edit_employee.php?id_member=<?php echo $value['id_member']; ?>" type="button" class="btn btn-success btn-xs">>></a>
+                                </td>
+                              </tr>
+                              <?php
+                                }
+                              ?>
+                            </tbody>
+                          </table>
                         </div>
                       </div>
                     </div>
@@ -466,11 +477,8 @@
                 </div>
                 <!-- /เเก้ไขพนักงาน -->
 
-
               </div>
-              <!-- /.tab-content -->
             </div>
-            <!-- /.nav-tabs-custom -->
           </div>
 
         </div>

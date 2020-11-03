@@ -11,7 +11,7 @@
    $note = $_POST['note'];
  
   if(isset($_POST['id_member'])){
-     $value_member = $id_member;
+     $value_member = $_POST['id_member'];
   }else {
      $value_member = 54;
   }

@@ -1,5 +1,6 @@
 <?php 
   require "../config_database/config.php";
+  require "../session.php"; 
 ?>
 
 <!DOCTYPE html>
@@ -45,87 +46,78 @@
 <body class=" hold-transition skin-blue layout-top-nav ">
   <div class="wrapper">
     <header class="main-header">
-      <?php //require('menu/header_logout.php');?>
+      <?php require('menu/header_logout.php');?>
     </header>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
 
-      <!-- Main content -->
       <section class="content">
         <div class="row">
-          <!-- form start -->
-          <div class="col-md-12">
-              <div class="tab-content">
+          <div class="col-12"> 
+            <div class="box box-default">
               
-                  <div class="box box-default">
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="container">
-                          <form action="algorithm/add_product2.php" method="post" autocomplete="off">
-                            <div class="box-header with-border">
-                              <font size="4">
-                                <B>
-                                  แก้ไขสินค้าในรถ
-                                </B>
-                              </font>
-                            </div>
-                            <table class="table table-bordered">
-                              <tbody>
-                                <tr bgcolor="#99CCFF">
-                                  <th class="text-center">ชื่อสินค้า</th>
-                                  <th class="text-center" width="15%">จำนวน</th>
-                                  <th class="text-center" width="12%">แก้ไข</th>
-                                  <th class="text-center" width="12%">ลบ</th>
-                                </tr>
-                                <?php #endregion
-                                    $id_membercar = $_POST['id_membercar'];
-                                    $total_money = 0;
-                                    $date = "SELECT * FROM numpd_car INNER JOIN product ON numpd_car.id_product = product.id_product 
-                                            WHERE numpd_car.id_member = $id_membercar";  
-                                    $objq = mysqli_query($conn,$date);
-                                    while($value = $objq ->fetch_assoc()){ 
-                                ?>
-                                <tr>
-                                  <td>
-                                    <?php echo $value['name_product'].'('.$value['unit'].')'; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <?php echo $value['num'];?>
-                                  </td>
-                                  <td class="text-center">
-                                    <a href="edit_productcar2.php?id_numPD_car=<?php echo $value['id_numPD_car']; ?>" type="button" class="btn btn-success"><i class="fa fa-cog"></i></a>
-                                  </td>
-                                  <td class="text-center">
-                                    <a href="algorithm/delete_PDcar.php?id_numpd_car=<?php echo $value['id_numPD_car']; ?>" type="button" class="btn btn-danger"><i class="fa fa-minus-square"></i></a>
-                                  </td>
-                                </tr>
-                                <?php
-                                  }
-                                ?>
-                              </tbody>
-                            </table>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                <!-- /เเก้ไขสินค้า -->
+              <div class="box-header with-border text-center">
+                <font size="5"> <B> แก้ไขสินค้าในรถ</B> </font>
               </div>
-              <!-- /.tab-content -->
-            </div>
-            <!-- /.nav-tabs-custom -->
-          </div>
 
+              <div class="box-body with-border">
+                <div class="row">
+                  <div class="container">
+                    <form action="algorithm/add_product2.php" method="post" autocomplete="off">
+                      
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr bgcolor="#99CCFF">
+                            <th class="text-center">ชื่อสินค้า</th>
+                            <th class="text-center" width="15%">จำนวน</th>
+                            <th class="text-center" width="12%">แก้ไข</th>
+                            <th class="text-center" width="12%">ลบ</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php #endregion
+                              $id_membercar = $_GET['id_membercar'];
+                              $total_money = 0;
+                              $date = "SELECT * FROM numpd_car INNER JOIN product ON numpd_car.id_product = product.id_product 
+                                      WHERE numpd_car.id_member = $id_membercar";  
+                              $objq = mysqli_query($conn,$date);
+                              while($value = $objq ->fetch_assoc()){ 
+                          ?>
+                          <tr>
+                            <td  class="text-center">
+                              <?php echo $value['name_product'].'('.$value['unit'].')'; ?>
+                            </td>
+                            <td class="text-center">
+                              <?php echo $value['num'];?>
+                            </td>
+                            <td class="text-center">
+                              <a href="edit_productcar2.php?id_numPD_car=<?php echo $value['id_numPD_car'];?>&&id_membercar=<?php echo $id_membercar; ?>" type="button" class="btn btn-success btn-xs"><i class="fa fa-cog"></i></a>
+                            </td>
+                            <td class="text-center">
+                              <a href="algorithm/delete_PDcar.php?id_numpd_car=<?php echo $value['id_numPD_car']; ?>" type="button" class="btn btn-danger btn-xs"><i class="fa fa-minus-square"></i></a>
+                            </td>
+                          </tr>
+                          <?php
+                            }
+                          ?>
+                        </tbody>
+                      </table>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="box-footer">
+              <a href="add_data.php" type="button" class="btn btn-danger"> <<กลับ </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 
     <?php require("../menu/footer.html"); ?>
   </div>

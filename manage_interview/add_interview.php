@@ -69,7 +69,7 @@
                           <div class="form-group">
                             <label class="col-sm-4 control-label">ชื่อ </label>
                             <div class="col-sm-8">
-                              <input type="text" name="name" class="form-control" placeholder="ชื่อ">
+                              <input type="text" name="name_customer" class="form-control" placeholder="ชื่อ">
                             </div>
                           </div>
 

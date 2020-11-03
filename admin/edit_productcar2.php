@@ -49,80 +49,69 @@
       <?php require('menu/header_logout.php');?>
     </header>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
 
-      <!-- Main content -->
       <section class="content">
         <div class="row">
-          <!-- form start -->
           <div class="col-md-12">
-              <div class="tab-content">
-              
-                  <div class="box box-default">
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="container">
-                          <form action="algorithm/edit_productcar.php" method="post" autocomplete="off">
-                            <div class="box-header with-border">
-                              <font size="4">
-                                <B>
-                                  แก้ไขสินค้าในรถ
-                                </B>
-                              </font>
-                            </div>
-                            <table class="table table-bordered">
-                              <tbody>
-                                <tr bgcolor="#99CCFF">
-                                  <th class="text-center">ชื่อสินค้า</th>
-                                  <th class="text-center" width="20%">จำนวน</th>
-                                </tr>
-                                <?php #endregion
-                                    $id_numpd_car = $_GET['id_numPD_car'];
-                                    $total_money = 0;
-                                    $date = "SELECT * FROM numpd_car INNER JOIN product ON numpd_car.id_product = product.id_product 
-                                            WHERE numpd_car.id_numPD_car = $id_numpd_car";  
-                                    $objq = mysqli_query($conn,$date);
-                                    while($value = $objq ->fetch_assoc()){ 
-                                ?>
-                                <tr>
-                                  <td>
-                                    <?php echo $value['name_product'].'('.$value['unit'].')'; ?>
-                                  </td>
-                                  <td class="text-center">
-                                    <input class="form-control text-center" type="text" name='num' value="<?php echo $value['num'];?>">
-                                    <input class="form-control text-center" type="hidden" name='id_numpd_car' value="<?php echo $id_numpd_car;?>">
-                                  </td>
-                                </tr>
-                                <?php
-                                  }
-                                ?>
-                              </tbody>
-                            </table>
-                            <div class="box-footer" align="center">
-                              <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"></i> บันทึก </button>
-                            </div>
-                          </form>
+            <div class="tab-content">
+              <div class="box box-default">
+                <div class="box-header with-border text-center">
+                  <font size="5"> <B> แก้ไขสินค้าในรถ</B></font>
+                </div>
+                <div class="box-body">
+                  <div class="row">
+                    <div class="container">
+                      <form action="algorithm/edit_productcar.php" method="get" autocomplete="off">
+                        
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr bgcolor="#99CCFF">
+                              <th class="text-center">ชื่อสินค้า</th>
+                              <th class="text-center" width="20%">จำนวน</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php
+                                $id_membercar = $_GET['id_membercar'];
+                                $id_numpd_car = $_GET['id_numPD_car'];
+                                $total_money = 0;
+                                $date = "SELECT * FROM numpd_car INNER JOIN product ON numpd_car.id_product = product.id_product 
+                                        WHERE numpd_car.id_numPD_car = $id_numpd_car";  
+                                $objq = mysqli_query($conn,$date);
+                                while($value = $objq ->fetch_assoc()){ 
+                            ?>
+                            <tr>
+                              <td  class="text-center">
+                                <?php echo $value['name_product'].'('.$value['unit'].')'; ?>
+                              </td>
+                              <td class="text-center">
+                                <input class="form-control text-center" type="text" name='num' value="<?php echo $value['num'];?>">
+                                <input type="hidden" name='id_numpd_car' value="<?php echo $id_numpd_car;?>">
+                                <input type="hidden" name='id_membercar' value="<?php echo $id_membercar;?>">
+                              </td>
+                            </tr>
+                            <?php
+                              }
+                            ?>
+                          </tbody>
+                        </table>
+                        <div class="box-footer" align="center">
+                          <button type="submit" class="btn btn-success" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save"></i> บันทึก </button>
                         </div>
-                      </div>
+                      </form>
                     </div>
                   </div>
-                <!-- /เเก้ไขสินค้า -->
+                </div>
               </div>
-              <!-- /.tab-content -->
             </div>
-            <!-- /.nav-tabs-custom -->
           </div>
-
         </div>
       </section>
-      <!-- /.content -->
+
     </div>
-    <!-- /.content-wrapper -->
 
     <?php require("../menu/footer.html"); ?>
   </div>

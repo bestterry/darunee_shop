@@ -1,6 +1,11 @@
 <?php 
   require "../config_database/config.php";
   require "../session.php"; 
+
+  $id_product = $_GET['id_product'];
+  $list_product = "SELECT * FROM product WHERE id_product = $id_product";
+  $objq_listproduct = mysqli_query($conn,$list_product);
+  $objr_listproduct = mysqli_fetch_array($objq_listproduct);
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,68 +53,87 @@
     <header class="main-header">
       <?php require('menu/header_logout.php');?>
     </header>
-    <!-- Content Wrapper. Contains page content -->
+
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
 
-      <!-- Main content -->
       <section class="content">
+        <form action="algorithm/edit_product.php" method="post" class="form-horizontal" autocomplete="off">
           <div class="box box-primary">
             <div class="box-header text-center with-border">
               <font size="5">
                 <B align="center"> แก้ไขข้อมูลสินค้า </B>
               </font>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-                <form action="algorithm/edit_product.php" method="post" autocomplete="off">
-                  <table class="table table-bordered">
-                    <tbody>
-                      <tr bgcolor="#99CCFF">
-                        <th class="text-center" width="25%">ชื่อย่อ</th>
-                        <th class="text-center" width="25%">ชื่อเต็ม</th>
-                        <th class="text-center" width="20%">หน่วย</th>
-                        <th class="text-center" width="15%">ราคาซื้อมา(บ)</th>
-                        <th class="text-center" width="15%">ราคาขาย(บ)</th>
-                      </tr>
-                      <?php
-                              $id_product = $_GET['id_product'];
-                                  $list_product = "SELECT * FROM product WHERE id_product = $id_product";
-                                  $objq_listproduct = mysqli_query($conn,$list_product);
-                                  $objr_listproduct = mysqli_fetch_array($objq_listproduct);
-                          ?>
-                      <tr>
-                        <td class="text-center">
-                           <input type="hidden" name="id_product" class="form-control text-center " value="<?php echo $objr_listproduct['id_product']; ?>">
-                           <input type="text" name="name_product" class="form-control text-center " value="<?php echo $objr_listproduct['name_product']; ?>">
-                        </td>
-                        <td><input  type="text" name="full_name" class="form-control text-center" value="<?php echo $objr_listproduct['full_name']; ?>"></td>
-                        <td><input  type="text" name="unit" class="form-control text-center" value="<?php echo $objr_listproduct['unit']; ?>"></td>
-                        <td><input  type="text" name="price_num" class="form-control text-center " value="<?php echo $objr_listproduct['price_num']; ?>"></td>
-                        <td><input  type="text" name="price_outside" class="form-control text-center " value="<?php echo $objr_listproduct['price_outside']; ?>"></td>
-                      </tr>
-                    </tbody>
-                  </table>
+
+            <div class="box-body with-border">
+              <div class="row">
+                <div class="col-md-3 col-sm-3 col-lg-3"></div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-sm-3 col-md-3 col-6 control-label">ชื่อย่อ</label>
+                      <div class="col-sm-6 col-md-6 col-6">
+                        <input type="hidden" name="id_product" class="form-control text-center " value="<?php echo $objr_listproduct['id_product']; ?>">
+                        <input type="text" name="name_product" class="form-control text-center " value="<?php echo $objr_listproduct['name_product']; ?>">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-sm-3 col-md-3 col-6 control-label">ชื่อเต็ม</label>
+                      <div class="col-sm-6 col-md-6 col-6">
+                        <input type="text" name="full_name" class="form-control text-center" value="<?php echo $objr_listproduct['full_name']; ?>">  
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-sm-3 col-md-3 col-6 control-label">หน่วย</label>
+                      <div class="col-sm-6 col-md-6 col-6">
+                        <input type="text" name="unit" class="form-control text-center" value="<?php echo $objr_listproduct['unit']; ?>">  
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-sm-3 col-md-3 col-6 control-label">ราคาซื้อมา(บ)</label>
+                      <div class="col-sm-6 col-md-6 col-6">
+                        <input type="number" name="price_num" class="form-control text-center " value="<?php echo $objr_listproduct['price_num']; ?>">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-sm-3 col-md-3 col-6 control-label">ราคาขาย(บ)</label>
+                      <div class="col-sm-6 col-md-6 col-6">
+                        <input type="number" name="price_outside" class="form-control text-center " value="<?php echo $objr_listproduct['price_outside']; ?>">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-lg-3"></div>
               </div>
-              <!-- /.mailbox-read-message -->
             </div>
+
             <div class="box-footer">
-              <a type="block" href="add_data.php" class="btn btn-success"><<= เริ่มต้นใหม่ </i> </a> 
-              <button type="submit" class="btn btn-success pull-right"><i class="fa fa-save"> บันทึก </i></button>
+              <a type="block" href="add_data.php" class="btn btn-danger"><< กลับ </i> </a> 
+              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลหรือไม่ ?')";><i class="fa fa-save" > บันทึก </i></button>
             </div>
-            <!-- /.box-footer -->
-            </form>
           </div>
+        </form>
+      </section>
     </div>
-    </section>
-    <!-- /.content -->
+
+    <?php require("../menu/footer.html"); ?>
+
   </div>
-  <!-- /.content-wrapper -->
-  <?php require("../menu/footer.html"); ?>
-  </div>
+
   <!-- jQuery 3 -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap 3.3.7 -->

@@ -24,10 +24,15 @@
             <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
               <div class="topnav">
                 <a href="artist.php"> ค้นหา </a>
-                <a  href="song_old.php"> เก่า </a>
+                <a class="active" href="song_setting.php"> เพลง </a>
+                <a href="song_original.php"> ต้นฉบับ </a>
+                <a href="song_old.php"> เก่า </a>
                 <a href="song_middle.php"></i> กลาง </a>
                 <a href="song_new.php"> ใหม่ </a>
-                <a class="active" href="song_setting.php"> เพลง </a>
+                <a href="gradea.php"> A </a>
+                <a href="gradeb.php"> B </a>
+                <a href="gradec.php"> C </a>
+                <a href="graded.php"> D </a>
                 <a href="artist_setting.php"> นักร้อง </a>
                 <a href="song_setting2.php"> แก้ไข </a>
               </div>
@@ -71,7 +76,7 @@
                                 <th class="text-center" width="8%">ต้นฉบับ</th> 
                                 <th class="text-center" width="8%">ยุค</th>
                                 <th class="text-center" width="6%">#</th>
-                                <th class="text-center" width="8%">เปิด</th>
+                                <th class="text-center" width="8%">#</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -119,8 +124,7 @@
                   <div align="center" class="box-footer">
                   </div>
                 </div>
-                <div class="box-footer text-center">
-                  
+                <div class="box-footer text-center"> 
                 </div>
               </div>
             </div>
@@ -153,8 +157,10 @@
                               <select name="id_artist" class=" form-control" style="width: 100%;">
                                 <option value="">-- เลือกศิลปิน --</option>
                                 <?php 
-                                  $sql_artist = "SELECT id_artist,name_artist FROM song_artist";
+                                  $sql_artist = "SELECT id_artist,name_artist FROM song_artist
+                                                 ORDER BY CONVERT (name_artist USING tis620 ) ASC";
                                   $objq_artist = mysqli_query($conn,$sql_artist);
+
                                   while($value_artist = $objq_artist->fetch_assoc()){
                                 ?>
                                 <option value="<?php echo $value_artist['id_artist'];?>"><?php echo $value_artist['name_artist'];?></option>

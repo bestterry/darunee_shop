@@ -16,5 +16,19 @@
       }
       if ($status == 'new') {
         header('location:../song_new.php');
-      }    
+     }   
+     if ($status == 'a') {
+      header('location:../gradea.php');
+     } 
+     if ($status == 'b') {
+      header('location:../gradeb.php');
+     } 
+     if ($status == 'c') {
+      header('location:../gradec.php');
+     } 
+     if ($status == 'd') {
+      header('location:../graded.php');
+     }if ($status == 'original') {
+      header('location:../song_original.php');
+     }
 ?>

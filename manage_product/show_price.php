@@ -38,13 +38,6 @@
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../plugins/iCheck/all.css">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
   <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -55,34 +48,31 @@
     <header class="main-header">
       <?php require "menu/main_header.php"; ?>
     </header>
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
 
-      <!-- Main content -->
       <section class="content">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-          <div class="box box-primary">
+        <div class="box box-primary">
+          <form action="../pdf_file/bill.php" method="post" autocomplete="off" target="_blank">
+
             <div class="box-header with-border text-center">
-              <font size="5"><B> รายการขายสินค้า </font></B>
+              <font size="5"><B> รายการขายสินค้า</B></font>
             </div>
-            <!-- /.box-header -->
 
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
-                <form action="../pdf_file/bill.php" method="post" autocomplete="off" target="_blank">
+                <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                   <table class="table table-bordered">
-                    <tbody>
-                      <tr bgcolor="#99CCFF">
-                        <th class="text-center" width="5%">ลำดับ</th>
+                    <thead>
+                      <tr>
                         <th class="text-center">สินค้า_หน่วย</th>
                         <th class="text-center" width="15%">จำนวน</th>
                         <th class="text-center" width="15%">บ/หน่วย</th>
                         <th class="text-center" width="15%">รวมเงิน(บ)</th>
                       </tr>
+                    </thead>
+                    <tbody>
                       <?php #endregion
                               $total_all=0;
                               $money_receive = $_POST['money_receive'];
@@ -90,8 +80,7 @@
                                 $total_price = $_POST['num_product'][$i]*$_POST['price_product'][$i];
                           ?>
                       <tr>
-                        <td class="text-center"><?php echo $i+1 ?></td>
-                        <td><?php echo $_POST['name_product'][$i].'_'.$_POST['unit'][$i]; ?></td>
+                        <td class="text-center"><?php echo $_POST['name_product'][$i].'_'.$_POST['unit'][$i]; ?></td>
                         <td class="text-center"><?php echo $_POST['num_product'][$i]; ?></td>
                         <td class="text-center"><?php echo $_POST['price_product'][$i]; ?> </td>
                         <td class="text-center"><?php echo $total_price;?></td>
@@ -111,12 +100,10 @@
                       <tr>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        <td style="visibility:collapse;"></td>
                         <th bgcolor="#EAF4FF" class="text-center">รวมเป็นเงิน</th>
                         <th class="text-center" bgcolor="#EAF4FF"><?php echo $total_all; ?></th>
                       </tr>
                       <tr>
-                        <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
                         <th class="text-center">เงินทีรับ</th>
@@ -126,30 +113,24 @@
                       <tr>
                         <td style="visibility:collapse;"></td>
                         <td style="visibility:collapse;"></td>
-                        <td style="visibility:collapse;"></td>
                         <th class="text-center">เงินทอน</th>
                         <th class="text-center"><?php echo $change; ?></th>
                       </tr>
                     </tbody>
                   </table>
+                </div>
               </div>
             </div>
-            <!-- /.mailbox-read-message -->
 
             <div class="box-footer">
               <button type="submit" class="btn btn-success pull-right"><i class="fa fa-print"> พิมพ์ใบเสร็จ </i></button>
-              <a type="block" href="../product.php" class="btn btn-success pull-left"> <<= กลับสู่หน้าหลัก</a> 
+              <a type="block" href="../product.php" class="btn btn-danger pull-left"> << กลับ</a> 
             </div>
-            </form>
-            <!-- /.box-footer -->
-          </div>
-          <!-- /. box -->
-        </div>
 
+          </form>
+        </div>
       </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 
     <?php require("../menu/footer.html"); ?>
   </div>

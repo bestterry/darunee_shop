@@ -98,7 +98,7 @@
                   </div>
                   <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center">
                     <font size="5">
-                      <B> ค่าเช่ารถ </B>
+                      <B> ปฏิบัติงานและค่าเช่ารถ </B>
                     </font>
                   </div>
                   <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right">
@@ -122,7 +122,7 @@
                     <tr>
                       <th width="20%" class="text-right"><font size="4" valign="middle">ปฏิบัติงาน &nbsp;&nbsp;:</font></th>
                       <td width="30%" >
-                        <select name="id_practice" id="id_practice" onchange="sSelect(this.value)" class="form-control" style="width: 100%;">
+                        <select name="id_practice" id="id_practice" class="form-control" style="width: 100%;">
                             <option value="">-- รายการ --</option>
                             <?php 
                               $rc_practice = "SELECT * FROM rc_practice";
@@ -137,7 +137,7 @@
                       </td>
                       <th width="20%" class="text-right"><font size="4">รถ &nbsp;&nbsp;:</font></th>
                       <td width="30%">
-                        <select name="member_car" class="form-control" style="width: 100%;">
+                        <select name="member_car" class="form-control" onchange="sSelect()" style="width: 100%;">
                           <option value="54">-- กรุณาเลือกหน่วยรถ --</option>
                           <?php 
                            $sql_car = "SELECT id_member,name FROM member WHERE status_reserve = 1";
@@ -332,11 +332,12 @@
         $('#datePicker').val(today);
       });
 
-      function sSelect(value){  
+      function sSelect(){  
+        var id_practice = document.getElementById('id_practice').value;
         $.ajax({
           type:"POST",
           url:"algorithm/select_carrental.php",
-          data:{value:value},
+          data:{id_practice:id_practice},
           success:function(data){
             $("#car_rental").val(data);
             console.log(data);

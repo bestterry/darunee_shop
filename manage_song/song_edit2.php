@@ -153,9 +153,10 @@
                 <div class="box-body no-padding">
                   <div class="mailbox-read-message">
                     <div class="row">
-                      <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
+                    
+                      <div class="col-3 col-sm-2 col-md-3 col-xl-3"></div>
                       
-                      <div class="col-5 col-sm-5 col-md-5 col-xl-5">
+                      <div class="col-5 col-sm-8 col-md-5 col-xl-5">
                         <div class="form-group">
                           <label class="col-sm-4 control-label">นักร้อง </label>
                           <div class="col-sm-4">
@@ -250,7 +251,8 @@
                           <label class="col-sm-4 control-label">เปิดแล้ว </label>
                           <div class="col-sm-8">
                             <label class="switch">
-                              <input type="checkbox" name="id_member" <?php if($objr_song['id_member'] != 54){ echo "checked"; }else{} ?>>
+                              <input type="checkbox" name="id_member" value="<?php echo $objr_song['id_member'];?>" 
+                                <?php if($objr_song['id_member'] != 54){ echo "checked"; }else{} ?>>
                               <span class="slider round"></span>
                             </label>
                           </div>
@@ -285,8 +287,9 @@
                         </div>
 
                       </div>
-                      <div class="col-3 col-sm-3 col-md-3 col-xl-3"></div>
-                      <!-- /.row -->
+
+                      <div class="col-3 col-sm-2 col-md-3 col-xl-3"></div>
+
                     </div>
                   </div>
                   <div class="box-footer text-center">

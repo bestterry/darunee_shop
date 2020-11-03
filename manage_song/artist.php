@@ -29,10 +29,15 @@
             <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
               <div class="topnav">
                 <a class="active" href="artist.php"> ค้นหา </a>
+                <a href="song_setting.php"> เพลง </a>
+                <a href="song_original.php"> ต้นฉบับ </a>
                 <a href="song_old.php"> เก่า </a>
                 <a href="song_middle.php"></i> กลาง </a>
                 <a href="song_new.php"> ใหม่ </a>
-                <a href="song_setting.php"> เพลง </a>
+                <a href="gradea.php"> A </a>
+                <a href="gradeb.php"> B </a>
+                <a href="gradec.php"> C </a>
+                <a href="graded.php"> D </a>
                 <a href="artist_setting.php"> นักร้อง </a>
                 <a href="song_setting2.php"> แก้ไข </a>
               </div>

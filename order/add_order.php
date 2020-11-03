@@ -163,12 +163,12 @@ folder instead of downloading all of them to reduce the load. -->
           document.form1.money.value = parseFloat(document.form1.num_product.value) * parseFloat(document.form1.price.value);
         }
   </script>
-    <style>
-      .button2 {
-        background-color: #b35900;
-        color : white;
-        } /* Back & continue */
-    </style>
+  <style>
+    .button2 {
+      background-color: #b35900;
+      color : white;
+      } /* Back & continue */
+  </style>
 </head>
 
 <body class=" hold-transition skin-blue layout-top-nav">

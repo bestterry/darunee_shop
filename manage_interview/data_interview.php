@@ -1,7 +1,9 @@
 <?php
-  include("menu/db_connect.php");
+  require "menu/db_connect.php";
   $mysqli = connect();
+  require "../session2.php";
   $interview = "SELECT * FROM interview 
+                INNER JOIN member ON member.id_member = interview.id_member
                 INNER JOIN tbl2_amphures ON tbl2_amphures.amphur_id = interview.amphures_id
                 INNER JOIN tbl2_provinces ON tbl2_provinces.province_id = interview.provinces_id
                 ORDER BY CONVERT (interview.name_file USING tis620 ) ASC";
@@ -60,15 +62,14 @@
                     <table id="example1" class="table">
                       <thead>
                         <tr>
-                          <th class="text-center" width="7%">ชื่อไฟล์</th>
-                          <th class="text-center" width="10%">ชื่อ</th>
-                          <th class="text-center" width="14%">พื้นที่</th>
-                          <th class="text-center" width="14%">สินค้า</th>
-                          <th class="text-center" width="14%">ใช้กับ</th>
-                          <th class="text-center" width="5%">เกรด</th>
-                          <th class="text-center" width="25%">หมายเหตุ</th>
-                          <th class="text-center" width="5%">#</th>
-                          <th class="text-center" width="5%">#</th>
+                          <th class="text-center" width="11%">ชื่อไฟล์</th>
+                          <th class="text-center" width="11%">ชื่อ</th>
+                          <th class="text-center" width="15%">พื้นที่</th>
+                          <th class="text-center" width="15%">สินค้า</th>
+                          <th class="text-center" width="15%">ใช้กับ</th>
+                          <th class="text-center" width="11%">เกรด</th>
+                          <th class="text-center" width="11%">#</th>
+                          <th class="text-center" width="11%">#</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -78,7 +79,7 @@
                         ?>
                           <tr>
                             <td class="text-center"><?php echo $value['name_file'];?></td>
-                            <td class="text-center"><?php echo $value['name'];?></td>
+                            <td class="text-center"><?php echo $value['name_customer'];?></td>
                             <td class="text-center"><?php echo 'อ.'.$value['amphur_name'].' จ.'.$value['province_name']; ?></td>
                             <td class="text-center">
                             <?php 
@@ -103,15 +104,14 @@
                             ?>
                             </td>
                             <td class="text-center"><?php echo $value['grade'];?></td>
-                            <td class=""><?php echo $value['note'];?></td>
                             <td class="text-center">
                               <?php 
-                                if ($value['status']=='N') {
+                                if ($value['id_member'] == 54) {
                               ?>
                                   <a href="algorithm/edit_status.php?id_interview=<?php echo $value['id_interview'];?>" class="btn btn-success btn-xs">เปิด</a>
                               <?php
                                 }else {
-                                echo "เปิดเเล้ว";
+                                echo $value['name'];
                                 }
                               ?>
                             </td>

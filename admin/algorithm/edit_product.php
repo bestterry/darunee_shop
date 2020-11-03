@@ -11,14 +11,12 @@
 
     $sql = "UPDATE product SET name_product='$name_product', full_name = '$full_name', unit='$unit', price_num = $price_num, price_outside = $price_outside  
             WHERE id_product = $id_product";
-
     if ($conn->query($sql) === TRUE) {
-        echo "Record updated successfully";
+        $conn->close();
+        header('location:../edit_product.php?id_product='.$id_product);
     } else {
         echo "Error updating record: " . $conn->error;
     }
 
-    $conn->close();
-
-   header('location:../add_data.php');
+    
 ?>

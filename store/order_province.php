@@ -98,7 +98,6 @@
 
     <div class="content-wrapper">
       <section class="content">
-
         <div class="box box-primary">
           <div class="box-header text-center with-border">
             <div class="col-12">

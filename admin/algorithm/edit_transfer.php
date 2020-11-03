@@ -5,13 +5,13 @@
   $date = $_POST['date'];
   $name_transfer = $_POST['name_transfer'];
   $account_name = $_POST['account_name'];
-  $id_transfer_pd = $_POST['id_transfer_pd'];
+  $id_product = $_POST['id_product'];
   $money = $_POST['money'];
   $transferor = $_POST['transferor'];
   $payment_slip = $_POST['payment_slip'];
   $note = $_POST['note'];
 
-  $update_transfer = "UPDATE transfer_list SET date = '$date', name_transfer = '$name_transfer', account_name = '$account_name', id_transfer_pd = $id_transfer_pd, 
+  $update_transfer = "UPDATE transfer_list SET date = '$date', name_transfer = '$name_transfer', account_name = '$account_name', id_product = $id_product, 
                           money = $money, transferor = '$transferor', payment_slip = '$payment_slip', note = '$note'
                           WHERE id_transfer_list = $id_transfer_list";
       if ($conn->query($update_transfer) === TRUE) {

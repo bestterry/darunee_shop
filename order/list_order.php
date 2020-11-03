@@ -147,13 +147,13 @@
                     ?>
                       <tr>
                         <td class="text-center"><?php echo $value['id_order_list'];?></td>
-                        <td class="text-center" ><?php echo DateThai($value['date_order']);?></td>
+                        <td class="text-center"><?php echo DateThai($value['date_order']);?></td>
                         <td class="text-center"><?php echo $value['list_order'];?></td>
-                        <td class="text-center" ><?php echo $value['name_product'].'_'.$value['unit'];?></td>
-                        <td class="text-center" ><?php echo $value['price']; ?></td>
-                        <td class="text-center" ><?php echo $value['num_product']; ?></td>
-                        <td class="text-center" ><?php echo $value['money']; ?></td>
-                        <td class="text-center" ><?php echo DateThai($value['date_receive']) ;?></td>
+                        <td class="text-center"><?php echo $value['name_product'].'_'.$value['unit'];?></td>
+                        <td class="text-center"><?php echo $value['price']; ?></td>
+                        <td class="text-center"><?php echo $value['num_product']; ?></td>
+                        <td class="text-center"><?php echo $value['money']; ?></td>
+                        <td class="text-center"><?php echo DateThai($value['date_receive']) ;?></td>
                         <td class="text-center"><?php echo $value['amphur_name'];?></td>
                         <td class="text-center"><?php echo $value['invoice'];?></td>
                         <td class="text-center"><a href="data_order.php?id_order_list=<?php echo $value['id_order_list']; ?>">>></a></td>

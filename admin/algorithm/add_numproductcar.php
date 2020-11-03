@@ -1,5 +1,6 @@
 <?php 
   require "../../config_database/config.php"; 
+
   $id_member = $_POST['id_member'];
   for ($i=0; $i < count($_POST['id_product']) ; $i++) { 
       $id_product = $_POST['id_product'][$i];
@@ -9,7 +10,7 @@
               VALUES ($num, $id_product, $id_member)";
       mysqli_query($conn,$sql);
 
-      header('location:../admin.php');
+      header('location:../add_data.php');
 
   }
 ?>

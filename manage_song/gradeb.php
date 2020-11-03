@@ -1,5 +1,6 @@
 <?php
   require "../config_database/config.php";
+  require "../session.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,6 +25,8 @@
             <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
               <div class="topnav">
                 <a href="artist.php"> ค้นหา </a>
+                <a href="song_setting.php"> เพลง </a>
+                <a href="song_original.php"> ต้นฉบับ </a>
                 <a href="song_old.php"> เก่า </a>
                 <a href="song_middle.php"></i> กลาง </a>
                 <a href="song_new.php"> ใหม่ </a>
@@ -31,7 +34,6 @@
                 <a class="active" href="gradeb.php"> B </a>
                 <a href="gradec.php"> C </a>
                 <a href="graded.php"> D </a>
-                <a href="song_setting.php"> เพลง </a>
                 <a href="artist_setting.php"> นักร้อง </a>
                 <a href="song_setting2.php"> แก้ไข </a>
               </div>
@@ -58,7 +60,7 @@
                       <div class="tab-pane active" id="old">
                         <div align="center" class="box-footer">
                           <font size="5">
-                            <B align="center">เพลงเก่า (B)</B>
+                            <B align="center">นักร้องเก่า (B)</B>
                           </font>
                         </div>
                         <div class="box-body">
@@ -67,46 +69,52 @@
                               <table id="example1" class="table">
                                 <thead>
                                   <tr>
-                                    <th class="text-center" width="27%">ชื่อเพลง</th>
-                                    <th class="text-center" width="27%">นักร้อง</th>
-                                    <th class="text-center" width="10%">#</th>
+                                    <th class="text-center" width="24%">ชื่อเพลง</th>
+                                    <th class="text-center" width="24%">นักร้อง</th>
                                     <th class="text-center" width="10%">ทำนอง</th>
-                                    <th class="text-center" width="13%">ต้นฉบับ</th>
-                                    <th class="text-center" width="13%">เปิด</th>
+                                    <th class="text-center" width="12%">ต้นฉบับ</th>
+                                    <th class="text-center" width="10%">#</th>
+                                    <th class="text-center" width="10%">#</th>
+                                    <th class="text-center" width="10%">#</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <?php 
                                     $sql_songslow = "SELECT * FROM song_list
-                                                  INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
-                                                  INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
-                                                  INNER JOIN song_ageartist ON song_artist.id_ageartist = song_ageartist.id_ageartist
-                                                  WHERE song_list.melodic = 'B' AND song_artist.id_ageartist = 1
-                                                  ORDER BY CONVERT (song_list.name_song USING tis620 ) ASC";
+                                                     INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
+                                                     INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
+                                                     INNER JOIN member ON song_list.id_member = member.id_member
+                                                     WHERE song_artist.id_ageartist = 1 AND song_list.melodic = 'B'
+                                                     ORDER BY CONVERT (song_list.name_song USING tis620 ) ASC";
                                     $objq_songslow = mysqli_query($conn,$sql_songslow);
                                     while($value =  $objq_songslow->fetch_assoc()){
                                   ?>
                                   <tr> 
-                                  <td class="text-center"><?php echo $value['name_song']; ?></td>
-                                    <td class="text-center"><?php echo $value['name_artist'];?></td>
+                                    <td class="text-center"><?php echo $value['name_song'];?></td>
+                                    <td class="text-center"><?php echo $value['name_artist']; ?></td>
+                                    <td class="text-center"><?php echo $value['name_tune']; ?></td> 
+                                    <td class="text-center"><?php if($value['script']=='N'){echo "-";}else{echo "ต้นฉบับ";} ?></td>
                                     <td class="text-center">
                                       <?php
                                         if(!empty($value['ad_song'])){
                                       ?>
-                                        <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&id_age=<?php echo $value['id_age']; ?>&&status=a" class="btn  btn-success btn-xs">ฟัง</a>
+                                      <input type="button" name="ฟัง" value="ฟัง" id="<?php echo $value["id_song"]; ?>" class="btn btn-success btn-xs view_data" />
                                       <?php }else{}?>
                                     </td>
-                                    <td class="text-center"><?php echo $value['name_tune']; ?></td> 
-                                    <td class="text-center"><?php if($value['script']=='N'){echo "-";}else{echo "ต้นฉบับ";} ?></td>
+                                    <td class="text-center">
+                                      <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&age=b" class="btn btn-success btn-xs">>></a>
+                                    </td>
                                     <?php
-                                      if($value['status']=='N'){
-                                    ?>
-                                      <td class="text-center">-</td>
-                                    <?php
-                                      }else{
-                                    ?>
-                                    <td class="text-center"><font>เปิด</font></td>
-                                    <?php 
+                                      if($value['id_member']==54){
+                                      ?>
+                                      <td class="text-center">
+                                        <a href="algorithm/song_editstatusopen.php?id_song=<?php echo $value['id_song']; ?>&&id_member=<?php echo $id_member;?>&&status=b" class="btn btn-success btn-xs">เปิด</a>
+                                      </td>
+                                      <?php
+                                        }else{
+                                      ?>
+                                      <td class="text-center"><font><?php echo $value['name']; ?></font></td>
+                                      <?php 
                                       }
                                     ?> 
                                   </tr>
@@ -118,15 +126,13 @@
                             </div>
                           </div>
                         </div>
-                        <div align="center" class="box-footer">
-                          
-                        </div>
+                        <div align="center" class="box-footer"></div>
                       </div>
 
                       <div class="tab-pane" id="middle">
                         <div align="center" class="box-footer">
                           <font size="5">
-                          <B align="center">เพลงยุคกลาง (B)</B>
+                          <B align="center"> นักร้องยุคกลาง (B)</B>
                           </font>
                         </div>
                         <div class="box-body">
@@ -135,46 +141,53 @@
                               <table id="example2" class="table">
                                 <thead>
                                   <tr>
-                                  <th class="text-center" width="27%">ชื่อเพลง</th>
-                                    <th class="text-center" width="27%">นักร้อง</th>
-                                    <th class="text-center" width="10%">#</th>
+                                    <th class="text-center" width="24%">ชื่อเพลง</th>
+                                    <th class="text-center" width="24%">นักร้อง</th>
                                     <th class="text-center" width="10%">ทำนอง</th>
-                                    <th class="text-center" width="13%">ต้นฉบับ</th>
-                                    <th class="text-center" width="13%">เปิด</th>
+                                    <th class="text-center" width="12%">ต้นฉบับ</th>
+                                    <th class="text-center" width="10%">#</th>
+                                    <th class="text-center" width="10%">#</th>
+                                    <th class="text-center" width="10%">#</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <?php 
                                     $sql_songslow = "SELECT * FROM song_list
-                                                  INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
-                                                  INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
-                                                  INNER JOIN song_ageartist ON song_artist.id_ageartist = song_ageartist.id_ageartist
-                                                  WHERE song_list.melodic = 'B' AND song_artist.id_ageartist = 2
-                                                  ORDER BY CONVERT (song_list.name_song USING tis620 ) ASC";
+                                                     INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
+                                                     INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
+                                                     INNER JOIN member ON song_list.id_member = member.id_member
+                                                     WHERE song_artist.id_ageartist = 2 AND song_list.melodic = 'B'
+                                                     ORDER BY CONVERT (song_list.name_song USING tis620 ) ASC";
                                     $objq_songslow = mysqli_query($conn,$sql_songslow);
                                     while($value =  $objq_songslow->fetch_assoc()){
                                   ?>
                                   <tr> 
-                                  <td class="text-center"><?php echo $value['name_song']; ?></td>
-                                    <td class="text-center"><?php echo $value['name_artist'];?></td>
+                                    <td class="text-center"><?php echo $value['name_song'];?></td>
+                                    <td class="text-center"><?php echo $value['name_artist']; ?></td>
+                                    <td class="text-center"><?php echo $value['name_tune']; ?></td> 
+                                    <td class="text-center"><?php if($value['script']=='N'){echo "-";}else{echo "ต้นฉบับ";} ?></td>
                                     <td class="text-center">
                                       <?php
                                         if(!empty($value['ad_song'])){
                                       ?>
-                                      <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&id_age=<?php echo $value['id_age']; ?>&&status=a" class="btn  btn-success btn-xs">ฟัง</a>
-                                     <?php }else{}?>
+                                      <input type="button" name="ฟัง" value="ฟัง" id="<?php echo $value["id_song"]; ?>" class="btn btn-success btn-xs view_data" />
+                                      <!-- <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&id_age=<?php echo $value['id_age']; ?>&&status=old" target="_back" class="btn btn-success btn-xs">ฟัง</a> -->
+                                      <?php }else{}?>
                                     </td>
-                                    <td class="text-center"><?php echo $value['name_tune']; ?></td> 
-                                    <td class="text-center"><?php if($value['script']=='N'){echo "-";}else{echo "ต้นฉบับ";} ?></td>
+                                    <td class="text-center">
+                                      <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&age=b" class="btn btn-success btn-xs">>></a>
+                                    </td>
                                     <?php
-                                      if($value['status']=='N'){
-                                    ?>
-                                      <td class="text-center">-</td>
-                                    <?php
-                                      }else{
-                                    ?>
-                                    <td class="text-center"><font>เปิด</font></td>
-                                    <?php 
+                                      if($value['id_member']==54){
+                                      ?>
+                                      <td class="text-center">
+                                        <a href="algorithm/song_editstatusopen.php?id_song=<?php echo $value['id_song']; ?>&&id_member=<?php echo $id_member;?>&&status=b" class="btn btn-success btn-xs">เปิด</a>
+                                      </td>
+                                      <?php
+                                        }else{
+                                      ?>
+                                      <td class="text-center"><font><?php echo $value['name']; ?></font></td>
+                                      <?php 
                                       }
                                     ?> 
                                   </tr>
@@ -186,14 +199,13 @@
                             </div>
                           </div>
                         </div>
-                        <div align="center" class="box-footer">
-                        </div>
+                        <div align="center" class="box-footer"></div>
                       </div>
 
                       <div class="tab-pane" id="new">
                         <div align="center" class="box-footer">
                           <font size="5">
-                            <B align="center">เพลงใหม่ (B)</B>
+                            <B align="center">นักร้องใหม่ (B)</B>
                           </font>
                         </div>
                         <div class="box-body">
@@ -202,46 +214,52 @@
                               <table id="example3" class="table">
                                 <thead>
                                   <tr>
-                                    <th class="text-center" width="27%">ชื่อเพลง</th>
-                                    <th class="text-center" width="27%">นักร้อง</th>
-                                    <th class="text-center" width="10%">#</th>
+                                    <th class="text-center" width="24%">ชื่อเพลง</th>
+                                    <th class="text-center" width="24%">นักร้อง</th>
                                     <th class="text-center" width="10%">ทำนอง</th>
-                                    <th class="text-center" width="13%">ต้นฉบับ</th>
-                                    <th class="text-center" width="13%">เปิด</th>
+                                    <th class="text-center" width="12%">ต้นฉบับ</th>
+                                    <th class="text-center" width="10%">#</th>
+                                    <th class="text-center" width="10%">#</th>
+                                    <th class="text-center" width="10%">#</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <?php 
                                     $sql_songslow = "SELECT * FROM song_list
-                                                  INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
-                                                  INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
-                                                  INNER JOIN song_ageartist ON song_artist.id_ageartist = song_ageartist.id_ageartist
-                                                  WHERE song_list.melodic = 'B' AND song_artist.id_ageartist = 3
-                                                  ORDER BY CONVERT (song_list.name_song USING tis620 ) ASC";
+                                                     INNER JOIN song_artist ON song_list.id_artist = song_artist.id_artist
+                                                     INNER JOIN song_tune ON song_list.id_tune = song_tune.id_tune
+                                                     INNER JOIN member ON song_list.id_member = member.id_member
+                                                     WHERE song_artist.id_ageartist = 3 AND song_list.melodic = 'B'
+                                                     ORDER BY CONVERT (song_list.name_song USING tis620 ) ASC";
                                     $objq_songslow = mysqli_query($conn,$sql_songslow);
                                     while($value =  $objq_songslow->fetch_assoc()){
                                   ?>
                                   <tr> 
-                                    <td class="text-center"><?php echo $value['name_song']; ?></td>
-                                    <td class="text-center"><?php echo $value['name_artist'];?></td>
+                                    <td class="text-center"><?php echo $value['name_song'];?></td>
+                                    <td class="text-center"><?php echo $value['name_artist']; ?></td>
+                                    <td class="text-center"><?php echo $value['name_tune']; ?></td> 
+                                    <td class="text-center"><?php if($value['script']=='N'){echo "-";}else{echo "ต้นฉบับ";} ?></td>
                                     <td class="text-center">
                                       <?php
                                         if(!empty($value['ad_song'])){
                                       ?>
-                                      <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&id_age=<?php echo $value['id_age']; ?>&&status=a" class="btn  btn-success btn-xs">ฟัง</a>
-                                     <?php }else{}?>
+                                      <input type="button" name="ฟัง" value="ฟัง" id="<?php echo $value["id_song"]; ?>" class="btn btn-success btn-xs view_data" />
+                                      <?php }else{}?>
                                     </td>
-                                    <td class="text-center"><?php echo $value['name_tune']; ?></td> 
-                                    <td class="text-center"><?php if($value['script']=='N'){echo "-";}else{echo "ต้นฉบับ";} ?></td>
+                                    <td class="text-center">
+                                      <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&age=b" class="btn btn-success btn-xs">>></a>
+                                    </td>
                                     <?php
-                                      if($value['status']=='N'){
-                                    ?>
-                                      <td class="text-center">-</td>
-                                    <?php
-                                      }else{
-                                    ?>
-                                    <td class="text-center"><font>เปิด</font></td>
-                                    <?php 
+                                      if($value['id_member']==54){
+                                      ?>
+                                      <td class="text-center">
+                                        <a href="algorithm/song_editstatusopen.php?id_song=<?php echo $value['id_song']; ?>&&id_member=<?php echo $id_member;?>&&status=b" class="btn btn-success btn-xs">เปิด</a>
+                                      </td>
+                                      <?php
+                                        }else{
+                                      ?>
+                                      <td class="text-center"><font><?php echo $value['name']; ?></font></td>
+                                      <?php 
                                       }
                                     ?> 
                                   </tr>
@@ -253,8 +271,7 @@
                             </div>
                           </div>
                         </div>
-                        <div align="center" class="box-footer">
-                        </div>
+                        <div align="center" class="box-footer"></div>
                       </div>
 
                     </div>

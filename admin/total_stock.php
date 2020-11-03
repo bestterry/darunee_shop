@@ -99,8 +99,7 @@
                   <tr>
                     <th class="text-center" width="10%">สินค้า_หน่วย</th>
                     <th class="text-center" width="5%">จุน</th>
-                    <th class="text-center" width="5%">พาน1</th>
-                    <th class="text-center" width="5%">พาน2</th>
+                    <th class="text-center" width="5%">พาน</th>
                     <th class="text-center" width="5%">ดคต1</th>
                     <th class="text-center" width="5%">ดคต2</th>
                     <th class="text-center" width="5%">วปป.</th>
@@ -143,23 +142,6 @@
                     <!-- -------------------------------//จุน------------------------------------ -->
                     <!-- -------------------------------พาน------------------------------------ -->
                     <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 4";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                      ?>
-                    <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//พาน------------------------------------ -->
-                    <!-- -------------------------------พาน2------------------------------------ -->
-                    <?php 
                         $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 13";
                         $objq_num = mysqli_query($conn,$SQL_num);
                         $objr_num = mysqli_fetch_array($objq_num);
@@ -174,7 +156,7 @@
                         } 
                       
                       ?>
-                    <!-- -------------------------------//พาน2------------------------------------ -->
+                    <!-- -------------------------------//พาน------------------------------------ -->
                     <!-- -------------------------------ดคต.------------------------------------ -->
                     <?php 
                         $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 2";
@@ -445,8 +427,7 @@
                   <tr>
                     <th class="text-center" width="10%">สินค้า_หน่วย</th>
                     <th class="text-center" width="5%">จุน</th>
-                    <th class="text-center" width="5%">พาน1</th>
-                    <th class="text-center" width="5%">พาน2</th>
+                    <th class="text-center" width="5%">พาน</th>
                     <th class="text-center" width="5%">ดคต1</th>
                     <th class="text-center" width="5%">ดคต2</th>
                     <th class="text-center" width="5%">วปป.</th>
@@ -487,23 +468,6 @@
                     <!-- -------------------------------//จุน------------------------------------ -->
                     <!-- -------------------------------พาน------------------------------------ -->
                     <?php 
-                        $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 4";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                      ?>
-                    <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//พาน------------------------------------ -->
-                    <!-- -------------------------------พาน2------------------------------------ -->
-                    <?php 
                         $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 13";
                         $objq_num = mysqli_query($conn,$SQL_num);
                         $objr_num = mysqli_fetch_array($objq_num);
@@ -518,7 +482,7 @@
                         } 
                       
                       ?>
-                    <!-- -------------------------------//พาน2------------------------------------ -->
+                    <!-- -------------------------------//พาน------------------------------------ -->
                     <!-- -------------------------------ดคต.------------------------------------ -->
                     <?php 
                         $SQL_num = "SELECT * FROM num_productwaste WHERE id_product = $product[id_product] AND id_zone = 2";

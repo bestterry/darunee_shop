@@ -5,11 +5,11 @@
 
   $id_transfer_list = $_GET['id_transfer_list'];
 
-  $sql_transfer = "SELECT * FROM transfer_list INNER JOIN transfer_product ON transfer_list.id_transfer_pd = transfer_product.id_transfer_pd
+  $sql_transfer = "SELECT * FROM transfer_list INNER JOIN product ON transfer_list.id_product = product.id_product
                     WHERE transfer_list.id_transfer_list = $id_transfer_list";
   $objq_transfer = mysqli_query($conn,$sql_transfer);
   $objr_transfer = mysqli_fetch_array($objq_transfer);
-  $id_transfer_pd = $objr_transfer['id_transfer_pd'];
+  $id_product = $objr_transfer['id_product'];
 ?>
 
 <!DOCTYPE html>
@@ -99,7 +99,7 @@
         <section class="content">
           <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-              <form action="algorithm/edit_transfer.php" method="post" class="form-horizontal">
+              <form action="algorithm/edit_transfer.php" method="post" class="form-horizontal" autocomplete="off">
                 <div class="box box-primary">
                   <div class="box-header with-border">
                     <div class="col-12">
@@ -109,11 +109,11 @@
                       <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                         <div class="text-center">
                           <font size="5">
-                            <B align="center">แก้ไขโอนจ่าย</B>
+                            <B align="center">แก้ไขตัดจ่ายค่าสินค้า</B>
                           </font>
                         </div>
                       </div>
-                      <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right"> </div>
+                      <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right"></div>
                     </div>
                   </div>
                   <div class="box-body no-padding">
@@ -125,15 +125,31 @@
                           <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-xl-6">
 
                             <div class="form-group">
-                              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">วันที่ </label>
+                              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label"> ชำระสินค้า </label>
                               <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <input type="date" class="form-control text-center" id="datePicker" value="<?php echo $objr_transfer['date'];?>" name="date" >
+                                <select name="id_product"  class="form-control" >
+                                  <?php 
+                                    $sql_list = "SELECT * FROM product WHERE status_order = 1";
+                                    $objq_list = mysqli_query($conn,$sql_list);
+                                      while($value = $objq_list->fetch_assoc()){ ?>
+                                      <option value="<?php echo $value['id_product'];?>" 
+                                        <?php 
+                                          if($id_product==$value['id_product']){
+                                            echo "selected";
+                                          }else {
+                                            
+                                          }
+                                        ?>
+                                      >
+                                      <?php echo $value['name_product'];?></option>
+                                  <?php } ?>
+                                </select>
                               </div>
                               <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
                             </div>
 
                             <div class="form-group">
-                              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">รับโอน</label>
+                              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">บัญชีรับโอน</label>
                               <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <input type="text" class="form-control text-center" value="<?php echo $objr_transfer['name_transfer'];?>" name="name_transfer">
                               </div>
@@ -147,41 +163,25 @@
                               </div>
                               <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
                             </div>
-                                      
+
                             <div class="form-group">
-                              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label"> สินค้า </label>
+                              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">วันที่ตัดจ่าย </label>
                               <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <select name="id_transfer_pd"  class="form-control" >
-                                  <?php 
-                                    $sql_list = "SELECT * FROM transfer_product";
-                                    $objq_list = mysqli_query($conn,$sql_list);
-                                      while($value = $objq_list->fetch_assoc()){ ?>
-                                      <option value="<?php echo $value['id_transfer_pd'];?>" 
-                                        <?php 
-                                          if($id_transfer_pd==$value['id_transfer_pd']){
-                                            echo "selected";
-                                          }else {
-                                            
-                                          }
-                                        ?>
-                                      >
-                                      <?php echo $value['name_transfer_pd'];?></option>
-                                  <?php } ?>
-                                </select>
+                                <input type="date" class="form-control text-center" id="datePicker" value="<?php echo $objr_transfer['date'];?>" name="date" >
                               </div>
                               <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
                             </div>
 
                             <div class="form-group">
-                              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">จำนวนเงิน</label>
+                              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">จำนวนเงิน(บ)</label>
                               <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <input type="text" class="form-control text-center" value="<?php echo $objr_transfer['money'];?>" name="money">
+                                <input type="number" class="form-control text-center" value="<?php echo $objr_transfer['money'];?>" name="money">
                               </div>
                               <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
                             </div>
 
                             <div class="form-group">
-                              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">ผู้โอน</label>
+                              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">ชื่อผู้โอน</label>
                               <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <input type="text" class="form-control text-center" value="<?php echo $objr_transfer['transferor'];?>" name="transferor">
                               </div>
@@ -189,7 +189,7 @@
                             </div>
 
                             <div class="form-group">
-                              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">ใบจ่าย</label>
+                              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">ใบจ่ายที่</label>
                               <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <input type="text" class="form-control text-center" value="<?php echo $objr_transfer['payment_slip'];?>" name="payment_slip">
                               </div>

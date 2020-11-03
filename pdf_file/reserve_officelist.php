@@ -41,6 +41,7 @@
       $bday = $_POST['bday'];
       $sql_history = "SELECT * FROM reserve_history INNER JOIN reserve_list ON reserve_history.id_list = reserve_list.id_list
                       WHERE (reserve_history.status = 2 OR reserve_history.status = 3 OR reserve_history.status = 5 OR reserve_history.status = 1) 
+                      AND reserve_history.transfer_office != '' 
                       AND (reserve_history.date BETWEEN '$aday' AND '$bday')
                       ORDER BY reserve_history.id_reserve_history DESC";
       $objq_history = mysqli_query($conn,$sql_history);

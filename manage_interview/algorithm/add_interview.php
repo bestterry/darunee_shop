@@ -2,15 +2,15 @@
   require "../../config_database/config.php";
 
   $name_file = $_POST['name_file'];
-  $name = $_POST['name'];
+  $name_customer = $_POST['name_customer'];
   $province_id = $_POST['province_name'];
   $amphur_id = $_POST['amphur_name'];
   $note = $_POST['note'];
   $grade = $_POST['grade'];
   $id = (rand(1,10000));
 
-  $add_interview = "INSERT INTO interview (name_file, name, amphures_id, provinces_id, note, id, grade) 
-                    VALUE ('$name_file','$name',$amphur_id, $province_id, '$note', $id, '$grade')";
+  $add_interview = "INSERT INTO interview (name_file, name_customer, amphures_id, provinces_id, note, id, grade, id_member) 
+                    VALUE ('$name_file','$name_customer',$amphur_id, $province_id, '$note', $id, '$grade', 54)";
   mysqli_query($conn,$add_interview);
 
 

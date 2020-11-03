@@ -1,10 +1,10 @@
 <?php 
   require "../../config_database/config.php";
+  require "../../config_database/session.php";
+
    $id_interview = $_GET['id_interview'];
 
-   print_r($_GET);
-
-  $sql_interview = "UPDATE interview SET status = 'Y' WHERE id_interview = $id_interview";
+  $sql_interview = "UPDATE interview SET id_member = $id_member WHERE id_interview = $id_interview";
   mysqli_query($conn,$sql_interview);
 
   if($_GET['status']=='search'){

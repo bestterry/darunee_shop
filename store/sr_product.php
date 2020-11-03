@@ -48,25 +48,21 @@ require "../session.php";
     <header class="main-header">
       <?php require('menu/header_logout.php'); ?>
     </header>
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
       <section class="content-header">
       </section>
 
-      <!-- Main content -->
       <section class="content">
         <div class="col-md-12">
           <div class="box box-primary">
-            <div class="box-header with-border text-center">
-              <font size="5">
-                <B> รายการสินค้าที่ต้องการแกะกล่อง</B>
-              </font>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="mailbox-read-message">
-                <form action="algorithm/sr_product.php" method="post" autocomplete="off">
+            <form action="algorithm/sr_product.php" method="post" autocomplete="off">
+              <div class="box-header with-border text-center">
+                <font size="5">
+                  <B> แกะกล่องสินค้า</B>
+                </font>
+              </div>
+              <div class="box-body no-padding">
+                <div class="mailbox-read-message">
                   <table class="table table-bordered ">
                     <tbody>
                       <tr bgcolor="#99CCFF">
@@ -97,42 +93,39 @@ require "../session.php";
                                 $id_product2 = 38;
                               }elseif ($id_product==39) {
                                 $id_product2 = 40;
+                              }elseif ($id_product==57) {
+                                $id_product2 = 59;
                               }
                               
-                              ?>
-                          <tr>
-                            <td>
-                              <?php echo $objr_listproduct['name_product'] . '_' . $objr_listproduct['unit']; ?>
-                              <input class="hidden" type="text" name="id_product" value="<?php echo $objr_listproduct['id_product']; ?>">
-                              <input class="hidden" type="text" name="id_numPD_car" value="<?php echo $objr_listproduct['id_numPD_car']; ?>">
-                              <input class="hidden" type="text" name="id_product2" value="<?php echo $id_product2; ?>">
-                            </td>
-                            <td class="text-center">
-                              <?php echo $objr_listproduct['num']; ?>
-                              <input class="hidden" type="text" name="num_befor" value="<?php echo $objr_listproduct['num']; ?>">
-                            </td>
-                            <td class="text-center">
-                              <input type="text" name="num_after" class="form-control text-center col-md-2" placeholder="ระบุจำนวน">
-                            </td>
-                          </tr>
+                      ?>
+                      <tr>
+                        <td class="text-center">
+                          <?php echo $objr_listproduct['name_product'] . '_' . $objr_listproduct['unit']; ?>
+                          <input class="hidden" type="text" name="id_product" value="<?php echo $objr_listproduct['id_product']; ?>">
+                          <input class="hidden" type="text" name="id_numPD_car" value="<?php echo $objr_listproduct['id_numPD_car']; ?>">
+                          <input class="hidden" type="text" name="id_product2" value="<?php echo $id_product2; ?>">
+                        </td>
+                        <td class="text-center">
+                          <?php echo $objr_listproduct['num']; ?>
+                          <input class="hidden" type="text" name="num_befor" value="<?php echo $objr_listproduct['num']; ?>">
+                        </td>
+                        <td class="text-center">
+                          <input type="number" name="num_after" class="form-control text-center col-md-2" placeholder="ระบุจำนวน">
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
+                </div>
               </div>
-              <!-- /.mailbox-read-message -->
-            </div>
-            <div class="box-footer">
-              <a type="block" href="store.php" class="btn btn-success"><<= กลับสู่หน้าหลัก </i> </a> 
-              <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-calculator"> บันทึก </i></button>
-            </div>
-            <!-- /.box-footer -->
+              <div class="box-footer">
+                <a type="block" href="store.php" class="btn btn-danger"><< เมนูหลัก </i> </a> 
+                <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-calculator"> บันทึก </i></button>
+              </div>
             </form>
           </div>
-          <!-- /. box -->
         </div>
       </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
     <?php require("../menu/footer.html"); ?>
   </div>
   <!-- jQuery 3 -->

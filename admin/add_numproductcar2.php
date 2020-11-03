@@ -1,6 +1,10 @@
 <?php 
     require "../config_database/config.php"; 
     require "../session.php";
+    $id_member = $_POST['id_member'];
+    $name = "SELECT * FROM member WHERE id_member = $id_member";
+    $objq_name = mysqli_query($conn,$name);
+    $objr_name = mysqli_fetch_array($objq_name);
  ?>
 
     <!DOCTYPE html>
@@ -44,117 +48,88 @@
     </head>
 
     <body class=" hold-transition skin-blue layout-top-nav ">
-      <script language="javascript">
-      function fncSubmit() {
-        if (document.form1.add_num.value == "") {
-          alert('กรุณาระบุจำนวน');
-          document.form1.num.focus();
-          return false;
-        }
-        if (document.form1.name.value == "") {
-          alert('กรุณาระบุชื่อผู้รับเข้าสินค้า');
-          document.form1.name.focus();
-          return false;
-        }
-        document.form1.submit();
-      }
-      </script>
       <div class="wrapper">
         <header class="main-header">
         <?php require('menu/header_logout.php');?>
         </header>
 
-        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-          <!-- Content Header (Page header) -->
           <section class="content-header">
           </section>
 
-          <!-- Main content -->
           <section class="content">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-              <div class="box box-primary">
-                <div class="box-header text-center with-border">
-                  <font size="5">
-                    <B align="center">เบิกสินค้าจาก : 
-                    </B>
-                  </font>
-                </div>
+            <div class="col-12">
+              <form action="algorithm/add_numproductcar.php" method="post" autocomplete="off">
+                <div class="box box-primary">
 
-                <!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <div class="mailbox-read-message">
-                    <form action="algorithm/add_numproductcar.php" method="post" autocomplete="off">
-                      <table class="table table-striped ">
-                          <tbody>
-                            <tr class="info" >
-                            <th class="text-center" width="5%">ลำดับ
-                            </th>
-                            <th class="text-center" width="35%">สินค้า_หน่วย
-                            </th>
-                            <th class="text-center" width="20%">จำนวนสินค้า
-                            </th> 
-                          </tr> 
-                      <?php
-                        for ($i=0; $i < count($_POST['id_product']); $i++) { 
-                       
-                          $id_product = $_POST['id_product'][$i];
-                          $list_product = "SELECT * FROM product WHERE id_product = $id_product";
-                          $objq_listproduct = mysqli_query($conn,$list_product);
-                          $list = mysqli_fetch_array($objq_listproduct);
-                      ?> <tr>
-                            <td class="text-center"><?php echo $i+1; ?>
-                              <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
-                            </td>
-                            <td><?php echo $list['name_product'].'_'.$list['unit']; ?> </td>
-                            <td class="text-center"><input class="text-center" type="text" name="num[]"></td>
-                          </tr>
-                          <?php 
-                           }
-                      ?>
-                        </tbody>
-                      </table>
-                      <div class="col-md-6">
-                        <table class="table table-bordered table-hover">
-                          <tbody>
+                  <div class="box-header text-center with-border">
+                    <font size="5">
+                      <B align="center">เบิกสินค้าจาก : 
+                      </B>
+                    </font>
+                  </div>
+
+                  <div class="box-body no-padding">
+                    <div class="mailbox-read-message">
+                        <table class="table table-striped ">
+                            <tbody>
+                              <tr class="info">
+                              <th class="text-center" width="50%">สินค้า_หน่วย</th>
+                              <th class="text-center" width="50%">จำนวนสินค้า</th> 
+                            </tr> 
+                            <?php
+                              for ($i=0; $i < count($_POST['id_product']); $i++) { 
+                            
+                                $id_product = $_POST['id_product'][$i];
+                                $list_product = "SELECT * FROM product WHERE id_product = $id_product";
+                                $objq_listproduct = mysqli_query($conn,$list_product);
+                                $list = mysqli_fetch_array($objq_listproduct);
+                            ?> 
                             <tr>
-                              <th bgcolor="#99CCFF" class="text-center">โอนให้
-                              </th>
-                              <th bgcolor="#99CCFF" class="text-center">
-                                <?php #endregion
-                                  $name = "SELECT * FROM member WHERE id_member = $_POST[id_member]";
-                                  $objq_name = mysqli_query($conn,$name);
-                                  $objr_name = mysqli_fetch_array($objq_name);
-                              echo $objr_name['name'];
-                            ?>
-                                <input type="hidden" name="id_member" value="<?php echo $_POST['id_member']; ?>">
-                              </th>
+                              <td class="text-center"><?php echo $list['name_product'].'_'.$list['unit']; ?> </td>
+                              <td class="text-center">
+                                <input type="hidden" name="id_product[]" value="<?php echo $list['id_product']; ?>">
+                                <input class="text-center form-control" type="number" name="num[]">
+                              </td>
                             </tr>
+                            <?php 
+                            }
+                        ?>
                           </tbody>
                         </table>
-                      </div>
+                        <div class="col-12">
+                          <div class="col-4 col-sm-4 col-xl-4 col-md-4">
+                            <table class="table table-bordered table-hover">
+                              <tbody>
+                                <tr>
+                                  <th bgcolor="#99CCFF" class="text-center">โอนให้</th>
+                                  <th bgcolor="#99CCFF" class="text-center"><?php echo $objr_name['name'];?></th>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="col-8 col-sm-8 col-xl-8 col-md-8"></div>
+                        </div>
+                        
+                    </div>
+                  </div> 
+
+                  <div class="box-footer">
+                    <input type="hidden" name="id_member" type="number" value="<?php echo $id_member; ?>">  
+                    <a type="block" href="add_data.php" class="btn btn-danger pull-left"><< กลับ</a> 
+                    <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save">
+                          บันทึก</i></button>
                   </div>
+                  
                 </div>
-                <!-- /.box-body -->
-                <!-- /.box-footer -->
-                <div class="box-footer">
-                  <a type="block" href="admin.php" class="btn btn-success pull-left"><<== กลับสู่เมนูหลัก</a> 
-                  <button type="submit" class="btn btn-success pull-right" onClick="return confirm('คุณต้องการที่จะบันทึกข้อมูลนี้หรือไม่ ?')";><i class="fa fa-save">
-                        บันทึก</i></button>
-                </div>
-                </form>
-                <!-- /.box-footer -->
-              </div>
-              <!-- /. box -->
+              </form>
             </div>
           </section>
-          <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
 
         <?php require("../menu/footer.html"); ?>
       </div>
+
       <!-- jQuery 3 -->
       <script src="../bower_components/jquery/dist/jquery.min.js"></script>
       <!-- Bootstrap 3.3.7 -->

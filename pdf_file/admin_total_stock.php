@@ -32,13 +32,12 @@ class PDF extends FPDF
         $this->Text(200, 15,iconv('UTF-8','cp874','วันที่  '.DateThai($strDate)),1,0,'C');
         // Title
         $this->SetTextColor(0,0,0);
-        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'สต๊อกรวม') , 0 , 1,'L' );
+        $this->Cell(0,5, iconv( 'UTF-8','cp874' ,'สต๊อกร้าน') , 0 , 1,'L' );
         $this->Ln(3);
             $this->Cell(10,10,iconv('UTF-8','cp874','ที่'),1,0,'C');
             $this->Cell(50,10,iconv('UTF-8','cp874','ชื่อสินค้า'),1,0,'C');
             $this->Cell(15,10,iconv('UTF-8','cp874','จุน'),1,0,'C');
-            $this->Cell(15,10,iconv('UTF-8','cp874','พาน1'),1,0,'C');
-            $this->Cell(15,10,iconv('UTF-8','cp874','พาน2'),1,0,'C');
+            $this->Cell(15,10,iconv('UTF-8','cp874','พาน'),1,0,'C');
             $this->Cell(15,10,iconv('UTF-8','cp874','ดคต1'),1,0,'C');
             $this->Cell(15,10,iconv('UTF-8','cp874','ดคต2'),1,0,'C');
             $this->Cell(15,10,iconv('UTF-8','cp874','วปป'),1,0,'C');
@@ -95,16 +94,6 @@ $pdf=new PDF('L','mm','A4');
               }
               // -----------------------//จุน----------------------------------
 
-              // -----------------------พาน----------------------------------
-              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 4";
-              $objq_num = mysqli_query($conn,$SQL_num);
-              $objr_num = mysqli_fetch_array($objq_num);
-              if(!isset($objr_num['num'])){
-                $pdf->Cell(15,8,iconv('UTF-8','cp874',''),1,0,'C');
-              }else{
-                $pdf->Cell(15,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
-              }
-              // -----------------------//พาน----------------------------------
 
                // -----------------------พาน----------------------------------
                $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 13";

@@ -76,7 +76,7 @@
                           <div class="form-group">
                             <label class="col-sm-4 control-label">ชื่อ </label>
                             <div class="col-sm-8">
-                              <input type="text" name="name" class="form-control" placeholder="ชื่อลูกค้า" value="<?php echo $objr_interview['name']; ?>">
+                              <input type="text" name="name_customer" class="form-control" placeholder="ชื่อลูกค้า" value="<?php echo $objr_interview['name_customer']; ?>">
                             </div>
                           </div>
 
@@ -124,7 +124,9 @@
                             <label class="col-sm-4 control-label">เปิดแล้ว </label>
                             <div class="col-sm-8">
                               <label class="switch">
-                                <input type="checkbox" name="status" <?php if($objr_interview['status']=="Y"){ echo "checked"; }else{} ?>>
+                                <input type="checkbox" name="id_member" value="<?php echo $objr_interview['id_member']; ?>" 
+                                <?php if($objr_interview['id_member']!=54){ echo "checked"; }else{} ?>>
+                                
                                 <span class="slider round"></span>
                               </label>
                             </div>

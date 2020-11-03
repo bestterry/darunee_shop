@@ -58,14 +58,14 @@
 
         <div class="col-md-12">
           <div class="box box-primary">
-            <div class="box-header with-border">
-              <font size="4"><B> แก้ไขประวัติขายสินค้า </font></B>
+            <div class="box-header with-border text-center">
+              <font size="5"><B> แก้ไขประวัติขายสินค้า </font></B>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-message">
                 <form action="algorithm/edit_sale_history.php" method="post" autocomplete="off">
-                  <table class="table table-bordered table-hover">
+                  <table class="table table-bordered ">
                     <tbody>
                       <tr bgcolor="#99CCFF">
                         <th class="text-center">ชื่อสินค้า</th>

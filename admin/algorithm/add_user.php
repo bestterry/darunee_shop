@@ -2,7 +2,7 @@
   require "../../config_database/config.php";
   require "../../session.php"; 
 
-  print_r($_POST);
+  $full_name = $_POST['full_name'];
   $name = $_POST['name'];
   $name_sub = $_POST['sub_name'];
   $username = $_POST['username'];
@@ -15,8 +15,8 @@
     $status_car = "1";
   }
 
-  $insert_user = "INSERT INTO member (username, password, name, name_sub, status, id_zone, status_car) 
-                  VALUE ('$username','$password','$name', '$name_sub','$status', 8, $status_car)";
+  $insert_user = "INSERT INTO member (username, password, full_name, name, name_sub, status, id_zone, status_car) 
+                  VALUE ('$username','$password', '$full_name','$name', '$name_sub','$status', 8, $status_car)";
   if ($conn->query($insert_user) === TRUE) {
     echo "New record created successfully";
 } else {

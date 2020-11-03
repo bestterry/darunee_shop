@@ -3,7 +3,7 @@
   require "../session.php";
   require "menu/date.php";
 
-  $sql_transfer = "SELECT * FROM transfer_list INNER JOIN transfer_product ON transfer_list.id_transfer_pd = transfer_product.id_transfer_pd
+  $sql_transfer = "SELECT * FROM transfer_list INNER JOIN product ON transfer_list.id_product = product.id_product
                   ORDER BY transfer_list.id_transfer_list DESC 
                   LIMIT 300";
   $objq_transfer = mysqli_query($conn,$sql_transfer);
@@ -101,12 +101,12 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center">โอนจ่าย<font color="red"> </font></B>
+                          <B align="center">ข้อมูลตัดจ่ายค่าสินค้า</B>
                         </font>
                       </div>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right">
-                      <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> ทำรายการ </a>
+                      <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> ลงข้อมูล </a>
                     </div>
                   </div>
                 </div>
@@ -118,15 +118,14 @@
                         <table id="example1" class="table">
                           <thead>
                             <tr>
-                              <th class="text-center" width="10%">วันที่โอน</th>
-                              <th class="text-center" width="10%">รับโอน</th>
-                              <th class="text-center" width="10%">ชื่อบัญชี</th>
-                              <th class="text-center" width="10%">สินค้า</th>
-                              <th class="text-center" width="10%">จำนวนเงิน</th>
-                              <th class="text-center" width="10%">ผู้โอน</th>
-                              <th class="text-center" width="10%">ใบจ่าย</th>
-                              <th class="text-center" width="20%">หมายเหตุ</th>
-                              <th class="text-center" width="5%">#</th>
+                              <th class="text-center" width="14%">วันที่โอน</th>
+                              <th class="text-center" width="14%">บช.รับโอน</th>
+                              <th class="text-center" width="14%">ชื่อบัญชี</th>
+                              <th class="text-center" width="13%">สินค้า</th>
+                              <th class="text-center" width="13%">เงิน(บ)</th>
+                              <th class="text-center" width="13%">ชื่อผู้โอน</th>
+                              <th class="text-center" width="13%">ใบจ่ายที่</th>
+                              <!-- <th class="text-center" width="5%">#</th> -->
                               <th class="text-center" width="5%">แก้</th>
                             </tr>
                           </thead>
@@ -138,12 +137,11 @@
                               <td class="text-center"><?php echo DateThai($value['date']);?></td>
                               <td class="text-center"><?php echo $value['name_transfer'];?></td>
                               <td class="text-center"><?php echo $value['account_name'];?></td>
-                              <td class="text-center"><?php echo $value['name_transfer_pd'];?></td>
+                              <td class="text-center"><?php echo $value['name_product'];?></td>
                               <td class="text-center"><?php echo $value['money'];?></td>
                               <td class="text-center"><?php echo $value['transferor'];?></td>
                               <td class="text-center"><?php echo $value['payment_slip'];?></td>
-                              <td class="text-center"><?php echo $value['note'];?></td>
-                              <td class="text-center" >
+                              <!-- <td class="text-center" >
                                 <?php 
                                   $status = $value['status_pay'];
                                     if( $status == 'Y'){
@@ -159,7 +157,7 @@
                                       echo "";
                                     } 
                                 ?>
-                              </td>
+                              </td> -->
                               <td class="text-center">
                                 <a href="transfer_edit.php?id_transfer_list=<?php echo $value['id_transfer_list']; ?>" class="btn btn-success btn-xs" >>></a>
                               </td>
@@ -191,7 +189,7 @@
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <div class="text-center">
                         <font size="5">
-                          <B align="center">ยอดรวมโอนจ่าย<font color="red"> </font></B>
+                          <B align="center">ยอดรวมตัดจ่ายค่าสินค้า<font color="red"> </font></B>
                         </font>
                       </div>
                     </div>
@@ -203,13 +201,13 @@
                     <div class="col-12">
 
                       <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-xl-12">
-                        <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-xl-3"></div>
-                        <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-xl-6">
-                          <table class="table table-bordered">
+                        <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-xl-4"></div>
+                        <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-xl-4">
+                          <table class="table">
                             <thead>
                               <tr>
-                                <th class="text-center" width="50%">สินค้า</th>
-                                <th class="text-center" width="50%">เงินโอน</th>
+                                <th class="text-right" width="50%"><font color="red">กลุ่มสินค้า</font></th>
+                                <th class="text-left" width="50%"><font color="red">เงินรับโอน</font></th>
                                 
                               </tr>
                             </thead>
@@ -219,13 +217,16 @@
                               $objq_transferPD = mysqli_query($conn,$sql_transferPD);
                               while($value = $objq_transferPD -> fetch_assoc()){
                                 $id_transfer_pd = $value['id_transfer_pd'];
-                                $sql_sumtransfer = "SELECT SUM(money) FROM transfer_list WHERE id_transfer_pd = $id_transfer_pd AND status_pay = 'N'";
+                                $sql_sumtransfer = "SELECT SUM(money) FROM product
+                                                    INNER JOIN transfer_list ON transfer_list.id_product = product.id_product 
+                                                    INNER JOIN transfer_product ON transfer_product.id_transfer_pd = product.id_transfer_pd
+                                                    WHERE transfer_product.id_transfer_pd = $id_transfer_pd AND transfer_list.payment_slip = 'NO'";
                                 $objq_sumtransfer = mysqli_query($conn,$sql_sumtransfer);
                                 $objr_sumtransfer = mysqli_fetch_array($objq_sumtransfer);
                             ?>
                               <tr>
-                                <td class="text-center"><?php echo $value['name_transfer_pd']; ?></td>
-                                <td class="text-center"><?php echo $objr_sumtransfer['SUM(money)']; ?></td>
+                                <td class="text-right"><?php echo $value['name_transfer_pd']; ?></td>
+                                <td class="text-left"><?php echo $objr_sumtransfer['SUM(money)']; ?></td>
                               </tr>
                             <?php 
                               }
@@ -233,7 +234,7 @@
                             </tbody>
                           </table>
                         </div>
-                        <div class="col-3 col-xs-3 col-sm-3 col-md-3 col-xl-3"></div>
+                        <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-xl-4"></div>
                       </div>
                     </div>
                   </div>
@@ -249,10 +250,10 @@
       
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
-          <form action="algorithm/add_transfer.php" method="post" class="form-horizontal">
+          <form action="algorithm/add_transfer.php" method="post" class="form-horizontal" autocomplete="off">
             <div class="modal-content">
               <div class="modal-header text-center">
-                  <font size="5"><B> โอนจ่าย </B></font>
+                  <font size="5"><B> ตัดจ่ายค่าสินค้า </B></font>
               </div>
               <div class="modal-body col-md-12 table-responsive mailbox-messages">
                 <div class="col-12">
@@ -260,66 +261,66 @@
                   <div class="col-8 col-sm-8 col-xl-8 col-md-8">
 
                     <div class="form-group">
-                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">วันที่ </label>
+                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label"> ชำระสินค้า </label>
                       <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                        <input type="date" class="form-control text-center" id="datePicker" name="date">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">รับโอน</label>
-                      <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                        <input type="text" class="form-control text-center" name="name_transfer">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">ชื่อบัญชี</label>
-                      <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                        <input type="text" class="form-control text-center" name="account_name">
-                      </div>
-                    </div>
-                              
-                    <div class="form-group">
-                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label"> สินค้า </label>
-                      <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                        <select name="id_transfer_pd"  class="form-control" >
-                          <option value="">-- เลือกรายการ --</option>
+                        <select name="id_product" onchange="sSelect(this.value)"  class="form-control" >
+                          <option value="">-- เลือกสินค้า --</option>
                           <?php 
-                            $sql_list = "SELECT * FROM transfer_product";
+                            $sql_list = "SELECT id_product,name_product FROM product WHERE status_order = 1";
                             $objq_list = mysqli_query($conn,$sql_list);
                               while($value = $objq_list->fetch_assoc()){ ?>
-                              <option value="<?php echo $value['id_transfer_pd'];?>"><?php echo $value['name_transfer_pd'];?></option>
+                              <option value="<?php echo $value['id_product'];?>"><?php echo $value['name_product'];?></option>
                           <?php } ?>
                         </select>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">จำนวนเงิน</label>
+                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">บัญชีรับโอน</label>
                       <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                        <input type="text" class="form-control text-center" name="money">
+                      <select name="name_transfer" id="name_transfer" class=" form-control"></select>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">ผู้โอน</label>
+                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">ชื่อบัญชี</label>
+                      <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                        <input type="text" id="account_name" class="form-control text-center" name="account_name">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">วันที่ตัดจ่าย </label>
+                      <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                        <input type="date" class="form-control text-center" id="datePicker" name="date">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">จำนวนเงิน(บ)</label>
+                      <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                        <input type="number" class="form-control text-center" name="money">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">ชื่อผู้โอน</label>
                       <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
                         <input type="text" class="form-control text-center" name="transferor">
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">ใบจ่าย</label>
+                      <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">ใบจ่ายที่</label>
                       <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                        <input type="text" class="form-control text-center" name="payment_slip">
+                        <input type="text" class="form-control text-center" name="payment_slip" value="NO">
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">หมายเหตุ</label>
                       <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                        <input type="text" class="form-control text-center" name="note">
+                        <input type="text" class="form-control text-center" name="note" value="-">
                       </div>
                     </div>
 
@@ -355,6 +356,29 @@
     <script src="../dist/js/demo.js"></script>
     <script src="../plugins/iCheck/icheck.min.js"></script>
     <script>
+
+        function sSelect(value){
+              $.ajax({
+                  type:"POST",
+                  url:"algorithm/select_transfer.php",
+                  data:{value:value},
+                  success:function(data){
+                    $("#name_transfer").html(data);
+                  }
+              });
+
+              $.ajax({
+                  type:"POST",
+                  url:"algorithm/select_accounttranfer.php",
+                  data:{value:value},
+                  success:function(data){
+                    $("#account_name").val(data);
+                  }
+              });
+
+          return false;
+        };
+
        $(function () {
           $('#example1').DataTable({
             'paging'      : true,

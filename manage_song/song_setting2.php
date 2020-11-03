@@ -32,10 +32,15 @@
             <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
               <div class="topnav">
                 <a href="artist.php"> ค้นหา </a>
+                <a href="song_setting.php"> เพลง </a>
+                <a href="song_original.php"> ต้นฉบับ </a>
                 <a href="song_old.php"> เก่า </a>
                 <a href="song_middle.php"></i> กลาง </a>
                 <a href="song_new.php"> ใหม่ </a>
-                <a href="song_setting.php"> เพลง </a>
+                <a href="gradea.php"> A </a>
+                <a href="gradeb.php"> B </a>
+                <a href="gradec.php"> C </a>
+                <a href="graded.php"> D </a>
                 <a href="artist_setting.php"> นักร้อง </a>
                 <a class="active" href="song_setting2.php"> แก้ไข </a>
               </div>
@@ -65,15 +70,14 @@
                   <table id="example2" class="table">
                     <thead>
                       <tr>
-                        <th class="text-center" width="8%">#</th>
-                        <th class="text-center" width="15%">นักร้อง</th>
-                        <th class="text-center" width="14%">ชื่อเพลง</th>
+                        <th class="text-center" width="18%">ชื่อเพลง</th>
+                        <th class="text-center" width="18%">นักร้อง</th>
                         <th class="text-center" width="7%">ทำนอง</th>
-                        <th class="text-center" width="7%">เกรด</th>
                         <th class="text-center" width="9%">ต้นฉบับ</th>
+                        <th class="text-center" width="7%">เกรด</th>
                         <th class="text-center" width="8%">#</th>
-                        <th class="text-center" width="8%">แก้ไข</th>
-                        <th class="text-center" width="24%">หมายเหตุ</th>
+                        <th class="text-center" width="8%">#</th>
+                        <th class="text-center" width="25%">หมายเหตุ</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -81,33 +85,21 @@
                         while($value =  $objq_song->fetch_assoc()){
                       ?>
                       <tr> 
+                        <td class="text-center"><?php echo $value['name_song']; ?></td>
+                        <td class="text-center"><?php echo $value['name_artist']; ?></td>
+                        <td class="text-center"><?php echo $value['name_tune']; ?></td>
+                        <td class="text-center"><?php if($value['script']=='N'){echo "-";}else{echo "ต้นฉบับ";} ?></td>
+                        <td class="text-center"><?php echo $value['melodic']; ?></td>
                         <td class="text-center">
                           <?php
                             if(!empty($value['ad_song'])){
                           ?>
-                          <a href="song_listen.php?id_song=<?php echo $value['id_song'];?>&&status=setting2" class="btn  btn-success btn-xs" >ฟัง</a>
+                           <input type="button" name="ฟัง" value="ฟัง" id="<?php echo $value["id_song"]; ?>" class="btn btn-success btn-xs view_data" />
                           <?php }else{}?>
                         </td>
-                        <td class="text-center"><?php echo $value['name_artist']; ?></td>
-                        <td class="text-center"><?php echo $value['name_song']; ?></td>
-                        <td class="text-center"><?php echo $value['name_tune']; ?></td>
-                        <td class="text-center"><?php echo $value['melodic']; ?></td>
-                        <td class="text-center"><?php if($value['script']=='N'){echo "-";}else{echo "ต้นฉบับ";} ?></td>
-                        
                         <td class="text-center">
-                          <a href="song_edit5.php?id_song=<?php echo $value['id_song']; ?>" class="btn btn-success btn-xs">แก้</a>
+                          <a href="song_edit5.php?id_song=<?php echo $value['id_song']; ?>" class="btn btn-success btn-xs">>></a>
                         </td> 
-                        <?php
-                        if($value['edit']=='N'){
-                        ?>
-                        <td class="text-center">-</td>
-                        <?php
-                          }else{
-                        ?>
-                        <td class="text-center"><font>>></font></td>
-                        <?php
-                          }
-                        ?> 
                         <td class="text-center"><?php echo $value['note']; ?></td>
                       </tr>
                       <?php 
@@ -146,6 +138,37 @@
     </script>
     <script src="../plugins/iCheck/icheck.min.js">
     </script>
+    <script>  
+      $(document).ready(function(){  
+            $('.view_data').click(function(){  
+                var id_song = $(this).attr("id");  
+                $.ajax({  
+                      url:"select_song.php",  
+                      method:"post",  
+                      data:{id_song:id_song},  
+                      success:function(data){  
+                          $('#listen_music').html(data);  
+                          $('#dataModal').modal("show");  
+                      }  
+                });  
+            });  
+      });  
+    </script>
   </body>
 
 </html>
+<div id="dataModal" class="modal fade">  
+      <div class="modal-dialog">  
+           <div class="modal-content">  
+                <div class="modal-header">  
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                     <h4 class="modal-title"></h4>  
+                </div>  
+                <div class="modal-body" id="listen_music">  
+                </div>  
+                <div class="modal-footer">  
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>  
+                </div>  
+           </div>  
+      </div>  
+ </div>  

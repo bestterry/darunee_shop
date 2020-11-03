@@ -35,9 +35,13 @@
                             <tr>
                               <td class="text-center" width="15%">
                                 <input type="checkbox" name="menu[]" value="<?php echo $product['id_numproduct']; ?>">
+                                <input type="hidden" name="num[]" value="<?php echo $product['id_numproduct']; ?>">
                               </td>
                               <td width="35%"><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
-                              <td class="text-center" width="15%"><?php echo $product['num']; ?></td>
+                              <td class="text-center" width="15%">
+                                <?php echo $product['num']; ?>
+                                <input type="hidden" name="num[]" value="<?php echo $product['num']; ?>">
+                              </td>
 
                             <?php } ?>
                             <input type="hidden" name="id_member" value="<?php echo $id_member; ?>">
@@ -47,8 +51,8 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-success pull-right">ถัดไป ==>></button>
-                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close">ปิดหน้าต่างนี้</i></button>
+                    <button type="submit" class="btn btn-success pull-right">ต่อไป >></button>
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ปิด </i></button>
                   </div>
                 </div>
               </form>

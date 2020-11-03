@@ -55,57 +55,123 @@
       <div class="content-wrapper">
         <section class="content-header">
         </section>
+
         <section class="content">
-            <div class="col-12">
-              <div class="box box-primary">
-                <div class="box-header with-border">
-                  <div class="col-12">
-                    <div class="col-4 col-sm-4 col-xl-4 col-md-4">
-                      <a type="button"href="admin.php" class="btn button2"><< กลับ</a>
-                    </div>
-                    <div class="col-4 col-sm-4 col-xl-4 col-md-4 text-center">
-                      <font size="5"><B>สินค้า</B></font>
-                    </div>
-                    <div class="col-4 col-sm-4 col-xl-4 col-md-4 text-right">
-                      <a type="button"href="present_product_manage.php" class="btn btn-success">จัดการ</a>
-                    </div>
-                  </div>
-                </div>
-                <div  class="box box-body">
-                  <div class="row" align="center">
-                    <div id="myCarousel" class="carousel slide" data-interval="false">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#check" data-toggle="tab">สินค้า</a></li>
+                  <li><a href="#addproduct" data-toggle="tab">เพิ่มข้อมูล</a></li>
+                  <a href="admin.php" class="btn button2 pull-right"><< เมนูหลัก </a>
+                </ul>
+                <div class="tab-content">
 
-                      <!-- Wrapper for slides -->
-                      <div class="carousel-inner">
-                        <?php 
-                          $i = 1;
-                          $sql_present = "SELECT id,name_product FROM present_product";
-                          $objq_present = mysqli_query($conn,$sql_present);
-                          while($value = $objq_present->fetch_assoc()){
-                        ?>
-                          <div class="item <?php if($i == 1){ echo "active";}else{}?>">
-                            <img src="../images/product/<?php echo $value['name_product'];?>" width="1300" height="1200">
-                          </div>
-                        <?php
-                            $i++;
-                          }
-                        ?>
+                  <div class="active tab-pane" id="check">
+                    <div class="box box-default">
+                      <div class="box-header">
+                        <div class="col-12">
+                          <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4"> </div>
+                          <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4 text-center"></div>
+                          <div class="col-4 col-sm-4 col-lg-4 col-md-4 col-xl-4 text-right"></div>
+                        </div>
                       </div>
+                      <div class="box-body">
+                        <div class="row" align="center">
+                          <div id="myCarousel" class="carousel slide" data-interval="false">
 
-                      <!-- Left and right controls -->
-                      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
+                            <div class="carousel-inner">
+                              <?php 
+                                $i = 1;
+                                $sql_present = "SELECT id,name_product FROM present_product";
+                                $objq_present = mysqli_query($conn,$sql_present);
+                                while($value = $objq_present->fetch_assoc()){
+                              ?>
+                                <div class="item <?php if($i == 1){ echo "active";}else{}?>">
+                                  <img src="../images/product/<?php echo $value['name_product'];?>" width="1300" height="1200">
+                                  <br>
+                                  <div class="text-center">
+                                    <font size="6"><B><?php echo $value['name_product'];?></B></font>
+                                  </div>
+                                </div>
+                              
+                              <?php
+                                  $i++;
+                                }
+                              ?>
+                            </div>
+
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                              <span class="glyphicon glyphicon-chevron-left"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                              <span class="glyphicon glyphicon-chevron-right"></span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-footer">
+                        
+                      </div>
                     </div>
                   </div>
+
+                  <div class="tab-pane" id="addproduct">
+                    <div class="box box-default">
+                      <div class="box-header with-border">
+                        <div class="col-12">
+                          <div class="col-2 col-sm-2 col-xl-2 col-md-2">
+                            <a type="button" href="present_product.php" class="btn button2"><< กลับ</a>
+                          </div>
+                          <div class="col-8 col-sm-8 col-xl-8 col-md-8 text-center">
+                            <font size="5"><B>ข้อมูลนำเสนอสินค้า</B></font>
+                          </div>
+                          <div class="col-2 col-sm-2 col-xl-2 col-md-2 text-right">
+                          <a type="button"href="#" data-toggle="modal" data-target="#myModal2" class="btn btn-success" style="color:black;">เพิ่มข้อมูล</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-body no-padding">
+                        <div class="mailbox-read-message">
+                          <div class="col-1 col-sm-1 col-lg-1 col-md-1 col-xl-1"></div>
+                          <div class="col-10 col-sm-10 col-lg-10 col-md-10 col-xl-10">
+                            <table id="example2" class="table">
+                              <thead>
+                                <tr>
+                                  <th class="text-center" width="90%">ข้อมูล</th>
+                                  <th class="text-center" width="10%">ลบ</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              <?php 
+                                $sql_present = "SELECT id,name_product FROM present_product";
+                                $objq_present = mysqli_query($conn,$sql_present);
+                                while($value = $objq_present->fetch_assoc()){
+                              ?>
+                                <tr>
+                                  <td class="text-center"><?php echo $value['name_product']; ?></td>
+                                  <td class="text-center"><a href="algorithm/delete_presentproduct.php?id=<?php echo $value['id']; ?>&&name_product=<?php echo $value['name_product'];?>" class="btn  btn-danger btn-xs" >ลบ</a> </td>   
+                                </tr>
+                              <?php 
+                                }
+                              ?>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="col-1 col-sm-1 col-lg-1 col-md-1 col-xl-1"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
+
+
+          </div>
         </section>
       </div>
       <?php require("../menu/footer.html"); ?>
@@ -130,3 +196,39 @@
   </body>
 
 </html>
+
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <form action="algorithm/add_presentproduct.php" method="post" enctype="multipart/form-data">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+              <font size="5"><B> เพิ่มข้อมูล </B></font>
+          </div>
+          <div class="modal-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+              <div class="col-8 col-sm-8 col-xl-8 col-md-8">
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <th class="text-center" width="30%"><font size="4">รูปสินค้า</font></th>
+                      <th class="text-center" width="70%"> 
+                        <input name="upload" type="file" class="form-control" style="width: 100%;">
+                      </th>
+                    </tr>
+                  </tbody>
+                </table> 
+              </div>
+              <div class="col-2 col-sm-2 col-xl-2 col-md-2"></div>
+              
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit"  class="btn btn-success pull-right" OnClick="return confirm('ต้องการบันทึกหรือไม่ ?')";>บันทึก</button>
+            <button type="button" class="btn button2 pull-left" data-dismiss="modal"><< กลับ</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
