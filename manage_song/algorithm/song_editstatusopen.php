@@ -28,7 +28,11 @@
      } 
      if ($status == 'd') {
       header('location:../graded.php');
-     }if ($status == 'original') {
+     }
+     if ($status == 'original') {
       header('location:../song_original.php');
+     }
+     if ($status == 'coeval') {
+      header('location:../song_coeval.php');
      }
 ?>

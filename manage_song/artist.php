@@ -26,7 +26,7 @@
       <section class="content">
         <div class="box box-primary">
           <div class="row">
-            <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
               <div class="topnav">
                 <a class="active" href="artist.php"> ค้นหา </a>
                 <a href="song_setting.php"> เพลง </a>
@@ -34,6 +34,8 @@
                 <a href="song_old.php"> เก่า </a>
                 <a href="song_middle.php"></i> กลาง </a>
                 <a href="song_new.php"> ใหม่ </a>
+                <a href="song_coeval.php"> ร่วมสมัย </a>
+                <a href="song_forlife.php"> ลูกทุ่งเพื่อชีวิต </a>
                 <a href="gradea.php"> A </a>
                 <a href="gradeb.php"> B </a>
                 <a href="gradec.php"> C </a>
@@ -42,7 +44,7 @@
                 <a href="song_setting2.php"> แก้ไข </a>
               </div>
             </div>
-            <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2">
                 <a class="btn button2 pull-right" href="../admin/admin.php"> << เมนูหลัก </a>
             </div>
           </div>

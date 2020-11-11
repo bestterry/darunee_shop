@@ -268,13 +268,18 @@
                           </div>
                         </div>
                       </div>
-
+                      
                       <div class="tab-pane active" id="intime">
                         <div class="col-12">
                           <form action="car_rental_intime.php" method="post">
                             <div class="box-body">
                               <div class="table-responsive mailbox-messages">
                                 <div class="col-12">
+                                  <div class="text-center">
+                                    <font size="5">
+                                      <B align="center">ปฏิบัตงานและค่าเช่ารถ</B>
+                                    </font>
+                                  </div>
                                   <div class="col-6 col-sm-6 col-md-6 col-xl-6 text-center">
                                     <div class="col-2 col-sm-2 col-md-2 col-xl-2"></div>
                                     <div class="col-8 col-sm-8 col-md-8 col-xl-8">
@@ -324,35 +329,41 @@
                                   </font>
                                 </div>
                                 <br>
-                                  <table class="table">
+                                  <table class="table table-bordered">
                                     <thead>
                                       <tr>
-                                        <th class="text-right" width="50%">หน่วยรถ</th>
-                                        <th class="text-left" width="50%">ค่าเช่ารถ</th>
+                                        <th class="text-center" width="33%">หน่วยรถ</th>
+                                        <th class="text-center" width="33%">ใช้รถ(วัน)</th>
+                                        <th class="text-center" width="33%">ค่าเช่ารถ</th>
                                       </tr>
                                     </thead>
                                     <tbody>
                                       <?php 
                                       $sum_money = 0;
+                                      $sum_carrental = 0;
                                         while($value = $objq_member3 -> fetch_assoc()){
                                           $id_member = $value['id_member'];
                                       ?>
                                         <tr>
-                                          <td class="text-right"><?php echo ($value['name']); ?></td> 
+                                          <td class="text-center"><?php echo ($value['name']); ?></td> 
                                           <?php
-                                            $sql_carrental = "SELECT SUM(money) FROM car_rental WHERE member_car = $id_member 
+                                            $sql_carrental = "SELECT SUM(money),COUNT(id_carrental) FROM car_rental WHERE member_car = $id_member 
                                                               AND(date BETWEEN '$aday' AND '$bday')";
                                             $objq_carrental = mysqli_query($conn,$sql_carrental);
                                             if ($objq_carrental->num_rows > 0 ) {
                                             $objr_carental = mysqli_fetch_array($objq_carrental);
                                             $money = $objr_carental['SUM(money)'];
+                                            $day_carrental = $objr_carental['COUNT(id_carrental)'];
                                             $sum_money = $sum_money + $money;
+                                            $sum_carrental = $sum_carrental + $day_carrental;
                                           ?>
-                                          <td class="text-left"><?php echo $money;?></td>
+                                          <td class="text-center"><?php echo $day_carrental; ?></td>
+                                          <td class="text-center"><?php echo $money; ?></td>
                                           <?php 
                                             }else{
                                           ?>
-                                          <td class="text-left">-</td>
+                                          <td class="text-center">-</td>
+                                          <td class="text-center">-</td>
                                           <?php 
                                             }
                                           ?>
@@ -361,8 +372,9 @@
                                         }
                                       ?>
                                       <tr>
-                                        <th class="text-right">รวม</th>
-                                        <th class="text-left"><?php echo $sum_money; ?></th>
+                                        <th class="text-center">รวม</th>
+                                        <th class="text-center"><?php echo $sum_carrental; ?></th>
+                                        <th class="text-center"><?php echo $sum_money; ?></th>
                                       </tr>
                                     </tbody>
                                   </table>
@@ -386,10 +398,11 @@
                                       $objq_practice = mysqli_query($conn,$sql_practice);
                                       while($value_practice = $objq_practice->fetch_assoc()){
                                     ?>
-                                    <th class="text-center" width="7%"><?php echo $value_practice['name_practice']; ?></th>
+                                    <th class="text-center" width="6%"><?php echo $value_practice['name_practice']; ?></th>
                                     <?php    
                                       }
                                     ?>
+                                    <th class="text-center" width="6%">รวม</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -400,8 +413,9 @@
                                       $id_member = $value_member['id_member'];
                                   ?>
                                   <tr>
-                                    <th class="text-center" width="7%"><?php echo $value_member['name']; ?></th>
+                                    <th class="text-center"><?php echo $value_member['name']; ?></th>
                                     <?php 
+                                      $sum = 0;
                                       $objq_practice2 = mysqli_query($conn,$sql_practice);
                                       while($value_practice = $objq_practice2->fetch_assoc()){
                                         $id_practice = $value_practice['id_practice'];
@@ -418,8 +432,10 @@
                                     ?>
                                     <td class="text-center"><?php echo $value; ?></td>
                                     <?php 
+                                        $sum = $sum + $objr_report_office['COUNT(id_carrental)'];
                                       }
                                     ?>
+                                    <td class="text-center"><?php echo $sum; ?></td>
                                   </tr>
                                   <?php    
                                     }

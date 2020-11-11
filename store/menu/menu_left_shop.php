@@ -233,75 +233,67 @@
           <li><a href="sent_order.php" ><i class="fa fa-shopping-cart"></i> ORDER หน่วยรถ </a></li>
           <!-- /รายการรวมสต๊อกค้างส่ง -->
 
-          <!-- /ORDER ค้างส่งจังหวัด -->
-          <li><a href="order_province.php"><i class="fa fa-dropbox"></i> ORDER ค้างส่งจังหวัด </a></li>
-          <!-- /ORDER ค้างส่งจังหวัด -->
-
-          <!-- /ORDER ค้างส่งจังหวัด -->
-          <li><a href="order_amphur.php"><i class="fa fa-dropbox"></i> ORDER ค้างส่งอำเภอ </a></li>
-          <!-- /ORDER ค้างส่งจังหวัด -->
-
          <!-- ค้นหา ORDER -->
          <li><a href="#" data-toggle="modal" data-target="#seachorder"><i class="fa fa-archive"></i> ค้นหา ORDER </a></li>
           <div class="modal fade" id="seachorder" role="dialog">
-              <div class="modal-dialog modal-lg">
-                  <form action="../pdf_file/list_order3.php" method="post">
-                      <div class="modal-content">
-                          <div class="modal-header text-center">
-                              <font size="5"><B> ค้นหา ORDER </B></font>
-                          </div>
-                          <div class="modal-body col-md-12 table-responsive mailbox-messages">
-                            <div class="table-responsive mailbox-messages">
+            <div class="modal-dialog modal-lg">
+              <form action="../pdf_file/list_order3.php" method="post">
+                <div class="modal-content">
+                  <div class="modal-header text-center">
+                      <font size="5"><B> ค้นหา ORDER </B></font>
+                  </div>
+                  <div class="modal-body col-md-12 table-responsive mailbox-messages">
+                    <div class="table-responsive mailbox-messages">
 
-                              <table class="table table-bordered">
-                              <tbody>
-                                  <tr>
-                                  <th class="text-center" width="30%"><font size="5">จังหวัด</font></th>
-                                  <th bgcolor="#99CCFF" class="text-center" width="70%"> 
-                                  <select name="province_name" data-where="2" class="form-control ajax_address select2" style="width: 100%;">
-                                      <option value="">-- เลือกจังหวัด --</option>
-                                  </select>
-                                  </th>
-                                  </tr>
-                              </tbody>
-                              </table> 
-                              <br> 
+                      <table class="table table-bordered">
+                      <tbody>
+                          <tr>
+                          <th class="text-center" width="30%"><font size="5">จังหวัด</font></th>
+                          <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                          <select name="province_name" data-where="2" class="form-control ajax_address select2" style="width: 100%;">
+                              <option value="">-- เลือกจังหวัด --</option>
+                          </select>
+                          </th>
+                          </tr>
+                      </tbody>
+                      </table> 
+                      <br> 
 
-                            <table class="table table-bordered">
-                              <tbody>
-                                  <tr>
-                                  <th class="text-center" width="30%"><font size="5">อำเภอ</font></th>
-                                  <th bgcolor="#99CCFF" class="text-center" width="70%"> 
-                                  <select name="amphur_name" data-where="3" class="form-control ajax_address select2" style="width: 100%;">
-                                      <option value="">-- เลือกอำเภอ --</option>
-                                  </select>
-                                  </th>
-                                  </tr>
-                              </tbody>
-                              </table>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="submit"  class="btn btn-success pull-right">ถัดไป >></button>
-                            <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ยกเลิก</i></button>
-                          </div>
-                      </div>
-                  </form>
-              </div>
+                    <table class="table table-bordered">
+                      <tbody>
+                          <tr>
+                          <th class="text-center" width="30%"><font size="5">อำเภอ</font></th>
+                          <th bgcolor="#99CCFF" class="text-center" width="70%"> 
+                          <select name="amphur_name" data-where="3" class="form-control ajax_address select2" style="width: 100%;">
+                              <option value="">-- เลือกอำเภอ --</option>
+                          </select>
+                          </th>
+                          </tr>
+                      </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit"  class="btn btn-success pull-right">ถัดไป >></button>
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"> ยกเลิก</i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
           <!-- ค้นหา ORDER -->
 
-          <!-- เงินขายรายวัน -->
-          <li><a href="receive_money.php" ><i class="fa fa-money"></i> เงินขายรายวัน </a></li>
-          <!-- /เงินขายรายวัน -->
+          <!-- ค่าเช่ารถ -->
+          <li><a href="car_rental.php" ><i class="fa fa-car"></i> ปฏิบัติงานและค่าเช่ารถ </a></li>
+          <!--/ค่าเช่ารถ -->
 
           <!-- สำรองจ่าย -->
           <li><a href="reserve_money.php" ><i class="fa fa-money"></i> สำรองจ่าย </a></li>
           <!--/สำรองจ่าย -->
 
-          <!-- ค่าเช่ารถ -->
-          <li><a href="car_rental.php" ><i class="fa fa-car"></i> ค่าเช่ารถ </a></li>
-          <!--/ค่าเช่ารถ -->
+          <!-- เงินขายรายวัน -->
+          <li><a href="receive_money.php" ><i class="fa fa-money"></i> เงินขายรายวัน </a></li>
+          <!-- /เงินขายรายวัน -->
 
           <!-- เยี่ยมร้าน -->
           <li><a href="visit_shop.php" ><i class="fa fa-user"></i>เยี่ยมร้าน</a></li>

@@ -69,6 +69,9 @@
                 <a type="button" href="../pdf_file/list_order.php" class="btn btn-success ">พิมพ์จังหวัด</a>
                 <a type="button" href="../pdf_file/list_order2.php" class="btn btn-success ">พิมพ์อำเภอ</a>
                 <a type="button" href="../pdf_file/list_order_today.php" class="btn btn-success ">ORDER วันนี้</a>
+                <a type="button" href="order_amphur.php" class="btn btn-success ">ORDER ค้างส่งอำเภอ</a>
+                <a type="button" href="order_province.php" class="btn btn-success ">ORDER ค้างส่งจังหวัด</a>
+                <br>
                 <br>
                 <div class="col-md-12 text-center"><font size="5"><B>ORDER ค้างส่ง</B></font></div>
               </div>

@@ -33,6 +33,8 @@
                 <a class="active" href="song_old.php"> เก่า </a>
                 <a href="song_middle.php"></i> กลาง </a>
                 <a href="song_new.php"> ใหม่ </a>
+                <a href="song_coeval.php"> ร่วมสมัย </a>
+                <a href="song_forlife.php"> ลูกทุ่งเพื่อชีวิต </a>
                 <a href="gradea.php"> A </a>
                 <a href="gradeb.php"> B </a>
                 <a href="gradec.php"> C </a>

@@ -11,6 +11,81 @@
         <ul class="nav nav-pills nav-stacked" ata-widget="tree">
 
           <!-- ปฏิบัติงาน สนง. -->
+          <li><a href="#" data-toggle="modal" data-target="#salary"><i class="fa fa-user-o"></i> พนักงาน </a></li>
+          <div class="modal fade" id="salary" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <form action="../manage_salary/salary.php" method="post">
+                <div class="modal-content">
+                  <div class="modal-header text-center">
+                    <font size="5"><B> พนักงาน </B></font>
+                  </div>
+                    <div class="modal-body col-md-12 table-responsive mailbox-messages">
+                      <div class="table-responsive mailbox-messages">
+                        <div class="col-12">
+                          <div class="col-md-6 text-center">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8">
+                                <B><font size="5">เดือน</font></B>
+                            </div>
+                            <div class="col-sm-2"></div>
+                          </div>
+                          <div class="col-md-6 text-center"> 
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8">
+                              <B><font size="5">พ.ศ.</font></B>
+                            </div>
+                            <div class="col-sm-2"></div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="col-md-6 text-center">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8">
+                              <select name="month" class="form-control" style="width: 100%;">
+                                <option value="01">มกราคม</option>
+                                <option value="02">กุมภาพันธ์</option>
+                                <option value="03">มีนาคม</option>
+                                <option value="04">เมษายน</option>
+                                <option value="05">พฤษภาคม</option>
+                                <option value="06">มิถุนายน</option>
+                                <option value="07">กรกฎาคม</option>
+                                <option value="08">สิงหาคม</option>
+                                <option value="09">กันยายน</option>
+                                <option value="10">ตุลาคม</option>
+                                <option value="11">พฤศจิกายน</option>
+                                <option value="12">ธันวาคม</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-2"></div>
+                          </div>
+                          <div class="col-md-6 text-center"> 
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8">
+                              <select name="year" class="form-control" style="width: 100%;">
+                                <option value="2020">2563</option>
+                                <option value="2021">2564</option>
+                                <option value="2022">2565</option>
+                                <option value="2023">2566</option>
+                                <option value="2024">2567</option>
+                                <option value="2025">2568</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-2"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit"  class="btn btn-success pull-right">ถัดไป >></button>
+                      <button type="button" class="btn button2 pull-left" data-dismiss="modal"> << ย้อนกลับ</button>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!--/ปฏิบัติงาน สนง. -->
+
+          <!-- ปฏิบัติงาน สนง. -->
           <li><a href="report_work.php"><i class="fa fa-user-circle"></i> ปฏิบัติงาน (สนง) </a></li>
           <!--/ปฏิบัติงาน สนง. -->
         

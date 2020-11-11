@@ -117,7 +117,7 @@
 
                       <div class="tab-pane active" id="befor">
                           <form action="reserve_carbefor.php" method="post">
-                            <div class="box-body">
+                            <div class="box-header with-border">
                               <div class="col-12">
                                 <div align="center">
                                   <font size="5">
@@ -140,7 +140,7 @@
                                 <button type="submit" class="btn btn-success">ตกลง</button>
                               </div>
                             </div>
-                            <div class="box-footer text-center">
+                            <div class="box-body text-center">
                               <div class="col-12">
                                 <table id="example1" class="table">
                                   <thead>
@@ -213,7 +213,9 @@
                                 </table>
                               </div>
                             </div>
-                            
+                            <div class="box-footer text-right">
+                              <a href="../pdf_file/reserve_carvalue.php?date=<?php echo $date; ?>" class="btn btn-success">PDF</a>
+                            </div>
                           </form>
                       </div>
 

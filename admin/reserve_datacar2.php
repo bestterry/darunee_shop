@@ -141,7 +141,6 @@
                       </font>
                     </div>
                     <br><br>
-
                     <div class="col-12">
                       <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                         <table class="table" id="example2">
@@ -158,10 +157,10 @@
                           <tbody>
                             <?php 
                               $sql_rs_history = "SELECT * FROM reserve_history 
-                                                  INNER JOIN reserve_list ON reserve_history.id_list = reserve_list.id_list
-                                                  WHERE reserve_history.id_member_receive = $id_member_car
-                                                  GROUP BY reserve_history.id_reserve_history DESC
-                                                  LIMIT 1000";
+                                                 INNER JOIN reserve_list ON reserve_history.id_list = reserve_list.id_list
+                                                 WHERE reserve_history.id_member_receive = $id_member_car
+                                                 GROUP BY reserve_history.id_reserve_history DESC
+                                                 LIMIT 1000";
                               $objq_rs_history = mysqli_query($conn,$sql_rs_history);
                               while($value = $objq_rs_history->fetch_assoc()){
                             ?>

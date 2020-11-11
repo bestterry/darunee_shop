@@ -60,6 +60,8 @@
       header('location:../graded.php');
      }if ($age == 'original') {
       header('location:../song_original.php');
+     }if ($age == 'coeval') {
+      header('location:../song_coeval.php');
      }
 
    } else {
@@ -87,6 +89,8 @@
      header('location:../graded.php');
     }if ($age == 'original') {
       header('location:../song_original.php');
+    }if ($age == 'coeval') {
+      header('location:../song_coeval.php');
      }
 
    } else {

@@ -80,6 +80,7 @@
                     if ($id_member == 30) {
                   ?>
                     <a type="button"  href="#" data-toggle="modal" data-target="#list_category" class="btn btn-warning ">ประเภทเงิน</a> 
+                    <a type="button"  href="algorithm/receive_money0.php" class="btn btn-warning ">เปลี่ยน0บาท</a> 
                   <?php
                     }
                   ?>   

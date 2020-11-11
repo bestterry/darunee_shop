@@ -253,6 +253,7 @@ folder instead of downloading all of them to reduce the load. -->
                                 <option value="หกล้อ">รถหกล้อ</option>
                                 <option value="สิบล้อ">รถสิบล้อ</option>
                                 <option value="ขนส่ง">ฝากขนส่ง</option>
+                                <option value="ขนส่ง">กระบะ</option>
                               </select>
                             </td>
                           </tr>
