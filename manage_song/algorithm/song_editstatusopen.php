@@ -35,4 +35,7 @@
      if ($status == 'coeval') {
       header('location:../song_coeval.php');
      }
+     if ($status == 'forlife') {
+      header('location:../song_forlife.php');
+     }
 ?>

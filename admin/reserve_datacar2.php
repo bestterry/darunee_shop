@@ -146,11 +146,12 @@
                         <table class="table" id="example2">
                           <thead>
                             <tr>
-                              <th class="text-center" width="12%">วันที่</th>
-                              <th class="text-center" width="12%">รายการ</th>
-                              <th class="text-center" width="12%">รับ-จ่าย</th>
-                              <th class="text-center" width="12%">คงเหลือ</th>
-                              <th class="text-center" width="47%">หมายเหตุ</th>
+                              <th class="text-center" width="10%">วันที่</th>
+                              <th class="text-center" width="10%">รายการ</th>
+                              <th class="text-center" width="10%">รับ-จ่าย</th>
+                              <th class="text-center" width="10%">คงเหลือ</th>
+                              <th class="text-center" width="10%">รถ</th>
+                              <th class="text-center" width="45%">หมายเหตุ</th>
                               <th class="text-center" width="5%">ลบ</th>
                             </tr>
                           </thead>
@@ -172,6 +173,7 @@
                                 <td class="text-center"><font color="red"><?php echo $value['name_list']; ?></font></td>
                                 <td class="text-center"><font color="red"><?php echo $value['money']; ?></font></td>
                                 <td class="text-center"><font color="red"><?php echo $value['transfer']; ?></font></td>
+                                <td class="text-center"><font color="red"><?php ?></font></td>
                                 <td class="text-center"><?php echo $value['note']; ?></td>
                                 <td class="text-center">
                                   
@@ -179,12 +181,17 @@
                               </tr>
                               <?php
                                 }else{
+                                  $id_member_car1 = $value['id_member_car'];
+                                  $check_car = "SELECT name FROM member WHERE id_member = $id_member_car1";
+                                  $objq_car = mysqli_query($conn,$check_car);
+                                  $objr_car = mysqli_fetch_array($objq_car);
                               ?>
                               <tr>
                                 <td class="text-center"><?php echo Datethai($value['date']); ?></td>
                                 <td class="text-center"><?php echo $value['name_list']; ?></td>
                                 <td class="text-center"><?php echo $value['money']; ?></td>
                                 <td class="text-center"><?php echo $value['transfer']; ?></td>
+                                <td class="text-center"><?php echo $objr_car['name']; ?></td>
                                 <td class="text-center"><?php echo $value['note']; ?></td>
                                 <td class="text-center">
                                   <?php 

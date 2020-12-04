@@ -62,6 +62,8 @@
       header('location:../song_original.php');
      }if ($age == 'coeval') {
       header('location:../song_coeval.php');
+     }if ($age == 'forlife') {
+      header('location:../song_forlife.php');
      }
 
    } else {
@@ -72,7 +74,6 @@
             script = '$script', melodic = '$melodic', edit = '$edit', note = '$note', check_edit = '$check_edit'
             WHERE id_song = $id_song";
    if ($conn->query($sql) === TRUE) {
-
     if($age == 'old') {
       header('location:../song_old.php');
     }if ($age == 'middle') {
@@ -91,6 +92,8 @@
       header('location:../song_original.php');
     }if ($age == 'coeval') {
       header('location:../song_coeval.php');
+     }if ($age == 'forlife') {
+      header('location:../song_forlife.php');
      }
 
    } else {

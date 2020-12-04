@@ -11,7 +11,8 @@
   $objq_product2 = mysqli_query($conn,$list_product);
   $objq_product3 = mysqli_query($conn,$list_product);
 
-  $member = "SELECT * FROM member WHERE status_car = 1";
+  $member = "SELECT * FROM member WHERE status_car = 1
+            AND NOT id_member = 3 AND NOT id_member = 8  AND NOT id_member = 45  AND NOT id_member = 46";
   $objq_member = mysqli_query($conn,$member);
   $objq_member3 = mysqli_query($conn,$member);
   $objq_member5 = mysqli_query($conn,$member);
@@ -108,15 +109,15 @@
                           <table class="table table-striped ">
                             <thead>
                               <tr>
-                                <th class="text-center" width="10%"><font color="red">สินค้า_หน่วย</font></th>
+                                <th class="text-center" width="8%"><font color="red">สินค้า_หน่วย</font></th>
                                 <?php 
                                   while($value = $objq_member->fetch_assoc()){
                                 ?>
-                                <th class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
+                                <th class="text-center" width="4%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
                                 <?php 
                                   }
                                 ?>
-                                <th class="text-center" width="5%"><font color="red">รวม</font></th>
+                                <th class="text-center" width="4%"><font color="red">รวม</font></th>
                               </tr>
                             </thead>
                             <tbody>
@@ -165,15 +166,15 @@
                           <table class="table table-striped">
                             <thead>
                               <tr>
-                                <th class="text-center" width="10%"><font color="red">สินค้า_หน่วย</font></th>
+                                <th class="text-center" width="8%"><font color="red">สินค้า_หน่วย</font></th>
                                 <?php 
                                   while($value = $objq_member3->fetch_assoc()){
                                 ?>
-                                <th class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
+                                <th class="text-center" width="4%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
                                 <?php 
                                   }
                                 ?>
-                                <th class="text-center" width="5%"><font color="red">รวม</font></th>
+                                <th class="text-center" width="4%"><font color="red">รวม</font></th>
                               </tr>
                             </thead>
                             <tbody>
@@ -222,15 +223,15 @@
                           <table class="table table-striped">
                             <thead>
                               <tr>
-                                <th class="text-center" width="10%"><font color="red">สินค้า_หน่วย</font></th>
+                                <th class="text-center" width="8%"><font color="red">สินค้า_หน่วย</font></th>
                                 <?php 
                                   while($value = $objq_member5->fetch_assoc()){
                                 ?>
-                                <th class="text-center" width="5%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
+                                <th class="text-center" width="4%"><font color="red"><?php echo $value['name_sub']; ?></font></th>
                                 <?php 
                                   }
                                 ?>
-                                <th class="text-center" width="5%"><font color="red">รวม</font></th>
+                                <th class="text-center" width="4%"><font color="red">รวม</font></th>
                               </tr>
                             </thead>
                             <tbody>

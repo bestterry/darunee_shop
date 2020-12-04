@@ -118,15 +118,15 @@
                         <table id="example1" class="table">
                           <thead>
                             <tr>
+                              <th class="text-center" width="5%">ID</th>
                               <th class="text-center" width="14%">วันที่โอน</th>
                               <th class="text-center" width="14%">บช.รับโอน</th>
                               <th class="text-center" width="14%">ชื่อบัญชี</th>
-                              <th class="text-center" width="13%">สินค้า</th>
-                              <th class="text-center" width="13%">เงิน(บ)</th>
-                              <th class="text-center" width="13%">ชื่อผู้โอน</th>
-                              <th class="text-center" width="13%">ใบจ่ายที่</th>
-                              <!-- <th class="text-center" width="5%">#</th> -->
-                              <th class="text-center" width="5%">แก้</th>
+                              <th class="text-center" width="12%">สินค้า</th>
+                              <th class="text-center" width="12%">เงิน(บ)</th>
+                              <th class="text-center" width="12%">ชื่อผู้โอน</th>
+                              <th class="text-center" width="12%">ใบจ่ายที่</th>
+                              <th class="text-center" width="4%">แก้</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -134,6 +134,7 @@
                             while($value = $objq_transfer -> fetch_assoc()){
                           ?>
                             <tr>
+                              <td class="text-center"><?php echo $value['id_transfer_list'];?></td>
                               <td class="text-center"><?php echo DateThai($value['date']);?></td>
                               <td class="text-center"><?php echo $value['name_transfer'];?></td>
                               <td class="text-center"><?php echo $value['account_name'];?></td>
@@ -141,23 +142,6 @@
                               <td class="text-center"><?php echo $value['money'];?></td>
                               <td class="text-center"><?php echo $value['transferor'];?></td>
                               <td class="text-center"><?php echo $value['payment_slip'];?></td>
-                              <!-- <td class="text-center" >
-                                <?php 
-                                  $status = $value['status_pay'];
-                                    if( $status == 'Y'){
-                                ?>
-                                <a href="algorithm/edit_statustransfer.php?id_transfer_list=<?php echo $value['id_transfer_list']; ?>&&status_pay=N" 
-                                   class="btn btn-success btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นไม่ได้โอนหรือไม่ ?')";>Y</a>
-                                <?php
-                                    }else{
-                                ?>
-                                <a href="algorithm/edit_statustransfer.php?id_transfer_list=<?php echo $value['id_transfer_list']; ?>&&status_pay=Y" 
-                                   class="btn btn-danger btn-xs" onClick="return confirm('คุณต้องการที่จะเปลี่ยนสถานะเป็นโอนแล้วหรือไม่ ?')";>N</a>
-                                <?php
-                                      echo "";
-                                    } 
-                                ?>
-                              </td> -->
                               <td class="text-center">
                                 <a href="transfer_edit.php?id_transfer_list=<?php echo $value['id_transfer_list']; ?>" class="btn btn-success btn-xs" >>></a>
                               </td>
@@ -171,9 +155,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="box-footer text-right">
-                  <!-- <a href="#" data-toggle="modal" data-target="#check_list" class="btn btn-success">PDF</a> -->
-                </div>
+                <div class="box-footer text-right"> </div>
               </div>
             </div>
           </div>
@@ -357,38 +339,40 @@
     <script src="../plugins/iCheck/icheck.min.js"></script>
     <script>
 
-        function sSelect(value){
-              $.ajax({
-                  type:"POST",
-                  url:"algorithm/select_transfer.php",
-                  data:{value:value},
-                  success:function(data){
-                    $("#name_transfer").html(data);
-                  }
-              });
+      function sSelect(value){
+            $.ajax({
+                type:"POST",
+                url:"algorithm/select_transfer.php",
+                data:{value:value},
+                success:function(data){
+                  $("#name_transfer").html(data);
+                }
+            });
 
-              $.ajax({
-                  type:"POST",
-                  url:"algorithm/select_accounttranfer.php",
-                  data:{value:value},
-                  success:function(data){
-                    $("#account_name").val(data);
-                  }
-              });
+            $.ajax({
+                type:"POST",
+                url:"algorithm/select_accounttranfer.php",
+                data:{value:value},
+                success:function(data){
+                  $("#account_name").val(data);
+                }
+            });
 
-          return false;
-        };
+        return false;
+      };
 
-       $(function () {
-          $('#example1').DataTable({
-            'paging'      : true,
-            'lengthChange': true,
-            'searching'   : true,
-            'ordering'    : false,
-            'info'        : true,
-            'autoWidth'   : false
-          });
-       });
+      $(function () {
+        $('#example1').DataTable({
+          'paging'      : true,
+          'lengthChange': true,
+          'lengthMenu'  : [ 20, 50, 75, 100 ],
+          'searching'   : true,
+          'order'       : [],
+          'info'        : true,
+          'autoWidth'   : false
+        });
+      });
+
       $(document).ready( function() {
           var now = new Date();
       
@@ -400,6 +384,7 @@
 
         $('#datePicker').val(today);
       });
+
     </script>
   </body>
 

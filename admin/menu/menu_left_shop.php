@@ -14,7 +14,7 @@
           <li><a href="#" data-toggle="modal" data-target="#salary"><i class="fa fa-user-o"></i> พนักงาน </a></li>
           <div class="modal fade" id="salary" role="dialog">
             <div class="modal-dialog modal-lg">
-              <form action="../manage_salary/salary.php" method="post">
+              <form action="../manage_salary/salary.php" method="GET">
                 <div class="modal-content">
                   <div class="modal-header text-center">
                     <font size="5"><B> พนักงาน </B></font>
@@ -253,6 +253,14 @@
          <!-- แผนที่ -->
          <li><a href="map.php" ><i class="fa fa-map"></i> แผนที่ </a></li>
         <!-- /แผนที่ -->
+
+        <!-- แนะนำสินค้า -->
+        <li><a href="../manage_bank/list_bank.php"><i class="fa fa-columns"></i> บัญชีโอนจ่าย </a></li>
+        <!--/แนะนำสินค้า -->
+
+        <!-- แนะนำสินค้า -->
+        <li><a href="../manage_question/question.php"><i class="fa fa-columns"></i> แบบสอบถาม </a></li>
+        <!--/แนะนำสินค้า -->
         
         <!--จัดการข้อมูลสินค้า-พนักงาน -->
         <li><a href="add_data.php" ><i class="fa fa-cog"></i> จัดการข้อมูล </a></li>

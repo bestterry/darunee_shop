@@ -23,7 +23,8 @@
         $this->Cell(30,8,iconv('UTF-8','cp874','รายการ'),1,0,'C');
         $this->Cell(30,8,iconv('UTF-8','cp874','เงินจ่าย'),1,0,'C');
         $this->Cell(30,8,iconv('UTF-8','cp874','คงเหลือ'),1,0,'C');
-        $this->Cell(140,8,iconv('UTF-8','cp874','รายละเอียด'),1,0,'C');
+        $this->Cell(30,8,iconv('UTF-8','cp874','ประเภท'),1,0,'C');
+        $this->Cell(110,8,iconv('UTF-8','cp874','รายละเอียด'),1,0,'C');
         $this->Ln(8);
       }
     }
@@ -46,13 +47,51 @@
                       ORDER BY reserve_history.id_reserve_history DESC";
       $objq_history = mysqli_query($conn,$sql_history);
       while($value = $objq_history -> fetch_assoc()){
+
+        if($value['status_lavish']=='Y'){
+          $status_lavish = "ฟุ่มเฟือย";
+        }else {
+          $status_lavish = "ปกติ";
+        }
+        
         $pdf->Cell(30,8,iconv('UTF-8','cp874',Datethai($value['date'])),1,0,'C');
         $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['name_list']),1,0,'C');
         $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['money']),1,0,'C');
         $pdf->Cell(30,8,iconv('UTF-8','cp874',$value['transfer_office']),1,0,'C');
-        $pdf->Cell(140,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
+        $pdf->Cell(30,8,iconv('UTF-8','cp874',$status_lavish),1,0,'C');
+        $pdf->Cell(110,8,iconv('UTF-8','cp874',$value['note']),1,0,'C');
         $pdf->Ln(8);
       }
+
+      $usemoney = "SELECT SUM(money) FROM reserve_history WHERE id_member = 33 
+                   AND status_cancen = 'Y' AND id_list != 18 
+                   AND (date BETWEEN '$aday' AND '$bday')";
+      $objq_usermoney = mysqli_query($conn,$usemoney);
+      $objr_usemoney = mysqli_fetch_array($objq_usermoney);
+
+      $uselavish = "SELECT SUM(money) FROM reserve_history WHERE id_member = 33 AND status_cancen = 'Y' 
+                   AND id_list != 18 AND status_lavish = 'Y' 
+                   AND (date BETWEEN '$aday' AND '$bday')";
+      $objq_uselavish = mysqli_query($conn,$uselavish);
+      $objr_uselavish = mysqli_fetch_array($objq_uselavish);
+
+      $usenormal = "SELECT SUM(money) FROM reserve_history WHERE id_member = 33 AND status_cancen = 'Y' 
+                   AND id_list != 18 AND status_lavish = 'N' 
+                   AND (date BETWEEN '$aday' AND '$bday')";
+      $objq_usenormal = mysqli_query($conn,$usenormal);
+      $objr_usenormal = mysqli_fetch_array($objq_usenormal);
+
+        $pdf->Ln(8);
+        
+        $pdf->Cell(86,8,iconv('UTF-8','cp874','เงินฟุ่มเฟือย'),1,0,'C');
+        $pdf->Cell(87,8,iconv('UTF-8','cp874','เงินปกติ'),1,0,'C');
+        $pdf->Cell(87,8,iconv('UTF-8','cp874','รวมใช้เงิน'),1,0,'C');
+        $pdf->Ln(8);
+        $pdf->Cell(86,8,iconv('UTF-8','cp874',$objr_uselavish['SUM(money)']),1,0,'C');
+        $pdf->Cell(87,8,iconv('UTF-8','cp874',$objr_usenormal['SUM(money)']),1,0,'C');
+        $pdf->Cell(87,8,iconv('UTF-8','cp874',$objr_usemoney['SUM(money)']),1,0,'C');
+        $pdf->Ln(8);
+      
      
   $pdf->Output();
 ?>

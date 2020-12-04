@@ -93,268 +93,302 @@
           </div>
           <div class="box-body no-padding">
             <div class=" mailbox-read-message">
-
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th class="text-center" width="10%">สินค้า_หน่วย</th>
-                    <th class="text-center" width="5%">จุน</th>
-                    <th class="text-center" width="5%">พาน</th>
-                    <th class="text-center" width="5%">ดคต1</th>
-                    <th class="text-center" width="5%">ดคต2</th>
-                    <th class="text-center" width="5%">วปป.</th>
-                    <th class="text-center" width="5%">เกาะคา</th>
-                    <th class="text-center" width="5%">ลำพูน</th>
-                    <th class="text-center" width="5%">ขายส่ง</th>
-                    <th class="text-center" width="5%">แม่จัน</th>
-                    <th class="text-center" width="5%">จห</th>
-                    <th class="text-center" width="5%">แพร่</th>
-                    <th class="text-center" width="5%">รถ</th>
-                    <th class="text-center" width="5%">ทั้งหมด</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php 
-                    $i=1;
-                      while($product = $query_product ->fetch_assoc()){
-                        
+              <div style="overflow-x:auto;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="text-center" width="10%">สินค้า_หน่วย</th>
+                      <th class="text-center" width="5%">จุน</th>
+                      <th class="text-center" width="5%">พาน</th>
+                      <th class="text-center" width="5%">ดคต1</th>
+                      <th class="text-center" width="5%">ดคต2</th>
+                      <th class="text-center" width="5%">วปป.</th>
+                      <th class="text-center" width="5%">เกาะคา</th>
+                      <th class="text-center" width="5%">ลำพูน</th>
+                      <th class="text-center" width="5%">ขายส่ง</th>
+                      <th class="text-center" width="5%">แม่จัน</th>
+                      <th class="text-center" width="5%">จห</th>
+                      <th class="text-center" width="5%">แพร่</th>
+                      <th class="text-center" width="5%">รถ</th>
+                      <th class="text-center" width="5%">ทั้งหมด</th>
+                      <th class="text-center" width="5%">U</th>
+                      <th class="text-center" width="5%">ราคา</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                      $i=1;
+                      $sum_price = 0;
+                      while($product = $query_product ->fetch_assoc()){ 
                     ?>
-                  <tr>
-                    <td class="text-center" >
-                      <?php echo $product['name_product'].'_'.$product['unit']; ?>
-                    </td>
-                    <!-- -------------------------------จุน------------------------------------ -->
-                    <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 3";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                      ?>
-                    <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//จุน------------------------------------ -->
-                    <!-- -------------------------------พาน------------------------------------ -->
-                    <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 13";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                      ?>
-                    <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//พาน------------------------------------ -->
-                    <!-- -------------------------------ดคต.------------------------------------ -->
-                    <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 2";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                          ?>
+                    <tr>
+                      <td class="text-center" >
+                        <?php echo $product['name_product'].'_'.$product['unit']; ?>
+                      </td>
+                      <!-- -------------------------------จุน------------------------------------ -->
+                        <?php 
+                          $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 3";
+                          $objq_num = mysqli_query($conn,$SQL_num);
+                          $objr_num = mysqli_fetch_array($objq_num);
+                          if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
                         <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//ดคต2.------------------------------------ -->
-                    <!-- -------------------------------ดคต.------------------------------------ -->
-                    <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 12";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                          ?>
-                        <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//ดคต2.------------------------------------ -->
-                      <!-- -------------------------------วปป..------------------------------------ -->
-                      <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 1";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                          ?>
-                        <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//วปป.------------------------------------ -->
-                      <!-- -------------------------------ลป.------------------------------------ -->
-                      <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 6";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                          ?>
-                        <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//ลป.------------------------------------ -->
-                      <!-- -------------------------------ลพ.------------------------------------ -->
-                                          <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 10";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                          ?>
-                        <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//ลพ.------------------------------------ -->
-                      <!-- -------------------------------ขายส่ง.------------------------------------ -->
-                      <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 7";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                          ?>
-                        <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//ขายส่ง.------------------------------------ -->
-                      <!-- -------------------------------แม่จัน.------------------------------------ -->
-                      <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 5";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                          ?>
-                        <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//แม่จัน.------------------------------------ -->
-                    <!-- -------------------------------จห.------------------------------------ -->
-                      <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 11";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                      ?>
-                    <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//จห.------------------------------------ -->
+                        <?php
+                          }else{
+                        ?>
+                        <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                        <?php 
+                          } 
+                        ?>
+                      <!-- -------------------------------//จุน------------------------------------ -->
 
-                    <!-- -------------------------------แพร่.------------------------------------ -->
-                    <?php 
-                        $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 14";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
-                      ?>
-                    <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center" ><?php echo $objr_num['num']; ?></td>
-                    <?php 
-                        } 
-                      
-                      ?>
-                    <!-- -------------------------------//แพร่.------------------------------------ -->
-
-                    <!-- -------------------------------รวมรถ------------------------------------ -->
-                    <?php 
-                        $SQL_num_car = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";
-                        $objq_num_car = mysqli_query($conn,$SQL_num_car);
-                        $objr_num_car = mysqli_fetch_array($objq_num_car);
-                        $total_numcar = $objr_num_car['SUM(num)'];
-                        if((!isset($total_numcar)) || ($total_numcar == 0) ){
+                      <!-- -------------------------------พาน------------------------------------ -->
+                        <?php 
+                            $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 13";
+                            $objq_num = mysqli_query($conn,$SQL_num);
+                            $objr_num = mysqli_fetch_array($objq_num);
+                            if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
                           ?>
                         <td class="text-center">-</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center"><?php echo $total_numcar; ?></td>
-                    <?php 
-                        } 
-                      ?>
-                    <!-- -------------------------------//รวมรถ------------------------------------ -->
-
-                    <!-- -------------------------------รวมทั้งหมด------------------------------------ -->
-                    <?php 
-                        $SQL_num = "SELECT SUM(num) FROM num_product WHERE id_product = $product[id_product]";
-                        $objq_num = mysqli_query($conn,$SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-
-                        $total_num = $objr_num['SUM(num)'];
-                        $total_numstore = $total_numcar+$total_num;
+                        <?php
+                            }else{
                         
-                        if($total_numstore == 0 ){
-                          ?>
-                        <td class="text-center">0</td>
-                    <?php
-                        }else{
-                      ?>
-                    <td class="text-center"><?php echo $total_numstore; ?></td>
-                    <?php 
-                        } 
-                      ?>
-                    <!-- -------------------------------//รวมทั้งหมด------------------------------------ -->
+                        ?>
+                        <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                        <?php 
+                            } 
+                        ?>
+                      <!-- -------------------------------//พาน------------------------------------ -->
 
-                  </tr>
-                  <?php $i++; } ?>
-                </tbody>
-              </table>
+                      <!-- -------------------------------ดคต.------------------------------------ -->
+                        <?php 
+                            $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 2";
+                            $objq_num = mysqli_query($conn,$SQL_num);
+                            $objr_num = mysqli_fetch_array($objq_num);
+                            if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                          <td class="text-center">-</td>
+                        <?php
+                          }else{
+                        ?>
+                        <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                        <?php 
+                          } 
+                        ?>
+                      <!-- -------------------------------//ดคต.------------------------------------ -->
+
+                      <!-- -------------------------------ดคต2.------------------------------------ -->
+                        <?php 
+                          $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 12";
+                          $objq_num = mysqli_query($conn,$SQL_num);
+                          $objr_num = mysqli_fetch_array($objq_num);
+                          if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                            <td class="text-center">-</td>
+                        <?php
+                            }else{
+                        ?>
+                        <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                        <?php 
+                          } 
+                        ?>
+                      <!-- -------------------------------//ดคต2.------------------------------------ -->
+
+                      <!-- -------------------------------วปป..------------------------------------ -->
+                        <?php 
+                          $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 1";
+                          $objq_num = mysqli_query($conn,$SQL_num);
+                          $objr_num = mysqli_fetch_array($objq_num);
+                          if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                          <td class="text-center">-</td>
+                        <?php
+                            }else{
+                        ?>
+                        <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                        <?php 
+                            } 
+                        ?>
+                      <!-- -------------------------------//วปป.------------------------------------ -->
+
+                      <!-- -------------------------------ลป.------------------------------------ -->
+                        <?php 
+                            $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 6";
+                            $objq_num = mysqli_query($conn,$SQL_num);
+                            $objr_num = mysqli_fetch_array($objq_num);
+                            if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                          <td class="text-center">-</td>
+                        <?php
+                            }else{
+                        ?>
+                        <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                        <?php 
+                            } 
+                          
+                        ?>
+                      <!-- -------------------------------//ลป.------------------------------------ -->
+
+                      <!-- -------------------------------ลพ.------------------------------------ -->
+                        <?php 
+                          $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 10";
+                          $objq_num = mysqli_query($conn,$SQL_num);
+                          $objr_num = mysqli_fetch_array($objq_num);
+                          if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                          <td class="text-center">-</td>
+                        <?php
+                            }else{
+                          ?>
+                        <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                        <?php 
+                            } 
+                        ?>
+                      <!-- -------------------------------//ลพ.------------------------------------ -->
+
+                      <!-- -------------------------------ขายส่ง.------------------------------------ -->
+                        <?php 
+                          $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 7";
+                          $objq_num = mysqli_query($conn,$SQL_num);
+                          $objr_num = mysqli_fetch_array($objq_num);
+                          if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                          <td class="text-center">-</td>
+                        <?php
+                            }else{
+                          ?>
+                        <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                        <?php 
+                            } 
+                          
+                          ?>
+                      <!-- -------------------------------//ขายส่ง.------------------------------------ -->
+
+                      <!-- -------------------------------แม่จัน.------------------------------------ -->
+                        <?php 
+                          $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 5";
+                          $objq_num = mysqli_query($conn,$SQL_num);
+                          $objr_num = mysqli_fetch_array($objq_num);
+                          if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                            ?>
+                          <td class="text-center">-</td>
+                        <?php
+                            }else{
+                        ?>
+                        <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                        <?php 
+                            } 
+                        ?>
+                      <!-- -------------------------------//แม่จัน.------------------------------------ -->
+
+                      <!-- -------------------------------จห.------------------------------------ -->
+                        <?php 
+                          $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 11";
+                          $objq_num = mysqli_query($conn,$SQL_num);
+                          $objr_num = mysqli_fetch_array($objq_num);
+                          if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                        ?>
+                        <td class="text-center">-</td>
+                        <?php
+                            }else{
+                          ?>
+                        <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                        <?php 
+                            } 
+                          
+                        ?>
+                      <!-- -------------------------------//จห.------------------------------------ -->
+
+                      <!-- -------------------------------แพร่.------------------------------------ -->
+                        <?php 
+                            $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 14";
+                            $objq_num = mysqli_query($conn,$SQL_num);
+                            $objr_num = mysqli_fetch_array($objq_num);
+                            if((!isset($objr_num['num'])) || ($objr_num['num'] == 0) ){
+                          ?>
+                        <td class="text-center">-</td>
+                        <?php
+                            }else{
+                          ?>
+                        <td class="text-center" ><?php echo $objr_num['num']; ?></td>
+                        <?php 
+                          } 
+                        
+                        ?>
+                      <!-- -------------------------------//แพร่.------------------------------------ -->
+
+                      <!-- -------------------------------รวมรถ------------------------------------ -->
+                        <?php 
+                            $SQL_num_car = "SELECT SUM(num) FROM numpd_car WHERE id_product = $product[id_product]";
+                            $objq_num_car = mysqli_query($conn,$SQL_num_car);
+                            $objr_num_car = mysqli_fetch_array($objq_num_car);
+                            $total_numcar = $objr_num_car['SUM(num)'];
+                            if((!isset($total_numcar)) || ($total_numcar == 0) ){
+                              ?>
+                            <td class="text-center">-</td>
+                        <?php
+                            }else{
+                          ?>
+                        <td class="text-center"><?php echo $total_numcar; ?></td>
+                        <?php 
+                          } 
+                        ?>
+                      <!-- -------------------------------//รวมรถ------------------------------------ -->
+
+                      <!-- -------------------------------รวมทั้งหมด------------------------------------ -->
+                        <?php 
+                          $SQL_num = "SELECT SUM(num) FROM num_product WHERE id_product = $product[id_product]";
+                          $objq_num = mysqli_query($conn,$SQL_num);
+                          $objr_num = mysqli_fetch_array($objq_num);
+
+                          $total_num = $objr_num['SUM(num)'];
+                          $price_num = $product['price_num'];
+                          $total_numstore = $total_numcar+$total_num;
+                          $total_price = $price_num * ($total_num+$total_numcar);
+                          $sum_price = $sum_price + $total_price;
+                          
+                          if($total_numstore == 0 ){
+                        ?>
+                          <td class="text-center">0</td>
+                          <td class="text-center">0</td>
+                          <td class="text-center">0</td>
+                        <?php
+                          }else{
+                        ?>
+                          <td class="text-center"><?php echo $total_numstore; ?></td>
+                          <td class="text-center"><?php echo $price_num; ?></td>
+                          <td class="text-center"><?php echo $total_price; ?></td>
+                        <?php 
+                          } 
+                        ?>
+                      <!-- -------------------------------//รวมทั้งหมด------------------------------------ -->
+
+                    </tr>
+                    <?php 
+                      $i++; 
+                      } 
+                    ?>
+                    <tr>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <th class="text-center">รวม</th>
+                      <th class="text-center"><?php echo $sum_price; ?></th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <div class="box-footer">
                 <a href="../pdf_file/admin_total_stock.php" class="btn btn-success pull-right"> PDF(สต๊อกร้าน) </a>
               </div>
@@ -365,58 +399,65 @@
                   <font size="5"> สต๊อกรถ </font>
                 </B>
               </div>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th class="text-center" width="8%">สินค้า_หน่วย</th>
-                    <?php 
-                      $sql_member = "SELECT id_member,name_sub FROM member WHERE status_car = 1 
-                                    AND NOT id_member = 3 AND NOT id_member = 8  AND NOT id_member = 45  AND NOT id_member = 46";
-                      $objq_member = mysqli_query($conn,$sql_member);
-                      while($value = $objq_member -> fetch_assoc()){
-                    ?>
-                    <th class="text-center" width="4%"><?php echo $value['name_sub'];?></th>
-                    <?php 
-                      }
-                    ?>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                    while ($product = $query_product2->fetch_assoc()) {
-                  ?>
-                  <tr>
-                    <td class="text-center"><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
-                    <!-- -------------------------------รถ------------------------------------ -->
+              <div style="overflow-x:auto;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="text-center" width="7%">สินค้า_หน่วย</th>
+                        <?php 
+                          $sql_member = "SELECT id_member,name_sub FROM member WHERE status_car = 1";
+                          $objq_member = mysqli_query($conn,$sql_member);
+                          while($value = $objq_member -> fetch_assoc()){
+                        ?>
+                        <th class="text-center" width="4%"><?php echo $value['name_sub'];?></th>
+                        <?php 
+                          }
+                        ?>
+                    <th class="text-center">รวม</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                     <?php
-                      $objq_member2 = mysqli_query($conn,$sql_member);
-                      while($value2 = $objq_member2 -> fetch_assoc()){
-                        $id_member = $value2['id_member'];
-                        $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $id_member";
-                        $objq_num = mysqli_query($conn, $SQL_num);
-                        $objr_num = mysqli_fetch_array($objq_num);
-                        if((!isset($objr_num['num'])) || ($objr_num['num'] == 0)){
+                      while ($product = $query_product2->fetch_assoc()) {
                     ?>
-                      <td class="text-center">-</td>
-                    <?php
-                      } else {
-                        $num_pd = $objr_num['num'];
-                    ?>
-                      <td class="text-center"><?php echo $num_pd; ?></td>
-                    <?php
+                    <tr>
+                      <td class="text-center"><?php echo $product['name_product'].'_'.$product['unit']; ?></td>
+                      <!-- -------------------------------รถ------------------------------------ -->
+                      <?php
+                      $sum = 0;
+                        $objq_member2 = mysqli_query($conn,$sql_member);
+                        while($value2 = $objq_member2 -> fetch_assoc()){
+                          
+                          $id_member = $value2['id_member'];
+                          $SQL_num = "SELECT * FROM numpd_car WHERE id_product = $product[id_product] AND id_member = $id_member";
+                          $objq_num = mysqli_query($conn, $SQL_num);
+                          $objr_num = mysqli_fetch_array($objq_num);
+                          if((!isset($objr_num['num'])) || ($objr_num['num'] == 0)){
+                      ?>
+                        <td class="text-center">-</td>
+                      <?php
+                        } else {
+                          $num_pd = $objr_num['num'];
+                          $sum =$sum + $num_pd;
+                      ?>
+                        <td class="text-center"><?php echo $num_pd; ?></td>
+                      <?php
+                          }
                         }
-                      }
+                      ?>
+                      <td class="text-center"><?php echo $sum; ?></td>
+                    </tr>
+                    <?php 
+                      } 
                     ?>
-                  </tr>
-                  <?php 
-                    } 
-                  ?>
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
+              </div>
               <div class="box-footer">
                 <a href="../pdf_file/admin_car_stock.php" class="btn btn-success pull-right"> PDF(สต๊อกรถ) </a>
               </div>
               <br>
+              
               <div class="text-center">
                 <B> 
                   <font size="5"> สต๊อกสินค้าชำรุด </font>

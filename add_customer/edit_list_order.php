@@ -430,118 +430,118 @@
             
           });
 
-        function sSelect(value){
-          $.ajax({
-                    type:"POST",
-                    url:"select_product.php",
-                    data:{value:value},
-                    success:function(data){
-                      $("#price1").val(data);
-                    }
-                });
+          function sSelect(value){
+            $.ajax({
+                      type:"POST",
+                      url:"select_product.php",
+                      data:{value:value},
+                      success:function(data){
+                        $("#price1").val(data);
+                      }
+                  });
 
-            return false;
+              return false;
+              }
+
+          function sSelect2(value){
+            $.ajax({
+                      type:"POST",
+                      url:"select_product.php",
+                      data:{value:value},
+                      success:function(data){
+                        $("#price2").val(data);
+                      }
+                  });
+
+              return false;
+              }
+
+          function sSelect3(value){
+            $.ajax({
+                      type:"POST",
+                      url:"select_product.php",
+                      data:{value:value},
+                      success:function(data){
+                        $("#price3").val(data);
+                      }
+                  });
+
+              return false;
+              }
+
+          function sSelect4(value){
+            $.ajax({
+                      type:"POST",
+                      url:"select_product.php",
+                      data:{value:value},
+                      success:function(data){
+                        $("#price4").val(data);
+                      }
+                  });
+
+              return false;
+              }
+
+          function cal1() {
+              var val1 = parseFloat(document.form1.p1.value);
+              var val2 = parseFloat(document.form1.n1.value);
+              document.form1.m1.value=val2*val1;
             }
 
-        function sSelect2(value){
-          $.ajax({
-                    type:"POST",
-                    url:"select_product.php",
-                    data:{value:value},
-                    success:function(data){
-                      $("#price2").val(data);
-                    }
-                });
-
-            return false;
+          function cal2() {
+              var val1 = parseFloat(document.form1.p2.value);
+              var val2 = parseFloat(document.form1.n2.value);
+              document.form1.m2.value=val1*val2;
             }
 
-        function sSelect3(value){
-          $.ajax({
-                    type:"POST",
-                    url:"select_product.php",
-                    data:{value:value},
-                    success:function(data){
-                      $("#price3").val(data);
-                    }
-                });
-
-            return false;
+          function cal3() {
+              var val1 = parseFloat(document.form1.p3.value);
+              var val2 = parseFloat(document.form1.n3.value);
+              document.form1.m3.value=val1*val2;
             }
 
-        function sSelect4(value){
-          $.ajax({
-                    type:"POST",
-                    url:"select_product.php",
-                    data:{value:value},
-                    success:function(data){
-                      $("#price4").val(data);
-                    }
-                });
-
-            return false;
+          function cal4() {
+              var val1 = parseFloat(document.form1.p4.value);
+              var val2 = parseFloat(document.form1.n4.value);
+              document.form1.m4.value=val1*val2;
             }
 
-        function cal1() {
-            var val1 = parseFloat(document.form1.p1.value);
-            var val2 = parseFloat(document.form1.n1.value);
-            document.form1.m1.value=val2*val1;
+            function calcfunc1() {
+            var val1 = parseFloat(document.form1.price1.value);
+            var val2 = parseFloat(document.form1.num1.value);
+            document.form1.money1.value=val1*val2;
           }
 
-        function cal2() {
-            var val1 = parseFloat(document.form1.p2.value);
-            var val2 = parseFloat(document.form1.n2.value);
-            document.form1.m2.value=val1*val2;
+          function calcfunc2() {
+            var val1 = parseFloat(document.form1.price2.value);
+            var val2 = parseFloat(document.form1.num2.value);
+            document.form1.money2.value=val1*val2;
           }
 
-        function cal3() {
-            var val1 = parseFloat(document.form1.p3.value);
-            var val2 = parseFloat(document.form1.n3.value);
-            document.form1.m3.value=val1*val2;
+          function calcfunc3() {
+            var val1 = parseFloat(document.form1.price3.value);
+            var val2 = parseFloat(document.form1.num3.value);
+            document.form1.money3.value=val1*val2;
           }
 
-        function cal4() {
-            var val1 = parseFloat(document.form1.p4.value);
-            var val2 = parseFloat(document.form1.n4.value);
-            document.form1.m4.value=val1*val2;
+          function calcfunc4() {
+            var val1 = parseFloat(document.form1.price4.value);
+            var val2 = parseFloat(document.form1.num4.value);
+            document.form1.money4.value=val1*val2;
           }
 
-          function calcfunc1() {
-          var val1 = parseFloat(document.form1.price1.value);
-          var val2 = parseFloat(document.form1.num1.value);
-          document.form1.money1.value=val1*val2;
-        }
+          function calcfunc5() {
+            var val1 = parseFloat(document.form1.price5.value);
+            var val2 = parseFloat(document.form1.num5.value);
+            document.form1.money5.value=val1*val2;
+          }
 
-        function calcfunc2() {
-          var val1 = parseFloat(document.form1.price2.value);
-          var val2 = parseFloat(document.form1.num2.value);
-          document.form1.money2.value=val1*val2;
-        }
-
-        function calcfunc3() {
-          var val1 = parseFloat(document.form1.price3.value);
-          var val2 = parseFloat(document.form1.num3.value);
-          document.form1.money3.value=val1*val2;
-        }
-
-        function calcfunc4() {
-          var val1 = parseFloat(document.form1.price4.value);
-          var val2 = parseFloat(document.form1.num4.value);
-          document.form1.money4.value=val1*val2;
-        }
-
-        function calcfunc5() {
-          var val1 = parseFloat(document.form1.price5.value);
-          var val2 = parseFloat(document.form1.num5.value);
-          document.form1.money5.value=val1*val2;
-        }
-
-        function calcfunc6() {
-          var val1 = parseFloat(document.form1.price6.value);
-          var val2 = parseFloat(document.form1.num6.value);
-          document.form1.money6.value=val1*val2;
-        }
-      </script>
+          function calcfunc6() {
+            var val1 = parseFloat(document.form1.price6.value);
+            var val2 = parseFloat(document.form1.num6.value);
+            document.form1.money6.value=val1*val2;
+          }
+        </script>
 
   </body>
 

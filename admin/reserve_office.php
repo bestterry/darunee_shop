@@ -7,7 +7,8 @@
   $objr_reserve = mysqli_fetch_array($objq_reserve);
   $reserve_money = $objr_reserve['money'];
 
-  $sql_history = "SELECT * FROM reserve_history INNER JOIN reserve_list ON reserve_history.id_list = reserve_list.id_list
+  $sql_history = "SELECT * FROM reserve_history 
+                  INNER JOIN reserve_list ON reserve_history.id_list = reserve_list.id_list
                   WHERE (reserve_history.status = 2 OR reserve_history.status = 3 OR reserve_history.status = 5 OR reserve_history.status = 1) 
                   AND reserve_history.transfer_office != ''
                   ORDER BY reserve_history.id_reserve_history DESC 
@@ -147,10 +148,11 @@
                           <thead>
                             <tr>
                               <th class="text-center" width="12%">วันที่</th>
-                              <th class="text-center" width="12%">รายการ</th>
-                              <th class="text-center" width="12%">จำนวนเงิน</th>
-                              <th class="text-center" width="12%">คงเหลือ</th>
-                              <th class="text-center" width="44%">รายละเอียด</th>
+                              <th class="text-center" width="10%">รายการ</th>
+                              <th class="text-center" width="10%">จำนวนเงิน</th>
+                              <th class="text-center" width="10%">คงเหลือ</th>
+                              <th class="text-center" width="10%">ประเภท</th>
+                              <th class="text-center" width="40%">รายละเอียด</th>
                               <th class="text-center" width="8%">ลบ</th>
                             </tr>
                           </thead>
@@ -165,11 +167,19 @@
                               <td class="text-center"><?php echo $value['name_list']; ?></td>
                               <td class="text-center"><?php echo $value['money']; ?></td>
                               <td class="text-center"><?php echo $value['transfer_office']; ?></td>
+                              <td class="text-center">
+                                <?php 
+                                  if($value['status_lavish']=='Y'){
+                                    echo "ฟุ่มเฟือย";
+                                  }else {
+                                    echo "ปกติ";
+                                  }
+                                ?>
+                              </td>
                               <td class="text-center"><?php echo $value['note']; ?></td>
                               <td class="text-center">
                                 <?php 
                                   if ($value['status']==1||$value['status']==5||$id_member!=30) {
-                                    
                                   }else{
                                 ?>
                                   <a href="algorithm/delete_reserve.php?id=<?php echo $value['id_reserve_history'];?>&&money=<?php echo $value['money'];?>&&money_total=<?php echo $reserve_money;?>" class="btn btn-danger btn-xs">ลบ</a>
@@ -186,6 +196,7 @@
                               <td class="text-center"><font color="red"><?php echo $value['name_list']; ?></font> </td>
                               <td class="text-center"><font color="red"><?php echo $value['money']; ?></font> </td>
                               <td class="text-center"><font color="red"><?php echo $value['transfer_office']; ?></font> </td>
+                              <td class="text-center"><font color="red">-</font> </td>
                               <td class="text-center"><font color="red"><?php echo $value['note']; ?></font> </td>
                               <td class="text-center"></td>
                             </tr>
@@ -328,6 +339,20 @@
                             <th class="text-center" width="70%"> 
                               <input type="number" name="money" class="form-control text-center">
                               <input type="hidden" name="money_befor" value="<?php echo $reserve_money; ?>">
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table> 
+                      <br> 
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr>
+                            <th class="text-center" width="30%"><font size="3">ประเภท</font></th>
+                            <th class="text-center" width="70%"> 
+                              <select name="status_lavish"  class="form-control">
+                                <option value="N">ปกติ</option>
+                                <option value="Y">ฟุ่มเฟือย</option>
+                              </select>
                             </th>
                           </tr>
                         </tbody>

@@ -210,18 +210,19 @@
                   <table class="table" id="example2">
                     <thead>
                       <tr>
-                        <th class="text-center" width="20%">วันที่</th>
-                        <th class="text-center" width="20%">รายการ</th>
-                        <th class="text-center" width="20%">จำนวนเงิน</th>
-                        <th class="text-center" width="20%">คงเหลือ</th>
-                        <th class="text-center" width="20%">หมายเหตุ</th>
+                        <th class="text-center" width="16%">วันที่</th>
+                        <th class="text-center" width="16%">รายการ</th>
+                        <th class="text-center" width="16%">รถ</th>
+                        <th class="text-center" width="16%">จำนวนเงิน</th>
+                        <th class="text-center" width="16%">คงเหลือ</th>
+                        <th class="text-center" width="16%">หมายเหตุ</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php 
                         $sql_rs_history = "SELECT * FROM reserve_history 
                                             INNER JOIN reserve_list ON reserve_history.id_list = reserve_list.id_list
-                                            WHERE reserve_history.id_member_receive = $id_member
+                                            WHERE reserve_history.id_member_receive = $id_member AND reserve_history.id_list != 18
                                             GROUP BY reserve_history.id_reserve_history DESC
                                             LIMIT 1000";
                         $objq_rs_history = mysqli_query($conn,$sql_rs_history);
@@ -233,16 +234,27 @@
                         <tr>
                           <td class="text-center"><font color="red"><?php echo Datethai($value['date']); ?></font></td>
                           <td class="text-center"><font color="red"><?php echo $value['name_list']; ?></font></td>
+                          <td class="text-center"><font color="red">-</font></td>
                           <td class="text-center"><font color="red"><?php echo $value['money']; ?></font></td>
                           <td class="text-center"><font color="red"><?php echo $value['transfer']; ?></font></td>
                           <td class="text-center"><font color="red"><?php echo $value['note']; ?></font></td>
                         </tr>
                         <?php
                           }else{
+
+                            if( $value['id_member_car'] == 0){
+                              $id_member_car = 54;
+                            }else {
+                              $id_member_car = $value['id_member_car'];
+                            }
+                            $sql_car = "SELECT name FROM member WHERE id_member = $id_member_car";
+                            $objq_car = mysqli_query($conn,$sql_car);
+                            $objr_car = mysqli_fetch_array($objq_car);
                         ?>
                         <tr>
                           <td class="text-center"><?php echo Datethai($value['date']); ?></td>
                           <td class="text-center"><?php echo $value['name_list']; ?></td>
+                          <td class="text-center"><?php echo $objr_car['name']; ?></td>
                           <td class="text-center"><?php echo $value['money']; ?></td>
                           <td class="text-center"><?php echo $value['transfer']; ?></td>
                           <td class="text-center"><?php echo $value['note']; ?></td>

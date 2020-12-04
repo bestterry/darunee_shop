@@ -336,6 +336,7 @@
             $('#example2').DataTable({
             'paging'      : true,
             'lengthChange': true,
+            'lengthMenu'  : [ 20, 50, 75, 100 ],
             'searching'   : true,
             'ordering'    : false,
             'info'        : true,

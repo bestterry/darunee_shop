@@ -268,28 +268,25 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php 
-
-                    ?>
                     <tr>
                       <td class="text-center" >สนง.รับ</td>
-                    <?php 
-                      $sql_category = "SELECT id_category FROM rc_category";
-                      $objq_category1 = mysqli_query($conn,$sql_category);
-                      while($value_category = $objq_category1->fetch_assoc()){
-                        $id_category = $value_category['id_category'];
-                        $sql_sum_of = "SELECT SUM(money) FROM rc_receive_money WHERE id_category = '$id_category' AND status_office = 'Y' AND status_boss = 'N'";
-                        $objq_sum_of = mysqli_query($conn,$sql_sum_of);
-                        $objr_sum_of = mysqli_fetch_array($objq_sum_of);
-                        $of_money = $objr_sum_of['SUM(money)'];
-                        if (isset($of_money) && !$of_money == 0) {
-                          $value_rc = $of_money;
-                        }else{
-                              $value_rc = '-';
-                        } 
-                    ?>
-                      <td class="text-center" ><?php echo $value_rc; ?></td>
-                    <?php } ?>
+                      <?php 
+                        $sql_category = "SELECT id_category FROM rc_category";
+                        $objq_category1 = mysqli_query($conn,$sql_category);
+                        while($value_category = $objq_category1->fetch_assoc()){
+                          $id_category = $value_category['id_category'];
+                          $sql_sum_of = "SELECT SUM(money) FROM rc_receive_money WHERE id_category = '$id_category' AND status_office = 'Y' AND status_boss = 'N'";
+                          $objq_sum_of = mysqli_query($conn,$sql_sum_of);
+                          $objr_sum_of = mysqli_fetch_array($objq_sum_of);
+                          $of_money = $objr_sum_of['SUM(money)'];
+                          if (isset($of_money) && !$of_money == 0) {
+                            $value_rc = $of_money;
+                          }else{
+                                $value_rc = '-';
+                          } 
+                      ?>
+                        <td class="text-center" ><?php echo $value_rc; ?></td>
+                      <?php } ?>
                     </tr>
                     <?php 
                       $total_money = 0;
@@ -303,27 +300,27 @@
                           $id_member = $value['id_member'];
                           $name = $value['name'];
                     ?>
-                    <tr>
-                      <td class="text-center"><?php echo $name;?></td>
-                    <?php 
-                      
-                      $objq_category2 = mysqli_query($conn,$sql_category);
-                      while($value_category = $objq_category2->fetch_assoc()){
-                        $id_category = $value_category['id_category'];
-                        $sql_sum_cr = "SELECT SUM(money) FROM rc_receive_money WHERE id_category = '$id_category' AND id_member = '$id_member' AND status_office = 'N'";
-                        $objq_sum_cr = mysqli_query($conn,$sql_sum_cr);
-                        $objr_sum_cr = mysqli_fetch_array($objq_sum_cr);
-                        $rc_money = $objr_sum_cr['SUM(money)'];
-                        if (isset($rc_money) && !$rc_money == 0) {
-                          $value_rc = $rc_money;
-                        }else{
-                              $value_rc = '-';
-                        } 
-                    ?>
+                      <tr>
+                        <td class="text-center"><?php echo $name;?></td>
+                        <?php 
+                        
+                          $objq_category2 = mysqli_query($conn,$sql_category);
+                          while($value_category = $objq_category2->fetch_assoc()){
+                            $id_category = $value_category['id_category'];
+                            $sql_sum_cr = "SELECT SUM(money) FROM rc_receive_money WHERE id_category = '$id_category' AND id_member = '$id_member' 
+                                           AND status_office = 'N' AND status_boss != 'Y'";
+                            $objq_sum_cr = mysqli_query($conn,$sql_sum_cr);
+                            $objr_sum_cr = mysqli_fetch_array($objq_sum_cr);
+                            $rc_money = $objr_sum_cr['SUM(money)'];
+                            if (isset($rc_money) && !$rc_money == 0) {
+                              $value_rc = $rc_money;
+                            }else{
+                                  $value_rc = '-';
+                            } 
+                        ?>
                           <td class="text-center" ><?php echo $value_rc; ?></td>
-                    <?php } ?>
-                    </tr>
-                    
+                        <?php } ?>
+                      </tr>
                     <?php 
                         }
                     ?>

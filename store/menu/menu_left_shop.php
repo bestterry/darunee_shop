@@ -311,6 +311,18 @@
           <li><a href="radio_list.php" ><i class="fa fa-play-circle-o"></i> เวลาเช่าวิทยุ </a></li>
           <!--/เวลาเช่าวิทยุ -->
 
+          <!-- แนะนำสินค้า -->
+          <li><a href="present_product.php" ><i class="fa fa-play-circle-o"></i> แนะนำสินค้า </a></li>
+          <!--/แนะนำสินค้า -->
+
+          <!-- บัญชีโอนจ่าย -->
+          <li><a href="../manage_bank/list_bank2.php" ><i class="fa fa-play-circle-o"></i> บัญชีโอนจ่าย </a></li>
+          <!--/บัญชีโอนจ่าย -->
+
+          <!-- บัญชีโอนจ่าย -->
+          <li><a href="../manage_question/question.php" ><i class="fa fa-columns"></i> แบบสอบถาม </a></li>
+          <!--/บัญชีโอนจ่าย -->
+
         </ul>
       </div>
       <!-- /.box-body -->

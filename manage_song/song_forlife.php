@@ -106,13 +106,13 @@
                                       <?php }else{}?>
                                     </td>
                                     <td class="text-center">
-                                      <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&age=new" class="btn btn-success btn-xs">>></a>
+                                      <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&age=forlife" class="btn btn-success btn-xs">>></a>
                                     </td>
                                     <?php
                                       if($value['id_member']==54){
                                       ?>
                                       <td class="text-center">
-                                        <a href="algorithm/song_editstatusopen.php?id_song=<?php echo $value['id_song']; ?>&&id_member=<?php echo $id_member;?>&&status=new" class="btn btn-success btn-xs">เปิด</a>
+                                        <a href="algorithm/song_editstatusopen.php?id_song=<?php echo $value['id_song']; ?>&&id_member=<?php echo $id_member;?>&&status=forlife" class="btn btn-success btn-xs">เปิด</a>
                                       </td>
                                       <?php
                                         }else{
@@ -181,13 +181,13 @@
                                       <?php }else{}?>
                                     </td>
                                     <td class="text-center">
-                                      <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&age=new" class="btn btn-success btn-xs">>></a>
+                                      <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&age=forlife" class="btn btn-success btn-xs">>></a>
                                     </td>
                                     <?php
                                       if($value['id_member']==54){
                                       ?>
                                       <td class="text-center">
-                                        <a href="algorithm/song_editstatusopen.php?id_song=<?php echo $value['id_song']; ?>&&id_member=<?php echo $id_member;?>&&status=new" class="btn btn-success btn-xs">เปิด</a>
+                                        <a href="algorithm/song_editstatusopen.php?id_song=<?php echo $value['id_song']; ?>&&id_member=<?php echo $id_member;?>&&status=forlife" class="btn btn-success btn-xs">เปิด</a>
                                       </td>
                                       <?php
                                         }else{
@@ -255,13 +255,13 @@
                                       <?php }else{}?>
                                     </td>
                                     <td class="text-center">
-                                      <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&age=new" class="btn btn-success btn-xs">>></a>
+                                      <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&age=forlife" class="btn btn-success btn-xs">>></a>
                                     </td>
                                     <?php
                                       if($value['id_member']==54){
                                       ?>
                                       <td class="text-center">
-                                        <a href="algorithm/song_editstatusopen.php?id_song=<?php echo $value['id_song']; ?>&&id_member=<?php echo $id_member;?>&&status=new" class="btn btn-success btn-xs">เปิด</a>
+                                        <a href="algorithm/song_editstatusopen.php?id_song=<?php echo $value['id_song']; ?>&&id_member=<?php echo $id_member;?>&&status=forlife" class="btn btn-success btn-xs">เปิด</a>
                                       </td>
                                       <?php
                                         }else{
@@ -329,13 +329,13 @@
                                       <?php }else{}?>
                                     </td>
                                     <td class="text-center">
-                                      <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&age=new" class="btn btn-success btn-xs">>></a>
+                                      <a href="song_edit.php?id_song=<?php echo $value['id_song']; ?>&&age=forlife" class="btn btn-success btn-xs">>></a>
                                     </td>
                                     <?php
                                       if($value['id_member']==54){
                                       ?>
                                       <td class="text-center">
-                                        <a href="algorithm/song_editstatusopen.php?id_song=<?php echo $value['id_song']; ?>&&id_member=<?php echo $id_member;?>&&status=new" class="btn btn-success btn-xs">เปิด</a>
+                                        <a href="algorithm/song_editstatusopen.php?id_song=<?php echo $value['id_song']; ?>&&id_member=<?php echo $id_member;?>&&status=forlife" class="btn btn-success btn-xs">เปิด</a>
                                       </td>
                                       <?php
                                         }else{
@@ -372,34 +372,34 @@
   <?php require "menu/script.php"; ?>
   </body>
 </html>
-<div id="dataModal" class="modal fade">  
-      <div class="modal-dialog">  
-           <div class="modal-content">  
-                <div class="modal-header">  
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                     <h4 class="modal-title"></h4>  
-                </div>  
-                <div class="modal-body" id="listen_music">  
-                </div>  
-                <div class="modal-footer">  
-                     <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>  
-                </div>  
-           </div>  
+  <div id="dataModal" class="modal fade">  
+    <div class="modal-dialog">  
+      <div class="modal-content">  
+        <div class="modal-header">  
+          <button type="button" class="close" data-dismiss="modal">&times;</button>  
+          <h4 class="modal-title"></h4>  
+        </div>  
+        <div class="modal-body" id="listen_music">  
+        </div>  
+        <div class="modal-footer">  
+          <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>  
+        </div>  
       </div>  
- </div>  
- <script>  
-  $(document).ready(function(){  
-        $('.view_data').click(function(){  
-            var id_song = $(this).attr("id");  
-            $.ajax({  
-                  url:"select_song.php",  
-                  method:"post",  
-                  data:{id_song:id_song},  
-                  success:function(data){  
-                      $('#listen_music').html(data);  
-                      $('#dataModal').modal("show");  
-                  }  
-            });  
+    </div>  
+  </div>  
+  <script>  
+    $(document).ready(function(){  
+      $('.view_data').click(function(){  
+        var id_song = $(this).attr("id");  
+        $.ajax({  
+          url:"select_song.php",  
+          method:"post",  
+          data:{id_song:id_song},  
+          success:function(data){  
+            $('#listen_music').html(data);  
+            $('#dataModal').modal("show");  
+          }  
         });  
-  });  
- </script>
+      });  
+    });  
+  </script>

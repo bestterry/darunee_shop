@@ -1,13 +1,12 @@
 <?php
-  require "menu/db_connect.php";
-  $mysqli = connect();
-  require "../session2.php";
+  require "../config_database/config.php";
+  require "../session.php"; 
   $interview = "SELECT * FROM interview 
                 INNER JOIN member ON member.id_member = interview.id_member
                 INNER JOIN tbl2_amphures ON tbl2_amphures.amphur_id = interview.amphures_id
                 INNER JOIN tbl2_provinces ON tbl2_provinces.province_id = interview.provinces_id
                 ORDER BY CONVERT (interview.name_file USING tis620 ) ASC";
-  $objq_interview = mysqli_query($mysqli,$interview);
+  $objq_interview = mysqli_query($conn,$interview);
 ?>
 <!DOCTYPE html>
 <html>
@@ -86,7 +85,7 @@
                               $sql_product = "SELECT * FROM interview_product 
                                               INNER JOIN product ON interview_product.id_product = product.id_product
                                               WHERE interview_product.id = $id";
-                              $objq_product = mysqli_query($mysqli,$sql_product);
+                              $objq_product = mysqli_query($conn,$sql_product);
                               while($value_product = $objq_product -> fetch_assoc()){
                                 echo $value_product['name_product'].'<br>';
                               }
@@ -97,7 +96,7 @@
                               $sql_plance = "SELECT * FROM interview_plance
                                               INNER JOIN plance ON interview_plance.id_plance = plance.id_plance
                                               WHERE interview_plance.id = $id";
-                              $objq_plance = mysqli_query($mysqli,$sql_plance);
+                              $objq_plance = mysqli_query($conn,$sql_plance);
                               while($value_plance = $objq_plance -> fetch_assoc()){
                                 echo $value_plance['name_plance'].'<br>';
                               }
