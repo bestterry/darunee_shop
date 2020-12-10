@@ -47,6 +47,7 @@ class PDF extends FPDF
             $this->Cell(15,10,iconv('UTF-8','cp874','แม่จัน'),1,0,'C');
             $this->Cell(15,10,iconv('UTF-8','cp874','แจ้ห่ม'),1,0,'C');
             $this->Cell(15,10,iconv('UTF-8','cp874','แพร่'),1,0,'C');
+            $this->Cell(15,10,iconv('UTF-8','cp874','ฝาง'),1,0,'C');
             $this->Cell(15,10,iconv('UTF-8','cp874','รถ'),1,0,'C');
             $this->Cell(20,10,iconv('UTF-8','cp874','ทั้งหมด'),1,0,'C');
             $this->Ln(10);
@@ -196,6 +197,17 @@ $pdf=new PDF('L','mm','A4');
 
               // -----------------------แพร่----------------------------------
               $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 14";
+              $objq_num = mysqli_query($conn,$SQL_num);
+              $objr_num = mysqli_fetch_array($objq_num);
+              if(!isset($objr_num['num'])){
+                $pdf->Cell(15,8,iconv('UTF-8','cp874',''),1,0,'C');
+              }else{
+                $pdf->Cell(15,8,iconv('UTF-8','cp874',$objr_num['num']),1,0,'C');
+              }
+              // -----------------------//แพร่----------------------------------
+
+              // -----------------------แพร่----------------------------------
+              $SQL_num = "SELECT * FROM num_product WHERE id_product = $product[id_product] AND id_zone = 15";
               $objq_num = mysqli_query($conn,$SQL_num);
               $objr_num = mysqli_fetch_array($objq_num);
               if(!isset($objr_num['num'])){

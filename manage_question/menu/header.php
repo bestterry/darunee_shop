@@ -2,7 +2,7 @@
     <?php require('../font/font_style.php'); ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>จัดการเพลง</title>
+    <title>แบบสอบถาม</title>
     <!-- Tell the browser to be responsive to screen width -->
     <link rel="icon" type="image/png" href="../images/favicon.ico" />
     <!-- Bootstrap 3.3.7 -->
@@ -124,6 +124,6 @@
       .button2 {
         background-color: #b35900;
         color : white;
-        } /* Back & continue */
+        }
   </style>
   </head>

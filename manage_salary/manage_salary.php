@@ -85,8 +85,7 @@
                         class="btn btn-danger pull-left"><< กลับ</a>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-                      <B><font size="5">ชื่อ  <?php echo $objr_member['name']; ?></font></B><br>
-                      <B><font size="5">เดือน  <?php echo Datethai($date2); ?></font></B>
+                      <B><font size="5">เงินเดือน </font> <font size="5" color="red"><?php echo $objr_member['name']; ?> <?php echo Datethai($show_date); ?></font></B>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                     </div>
@@ -201,15 +200,15 @@
                                 <tr> 
                                   <td class="text-center">หนี้สำนักงาน</td>
                                   <td class="text-center">
-                                    <input type="number" class="form-control text-center" name="money_debt1" id="debt_office" 
+                                    <input type="number" class="form-control text-center" name="total_debt_office" id="debt_office" 
                                           value="<?php echo $debt_office; ?>" readonly/>
-                                    <input type="hidden" class="form-control text-center" name="id_debt_office" value="<?php echo $id_debt_office; ?>">
+                                    <input type="hidden" class="form-control text-center" name="id_debt_office" value="1">
                                   </td>
                                   <td class="text-center">
-                                    <input type="number" class="form-control text-center" id="pay_debt_office" value="0" disabled/>
+                                    <input type="number" class="form-control text-center" id="pay_debt_office" value="0" readonly/>
                                   </td>
                                   <td class="text-center">
-                                    <input type="number" class="form-control text-center" name="debt_owing1" id="debt_owing1" value="0" readonly/>
+                                    <input type="number" class="form-control text-center" name="owing_debt_office" id="owing_debt_office" value="0" readonly/>
                                   </td>
                                 </tr>
                                 <!-- //หนี้สำนักงาน -->
@@ -218,15 +217,15 @@
                                 <tr> 
                                   <td class="text-center">หนี้กองทุน</td>
                                   <td class="text-center">
-                                    <input type="number" class="form-control text-center" name="money_debt2" id="debt_func" 
+                                    <input type="number" class="form-control text-center" name="total_debt_fund" id="debt_func" 
                                           value="<?php echo $debt_func; ?>" readonly/>
-                                    <input type="hidden" class="form-control text-center" name="id_debt_func" value="<?php echo $id_debt_func; ?>">
+                                    <input type="hidden" class="form-control text-center" name="id_debt_fund" value="2">
                                   </td>
                                   <td class="text-center">
                                     <input type="number" class="form-control text-center" id="pay_debt_fund" value="0" disabled/>
                                   </td>
                                   <td class="text-center">
-                                    <input type="number" class="form-control text-center" name="debt_owing2" id="debt_owing2" value="0" readonly/>
+                                    <input type="number" class="form-control text-center" name="owing_debt_fund" id="owing_debt_fund" value="0" readonly/>
                                   </td>
                                 </tr>
                                 <!-- //หนี้กองทุน -->
@@ -235,15 +234,15 @@
                                 <tr> 
                                   <td class="text-center">เบิกล่วงหน้า</td>
                                   <td class="text-center">
-                                    <input type="number" class="form-control text-center" name="money_debt3" id="debt_forward" 
+                                    <input type="number" class="form-control text-center" name="total_debt_withdraw" id="debt_forward" 
                                           value="<?php echo $debt_forward; ?>" readonly/>
-                                    <input type="hidden" class="form-control text-center" name="id_debt_forward" value="<?php echo $id_debt_forward; ?>">
+                                    <input type="hidden" class="form-control text-center" name="id_debt_withdraw" value="3">
                                   </td>
                                   <td class="text-center">
-                                    <input type="number" class="form-control text-center" id="pay_debt_forward" value="0" disabled/>
+                                    <input type="number" class="form-control text-center" id="pay_debt_withdraw" value="0" disabled/>
                                   </td>
                                   <td class="text-center">
-                                    <input type="number" class="form-control text-center" name="debt_owing3" id="debt_owing3" value="0" readonly/>
+                                    <input type="number" class="form-control text-center" name="owing_debt_withdraw" id="owing_debt_withdraw" value="0" readonly/>
                                   </td>
                                 </tr>
                                 <!-- //เบิกล่วงหน้า -->
@@ -323,11 +322,12 @@
                 <div class="box-header with-border text-center"> 
                   <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-                      <a href="salary.php?month=<?php echo $month; ?>&year=<?php echo $year; ?>" class="btn btn-danger pull-left"><< กลับ</a>
+                      <a href="salary_data.php?id_member=<?php echo $id_member; ?>&month=<?php echo $_GET['month']; ?>&year=<?php echo $_GET['year']; ?>" 
+                          class="btn btn-danger pull-left"><< กลับ
+                      </a>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-                      <B><font size="5">ชื่อ  <?php echo $objr_salary['name']; ?></font></B><br>
-                      <B><font size="5">เดือน  <?php echo Datethai($show_date); ?></font></B>
+                      <B><font size="5">เงินเดือน </font> <font size="5" color="red"><?php echo $objr_salary['name']; ?> <?php echo Datethai($show_date); ?></font></B>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                     </div>
@@ -541,10 +541,10 @@
       document.getElementById("total_pay").value = value7+value8+value9+value10+value11;
       document.getElementById("pay_debt_office").value = value9;
       document.getElementById("pay_debt_fund").value = value10;
-      document.getElementById("pay_debt_forward").value = value8;
-      document.getElementById("debt_owing1").value = value12-value9;
-      document.getElementById("debt_owing2").value = value13-value10;
-      document.getElementById("debt_owing3").value = value14-value8;
+      document.getElementById("pay_debt_withdraw").value = value8;
+      document.getElementById("owing_debt_office").value = value12-value9;
+      document.getElementById("owing_debt_fund").value = value13-value10;
+      document.getElementById("owing_debt_withdraw").value = value14-value8;
       document.getElementById('total_money').value = (value1+value2+value3+value4+value5+value6)-(value7+value8+value9+value10+value11);
     }
 

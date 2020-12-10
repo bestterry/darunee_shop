@@ -20,7 +20,7 @@
     <?php require('../font/font_style.php'); ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>จัดการเพลง</title>
+    <title>แบบสอบถาม</title>
     <!-- Tell the browser to be responsive to screen width -->
     <link rel="icon" type="image/png" href="../images/favicon.ico" />
     <!-- Bootstrap 3.3.7 -->
@@ -146,11 +146,16 @@
         border-radius: 50%;
       }
 
-
       .button2 {
         background-color: #b35900;
         color : white;
-        } /* Back & continue */
+        } 
+
+        .form-horizontal .control-label {
+          padding-top: 0px;
+          margin-bottom: 0;
+          text-align: right;
+      }
     </style>
     <script language="javascript">
       function fncSubmit()
@@ -193,8 +198,6 @@
     </script>
   </head>
 
-
-
   <body class=" hold-transition skin-blue layout-top-nav">
 
     <header class="main-header">
@@ -232,7 +235,7 @@
                       <a href="<?php echo $location; ?>" class="btn btn-danger pull-left"><< เมนูหลัก</a>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center">
-                      <B> <font size="5">แบบสอบถาม (สัญจร)</font> </B>
+                      <B> <font size="5" color="red">แบบสอบถาม (สัญจร)</font> </B>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
                   </div>
@@ -246,7 +249,7 @@
                       <div class="col-10 col-sm-11 col-md-9 col-xl-10">
 
                         <div class="form-group">
-                          <label class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label text-right"><font size="4">จังหวัด</font></label>
+                          <label class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label text-right"><font size="5">จังหวัด</font></label>
                           <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <select name="province_id" data-where="2" class="form-control ajax_address select2">
                             </select>
@@ -255,7 +258,7 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label text-right"><font size="4">อำเภอ</font></label>
+                          <label class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label text-right"><font size="5">อำเภอ</font></label>
                           <div class="col-6 col-xs-6 col-sm-6 col-md- col-lg-6">
                             <select name="amphur_id" data-where="3" class="ajax_address form-control select2">
                               <option value=""></option>
@@ -265,7 +268,7 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label text-right"><font size="4">ตำบล</font></label>
+                          <label class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label text-right"><font size="5">ตำบล</font></label>
                           <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <select name="district_id" data-where="4" class="ajax_address form-control select2">
                               <option value=""></option>
@@ -275,7 +278,7 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label text-right"><font size="4">หมู่ที่</font></label>
+                          <label class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label text-right"><font size="5">หมู่ที่</font></label>
                           <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <input type="number" name="address" class="form-control" value="">
                           </div>
@@ -290,7 +293,7 @@
                       <div class="col-1 col-sm-1 col-md-1 col-xl-1"></div>
                       <div class="col-10 col-sm-10 col-md-10 col-xl-10">
                         <font size="4">
-                          <div class="text-center"> <font size="5"> <B>โดยผู้สอบถาม (ไม่ถาม)</B></font></div>
+                          <div class="text-center"> <font size="5" color="red"> <B>โดยผู้สอบถาม (ไม่ถาม)</B></font></div>
                           <br>
                           <div class="form-group">
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3 text-right">เพศ &nbsp; &nbsp;</label>
@@ -310,15 +313,15 @@
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3 text-right">อายุ &nbsp; &nbsp;</label>
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3">
                               <input type="radio" name="id_age" value="1" checked>
-                              &nbsp;น้อยกว่า 30
+                              &nbsp;น้อยกว่า 30 ปี
                             </label>
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3">
                               <input type="radio" name="id_age" value="2">
-                              &nbsp;30 - 60
+                              &nbsp;30 - 60 ปี
                             </label>
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3">
                               <input type="radio" name="id_age" value="3">
-                              &nbsp;มากกว่า 60
+                              &nbsp;มากกว่า 60 ปี
                             </label>
                           </div>
 
@@ -339,7 +342,7 @@
                           </div>
                           <br>
 
-                          <div class="text-center"> <font size="5"> <B>สอบถามผู้ให้ข้อมูล (ถาม)</B></font></div>
+                          <div class="text-center"> <font size="5" color="red"> <B>สอบถามผู้ให้ข้อมูล (ถาม)</B></font></div>
                           <br>
                           <div class="form-group">
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3 text-right">อาชีพ &nbsp; &nbsp;</label>
@@ -358,14 +361,14 @@
                           </div>
 
                           <div class="form-group">
-                            <label class="col-3 col-sm-3 col-md-3 col-xl-3 text-right">รู้จักทีมงาน &nbsp; &nbsp;</label>
+                            <label class="col-3 col-sm-3 col-md-3 col-xl-3 text-right">รู้จัก (ทีมงาน) &nbsp; &nbsp;</label>
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3">
                               <input type="radio" name="know_team" value="Y">
-                              &nbsp;ใช่
+                              &nbsp;รู้จัก
                             </label>
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3">
                               <input type="radio" name="know_team" value="N">
-                              &nbsp;ไม่ใช่
+                              &nbsp;ไม่รู้จัก
                             </label>
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3">
                               <input type="radio" name="know_team" value="D">
@@ -374,14 +377,14 @@
                           </div>
 
                           <div class="form-group">
-                            <label class="col-3 col-sm-3 col-md-3 col-xl-3 text-right">ใช้สินค้าทีมงาน &nbsp; &nbsp;</label>
+                            <label class="col-3 col-sm-3 col-md-3 col-xl-3 text-right">ใช้สินค้า (ทีมงาน) &nbsp; &nbsp;</label>
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3">
                               <input type="radio" name="use_product" value="Y">
-                              &nbsp;ใช่
+                              &nbsp;เคยใช้
                             </label>
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3">
                               <input type="radio" name="use_product" value="N">
-                              &nbsp;ไม่ใช่
+                              &nbsp;ไม่เคยใช้
                             </label>
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3">
                               <input type="radio" name="use_product" value="D">
@@ -390,14 +393,14 @@
                           </div>
 
                           <div class="form-group">
-                            <label class="col-3 col-sm-3 col-md-3 col-xl-3 text-right">ฟังวิทยุทีมงาน &nbsp; &nbsp;</label>
+                            <label class="col-3 col-sm-3 col-md-3 col-xl-3 text-right">ฟังวิทยุ (ทีมงาน) &nbsp; &nbsp;</label>
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3">
                               <input type="radio" name="radio_team" value="Y">
-                              &nbsp;ใช่
+                              &nbsp;เคยฟัง
                             </label>
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3">
                               <input type="radio" name="radio_team" value="N">
-                              &nbsp;ไม่ใช่
+                              &nbsp;ไม่เคยฟัง
                             </label>
                             <label class="col-3 col-sm-3 col-md-3 col-xl-3">
                               <input type="radio" name="radio_team" value="D">

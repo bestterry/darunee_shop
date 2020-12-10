@@ -59,11 +59,11 @@
                 <div class="box-header with-border text-center"> 
                   <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-                      <a href="salary.php?month=<?php echo $month; ?>&year=<?php echo $year; ?>" class="btn btn-danger pull-left"><< กลับ</a>
+                      <a href="salary.php?month=<?php echo $_GET['month']; ?>&year=<?php echo $_GET['year']; ?>" 
+                         class="btn btn-danger pull-left"><< กลับ</a>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-                      <B><font size="5">ชื่อ <?php echo $objr_salary['name']; ?></font></B><br>
-                      <B><font size="5">เดือน <?php echo Datethai($show_date); ?></font></B>
+                      <B><font size="5">เงินเดือน </font> <font size="5" color="red"><?php echo $objr_salary['name']; ?> <?php echo Datethai($show_date); ?></font></B>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
                       <a href="manage_salary.php?id_member=<?php echo $id_member; ?>&month=<?php echo $_GET['month']; ?>&year=<?php echo $_GET['year']; ?>" 
@@ -260,8 +260,7 @@
                       <a href="salary.php?month=<?php echo $month; ?>&year=<?php echo $year; ?>" class="btn btn-danger pull-left"><< กลับ</a>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4">
-                      <B><font size="5">เดือน  <?php echo Datethai($show_date); ?></font></B><br>
-                      <B><font size="5">ชื่อ  <?php echo $objr_datamember['name']; ?></font></B>
+                    <B><font size="5">เงินเดือน </font> <font size="5" color="red"><?php echo $objr_datamember['name']; ?> <?php echo Datethai($show_date); ?></font></B>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-right">
                       <a href="#" data-toggle="modal" data-target="#add_debt" class="btn btn-success">เพิ่มรายการหนี้</a>

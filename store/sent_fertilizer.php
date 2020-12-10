@@ -47,7 +47,6 @@
     <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="../plugins/iCheck/all.css">
-
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style>
@@ -56,9 +55,10 @@
           color : white;
           } /* Back & continue */
     </style>
+
   </head>
 
-  <body class=" hold-transition skin-blue layout-top-nav ">
+  <body class="hold-transition skin-blue layout-top-nav">
     <div class="wrapper">
       <header class="main-header">
         <?php require('menu/header_logout.php'); ?>

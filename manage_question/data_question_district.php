@@ -2,8 +2,7 @@
   require "menu/date.php";
   require "db_connect.php";
   $conn = connect();
-  $district_id = $_POST['district_id'];
-  $address = $_POST['address'];
+  $district_id = $_GET['district_id'];
   
   $sql_address = "SELECT district_name,amphur_name,province_name FROM tbl_districts 
                   INNER JOIN tbl_amphures ON tbl_districts.amphur_id = tbl_amphures.amphur_id
@@ -12,61 +11,61 @@
   $objq_address = mysqli_query($conn,$sql_address);
   $objr_address = mysqli_fetch_array($objq_address);
 
-    $know_num = "SELECT * FROM question WHERE district_id = $district_id AND address = $address";
+    $know_num = "SELECT * FROM question WHERE district_id = $district_id ";
     $objq_num = mysqli_query($conn,$know_num);
     $num_rows_num = mysqli_num_rows($objq_num);
 
   // know_team
-    $know_teamY = "SELECT * FROM question WHERE know_team = 'Y' AND district_id = $district_id AND address = $address";
+    $know_teamY = "SELECT * FROM question WHERE know_team = 'Y' AND district_id = $district_id";
     $objq_teamY = mysqli_query($conn,$know_teamY);
     $num_rows_teamY = mysqli_num_rows($objq_teamY);
     $know_team_per = ($num_rows_teamY/$num_rows_num)*100;
     $know_team_per = ceil($know_team_per);
 
-    $know_teamN = "SELECT * FROM question WHERE know_team = 'N' AND district_id = $district_id AND address = $address";
+    $know_teamN = "SELECT * FROM question WHERE know_team = 'N' AND district_id = $district_id";
     $objq_teamN = mysqli_query($conn,$know_teamN);
     $num_rows_teamN = mysqli_num_rows($objq_teamN);
     $know_team_perN = ($num_rows_teamN/$num_rows_num)*100;
     $know_team_perN = floor($know_team_perN);
 
-    $know_teamD = "SELECT * FROM question WHERE know_team = 'D' AND district_id = $district_id AND address = $address";
+    $know_teamD = "SELECT * FROM question WHERE know_team = 'D' AND district_id = $district_id";
     $objq_teamD = mysqli_query($conn,$know_teamD);
     $num_rows_teamD = mysqli_num_rows($objq_teamD);
   // know team
 
   // know_radio
-    $know_radio = "SELECT * FROM question WHERE radio_team = 'Y' AND district_id = $district_id AND address = $address";
+    $know_radio = "SELECT * FROM question WHERE radio_team = 'Y' AND district_id = $district_id";
     $objq_radio = mysqli_query($conn,$know_radio);
     $num_radio = mysqli_num_rows($objq_radio);
     $radio_per = ($num_radio/$num_rows_num)*100;
     $radio_per = ceil($radio_per);
 
-    $know_radioN = "SELECT * FROM question WHERE radio_team = 'N' AND district_id = $district_id AND address = $address";
+    $know_radioN = "SELECT * FROM question WHERE radio_team = 'N' AND district_id = $district_id";
     $objq_radioN = mysqli_query($conn,$know_radioN);
     $num_rows_radioN = mysqli_num_rows($objq_radioN);
     $radio_perN = ($num_rows_radioN/$num_rows_num)*100;
     $radio_perN = floor($radio_perN);
 
-    $know_radioD = "SELECT * FROM question WHERE radio_team = 'D' AND district_id = $district_id AND address = $address";
+    $know_radioD = "SELECT * FROM question WHERE radio_team = 'D' AND district_id = $district_id";
     $objq_radioD = mysqli_query($conn,$know_radioD);
     $num_rows_radioD = mysqli_num_rows($objq_radioD);
   // know radio
 
   // use_product
-    $know_productY = "SELECT * FROM question WHERE use_product = 'Y' AND district_id = $district_id AND address = $address";
+    $know_productY = "SELECT * FROM question WHERE use_product = 'Y' AND district_id = $district_id";
     $objq_productY = mysqli_query($conn,$know_productY);
     $num_useproduct = mysqli_num_rows($objq_productY);
     $useproduct_per = ($num_useproduct/$num_rows_num)*100;
     $useproduct_per = ceil($useproduct_per);
 
-    $know_productN = "SELECT * FROM question WHERE use_product = 'N' AND district_id = $district_id AND address = $address";
+    $know_productN = "SELECT * FROM question WHERE use_product = 'N' AND district_id = $district_id";
     $objq_productN = mysqli_query($conn,$know_productN);
     $num_rows_productN = mysqli_num_rows($objq_productN);
     $useproduct_perN = ($num_rows_productN/$num_rows_num)*100;
     $useproduct_perN = floor($useproduct_perN);
     
 
-    $know_productD = "SELECT * FROM question WHERE use_product = 'D' AND district_id = $district_id AND address = $address";
+    $know_productD = "SELECT * FROM question WHERE use_product = 'D' AND district_id = $district_id";
     $objq_productD = mysqli_query($conn,$know_productD);
     $num_rows_productD = mysqli_num_rows($objq_productD);
   // use_product
@@ -117,7 +116,7 @@
                       <B> 
                           <font size="5">จำแนกผู้ตอบแบบสอบถาม</font> 
                           <br><br>
-                          <font color="red" size="5">หมู่ <?php echo $address; ?> ต.<?php echo $objr_address['district_name'];?>
+                          <font color="red" size="5">ต.<?php echo $objr_address['district_name'];?>
                            อ.<?php echo $objr_address['amphur_name']; ?> จ.<?php echo $objr_address['province_name']; ?></font>
                       </B>
                       <br>
@@ -133,6 +132,8 @@
                 <div class="box-body no-padding">
                   <div class="mailbox-read-message">
                     <div class="col-12">
+
+                    
                       <div class="col-3 col-sm-3 col-md-3 col-xl-3">
                         <table class="table">
                           <thead>
@@ -148,7 +149,7 @@
                             foreach($objq_sex as $value_sex):
                               $id_sex = $value_sex['id_sex'];
                               $sql_sumsex = "SELECT * FROM question WHERE id_sex = $id_sex 
-                                            AND district_id = $district_id AND address = $address";
+                                            AND district_id = $district_id";
                               $objq_sumsex = mysqli_query($conn,$sql_sumsex);
                               $num_rows_sex = mysqli_num_rows($objq_sumsex);
                           ?>
@@ -178,7 +179,7 @@
                               foreach($objq_career as $value_career):
                                 $id_career = $value_career['id_career'];
                                 $sql_sumcareer = "SELECT * FROM question WHERE id_career = $id_career 
-                                              AND district_id = $district_id AND address = $address";
+                                              AND district_id = $district_id";
                                 $objq_sumcareer = mysqli_query($conn,$sql_sumcareer);
                                 $num_rows_career = mysqli_num_rows($objq_sumcareer);
                             ?>
@@ -208,7 +209,7 @@
                             foreach($objq_age as $value_age):
                               $id_age = $value_age['id_age'];
                               $sql_sumage = "SELECT * FROM question WHERE id_age = $id_age 
-                                             AND district_id = $district_id AND address = $address";
+                                             AND district_id = $district_id";
                               $objq_sumage = mysqli_query($conn,$sql_sumage);
                               $num_rows_age = mysqli_num_rows($objq_sumage);
                           ?>
@@ -238,7 +239,7 @@
                             foreach($objq_status as $value_status):
                               $id_status = $value_status['id_status'];
                               $sql_sumstatus = "SELECT * FROM question WHERE id_status = $id_status 
-                                            AND district_id = $district_id AND address = $address";
+                                            AND district_id = $district_id";
                               $objq_sumstatus = mysqli_query($conn,$sql_sumstatus);
                               $num_rows_status = mysqli_num_rows($objq_sumstatus);
                           ?>
@@ -257,11 +258,11 @@
                         <table class="table">
                           <thead>
                             <tr>
-                              <th width="16%" class="text-center"></th>
+                              <th width="16%" class="text-right"></th>
                               <th width="16%" class="text-center">ใช่</th>
-                              <th width="16%" class="text-center">ร้อยละ(ใช่)</th>
+                              <th width="16%" class="text-center">%ใช่</th>
                               <th width="16%" class="text-center">ไม่ใช่</th>
-                              <th width="16%" class="text-center">ร้อยละ(ไม่ใช่)</th>
+                              <th width="16%" class="text-center">%ไม่ใช่</th>
                               <th width="16%" class="text-center">ไม่ตอบ</th>
                             </tr>
                           </thead>
@@ -293,82 +294,82 @@
                           </tbody>
                         </table>
                       </div>
-
+                      
                       <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-                      <br>
-                      <div class="col-12 text-center">
-                        <B><font size="5">ข้อมูลสอบถามรายบุคคล</font></B>
-                      </div>
-                      <br>
-                        <div style="overflow-x:auto;">
-                          <table class="table">
-                            <thead>
-                              <tr>
-                                <th width="11%" class="text-center">เพศ</th>
-                                <th width="11%" class="text-center">อายุ</th>
-                                <th width="11%" class="text-center">อาชีพ</th>
-                                <th width="11%" class="text-center">ฐานะ</th>
-                                <th width="11%" class="text-center">รู้จักทีมงาน</th>
-                                <th width="11%" class="text-center">ฟังวิทยุ</th>
-                                <th width="11%" class="text-center">ใช้สินค้า</th>
-                                <th width="11%" class="text-center">ผู้บันทึก</th>
-                                <th width="11%" class="text-center">วันที่</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            <?php 
-                              $sql_question = "SELECT * FROM question 
-                                              INNER JOIN sex ON question.id_sex = sex.id_sex
-                                              INNER JOIN question_age ON question.id_age = question_age.id_age
-                                              INNER JOIN question_career ON question.id_career = question_career.id_career
-                                              INNER JOIN question_status ON question.id_status = question_status.id_status
-                                              INNER JOIN member ON question.id_member = member.id_member
-                                              WHERE district_id = $district_id AND address = $address
-                                              ORDER BY id_question DESC";
-                              $objq_question = mysqli_query($conn,$sql_question);
-                              foreach($objq_question as $value):
-                            ?>
-                              <tr>
-                                <td class="text-center"><?php echo $value['sex_name']; ?></td>
-                                <td class="text-center"><?php echo $value['name_age']; ?></td>
-                                <td class="text-center"><?php echo $value['name_career']; ?></td>
-                                <td class="text-center"><?php echo $value['name_status']; ?></td>
-                                <td class="text-center">
-                                  <?php  
-                                    if($value['know_team']=='Y'){
-                                      echo "ใช่";
-                                    }else {
-                                      echo "ไม่ใช่";
-                                    }
-                                  ?>
-                                </td>
-                                <td class="text-center">
-                                  <?php  
-                                    if($value['radio_team']=='Y'){
-                                      echo "ใช่";
-                                    }else {
-                                      echo "ไม่ใช่";
-                                    }
-                                  ?>
-                                </td>
-                                <td class="text-center">
-                                  <?php  
-                                    if($value['use_product']=='Y'){
-                                      echo "ใช่";
-                                    }else {
-                                      echo "ไม่ใช่";
-                                    }
-                                  ?>
-                                </td>
-                                <td class="text-center"><?php echo $value['name']; ?></td>
-                                <td class="text-center"><?php echo Datethai2($value['date']); ?></td>
-                              </tr>
-                            <?php 
-                              endforeach;
-                            ?>
-                            </tbody>
-                          </table>
+                        <br>
+                        <div class="col-12 text-center">
+                          <B><font size="5">จำแนกรายหมู่บ้าน</font></B>
                         </div>
+                        <br>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th width="12%" class="text-center">หมู่ที่</th>
+                              <th width="12%" class="text-center">จำนวน</th>
+                              <th width="12%" class="text-center">รู้จัก</th>
+                              <th width="12%" class="text-center">%รู้จัก</th>
+                              <th width="12%" class="text-center">ฟังวิทยุ</th>
+                              <th width="12%" class="text-center">%ฟังวิทยุ</th>
+                              <th width="12%" class="text-center">ใช้สินค้า</th>
+                              <th width="12%" class="text-center">%ใช้สินค้า</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <?php 
+                            for ($i=1; $i <=30 ; $i++) { 
+                              $sql_calvillage = "SELECT * FROM question WHERE address = $i AND district_id = $district_id";
+                              $objq_calvillage = mysqli_query($conn,$sql_calvillage);
+                              $num_rows_calvillage = mysqli_num_rows($objq_calvillage);
+                              if ($num_rows_calvillage == 0) {
+                          ?>
+                          <?php
+                              }else{
+                                //num
+                                  $know_num = "SELECT * FROM question WHERE district_id = $district_id AND address = $i";
+                                  $objq_num = mysqli_query($conn,$know_num);
+                                  $num_rows_num = mysqli_num_rows($objq_num);
+                                //num
+
+                                 // know_team
+                                  $know_teamY = "SELECT * FROM question WHERE know_team = 'Y' AND district_id = $district_id AND address = $i";
+                                  $objq_teamY = mysqli_query($conn,$know_teamY);
+                                  $num_rows_teamY = mysqli_num_rows($objq_teamY);
+                                  $know_team_per = ($num_rows_teamY/$num_rows_num)*100;
+                                  $know_team_per = ceil($know_team_per);
+                                // know team
+
+                                // know_radio
+                                  $know_radio = "SELECT * FROM question WHERE radio_team = 'Y' AND district_id = $district_id AND address = $i";
+                                  $objq_radio = mysqli_query($conn,$know_radio);
+                                  $num_radio = mysqli_num_rows($objq_radio);
+                                  $radio_per = ($num_radio/$num_rows_num)*100;
+                                  $radio_per = ceil($radio_per);
+                                // know radio
+
+                                // use_product
+                                  $know_productY = "SELECT * FROM question WHERE use_product = 'Y' AND district_id = $district_id AND address = $i";
+                                  $objq_productY = mysqli_query($conn,$know_productY);
+                                  $num_useproduct = mysqli_num_rows($objq_productY);
+                                  $useproduct_per = ($num_useproduct/$num_rows_num)*100;
+                                  $useproduct_per = ceil($useproduct_per);
+                                // use_product
+                          ?>
+                            <tr>
+                              <td class="text-center"><?php echo $i; ?></td>
+                              <td class="text-center"><?php echo $num_rows_num; ?></td>
+                              <td class="text-center"><?php echo $num_rows_teamY; ?></td>
+                              <td class="text-center"><?php echo $know_team_per; ?></td>
+                              <td class="text-center"><?php echo $num_radio; ?></td>
+                              <td class="text-center"><?php echo $radio_per; ?></td>
+                              <td class="text-center"><?php echo $num_useproduct; ?></td>
+                              <td class="text-center"><?php echo $useproduct_per; ?></td>
+                            </tr>
+                          <?php
+                              }
+                            }
+                          ?>
+                          </tbody>
+                        </table>
                       </div>
 
                     </div>

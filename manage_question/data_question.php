@@ -1,21 +1,38 @@
 <?php
-    require "menu/date.php";
-    require "db_connect.php";
-    $conn = connect();
-    require "../session.php";
+  require "menu/date.php";
+  require "db_connect.php";
+  $conn = connect();
+  require "../session.php";
 
-    if ($id_member == 33) {
-      $location = "../admin/admin.php";
-    }elseif ($id_member == 30) {
-      $location = "../admin/admin.php";
-    }else {
-      $location = "../store/store.php";
-    }
+  if ($id_member == 33) {
+    $location = "../admin/admin.php";
+  }elseif ($id_member == 30) {
+    $location = "../admin/admin.php";
+  }else {
+    $location = "../store/store.php";
+  }
 ?>
 <!DOCTYPE html>
 <html>
-
   <?php require 'menu/header.php'; ?>
+    <script language="javascript">
+      function fncSubmit()
+      {
+        if(document.question.province_id.value == "")
+        {
+          alert('กรุณาเลือกจังหวัด');
+          document.question.province_id.focus();
+          return false;
+        }	
+        if(document.question.amphur_id.value == "")
+        {
+          alert('กรุณาเลือกอำเภอ');
+          document.question.amphur_id.focus();		
+          return false;
+        }	
+        document.question.submit();
+      }
+    </script>
 
   <body class=" hold-transition skin-blue layout-top-nav">
 
@@ -44,7 +61,7 @@
         </div>
         <div class="row">
           <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-            <form action="data_question2.php" method="POST" class="form-horizontal">
+            <form action="algorithm/data_question.php" method="GET" class="form-horizontal" name="question" onSubmit="JavaScript:return fncSubmit();">
               <div class="box box-primary">
 
                 <div class="box-header with-border text-center"> 
@@ -53,7 +70,7 @@
                       <a href="<?php echo $location; ?> " class="btn btn-danger pull-left"><< เมนูหลัก</a>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4 text-center">
-                      <B> <font size="5">สรุปข้อมูลแบบสอบถาม</font> </B>
+                      <B> <font size="5" color="red">สรุปข้อมูลแบบสอบถาม</font> </B>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4 col-xl-4"></div>
                   </div>
@@ -99,6 +116,7 @@
                           <label class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label text-right"><font size="4">หมู่ที่</font></label>
                           <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <select name="address" class="form-control">
+                             <option option value="" selected>-</option>
                             <?php 
                               for ($i=1; $i <= 30; $i++) { 
                             ?>

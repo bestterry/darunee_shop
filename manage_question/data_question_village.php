@@ -2,8 +2,8 @@
   require "menu/date.php";
   require "db_connect.php";
   $conn = connect();
-  $district_id = $_POST['district_id'];
-  $address = $_POST['address'];
+  $district_id = $_GET['district_id'];
+  $address = $_GET['address'];
   
   $sql_address = "SELECT district_name,amphur_name,province_name FROM tbl_districts 
                   INNER JOIN tbl_amphures ON tbl_districts.amphur_id = tbl_amphures.amphur_id
@@ -304,19 +304,20 @@
                           <table class="table">
                             <thead>
                               <tr>
-                                <th width="11%" class="text-center">เพศ</th>
-                                <th width="11%" class="text-center">อายุ</th>
-                                <th width="11%" class="text-center">อาชีพ</th>
-                                <th width="11%" class="text-center">ฐานะ</th>
-                                <th width="11%" class="text-center">รู้จักทีมงาน</th>
-                                <th width="11%" class="text-center">ฟังวิทยุ</th>
-                                <th width="11%" class="text-center">ใช้สินค้า</th>
-                                <th width="11%" class="text-center">ผู้บันทึก</th>
-                                <th width="11%" class="text-center">วันที่</th>
+                                <th width="4%" class="text-center">ที่</th>
+                                <th width="12%" class="text-center">เพศ</th>
+                                <th width="12%" class="text-center">อายุ(ปี)</th>
+                                <th width="12%" class="text-center">อาชีพ</th>
+                                <th width="12%" class="text-center">เศรษฐกิจ</th>
+                                <th width="12%" class="text-center">รู้จักทีม</th>
+                                <th width="12%" class="text-center">ฟังวิทยุ</th>
+                                <th width="12%" class="text-center">ใช้สินค้า</th>
+                                <th width="12%" class="text-center">ผู้บันทึก</th>
                               </tr>
                             </thead>
                             <tbody>
                             <?php 
+                              $i=1;
                               $sql_question = "SELECT * FROM question 
                                               INNER JOIN sex ON question.id_sex = sex.id_sex
                                               INNER JOIN question_age ON question.id_age = question_age.id_age
@@ -329,6 +330,7 @@
                               foreach($objq_question as $value):
                             ?>
                               <tr>
+                                <td class="text-center"><?php echo $i; ?></td>
                                 <td class="text-center"><?php echo $value['sex_name']; ?></td>
                                 <td class="text-center"><?php echo $value['name_age']; ?></td>
                                 <td class="text-center"><?php echo $value['name_career']; ?></td>
@@ -361,9 +363,9 @@
                                   ?>
                                 </td>
                                 <td class="text-center"><?php echo $value['name']; ?></td>
-                                <td class="text-center"><?php echo Datethai2($value['date']); ?></td>
                               </tr>
                             <?php 
+                              $i++;
                               endforeach;
                             ?>
                             </tbody>

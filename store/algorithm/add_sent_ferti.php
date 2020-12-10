@@ -8,7 +8,7 @@
   $money = $_POST['money'];
   $note = $_POST['note'];
       $sql = "INSERT INTO sent_ferti (id_member, id_car, id_type_lift, num_cus, num_ferti, money, note)
-              VALUES ($id_member, '$id_car', $id_type_lift, $num_cus, $num_ferti, $money, '$note')";
+              VALUES ($id_member, $id_car, $id_type_lift, $num_cus, $num_ferti, $money, '$note')";
             
               if ($conn->query($sql) === TRUE) {
                 header('location:../sent_fertilizer.php');
